@@ -1,0 +1,17 @@
+{
+  "name": "Singapur, Bali a Lombok 2027",
+  "short_name": "Cesta 2027",
+  "description": "Plán společné cesty 6.–25. 8. 2027: itinerář, lety, ubytování a rozpočet.",
+  "lang": "cs",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b0c0e",
+  "theme_color": "#0b0c0e",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
