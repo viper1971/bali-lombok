@@ -6074,7 +6074,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 07:04</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 07:11</div>
         <h1><img decoding="async" src="https://flagcdn.com/w40/sg.png" alt="Singapur" style="height: 1.2em; vertical-align: -0.15em; border-radius: 4px; margin-right: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);"> Singapur<br><img decoding="async" src="https://flagcdn.com/w40/id.png" alt="Indonésie" style="height: 1.2em; vertical-align: -0.15em; border-radius: 4px; margin-right: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);"> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -17686,7 +17686,16 @@ body.pres-on #presBar { display: flex; }
 #presBar .pr-n { font-size: 0.7rem; color: rgba(255, 255, 255, 0.75); font-variant-numeric: tabular-nums; }
 #presBar .pr-x { background: rgba(239, 68, 68, 0.85); border-color: transparent; }
 #presBar #prList { white-space: nowrap; }
-@media (max-width: 560px) { #presBar #prMinus, #presBar #prPlus, #presBar #prFs { display: none; } #presBar #prList { font-size: 0; padding: 0; } #presBar #prList::before { content: "☰"; font-size: 1.1rem; } #presBar .pr-mid { min-width: 0; max-width: 40vw; } }
+@media (max-width: 560px) {
+    /* mobil: ovládání přes celou šířku ve dvou řádcích (nahoře název snímku, dole čtyři velká tlačítka) */
+    #presBar { left: 8px; right: 8px; bottom: 8px; transform: none; max-width: none; border-radius: 22px; padding: 10px; }
+    body.pres-on #presBar { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+    #presBar #prMinus, #presBar #prPlus, #presBar #prFs { display: none; }
+    #presBar button { min-height: 48px; padding: 0 6px; font-size: 0.9rem; }
+    #presBar .pr-mid { order: -1; grid-column: 1 / -1; max-width: none; min-width: 0; padding: 0 4px 2px; text-align: left; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; align-items: baseline; }
+    #presBar .pr-k { grid-column: 1; } #presBar .pr-n { grid-column: 2; grid-row: 1; font-size: 0.8rem; }
+    #presBar .pr-t { grid-column: 1 / -1; white-space: normal; font-size: 1rem; line-height: 1.25; }
+}
 body.pres-on { padding-bottom: calc(var(--prh, 72px) + var(--pvh, 100px) + 50px); }
 /* souhrn cen zůstává vidět i v prezentaci: nad ovládací lištou, bez tlačítek pro WhatsApp a rozpočet */
 body.pres-on .vip-floating-bar { display: flex !important; bottom: calc(var(--prh, 72px) + 26px) !important; z-index: 10050; transform: translateX(-50%) !important; opacity: 1 !important; pointer-events: auto !important; }
@@ -17987,7 +17996,7 @@ body.pres-on #presRail { display: flex; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '31. 10. 2026 · 07:04';
+    var LUX_VERSION = '31. 10. 2026 · 07:11';
     var $ = function (id) { return document.getElementById(id); };
     function toast(msg) {
         if (typeof window.showToast === 'function') { try { window.showToast(msg); return; } catch (e) {} }
