@@ -6074,7 +6074,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 07:14</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 07:26</div>
         <h1><img decoding="async" src="https://flagcdn.com/w40/sg.png" alt="Singapur" style="height: 1.2em; vertical-align: -0.15em; border-radius: 4px; margin-right: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);"> Singapur<br><img decoding="async" src="https://flagcdn.com/w40/id.png" alt="Indonésie" style="height: 1.2em; vertical-align: -0.15em; border-radius: 4px; margin-right: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);"> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -6190,7 +6190,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
         <div style="background: var(--lux-card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); display: flex; flex-direction: column; justify-content: space-between;">
             <div>
                 <h3 class="x-ae12df">🇮🇩 Indonésie: Vízum e-VoA</h3>
-                <p class="x-fs-9_c-text-main_mb-12_fw-600_lh-1-4">Turistické vízum B1 (500 000 IDR / cca 750 Kč).</p>
+                <p class="x-fs-9_c-text-main_mb-12_fw-600_lh-1-4">Turistické vízum B1 (500 000 IDR / cca <span data-fx="IDR" data-amt="500000" data-round="1">605</span> Kč).</p>
 
                 <div id="voaStatus" style="font-size: 0.78rem; font-weight: 700; color: var(--lux-warn); margin-bottom: 16px; background: rgba(232, 212, 138, 0.14); padding: 8px 12px; border-radius: 10px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border);">⏳ Načítám stav termínu...</div>
 
@@ -6224,7 +6224,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
         <div style="background: var(--lux-card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04); display: flex; flex-direction: column; justify-content: space-between;">
             <div>
                 <h3 class="x-ae12df">Bali Tourist Levy (Přírodní daň)</h3>
-                <p class="x-fs-9_c-text-main_mb-12_fw-600_lh-1-4">Poplatek 150 000 IDR (cca 225 Kč) na ochranu přírody.</p>
+                <p class="x-fs-9_c-text-main_mb-12_fw-600_lh-1-4">Poplatek 150 000 IDR (cca <span data-fx="IDR" data-amt="150000" data-round="1">180</span> Kč) na ochranu přírody.</p>
 
                 <div id="levyStatus" style="font-size: 0.78rem; font-weight: 700; color: var(--lux-ok); margin-bottom: 16px; background: rgba(79, 191, 134, 0.13); padding: 8px 12px; border-radius: 10px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid #a7f3d0;">⏳ Načítám stav termínu...</div>
 
@@ -6910,6 +6910,7 @@ function updatePackingWeight() {
         <span class="lux-fold-chev" aria-hidden="true">▾</span>
     </button></h3>
     <div class="lux-fold-body" id="f-leg-sg-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+<div class="fl-deck st-deck" id="stDeck-f-leg-sg" data-fold="f-leg-sg" aria-label="Etapa v kostce"></div>
 <!-- SEKCE SINGAPUR (1x VEČER + 1x CELÝ DEN) S ODLOŽENÝM NAČÍTÁNÍM MAP -->
 <div class="bento-card full" id="singapur-program" style="margin-top: 24px; margin-bottom: 24px;">
 
@@ -6966,7 +6967,7 @@ function updatePackingWeight() {
     <div class="uber-top-bar">
         <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
             <span class="custom-checkbox-round">✓</span>
-            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨  A: Fragrance Hotel – Lavender</span>
+            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 A: Fragrance Hotel – Lavender</span>
         </label>
         <span class="hotel-status-tag tag-inactive" id="tag-singapore-A" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 800;">Klikni pro výběr</span>
     </div>
@@ -7013,7 +7014,7 @@ function updatePackingWeight() {
     <div class="uber-top-bar">
         <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
             <span class="custom-checkbox-round">✓</span>
-            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨    B: Hotel 81 Premier Princess</span>
+            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 B: Hotel 81 Premier Princess</span>
         </label>
         <span class="hotel-status-tag tag-active" id="tag-singapore-B" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 900;">⭐ Vybráno</span>
     </div>
@@ -7060,7 +7061,7 @@ function updatePackingWeight() {
     <div class="uber-top-bar">
         <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
             <span class="custom-checkbox-round">✓</span>
-            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨    C: Hotel 81 Gold</span>
+            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 C: Hotel 81 Gold</span>
         </label>
         <span class="hotel-status-tag tag-inactive" id="tag-singapore-C" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 800;">Klikni pro výběr</span>
     </div>
@@ -7442,6 +7443,7 @@ function updatePackingWeight() {
         <span class="lux-fold-chev" aria-hidden="true">▾</span>
     </button></h3>
     <div class="lux-fold-body" id="f-leg-uluwatu-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+<div class="fl-deck st-deck" id="stDeck-f-leg-uluwatu" data-fold="f-leg-uluwatu" aria-label="Etapa v kostce"></div>
 <!-- ==========================================================================
      Finanční přehled: Pronájem 7 dní + Pojištění motorky (bez duplicity)
      ========================================================================== -->
@@ -7557,7 +7559,7 @@ function updatePackingWeight() {
         <div class="giant-bike-card" data-cc="155">
             <div class="giant-bike-header">
                 <h5 class="giant-bike-title">Yamaha Lexi Sport (155 cc)</h5>
-                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $66,15 (~1 530 Kč)</div>
+                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $66,15 (~<span data-fx="USD" data-amt="66.15" data-round="5">1 530</span> Kč)</div>
                 <button class="zoom-btn-trigger" onclick="openGlobalLightbox('m1.png')">🔍 Zvětšit na celou obrazovku</button>
             </div>
             <div class="giant-image-wrapper" onclick="openGlobalLightbox('m1.png')">
@@ -7569,7 +7571,7 @@ function updatePackingWeight() {
         <div class="giant-bike-card" data-cc="125">
             <div class="giant-bike-header">
                 <h5 class="giant-bike-title">Yamaha Lexi s držákem na surf (125 cc)</h5>
-                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $62,30 (~1 440 Kč)</div>
+                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $62,30 (~<span data-fx="USD" data-amt="62.30" data-round="5">1 440</span> Kč)</div>
                 <button class="zoom-btn-trigger" onclick="openGlobalLightbox('m2.png')">🔍 Zvětšit na celou obrazovku</button>
             </div>
             <div class="giant-image-wrapper" onclick="openGlobalLightbox('m2.png')">
@@ -7581,7 +7583,7 @@ function updatePackingWeight() {
         <div class="giant-bike-card" data-cc="125">
             <div class="giant-bike-header">
                 <h5 class="giant-bike-title">Yamaha Lexi Standard (125 cc)</h5>
-                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $62,30 (~1 440 Kč)</div>
+                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $62,30 (~<span data-fx="USD" data-amt="62.30" data-round="5">1 440</span> Kč)</div>
                 <button class="zoom-btn-trigger" onclick="openGlobalLightbox('m3.png')">🔍 Zvětšit na celou obrazovku</button>
             </div>
             <div class="giant-image-wrapper" onclick="openGlobalLightbox('m3.png')">
@@ -7593,7 +7595,7 @@ function updatePackingWeight() {
         <div class="giant-bike-card" data-cc="110">
             <div class="giant-bike-header">
                 <h5 class="giant-bike-title">Honda Scoopy (110 cc)</h5>
-                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $62,30 (~1 440 Kč)</div>
+                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $62,30 (~<span data-fx="USD" data-amt="62.30" data-round="5">1 440</span> Kč)</div>
                 <button class="zoom-btn-trigger" onclick="openGlobalLightbox('m4.png')">🔍 Zvětšit na celou obrazovku</button>
             </div>
             <div class="giant-image-wrapper" onclick="openGlobalLightbox('m4.png')">
@@ -7605,7 +7607,7 @@ function updatePackingWeight() {
         <div class="giant-bike-card" data-cc="125">
             <div class="giant-bike-header">
                 <h5 class="giant-bike-title">Yamaha Lexi Travel (125 cc)</h5>
-                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $69,30 (~1 605 Kč)</div>
+                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $69,30 (~<span data-fx="USD" data-amt="69.30" data-round="5">1 605</span> Kč)</div>
                 <button class="zoom-btn-trigger" onclick="openGlobalLightbox('m5.png')">🔍 Zvětšit na celou obrazovku</button>
             </div>
             <div class="giant-image-wrapper" onclick="openGlobalLightbox('m5.png')">
@@ -7617,7 +7619,7 @@ function updatePackingWeight() {
         <div class="giant-bike-card" data-cc="155">
             <div class="giant-bike-header">
                 <h5 class="giant-bike-title">Yamaha NMAX Standard (155 cc)</h5>
-                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $76,30 (~1 770 Kč)</div>
+                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $76,30 (~<span data-fx="USD" data-amt="76.30" data-round="5">1 770</span> Kč)</div>
                 <button class="zoom-btn-trigger" onclick="openGlobalLightbox('m6.png')">🔍 Zvětšit na celou obrazovku</button>
             </div>
             <div class="giant-image-wrapper" onclick="openGlobalLightbox('m6.png')">
@@ -7629,7 +7631,7 @@ function updatePackingWeight() {
         <div class="giant-bike-card" data-cc="155">
             <div class="giant-bike-header">
                 <h5 class="giant-bike-title">Yamaha LEXI Sport Travel (155 cc)</h5>
-                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $76,30 (~1 770 Kč)</div>
+                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $76,30 (~<span data-fx="USD" data-amt="76.30" data-round="5">1 770</span> Kč)</div>
                 <button class="zoom-btn-trigger" onclick="openGlobalLightbox('m7.png')">🔍 Zvětšit na celou obrazovku</button>
             </div>
             <div class="giant-image-wrapper" onclick="openGlobalLightbox('m7.png')">
@@ -7641,7 +7643,7 @@ function updatePackingWeight() {
         <div class="giant-bike-card" data-cc="155">
             <div class="giant-bike-header">
                 <h5 class="giant-bike-title">Yamaha Nmax Travel (155 cc)</h5>
-                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $83,30 (~1 930 Kč)</div>
+                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $83,30 (~<span data-fx="USD" data-amt="83.30" data-round="5">1 930</span> Kč)</div>
                 <button class="zoom-btn-trigger" onclick="openGlobalLightbox('m8.png')">🔍 Zvětšit na celou obrazovku</button>
             </div>
             <div class="giant-image-wrapper" onclick="openGlobalLightbox('m8.png')">
@@ -7653,7 +7655,7 @@ function updatePackingWeight() {
         <div class="giant-bike-card" data-cc="157">
             <div class="giant-bike-header">
                 <h5 class="giant-bike-title">Honda ADV 160 (157 cc)</h5>
-                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $83,30 (~1 930 Kč)</div>
+                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $83,30 (~<span data-fx="USD" data-amt="83.30" data-round="5">1 930</span> Kč)</div>
                 <button class="zoom-btn-trigger" onclick="openGlobalLightbox('m9.png')">🔍 Zvětšit na celou obrazovku</button>
             </div>
             <div class="giant-image-wrapper" onclick="openGlobalLightbox('m9.png')">
@@ -7665,7 +7667,7 @@ function updatePackingWeight() {
         <div class="giant-bike-card" data-cc="155">
             <div class="giant-bike-header">
                 <h5 class="giant-bike-title">Yamaha Nmax Sport (155 cc)</h5>
-                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $83,30 (~1 930 Kč)</div>
+                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $83,30 (~<span data-fx="USD" data-amt="83.30" data-round="5">1 930</span> Kč)</div>
                 <button class="zoom-btn-trigger" onclick="openGlobalLightbox('m10.png')">🔍 Zvětšit na celou obrazovku</button>
             </div>
             <div class="giant-image-wrapper" onclick="openGlobalLightbox('m10.png')">
@@ -7677,7 +7679,7 @@ function updatePackingWeight() {
         <div class="giant-bike-card" data-cc="157">
             <div class="giant-bike-header">
                 <h5 class="giant-bike-title">Honda ADV Travel (157 cc)</h5>
-                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $83,30 (~1 930 Kč)</div>
+                <div class="bike-total-price-tag">Celkem (7 dní + pojištění): $83,30 (~<span data-fx="USD" data-amt="83.30" data-round="5">1 930</span> Kč)</div>
                 <button class="zoom-btn-trigger" onclick="openGlobalLightbox('m11.png')">🔍 Zvětšit na celou obrazovku</button>
             </div>
             <div class="giant-image-wrapper" onclick="openGlobalLightbox('m11.png')">
@@ -7801,7 +7803,7 @@ function updatePackingWeight() {
     <div class="uber-top-bar">
         <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
             <span class="custom-checkbox-round">✓</span>
-            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨  A: Uluwatu Jungle Villa</span>
+            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 A: Uluwatu Jungle Villa</span>
         </label>
         <span class="hotel-status-tag tag-inactive" id="tag-uluwatu-A" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 800;">Klikni pro výběr</span>
     </div>
@@ -7847,7 +7849,7 @@ function updatePackingWeight() {
     <div class="uber-top-bar">
         <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
             <span class="custom-checkbox-round">✓</span>
-            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨    B: The Ululani</span>
+            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 B: The Ululani</span>
         </label>
         <span class="hotel-status-tag tag-active" id="tag-uluwatu-B" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 900;">⭐ Vybráno</span>
     </div>
@@ -8214,6 +8216,7 @@ function updatePackingWeight() {
         <span class="lux-fold-chev" aria-hidden="true">▾</span>
     </button></h3>
     <div class="lux-fold-body" id="f-leg-ubud-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+<div class="fl-deck st-deck" id="stDeck-f-leg-ubud" data-fold="f-leg-ubud" aria-label="Etapa v kostce"></div>
 <!-- ========================================================================== -->
 <!-- Čistý kontejner pro dynamickou trasu Uluwatu -> Ubud na celou šířku        -->
 <!-- ========================================================================== -->
@@ -8500,7 +8503,7 @@ function updatePackingWeight() {
     <div class="uber-top-bar">
         <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
             <span class="custom-checkbox-round">✓</span>
-            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨  A: The Village Guest House</span>
+            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 A: The Village Guest House</span>
         </label>
         <span class="hotel-status-tag tag-inactive" id="tag-ubud-A" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 800;">Klikni pro výběr</span>
     </div>
@@ -8542,7 +8545,7 @@ function updatePackingWeight() {
     <div class="uber-top-bar">
         <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
             <span class="custom-checkbox-round">✓</span>
-            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨    B: Gandatera Ubud</span>
+            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 B: Gandatera Ubud</span>
         </label>
         <span class="hotel-status-tag tag-active" id="tag-ubud-B" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 900;">⭐ Vybráno</span>
     </div>
@@ -8588,7 +8591,7 @@ function updatePackingWeight() {
     <div class="uber-top-bar">
         <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
             <span class="custom-checkbox-round">✓</span>
-            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨    C: Bije Suite Villa Ubud</span>
+            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 C: Bije Suite Villa Ubud</span>
         </label>
         <span class="hotel-status-tag tag-inactive" id="tag-ubud-C" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 800;">Klikni pro výběr</span>
     </div>
@@ -8842,7 +8845,7 @@ function updatePackingWeight() {
     <div class="t-bubble transfer-bubble">
         <h3 class="stage-title">Přesun Bali ➔ Lombok</h3>
         <p class="stage-desc">
-            🚢 <strong>  B (Doporučeno – Rychloloď Starfish):</strong> Odjezd ve 13:00 z přístavu Sanur ➔ příjezd v 15:00 na Gili Trawangan / Lombok (2 hodiny plavby na moři). Cena: jen 1 343 Kč / osoba (2 686 Kč / pár obousměrně).<br><br>
+            🚢 <strong>  B (Doporučeno – Rychloloď Starfish):</strong> Odjezd ve 13:00 z přístavu Sanur ➔ příjezd v 15:00 do přístavu Bangsal na Lomboku (2 hodiny plavby na moři). Cena: jen 1 343 Kč / osoba (2 686 Kč / pár obousměrně).<br><br>
             ✈️ <strong> A (Přelet TransNusa):</strong> Odlet ve 12:40 DPS ➔ přílet ve 13:20 LOP. Cena: 2 240 Kč / osoba (4 480 Kč / pár).
         </p>
     </div>
@@ -9052,6 +9055,7 @@ function updatePackingWeight() {
         <span class="lux-fold-chev" aria-hidden="true">▾</span>
     </button></h3>
     <div class="lux-fold-body" id="f-leg-lombok-sever-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+<div class="fl-deck st-deck" id="stDeck-f-leg-lombok-sever" data-fold="f-leg-lombok-sever" aria-label="Etapa v kostce"></div>
  <!-- ETAPA 4: LOMBOK ZÁPAD / SEVER -->
 <div class="t-row filter-lombok-sever" id="etapa-lombok-zapad">
     <div class="t-point"></div>
@@ -9351,7 +9355,7 @@ function updatePackingWeight() {
             <div class="uber-top-bar">
                 <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
                     <span class="custom-checkbox-round">✓</span>
-                    <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨  A: Starsand Beach Resort (Sekotong)</span>
+                    <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 A: Starsand Beach Resort (Sekotong)</span>
                 </label>
                 <span class="hotel-status-tag tag-inactive" id="tag-lombokNorth-A" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 800;">Klikni pro výběr</span>
             </div>
@@ -9393,7 +9397,7 @@ function updatePackingWeight() {
             <div class="uber-top-bar">
                 <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
                     <span class="custom-checkbox-round">✓</span>
-                    <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨    B: Mina Tanjung Hotel (Sever / Tanjung)</span>
+                    <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 B: Mina Tanjung Hotel (Sever / Tanjung)</span>
                 </label>
                 <span class="hotel-status-tag tag-active" id="tag-lombokNorth-B" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 900;">⭐ Vybráno</span>
             </div>
@@ -9456,7 +9460,7 @@ function updatePackingWeight() {
         <!-- 🐢 2. DEN: PRIVÁTNÍ PLAVBA S PROSKLENÝM DNEM -->
         <div class="day-block-lombok x-bor-accent-d95_mt-16">
             <h4 class="x-fs-1-15_c-text-main_mb-6">🐢 2. DEN: Privátní plavba lodí s proskleným dnem (Gili Air, Meno &amp; Trawangan)</h4>
-            <p class="x-fs-88_c-text-muted_mb-12">Soukromá loď se skleněným dnem (cca 800 000 – 1 200 000 IDR / 1 200 – 1 800 Kč za skupinu): podvodní sochy NEST, šnorchlování s želvami, oběd na Gili Trawangan a relax na Gili Air.</p>
+            <p class="x-fs-88_c-text-muted_mb-12">Soukromá loď se skleněným dnem (cca 800 000 – 1 200 000 IDR / <span data-fx="IDR" data-amt="800000" data-round="50">960</span> – <span data-fx="IDR" data-amt="1200000" data-round="50">1 440</span> Kč za skupinu): podvodní sochy NEST, šnorchlování s želvami, oběd na Gili Trawangan a relax na Gili Air.</p>
 
             <div class="spots-grid-lombok">
                 <!-- MÍSTO 1: GILI MENO - SOCHY NEST -->
@@ -9613,6 +9617,7 @@ function updatePackingWeight() {
         <span class="lux-fold-chev" aria-hidden="true">▾</span>
     </button></h3>
     <div class="lux-fold-body" id="f-leg-kuta-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+<div class="fl-deck st-deck" id="stDeck-f-leg-kuta" data-fold="f-leg-kuta" aria-label="Etapa v kostce"></div>
 <div style="background: var(--lux-card) !important; border-radius: 18px; padding: 10px; margin: 20px 0;">
     <div class="lombok-inter-map-widget">
 
@@ -9820,7 +9825,7 @@ function updatePackingWeight() {
             <div class="uber-top-bar">
                 <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
                     <span class="custom-checkbox-round">✓</span>
-                    <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨  A: El Tropico Boutique Hotel</span>
+                    <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 A: El Tropico Boutique Hotel</span>
                 </label>
                 <span class="hotel-status-tag tag-inactive" id="tag-lombokSouth-A" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 800;">Klikni pro výběr</span>
             </div>
@@ -9862,7 +9867,7 @@ function updatePackingWeight() {
             <div class="uber-top-bar">
                 <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
                     <span class="custom-checkbox-round">✓</span>
-                    <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨    B: TheLocal AreGuling HOMESTAY</span>
+                    <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 B: TheLocal AreGuling HOMESTAY</span>
                 </label>
                 <span class="hotel-status-tag tag-active" id="tag-lombokSouth-B" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 900;">⭐ Vybráno</span>
             </div>
@@ -10131,7 +10136,7 @@ function updatePackingWeight() {
             🚢 23. 8. 2027 • Návrat z Lomboku na Bali
         </div>
         <div class="t-bubble transfer-bubble" style="background: var(--surface-hover); padding: 16px; border-radius: 12px; border: 1px solid var(--border);">
-            <h3 class="stage-title" style="font-size: 1.1rem; font-weight: 800; margin-bottom: 6px; color: var(--text-main);">Gili / Lombok ➔ Sanur Port (Bali)</h3>
+            <h3 class="stage-title" style="font-size: 1.1rem; font-weight: 800; margin-bottom: 6px; color: var(--text-main);">Přístav Bangsal (Lombok) ➔ Sanur Port (Bali)</h3>
             <p class="stage-desc" style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Ve <strong>13:30</strong> odplutí lodí Wahana Virendra zpět na Bali (příjezd do přístavu Sanur v 17:00). Krátký transfer do hotelu u letiště v Denpasaru.</p>
         </div>
     </div>
@@ -10250,7 +10255,7 @@ function updatePackingWeight() {
     <div class="uber-top-bar">
         <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
             <span class="custom-checkbox-round">✓</span>
-            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨  A: Grand Ixora Kuta Resort</span>
+            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 A: Grand Ixora Kuta Resort</span>
         </label>
         <span class="hotel-status-tag tag-inactive" id="tag-kutaLast-A" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 800;">Klikni pro výběr</span>
     </div>
@@ -10292,7 +10297,7 @@ function updatePackingWeight() {
     <div class="uber-top-bar">
         <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
             <span class="custom-checkbox-round">✓</span>
-            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨    B: Bakung Beach Resort</span>
+            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 B: Bakung Beach Resort</span>
         </label>
         <span class="hotel-status-tag tag-inactive" id="tag-kutaLast-B" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 900;">Klikni pro výběr</span>
     </div>
@@ -10337,7 +10342,7 @@ function updatePackingWeight() {
     <div class="uber-top-bar">
         <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
             <span class="custom-checkbox-round">✓</span>
-            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨    C: Bali Sandy Resort</span>
+            <span class="hotel-title-text x-fs-1-25_fw-900_c-text-main">🏨 C: Bali Sandy Resort</span>
         </label>
         <span class="hotel-status-tag tag-active" id="tag-kutaLast-C" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 900;">⭐ Vybráno</span>
     </div>
@@ -10852,7 +10857,7 @@ function updatePackingWeight() {
      <div style="background: var(--surface-hover); padding: 14px 16px; border-radius: 12px; margin-bottom: 16px; font-size: 0.9rem; line-height: 1.5; font-weight: 500; border: 1px solid var(--border); color: var(--text-main);">
                     🤝 <strong>Placení:</strong> Letenky a ubytování zařizuji já. Zálohu vybírám v lednu 2027 pro okamžitý flexibilní nákup. Po nákupu rozešlu oficiální fakturu a zbylé peníze vracím zpět. Zakládám si na 100% transparentnosti. O všem co budu dělat, Vás budu informovat. První nakupuju velké letenky z Prahy do Singapuru a zpět. Dále budu kupovat letenky ze Singapuru na Bali a pak objednávám lodní lístky z Bali na Lombok. Není to najednou, ale snažím se to vyřešit po nákupu velkých letenek co nejdříve. Na hotely budu potřebovat peníze začátkem července 2027. Co se týká vlastní výměny za USD doporučuji hlídat výhodný kurz a pak sami nakoupit. Odhad je cca 700 USD na osobu. Ale je to na Vás.
                     <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.15); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-                        <span>🚗 <strong>Tip na parkování u letiště:</strong> Zkoušel jsem to rezervovat a vyšla mi cena 1000 Kč, tak jsem to za tu cenu zarezervoval💰. Jinak bude léto, nebude potřeba řešit, kam dát zimní věci, tak se dá na letiště dojet StudentAgency a metrem, ale po dlouhém letu zpátky je to dost otravné a únavné, jet ještě busem domů....po zkušenostech, to nedoporučuji..</span>
+                        <span>🚗 <strong>Tip na parkování u letiště:</strong> Zkoušel jsem to rezervovat a vyšla mi cena 1000 Kč, tak jsem to za tu cenu zarezervoval 💰. Jinak bude léto, nebude potřeba řešit, kam dát zimní věci, tak se dá na letiště dojet StudentAgency a metrem, ale po dlouhém letu zpátky je to dost otravné a únavné, jet ještě busem domů....po zkušenostech, to nedoporučuji..</span>
                         <a href="https://1parking.cz/rezervace/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: var(--lux-deep-b); color: #ffffff; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 0.85rem;">
                             Rezervovat parkování ↗
                         </a>
@@ -14137,7 +14142,7 @@ function updatePackingWeight() {
             <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres11" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>🛂 Platnost pasu: Minimálně 6 měsíců po návratu (do února 2028)</span></label>
             <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres12" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>💉 Očkování (nic není povinné, jen doporučené)</span></label>
             <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres13" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>💊 „Bali Belly“ a lékárnička (Ercefuryl místo Endiaronu)</span></label>
-            <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres14" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>🚨 Přísné zákazy v Singapuru !!! (zákaz žvýkaček, e-cigaret a vapů)</span></label>
+            <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres14" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>🚨 Přísné zákazy v Singapuru!!! (zákaz žvýkaček, e-cigaret a vapů)</span></label>
         </div>
 
     </div>
@@ -17968,6 +17973,38 @@ body.pres-on #presRail { display: flex; }
 
 /* ---- Verze stránky v hlavičce (datum a čas sestavení) ---- */
 .hero-ver { display: inline-block; margin: 8px auto 0; padding: 4px 12px; border-radius: 999px; font: 700 0.74rem/1.2 var(--font-ui, inherit); letter-spacing: .03em; color: rgba(255, 255, 255, 0.92); background: rgba(8, 14, 20, 0.55); border: 1px solid rgba(255, 255, 255, 0.35); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); font-variant-numeric: tabular-nums; }
+
+/* ---- Etapa v kostce ---- */
+.st-deck { margin-bottom: 20px; }
+.st-days { margin: 0; padding: 6px 18px 4px; list-style: none; display: grid; gap: 0; position: relative; }
+.st-days li { position: relative; display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 14px; padding: 10px 0; border-top: 1px dashed var(--border); align-items: baseline; }
+.st-days li:first-child { border-top: 0; }
+.st-days time { font: 800 0.95rem var(--font-display, inherit); color: var(--primary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.st-days b { color: var(--text-main); font-size: 0.95rem; line-height: 1.35; }
+.st-hotel { display: grid; gap: 2px; }
+@media (max-width: 480px) { .st-days li { grid-template-columns: 62px minmax(0, 1fr); gap: 10px; } }
+/* ---- Slovníček: poslech výslovnosti ---- */
+.flip-back { position: relative; }
+.sp-btn { position: absolute; right: 8px; bottom: 8px; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid rgba(255, 255, 255, 0.6); background: rgba(8, 14, 20, 0.55); color: #fff; font-size: 1.05rem; cursor: pointer; display: grid; place-items: center; z-index: 3; }
+.sp-btn:hover { background: rgba(8, 14, 20, 0.8); } .sp-btn.is-on { background: var(--primary); border-color: var(--primary); color: var(--on-primary, #fff); }
+.sp-btn:focus-visible { outline: 2px solid #5eead4; outline-offset: 2px; }
+
+/* ---- Prezentace: poznámky řečníka, závěrečný QR snímek, stručný režim ---- */
+#presNotes { position: fixed; right: 12px; top: 70px; z-index: 10061; width: min(360px, calc(100vw - 24px)); display: none; padding: 14px 16px; border-radius: 16px; background: rgba(8, 14, 20, 0.95); color: #fff; border: 1.5px solid rgba(255, 255, 255, 0.3); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5); }
+#presNotes.is-open { display: block; }
+#presNotes b { display: block; margin-bottom: 6px; font: 800 0.92rem var(--font-display, inherit); } #presNotes p { margin: 0; font-size: 0.92rem; line-height: 1.5; color: rgba(255, 255, 255, 0.9); }
+#presEnd { display: none; padding: 40px 24px; border-radius: 24px; text-align: center; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow); }
+body.pres-on #presEnd.is-cur { display: grid; gap: 14px; justify-items: center; }
+#presEnd h2 { margin: 0; font: 800 clamp(1.8rem, 4vw, 2.6rem) var(--font-display, inherit); color: var(--text-main); }
+#presEnd p { margin: 0; color: var(--text-muted); font-size: 1.05rem; max-width: 36ch; }
+#presEnd .pe-qr { padding: 12px; border-radius: 16px; background: #fff; box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25); line-height: 0; }
+#presEnd .pe-qr svg { width: min(300px, 70vw); height: auto; }
+#presEnd .pe-url { font: 700 0.95rem var(--font-ui, inherit); color: var(--primary); word-break: break-all; max-width: 90vw; }
+#presEnd small { color: var(--text-muted); font-size: 0.8rem; }
+@media (max-width: 560px) { #presBar #prNotes, #presBar #prBrief { display: none; } }
+@media print { #presNotes, #presEnd { display: none !important; } }
+/* stručný režim: bez podrobných programů, map, Street View a katalogů */
+body.brief .lux-acc-title, body.brief .lux-acc-sub, body.brief .lux-acc-btn, body.brief [class*="accordion-content"], body.brief [id$="AccContent"], body.brief .map-container-wrapper, body.brief .sv-stage, body.brief #bikesCatalogWrapper, body.brief .share-row, body.brief .trip-show, body.brief .lux-fold-pad hr { display: none !important; }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -17978,6 +18015,8 @@ body.pres-on #presRail { display: flex; }
     <button type="button" id="prMinus" aria-label="Menší písmo" title="Menší písmo">A−</button>
     <button type="button" id="prPlus" aria-label="Větší písmo" title="Větší písmo">A+</button>
     <button type="button" id="prFs" aria-label="Celá obrazovka" title="Celá obrazovka (F)">⛶</button>
+    <button type="button" id="prNotes" aria-label="Poznámky řečníka" title="Poznámky (N)">📝</button>
+    <button type="button" id="prBrief" aria-label="Stručně nebo podrobně" title="Stručně / podrobně (B)">📄</button>
     <button type="button" class="pr-x" id="prX" aria-label="Ukončit prezentaci" title="Ukončit (Esc)">✕</button>
 </div>
 <div id="pbar" role="region" aria-label="Postup čtením stránky">
@@ -17996,7 +18035,7 @@ body.pres-on #presRail { display: flex; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '31. 10. 2026 · 07:14';
+    var LUX_VERSION = '31. 10. 2026 · 07:26';
     var $ = function (id) { return document.getElementById(id); };
     function toast(msg) {
         if (typeof window.showToast === 'function') { try { window.showToast(msg); return; } catch (e) {} }
@@ -18298,6 +18337,7 @@ body.pres-on #presRail { display: flex; }
                 s.push({ el: el, part: pt, fold: el.classList.contains('lux-fold'), kicker: kick, title: tt ? tt.textContent.trim() : 'Trasa na mapě' });
             });
         });
+        var endEl = buildEnd(); if (endEl) s.push({ el: endEl, kicker: 'Závěr', title: 'Děkuji · QR na stránku' });
         return s.filter(function (x) { return x.el; });
     }
     function presShow(i) {
@@ -18308,11 +18348,12 @@ body.pres-on #presRail { display: flex; }
         [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (f) { foldSet(f, false); });
         allParts().forEach(function (pt) { pt.classList.toggle('is-open', pt === s.part); });
         if (s.fold) foldSet(s.el, true);
+        [].forEach.call(document.querySelectorAll('#presEnd'), function (x) { x.classList.toggle('is-cur', x === s.el); });
         hideSiblings(s.el);
         window.scrollTo({ top: 0, behavior: 'instant' });
         $('prK').textContent = s.kicker || ''; $('prT').textContent = s.title; $('prN').textContent = (pres.i + 1) + ' / ' + pres.slides.length;
         $('prPrev').disabled = pres.i === 0; $('prNext').disabled = pres.i === pres.slides.length - 1;
-        pres.seen[pres.i] = 1; navMark(); presLayout(); setTimeout(presLayout, 250);
+        pres.seen[pres.i] = 1; navMark(); presLayout(); setTimeout(presLayout, 250); presTick(); notesRender();
         setTimeout(refreshMaps, 120); setTimeout(refreshMaps, 600);
     }
 
@@ -18363,12 +18404,13 @@ body.pres-on #presRail { display: flex; }
         pres.on = true; pres.scroll = window.scrollY; pres.slides = buildSlides(); pres.seen = {}; buildNav();
         pres.snap = { folds: [].map.call(document.querySelectorAll('.lux-fold.is-open'), function (f) { return f.id; }), parts: [].map.call(document.querySelectorAll('.lux-part.is-open'), function (x) { return x.id; }) };
         document.body.classList.add('pres-on'); document.documentElement.classList.add('pres-on'); setSize(112);
+        presT.t0 = Date.now(); clearInterval(presT.timer); presT.timer = setInterval(presTick, 1000);
         try { if (document.documentElement.requestFullscreen && !document.fullscreenElement) document.documentElement.requestFullscreen().then(function () { pres.wantFs = true; }).catch(function () {}); } catch (e) {}
         presShow(typeof start === 'number' ? start : 0);
         $('prNext').focus({ preventScroll: true });
     };
     window.luxPresentStop = function () {
-        if (!pres.on) return; pres.on = false; pres.wantFs = false; pres.lostByTab = false; closeViewer(); navToggle(false); var fo = $('presFs'); if (fo) fo.classList.remove('is-open');
+        if (!pres.on) return; pres.on = false; pres.wantFs = false; pres.lostByTab = false; clearInterval(presT.timer); var pn = $('presNotes'); if (pn) pn.classList.remove('is-open'); [].forEach.call(document.querySelectorAll('#presEnd'), function (x) { x.classList.remove('is-cur'); }); closeViewer(); navToggle(false); var fo = $('presFs'); if (fo) fo.classList.remove('is-open');
         [].forEach.call(document.querySelectorAll('.pres-hide'), function (x) { x.classList.remove('pres-hide'); });
         document.body.classList.remove('pres-on'); document.documentElement.classList.remove('pres-on'); document.documentElement.style.fontSize = '';
         [].forEach.call(document.querySelectorAll('.lux-fold'), function (f) { foldSet(f, pres.snap.folds.indexOf(f.id) > -1); f.inert = f.classList.contains('lux-locked'); });
@@ -18387,12 +18429,16 @@ body.pres-on #presRail { display: flex; }
         else if (k === 'End') { e.preventDefault(); presShow(pres.slides.length - 1); }
         else if (k === 'Escape') { e.preventDefault(); var nv = $('presNav'); if (nv && nv.classList.contains('is-open')) navToggle(false); else window.luxPresentStop(); }
         else if (k === 'o' || k === 'O') { e.preventDefault(); navToggle(); }
+        else if (k === 'n' || k === 'N') { e.preventDefault(); presT.notes = !presT.notes; notesRender(); }
+        else if (k === 'b' || k === 'B') { e.preventDefault(); window.luxBrief(); setTimeout(function () { presShow(pres.i); }, 50); }
         else if (k === 'f' || k === 'F') { e.preventDefault(); $('prFs').click(); }
     }
     (function presWire() {
         if (!$('presBar')) return;
         $('prPrev').onclick = function () { presShow(pres.i - 1); }; $('prNext').onclick = function () { presShow(pres.i + 1); };
         $('prX').onclick = function () { window.luxPresentStop(); };
+        $('prNotes').onclick = function () { presT.notes = !presT.notes; notesRender(); };
+        $('prBrief').onclick = function () { window.luxBrief(); setTimeout(function () { presShow(pres.i); }, 50); };
         $('prMinus').onclick = function () { setSize(pres.size - 10); }; $('prPlus').onclick = function () { setSize(pres.size + 10); };
         $('prFs').onclick = function () { try { if (document.fullscreenElement) { pres.wantFs = false; document.exitFullscreen(); } else { document.documentElement.requestFullscreen(); } } catch (e) {} };
         document.addEventListener('keydown', presKeys);
@@ -18841,6 +18887,193 @@ body.pres-on #presRail { display: flex; }
         }
     })();
 
+
+    /* ---------- částky v Kč u cizích měn se počítají ze stejných kurzů jako rozpočet ---------- */
+    function fxTexts() {
+        var r; try { r = window.TRIP && TRIP.rates ? TRIP.rates() : null; } catch (e) { r = null; } if (!r) return;
+        [].forEach.call(document.querySelectorAll('[data-fx]'), function (el) {
+            var k = r[el.getAttribute('data-fx')], a = parseFloat(el.getAttribute('data-amt')), rd = parseFloat(el.getAttribute('data-round')) || 5; if (!k || !a) return;
+            el.textContent = (Math.round(a * k / rd) * rd).toLocaleString('cs-CZ');
+        });
+    }
+
+
+    /* ---------- slovníček: poslech indonéské výslovnosti ---------- */
+    function initSpeech() {
+        if (!('speechSynthesis' in window)) return;
+        var cards = document.querySelectorAll('#cardsContainer .flip-card'); if (!cards.length) return;
+        [].forEach.call(cards, function (c) {
+            var back = c.querySelector('.flip-back'); if (!back || back.querySelector('.sp-btn')) return;
+            var phrase = (back.querySelector('span') || {}).textContent; if (!phrase) return;
+            var b = document.createElement('button'); b.type = 'button'; b.className = 'sp-btn'; b.textContent = '🔊'; b.setAttribute('aria-label', 'Přečíst nahlas: ' + phrase.trim()); b.title = 'Poslechnout výslovnost';
+            b.addEventListener('click', function (e) {
+                e.stopPropagation(); e.preventDefault();
+                var syn = window.speechSynthesis, voices = syn.getVoices ? syn.getVoices() : [], v = voices.filter(function (x) { return /^id([-_]|$)/i.test(x.lang); })[0];
+                syn.cancel();
+                var u = new SpeechSynthesisUtterance(phrase.replace(/\s*[\(\[].*$/, '').replace(/\s*\/\s*/g, ', ').trim()); u.lang = 'id-ID'; if (v) u.voice = v; u.rate = 0.85;
+                u.onstart = function () { b.classList.add('is-on'); }; u.onend = u.onerror = function () { b.classList.remove('is-on'); };
+                if (voices.length && !v) toast('Tvoje zařízení nenabízí indonéský hlas, přečte to jiným hlasem. Hlas si můžeš doinstalovat v nastavení převodu textu na řeč.');
+                syn.speak(u);
+            });
+            back.appendChild(b);
+        });
+    }
+
+    /* ---------- etapy v kostce: termín, hotel, vzdálenost, program po dnech ---------- */
+    var STAGE = { 'f-leg-sg': ['singapore', 'Singapur'], 'f-leg-uluwatu': ['uluwatu', 'Uluwatu'], 'f-leg-ubud': ['ubud', 'Ubud'], 'f-leg-lombok-sever': ['lombokNorth', 'sever Lomboku'], 'f-leg-kuta': ['lombokSouth', 'Kuta Lombok'] };
+    var STIPS = {
+        'f-leg-sg': [['💳', 'Čím platit', 'MHD, Grab a restaurace v obchoďácích se platí kartou. Hawkery a stánky ne, na ty je potřeba hotovost.'], ['🚭', 'Přísné zákazy', 'V Singapuru neber žvýkačky, e-cigarety ani vapy. Pokuty jsou vysoké.'], ['📱', 'Papíry před příletem', 'SG Arrival Card se vyplňuje 1–3 dny před příletem a je zdarma.']],
+        'f-leg-uluwatu': [['🐒', 'Opice u chrámu', 'U chrámu Uluwatu si schovej brýle, čepici a mobil. Opice je rády ukradnou. (tip)'], ['🎭', 'Kecak Dance', 'Představení bývá při západu slunce, takže si vyhraď dost času a zajisti místa dřív. (tip)'], ['🌊', 'Pláž Suluban', 'Dá se k ní dojít skrz jeskyně, nejlépe při odlivu. Podívej se na předpověď přílivu. (tip)']],
+        'f-leg-ubud': [['🐒', 'Opičí prales', 'Do lesa neber jídlo ani volné věci, opice si je umějí vzít. (tip)'], ['🌾', 'Terasy a vodopády', 'Na rýžové terasy a vodopády jeď dopoledne, bývá tam méně lidí. (tip)'], ['🛕', 'Chrámy', 'Do chrámů se chodí v sarongu. Na místě se obvykle půjčují. (tip)']],
+        'f-leg-lombok-sever': [['🚤', 'Plavba na Gili', 'Soukromá loď se skleněným dnem vychází asi na <span data-fx="IDR" data-amt="1000000" data-round="50">1 200</span> Kč za celou skupinu (cca 1 000 000 IDR).'], ['🌋', 'Vodopády pod Rinjani', 'Obuj pevné boty, k vodopádům se chodí po kamenech a schodech. (tip)'], ['🐒', 'Opičí les Pusuk', 'Jídlo nech v batohu, opice u silnice rády žebrají. (tip)']],
+        'f-leg-kuta': [['🏎️', 'Okruh Mandalika', 'Před návštěvou ověř, jestli se na okruhu zrovna nekoná akce, která by omezila vstup. (tip)'], ['🌊', 'Pláže a vlny', 'Plavej jen v zátokách, které vypadají klidně, a hlídej proudy. Divoké útesy Mawi jsou spíš na koukání. (tip)'], ['🚤', 'Poslední den', 'Přesun do přístavu na severu je dlouhý, vyraž s rezervou před odplutím v 13:30. (tip)']]
+    };
+    function stHav(a, b) { var rad = Math.PI / 180, dl = (b[0] - a[0]) * rad, dg = (b[1] - a[1]) * rad, x = Math.sin(dl / 2) * Math.sin(dl / 2) + Math.cos(a[0] * rad) * Math.cos(b[0] * rad) * Math.sin(dg / 2) * Math.sin(dg / 2); return 2 * 6371 * Math.asin(Math.sqrt(x)); }
+    function stHotel(key) { try { var o = hotelCatalog[key].options[selectedHotels[key]]; return o ? { v: selectedHotels[key], name: o.name, price: o.price, coords: o.coords } : null; } catch (e) { return null; } }
+    function renderStage(fid) {
+        var host = $('stDeck-' + fid), fold = $(fid); if (!host || !fold) return;
+        var cfg = STAGE[fid], key = cfg[0], sub = (fold.querySelector('.lux-fold-s') || {}).textContent || '', dm = /(\d{1,2})\.\s*–\s*(\d{1,2})\.\s*(\d{1,2})\.\s*(\d{4})\s*\((\d+)\s*(?:noc|noci|nocí)\)/.exec(sub);
+        var start = dm ? new Date(+dm[4], +dm[3] - 1, +dm[1]) : null, nights = dm ? +dm[5] : 0;
+        var h = stHotel(key), prevKey = { uluwatu: 'singapore', ubud: 'uluwatu', lombokNorth: 'ubud', lombokSouth: 'lombokNorth' }[key], prevH = prevKey ? stHotel(prevKey) : null;
+        /* odkud se jede: letiště / přístav, kde to dává smysl, jinak předchozí hotel */
+        var ORIG = { singapore: [[1.3644, 103.9915], 'letiště Changi'], uluwatu: [[-8.7482, 115.1672], 'letiště Denpasar'], lombokNorth: [[-8.3946, 116.0998], 'přístavu Bangsal'] };
+        var from = ORIG[key] ? ORIG[key][0] : (prevH ? prevH.coords : null), fromName = ORIG[key] ? ORIG[key][1] : (prevH ? prevH.name : '');
+        var km = h && h.coords && from ? Math.round(stHav(from, h.coords)) : null;
+        var days = [].filter.call(fold.querySelectorAll('h4'), function (x) { return /\d\.\s*(DEN|VEČER)\s*:/.test(x.textContent); });
+        var MON = ['led', 'úno', 'bře', 'dub', 'kvě', 'čvn', 'čvc', 'srp', 'zář', 'říj', 'lis', 'pro'];
+        var items = days.map(function (x) {
+            var n = +(/(\d)\.\s*(?:DEN|VEČER)/.exec(x.textContent) || [0, 1])[1], txt = x.textContent.replace(/🔗/g, '').replace(/\s+/g, ' ').trim().replace(/\s*\d\.\s*(?:DEN|VEČER):\s*/i, ' ').trim();
+            var d = start ? new Date(start.getFullYear(), start.getMonth(), start.getDate() + n - 1) : null;
+            return '<li><time>' + (d ? d.getDate() + '. ' + (d.getMonth() + 1) + '.' : n + '. den') + '</time><b>' + txt + '</b></li>';
+        }).join('');
+        var tips = (STIPS[fid] || []).map(function (q) { return '<div class="fl-tip"><b>' + q[0] + ' ' + q[1] + '</b>' + q[2] + '</div>'; }).join('');
+        host.innerHTML = '<div class="fl-read" style="grid-template-columns:repeat(4,minmax(0,1fr))">' +
+            '<div><span class="fl-k">Termín</span><span class="fl-v" style="font-size:1.05rem">' + (dm ? dm[1] + '.–' + dm[2] + '. ' + dm[3] + '.' : sub) + '</span><span class="fl-s">' + nights + (nights === 1 ? ' noc' : nights < 5 ? ' noci' : ' nocí') + ' · ' + cfg[1] + '</span></div>' +
+            '<div class="st-hotel"><span class="fl-k">Vybraný hotel</span><span class="fl-v" style="font-size:.98rem;line-height:1.25">' + (h ? h.name : '–') + '</span><span class="fl-s">' + (h ? h.price.toLocaleString('cs-CZ') + ' Kč / pokoj · ' + Math.round(h.price / 2).toLocaleString('cs-CZ') + ' Kč / os.' : '') + '</span></div>' +
+            '<div><span class="fl-k">Přesun sem</span><span class="fl-v" style="font-size:1.05rem">' + (km !== null ? 'cca ' + km + ' km' : '–') + '</span><span class="fl-s">' + (km !== null ? 'vzdušnou čarou z ' + fromName : '') + '</span></div>' +
+            '<div><span class="fl-k">Program</span><span class="fl-v" style="font-size:1.05rem">' + days.length + (days.length === 1 ? ' den' : days.length < 5 ? ' dny' : ' dní') + '</span><span class="fl-s">podrobně v rozbalovacích sekcích níže</span></div></div>' +
+            (items ? '<h4 class="fl-h">Program po dnech</h4><ol class="st-days">' + items + '</ol>' : '') +
+            '<h4 class="fl-h">Co mít na paměti</h4><div class="fl-tips">' + tips + '</div>';
+        fxTexts();
+    }
+    function renderStages() {
+        Object.keys(STAGE).forEach(function (fid) {
+            renderStage(fid);
+            var f = $(fid); if (f && !f.__stClick) { f.__stClick = 1; f.addEventListener('click', function () { setTimeout(function () { renderStage(fid); }, 400); }); }
+        });
+    }
+
+/* Minimální generátor QR kódu (bajtový režim, korekce L, verze 1–10), bez závislostí. */
+function luxQR(text) {
+    var data = []; var enc = unescape(encodeURIComponent(text)); for (var i = 0; i < enc.length; i++) data.push(enc.charCodeAt(i));
+    var ECC = [-1, 7, 10, 15, 20, 26, 18, 20, 24, 30, 18], BLK = [-1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 4];
+    function rawModules(v) { var r = (16 * v + 128) * v + 64; if (v >= 2) { var n = Math.floor(v / 7) + 2; r -= (25 * n - 10) * n - 55; if (v >= 7) r -= 36; } return r; }
+    var ver, dataCap;
+    for (ver = 1; ver <= 10; ver++) { dataCap = Math.floor(rawModules(ver) / 8) - ECC[ver] * BLK[ver]; if (data.length + (ver < 10 ? 2 : 3) <= dataCap) break; }
+    if (ver > 10) return null;
+    var bits = []; function put(val, len) { for (var i = len - 1; i >= 0; i--) bits.push((val >>> i) & 1); }
+    put(4, 4); put(data.length, ver < 10 ? 8 : 16); data.forEach(function (b) { put(b, 8); });
+    put(0, Math.min(4, dataCap * 8 - bits.length)); while (bits.length % 8) bits.push(0);
+    var cw = []; for (var i = 0; i < bits.length; i += 8) { var b = 0; for (var j = 0; j < 8; j++) b = (b << 1) | bits[i + j]; cw.push(b); }
+    for (var pad = 0xEC; cw.length < dataCap; pad ^= 0xEC ^ 0x11) cw.push(pad);
+    function mul(x, y) { var z = 0; for (var i = 7; i >= 0; i--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> i) & 1) * x; } return z; }
+    function divisor(deg) { var r = []; for (var i = 0; i < deg - 1; i++) r.push(0); r.push(1); var root = 1; for (var i = 0; i < deg; i++) { for (var j = 0; j < r.length; j++) { r[j] = mul(r[j], root); if (j + 1 < r.length) r[j] ^= r[j + 1]; } root = mul(root, 2); } return r; }
+    function remainder(dat, div) { var r = div.map(function () { return 0; }); dat.forEach(function (b) { var f = b ^ r.shift(); r.push(0); div.forEach(function (c, i) { r[i] ^= mul(c, f); }); }); return r; }
+    var nb = BLK[ver], el = ECC[ver], raw = Math.floor(rawModules(ver) / 8), nShort = nb - raw % nb, shortLen = Math.floor(raw / nb), blocks = [], div = divisor(el);
+    for (var i = 0, k = 0; i < nb; i++) { var d = cw.slice(k, k + shortLen - el + (i < nShort ? 0 : 1)); k += d.length; var e = remainder(d, div); if (i < nShort) d.push(0); blocks.push(d.concat(e)); }
+    var all = []; for (var i = 0; i < blocks[0].length; i++) blocks.forEach(function (bl, j) { if (i !== shortLen - el || j >= nShort) all.push(bl[i]); });
+    var size = ver * 4 + 17, mod = [], fn = []; for (var y = 0; y < size; y++) { mod.push(new Array(size).fill(false)); fn.push(new Array(size).fill(false)); }
+    function setF(x, y, d) { mod[y][x] = d; fn[y][x] = true; }
+    for (var i = 0; i < size; i++) { setF(6, i, i % 2 === 0); setF(i, 6, i % 2 === 0); }
+    function finder(cx, cy) { for (var dy = -4; dy <= 4; dy++) for (var dx = -4; dx <= 4; dx++) { var dist = Math.max(Math.abs(dx), Math.abs(dy)), x = cx + dx, y = cy + dy; if (x >= 0 && x < size && y >= 0 && y < size) setF(x, y, dist !== 2 && dist !== 4); } }
+    finder(3, 3); finder(size - 4, 3); finder(3, size - 4);
+    var ap = []; if (ver > 1) { var na = Math.floor(ver / 7) + 2, step = Math.ceil((ver * 4 + 4) / (na * 2 - 2)) * 2; ap = [6]; for (var pos = size - 7; ap.length < na; pos -= step) ap.splice(1, 0, pos); }
+    ap.forEach(function (ax, i) { ap.forEach(function (ay, j) { if ((i === 0 && j === 0) || (i === 0 && j === ap.length - 1) || (i === ap.length - 1 && j === 0)) return; for (var dy = -2; dy <= 2; dy++) for (var dx = -2; dx <= 2; dx++) setF(ax + dx, ay + dy, Math.max(Math.abs(dx), Math.abs(dy)) !== 1); }); });
+    function drawFormat(mask) {
+        var d = (1 << 3) | mask, r = d; for (var i = 0; i < 10; i++) r = (r << 1) ^ ((r >>> 9) * 0x537); var b = ((d << 10) | r) ^ 0x5412; function bit(i) { return ((b >>> i) & 1) !== 0; }
+        for (var i = 0; i <= 5; i++) setF(8, i, bit(i)); setF(8, 7, bit(6)); setF(8, 8, bit(7)); setF(7, 8, bit(8)); for (var i = 9; i < 15; i++) setF(14 - i, 8, bit(i));
+        for (var i = 0; i < 8; i++) setF(size - 1 - i, 8, bit(i)); for (var i = 8; i < 15; i++) setF(8, size - 15 + i, bit(i)); setF(8, size - 8, true);
+    }
+    drawFormat(0);
+    if (ver >= 7) { var r = ver; for (var i = 0; i < 12; i++) r = (r << 1) ^ ((r >>> 11) * 0x1F25); var vb = (ver << 12) | r; for (var i = 0; i < 18; i++) { var bt = ((vb >>> i) & 1) !== 0, a = size - 11 + i % 3, c = Math.floor(i / 3); setF(a, c, bt); setF(c, a, bt); } }
+    var idx = 0; for (var right = size - 1; right >= 1; right -= 2) { if (right === 6) right = 5; for (var vert = 0; vert < size; vert++) for (var j = 0; j < 2; j++) { var x = right - j, up = ((right + 1) & 2) === 0, y = up ? size - 1 - vert : vert; if (!fn[y][x] && idx < all.length * 8) { mod[y][x] = ((all[idx >>> 3] >>> (7 - (idx & 7))) & 1) !== 0; idx++; } } }
+    function applyMask(m) { for (var y = 0; y < size; y++) for (var x = 0; x < size; x++) { var inv; switch (m) { case 0: inv = (x + y) % 2 === 0; break; case 1: inv = y % 2 === 0; break; case 2: inv = x % 3 === 0; break; case 3: inv = (x + y) % 3 === 0; break; case 4: inv = (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0; break; case 5: inv = x * y % 2 + x * y % 3 === 0; break; case 6: inv = (x * y % 2 + x * y % 3) % 2 === 0; break; default: inv = ((x + y) % 2 + x * y % 3) % 2 === 0; } if (!fn[y][x] && inv) mod[y][x] = !mod[y][x]; } }
+    function penalty() {
+        var res = 0, i, j, run;
+        for (i = 0; i < size; i++) { for (var dir = 0; dir < 2; dir++) { run = 1; for (j = 1; j < size; j++) { var a = dir ? mod[j][i] : mod[i][j], b = dir ? mod[j - 1][i] : mod[i][j - 1]; if (a === b) { run++; if (run === 5) res += 3; else if (run > 5) res++; } else run = 1; } } }
+        for (i = 0; i < size - 1; i++) for (j = 0; j < size - 1; j++) { var c = mod[i][j]; if (c === mod[i][j + 1] && c === mod[i + 1][j] && c === mod[i + 1][j + 1]) res += 3; }
+        var dark = 0; mod.forEach(function (r) { r.forEach(function (c) { if (c) dark++; }); }); var total = size * size, k = Math.ceil(Math.abs(dark * 20 - total * 10) / total) - 1; res += k * 10; return res;
+    }
+    var best = 0, bestP = 1e9; for (var m = 0; m < 8; m++) { applyMask(m); drawFormat(m); var pen = penalty(); if (pen < bestP) { best = m; bestP = pen; } applyMask(m); }
+    applyMask(best); drawFormat(best);
+    return { size: size, version: ver, get: function (x, y) { return mod[y][x]; } };
+}
+function luxQRSvg(text, px) {
+    var q = luxQR(text); if (!q) return ''; var n = q.size, quiet = 4, d = '';
+    for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) if (q.get(x, y)) d += 'M' + (x + quiet) + ' ' + (y + quiet) + 'h1v1h-1z';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + (n + quiet * 2) + ' ' + (n + quiet * 2) + '" width="' + (px || 240) + '" height="' + (px || 240) + '" shape-rendering="crispEdges" role="img" aria-label="QR kód"><rect width="100%" height="100%" fill="#fff"/><path d="' + d + '" fill="#000"/></svg>';
+}
+
+
+    /* ---------- prezentace: časovač, poznámky řečníka, závěrečný snímek s QR ---------- */
+    var PNOTES = {
+        'f-viza': 'Singapur: SG Arrival Card, zdarma, 1–3 dny před příletem. Indonésie: vízum e-VoA za 500 000 IDR (žádost cca 14 dní před odletem), turistická daň na Bali 150 000 IDR a celní deklarace e-CD dva dny před příletem. Všechno se vyřizuje online.',
+        'f-sos': 'Tísňové linky a kontakty na ambasády. Očkování není povinné, doporučuje se tetanus, žloutenka A+B a břišní tyfus. Silný repelent s DEET koupit až na místě. Offline dopravu a mapy stáhnout předem.',
+        'f-esim': 'Singtel hi!Tourist eSIM za 15 SGD. Koupit předem a mít zapnutou při přistání. Telefon musí eSIM podporovat (ověří se kódem EID po vytočení *#06#).',
+        'f-apps': 'Dopravní aplikace Grab a Gojek a offline mapy.',
+        'f-live': 'Sdílení polohy a vzájemný přehled skupiny na cestách.',
+        'f-baleni': 'Příruční batoh do 7 kg na osobu. Interaktivní seznam, odškrtáváš si věci.',
+        'tripOverview': 'Celá trasa: Singapur 2 noci, Bali 7 nocí a Lombok 8 nocí, plus dvě noci v letadle. Mezi ostrovy se létá a pluje rychlolodí.',
+        'f-leg-sg': 'Singapur 7.–9. 8., 2 noci. Program: zátoka Marina Bay a světelná show, lanovka, Little India, Arab Street a Hot Pot večeře.',
+        'f-leg-sgdps': 'Přelet Singapur ➔ Bali 9. 8., Scoot TR288, 10:15–13:05. Stejné časové pásmo. Na letišti převezmeme nachystané skútry.',
+        'f-leg-uluwatu': '9.–11. 8., 2 noci. Útesy, pláž Suluban, Karang Boma, Tanah Barak, GWK a chrám Uluwatu s Kecak Dance.',
+        'f-leg-ubud': '11.–15. 8., 4 noci. Opičí prales, vodopády Kanto Lampo a Tibumana, Tirta Empul, rýžové terasy Tegalalang a kávová plantáž.',
+        'f-leg-presun4': '15. 8. přesun na Lombok. Doporučená rychlolod Starfish: 13:00 ze Sanuru, 15:00 do přístavu Bangsal, 1 343 Kč na osobu (tam i zpět 2 686 Kč na pár). Alternativa je let TransNusa.',
+        'f-leg-lombok-sever': '15.–19. 8., 4 noci. Soukromá plavba lodí se skleněným dnem kolem Gili, vodopády pod Rinjani, Pusuk, Malimbu Hill a chrám Batu Bolong.',
+        'f-leg-kuta': '19.–23. 8., 4 noci. Okruh Moto GP Mandalika, Tanjung Aan, Mawi, vesnice kmene Sasak a jeden volný den u bazénu.',
+        'f-leg-back': '23. 8. plavba zpět: Wahana Virendra ve 13:30 z Lomboku, příjezd do přístavu Sanur v 17:00.',
+        'f-leg-rozlucka': '23.–24. 8., poslední noc u letiště. Večer Jimbaran, ráno snídaně v 8:30, odjezd v 9:00 a odlet Scoot TR281 v 11:15.',
+        'f-leg-tranzit': 'Tranzit v Singapuru: čas závisí na zvolené aerolince. Plán A metro do centra a večeře v Lau Pa Sat (nejvýše hodinu), plán B Jewel a letiště. K bráně nejpozději dvě hodiny před odletem.',
+        'f-konfig': 'Tady se vybírají lety a hotely a ukazuje se souhrn cen. Cena se mění živě podle volby aerolinky a hotelů.',
+        'f-jidlo': 'Jídlo se počítá podle zvolené úrovně: skromné, pohodové nebo luxusní.',
+        'f-aktivity': 'Zaškrtáváš vstupné a aktivity, které chceš, a cena se přičte.',
+        'f-hotovost': 'Plán hotovosti: kolik S$ a USD si vzít a kde měnit. Rupie se doma nekupují, mění se na Bali.',
+        'f-rozpis': 'Transparentní rozpis všech nákladů včetně grafů.',
+        'f-srovnani': 'Srovnání s cestovní kanceláří SEN: delší zájezd a navíc Lombok a Gili.',
+        'f-slovnicek': 'Překlápěcí karty s výslovností. Ťuknutím na 🔊 se fráze přečte nahlas.',
+        'f-checklist': 'Úkoly s termíny a nakonec kontrolní seznam před schůzkou.',
+        'presEnd': 'Poděkování a QR kód, aby si posluchači otevřeli stránku ve svém mobilu.'
+    };
+    function presNote(el) { if (!el) return ''; var n = PNOTES[el.id]; if (n) return n; var s = el.querySelector && el.querySelector(':scope > .lux-fold-h .lux-fold-s'); return s ? s.textContent : ''; }
+    window.luxVariantUrl = function () {
+        var file = location.protocol === 'file:', base0 = file ? location.href.split(/[?#]/)[0] : location.origin + location.pathname, q = '';
+        try { if (typeof buildShareableUrl === 'function') q = (buildShareableUrl().split('?')[1] || ''); } catch (e) {}
+        return base0 + (q ? '?' + q : '');
+    };
+    function buildEnd() {
+        var wrap = document.querySelector('.main-wrapper'); if (!wrap) return null;
+        var e = $('presEnd'); if (!e) { e = document.createElement('section'); e.id = 'presEnd'; e.setAttribute('aria-label', 'Závěr prezentace'); wrap.appendChild(e); }
+        var url = window.luxVariantUrl(), isFile = location.protocol === 'file:', svg = '';
+        try { if (!isFile) svg = luxQRSvg(url.length <= 200 ? url : url.split('?')[0], 320) || luxQRSvg(url.split('?')[0], 320); } catch (er) { svg = ''; }
+        e.innerHTML = '<h2>Děkuji za pozornost 🌴</h2><p>' + (svg ? 'Načti QR kód a stránku máš hned v telefonu, včetně zvolených letů a hotelů.' : 'Stránku si otevři přes její webovou adresu.') + '</p>' +
+            (svg ? '<div class="pe-qr">' + svg + '</div>' : '') + '<div class="pe-url">' + (isFile ? '' : url.replace(/^https?:\/\//, '')) + '</div><small>Verze ' + LUX_VERSION + '</small>';
+        return e;
+    }
+    var presT = { t0: 0, timer: 0, notes: false };
+    function presClock() { var s = Math.floor((Date.now() - presT.t0) / 1000), m = Math.floor(s / 60); return (m >= 60 ? Math.floor(m / 60) + ':' + String(m % 60).padStart(2, '0') : m) + ':' + String(s % 60).padStart(2, '0'); }
+    function presTick() { var n = $('prN'); if (n && pres.on) n.textContent = (pres.i + 1) + ' / ' + pres.slides.length + ' · ⏱ ' + presClock(); }
+    function notesRender() {
+        var el = $('presNotes'); if (!el) { el = document.createElement('div'); el.id = 'presNotes'; el.setAttribute('role', 'note'); document.body.appendChild(el); }
+        var s = pres.slides[pres.i], nx = pres.slides[pres.i + 1]; el.innerHTML = '<b>📝 Poznámky: ' + (s ? s.title : '') + '</b><p>' + (presNote(s && s.el) || 'Bez poznámky.') + '</p>' + (nx ? '<p style="margin-top:8px;font-size:.8rem;color:rgba(255,255,255,.65)">Další: ' + nx.title + '</p>' : '');
+        el.classList.toggle('is-open', presT.notes && pres.on);
+    }
+    window.luxBrief = function (on) {
+        var v = typeof on === 'boolean' ? on : !document.body.classList.contains('brief'); document.body.classList.toggle('brief', v);
+        try { localStorage.setItem('lux_brief', v ? '1' : '0'); } catch (e) {} var m = $('menuToolBrief'); if (m) m.querySelector('span:last-child').textContent = v ? 'Přepnout na podrobný režim' : 'Přepnout na stručný režim';
+        var b = $('prBrief'); if (b) b.setAttribute('aria-pressed', v ? 'true' : 'false'); try { window.dispatchEvent(new Event('resize')); } catch (e) {}
+    };
+    try { if (localStorage.getItem('lux_brief') === '1') document.body.classList.add('brief'); } catch (e) {}
+
     /* ---------- skupina „Nástroje“ v menu ---------- */
     function addTools() {
         var nav = $('bottomNav'); if (!nav || $('menuToolShare')) return;
@@ -18853,10 +19086,11 @@ body.pres-on #presRail { display: flex; }
         nav.appendChild(item('menuToolShare', '🔗', 'Zkopírovat odkaz na moji variantu', window.luxCopyVariantLink));
         nav.appendChild(item('menuToolOffline', '📴', 'Uložit pro offline', window.luxOffline));
         nav.appendChild(item('menuToolPresent', '🎞️', 'Režim prezentace', function () { window.luxPresent(); }));
+        nav.appendChild(item('menuToolBrief', '📄', 'Přepnout na stručný režim', function () { window.luxBrief(); if (typeof window.toggleMenuModal === 'function' && $('menuModalOverlay') && $('menuModalOverlay').classList.contains('open')) window.toggleMenuModal(); }));
         nav.appendChild(item('menuToolInstall', '📲', 'Přidat na plochu', window.luxInstall));
         var ver = document.createElement('div'); ver.id = 'luxVersion'; ver.style.cssText = 'margin:10px 14px 4px;font-size:.7rem;color:var(--text-muted);opacity:.85'; ver.textContent = 'Verze stránky: ' + LUX_VERSION; nav.appendChild(ver);
         var lm = new Date(document.lastModified); if (!isNaN(lm)) { var sv = document.createElement('div'); sv.style.cssText = ver.style.cssText; sv.style.marginTop = '0'; try { sv.textContent = 'Soubor na serveru změněn: ' + lm.toLocaleString('cs-CZ', { timeZone: 'Europe/Prague', day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', ' ·'); } catch (e) { sv.textContent = 'Soubor na serveru změněn: ' + lm.toLocaleString('cs-CZ'); } nav.appendChild(sv); }
-        offlineLabel(); updateInstall();
+        offlineLabel(); updateInstall(); window.luxBrief(document.body.classList.contains('brief'));
     }
 
     /* ---------- mobil: spodní lišta se schová při rolování dolů ---------- */
@@ -18877,7 +19111,7 @@ body.pres-on #presRail { display: flex; }
     }, true);
 
     function start() {
-        place(); sync(); addTools(); initParts(); renderTasks(); initFlightDeck(); initVoyages(); renderHomeDeck(); renderTransit(); renderImpact(null, 0); imgScan(); setTimeout(imgScan, 3000);
+        place(); sync(); addTools(); initParts(); renderTasks(); initFlightDeck(); initVoyages(); renderHomeDeck(); renderTransit(); renderImpact(null, 0); renderStages(); initSpeech(); fxTexts(); if (window.TRIP && TRIP.onChange) TRIP.onChange(fxTexts); setTimeout(fxTexts, 2500); setTimeout(fxTexts, 8000); imgScan(); setTimeout(imgScan, 3000);
         if (/[?&]prezentace\b/.test(location.search)) setTimeout(function () { window.luxPresent(); }, 700);
         var card = document.querySelector('.lux-progress');
         if (card && window.MutationObserver) new MutationObserver(req).observe(card, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['style', 'class'] });
