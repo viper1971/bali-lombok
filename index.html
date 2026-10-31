@@ -6075,7 +6075,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 11:53</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 11:58</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -16443,6 +16443,71 @@ function recalculateAll() {
     var LOMBOK = [[-8.49,116.04],[-8.42,116.06],[-8.35,116.12],[-8.30,116.20],[-8.24,116.40],[-8.30,116.58],[-8.38,116.70],[-8.50,116.68],[-8.62,116.62],[-8.75,116.58],[-8.87,116.45],[-8.90,116.36],[-8.91,116.28],[-8.88,116.16],[-8.85,116.05],[-8.78,115.86],[-8.72,115.95],[-8.72,116.07],[-8.58,116.07]];
     var GILI = [[-8.35,116.035],[-8.345,116.06],[-8.36,116.085]];
 
+    /* ---------- celá trasa: Liberec ➔ Praha ➔ hub ➔ Singapur a zpět (horní panel mapy) ---------- */
+    var OFFY = 252;
+    var HUBF = { DXB: 0.5, HEL: 0.32, ZRH: 0.28, IST: 0.4 };
+    var HUBN = { DXB: 'Dubaj', HEL: 'Helsinky', ZRH: 'Curych', IST: 'Istanbul' };
+    function legInfo(s) {
+        var out = [];
+        String(s || '').split(' + ').forEach(function (x) {
+            var m = /([A-Z0-9]{2}\d{1,4})\s*\((\d{2}:\d{2}(?:\+\d)?)\s+(\w{3})\s+➔\s+(\d{2}:\d{2}(?:\+\d)?)\s+(\w{3})/.exec(x);
+            if (m) out.push({ no: m[1], dep: m[2], from: m[3], arr: m[4], to: m[5] });
+        });
+        return out;
+    }
+    function shortDate(d) { var m = /(\d{1,2})\.\s*(\d{1,2})\./.exec(d || ''); return m ? m[1] + '. ' + m[2] + '.' : ''; }
+    function clockShift(hm, mins) {
+        var m = /(\d{2}):(\d{2})/.exec(hm || ''); if (!m) return '--:--';
+        var t = (((+m[1]) * 60 + (+m[2]) + mins) % 1440 + 1440) % 1440;
+        return ('0' + Math.floor(t / 60)).slice(-2) + ':' + ('0' + (t % 60)).slice(-2);
+    }
+    function topPanel() {
+        var f = null; try { f = window.getSelectedFlight(); } catch (e) {}
+        var code = (f && (/\((\w{3})\)/.exec(f.hub || '') || [])[1]) || 'DXB';
+        var hub = HUBN[code] || (f && f.hub) || 'přestup';
+        var oL = f ? legInfo(f.outFlights) : [], rL = f ? legInfo(f.retFlights) : [];
+        var xL = 66, xP = 190, xS = 770, yB = 112, xH = Math.round(xP + (xS - xP) * (HUBF[code] || 0.4));
+        var g = '<rect class="rt-sea" x="0" y="0" width="900" height="232" rx="12"/>';
+        g += '<text class="rt-gap" x="14" y="20">CESTA TAM A ZPĚT · Liberec ➔ Praha ➔ ' + hub + ' ➔ Singapur · nahoře cesta tam, dole zpět (schéma, ne v měřítku)</text>';
+        function arc(x1, x2, up, cls) {
+            var peak = up ? -40 : 40;
+            return '<path class="rt-path ' + cls + '" d="M' + x1 + ',' + yB + ' Q ' + Math.round((x1 + x2) / 2) + ',' + (yB + peak * 2) + ' ' + x2 + ',' + yB + '"/>';
+        }
+        function lab(x1, x2, up, L) {
+            if (!L) return '';
+            return '<text class="rt-gap" x="' + Math.round((x1 + x2) / 2) + '" y="' + (up ? yB - 48 : yB + 68) + '" text-anchor="middle">' + L.no + ' · ' + L.dep + ' → ' + L.arr + '</text>';
+        }
+        // spojnice a oblouky
+        g += '<path class="rt-path rt-car" d="M' + (xL + 12) + ',' + yB + ' L' + (xP - 12) + ',' + yB + '"/>';
+        g += arc(xP, xH, true, 'rt-fly') + arc(xH, xS, true, 'rt-fly') + arc(xS, xH, false, 'rt-fly') + arc(xH, xP, false, 'rt-fly');
+        g += lab(xP, xH, true, oL[0]) + lab(xH, xS, true, oL[1]) + lab(xS, xH, false, rL[0]) + lab(xH, xP, false, rL[1]);
+        function node(x, href, face, name, sub, aria) {
+            return '<a href="#' + href + '" class="rt-stop" aria-label="' + aria + '"><title>' + aria + '</title>' +
+                '<circle class="rt-c" cx="' + x + '" cy="' + yB + '" r="13" style="fill:var(--text-muted)"/>' +
+                '<text class="rt-n" x="' + x + '" y="' + yB + '" style="font-size:14px">' + face + '</text>' +
+                '<text class="rt-l" x="' + x + '" y="' + (yB + 30) + '" text-anchor="middle">' + name + '</text>' +
+                (sub ? '<text class="rt-d" x="' + x + '" y="' + (yB + 43) + '" text-anchor="middle">' + sub + '</text>' : '') + '</a>';
+        }
+        function back(x, href, text, y) {
+            return '<a href="#' + href + '" class="rt-stop"><text class="rt-d" x="' + x + '" y="' + y + '" text-anchor="middle">' + text + '</text></a>';
+        }
+        var dep = f ? f.outDep : '', oDate = f ? shortDate(f.outDate) : '', rDate = f ? shortDate(f.retDate) : '';
+        var arrP = f ? (/(\d{2}:\d{2})/.exec(f.retArr || '') || [])[1] : '';
+        g += node(xL, 'f-leg-liberec', '🚌', 'Liberec', 'odjezd ' + (dep ? clockShift(dep, -330) : '--:--') + ' · ' + oDate, 'Odjezd Liberec ➔ Praha');
+        g += back(xL, 'f-leg-domu', '↩ doma ~' + (arrP ? clockShift(arrP, 150) : '--:--'), yB + 92);
+        g += node(xP, 'f-leg-odlet', '🛫', 'Praha (PRG)', 'odlet ' + oDate + ' · ' + (dep || '--:--'), 'Odlet z Prahy a přestup');
+        g += back(xP, 'f-leg-odlet-sin', '↩ přílet ' + (arrP || '--:--'), yB + 92);
+        g += node(xH, 'f-leg-odlet', '⏳', hub + ' (' + code + ')', f ? 'přestup tam ' + ((f.outLayover || '').split(' v ')[0].replace(/\.$/, '')) : '', 'Přestup: ' + hub);
+        g += back(xH, 'f-leg-odlet-sin', '↩ zpět ' + (f ? (f.retLayover || '').split(' v ')[0].replace(/\.$/, '') : ''), yB + 92);
+        // Singapur: stejné značky jako ve spodní mapě
+        g += '<a href="#f-leg-sg" class="rt-stop" aria-label="1. Singapur, 7.–9. 8."><title>1 · Singapur (7.–9. 8.)</title><circle class="rt-c" cx="' + (xS - 14) + '" cy="' + yB + '" r="11" style="fill:' + REG.sg + '"/><text class="rt-n" x="' + (xS - 14) + '" y="' + yB + '">1</text></a>';
+        g += '<a href="#f-leg-tranzit" class="rt-stop" aria-label="7. Singapur, tranzit 24. 8."><title>7 · Singapur, tranzit (24. 8.)</title><circle class="rt-c" cx="' + (xS + 14) + '" cy="' + yB + '" r="11" style="fill:' + REG.sg + '"/><text class="rt-n" x="' + (xS + 14) + '" y="' + yB + '">7</text></a>';
+        g += '<a href="#f-leg-sg" class="rt-stop"><text class="rt-l" x="' + xS + '" y="' + (yB + 30) + '" text-anchor="middle">Singapur (SIN)</text><text class="rt-d" x="' + xS + '" y="' + (yB + 43) + '" text-anchor="middle">7.–9. 8. · tranzit 24. 8.</text></a>';
+        g += back(xS, 'f-leg-odlet-sin', '↩ odlet zpět ' + (f ? (f.retDate ? shortDate(f.retDate) + ' · ' : '') + (f.retDep || '') : ''), yB + 92);
+        g += '<text class="rt-gap" x="' + xS + '" y="' + (yB + 114) + '" text-anchor="middle">dál: Bali a Lombok ↓</text>';
+        return g;
+    }
+
     function renderMap() {
         var host = $('routeMap'); if (!host) return;
         var read = readSet(), info = todayInfo();
@@ -16454,8 +16519,6 @@ function recalculateAll() {
         g += '<rect class="rt-sea" x="0" y="0" width="900" height="330" rx="12"/>';
         // Singapur
         g += '<ellipse class="rt-land" cx="' + sg[0] + '" cy="' + sg[1] + '" rx="34" ry="20"/>';
-        g += '<text class="rt-gap" x="14" y="' + (sg[1] - 84) + '">z Prahy</text><path class="rt-path rt-fly" d="M22,' + (sg[1] - 74) + ' Q 30,' + (sg[1] - 10) + ' ' + (sg[0] - 26) + ',' + (sg[1] - 2) + '"/>';
-        g += '<text class="rt-gap" x="14" y="' + (sg[1] + 58) + '">do Prahy</text><path class="rt-path rt-fly" d="M' + (sg[0] + 4) + ',' + (sg[1] + 14) + ' Q 40,' + (sg[1] + 30) + ' 18,' + (sg[1] + 46) + '"/>';
         g += '<text class="rt-gap" x="205" y="315" text-anchor="middle">≈ 1 700 km · let cca 2,5 h</text>';
         // ostrovy
         g += '<polygon class="rt-land" points="' + poly(BALI) + '"/><polygon class="rt-land" points="' + poly(PENIDA) + '"/><polygon class="rt-land" points="' + poly(LOMBOK) + '"/>';
@@ -16493,8 +16556,10 @@ function recalculateAll() {
                     '<text class="rt-d" x="' + lb[0] + '" y="' + (lb[1] + 13) + '" text-anchor="' + lb[2] + '">' + (l.id === 'f-leg-sg' ? '7.–9. 8.' : l.id === 'f-leg-tranzit' ? '24. 8.' : dates) + '</text>' : '') +
                 '</a>';
         });
-        host.innerHTML = '<svg viewBox="0 0 900 330" role="img" aria-label="Mapa trasy Singapur, Bali, Lombok">' + g + '</svg>';
+        g = '<text class="rt-gap" x="14" y="20">NA MÍSTĚ · Singapur, Bali a Lombok</text>' + g;
+        host.innerHTML = '<svg viewBox="0 0 900 ' + (OFFY + 330) + '" role="img" aria-label="Mapa celé trasy: z Liberce přes Prahu do Singapuru, Bali a Lombok a zpět">' + topPanel() + '<g transform="translate(0,' + OFFY + ')">' + g + '</g></svg>';
     }
+    window.renderRouteMap = renderMap;
 
     /* ---------- noclehy ---------- */
     function renderNights() {
@@ -19801,13 +19866,14 @@ function luxQRSvg(text, px) {
 
     if (typeof window.setFlightAirline === 'function' && !window.setFlightAirline.__bpx) {
         var orig = window.setFlightAirline;
-        window.setFlightAirline = function () { var r = orig.apply(this, arguments); try { render(); } catch (e) {} return r; };
+        window.setFlightAirline = function () { var r = orig.apply(this, arguments); try { render(); } catch (e) {} try { if (window.renderRouteMap) window.renderRouteMap(); } catch (e) {} return r; };
         window.setFlightAirline.__bpx = true;
     }
     var lbl = document.getElementById('b3_label');
     if (lbl && window.MutationObserver) new MutationObserver(function () { try { render(); } catch (e) {} }).observe(lbl, { childList: true, characterData: true, subtree: true });
     window.BPX = { render: render };
     try { render(); } catch (e) { console.error('BPX', e); }
+    try { if (window.renderRouteMap) window.renderRouteMap(); } catch (e) {}
 })();
 </script>
 
