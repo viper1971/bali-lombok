@@ -17919,7 +17919,7 @@ body.pres-on #presRail { display: flex; }
 .tx-check li.is-done label { opacity: .55; text-decoration: line-through; }
 @media (max-width: 900px) {
     .tx-cards { grid-template-columns: 1fr; } .tx-sum { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tx-legend { padding-left: 18px; }
-    .tx-sum > div:last-child { grid-column: 1 / -1; }
+    .tx-sum > div:last-child, .tx-sum > div:nth-child(5) { grid-column: 1 / -1 !important; }
     /* mobil: místo úzkého pruhu čitelný svislý seznam s časy, pod malým proporčním pruhem */
     .tx-tr { grid-template-columns: 1fr; gap: 6px; }
     .tx-tr > b { text-align: left; font-size: 1rem; } .tx-tr > b::before { content: "Plán "; }
@@ -17983,6 +17983,7 @@ body.pres-on #presRail { display: flex; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
+    var LUX_VERSION = '31. 10. 2026 · sestavení c';
     var $ = function (id) { return document.getElementById(id); };
     function toast(msg) {
         if (typeof window.showToast === 'function') { try { window.showToast(msg); return; } catch (e) {} }
@@ -18840,6 +18841,7 @@ body.pres-on #presRail { display: flex; }
         nav.appendChild(item('menuToolOffline', '📴', 'Uložit pro offline', window.luxOffline));
         nav.appendChild(item('menuToolPresent', '🎞️', 'Režim prezentace', function () { window.luxPresent(); }));
         nav.appendChild(item('menuToolInstall', '📲', 'Přidat na plochu', window.luxInstall));
+        var ver = document.createElement('div'); ver.id = 'luxVersion'; ver.style.cssText = 'margin:10px 14px 4px;font-size:.7rem;color:var(--text-muted);opacity:.85'; ver.textContent = 'Verze stránky: ' + LUX_VERSION; nav.appendChild(ver);
         offlineLabel(); updateInstall();
     }
 
