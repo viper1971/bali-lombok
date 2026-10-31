@@ -6010,6 +6010,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
         </div>
         <nav class="menu-grid" id="bottomNav">
             <a href="#hero" class="nav-item active" onclick="toggleMenuModal()"><span class="icon">🏠</span><span>Domů &amp; Mapa letů</span></a>
+            <a href="#cast-lety" class="nav-item" onclick="toggleMenuModal()"><span class="icon">✈️</span><span>Výběr letenek</span></a>
             <div class="nav-group-title">I · Před odletem</div>
             <a href="#viza" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛂</span><span>Víza &amp; Portály</span></a>
             <a href="#bezpecnost" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛡️</span><span>SOS &amp; Zdraví</span></a>
@@ -6075,7 +6076,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 11:58</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 12:04</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -6125,6 +6126,204 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
     <div class="lp-parts" id="lpParts"></div>
 </div>
 </div>
+
+<section id="cast-lety" aria-labelledby="cast-lety-h" style="margin: 0 0 28px;">
+<div class="bento-card highlight full">
+    <h2 class="x-a141b9" id="cast-lety-h" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3); display: flex;">✈️ Výběr letenek</h2>
+    <p style="font-size: 0.95rem; margin-bottom: 12px; color: var(--text-muted);">Vyber si variantu dálkového letu Praha ⇄ Singapur. Podle ní se přepočítá celá stránka: itinerář, mapa trasy, boarding passy, přestupy i cena.</p>
+                <!-- 1. KROK: PŘEPÍNAČ 5 DETAILNÍCH VARIANT DÁLKOVÉHO LETU -->
+                <div class="x-mb-16">
+                    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 6px; color: var(--primary-light);">
+                        ✈️ 1. Vyber variantu dálkového letu Praha (PRG) ⇄ Singapur (SIN) — kompletní časy a přestupy:
+                    </div>
+<div class="flight-airline-switch">
+    <!-- 1. EMIRATES (16:10) -->
+    <button id="btnFlight_emirates" class="flight-mode-btn active" onclick="setFlightAirline('emirates')">
+        <div class="fc-header">
+            <div>
+                <div class="fc-airline">
+                    <img decoding="async" loading="lazy" src="emirates.png" alt="Emirates" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
+                    <span>Emirates (Odpolední)</span>
+                </div>
+                <span class="fc-hub-sub">📍 Přestup: Dubaj (DXB) • Nejvýhodnější</span>
+            </div>
+            <span class="fc-price-badge">22 000 Kč / os.</span>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
+                <span class="fc-times">16:10 PRG ➔ 14:05<sup>+1</sup> SIN</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 15h 55m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 DXB 2h 25m</span>
+                <span class="fc-pill">✈️ EK140 + EK348</span>
+            </div>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • st 25. 8.</span>
+                <span class="fc-times">01:40 SIN ➔ 13:00 PRG</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 17h 20m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 DXB 3h 45m</span>
+                <span class="fc-pill">✈️ EK349 + EK139</span>
+            </div>
+        </div>
+    </button>
+
+    <!-- 2. EMIRATES + FLYDUBAI (21:15) -->
+    <button id="btnFlight_emirates_flydubai" class="flight-mode-btn" onclick="setFlightAirline('emirates_flydubai')">
+        <div class="fc-header">
+            <div>
+                <div class="fc-airline">
+                    <img decoding="async" loading="lazy" src="emirates.png" alt="Emirates" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
+                    <span>Emirates + flydubai</span>
+                </div>
+                <span class="fc-hub-sub">📍 Přestup: Dubaj (DXB) • Večerní odlet</span>
+            </div>
+            <span class="fc-price-badge">22 000 Kč / os.</span>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
+                <span class="fc-times">21:15 PRG ➔ 21:45<sup>+1</sup> SIN</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 18h 30m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 DXB 4h 35m</span>
+                <span class="fc-pill">✈️ EK2239 + EK352</span>
+            </div>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • st 25. 8.</span>
+                <span class="fc-times">00:50 SIN ➔ 13:00 PRG</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 18h 10m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 DXB 4h 30m</span>
+                <span class="fc-pill">✈️ EK353 + EK139</span>
+            </div>
+        </div>
+    </button>
+
+    <!-- 3. FINNAIR (19:30 přes Helsinky) -->
+    <button id="btnFlight_finnair" class="flight-mode-btn" onclick="setFlightAirline('finnair')">
+        <div class="fc-header">
+            <div>
+                <div class="fc-airline">
+                    <img decoding="async" loading="lazy" src="finair.jpg" alt="Finnair" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
+                    <span>Finnair (Helsinky)</span>
+                </div>
+                <span class="fc-hub-sub">📍 Přestup: Helsinky (HEL) • Severní trasa</span>
+            </div>
+            <span class="fc-price-badge">24 900 Kč / os.</span>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
+                <span class="fc-times">19:30 PRG ➔ 18:30<sup>+1</sup> SIN</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 17h 00m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 HEL 1h 50m</span>
+                <span class="fc-pill">✈️ AY1226 + AY131</span>
+            </div>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
+                <span class="fc-times">21:35 SIN ➔ 10:50<sup>+1</sup> PRG</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 19h 15m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 HEL 3h 40m</span>
+                <span class="fc-pill">✈️ AY132 + AY1223</span>
+            </div>
+        </div>
+    </button>
+
+    <!-- 4. SWISS (19:30 přes Curych) -->
+    <button id="btnFlight_swiss" class="flight-mode-btn" onclick="setFlightAirline('swiss')">
+        <div class="fc-header">
+            <div>
+                <div class="fc-airline">
+                    <img decoding="async" loading="lazy" src="swiss.png" alt="SWISS" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
+                    <span>SWISS (Curych)</span>
+                </div>
+                <span class="fc-hub-sub">📍 Přestup: Curych (ZRH) • Nejrychlejší let</span>
+            </div>
+            <span class="fc-price-badge">23 909 Kč / os.</span>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
+                <span class="fc-times">19:30 PRG ➔ 17:10<sup>+1</sup> SIN</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 15h 40m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 ZRH 1h 50m</span>
+                <span class="fc-pill">✈️ LX1489 + LX176</span>
+            </div>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
+                <span class="fc-times">23:25 SIN ➔ 08:40<sup>+1</sup> PRG</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 15h 15m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 ZRH 1h 10m</span>
+                <span class="fc-pill">✈️ LX177 + LX1484</span>
+            </div>
+        </div>
+    </button>
+
+    <!-- 5. TURKISH AIRLINES (19:15 přes Istanbul) -->
+    <button id="btnFlight_turkish" class="flight-mode-btn" onclick="setFlightAirline('turkish')">
+        <div class="fc-header">
+            <div>
+                <div class="fc-airline">
+                    <img decoding="async" loading="lazy" src="turkish.png" alt="Turkish Airlines" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
+                    <span>Turkish Airlines</span>
+                </div>
+                <span class="fc-hub-sub">📍 Přestup: Istanbul (IST) • Top servis</span>
+            </div>
+            <span class="fc-price-badge">26 505 Kč / os.</span>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
+                <span class="fc-times">19:15 PRG ➔ 17:55<sup>+1</sup> SIN</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 16h 40m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 IST 3h 05m</span>
+                <span class="fc-pill">✈️ TK1770 + TK54</span>
+            </div>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
+                <span class="fc-times">23:05 SIN ➔ 08:35<sup>+1</sup> PRG</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 15h 30m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 IST 1h 45m</span>
+                <span class="fc-pill">✈️ TK55 + TK1767</span>
+            </div>
+        </div>
+    </button>
+</div>
+                    <!-- ŽIVÝ DETAILNÍ BOX AKTIVNÍHO LETU -->
+                    <div class="active-flight-detail-box" id="activeFlightDetailBox">
+                        <!-- Dynamicky vykresleno JavaScriptem dle vybraného letu -->
+                    </div>
+                </div>
+</div>
+</section>
 
 <section class="lux-part" id="cast-priprava" aria-labelledby="cast-priprava-h">
     <header class="lux-part-head">
@@ -10704,7 +10903,6 @@ function updatePackingWeight() {
     <button class="map-fullscreen-btn" onclick="openImageInModal('DPS-SIN.jpg')" style="background: linear-gradient(135deg, var(--lux-deep-b) 0%, var(--lux-deep-a) 100%); color: #ffffff; border: 1px solid var(--primary-light); border-radius: 10px; padding: 8px 14px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);"><span>🔍</span> Zvětšit obrázek</button>
 </div>
     <div class="bpx-host" id="bpHome"></div>
-    <div class="fl-deck fl-home" id="homeDeck" aria-label="Odlet domů a celá cesta zpátky"></div>
 </div>
 
     </div></div></div>
@@ -10948,198 +11146,6 @@ function updatePackingWeight() {
                         <a href="https://1parking.cz/rezervace/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: var(--lux-deep-b); color: #ffffff; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 0.85rem;">
                             Rezervovat parkování ↗
                         </a>
-                    </div>
-                </div>
-
-                <!-- 1. KROK: PŘEPÍNAČ 5 DETAILNÍCH VARIANT DÁLKOVÉHO LETU -->
-                <div class="x-mb-16">
-                    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 6px; color: var(--primary-light);">
-                        ✈️ 1. Vyber variantu dálkového letu Praha (PRG) ⇄ Singapur (SIN) — kompletní časy a přestupy:
-                    </div>
-<div class="flight-airline-switch">
-    <!-- 1. EMIRATES (16:10) -->
-    <button id="btnFlight_emirates" class="flight-mode-btn active" onclick="setFlightAirline('emirates')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="emirates.png" alt="Emirates" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>Emirates (Odpolední)</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Dubaj (DXB) • Nejvýhodnější</span>
-            </div>
-            <span class="fc-price-badge">22 000 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">16:10 PRG ➔ 14:05<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 15h 55m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 DXB 2h 25m</span>
-                <span class="fc-pill">✈️ EK140 + EK348</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • st 25. 8.</span>
-                <span class="fc-times">01:40 SIN ➔ 13:00 PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 17h 20m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 DXB 3h 45m</span>
-                <span class="fc-pill">✈️ EK349 + EK139</span>
-            </div>
-        </div>
-    </button>
-
-    <!-- 2. EMIRATES + FLYDUBAI (21:15) -->
-    <button id="btnFlight_emirates_flydubai" class="flight-mode-btn" onclick="setFlightAirline('emirates_flydubai')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="emirates.png" alt="Emirates" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>Emirates + flydubai</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Dubaj (DXB) • Večerní odlet</span>
-            </div>
-            <span class="fc-price-badge">22 000 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">21:15 PRG ➔ 21:45<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 18h 30m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 DXB 4h 35m</span>
-                <span class="fc-pill">✈️ EK2239 + EK352</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • st 25. 8.</span>
-                <span class="fc-times">00:50 SIN ➔ 13:00 PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 18h 10m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 DXB 4h 30m</span>
-                <span class="fc-pill">✈️ EK353 + EK139</span>
-            </div>
-        </div>
-    </button>
-
-    <!-- 3. FINNAIR (19:30 přes Helsinky) -->
-    <button id="btnFlight_finnair" class="flight-mode-btn" onclick="setFlightAirline('finnair')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="finair.jpg" alt="Finnair" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>Finnair (Helsinky)</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Helsinky (HEL) • Severní trasa</span>
-            </div>
-            <span class="fc-price-badge">24 900 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">19:30 PRG ➔ 18:30<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 17h 00m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 HEL 1h 50m</span>
-                <span class="fc-pill">✈️ AY1226 + AY131</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
-                <span class="fc-times">21:35 SIN ➔ 10:50<sup>+1</sup> PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 19h 15m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 HEL 3h 40m</span>
-                <span class="fc-pill">✈️ AY132 + AY1223</span>
-            </div>
-        </div>
-    </button>
-
-    <!-- 4. SWISS (19:30 přes Curych) -->
-    <button id="btnFlight_swiss" class="flight-mode-btn" onclick="setFlightAirline('swiss')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="swiss.png" alt="SWISS" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>SWISS (Curych)</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Curych (ZRH) • Nejrychlejší let</span>
-            </div>
-            <span class="fc-price-badge">23 909 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">19:30 PRG ➔ 17:10<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 15h 40m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 ZRH 1h 50m</span>
-                <span class="fc-pill">✈️ LX1489 + LX176</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
-                <span class="fc-times">23:25 SIN ➔ 08:40<sup>+1</sup> PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 15h 15m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 ZRH 1h 10m</span>
-                <span class="fc-pill">✈️ LX177 + LX1484</span>
-            </div>
-        </div>
-    </button>
-
-    <!-- 5. TURKISH AIRLINES (19:15 přes Istanbul) -->
-    <button id="btnFlight_turkish" class="flight-mode-btn" onclick="setFlightAirline('turkish')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="turkish.png" alt="Turkish Airlines" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>Turkish Airlines</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Istanbul (IST) • Top servis</span>
-            </div>
-            <span class="fc-price-badge">26 505 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">19:15 PRG ➔ 17:55<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 16h 40m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 IST 3h 05m</span>
-                <span class="fc-pill">✈️ TK1770 + TK54</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
-                <span class="fc-times">23:05 SIN ➔ 08:35<sup>+1</sup> PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 15h 30m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 IST 1h 45m</span>
-                <span class="fc-pill">✈️ TK55 + TK1767</span>
-            </div>
-        </div>
-    </button>
-</div>
-                    <!-- ŽIVÝ DETAILNÍ BOX AKTIVNÍHO LETU -->
-                    <div class="active-flight-detail-box" id="activeFlightDetailBox">
-                        <!-- Dynamicky vykresleno JavaScriptem dle vybraného letu -->
                     </div>
                 </div>
 
