@@ -6074,6 +6074,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 07:04</div>
         <h1><img decoding="async" src="https://flagcdn.com/w40/sg.png" alt="Singapur" style="height: 1.2em; vertical-align: -0.15em; border-radius: 4px; margin-right: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);"> Singapur<br><img decoding="async" src="https://flagcdn.com/w40/id.png" alt="Indonésie" style="height: 1.2em; vertical-align: -0.15em; border-radius: 4px; margin-right: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);"> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -17955,6 +17956,9 @@ body.pres-on #presRail { display: flex; }
 .ai-tbl td:first-child { color: var(--text-main); font-weight: 800; }
 .ai-wrap { overflow-x: auto; }
 @media (max-width: 700px) { .ai-card { padding: 14px; } .ai-do li { grid-template-columns: 28px minmax(0, 1fr); } }
+
+/* ---- Verze stránky v hlavičce (datum a čas sestavení) ---- */
+.hero-ver { display: inline-block; margin: 8px auto 0; padding: 4px 12px; border-radius: 999px; font: 700 0.74rem/1.2 var(--font-ui, inherit); letter-spacing: .03em; color: rgba(255, 255, 255, 0.92); background: rgba(8, 14, 20, 0.55); border: 1px solid rgba(255, 255, 255, 0.35); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); font-variant-numeric: tabular-nums; }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -17983,7 +17987,7 @@ body.pres-on #presRail { display: flex; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '31. 10. 2026 · sestavení c';
+    var LUX_VERSION = '31. 10. 2026 · 07:04';
     var $ = function (id) { return document.getElementById(id); };
     function toast(msg) {
         if (typeof window.showToast === 'function') { try { window.showToast(msg); return; } catch (e) {} }
