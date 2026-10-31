@@ -6075,7 +6075,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 11:09</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 11:41</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -7412,6 +7412,7 @@ function updatePackingWeight() {
     </div>
 </div>
 
+                <div class="bpx-host" id="bpSinDps"></div>
                 <div class="fl-deck" id="flightDeck" aria-label="Interaktivní přehled letu Singapur – Bali"></div>
                 <div class="map-container-wrapper x-429a02" style="box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
     <!-- Hlavní výrazný nadpis sekce -->
@@ -8852,6 +8853,7 @@ function updatePackingWeight() {
     </div>
 </div>
 
+<div class="bpx-host" id="bpBoatOut"></div>
 <div class="fl-deck fl-sea" id="voyageOut" aria-label="Interaktivní přehled plavby Bali – Lombok"></div>
 <div class="ubud-port-map-widget">
 
@@ -10142,6 +10144,8 @@ function updatePackingWeight() {
         </div>
     </div>
 
+    <div class="bpx-host" id="bpBoatBack"></div>
+
     <hr style="border: none; height: 2px; background-color: var(--border); margin: 24px 0; border-radius: 2px;">
 
     <!-- 2. ČÁST: MAPA 1 - TRASA Z HOTELU NA LOMBOKU DO PŘÍSTAVU -->
@@ -10659,6 +10663,7 @@ function updatePackingWeight() {
     <span class="transfer-distance" id="dpsSinFlightNote" style="color: var(--text-muted) !important; font-size: 0.82rem; font-weight: 600;">📍 Přímý let Scoot TR281 (přibližně 2 h 55 min)</span>
     <button class="map-fullscreen-btn" onclick="openImageInModal('DPS-SIN.jpg')" style="background: linear-gradient(135deg, var(--lux-deep-b) 0%, var(--lux-deep-a) 100%); color: #ffffff; border: 1px solid var(--primary-light); border-radius: 10px; padding: 8px 14px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);"><span>🔍</span> Zvětšit obrázek</button>
 </div>
+    <div class="bpx-host" id="bpHome"></div>
     <div class="fl-deck fl-home" id="homeDeck" aria-label="Odlet domů a celá cesta zpátky"></div>
 </div>
 
@@ -11055,6 +11060,7 @@ function updatePackingWeight() {
                     <div class="active-flight-detail-box" id="activeFlightDetailBox">
                         <!-- Dynamicky vykresleno JavaScriptem dle vybraného letu -->
                     </div>
+                    <div class="bpx-host" id="bpOut"></div>
                 </div>
 
 <script>
@@ -18824,13 +18830,7 @@ body.simple-on { overflow: hidden; }
         });
         var total = blocks.reduce(function (a, b) { return a + b.min; }, 0);
         function dur(m) { return Math.floor(m / 60) + ' h' + (m % 60 ? ' ' + (m % 60) + ' min' : ''); }
-        var html = '<h4 class="fl-h">Úterý 24. 8.: odlet domů</h4>' +
-            '<div class="bp"><div class="bp-main"><div class="bp-top"><b>Boarding pass</b><span>Scoot · ekonomická třída</span></div>' +
-            '<div class="bp-route"><div class="bp-city"><span class="c">DPS</span><span class="n">Denpasar, Bali</span><span class="tm">11:15</span></div>' +
-            '<div class="bp-mid"><div class="ln"></div><span>2 h 55 min · přímý let</span></div>' +
-            '<div class="bp-city r"><span class="c">SIN</span><span class="n">Singapur Changi</span><span class="tm">14:10</span></div></div>' +
-            '<div class="bp-meta" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div><span>Let</span><b>TR281</b></div><div><span>Datum</span><b>út 24. 8. 2027</b></div></div></div>' +
-            '<div class="bp-stub"><span class="fn">TR281</span><span class="dt">24 SRP · 11:15</span><div class="bp-bar" aria-hidden="true"></div></div></div>' +
+        var html = '<h4 class="fl-h">Celá cesta domů v kostce</h4>' +
             '<div class="jr-wrap"><div class="jr-total"><div><span>Celá cesta domů od odletu z Bali</span><br><b>' + dur(total) + '</b></div><span>' + (f.name || '') + ' · přistání v Praze ' + (f.retArr || '') + '</span></div><div class="jr">' +
             blocks.map(function (b) { return '<div class="jr-b ' + b.k + '" style="--m:' + Math.max(b.min, 120) + '"><span class="jr-i" aria-hidden="true">' + b.i + '</span><span class="jr-t">' + b.t + '</span><span class="jr-s">' + b.s + '</span><span class="jr-d">' + dur(b.min) + '</span></div>'; }).join('') + '</div>' +
             '<p class="jr-arr">Časy letů se řídí aerolinkou vybranou v konfigurátoru, takže se tahle osa přepočítá po změně letu.</p></div>';
@@ -19372,6 +19372,319 @@ function luxQRSvg(text, px) {
     }
     window.luxClimInit = function (box) { if (!box || box.__fx) return; box.__fx = 1; if (io) io.observe(box); else box.classList.add('is-in'); };
     [].forEach.call(document.querySelectorAll('.clim'), window.luxClimInit);
+})();
+</script>
+
+<style id="bpx-style">
+/* ---- Palubní vstupenky (boarding passy): letadla i lodě ---- */
+.bpx-wrap { margin: 8px 16px 14px; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.28)); }
+.bpx-host { padding-bottom: 6px; }
+.bpx {
+    --b1: #d71921; --b2: #8f0f15; --ac: #c3141b; --hi: #ffffff;
+    display: grid; grid-template-columns: minmax(0, 1fr) 190px; position: relative; overflow: hidden;
+    border-radius: 16px; color: #14171c; text-align: left;
+    background:
+        repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.012) 0 2px, transparent 2px 5px),
+        linear-gradient(180deg, #fefefd 0%, #f6f6f2 100%);
+    font-family: "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif;
+    -webkit-mask:
+        radial-gradient(circle 11px at calc(100% - 190px) 0, #0000 98%, #000) top / 100% 51% no-repeat,
+        radial-gradient(circle 11px at calc(100% - 190px) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+    mask:
+        radial-gradient(circle 11px at calc(100% - 190px) 0, #0000 98%, #000) top / 100% 51% no-repeat,
+        radial-gradient(circle 11px at calc(100% - 190px) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+}
+.bpx-main { display: grid; grid-template-rows: auto 1fr auto auto; min-width: 0; grid-template-columns: minmax(0, 1fr); }
+.bpx-head { display: flex; align-items: center; gap: 14px; padding: 11px 18px; color: var(--hi); background: linear-gradient(100deg, var(--b1) 0%, var(--b2) 100%); }
+.bpx-logo { position: relative; flex: 0 0 auto; width: 138px; height: 38px; border-radius: 8px; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); overflow: hidden; }
+.bpx-logo svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.bpx-logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 3px 6px; background: #fff; box-sizing: border-box; }
+.bpx-title { display: grid; gap: 1px; min-width: 0; overflow: hidden; flex: 1 1 0; }
+.bpx-title b { font-size: 0.98rem; font-weight: 800; letter-spacing: 0.2em; }
+.bpx-title span { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; opacity: 0.85; text-transform: uppercase; }
+.bpx-cls { flex: 0 0 auto; padding: 4px 10px; border: 1.5px solid currentColor; border-radius: 6px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.14em; opacity: 0.95; }
+.bpx-body { padding: 14px 20px 8px; display: grid; gap: 12px; align-content: start; }
+.bpx-lab { display: block; font-size: 0.56rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; }
+.bpx-pax b { display: inline-block; margin-top: 2px; font-size: 1.08rem; font-weight: 800; letter-spacing: 0.06em; color: #0f1216; }
+.bpx-name { cursor: pointer; border-bottom: 1px dotted #9aa0a8; }
+.bpx-name:hover, .bpx-name:focus-visible { color: var(--ac); border-bottom-color: var(--ac); outline: none; }
+.bpx-edit { margin-left: 8px; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.04em; color: #8a909a; text-transform: none; }
+.bpx-route { display: grid; grid-template-columns: minmax(0, 1fr) minmax(110px, 1.1fr) minmax(0, 1fr); align-items: center; gap: 10px; }
+.bpx-pt { display: grid; gap: 1px; min-width: 0; }
+.bpx-pt.r { text-align: right; }
+.bpx-code { font-size: 2.7rem; font-weight: 800; line-height: 1; letter-spacing: 0.02em; color: #0f1216; }
+.bpx-city { font-size: 0.78rem; font-weight: 700; color: #2b313a; }
+.bpx-apn { font-size: 0.66rem; color: #7b828d; }
+.bpx-tm { margin-top: 3px; font-size: 1.4rem; font-weight: 800; color: var(--ac); font-variant-numeric: tabular-nums; }
+.bpx-tm sup { font-size: 0.6rem; margin-left: 2px; color: #7b828d; font-weight: 800; }
+.bpx-path { display: grid; justify-items: center; gap: 4px; color: #6b7280; font-size: 0.68rem; font-weight: 700; text-align: center; }
+.bpx-line { position: relative; width: 100%; height: 22px; }
+.bpx-line::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 2px dashed #b7bcc4; }
+.bpx-line::after { content: ""; position: absolute; left: 0; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%; background: #9aa0a8; }
+.bpx-line i { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; display: grid; place-items: center; background: #fbfbf8; border-radius: 50%; color: var(--ac); }
+.bpx-line svg { width: 22px; height: 22px; fill: currentColor; }
+.bpx-line svg.pl { transform: rotate(90deg); }
+.bpx-line b { position: absolute; right: 0; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%; background: #9aa0a8; }
+.bpx-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px 14px; padding-top: 10px; border-top: 1px dashed #cdd1d7; }
+.bpx-grid > div { display: grid; gap: 1px; min-width: 0; }
+.bpx-grid b { font-size: 0.98rem; font-weight: 800; color: #0f1216; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.bpx-grid b small { display: block; font-size: 0.6rem; font-weight: 700; color: #7b828d; }
+.bpx-grid b.hl { color: var(--ac); }
+.bpx-code417 { padding: 4px 20px 6px; }
+.bpx-pdf { display: block; width: 100%; height: 50px; }
+.bpx-bcbp { margin-top: 3px; font: 500 0.56rem/1.2 ui-monospace, "SF Mono", Menlo, Consolas, monospace; color: #8a909a; letter-spacing: 0.04em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.bpx-foot { padding: 8px 20px 11px; font-size: 0.62rem; line-height: 1.35; color: #707784; border-top: 1px solid #e4e6ea; background: rgba(0, 0, 0, 0.025); }
+.bpx-foot b { color: #3a414b; }
+.bpx-stub { position: relative; display: grid; gap: 9px; align-content: space-between; padding: 14px 16px 14px 18px; border-left: 2px dashed #c7ccd3; background: linear-gradient(180deg, #f1f2ee 0%, #e8eae4 100%); }
+.bpx-st-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding-bottom: 7px; border-bottom: 2px solid var(--b1); }
+.bpx-st-top span { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #4a515c; }
+.bpx-st-top b { font-size: 1.15rem; font-weight: 800; color: var(--ac); }
+.bpx-st-rt { display: flex; align-items: center; justify-content: space-between; font-size: 1.6rem; font-weight: 800; color: #0f1216; letter-spacing: 0.02em; }
+.bpx-st-rt svg { width: 20px; height: 20px; fill: var(--ac); }
+.bpx-st-rt svg.pl { transform: rotate(90deg); }
+.bpx-st-kv { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 8px; }
+.bpx-st-kv div { display: grid; gap: 0; }
+.bpx-st-kv b { font-size: 0.88rem; font-weight: 800; color: #0f1216; font-variant-numeric: tabular-nums; }
+.bpx-bar { display: block; width: 100%; height: 40px; }
+.bpx-conn { display: flex; align-items: center; gap: 10px; margin: -4px 18px 12px 34px; padding-left: 14px; border-left: 2px dashed var(--border); font-size: 0.8rem; font-weight: 700; color: var(--text-muted); min-height: 30px; }
+.bpx-sub { margin: 2px 18px 12px; font-size: 0.8rem; line-height: 1.5; color: var(--text-muted); }
+@media (max-width: 800px) {
+    .bpx-wrap { margin: 8px 10px 14px; }
+    .bpx {
+        grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 120px;
+        -webkit-mask:
+            radial-gradient(circle 11px at 0 calc(100% - 120px), #0000 98%, #000) left / 51% 100% no-repeat,
+            radial-gradient(circle 11px at 100% calc(100% - 120px), #0000 98%, #000) right / 51% 100% no-repeat;
+        mask:
+            radial-gradient(circle 11px at 0 calc(100% - 120px), #0000 98%, #000) left / 51% 100% no-repeat,
+            radial-gradient(circle 11px at 100% calc(100% - 120px), #0000 98%, #000) right / 51% 100% no-repeat;
+    }
+    .bpx-head { padding: 10px 14px; gap: 10px; }
+    .bpx-logo { width: 120px; height: 34px; }
+    .bpx-title b { font-size: 0.82rem; letter-spacing: 0.12em; white-space: nowrap; }
+    .bpx-title span { display: none; }
+    .bpx-body { padding: 12px 14px 6px; }
+    .bpx-code { font-size: 2.1rem; }
+    .bpx-tm { font-size: 1.15rem; }
+    .bpx-route { grid-template-columns: minmax(0, 1fr) minmax(70px, 0.8fr) minmax(0, 1fr); gap: 6px; }
+    .bpx-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .bpx-code417 { padding: 4px 14px 6px; }
+    .bpx-foot { padding: 8px 14px 10px; }
+    .bpx-stub { grid-template-columns: 1fr 1fr; align-items: center; border-left: 0; border-top: 2px dashed #c7ccd3; padding: 10px 14px; gap: 6px 14px; height: 120px; box-sizing: border-box; overflow: hidden; }
+    .bpx-st-top { grid-column: 1; padding-bottom: 4px; }
+    .bpx-st-rt { grid-column: 1; font-size: 1.15rem; gap: 6px; }
+    .bpx-st-kv { display: none; }
+    .bpx-stub .bpx-bar { grid-column: 2; grid-row: 1 / span 2; height: 64px; }
+    .bpx-conn { margin-left: 22px; }
+}
+</style>
+<script id="bpx-script">
+/* ---- Palubní vstupenky (boarding passy): letadla i lodě ---- */
+(function () {
+    'use strict';
+    var MON = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+    var WD = ['neděle', 'pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek', 'sobota'];
+    var AP = {
+        PRG: ['Praha', 'Václav Havel Airport'], DXB: ['Dubaj', 'Dubai International'], HEL: ['Helsinky', 'Helsinki-Vantaa'],
+        ZRH: ['Curych', 'Zürich Airport'], IST: ['Istanbul', 'Istanbul Airport'], SIN: ['Singapur', 'Changi Airport'],
+        DPS: ['Denpasar · Bali', 'Ngurah Rai Airport'], SNR: ['Sanur · Bali', 'Sanur Harbour'], BNG: ['Bangsal · Lombok', 'Bangsal Harbour']
+    };
+    var BR = {
+        EK: { n: 'Emirates', b1: '#d71921', b2: '#8f0f15', ac: '#c3141b', hi: '#ffffff', img: 'emirates.png' },
+        FZ: { n: 'flydubai', b1: '#f26a21', b2: '#c4410c', ac: '#c4410c', hi: '#ffffff' },
+        AY: { n: 'Finnair', b1: '#1b2a8a', b2: '#0b1560', ac: '#0b1560', hi: '#ffffff', img: 'finair.jpg' },
+        LX: { n: 'SWISS', b1: '#e30613', b2: '#a1000b', ac: '#c40510', hi: '#ffffff', img: 'swiss.png' },
+        TK: { n: 'Turkish Airlines', b1: '#d7192d', b2: '#8c0d1c', ac: '#b8101f', hi: '#ffffff', img: 'turkish.png' },
+        TR: { n: 'Scoot', b1: '#ffdd00', b2: '#f2b800', ac: '#1a1a1a', hi: '#111111' },
+        SF: { n: 'Starfish', b1: '#00a6c8', b2: '#005f86', ac: '#00708f', hi: '#ffffff', boat: 1 },
+        WH: { n: 'Wahana Virendra', b1: '#1565b8', b2: '#0a3a74', ac: '#0d4a94', hi: '#ffffff', boat: 1 }
+    };
+    var LOC = { PRG: 'Praze', DXB: 'Dubaji', HEL: 'Helsinkách', ZRH: 'Curychu', IST: 'Istanbulu', SIN: 'Singapuru' };
+    var OPERATED = { EK2239: 'flydubai', LX1484: 'Helvetic Airways' };
+    var PLANE = 'M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z';
+    var BOAT = 'M2.5 16h19l-3 4.5h-13z M5.5 14.8v-4h13v4z M8.5 9.8v-4h7v4z M11 5.8V3h2v2.8z';
+
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function toMin(hm) { var p = String(hm).split(':'); return (+p[0]) * 60 + (+p[1]); }
+    function hm(min) { min = ((min % 1440) + 1440) % 1440; return pad(Math.floor(min / 60)) + ':' + pad(min % 60); }
+    function fmt(m) { return Math.floor(m / 60) + ' h' + (m % 60 ? ' ' + pad(m % 60) + ' min' : ''); }
+    function addDays(d, n) { return new Date(d.getTime() + n * 86400000); }
+    function dstr(d) { return pad(d.getUTCDate()) + ' ' + MON[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); }
+    function dayTitle(d) { var w = WD[d.getUTCDay()]; return w.charAt(0).toUpperCase() + w.slice(1) + ' ' + d.getUTCDate() + '. ' + (d.getUTCMonth() + 1) + '.'; }
+    function parseDate(s) { var m = /(\d{1,2})\.\s*(\d{1,2})\.\s*(\d{4})/.exec(s || ''); return m ? new Date(Date.UTC(+m[3], +m[2] - 1, +m[1])) : null; }
+    function absMin(d, off, clock) { return d.getTime() / 60000 + off * 1440 + clock; }
+
+    /* ---- jméno cestujícího (každý si ho nastaví u sebe) ---- */
+    function getName() { try { return localStorage.getItem('bpx_name') || 'PRIJMENI/JMENO'; } catch (e) { return 'PRIJMENI/JMENO'; } }
+    function cleanName(v) { return String(v || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/[^A-Z\/ .\-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 40); }
+
+    /* ---- deterministické „náhodné“ čárové kódy ---- */
+    function rng(seed) {
+        var h = 1779033703 ^ seed.length, i;
+        for (i = 0; i < seed.length; i++) { h = Math.imul(h ^ seed.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
+        return function () { h = Math.imul(h ^ (h >>> 16), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); h ^= h >>> 16; return (h >>> 0) / 4294967296; };
+    }
+    function pdf417(seed) {
+        var R = rng(seed), rows = 15, cols = 5, rh = 3, d = '', START = [8, 1, 1, 1, 1, 1, 1, 3], STOP = [7, 1, 1, 3, 1, 1, 1, 2, 1], r, c;
+        function cw() { var w = [1, 1, 1, 1, 1, 1, 1, 1], e = 9; while (e--) w[(R() * 8) | 0]++; return w; }
+        function put(x0, y0, ws) { var x = x0; ws.forEach(function (w, i) { if (i % 2 === 0) d += 'M' + x + ' ' + y0 + 'h' + w + 'v' + rh + 'h-' + w + 'z'; x += w; }); return x; }
+        for (r = 0; r < rows; r++) {
+            var x = put(0, r * rh, START);
+            x = put(x, r * rh, cw());
+            for (c = 0; c < cols; c++) x = put(x, r * rh, cw());
+            x = put(x, r * rh, cw());
+            put(x, r * rh, STOP);
+        }
+        return '<svg class="bpx-pdf" viewBox="0 0 154 ' + rows * rh + '" preserveAspectRatio="none" aria-hidden="true"><path d="' + d + '" fill="#111"/></svg>';
+    }
+    function bars(seed) {
+        var R = rng(seed + '#1d'), x = 0, d = '', i, w;
+        for (i = 0; i < 46; i++) { w = 1 + ((R() * 3) | 0); if (i % 2 === 0) d += 'M' + x + ' 0h' + w + 'v40h-' + w + 'z'; x += w; }
+        return '<svg class="bpx-bar" viewBox="0 0 ' + x + ' 40" preserveAspectRatio="none" aria-hidden="true"><path d="' + d + '" fill="#111"/></svg>';
+    }
+
+    /* ---- loga (zjednodušené kresby; pokud na webu leží soubor loga, překryje je) ---- */
+    function logo(k) {
+        var B = BR[k], s = '<svg viewBox="0 0 150 40" role="img" aria-label="' + esc(B.n) + '">';
+        if (k === 'EK') s += '<text x="75" y="19" text-anchor="middle" font-size="17" font-weight="700" fill="#d71921" font-family="Noto Naskh Arabic, Tahoma, Arial, serif">طيران الإمارات</text><text x="75" y="35" text-anchor="middle" font-size="14" font-weight="800" font-style="italic" fill="#d71921" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">Emirates</text>';
+        else if (k === 'FZ') s += '<text x="75" y="27" text-anchor="middle" font-size="22" font-weight="800" font-family="Arial, Helvetica, sans-serif"><tspan fill="#f26a21">fly</tspan><tspan fill="#2a3547">dubai</tspan></text>';
+        else if (k === 'AY') s += '<path d="M14 28 L26 12 L30 12 L22 24 L34 24 L32 28z" fill="#0b1560"/><text x="42" y="27" font-size="20" font-weight="800" fill="#0b1560" font-family="Arial, Helvetica, sans-serif" letter-spacing="2.5">FINNAIR</text>';
+        else if (k === 'LX') s += '<rect x="10" y="5" width="30" height="30" rx="2" fill="#e30613"/><path d="M23 11h4v7h7v4h-7v7h-4v-7h-7v-4h7z" fill="#fff"/><text x="47" y="28" font-size="21" font-weight="800" fill="#1a1a1a" font-family="Arial, Helvetica, sans-serif" letter-spacing="1.5">SWISS</text>';
+        else if (k === 'TK') s += '<circle cx="24" cy="20" r="15" fill="#c8102e"/><circle cx="24" cy="20" r="11" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M17 24 L28 12 L26 21 L32 20 L21 29 L23 22z" fill="#fff"/><text x="44" y="17" font-size="12.5" font-weight="800" fill="#c8102e" font-family="Arial, Helvetica, sans-serif" letter-spacing="0.6">TURKISH</text><text x="44" y="31" font-size="12.5" font-weight="800" fill="#c8102e" font-family="Arial, Helvetica, sans-serif" letter-spacing="0.6">AIRLINES</text>';
+        else if (k === 'TR') s += '<rect x="20" y="5" width="110" height="30" rx="15" fill="#ffdd00"/><text x="75" y="29" text-anchor="middle" font-size="23" font-weight="900" fill="#111" font-family="Arial Black, Arial, Helvetica, sans-serif" letter-spacing="0.5">scoot</text>';
+        else if (k === 'SF') s += '<path d="M26 5l4.4 9.2 10.1 1.3-7.4 7 1.9 10-9-4.9-9 4.9 1.9-10-7.4-7 10.1-1.3z" fill="#ff8a1f"/><text x="48" y="27" font-size="19" font-weight="800" fill="#005f86" font-family="Arial, Helvetica, sans-serif" letter-spacing="0.5">Starfish</text>';
+        else if (k === 'WH') s += '<path d="M10 24q5-8 10 0t10 0 10 0" fill="none" stroke="#1565b8" stroke-width="3.2" stroke-linecap="round"/><path d="M10 31q5-8 10 0t10 0 10 0" fill="none" stroke="#5bb4ee" stroke-width="3.2" stroke-linecap="round"/><text x="58" y="19" font-size="14" font-weight="800" fill="#0a3a74" font-family="Arial, Helvetica, sans-serif" letter-spacing="1.5">WAHANA</text><text x="58" y="33" font-size="11" font-weight="700" fill="#1565b8" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">Virendra</text>';
+        s += '</svg>';
+        if (B.img) s += '<img src="' + B.img + '" alt="" loading="lazy" onerror="this.remove()">';
+        return s;
+    }
+
+    /* ---- jedna palubní vstupenka ---- */
+    function ticket(c) {
+        var B = BR[c.brand], boat = !!B.boat, A = AP[c.from] || [c.from, ''], Z = AP[c.to] || [c.to, ''];
+        var icon = boat ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + BOAT + '"/></svg>' : '<svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="' + PLANE + '"/></svg>';
+        var dm = toMin(c.dep), lead = boat ? 30 : (c.durMin >= 180 ? 60 : 45);
+        var date = dstr(c.date), wd = WD[c.date.getUTCDay()];
+        var seed = c.no + c.from + c.to + date;
+        var arrSup = c.aPlus > c.dPlus ? '<sup>+' + (c.aPlus - c.dPlus) + '</sup>' : '';
+        var opLine = c.op ? ' · operated by ' + esc(c.op) : '';
+        var pax = getName();
+        var bcbp = 'M1' + pax.replace(/ /g, '') + ' ' + (boat ? 'FB' : 'E') + ' ' + c.from + c.to + ' ' + c.no.replace(/\s/g, '') + ' ' + date.replace(/ /g, '');
+        return '<div class="bpx-wrap"><article class="bpx" style="--b1:' + B.b1 + ';--b2:' + B.b2 + ';--ac:' + B.ac + ';--hi:' + B.hi + '" aria-label="' + esc((boat ? 'Palubní vstupenka na loď ' : 'Palubní vstupenka ') + c.no + ' ' + A[0] + ' ➔ ' + Z[0] + ', ' + date) + '">' +
+            '<div class="bpx-main">' +
+            '<div class="bpx-head"><div class="bpx-logo">' + logo(c.brand) + '</div>' +
+            '<div class="bpx-title"><b>BOARDING PASS</b><span>' + (boat ? 'Palubní vstupenka · rychloloď' : 'Palubní vstupenka') + esc(opLine) + '</span></div>' +
+            '<div class="bpx-cls">' + esc(c.cls) + '</div></div>' +
+            '<div class="bpx-body">' +
+            '<div class="bpx-pax"><span class="bpx-lab">Passenger / Cestující</span><b class="bpx-name" role="button" tabindex="0" data-bpx-name title="Klepni a změň jméno na vstupence">' + esc(pax) + '</b><span class="bpx-edit">✎ změnit jméno</span></div>' +
+            '<div class="bpx-route">' +
+            '<div class="bpx-pt"><span class="bpx-lab">From / Odkud</span><span class="bpx-code">' + c.from + '</span><span class="bpx-city">' + esc(A[0]) + '</span><span class="bpx-apn">' + esc(A[1]) + '</span><span class="bpx-tm">' + c.dep + '</span></div>' +
+            '<div class="bpx-path"><div class="bpx-line"><i>' + icon + '</i><b></b></div><span>' + esc(c.dur) + (boat ? ' · plavba' : (c.stops ? '' : ' · přímý let')) + '</span></div>' +
+            '<div class="bpx-pt r"><span class="bpx-lab">To / Kam</span><span class="bpx-code">' + c.to + '</span><span class="bpx-city">' + esc(Z[0]) + '</span><span class="bpx-apn">' + esc(Z[1]) + '</span><span class="bpx-tm">' + c.arr + arrSup + '</span></div>' +
+            '</div>' +
+            '<div class="bpx-grid">' +
+            '<div><span class="bpx-lab">' + (boat ? 'Ship / Loď' : 'Flight / Let') + '</span><b class="hl">' + esc(c.no) + '</b></div>' +
+            '<div><span class="bpx-lab">Date / Datum</span><b>' + date + '<small>' + wd + '</small></b></div>' +
+            '<div><span class="bpx-lab">Boarding / Nástup</span><b class="hl">' + hm(dm - lead) + '</b></div>' +
+            '<div><span class="bpx-lab">' + (boat ? 'Pier / Molo' : 'Gate / Brána') + '</span><b>TBA</b></div>' +
+            '<div><span class="bpx-lab">Seat / Sedadlo</span><b>TBA</b></div>' +
+            '<div><span class="bpx-lab">Class / Třída</span><b>' + esc(c.cls) + '</b></div>' +
+            '<div><span class="bpx-lab">Departs / Odlet</span><b>' + c.dep + '</b></div>' +
+            '<div><span class="bpx-lab">Booking ref.</span><b>TBA</b></div>' +
+            '</div></div>' +
+            '<div class="bpx-code417">' + pdf417(seed) + '<div class="bpx-bcbp">' + esc(bcbp) + '</div></div>' +
+            '<div class="bpx-foot"><b>' + (boat ? 'Nástup se uzavírá 15 minut před odplutím.' : 'Brána se zavírá 20 minut před odletem.') + '</b> ' + (boat ? 'Boarding closes 15 min before departure. Mějte u sebe pas a e-ticket.' : 'Gate closes 20 min before departure. Časy jsou místní.') + '</div>' +
+            '</div>' +
+            '<aside class="bpx-stub"><div class="bpx-st-top"><span>' + (boat ? 'Boat' : esc(B.n)) + '</span><b>' + esc(c.short || c.no) + '</b></div>' +
+            '<div class="bpx-st-rt"><span>' + c.from + '</span>' + icon + '<span>' + c.to + '</span></div>' +
+            '<div class="bpx-st-kv"><div><span class="bpx-lab">Date</span><b>' + pad(c.date.getUTCDate()) + ' ' + MON[c.date.getUTCMonth()] + '</b></div><div><span class="bpx-lab">Boarding</span><b>' + hm(dm - lead) + '</b></div><div><span class="bpx-lab">' + (boat ? 'Pier' : 'Gate') + '</span><b>TBA</b></div><div><span class="bpx-lab">Seat</span><b>TBA</b></div></div>' +
+            bars(seed) + '</aside></article></div>';
+    }
+
+    function conn(min, where) { return '<div class="bpx-conn"><span aria-hidden="true">⏳</span><span>' + (where || 'Přestup') + ' · ' + fmt(min) + '</span></div>'; }
+    function head(t) { return '<h4 class="fl-h">' + t + '</h4>'; }
+    function dur(s) { return String(s || '').replace(/(\d+)h/, '$1 h').replace(/(\d+)m/, '$1 min').trim(); }
+
+    /* ---- rozbor dálkových letů z dat konfigurátoru ---- */
+    function legs(str, base) {
+        var out = [], prev = null;
+        String(str || '').split(' + ').forEach(function (x) {
+            var m = /^(.*?)\s*\((\d{2}):(\d{2})(?:\+(\d))?\s+(\w{3})\s+➔\s+(\d{2}):(\d{2})(?:\+(\d))?\s+(\w{3}),\s*([^)]+)\)/.exec(x.trim());
+            if (!m) return;
+            var f = /([A-Z0-9]{2})\s?(\d{1,4})\s*$/.exec(m[1]); if (!f) return;
+            var dmn = (+m[2]) * 60 + (+m[3]), amn = (+m[6]) * 60 + (+m[7]);
+            var dP = m[4] !== undefined ? +m[4] : (prev ? prev.aPlus + (dmn < prev.amn ? 1 : 0) : 0);
+            var aP = m[8] !== undefined ? +m[8] : dP + (amn < dmn ? 1 : 0);
+            var no = f[1] + f[2], brand = no === 'EK2239' ? 'FZ' : f[1];
+            if (!BR[brand]) return;
+            var L = { brand: brand, no: no, from: m[5], to: m[9], dep: hm(dmn), arr: hm(amn), dPlus: dP, aPlus: aP, dmn: dmn, amn: amn, date: addDays(base, dP), dur: dur(m[10]), durMin: 0, op: OPERATED[no] || '', cls: 'ECONOMY', stops: 0 };
+            var dd = /(\d+)h\s*(?:(\d+)m)?/.exec(m[10]); L.durMin = dd ? (+dd[1]) * 60 + (+(dd[2] || 0)) : 0;
+            out.push(L); prev = L;
+        });
+        return out;
+    }
+    function legsHTML(arr, base) {
+        var h = '';
+        arr.forEach(function (L, i) {
+            h += ticket(L);
+            var N = arr[i + 1];
+            if (N) h += conn(Math.round(absMin(base, N.dPlus, N.dmn) - absMin(base, L.aPlus, L.amn)), 'Přestup v ' + (LOC[L.to] || (AP[L.to] ? AP[L.to][0] : L.to)) + ' (' + L.to + ')');
+        });
+        return h;
+    }
+
+    /* ---- pevné lety a lodě z itineráře ---- */
+    function fixed(brand, no, from, to, dep, arr, durMin, y, mo, d, extra) {
+        var o = { brand: brand, no: no, from: from, to: to, dep: dep, arr: arr, dPlus: 0, aPlus: 0, dur: fmt(durMin), durMin: durMin, date: new Date(Date.UTC(y, mo - 1, d)), op: '', cls: 'ECONOMY', stops: 0 };
+        for (var k in extra) o[k] = extra[k];
+        return o;
+    }
+    var TR288 = function () { return fixed('TR', 'TR288', 'SIN', 'DPS', '10:15', '13:05', 170, 2027, 8, 9); };
+    var TR281 = function () { return fixed('TR', 'TR281', 'DPS', 'SIN', '11:15', '14:10', 175, 2027, 8, 24); };
+    var BOAT_OUT = function () { return fixed('SF', 'STARFISH', 'SNR', 'BNG', '13:00', '15:00', 120, 2027, 8, 15, { cls: 'STANDARD', short: 'STARFISH' }); };
+    var BOAT_BACK = function () { return fixed('WH', 'WAHANA VIRENDRA', 'BNG', 'SNR', '13:30', '17:00', 210, 2027, 8, 23, { cls: 'STANDARD', short: 'WAHANA' }); };
+
+    function curFlight() { try { return flightOptions[currentAirline]; } catch (e) { return null; } }
+    function put(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
+
+    function render() {
+        var f = curFlight();
+        if (f) {
+            var ob = parseDate(f.outDate), rb = parseDate(f.retDate);
+            if (ob) put('bpOut', head(dayTitle(ob) + ': odlet z Prahy do Singapuru (' + esc(f.name || '') + ')') + legsHTML(legs(f.outFlights, ob), ob) +
+                '<p class="bpx-sub">Jméno na vstupence si každý změní klepnutím na něj. Brána, sedadlo a rezervační kód doplníš po odbavení.</p>');
+            if (ob && rb) {
+                var t281 = TR281(), ret = legs(f.retFlights, rb), h = head(dayTitle(t281.date) + ': odlet z Bali do Singapuru') + ticket(t281);
+                if (ret.length) {
+                    h += conn(Math.round(absMin(rb, ret[0].dPlus, ret[0].dmn) - absMin(t281.date, 0, toMin('14:10'))), 'Tranzit v Singapuru') +
+                        head(dayTitle(rb) + ': dálkový let domů (' + esc(f.name || '') + ')') + legsHTML(ret, rb);
+                }
+                put('bpHome', h);
+            }
+        }
+        put('bpSinDps', head(dayTitle(TR288().date) + ': palubní vstupenka Singapur → Bali') + ticket(TR288()));
+        put('bpBoatOut', head(dayTitle(BOAT_OUT().date) + ': palubní vstupenka na loď Bali → Lombok') + ticket(BOAT_OUT()));
+        put('bpBoatBack', head(dayTitle(BOAT_BACK().date) + ': palubní vstupenka na loď Lombok → Bali') + ticket(BOAT_BACK()));
+    }
+
+    function editName() {
+        var v = window.prompt('Jméno na palubní vstupence ve tvaru PŘÍJMENÍ/JMÉNO (bez diakritiky se doplní samo):', getName());
+        if (v === null) return;
+        v = cleanName(v); if (!v) return;
+        try { localStorage.setItem('bpx_name', v); } catch (e) {}
+        render();
+    }
+    document.addEventListener('click', function (e) { var t = e.target.closest && e.target.closest('[data-bpx-name], .bpx-edit'); if (t) editName(); });
+    document.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-bpx-name]')) { e.preventDefault(); editName(); } });
+
+    if (typeof window.setFlightAirline === 'function' && !window.setFlightAirline.__bpx) {
+        var orig = window.setFlightAirline;
+        window.setFlightAirline = function () { var r = orig.apply(this, arguments); try { render(); } catch (e) {} return r; };
+        window.setFlightAirline.__bpx = true;
+    }
+    window.BPX = { render: render };
+    try { render(); } catch (e) { console.error('BPX', e); }
 })();
 </script>
 
