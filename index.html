@@ -17895,6 +17895,9 @@ body.pres-on #presRail { display: flex; }
 .tx-seg { flex: var(--d, 10) 1 0; min-width: 0; display: grid; align-items: center; padding: 0 6px; font: 800 0.64rem/1.1 var(--font-ui, inherit); color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, .55); overflow: hidden; background: var(--c); }
 .tx-seg span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tx-seg.in { --c: #d97706; } .tx-seg.mrt { --c: #2563eb; } .tx-seg.walk { --c: #16a34a; } .tx-seg.din { --c: #dc2626; } .tx-seg.jew { --c: #0d9488; } .tx-seg.gar { --c: #65a30d; } .tx-seg.buf { --c: #64748b; background-image: repeating-linear-gradient(135deg, transparent 0 6px, rgba(255, 255, 255, .15) 6px 12px); }
+.tx-seg.gt { --c: #475569; }
+.tx-mini { display: none; }
+.tx-seg .m { display: none; }
 .tx-seg.del { --c: #ef4444; background-image: repeating-linear-gradient(135deg, transparent 0 6px, rgba(255, 255, 255, .22) 6px 12px); }
 .tx-bar.is-no { opacity: .5; filter: saturate(.4); }
 .tx-axis { position: relative; height: 20px; margin-left: 44px; font: 700 0.66rem var(--font-ui, inherit); color: var(--text-muted); }
@@ -17914,7 +17917,20 @@ body.pres-on #presRail { display: flex; }
 .tx-check input { width: 20px; height: 20px; flex: 0 0 auto; margin-top: 1px; accent-color: var(--primary); }
 .tx-check small { display: block; color: var(--text-muted); font-size: 0.76rem; }
 .tx-check li.is-done label { opacity: .55; text-decoration: line-through; }
-@media (max-width: 900px) { .tx-cards { grid-template-columns: 1fr; } .tx-sum { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tx-seg { font-size: 0; } .tx-legend { padding-left: 18px; } }
+@media (max-width: 900px) {
+    .tx-cards { grid-template-columns: 1fr; } .tx-sum { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tx-legend { padding-left: 18px; }
+    /* mobil: místo úzkého pruhu čitelný svislý seznam s časy, pod malým proporčním pruhem */
+    .tx-tr { grid-template-columns: 1fr; gap: 6px; }
+    .tx-tr > b { text-align: left; font-size: 1rem; } .tx-tr > b::before { content: "Plán "; }
+    .tx-wrap { display: grid; gap: 6px; }
+    .tx-mini { display: flex; gap: 2px; height: 12px; border-radius: 6px; overflow: hidden; }
+    .tx-mini .tx-seg { padding: 0; min-height: 0; }
+    .tx-bar { flex-direction: column; height: auto; gap: 4px; overflow: visible; border-radius: 12px; }
+    .tx-bar .tx-seg { flex: none; min-height: 46px; padding: 8px 12px; border-radius: 10px; font-size: 0.86rem; line-height: 1.3; }
+    .tx-bar .tx-seg .s { display: none; } .tx-bar .tx-seg .m { display: block; white-space: normal; overflow: visible; text-overflow: clip; }
+    .tx-bar .tx-seg .m b { display: block; font-size: 0.78rem; opacity: .95; font-variant-numeric: tabular-nums; }
+    .tx-axis { display: none; }
+}
 @media (max-width: 900px) { .tx-axis { height: 36px; } .tx-axis i.g { top: 16px; } .tx-axis i.f { transform: translateX(-100%); } .tx-axis i.f::before { left: 100%; } }
 
 /* ---- Co to znamená pro tebe (po změně aerolinky) ---- */
@@ -18687,13 +18703,16 @@ body.pres-on #presRail { display: flex; }
         return h;
     }
     function txBarHtml(plan, F, arr, cls, delay) {
-        var h = '<div class="tx-bar ' + (cls || '') + '">';
-        if (delay > 0) h += '<div class="tx-seg del" style="--d:' + delay + '" title="Zpoždění letu z Bali ' + delay + ' min"><span>zpoždění ' + delay + '′</span></div>';
-        plan.items.forEach(function (x) { h += '<div class="tx-seg ' + x.type + '" style="--d:' + (x.e - x.s) + '" title="' + txHM(x.s) + '–' + txHM(x.e) + ' ' + x.title.replace(/"/g, '') + '"><span>' + x.title.split(' ')[0] + ' ' + (x.e - x.s) + '′</span></div>'; });
-        var last = plan.items[plan.items.length - 1].e; if (F.gate - last > 5) h += '<div class="tx-seg buf" style="--d:' + (F.gate - last) + '"><span>rezerva</span></div>';
-        h += '<div class="tx-seg" style="--d:120;--c:#475569"><span>brána → odlet</span></div></div>';
-        return h;
+        var h = '', mini = '', segs = [];
+        if (delay > 0) segs.push({ type: 'del', d: delay, s: 'zpoždění ' + delay + '′', m: '<b>' + txHM(TXARR) + '–' + txHM(TXARR + delay) + '</b>Zpoždění letu z Bali · ' + delay + ' min', tt: 'Zpoždění letu z Bali ' + delay + ' min' });
+        plan.items.forEach(function (x) { var du = x.e - x.s; segs.push({ type: x.type, d: du, s: x.title.split(' ')[0] + ' ' + du + '′', m: '<b>' + txHM(x.s) + '–' + txHM(x.e) + '</b>' + x.title + ' · ' + du + ' min', tt: txHM(x.s) + '–' + txHM(x.e) + ' ' + x.title.replace(/"/g, '') }); });
+        var last = plan.items[plan.items.length - 1].e; if (F.gate - last > 5) segs.push({ type: 'buf', d: F.gate - last, s: 'rezerva', m: '<b>' + txHM(last) + '–' + txHM(F.gate) + '</b>Rezerva před bránou · ' + (F.gate - last) + ' min', tt: 'Rezerva' });
+        segs.push({ type: 'gt', d: 120, s: 'brána → odlet', m: '<b>' + txHM(F.gate) + '–' + txHM(F.dep) + '</b>Brána a odlet (' + txHM(F.gate) + ' brána, ' + txHM(F.dep) + ' odlet)', tt: 'Brána a odlet' });
+        mini = '<div class="tx-mini">' + segs.map(function (g) { return '<i class="tx-seg ' + g.type + '" style="--d:' + g.d + '"></i>'; }).join('') + '</div>';
+        h = '<div class="tx-bar ' + (cls || '') + '">' + segs.map(function (g) { return '<div class="tx-seg ' + g.type + '" style="--d:' + g.d + '" title="' + g.tt + '"><span class="s">' + g.s + '</span><span class="m">' + g.m + '</span></div>'; }).join('') + '</div>';
+        return mini + h;
     }
+
     function txFx() { var x = window.luxFx; return x && x.mid && x.mid.SGD ? x.mid.SGD : 24.347 / 1.4285; }
     function txCalc() {
         var host = $('txCalc'); if (!host) return;
@@ -18731,7 +18750,7 @@ body.pres-on #presRail { display: flex; }
             '<div><span class="fl-k">Doba tranzitu</span><span class="fl-v">' + txDur(L) + '</span><span class="fl-s">' + (F.f.name || '') + '</span></div>' +
             '<div><span class="fl-k">Doporučená varianta</span><span class="fl-v">Plán ' + rec + '</span><span class="fl-s"><span class="tx-badge ' + (rec === 'A' ? A.status : 'ok') + '">' + (rec === 'A' ? 'metro do centra' : 'Jewel a letiště') + '</span></span></div></div>' +
             '<h4 class="fl-h">Časová osa: plán A a plán B</h4><div class="tx-tl">' +
-            '<div class="tx-tr"><b>A</b>' + txBarHtml(A, F, arr, A.status === 'no' ? 'is-no' : '', dly) + '</div><div class="tx-tr"><b>B</b>' + txBarHtml(B, F, arr, '', dly) + '</div></div>' +
+            '<div class="tx-tr"><b>A</b><div class="tx-wrap">' + txBarHtml(A, F, arr, A.status === 'no' ? 'is-no' : '', dly) + '</div></div><div class="tx-tr"><b>B</b><div class="tx-wrap">' + txBarHtml(B, F, arr, '', dly) + '</div></div></div>' +
             '<div class="tx-axis" aria-hidden="true">' + ticks + '</div>' + legend + '<p class="tx-res" style="margin-top:0"><b>' + verdict + '</b></p>' +
             '<h4 class="fl-h">Co když přiletíme se zpožděním?</h4><div class="tx-ctl"><span class="l">Zpoždění letu z Bali:</span>' + [0, 30, 60, 90, 120].map(function (d) { return '<button type="button" class="tx-chip" data-d="' + d + '" aria-pressed="' + (txState.delay === d) + '">' + (d ? '+' + d + ' min' : 'žádné') + '</button>'; }).join('') + '</div><div class="tx-res" id="txDelayRes"></div>' +
             '<h4 class="fl-h">Než vstoupíme do města</h4><ul class="tx-check" id="txCheck"></ul>';
