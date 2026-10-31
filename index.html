@@ -6075,7 +6075,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 10:53</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 10:59</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -18132,7 +18132,7 @@ body.simple-on { overflow: hidden; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '31. 10. 2026 · 10:53';
+    var LUX_VERSION = '31. 10. 2026 · 10:59';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19213,18 +19213,24 @@ function luxQRSvg(text, px) {
         var notesSgd = ((/Např\.\s*([^.]*?)\.(?:\s|$)/.exec(find(sl, /Např\./)) || [])[1] || '').trim(), notesUsd = find(ul, /Bankovky:/).replace(/\.$/, ''), deposit = ((/^(\$[\d,]+)\s*kauce/.exec(find(ul, /kauce/)) || [])[1]) || '', toIdr = ((/^(\$[\d,]+)\s*k výměně/.exec(find(ul, /k výměně/)) || [])[1]) || '', reserve = ((/(\$[\d,]+)\s*navíc/.exec(find(ul, /navíc/)) || [])[1]) || '';
         var split = /Letiště\s+([\d,.]+\s*(?:tis\.|M))\s*,\s*Uluwatu či Ubud\s+([\d,.]+\s*(?:tis\.|M))\s*,\s*Sanur\s+([\d,.]+\s*(?:tis\.|M))/.exec(find(il, /Letiště/)) || [], fuel = (/Benzín do motorek:\s*(.+?)\s*(?:\(([^)]*)\))?\.?\s*$/.exec(find(il, /Benzín/)) || []);
         var row = function (d, title, det) { return '<li><time>' + d + '</time><div><b>' + title + '</b><span>' + det + '</span></div></li>'; };
-        var rp = function (v) { return v ? 'Rp ' + v.replace(/\s*(tis\.|M)$/, ' $1') : ''; };
-        var rows = row('do 6. 8.', '🏠 Doma před odjezdem', 'Koupit <b>' + spEsc(sgd) + '</b> (' + spEsc(el('cxSgdKc')) + ')' + (notesSgd ? ', bankovky např. ' + spEsc(notesSgd) : '') + ', objednat předem. A <b>' + spEsc(usd) + '</b> (' + spEsc(el('cxUsdKc')) + ')' + (notesUsd ? ': ' + spEsc(notesUsd.replace(/^Bankovky:\s*/, '')) : '') + ', nové a nepokrčené, v obálce. Rupie doma nekupuj, vyměníš je až na Bali.');
+        /* kolik USD vyměnit na jednotlivých místech: dolary k výměně se rozdělí v poměru rupií z plánu hotovosti, zaokrouhleno na 5 $ */
+        function idrNum(s) { var m = /([\d,.]+)\s*(tis\.|M)/.exec(s || ''); return m ? parseFloat(m[1].replace(',', '.')) * (m[2] === 'M' ? 1e6 : 1e3) : 0; }
+        var usdTotal = toIdr ? parseFloat(toIdr.replace('$', '').replace(',', '.')) : 0, w = [idrNum(split[1]), idrNum(split[2]), idrNum(split[3])], ws = w[0] + w[1] + w[2], usdPart = ['', '', ''];
+        if (usdTotal && ws) {
+            var u = w.map(function (x) { return Math.round(usdTotal * x / ws / 5) * 5; }), diff = usdTotal - (u[0] + u[1] + u[2]), big = w.indexOf(Math.max.apply(null, w)); u[big] += diff;
+            usdPart = u.map(function (x) { return '$' + x.toLocaleString('cs-CZ'); });
+        }
+        var rows = row('do 6. 8.', '🏠 Doma před odjezdem', 'Koupit <b>' + spEsc(sgd) + '</b> (' + spEsc(el('cxSgdKc')) + ')' + (notesSgd ? ', bankovky např. ' + spEsc(notesSgd) : '') + ', objednat předem. A <b>' + spEsc(usd) + '</b> (' + spEsc(el('cxUsdKc')) + ')' + (notesUsd ? ': ' + spEsc(notesUsd.replace(/^Bankovky:\s*/, '')) : '') + ', nové a nepokrčené, v obálce. Rupie doma nekupuj, vyměníš je až na Bali z dolarů.');
         rows += row('7.–9. 8.', '🇸🇬 Singapur', 'Platí se singapurskými dolary, hawkery berou hlavně hotovost a nechtějí S$50 a S$100. Doprava jde bezkontaktní kartou. Dolary S$ se použijí znovu při tranzitu 24. 8.');
-        rows += row('9. 8.', '🛬 Bali: letiště Denpasar', (split[1] ? 'Vyměnit asi <b>' + spEsc(rp(split[1])) + '</b>. ' : '') + (deposit ? 'Kauce za motorky <b>' + spEsc(deposit) + '</b> na osobu se skládá v dolarech při převzetí skútrů, proto ji nesměňuj.' : ''));
-        rows += row('9.–15. 8.', '🌿 Uluwatu nebo Ubud', split[2] ? 'Vyměnit asi <b>' + spEsc(rp(split[2])) + '</b>.' : 'Vyměnit rupie podle potřeby.');
-        rows += row('15. 8.', '⚓ Sanur před plavbou', (split[3] ? 'Vyměnit asi <b>' + spEsc(rp(split[3])) + '</b>. ' : '') + (deposit ? 'Při vrácení motorek v Sanuru se kauce ' + spEsc(deposit) + ' vrátí.' : ''));
-        rows += row('15.–23. 8.', '🏝️ Lombok', 'Platíš rupiemi.' + (fuel[1] ? ' Benzín do motorek vyjde asi <b>' + spEsc(fuel[1].replace(/\s+/g, ' ')) + '</b>' + (fuel[2] ? ' (' + spEsc(fuel[2]) + ')' : '') + '.' : ''));
+        rows += row('9. 8.', '🛬 Bali: letiště Denpasar', (usdPart[0] ? 'Vyměnit <b>' + spEsc(usdPart[0]) + '</b> na rupie. ' : '') + (deposit ? 'Kauci za motorky <b>' + spEsc(deposit) + '</b> zaplatíš v dolarech při převzetí skútrů, tu nesměňuj.' : ''));
+        rows += row('9.–15. 8.', '🌿 Uluwatu nebo Ubud', usdPart[1] ? 'Vyměnit <b>' + spEsc(usdPart[1]) + '</b> na rupie.' : 'Vyměnit dolary na rupie podle potřeby.');
+        rows += row('15. 8.', '⚓ Sanur před plavbou na Lombok', (usdPart[2] ? 'Vyměnit <b>' + spEsc(usdPart[2]) + '</b> na rupie. ' : '') + (deposit ? 'Při vrácení motorek se tu vrátí kauce <b>' + spEsc(deposit) + '</b> v dolarech, nesměňuj ji.' : ''));
+        rows += row('15.–23. 8.', '🏝️ Lombok', 'Platíš rupiemi, které sis vyměnil na Bali.' + (fuel[1] ? ' Benzín do motorek vyjde asi ' + spEsc(fuel[1].replace(/\s+/g, ' ')) + (fuel[2] ? ' (' + spEsc(fuel[2]) + ')' : '') + '.' : ''));
         rows += row('23.–24. 8.', '🏁 Konec cesty', 'Zbylé rupie nevracej v CZ, tam je nekoupí. Utrať je nebo je změň zpět na Bali.');
         var tiles = '<div class="sp-money"><div><small>Koupit doma</small><b>' + spEsc(sgd) + ' + ' + spEsc(usd) + '</b><span>≈ ' + spEsc(el('cxSumKc')) + ' na osobu v CZ směnárně</span></div>' +
-            '<div><small>Vyměnit na Bali</small><b>' + (toIdr ? spEsc(toIdr) + ' → ' : '') + spEsc(el('cxIdr').replace('Rp', 'Rp ')) + '</b><span>' + spEsc(el('cxIdrKc')) + '</span></div>' +
-            '<div><small>Zůstane v dolarech</small><b>' + (deposit ? spEsc(deposit) : '–') + (reserve ? ' + ' + spEsc(reserve) : '') + '</b><span>vratná kauce za motorky a rezerva</span></div></div>';
-        return '<section><h2>💶 Peníze: kolik, kdy a kde</h2>' + tiles + '<ul class="sp-tl">' + rows + '</ul><p class="sp-note">Částky jsou na osobu a berou se živě z plánu hotovosti, takže se mění s kurzem. Rozdělení mezi letiště, Uluwatu či Ubud a Sanur je z plánu hotovosti. Datum u jednotlivých směnáren je odvozené z trasy, aby bylo jasné, kdy se kde vyplatí vyměnit.</p></section>';
+            '<div><small>Vyměnit na Bali</small><b>' + (toIdr ? spEsc(toIdr) : '–') + '</b><span>z dolarů na rupie, na třech místech</span></div>' +
+            '<div><small>Nesměňovat</small><b>' + (deposit ? spEsc(deposit) : '–') + (reserve ? ' + ' + spEsc(reserve) : '') + '</b><span>kauce za motorky (vrátí se) a rezerva</span></div></div>';
+        return '<section><h2>💶 Peníze: kolik, kdy a kde</h2>' + tiles + '<ul class="sp-tl">' + rows + '</ul><p class="sp-note">Částky jsou na osobu a berou se živě z plánu hotovosti. Dolary k výměně se mezi letiště, Uluwatu či Ubud a Sanur dělí ve stejném poměru jako rupie v plánu hotovosti a jsou zaokrouhlené na 5 $. Datum u jednotlivých směnáren je odvozené z trasy.</p></section>';
     }
 
     function spFinal(txt) {
