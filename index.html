@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="cs" data-theme="dark">
 <head>
+<script>window.__wantSimple = /[?&]jednoduse(?:&|=|$)/.test(location.search);</script>
 <script>
 /* Nenačtený obrázek: vlajka → emoji, ostatní se skryjí místo prázdné ikonky */
 (function () {
@@ -6074,7 +6075,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 08:32</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 10:47</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -10391,7 +10392,7 @@ function updatePackingWeight() {
     <!-- CSS STYLY -->
 
 <!-- HLAVIČKA KARTY -->
-<h3 class="lux-acc-title">6. Etapa: Rozlučka na Bali & Návrat domů</h3>
+<h3 class="lux-acc-title">Poznávací program: Rozlučka na Bali</h3>
 <p class="lux-acc-sub" id="stage6DescParagraph">1 noc v Bakung Beach Resort (Kuta): Západ slunce & mořské plody v Jimbaranu, balijská masáž a odlet zpět do ČR.</p>
 
 <!-- ROZBALOVACÍ TLAČÍTKO -->
@@ -10687,8 +10688,8 @@ function updatePackingWeight() {
     <div class="tx-card"><b>🚪 Proč jít ven z tranzitu</b>
         <p>V obou variantách (A i B) musíme vystoupit z tranzitního sektoru a oficiálně vstoupit do Singapuru. Minule nám to, že někteří nešli ven, zkomplikovalo nástup do letadla směr domů: systém je nechtěl pustit a museli to zdlouhavě řešit s palubním personálem. Výlet ven to celé obejde a budeme v klidu.</p></div>
     <div class="tx-card"><b>📱 Co vyplnit předem</b>
-        <p>V mobilu (využijeme novou eSIM s internetem) vyplníme online formulář <strong>SG Arrival Card</strong>. Zabere asi 5 minut. Poté projdeme samoobslužnými automaty a imigrační kontrolou ven do Singapuru.</p>
-        <a class="tk-btn" href="#ukolyTerminy">✅ Úkoly &amp; termíny</a></div>
+        <p>V mobilu vyplníme online <strong>SG Arrival Card</strong> (asi 5 minut) a projdeme automaty ven do města. Návod krok za krokem je ve <em>Víza &amp; portály</em>.</p>
+        <a class="tk-btn" href="#f-viza">📖 Návod ve Víza &amp; portály</a></div>
     <div class="tx-card"><b>🎒 Úschovna zavazadel</b>
         <p>7kg kabinové batohy odložíme v úschovně <em>Smarte Carte / Baggage Storage</em> (T1–T4 i Jewel) za cca <strong>10,90 SGD za batoh a 24 hodin</strong>.</p>
         <div class="tx-calc" id="txCalc"></div>
@@ -18029,6 +18030,63 @@ body.brief .lux-acc-title, body.brief .lux-acc-sub, body.brief .lux-acc-btn, bod
     #statsFoot #toplistFloat { position: static !important; margin: 0 !important; transform: none !important; }
 }
 body.pres-on #statsFoot { display: none !important; }
+
+/* ---- Jednoduchá stránka: jen to nejdůležitější ---- */
+#simplePage { position: fixed; inset: 0; z-index: 10085; display: none; overflow-y: auto; -webkit-overflow-scrolling: touch; background: var(--bg-color, var(--surface)); color: var(--text-main); }
+#simplePage.is-open { display: block; }
+body.simple-on { overflow: hidden; }
+#simplePage .sp-top { position: sticky; top: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; background: color-mix(in srgb, var(--surface) 94%, transparent); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+#simplePage .sp-top b { font: 800 1rem var(--font-display, inherit); }
+#simplePage .sp-btn2 { min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-hover, var(--surface)); color: var(--text-main); font: 800 0.86rem var(--font-ui, inherit); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+#simplePage .sp-btn2.primary { background: var(--primary); border-color: var(--primary); color: var(--on-primary, #fff); }
+#simplePage .sp-btn2:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+#simplePage .sp-wrap { max-width: 780px; margin: 0 auto; padding: 18px 16px 60px; display: grid; gap: 16px; }
+#simplePage h1 { margin: 0; font: 800 clamp(1.6rem, 5vw, 2.3rem)/1.15 var(--font-display, inherit); }
+#simplePage .sp-sub { margin: 4px 0 0; color: var(--text-muted); font-size: 0.95rem; }
+#simplePage h2 { margin: 0 0 10px; font: 800 0.8rem var(--font-ui, inherit); letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
+#simplePage section { padding: 16px; border-radius: 18px; border: 1px solid var(--border); background: var(--surface); }
+#simplePage .sp-price { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+#simplePage .sp-price > div { padding: 12px; border-radius: 14px; background: color-mix(in srgb, var(--primary) 8%, transparent); border: 1px solid var(--border); }
+#simplePage .sp-price small { display: block; font-size: 0.68rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); }
+#simplePage .sp-price b { display: block; margin-top: 2px; font: 800 1.25rem/1.15 var(--font-display, inherit); font-variant-numeric: tabular-nums; }
+#simplePage .sp-note { margin: 10px 0 0; font-size: 0.84rem; color: var(--text-muted); line-height: 1.45; }
+#simplePage .sp-inex { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+#simplePage .sp-inex h3 { margin: 0 0 6px; font: 800 0.9rem var(--font-display, inherit); } #simplePage .sp-inex ul { margin: 0; padding-left: 1.1em; font-size: 0.86rem; line-height: 1.5; color: var(--text-muted); }
+#simplePage .sp-tl { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; }
+#simplePage .sp-tl li { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 12px; padding: 11px 0; border-top: 1px solid var(--border); align-items: start; }
+#simplePage .sp-tl li:first-child { border-top: 0; }
+#simplePage .sp-tl time { font: 800 0.9rem var(--font-display, inherit); color: var(--primary); font-variant-numeric: tabular-nums; }
+#simplePage .sp-tl b { display: block; font-size: 0.98rem; line-height: 1.3; } #simplePage h1:focus { outline: none; } #simplePage .sp-tl div > span { display: block; font-size: 0.84rem; line-height: 1.45; color: var(--text-muted); }
+#simplePage .sp-tl li.mv b::before { content: "↪ "; color: var(--primary); }
+#simplePage .sp-tasks { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+#simplePage .sp-tasks li { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: 0.92rem; }
+#simplePage .sp-tasks time { font-weight: 800; color: var(--primary); font-variant-numeric: tabular-nums; }
+#simplePage .sp-tasks small { display: block; color: var(--text-muted); }
+#simplePage .sp-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+#simplePage .sp-foot { text-align: center; font-size: 0.76rem; color: var(--text-muted); }
+.hero-simple-btn { margin-top: 10px; min-height: 44px; padding: 0 20px; border-radius: 999px; border: 1.5px solid rgba(255, 255, 255, 0.55); background: rgba(8, 14, 20, 0.55); color: #fff; font: 800 0.9rem var(--font-ui, inherit); cursor: pointer; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); }
+.hero-simple-btn:hover { background: rgba(8, 14, 20, 0.78); }
+@media (max-width: 560px) { #simplePage .sp-price { grid-template-columns: 1fr; } #simplePage .sp-inex { grid-template-columns: 1fr; } #simplePage .sp-tl li { grid-template-columns: 72px minmax(0, 1fr); gap: 10px; } #simplePage .sp-price > div { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; } }
+@media print { body.simple-on > *:not(#simplePage) { display: none !important; } #simplePage { position: static; overflow: visible; display: block !important; } #simplePage .sp-top, #simplePage .sp-actions { display: none !important; } body.simple-on { overflow: visible; } }
+
+/* ---- Mobil: žádné úzké sloupce u přehledů (dlaždice ve dvou sloupcích, dlouhé hodnoty přes celou šířku) ---- */
+@media (max-width: 800px) {
+    .fl-read { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .fl-read > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
+    .st-deck .fl-read > .st-hotel { grid-column: 1 / -1; order: -1; }
+    .st-deck .fl-read > div:last-child { grid-column: 1 / -1; }
+    .fl-read > div { padding: 12px 14px; }
+}
+@media (max-width: 560px) {
+    .bp-route { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 10px; }
+    .bp-mid { grid-column: 1 / -1; grid-row: 2; grid-auto-flow: column; justify-content: center; align-items: center; gap: 12px; }
+    .bp-mid .ln { width: 56px; }
+    .bp-city .c { font-size: 1.9rem; }
+}
+
+.st-move { margin: 0 0 6px; padding: 10px 14px; border-radius: 12px; border: 1px dashed var(--border); font-size: 0.88rem; color: var(--text-muted); }
+.st-move b { color: var(--text-main); }
+.st-date { display: inline-block; margin-right: 8px; padding: 1px 8px; border-radius: 999px; font: 800 0.74rem var(--font-ui, inherit); letter-spacing: .02em; background: color-mix(in srgb, var(--primary) 16%, transparent); color: var(--primary); border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent); vertical-align: 0.1em; font-variant-numeric: tabular-nums; }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -18059,7 +18117,7 @@ body.pres-on #statsFoot { display: none !important; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '31. 10. 2026 · 08:32';
+    var LUX_VERSION = '31. 10. 2026 · 10:47';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -18624,25 +18682,13 @@ body.pres-on #statsFoot { display: none !important; }
             '<div><span class="fl-k">Uletěno</span><span class="fl-v" id="fdKm">0 km</span><span class="fl-s">z celkem ' + KM.toLocaleString('cs-CZ') + ' km</span></div>' +
             '<div><span class="fl-k">Zbývá</span><span class="fl-v" id="fdLeft">2 h 50 min</span><span class="fl-s">do přistání ve 13:05</span></div>' +
             '<div><span class="fl-k">Rovník</span><span class="fl-v" id="fdEqT">–</span><span class="fl-s" id="fdEqS">přeletíš ho cca <b id="fdEqMin">–</b> min po startu</span></div></div>' +
-            '<h4 class="fl-h">Let v číslech</h4><div class="fl-tiles">' +
-            '<div class="fl-tile"><span>Dopravce a let</span><b>Scoot TR288</b><span>přímý let</span></div>' +
-            '<div class="fl-tile"><span>Vzdálenost</span><b>cca ' + KM.toLocaleString('cs-CZ') + ' km</b><span>vzdušnou čarou</span></div>' +
-            '<div class="fl-tile"><span>Doba letu</span><b>2 h 50 min</b><span>10:15 ➔ 13:05</span></div>' +
-            '<div class="fl-tile"><span>Časový posun</span><b>žádný</b><span>Singapur i Bali UTC+8</span></div>' +
-            '<div class="fl-tile"><span>Cena tam i zpět</span><b>5 206 Kč</b><span>na osobu</span></div></div>' +
-            '<h4 class="fl-h">Jak ten den poběží</h4><ol class="fl-day">' +
-            '<li><time>10:15</time><div><b>Odlet z letiště Changi</b><span>Přímý let Scoot TR288 směr Denpasar.</span></div></li>' +
-            '<li><time id="fdEqTime">~10:40</time><div><b>Přelet rovníku</b><span>Ze severní polokoule na jižní. Na zpáteční cestě ho přeletíš znovu, opačným směrem.</span></div></li>' +
-            '<li><time>13:05</time><div><b>Přistání v Denpasaru (Bali)</b><span>Hodinky nepřestavuješ, časový posun je nulový.</span></div></li>' +
-            '<li><time>po přistání</time><div><b>Převzetí skútrů</b><span>Nachystané skútry převezmeme přímo u letiště a jedeme do Uluwatu.</span></div></li></ol>' +
             '<div class="fl-tips"><div class="fl-tip"><b>👀 Okénko</b>Zkus sedět na pravé straně, tedy k jihu. Při dobrém počasí uvidíš sopky Jávy a při klesání i sopky na Bali. Je to jen tip, výhled závisí na počasí a oblačnosti.</div>' +
-            '<div class="fl-tip"><b>📝 Papíry včas</b>Indonéskou celní deklaraci (e-CD) vyplň 2 dny před příletem. Je mezi úkoly v sekci „Kontrola, jestli jsme si všechno řekli“.</div>' +
-            '<div class="fl-tip"><b>🛵 Hned po příletu</b>Skútry čekají u letiště, takže vezmi řidičský průkaz a mobil se staženou mapou nebo offline mapami.</div></div>';
+            '</div>';
         var base = $('fdBase'), done = $('fdDone'), plane = $('fdPlane'), eq = $('fdEq'), rng = $('fdRange'), play = $('fdPlay'), L = base.getTotalLength();
         /* poloha rovníku na trase (nejbližší bod k přímce rovníku) */
         var pEq = 0.14, best = 1e9; for (var i = 0; i <= 400; i++) { var pt = base.getPointAtLength(L * i / 400), dd = Math.abs(pt.y - yEq); if (dd < best) { best = dd; pEq = i / 400; } }
         var eqPt = base.getPointAtLength(L * pEq); eq.setAttribute('cx', eqPt.x); eq.setAttribute('cy', eqPt.y);
-        var eqMin = Math.round(pEq * DUR); $('fdEqMin').textContent = eqMin; $('fdEqT').textContent = hhmm(DEP + eqMin); $('fdEqTime').textContent = '~' + hhmm(DEP + eqMin);
+        var eqMin = Math.round(pEq * DUR); $('fdEqMin').textContent = eqMin; $('fdEqT').textContent = hhmm(DEP + eqMin);
         function hhmm(m) { m = Math.round(m); return String(Math.floor(m / 60) % 24).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); }
         var P = 0;
         function set(p) {
@@ -18706,8 +18752,7 @@ body.pres-on #statsFoot { display: none !important; }
             '<div><span class="fl-k">Ujeto</span><span class="fl-v v-km">0 km</span><span class="fl-s">z cca ' + KM + ' km vzdušnou čarou</span></div>' +
             '<div><span class="fl-k">Zbývá</span><span class="fl-v v-left">' + Math.floor(dur / 60) + ' h ' + (dur % 60 ? (dur % 60) + ' min' : '') + '</span><span class="fl-s">do ' + hhmm(dep + dur) + '</span></div>' +
             '<div><span class="fl-k">Wallaceova linie</span><span class="fl-v v-wt">–</span><span class="fl-s">hranice asijské a australské přírody</span></div></div>' +
-            '<h4 class="fl-h">Plavba v číslech</h4><div class="fl-tiles">' + tiles + '</div>' +
-            '<h4 class="fl-h">Jak ten den poběží</h4><ol class="fl-day">' + day + '</ol><div class="fl-tips">' + tips + '</div>';
+            '<div class="fl-tips">' + tips + '</div>';
         function q(s) { return host.querySelector(s); }
         var base = q('.vy-base'), done = q('.vy-done'), boat = q('.vy-boat'), wp = q('.vy-w'), rng = q('.fl-range'), play = q('.fl-play'), Lg = base.getTotalLength();
         /* kde loď přetíná Wallaceovu linii */
@@ -18737,7 +18782,7 @@ body.pres-on #statsFoot { display: none !important; }
             id: 'voyageOut', rev: false, dep: 13 * 60, dur: 120,
             tiles: [['Rychloloď', 'Starfish', 'doporučená varianta B'], ['Odjezd', '13:00', 'přístav Sanur (Bali)'], ['Příjezd', '15:00', 'přístav Bangsal (Lombok)'], ['Plavba', '2 hodiny', 'na moři'], ['Cena tam i zpět', '1 343 Kč', 'na osobu · 2 686 Kč na pár']],
             day: [['dopoledne', 'Odjezd z hotelu v Ubudu', 'Cesta do přístavu Sanur trvá cca 1 h 15 min až 1 h 30 min.'], ['13:00', 'Odplutí ze Sanuru', 'Rychloloď Starfish míří na Lombok.'], ['@W', 'Wallaceova linie', 'Plaveš přes ni mezi Bali a Lombokem.'], ['15:00', 'Přistání na Lomboku', 'Pokračujeme skútry do hotelu v západní a severní části ostrova.']],
-            tips: [['🧬 Wallaceova linie', 'Mezi Bali a Lombokem vede nejznámější hranice mezi asijskou a australskou přírodou. Na Bali žijí druhy z Asie, na Lomboku už převažují ty z australské oblasti. Přes tu hranici zrovna plaveš.'], ['🤢 Mořská nemoc', 'Lombocký průliv je hluboký a proudy tu bývají silné, takže loď může houpat. Kdo to nesnáší, ať si vezme tabletku dopředu a sedne doprostřed lodi.'], ['✈️ Alternativa', 'Místo lodi jde i let TransNusa: odlet ve 12:40 z Denpasaru, přílet ve 13:20 na Lombok, cena 2 240 Kč na osobu (4 480 Kč na pár).']]
+            tips: [['🧬 Wallaceova linie', 'Mezi Bali a Lombokem vede nejznámější hranice mezi asijskou a australskou přírodou. Na Bali žijí druhy z Asie, na Lomboku už převažují ty z australské oblasti. Přes tu hranici zrovna plaveš.'], ['🤢 Mořská nemoc', 'Lombocký průliv je hluboký a proudy tu bývají silné, takže loď může houpat. Kdo to nesnáší, ať si vezme tabletku dopředu a sedne doprostřed lodi.']]
         });
     }
 
@@ -18764,7 +18809,7 @@ body.pres-on #statsFoot { display: none !important; }
             '<div class="bp-route"><div class="bp-city"><span class="c">DPS</span><span class="n">Denpasar, Bali</span><span class="tm">11:15</span></div>' +
             '<div class="bp-mid"><div class="ln"></div><span>2 h 55 min · přímý let</span></div>' +
             '<div class="bp-city r"><span class="c">SIN</span><span class="n">Singapur Changi</span><span class="tm">14:10</span></div></div>' +
-            '<div class="bp-meta"><div><span>Let</span><b>TR281</b></div><div><span>Datum</span><b>út 24. 8. 2027</b></div><div><span>Snídaně a check-out</span><b>08:30</b></div><div><span>Odjezd na letiště</span><b>09:00 (10 min)</b></div></div></div>' +
+            '<div class="bp-meta" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div><span>Let</span><b>TR281</b></div><div><span>Datum</span><b>út 24. 8. 2027</b></div></div></div>' +
             '<div class="bp-stub"><span class="fn">TR281</span><span class="dt">24 SRP · 11:15</span><div class="bp-bar" aria-hidden="true"></div></div></div>' +
             '<div class="jr-wrap"><div class="jr-total"><div><span>Celá cesta domů od odletu z Bali</span><br><b>' + dur(total) + '</b></div><span>' + (f.name || '') + ' · přistání v Praze ' + (f.retArr || '') + '</span></div><div class="jr">' +
             blocks.map(function (b) { return '<div class="jr-b ' + b.k + '" style="--m:' + Math.max(b.min, 120) + '"><span class="jr-i" aria-hidden="true">' + b.i + '</span><span class="jr-t">' + b.t + '</span><span class="jr-s">' + b.s + '</span><span class="jr-d">' + dur(b.min) + '</span></div>'; }).join('') + '</div>' +
@@ -18847,7 +18892,7 @@ body.pres-on #statsFoot { display: none !important; }
         var arr0 = TXARR, dly = txState.delay || 0, arr = arr0 + dly, A = txPlanA(arr, F.gate), B = txPlanB(arr, F.gate), L = F.dep - arr0, hub = TXGEN[F.hub] || F.hub;
         var rec = A.status === 'ok' ? 'A' : 'B'; if (!txState.plan) txState.plan = rec;
         /* nadpisy a seznamy v původní sekci */
-        var title = $('txTitle'); if (title) title.textContent = 'Singapur Tranzit: ' + txDur(L) + ' (' + txHM(arr0) + ' – ' + txHM(F.dep) + ')' + (dly ? ' · zpoždění +' + dly + ' min' : '');
+        var title = $('txTitle'); if (title) title.textContent = 'Singapur Tranzit: harmonogram' + (dly ? ' · zpoždění +' + dly + ' min' : '');
         var sub = document.querySelector('#f-leg-tranzit > .lux-fold-h .lux-fold-s'); if (sub) sub.textContent = 'tranzit ' + txHM(arr0) + ' – ' + txHM(F.dep) + (F.dep >= 1440 ? ' (+1)' : '');
         var la = $('txListA'), lb = $('txListB'); if (la) la.innerHTML = txListHtml(A, F); if (lb) lb.innerHTML = txListHtml(B, F);
         var hs = document.querySelectorAll('#singaporeAccContent .day-block-singapore > h4'); [].forEach.call(hs, function (h, i) {
@@ -18928,11 +18973,7 @@ body.pres-on #statsFoot { display: none !important; }
             '<li><span>🛬</span><div><b>Do Singapuru ' + (f.outArr || '') + '.</b> ' + lateTxt + ' SG Arrival Card vyplň 1–3 dny předem <a href="#ukolyTerminy">úkoly a termíny</a>.</div></li>' +
             '<li><span>⏳</span><div><b>Tranzit na zpáteční cestě: ' + txDur(cur.L) + '</b> (14:10 až ' + txHM(cur.F.dep) + ', brána ' + txHM(cur.F.gate) + '). ' + planTxt + ' <a href="#f-leg-tranzit">Otevřít tranzit</a></div></li>' +
             '<li><span>🏠</span><div><b>Do Prahy ' + (f.retArr || '') + '.</b> Celá cesta domů z Bali trvá ' + txDur(cur.home) + '. Domluv si na ten čas odvoz z letiště a hlídej, jestli ti vyhovuje příchod v takovou hodinu.</div></li></ul>';
-        var keys = Object.keys(flightOptions), rows = keys.map(function (k) {
-            var I = aiInfo(k); return '<tr class="' + (k === currentAirline ? 'is-cur' : '') + '"><td>' + I.f.name.replace(/\s*\(.*$/, '') + '</td><td>' + I.f.pricePerson.toLocaleString('cs-CZ') + ' Kč</td><td>' + txDur(I.outMin) + '</td><td>' + I.f.outArr.replace(/\s*\(.*$/, '') + '</td><td>' + txDur(I.L) + '</td><td>' + (I.F.dep >= 1440 ? txHM(I.F.dep) + ' (+1)' : txHM(I.F.dep)) + '</td><td>' + I.f.retArr.replace(/\s*\(.*$/, '') + '</td><td>Plán ' + I.rec + '</td></tr>';
-        }).join('');
-        host.innerHTML = '<div class="ai-h"><b>✈️ Co to znamená pro tebe: ' + f.name + '</b><span>' + (prev ? 'změna oproti předchozí volbě: ' + prev.f.name.replace(/\s*\(.*$/, '') : 'přehled zvolené varianty letu') + '</span></div>' + chg + doHtml +
-            '<div class="ai-wrap"><table class="ai-tbl"><thead><tr><th>Aerolinka</th><th>Cena / os.</th><th>Cesta tam</th><th>Přílet do SIN</th><th>Tranzit SIN</th><th>Odlet ze SIN</th><th>Přílet do PRG</th><th>Tranzit</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+        host.innerHTML = '<div class="ai-h"><b>✈️ Co to znamená pro tebe: ' + f.name + '</b><span>' + (prev ? 'změna oproti předchozí volbě: ' + prev.f.name.replace(/\s*\(.*$/, '') : 'přehled zvolené varianty letu') + '</span></div>' + chg + doHtml;
     }
     (function wrapAirline2() {
         if (typeof window.setFlightAirline === 'function' && !window.setFlightAirline.__ai) {
@@ -18980,11 +19021,11 @@ body.pres-on #statsFoot { display: none !important; }
     /* ---------- etapy v kostce: termín, hotel, vzdálenost, program po dnech ---------- */
     var STAGE = { 'f-leg-sg': ['singapore', 'Singapur'], 'f-leg-uluwatu': ['uluwatu', 'Uluwatu'], 'f-leg-ubud': ['ubud', 'Ubud'], 'f-leg-lombok-sever': ['lombokNorth', 'sever Lomboku'], 'f-leg-kuta': ['lombokSouth', 'Kuta Lombok'] };
     var STIPS = {
-        'f-leg-sg': [['💳', 'Čím platit', 'MHD, Grab a restaurace v obchoďácích se platí kartou. Hawkery a stánky ne, na ty je potřeba hotovost.'], ['🚭', 'Přísné zákazy', 'V Singapuru neber žvýkačky, e-cigarety ani vapy. Pokuty jsou vysoké.'], ['📱', 'Papíry před příletem', 'SG Arrival Card se vyplňuje 1–3 dny před příletem a je zdarma.']],
+        'f-leg-sg': [],
         'f-leg-uluwatu': [['🐒', 'Opice u chrámu', 'U chrámu Uluwatu si schovej brýle, čepici a mobil. Opice je rády ukradnou. (tip)'], ['🎭', 'Kecak Dance', 'Představení bývá při západu slunce, takže si vyhraď dost času a zajisti místa dřív. (tip)'], ['🌊', 'Pláž Suluban', 'Dá se k ní dojít skrz jeskyně, nejlépe při odlivu. Podívej se na předpověď přílivu. (tip)']],
         'f-leg-ubud': [['🐒', 'Opičí prales', 'Do lesa neber jídlo ani volné věci, opice si je umějí vzít. (tip)'], ['🌾', 'Terasy a vodopády', 'Na rýžové terasy a vodopády jeď dopoledne, bývá tam méně lidí. (tip)'], ['🛕', 'Chrámy', 'Do chrámů se chodí v sarongu. Na místě se obvykle půjčují. (tip)']],
-        'f-leg-lombok-sever': [['🚤', 'Plavba na Gili', 'Soukromá loď se skleněným dnem vychází asi na <span data-fx="IDR" data-amt="1000000" data-round="50">1 200</span> Kč za celou skupinu (cca 1 000 000 IDR).'], ['🌋', 'Vodopády pod Rinjani', 'Obuj pevné boty, k vodopádům se chodí po kamenech a schodech. (tip)'], ['🐒', 'Opičí les Pusuk', 'Jídlo nech v batohu, opice u silnice rády žebrají. (tip)']],
-        'f-leg-kuta': [['🏎️', 'Okruh Mandalika', 'Před návštěvou ověř, jestli se na okruhu zrovna nekoná akce, která by omezila vstup. (tip)'], ['🌊', 'Pláže a vlny', 'Plavej jen v zátokách, které vypadají klidně, a hlídej proudy. Divoké útesy Mawi jsou spíš na koukání. (tip)'], ['🚤', 'Poslední den', 'Přesun do přístavu na severu je dlouhý, vyraž s rezervou před odplutím v 13:30. (tip)']]
+        'f-leg-lombok-sever': [['🌋', 'Vodopády pod Rinjani', 'Obuj pevné boty, k vodopádům se chodí po kamenech a schodech. (tip)'], ['🐒', 'Opičí les Pusuk', 'Jídlo nech v batohu, opice u silnice rády žebrají. (tip)']],
+        'f-leg-kuta': [['🏎️', 'Okruh Mandalika', 'Před návštěvou ověř, jestli se na okruhu zrovna nekoná akce, která by omezila vstup. (tip)'], ['🌊', 'Pláže a vlny', 'Plavej jen v zátokách, které vypadají klidně, a hlídej proudy. Divoké útesy Mawi jsou spíš na koukání. (tip)']]
     };
     function stHav(a, b) { var rad = Math.PI / 180, dl = (b[0] - a[0]) * rad, dg = (b[1] - a[1]) * rad, x = Math.sin(dl / 2) * Math.sin(dl / 2) + Math.cos(a[0] * rad) * Math.cos(b[0] * rad) * Math.sin(dg / 2) * Math.sin(dg / 2); return 2 * 6371 * Math.asin(Math.sqrt(x)); }
     function stHotel(key) { try { var o = hotelCatalog[key].options[selectedHotels[key]]; return o ? { v: selectedHotels[key], name: o.name, price: o.price, coords: o.coords } : null; } catch (e) { return null; } }
@@ -19005,13 +19046,15 @@ body.pres-on #statsFoot { display: none !important; }
             return '<li><time>' + (d ? d.getDate() + '. ' + (d.getMonth() + 1) + '.' : n + '. den') + '</time><b>' + txt + '</b></li>';
         }).join('');
         var tips = (STIPS[fid] || []).map(function (q) { return '<div class="fl-tip"><b>' + q[0] + ' ' + q[1] + '</b>' + q[2] + '</div>'; }).join('');
-        host.innerHTML = '<div class="fl-read" style="grid-template-columns:repeat(4,minmax(0,1fr))">' +
-            '<div><span class="fl-k">Termín</span><span class="fl-v" style="font-size:1.05rem">' + (dm ? dm[1] + '.–' + dm[2] + '. ' + dm[3] + '.' : sub) + '</span><span class="fl-s">' + nights + (nights === 1 ? ' noc' : nights < 5 ? ' noci' : ' nocí') + ' · ' + cfg[1] + '</span></div>' +
-            '<div class="st-hotel"><span class="fl-k">Vybraný hotel</span><span class="fl-v" style="font-size:.98rem;line-height:1.25">' + (h ? h.name : '–') + '</span><span class="fl-s">' + (h ? h.price.toLocaleString('cs-CZ') + ' Kč / pokoj · ' + Math.round(h.price / 2).toLocaleString('cs-CZ') + ' Kč / os.' : '') + '</span></div>' +
-            '<div><span class="fl-k">Přesun sem</span><span class="fl-v" style="font-size:1.05rem">' + (km !== null ? 'cca ' + km + ' km' : '–') + '</span><span class="fl-s">' + (km !== null ? 'vzdušnou čarou z ' + fromName : '') + '</span></div>' +
-            '<div><span class="fl-k">Program</span><span class="fl-v" style="font-size:1.05rem">' + days.length + (days.length === 1 ? ' den' : days.length < 5 ? ' dny' : ' dní') + '</span><span class="fl-s">podrobně v rozbalovacích sekcích níže</span></div></div>' +
-            (items ? '<h4 class="fl-h">Program po dnech</h4><ol class="st-days">' + items + '</ol>' : '') +
-            '<h4 class="fl-h">Co mít na paměti</h4><div class="fl-tips">' + tips + '</div>';
+        host.innerHTML = (km !== null ? '<p class="st-move">📍 <b>Přesun sem:</b> cca ' + km + ' km vzdušnou čarou z ' + fromName + '.</p>' : '') +
+            (tips ? '<h4 class="fl-h">Co mít na paměti</h4><div class="fl-tips">' + tips + '</div>' : '');
+        host.style.display = host.innerHTML.trim() ? '' : 'none';
+        /* datum přímo u dnů programu (dřív to byl samostatný seznam, který opakoval stejné nadpisy) */
+        days.forEach(function (x) {
+            if (x.getAttribute('data-dated')) return; var n = +(/(\d)\.\s*(?:DEN|VEČER)/.exec(x.textContent) || [0, 1])[1];
+            if (!start) return; var d = new Date(start.getFullYear(), start.getMonth(), start.getDate() + n - 1);
+            var b = document.createElement('span'); b.className = 'st-date'; b.textContent = d.getDate() + '. ' + (d.getMonth() + 1) + '. '; x.insertBefore(b, x.firstChild); x.setAttribute('data-dated', '1');
+        });
         fxTexts();
     }
     function renderStages() {
@@ -19142,6 +19185,64 @@ function luxQRSvg(text, px) {
     }
     placeStats(); window.addEventListener('resize', placeStats);
 
+
+    /* ---------- jednoduchá stránka: jen to nejdůležitější, poskládané ze živých údajů ---------- */
+    function spEsc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    function spBuild() {
+        var f; try { f = flightOptions[currentAirline]; } catch (e) { f = null; }
+        function txt(id) { var e = $(id); return e ? e.textContent.trim().replace(/\u00a0/g, ' ') : '–'; }
+        function hotel(key) { var h = stHotel(key); return h ? spEsc(h.name) + ' <small>(' + h.price.toLocaleString('cs-CZ') + ' Kč / pokoj)</small>' : '–'; }
+        var left = Math.max(0, Math.ceil((new Date(2027, 7, 6, 19, 30) - new Date()) / 86400000));
+        var cash = ''; try { cash = document.querySelector('#f-hotovost .lux-fold-meta').textContent.trim(); } catch (e) {}
+        var row = function (d, title, det, mv) { return '<li' + (mv ? ' class="mv"' : '') + '><time>' + d + '</time><div><b>' + title + '</b>' + (det ? '<span>' + det + '</span>' : '') + '</div></li>'; };
+        var tl = '';
+        if (f) tl += row('6.–7. 8.', '✈️ Praha → Singapur', spEsc(f.name) + '. Odlet ' + spEsc(f.outDate || '') + ' v ' + spEsc(f.outDep) + ', přílet ' + spEsc(f.outArr) + '. Přestup: ' + spEsc(f.outLayover || ''), true);
+        tl += row('7.–9. 8.', '🇸🇬 Singapur · 2 noci', hotel('singapore'));
+        tl += row('9. 8.', '✈️ Singapur → Bali', 'Scoot TR288, 10:15–13:05, stejné časové pásmo. Na letišti převezmeme skútry.', true);
+        tl += row('9.–11. 8.', '🌊 Uluwatu · 2 noci', hotel('uluwatu'));
+        tl += row('11.–15. 8.', '🌿 Ubud · 4 noci', hotel('ubud'));
+        tl += row('15. 8.', '🚤 Bali → Lombok', 'Rychlolod Starfish: 13:00 ze Sanuru, 15:00 v přístavu Bangsal.', true);
+        tl += row('15.–19. 8.', '🏝️ Lombok sever · 4 noci', hotel('lombokNorth'));
+        tl += row('19.–23. 8.', '🌴 Kuta Lombok · 4 noci', hotel('lombokSouth'));
+        tl += row('23. 8.', '🚤 Lombok → Bali', 'Loď Wahana Virendra: 13:30 odplutí, 17:00 příjezd do Sanuru.', true);
+        tl += row('23.–24. 8.', '🌅 Bali u letiště · 1 noc', hotel('kutaLast'));
+        if (f) {
+            var F = txFlight(), L = F ? F.dep - TXARR : 0;
+            tl += row('24. 8.', '✈️ Bali → Singapur → domů', 'Scoot TR281 11:15–14:10. Tranzit v Singapuru ' + txDur(L) + ' (do ' + txHM(F.dep) + (F.dep >= 1440 ? ', následující den' : '') + '), brána 2 h před odletem.', true);
+            tl += row('25. 8.', '🏠 Přílet do Prahy', spEsc(f.retArr) + ' · celá cesta domů ' + txDur(aiInfo(currentAirline).home), true);
+        }
+        var done = tkDone(), tasks = TASKS.filter(function (x) { return !done[x.id] && dayDiff(x.end || x.d) >= 0; }).sort(function (a, b) { return a.d < b.d ? -1 : 1; }).slice(0, 6).map(function (x) {
+            var d = new Date(x.d + 'T00:00:00'); return '<li><time>' + (x.show ? x.show[0] : d.getDate() + '. ' + (d.getMonth() + 1) + '.') + '</time><div><b>' + spEsc(x.title) + '</b><small>' + leftTxt(dayDiff(x.end || x.d)) + '</small></div></li>';
+        }).join('');
+        return '<div class="sp-top"><b>Singapur · Bali · Lombok 2027</b><button type="button" class="sp-btn2 primary" data-sp="close">← Celá stránka</button></div>' +
+            '<div class="sp-wrap"><div><h1>Naše cesta v kostce</h1><p class="sp-sub">6.–25. srpna 2027 · 20 dní · Singapur, Bali a Lombok' + (left ? ' · do odletu zbývá ' + left + ' dní' : '') + '</p></div>' +
+            '<section><h2>💰 Cena na osobu</h2><div class="sp-price"><div><small>1 osoba · vše</small><b>' + txt('floatPricePerson') + '</b></div><div><small>Pár · vše</small><b>' + txt('floatPriceFamily') + '</b></div><div><small>Sólo · vše</small><b>' + txt('floatPriceSingle') + '</b></div></div>' +
+            '<p class="sp-note">' + txt('floatBasePerson') + ' (bez jídla a aktivit). Cena se mění podle zvolených letů a hotelů.' + (cash ? ' Hotovost k nákupu doma: <b>' + spEsc(cash) + '</b> na osobu.' : '') + '</p></section>' +
+            '<section><h2>🗺️ Trasa a ubytování</h2><ul class="sp-tl">' + tl + '</ul></section>' +
+            '<section><h2>✅ V ceně a navíc</h2><div class="sp-inex"><div><h3>V základní ceně</h3><ul><li>Letenky Praha ⇄ Singapur a Singapur ⇄ Bali</li><li>Loď Bali ⇄ Lombok</li><li>17 nocí ubytování se snídaní</li><li>Skútry, benzín a mýto</li><li>Indonéské vízum a turistická daň</li><li>eSIM a parkování v Praze</li></ul></div><div><h3>Navíc (platí se zvlášť)</h3><ul><li>Jídlo a pití</li><li>Výlety, vstupy a aktivity</li><li>Jízdné v Singapuru</li><li>Taxi a drobné výdaje</li><li>Suvenýry</li><li>Poslední hotel (platba na místě)</li></ul></div></div></section>' +
+            '<section><h2>⏳ Co nás čeká v nejbližší době</h2>' + (tasks ? '<ul class="sp-tasks">' + tasks + '</ul>' : '<p class="sp-note">Všechny úkoly jsou splněné 🎉</p>') + '</section>' +
+            '<div class="sp-actions"><button type="button" class="sp-btn2 primary" data-sp="close">← Celá stránka</button><button type="button" class="sp-btn2" data-sp="present">🎞️ Prezentace</button><button type="button" class="sp-btn2" data-sp="link">🔗 Zkopírovat odkaz</button><button type="button" class="sp-btn2" data-sp="print">🖨️ Vytisknout</button></div>' +
+            '<p class="sp-foot">Jednoduchý přehled. Všechny podrobnosti jsou na celé stránce. Verze ' + LUX_VERSION + '</p></div>';
+    }
+    window.luxSimple = function (on) {
+        var el = $('simplePage'); if (!el) { el = document.createElement('div'); el.id = 'simplePage'; el.setAttribute('role', 'document'); el.setAttribute('aria-label', 'Jednoduchá stránka s tím nejdůležitějším'); document.body.appendChild(el);
+            el.addEventListener('click', function (e) {
+                var b = e.target.closest && e.target.closest('[data-sp]'); if (!b) return; var k = b.getAttribute('data-sp');
+                if (k === 'close') window.luxSimple(false); else if (k === 'print') window.print();
+                else if (k === 'present') { window.luxSimple(false); setTimeout(function () { window.luxPresent(); }, 80); }
+                else if (k === 'link') { var u = window.luxVariantUrl(); u += (u.indexOf('?') > -1 ? '&' : '?') + 'jednoduse'; copyText(u).then(function (ok) { toast(ok ? '🔗 Odkaz na jednoduchou stránku je zkopírovaný' : 'Odkaz se nepodařilo zkopírovat'); }); }
+            });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && el.classList.contains('is-open') && !pres.on) window.luxSimple(false); });
+        }
+        var v = typeof on === 'boolean' ? on : !el.classList.contains('is-open');
+        if (v) { try { el.innerHTML = spBuild(); } catch (err) { el.innerHTML = '<div class="sp-wrap"><h1>Jednoduchá stránka se nepodařila sestavit</h1><button type="button" class="sp-btn2 primary" data-sp="close">← Celá stránka</button></div>'; try { console.error(err); } catch (e) {} } el.scrollTop = 0; }
+        el.classList.toggle('is-open', v); document.body.classList.toggle('simple-on', v);
+        if (v) { if (typeof window.toggleMenuModal === 'function' && $('menuModalOverlay') && $('menuModalOverlay').classList.contains('open')) window.toggleMenuModal(); var h = el.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
+    };
+    function addSimpleButtons() {
+        var hi = document.querySelector('.hero-inner'); if (hi && !$('heroSimpleBtn')) { var b = document.createElement('button'); b.type = 'button'; b.id = 'heroSimpleBtn'; b.className = 'hero-simple-btn'; b.textContent = '📄 Jednoduchá stránka: jen to nejdůležitější'; b.addEventListener('click', function () { window.luxSimple(true); }); hi.appendChild(b); }
+    }
+
     /* ---------- skupina „Nástroje“ v menu ---------- */
     function addTools() {
         var nav = $('bottomNav'); if (!nav || $('menuToolShare')) return;
@@ -19151,6 +19252,7 @@ function luxQRSvg(text, px) {
             b.innerHTML = '<span class="icon">' + ic + '</span><span>' + txt + '</span>'; b.addEventListener('click', fn); return b;
         }
         nav.appendChild(g);
+        nav.appendChild(item('menuToolSimple', '📄', 'Jednoduchá stránka (jen to hlavní)', function () { window.luxSimple(true); }));
         nav.appendChild(item('menuToolShare', '🔗', 'Zkopírovat odkaz na moji variantu', window.luxCopyVariantLink));
         nav.appendChild(item('menuToolOffline', '📴', 'Uložit pro offline', window.luxOffline));
         nav.appendChild(item('menuToolPresent', '🎞️', 'Režim prezentace', function () { window.luxPresent(); }));
@@ -19179,7 +19281,7 @@ function luxQRSvg(text, px) {
     }, true);
 
     function start() {
-        place(); sync(); addTools(); initParts(); renderTasks(); initFlightDeck(); initVoyages(); renderHomeDeck(); renderTransit(); renderImpact(null, 0); renderStages(); initSpeech(); fxTexts(); if (window.TRIP && TRIP.onChange) TRIP.onChange(fxTexts); setTimeout(fxTexts, 2500); setTimeout(fxTexts, 8000); imgScan(); setTimeout(imgScan, 3000);
+        place(); sync(); addTools(); initParts(); renderTasks(); initFlightDeck(); initVoyages(); renderHomeDeck(); renderTransit(); renderImpact(null, 0); renderStages(); initSpeech(); addSimpleButtons(); if (window.__wantSimple) setTimeout(function () { window.luxSimple(true); }, 900); fxTexts(); if (window.TRIP && TRIP.onChange) TRIP.onChange(fxTexts); setTimeout(fxTexts, 2500); setTimeout(fxTexts, 8000); imgScan(); setTimeout(imgScan, 3000);
         if (/[?&]prezentace\b/.test(location.search)) setTimeout(function () { window.luxPresent(); }, 700);
         var card = document.querySelector('.lux-progress');
         if (card && window.MutationObserver) new MutationObserver(req).observe(card, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['style', 'class'] });
