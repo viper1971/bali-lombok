@@ -5140,10 +5140,7 @@ window.getDepartureDate = function () {
                 // při načtení je vše sbalené (odkaz s #kotvou rozbalí jen svůj cíl)
                 [].forEach.call(folds, function (f) { setState(f, false, true); });
                 try { localStorage.removeItem(KEY); } catch (e) {}
-                if (location.hash) {
-                    var t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
-                    if (t) goTo(t);
-                }
+                /* vše zavřené: kotva v adrese po načtení nic neotevírá */
                 syncMeta();
                 setTimeout(syncMeta, 800);
                 setTimeout(syncMeta, 2500);
@@ -6010,7 +6007,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
         </div>
         <nav class="menu-grid" id="bottomNav">
             <a href="#hero" class="nav-item active" onclick="toggleMenuModal()"><span class="icon">🏠</span><span>Domů &amp; Mapa letů</span></a>
-            <a href="#cast-lety" class="nav-item" onclick="toggleMenuModal()"><span class="icon">✈️</span><span>Výběr letenek</span></a>
+            <a href="#f-lety" class="nav-item" onclick="toggleMenuModal()"><span class="icon">✈️</span><span>Výběr letenek</span></a>
             <div class="nav-group-title">I · Před odletem</div>
             <a href="#viza" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛂</span><span>Víza &amp; Portály</span></a>
             <a href="#bezpecnost" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛡️</span><span>SOS &amp; Zdraví</span></a>
@@ -6031,7 +6028,6 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
             <a href="#singapore-layover-program" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛄</span><span>7. Tranzit Singapur</span></a>
             <div class="nav-group-title">III · Konfigurátor cesty &amp; rozpočet</div>
             <a href="#rozpocet" class="nav-item" onclick="toggleMenuModal()"><span class="icon">💰</span><span>Konfigurátor rozpočtu</span></a>
-            <a href="#noclehyCard" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛏️</span><span>Noclehy (19 nocí)</span></a>
             <a href="#jidlo" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🍜</span><span>Jídlo</span></a>
             <a href="#aktivity" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🎟️</span><span>Vstupné a aktivity</span></a>
             <a href="#hotovost" class="nav-item" onclick="toggleMenuModal()"><span class="icon">💵</span><span>Plán hotovosti</span></a>
@@ -6076,7 +6072,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 12:12</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 12:17</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -6119,10 +6115,16 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 </div>
 </div>
 
-<section id="cast-lety" aria-labelledby="cast-lety-h" style="margin: 0 0 28px;">
-<div class="bento-card highlight full">
-    <h2 class="x-a141b9" id="cast-lety-h" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3); display: flex;">✈️ Výběr letenek</h2>
-    <p style="font-size: 0.95rem; margin-bottom: 12px; color: var(--text-muted);">Vyber si variantu dálkového letu Praha ⇄ Singapur. Podle ní se přepočítá celá stránka: itinerář, mapa trasy, boarding passy, přestupy i cena.</p>
+<div class="lux-part-body" style="margin: 0 0 24px;">
+<section class="lux-fold " id="f-lety" data-nocount>
+    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-lety-b" onclick="luxToggle('f-lety')">
+        <span class="lux-fold-node" aria-hidden="true">✈️</span>
+        <span class="lux-fold-txt"><span class="lux-fold-t">Výběr letenek</span><span class="lux-fold-s">Dálkový let Praha ⇄ Singapur a srovnání aerolinek</span></span>
+        <span class="lux-fold-meta"></span>
+        <span class="lux-fold-chev" aria-hidden="true">▾</span>
+    </button></h3>
+    <div class="lux-fold-body" id="f-lety-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+<p style="font-size: 0.95rem; margin-bottom: 12px; color: var(--text-muted);">Vyber si variantu dálkového letu Praha ⇄ Singapur. Podle ní se přepočítá celá stránka: itinerář, mapa trasy, boarding passy, přestupy i cena.</p>
                 <!-- 1. KROK: PŘEPÍNAČ 5 DETAILNÍCH VARIANT DÁLKOVÉHO LETU -->
                 <div class="x-mb-16">
                     <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 6px; color: var(--primary-light);">
@@ -6447,8 +6449,9 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 </div>
 
 
-</div>
+    </div></div></div>
 </section>
+</div>
 
 <section class="lux-part" id="cast-priprava" aria-labelledby="cast-priprava-h">
     <header class="lux-part-head">
@@ -11251,7 +11254,7 @@ function updatePackingWeight() {
 <section class="lux-fold " id="f-konfig">
     <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-konfig-b" onclick="luxToggle('f-konfig')">
         <span class="lux-fold-node" aria-hidden="true">💰</span>
-        <span class="lux-fold-txt"><span class="lux-fold-t">Konfigurátor expedice</span><span class="lux-fold-s">Hotely, souhrn cen a přehled nocí</span></span>
+        <span class="lux-fold-txt"><span class="lux-fold-t">Konfigurátor expedice</span><span class="lux-fold-s">Hotely a souhrn cen</span></span>
         <span class="lux-fold-meta"></span>
         <span class="lux-fold-chev" aria-hidden="true">▾</span>
     </button></h3>
@@ -11412,7 +11415,7 @@ function updatePackingWeight() {
 </div>
 
 
-<div class="to-nights" id="noclehyCard" style="margin: 32px 0 28px;"><div class="to-head"><b>19 nocí</b><span>Kde se spí a jak dlouho</span></div><div id="nightsBar"></div></div>
+
 
     </div></div></div>
 </section>
@@ -15976,7 +15979,7 @@ function recalculateAll() {
     var MAP = {
         'f-konfig': 'sliders', 'f-srovnani': 'scale', 'f-rozpis': 'receipt', 'f-jidlo': 'receipt', 'f-aktivity': 'palm', 'f-hotovost': 'wallet', 'f-karta-mhd': 'card',
         'f-viza': 'passport', 'f-sos': 'sos', 'f-esim': 'sim', 'f-apps': 'apps', 'f-live': 'live', 'f-baleni': 'backpack',
-        'f-leg-liberec': 'bus', 'f-leg-odlet': 'plane', 'f-leg-odlet-sin': 'plane', 'f-leg-domu': 'bus', 'f-leg-sg': 'city', 'f-leg-sgdps': 'plane', 'f-leg-uluwatu': 'cliff', 'f-leg-ubud': 'leaf',
+        'f-leg-liberec': 'bus', 'f-leg-odlet': 'plane', 'f-leg-odlet-sin': 'plane', 'f-leg-domu': 'bus', 'f-lety': 'plane', 'f-lety': 'plane', 'f-leg-sg': 'city', 'f-leg-sgdps': 'plane', 'f-leg-uluwatu': 'cliff', 'f-leg-ubud': 'leaf',
         'f-leg-presun4': 'ship', 'f-leg-lombok-sever': 'mountain', 'f-leg-kuta': 'palm', 'f-leg-back': 'ship',
         'f-leg-rozlucka': 'sunset', 'f-leg-tranzit': 'transit', 'f-slovnicek': 'book', 'f-checklist': 'checklist'
     };
@@ -16308,7 +16311,7 @@ function recalculateAll() {
             }
         });
         var main = info.main && $(info.main.id);
-        if (main && !location.hash && !main.classList.contains('is-open') && typeof window.luxToggle === 'function') window.luxToggle(main.id);
+        /* dnešní etapa se sama neotevírá: vše zavřené */
     }
 
     /* ---------- počítadlo zabalených věcí ---------- */
@@ -17006,7 +17009,7 @@ function recalculateAll() {
 
     // spouští se hned (DOM nad skriptem je hotový), aby kotvy existovaly dřív než se zpracuje #odkaz
     shareInit();
-    document.addEventListener('DOMContentLoaded', function () { icsInit(); shareInit(); setTimeout(function () { openHashTarget(initialHash); }, 50); });
+    document.addEventListener('DOMContentLoaded', function () { icsInit(); shareInit(); /* kotva z adresy po načtení nic neotevírá */ });
     window.addEventListener('hashchange', function () { setTimeout(function () { openHashTarget(location.hash); }, 50); });
     window.addEventListener('load', function () { (window.requestIdleCallback || setTimeout)(fxInit); });
 })();
@@ -18156,13 +18159,7 @@ body.simple-on { overflow: hidden; }
             h.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
             var f = partFolds(p); window.luxPartCount(p.id, f.filter(function (x) { return x.classList.contains('is-read'); }).length, f.length);
         });
-        /* po načtení: otevřená je část s otevřenou sekcí / cílem odkazu, jinak naposledy otevřená, jinak první */
-        if (!document.querySelector('.lux-part.is-open')) {
-            var h = location.hash && location.hash.length > 1 ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null, saved = null;
-            try { saved = localStorage.getItem(PKEY); } catch (e) {}
-            if (h && h.closest && h.closest('.lux-part')) openPart(h.closest('.lux-part'), false);
-            else openPart(document.getElementById(saved) || document.getElementById('cast-priprava') || allParts()[0], false);
-        }
+        /* vše zavřené: po načtení se žádná část ani sekce sama neotevírá */
     }
 
 
@@ -19273,7 +19270,7 @@ function luxQRSvg(text, px) {
 }
 
 /* trip-folds */
-#f-leg-odlet > .lux-fold-h > .lux-fold-btn::before, #f-leg-odlet-sin > .lux-fold-h > .lux-fold-btn::before { background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 100' preserveAspectRatio='xMaxYMid slice'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%231e3a8a'/%3E%3Cstop offset='1' stop-color='%2393c5fd'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='360' height='100' fill='url(%23g)'/%3E%3Ccircle cx='318' cy='66' r='13' fill='%23fef3c7'/%3E%3Cg transform='translate(170 30) scale(1.1)' fill='%23fff' opacity='.85'%3E%3Cellipse rx='16' ry='6'/%3E%3Cellipse cx='-9' cy='-4' rx='9' ry='7'/%3E%3Cellipse cx='5' cy='-6' rx='11' ry='8'/%3E%3C/g%3E%3Cpath d='M110 72Q170 62 230 46' stroke='%23fff' stroke-width='2' stroke-dasharray='2 6' stroke-linecap='round' fill='none' opacity='.7'/%3E%3Cg transform='translate(250 40) rotate(-14) scale(1.3)' fill='%23fff'%3E%3Cpath d='M-22 0Q-18-3.5 0-3.5L18-2.5Q26 0 18 2.5L0 3.5Q-18 3.5-22 0Z'/%3E%3Cpath d='M-3-2L-13-19-8-19 9-2Z'/%3E%3Cpath d='M-3 2L-13 19-8 19 9 2Z'/%3E%3Cpath d='M-19-1.5L-24-8-20-8-14-1.5Z'/%3E%3Cpath d='M-19 1.5L-24 8-20 8-14 1.5Z'/%3E%3C/g%3E%3C/svg%3E"); }
+#f-leg-odlet > .lux-fold-h > .lux-fold-btn::before, #f-leg-odlet-sin > .lux-fold-h > .lux-fold-btn::before, #f-lety > .lux-fold-h > .lux-fold-btn::before { background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 100' preserveAspectRatio='xMaxYMid slice'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%231e3a8a'/%3E%3Cstop offset='1' stop-color='%2393c5fd'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='360' height='100' fill='url(%23g)'/%3E%3Ccircle cx='318' cy='66' r='13' fill='%23fef3c7'/%3E%3Cg transform='translate(170 30) scale(1.1)' fill='%23fff' opacity='.85'%3E%3Cellipse rx='16' ry='6'/%3E%3Cellipse cx='-9' cy='-4' rx='9' ry='7'/%3E%3Cellipse cx='5' cy='-6' rx='11' ry='8'/%3E%3C/g%3E%3Cpath d='M110 72Q170 62 230 46' stroke='%23fff' stroke-width='2' stroke-dasharray='2 6' stroke-linecap='round' fill='none' opacity='.7'/%3E%3Cg transform='translate(250 40) rotate(-14) scale(1.3)' fill='%23fff'%3E%3Cpath d='M-22 0Q-18-3.5 0-3.5L18-2.5Q26 0 18 2.5L0 3.5Q-18 3.5-22 0Z'/%3E%3Cpath d='M-3-2L-13-19-8-19 9-2Z'/%3E%3Cpath d='M-3 2L-13 19-8 19 9 2Z'/%3E%3Cpath d='M-19-1.5L-24-8-20-8-14-1.5Z'/%3E%3Cpath d='M-19 1.5L-24 8-20 8-14 1.5Z'/%3E%3C/g%3E%3C/svg%3E"); }
 #f-leg-liberec > .lux-fold-h > .lux-fold-btn::before, #f-leg-domu > .lux-fold-h > .lux-fold-btn::before { background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 100' preserveAspectRatio='xMaxYMid slice'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23334155'/%3E%3Cstop offset='1' stop-color='%23fdba74'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='360' height='100' fill='url(%23g)'/%3E%3Ccircle cx='300' cy='60' r='14' fill='%23fef3c7'/%3E%3Cpath d='M0 74Q60 50 120 66T240 60T360 62V100H0Z' fill='%231f4d3a'/%3E%3Cpath d='M0 86Q90 74 180 84T360 80V100H0Z' fill='%2314342a'/%3E%3Crect y='88' width='360' height='12' fill='%233f3f46'/%3E%3Cpath d='M0 94H360' stroke='%23fde68a' stroke-width='1.6' stroke-dasharray='10 8'/%3E%3Cg transform='translate(220 62)'%3E%3Crect width='64' height='26' rx='5' fill='%23f8fafc'/%3E%3Crect x='0' y='15' width='64' height='5' fill='%232563eb'/%3E%3Crect x='6' y='4' width='11' height='9' rx='1.5' fill='%2393c5fd'/%3E%3Crect x='21' y='4' width='11' height='9' rx='1.5' fill='%2393c5fd'/%3E%3Crect x='36' y='4' width='11' height='9' rx='1.5' fill='%2393c5fd'/%3E%3Crect x='51' y='4' width='9' height='9' rx='1.5' fill='%2393c5fd'/%3E%3Ccircle cx='14' cy='27' r='5.5' fill='%230f172a'/%3E%3Ccircle cx='50' cy='27' r='5.5' fill='%230f172a'/%3E%3C/g%3E%3C/svg%3E"); }
 </style>
 <script id="bpx-script">
@@ -19461,6 +19458,7 @@ function luxQRSvg(text, px) {
                     '<p class="bpx-sub">Jméno na vstupence si každý změní klepnutím na něj. Brána, sedadlo a rezervační kód doplníš po odbavení.</p>';
                 put('bpOutTrip', outHTML);
             }
+            var fm = document.querySelector('#f-lety .lux-fold-meta'); if (fm) fm.textContent = '✈️ ' + (f.name || '') + ' · ' + Math.round(f.pricePerson || 0).toLocaleString('cs-CZ') + ' Kč';
             tripTexts(f, ob, rb, ob && rb ? legs(f.retFlights, rb) : []);
             if (ob && rb) {
                 var t281 = TR281(), ret = legs(f.retFlights, rb);
