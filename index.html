@@ -6075,7 +6075,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 11:41</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 11:53</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -6903,6 +6903,46 @@ function updatePackingWeight() {
     <div class="to-nights"><div class="to-head"><b>19 nocí</b><span>Kde se spí a jak dlouho</span></div><div id="nightsBar"></div></div>
 </div>
 <div class="lux-spine">
+<section class="lux-fold is-transfer" id="f-leg-liberec">
+    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-leg-liberec-b" onclick="luxToggle('f-leg-liberec')">
+        <span class="lux-fold-node" aria-hidden="true">🚌</span>
+        <span class="lux-fold-txt"><span class="lux-fold-t">Odjezd Liberec ➔ Praha</span><span class="lux-fold-s" id="lbSub">6. 8. 2027 · na letiště Václava Havla</span></span>
+        <span class="lux-fold-meta"></span>
+        <span class="lux-fold-chev" aria-hidden="true">▾</span>
+    </button></h3>
+    <div class="lux-fold-body" id="f-leg-liberec-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+<div class="t-row filter-padang">
+    <div class="t-point"></div>
+    <div class="timeline-date-container x-a8f6a5" id="lbDate" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3);">🚌 Pátek 6. 8. 2027 • Liberec ➔ Praha</div>
+    <div class="t-bubble transfer-bubble">
+        <h3 class="stage-title">Z Liberce na letiště v Praze</h3>
+        <p class="stage-desc">Sraz a odjezd z Liberce nejpozději v <strong id="lbDep">--:--</strong>, aby byla celá skupina na letišti v Praze v <strong id="lbAir">--:--</strong> (zhruba 3 hodiny před odletem). Cesta autobusem nebo vlakem z Liberce do Prahy a dál na letiště vychází orientačně na 2 h 30 min včetně rezervy na přestup. Konkrétní spoj a jízdenky se doplní podle toho, jak se domluvíme na srazu.</p>
+        <span class="transfer-distance">📍 Orientační čas, není to jízdní řád. Před odjezdem ho ověř ve vyhledávači spojení.</span>
+    </div>
+</div>
+    </div></div></div>
+</section>
+<section class="lux-fold is-transfer" id="f-leg-odlet">
+    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-leg-odlet-b" onclick="luxToggle('f-leg-odlet')">
+        <span class="lux-fold-node" aria-hidden="true">✈️</span>
+        <span class="lux-fold-txt"><span class="lux-fold-t">Odlet z Prahy a přestup</span><span class="lux-fold-s" id="odletSub">6. 8. 2027</span></span>
+        <span class="lux-fold-meta"></span>
+        <span class="lux-fold-chev" aria-hidden="true">▾</span>
+    </button></h3>
+    <div class="lux-fold-body" id="f-leg-odlet-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+<div class="t-row filter-padang">
+    <div class="t-point"></div>
+    <div class="timeline-date-container x-a8f6a5" id="odDate" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3);">✈️ Pátek 6. 8. 2027 • Praha ➔ přestup ➔ Singapur</div>
+    <div class="t-bubble transfer-bubble">
+        <h3 class="stage-title">Odlet z Prahy (PRG) a přestup</h3>
+        <p class="stage-desc" id="odletDesc"></p>
+        <p class="stage-desc" id="odletLay"></p>
+        <span class="transfer-distance">📍 Variantu letu přepneš v sekci s výběrem dálkového letu, tady se přepočítá sama.</span>
+    </div>
+</div>
+<div class="bpx-host" id="bpOutTrip"></div>
+    </div></div></div>
+</section>
 <section class="lux-fold is-leg" id="f-leg-sg" data-stage="singapore">
     <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-leg-sg-b" onclick="luxToggle('f-leg-sg')">
         <span class="lux-fold-node" aria-hidden="true">1</span>
@@ -10830,7 +10870,48 @@ function updatePackingWeight() {
 </div>
 
     </div></div></div>
-</section></div>
+</section>
+<section class="lux-fold is-transfer" id="f-leg-odlet-sin">
+    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-leg-odlet-sin-b" onclick="luxToggle('f-leg-odlet-sin')">
+        <span class="lux-fold-node" aria-hidden="true">✈️</span>
+        <span class="lux-fold-txt"><span class="lux-fold-t">Odlet ze Singapuru a mezipřistání</span><span class="lux-fold-s" id="sinSub">25. 8. 2027</span></span>
+        <span class="lux-fold-meta"></span>
+        <span class="lux-fold-chev" aria-hidden="true">▾</span>
+    </button></h3>
+    <div class="lux-fold-body" id="f-leg-odlet-sin-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+<div class="t-row filter-padang">
+    <div class="t-point"></div>
+    <div class="timeline-date-container x-a8f6a5" id="sinDate" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3);">✈️ Singapur ➔ přestup ➔ Praha</div>
+    <div class="t-bubble transfer-bubble">
+        <h3 class="stage-title">Odlet ze Singapuru (SIN) a mezipřistání</h3>
+        <p class="stage-desc" id="sinDesc"></p>
+        <p class="stage-desc" id="sinLay"></p>
+        <span class="transfer-distance">📍 Variantu letu přepneš v sekci s výběrem dálkového letu, tady se přepočítá sama.</span>
+    </div>
+</div>
+<div class="bpx-host" id="bpRetTrip"></div>
+    </div></div></div>
+</section>
+<section class="lux-fold is-transfer" id="f-leg-domu">
+    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-leg-domu-b" onclick="luxToggle('f-leg-domu')">
+        <span class="lux-fold-node" aria-hidden="true">🚌</span>
+        <span class="lux-fold-txt"><span class="lux-fold-t">Odjezd domů do Liberce</span><span class="lux-fold-s" id="domSub">25. 8. 2027 · z letiště Václava Havla</span></span>
+        <span class="lux-fold-meta"></span>
+        <span class="lux-fold-chev" aria-hidden="true">▾</span>
+    </button></h3>
+    <div class="lux-fold-body" id="f-leg-domu-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+<div class="t-row filter-padang">
+    <div class="t-point"></div>
+    <div class="timeline-date-container x-a8f6a5" id="domDate" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3);">🚌 Středa 25. 8. 2027 • Praha ➔ Liberec</div>
+    <div class="t-bubble transfer-bubble">
+        <h3 class="stage-title">Z letiště v Praze domů do Liberce</h3>
+        <p class="stage-desc">Přistáváme v Praze v <strong id="domArr">--:--</strong>. Po vyzvednutí zavazadel a přesunu z letiště do centra a dál na spoj do Liberce počítej orientačně s 2 h 30 min, doma jsme tedy zhruba kolem <strong id="domHome">--:--</strong>. Konkrétní spoj a jízdenky se doplní podle toho, jak se domluvíme.</p>
+        <span class="transfer-distance">📍 Orientační čas, není to jízdní řád. Před odjezdem ho ověř ve vyhledávači spojení.</span>
+    </div>
+</div>
+    </div></div></div>
+</section>
+</div>
     </div>
 </section>
 
@@ -11060,7 +11141,6 @@ function updatePackingWeight() {
                     <div class="active-flight-detail-box" id="activeFlightDetailBox">
                         <!-- Dynamicky vykresleno JavaScriptem dle vybraného letu -->
                     </div>
-                    <div class="bpx-host" id="bpOut"></div>
                 </div>
 
 <script>
@@ -16242,12 +16322,13 @@ function recalculateAll() {
         book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><path d="M6.5 17A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5"/><path d="M9 7h7M9 11h5"/>',
         wallet: '<path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>',
         card: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/>',
+        bus: '<rect x="4" y="3" width="16" height="14" rx="2"/><path d="M4 11h16M8 17v3M16 17v3"/><circle cx="8" cy="14" r=".7"/><circle cx="16" cy="14" r=".7"/>',
         checklist: '<rect x="5" y="4" width="14" height="18" rx="2"/><path d="M9 2h6v4H9z"/><path d="M8.5 13l2 2 4-4.5"/>'
     };
     var MAP = {
         'f-konfig': 'sliders', 'f-srovnani': 'scale', 'f-rozpis': 'receipt', 'f-jidlo': 'receipt', 'f-aktivity': 'palm', 'f-hotovost': 'wallet', 'f-karta-mhd': 'card',
         'f-viza': 'passport', 'f-sos': 'sos', 'f-esim': 'sim', 'f-apps': 'apps', 'f-live': 'live', 'f-baleni': 'backpack',
-        'f-leg-sg': 'city', 'f-leg-sgdps': 'plane', 'f-leg-uluwatu': 'cliff', 'f-leg-ubud': 'leaf',
+        'f-leg-liberec': 'bus', 'f-leg-odlet': 'plane', 'f-leg-odlet-sin': 'plane', 'f-leg-domu': 'bus', 'f-leg-sg': 'city', 'f-leg-sgdps': 'plane', 'f-leg-uluwatu': 'cliff', 'f-leg-ubud': 'leaf',
         'f-leg-presun4': 'ship', 'f-leg-lombok-sever': 'mountain', 'f-leg-kuta': 'palm', 'f-leg-back': 'ship',
         'f-leg-rozlucka': 'sunset', 'f-leg-tranzit': 'transit', 'f-slovnicek': 'book', 'f-checklist': 'checklist'
     };
@@ -16419,9 +16500,9 @@ function recalculateAll() {
     function renderNights() {
         var host = $('nightsBar'); if (!host) return;
         var info = todayInfo();
-        var segs = [{ plane: true, nights: 1, name: 'Let', sub: '6./7. 8.', id: 'f-leg-sg' }];
+        var segs = [{ plane: true, nights: 1, name: 'Let', sub: '6./7. 8.', id: 'f-leg-odlet' }];
         LEGS.forEach(function (l) { var n = l.to - l.from; if (n > 0) segs.push({ nights: n, name: l.short || l.name, sub: l.from + '.–' + l.to + '. 8.', id: l.id, reg: l.reg }); });
-        segs.push({ plane: true, nights: 1, name: 'Let', sub: '24./25. 8.', id: 'f-leg-tranzit' });
+        segs.push({ plane: true, nights: 1, name: 'Let', sub: '24./25. 8.', id: 'f-leg-odlet-sin' });
         var row = '';
         segs.forEach(function (s) {
             row += '<a class="nb-seg' + (s.plane ? ' nb-plane' : '') + '" href="#' + s.id + '" style="flex:' + s.nights + ' 1 0" title="' + s.name + ' · ' + s.sub + ' · ' + s.nights + ' ' + plural(s.nights, 'noc', 'noci', 'nocí') + '">' +
@@ -19477,6 +19558,10 @@ function luxQRSvg(text, px) {
     .bpx-stub .bpx-bar { grid-column: 2; grid-row: 1 / span 2; height: 64px; }
     .bpx-conn { margin-left: 22px; }
 }
+
+/* trip-folds */
+#f-leg-odlet > .lux-fold-h > .lux-fold-btn::before, #f-leg-odlet-sin > .lux-fold-h > .lux-fold-btn::before { background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 100' preserveAspectRatio='xMaxYMid slice'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%231e3a8a'/%3E%3Cstop offset='1' stop-color='%2393c5fd'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='360' height='100' fill='url(%23g)'/%3E%3Ccircle cx='318' cy='66' r='13' fill='%23fef3c7'/%3E%3Cg transform='translate(170 30) scale(1.1)' fill='%23fff' opacity='.85'%3E%3Cellipse rx='16' ry='6'/%3E%3Cellipse cx='-9' cy='-4' rx='9' ry='7'/%3E%3Cellipse cx='5' cy='-6' rx='11' ry='8'/%3E%3C/g%3E%3Cpath d='M110 72Q170 62 230 46' stroke='%23fff' stroke-width='2' stroke-dasharray='2 6' stroke-linecap='round' fill='none' opacity='.7'/%3E%3Cg transform='translate(250 40) rotate(-14) scale(1.3)' fill='%23fff'%3E%3Cpath d='M-22 0Q-18-3.5 0-3.5L18-2.5Q26 0 18 2.5L0 3.5Q-18 3.5-22 0Z'/%3E%3Cpath d='M-3-2L-13-19-8-19 9-2Z'/%3E%3Cpath d='M-3 2L-13 19-8 19 9 2Z'/%3E%3Cpath d='M-19-1.5L-24-8-20-8-14-1.5Z'/%3E%3Cpath d='M-19 1.5L-24 8-20 8-14 1.5Z'/%3E%3C/g%3E%3C/svg%3E"); }
+#f-leg-liberec > .lux-fold-h > .lux-fold-btn::before, #f-leg-domu > .lux-fold-h > .lux-fold-btn::before { background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 100' preserveAspectRatio='xMaxYMid slice'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23334155'/%3E%3Cstop offset='1' stop-color='%23fdba74'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='360' height='100' fill='url(%23g)'/%3E%3Ccircle cx='300' cy='60' r='14' fill='%23fef3c7'/%3E%3Cpath d='M0 74Q60 50 120 66T240 60T360 62V100H0Z' fill='%231f4d3a'/%3E%3Cpath d='M0 86Q90 74 180 84T360 80V100H0Z' fill='%2314342a'/%3E%3Crect y='88' width='360' height='12' fill='%233f3f46'/%3E%3Cpath d='M0 94H360' stroke='%23fde68a' stroke-width='1.6' stroke-dasharray='10 8'/%3E%3Cg transform='translate(220 62)'%3E%3Crect width='64' height='26' rx='5' fill='%23f8fafc'/%3E%3Crect x='0' y='15' width='64' height='5' fill='%232563eb'/%3E%3Crect x='6' y='4' width='11' height='9' rx='1.5' fill='%2393c5fd'/%3E%3Crect x='21' y='4' width='11' height='9' rx='1.5' fill='%2393c5fd'/%3E%3Crect x='36' y='4' width='11' height='9' rx='1.5' fill='%2393c5fd'/%3E%3Crect x='51' y='4' width='9' height='9' rx='1.5' fill='%2393c5fd'/%3E%3Ccircle cx='14' cy='27' r='5.5' fill='%230f172a'/%3E%3Ccircle cx='50' cy='27' r='5.5' fill='%230f172a'/%3E%3C/g%3E%3C/svg%3E"); }
 </style>
 <script id="bpx-script">
 /* ---- Palubní vstupenky (boarding passy): letadla i lodě ---- */
@@ -19487,7 +19572,7 @@ function luxQRSvg(text, px) {
     var AP = {
         PRG: ['Praha', 'Václav Havel Airport'], DXB: ['Dubaj', 'Dubai International'], HEL: ['Helsinky', 'Helsinki-Vantaa'],
         ZRH: ['Curych', 'Zürich Airport'], IST: ['Istanbul', 'Istanbul Airport'], SIN: ['Singapur', 'Changi Airport'],
-        DPS: ['Denpasar · Bali', 'Ngurah Rai Airport'], SNR: ['Sanur · Bali', 'Sanur Harbour'], BNG: ['Bangsal · Lombok', 'Bangsal Harbour']
+        DPS: ['Denpasar · Bali', 'Ngurah Rai Airport'], LOP: ['Praya · Lombok', 'Lombok International'], SNR: ['Sanur · Bali', 'Sanur Harbour'], BNG: ['Bangsal · Lombok', 'Bangsal Harbour']
     };
     var BR = {
         EK: { n: 'Emirates', b1: '#d71921', b2: '#8f0f15', ac: '#c3141b', hi: '#ffffff', img: 'emirates.png' },
@@ -19496,6 +19581,7 @@ function luxQRSvg(text, px) {
         LX: { n: 'SWISS', b1: '#e30613', b2: '#a1000b', ac: '#c40510', hi: '#ffffff', img: 'swiss.png' },
         TK: { n: 'Turkish Airlines', b1: '#d7192d', b2: '#8c0d1c', ac: '#b8101f', hi: '#ffffff', img: 'turkish.png' },
         TR: { n: 'Scoot', b1: '#ffdd00', b2: '#f2b800', ac: '#1a1a1a', hi: '#111111' },
+        TN: { n: 'TransNusa', b1: '#e2231a', b2: '#951410', ac: '#c41d14', hi: '#ffffff' },
         SF: { n: 'Starfish', b1: '#00a6c8', b2: '#005f86', ac: '#00708f', hi: '#ffffff', boat: 1 },
         WH: { n: 'Wahana Virendra', b1: '#1565b8', b2: '#0a3a74', ac: '#0d4a94', hi: '#ffffff', boat: 1 }
     };
@@ -19553,6 +19639,7 @@ function luxQRSvg(text, px) {
         else if (k === 'LX') s += '<rect x="10" y="5" width="30" height="30" rx="2" fill="#e30613"/><path d="M23 11h4v7h7v4h-7v7h-4v-7h-7v-4h7z" fill="#fff"/><text x="47" y="28" font-size="21" font-weight="800" fill="#1a1a1a" font-family="Arial, Helvetica, sans-serif" letter-spacing="1.5">SWISS</text>';
         else if (k === 'TK') s += '<circle cx="24" cy="20" r="15" fill="#c8102e"/><circle cx="24" cy="20" r="11" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M17 24 L28 12 L26 21 L32 20 L21 29 L23 22z" fill="#fff"/><text x="44" y="17" font-size="12.5" font-weight="800" fill="#c8102e" font-family="Arial, Helvetica, sans-serif" letter-spacing="0.6">TURKISH</text><text x="44" y="31" font-size="12.5" font-weight="800" fill="#c8102e" font-family="Arial, Helvetica, sans-serif" letter-spacing="0.6">AIRLINES</text>';
         else if (k === 'TR') s += '<rect x="20" y="5" width="110" height="30" rx="15" fill="#ffdd00"/><text x="75" y="29" text-anchor="middle" font-size="23" font-weight="900" fill="#111" font-family="Arial Black, Arial, Helvetica, sans-serif" letter-spacing="0.5">scoot</text>';
+        else if (k === 'TN') s += '<path d="M12 27 L30 11 L34 11 L26 22 L38 22 L36 27z" fill="#e2231a"/><text x="44" y="26" font-size="19" font-weight="800" fill="#1d2b53" font-family="Arial, Helvetica, sans-serif"><tspan fill="#e2231a">Trans</tspan>Nusa</text>';
         else if (k === 'SF') s += '<path d="M26 5l4.4 9.2 10.1 1.3-7.4 7 1.9 10-9-4.9-9 4.9 1.9-10-7.4-7 10.1-1.3z" fill="#ff8a1f"/><text x="48" y="27" font-size="19" font-weight="800" fill="#005f86" font-family="Arial, Helvetica, sans-serif" letter-spacing="0.5">Starfish</text>';
         else if (k === 'WH') s += '<path d="M10 24q5-8 10 0t10 0 10 0" fill="none" stroke="#1565b8" stroke-width="3.2" stroke-linecap="round"/><path d="M10 31q5-8 10 0t10 0 10 0" fill="none" stroke="#5bb4ee" stroke-width="3.2" stroke-linecap="round"/><text x="58" y="19" font-size="14" font-weight="800" fill="#0a3a74" font-family="Arial, Helvetica, sans-serif" letter-spacing="1.5">WAHANA</text><text x="58" y="33" font-size="11" font-weight="700" fill="#1565b8" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">Virendra</text>';
         s += '</svg>';
@@ -19564,7 +19651,8 @@ function luxQRSvg(text, px) {
     function ticket(c) {
         var B = BR[c.brand], boat = !!B.boat, A = AP[c.from] || [c.from, ''], Z = AP[c.to] || [c.to, ''];
         var icon = boat ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + BOAT + '"/></svg>' : '<svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="' + PLANE + '"/></svg>';
-        var dm = toMin(c.dep), lead = boat ? 30 : (c.durMin >= 180 ? 60 : 45);
+        var dm = c.dep ? toMin(c.dep) : null, lead = boat ? 30 : (c.durMin >= 180 ? 60 : 45);
+        var bt = dm == null ? 'TBA' : hm(dm - lead), depT = c.dep || 'TBA', arrT = c.arr || 'TBA';
         var date = dstr(c.date), wd = WD[c.date.getUTCDay()];
         var seed = c.no + c.from + c.to + date;
         var arrSup = c.aPlus > c.dPlus ? '<sup>+' + (c.aPlus - c.dPlus) + '</sup>' : '';
@@ -19579,18 +19667,18 @@ function luxQRSvg(text, px) {
             '<div class="bpx-body">' +
             '<div class="bpx-pax"><span class="bpx-lab">Passenger / Cestující</span><b class="bpx-name" role="button" tabindex="0" data-bpx-name title="Klepni a změň jméno na vstupence">' + esc(pax) + '</b><span class="bpx-edit">✎ změnit jméno</span></div>' +
             '<div class="bpx-route">' +
-            '<div class="bpx-pt"><span class="bpx-lab">From / Odkud</span><span class="bpx-code">' + c.from + '</span><span class="bpx-city">' + esc(A[0]) + '</span><span class="bpx-apn">' + esc(A[1]) + '</span><span class="bpx-tm">' + c.dep + '</span></div>' +
+            '<div class="bpx-pt"><span class="bpx-lab">From / Odkud</span><span class="bpx-code">' + c.from + '</span><span class="bpx-city">' + esc(A[0]) + '</span><span class="bpx-apn">' + esc(A[1]) + '</span><span class="bpx-tm">' + depT + '</span></div>' +
             '<div class="bpx-path"><div class="bpx-line"><i>' + icon + '</i><b></b></div><span>' + esc(c.dur) + (boat ? ' · plavba' : (c.stops ? '' : ' · přímý let')) + '</span></div>' +
-            '<div class="bpx-pt r"><span class="bpx-lab">To / Kam</span><span class="bpx-code">' + c.to + '</span><span class="bpx-city">' + esc(Z[0]) + '</span><span class="bpx-apn">' + esc(Z[1]) + '</span><span class="bpx-tm">' + c.arr + arrSup + '</span></div>' +
+            '<div class="bpx-pt r"><span class="bpx-lab">To / Kam</span><span class="bpx-code">' + c.to + '</span><span class="bpx-city">' + esc(Z[0]) + '</span><span class="bpx-apn">' + esc(Z[1]) + '</span><span class="bpx-tm">' + arrT + arrSup + '</span></div>' +
             '</div>' +
             '<div class="bpx-grid">' +
             '<div><span class="bpx-lab">' + (boat ? 'Ship / Loď' : 'Flight / Let') + '</span><b class="hl">' + esc(c.no) + '</b></div>' +
             '<div><span class="bpx-lab">Date / Datum</span><b>' + date + '<small>' + wd + '</small></b></div>' +
-            '<div><span class="bpx-lab">Boarding / Nástup</span><b class="hl">' + hm(dm - lead) + '</b></div>' +
+            '<div><span class="bpx-lab">Boarding / Nástup</span><b class="hl">' + bt + '</b></div>' +
             '<div><span class="bpx-lab">' + (boat ? 'Pier / Molo' : 'Gate / Brána') + '</span><b>TBA</b></div>' +
             '<div><span class="bpx-lab">Seat / Sedadlo</span><b>TBA</b></div>' +
             '<div><span class="bpx-lab">Class / Třída</span><b>' + esc(c.cls) + '</b></div>' +
-            '<div><span class="bpx-lab">Departs / Odlet</span><b>' + c.dep + '</b></div>' +
+            '<div><span class="bpx-lab">Departs / Odlet</span><b>' + depT + '</b></div>' +
             '<div><span class="bpx-lab">Booking ref.</span><b>TBA</b></div>' +
             '</div></div>' +
             '<div class="bpx-code417">' + pdf417(seed) + '<div class="bpx-bcbp">' + esc(bcbp) + '</div></div>' +
@@ -19598,7 +19686,7 @@ function luxQRSvg(text, px) {
             '</div>' +
             '<aside class="bpx-stub"><div class="bpx-st-top"><span>' + (boat ? 'Boat' : esc(B.n)) + '</span><b>' + esc(c.short || c.no) + '</b></div>' +
             '<div class="bpx-st-rt"><span>' + c.from + '</span>' + icon + '<span>' + c.to + '</span></div>' +
-            '<div class="bpx-st-kv"><div><span class="bpx-lab">Date</span><b>' + pad(c.date.getUTCDate()) + ' ' + MON[c.date.getUTCMonth()] + '</b></div><div><span class="bpx-lab">Boarding</span><b>' + hm(dm - lead) + '</b></div><div><span class="bpx-lab">' + (boat ? 'Pier' : 'Gate') + '</span><b>TBA</b></div><div><span class="bpx-lab">Seat</span><b>TBA</b></div></div>' +
+            '<div class="bpx-st-kv"><div><span class="bpx-lab">Date</span><b>' + pad(c.date.getUTCDate()) + ' ' + MON[c.date.getUTCMonth()] + '</b></div><div><span class="bpx-lab">Boarding</span><b>' + bt + '</b></div><div><span class="bpx-lab">' + (boat ? 'Pier' : 'Gate') + '</span><b>TBA</b></div><div><span class="bpx-lab">Seat</span><b>TBA</b></div></div>' +
             bars(seed) + '</aside></article></div>';
     }
 
@@ -19642,6 +19730,9 @@ function luxQRSvg(text, px) {
     }
     var TR288 = function () { return fixed('TR', 'TR288', 'SIN', 'DPS', '10:15', '13:05', 170, 2027, 8, 9); };
     var TR281 = function () { return fixed('TR', 'TR281', 'DPS', 'SIN', '11:15', '14:10', 175, 2027, 8, 24); };
+    var TN_OUT = function () { return fixed('TN', 'TRANSNUSA', 'DPS', 'LOP', '12:40', '13:20', 40, 2027, 8, 15); };
+    var TN_BACK = function () { return fixed('TN', 'TRANSNUSA', 'LOP', 'DPS', null, null, 40, 2027, 8, 23); };
+    function viaPlane() { var l = document.getElementById('b3_label'); return !!(l && /TransNusa/i.test(l.textContent)); }
     var BOAT_OUT = function () { return fixed('SF', 'STARFISH', 'SNR', 'BNG', '13:00', '15:00', 120, 2027, 8, 15, { cls: 'STANDARD', short: 'STARFISH' }); };
     var BOAT_BACK = function () { return fixed('WH', 'WAHANA VIRENDRA', 'BNG', 'SNR', '13:30', '17:00', 210, 2027, 8, 23, { cls: 'STANDARD', short: 'WAHANA' }); };
 
@@ -19652,20 +19743,50 @@ function luxQRSvg(text, px) {
         var f = curFlight();
         if (f) {
             var ob = parseDate(f.outDate), rb = parseDate(f.retDate);
-            if (ob) put('bpOut', head(dayTitle(ob) + ': odlet z Prahy do Singapuru (' + esc(f.name || '') + ')') + legsHTML(legs(f.outFlights, ob), ob) +
-                '<p class="bpx-sub">Jméno na vstupence si každý změní klepnutím na něj. Brána, sedadlo a rezervační kód doplníš po odbavení.</p>');
+            if (ob) {
+                var outHTML = head(dayTitle(ob) + ': odlet z Prahy do Singapuru (' + esc(f.name || '') + ')') + legsHTML(legs(f.outFlights, ob), ob) +
+                    '<p class="bpx-sub">Jméno na vstupence si každý změní klepnutím na něj. Brána, sedadlo a rezervační kód doplníš po odbavení.</p>';
+                put('bpOutTrip', outHTML);
+            }
+            tripTexts(f, ob, rb, ob && rb ? legs(f.retFlights, rb) : []);
             if (ob && rb) {
-                var t281 = TR281(), ret = legs(f.retFlights, rb), h = head(dayTitle(t281.date) + ': odlet z Bali do Singapuru') + ticket(t281);
-                if (ret.length) {
-                    h += conn(Math.round(absMin(rb, ret[0].dPlus, ret[0].dmn) - absMin(t281.date, 0, toMin('14:10'))), 'Tranzit v Singapuru') +
-                        head(dayTitle(rb) + ': dálkový let domů (' + esc(f.name || '') + ')') + legsHTML(ret, rb);
-                }
-                put('bpHome', h);
+                var t281 = TR281(), ret = legs(f.retFlights, rb);
+                put('bpHome', head(dayTitle(t281.date) + ': odlet z Bali do Singapuru') + ticket(t281));
+                put('bpRetTrip', (ret.length ? conn(Math.round(absMin(rb, ret[0].dPlus, ret[0].dmn) - absMin(t281.date, 0, toMin('14:10'))), 'Tranzit v Singapuru') +
+                    head(dayTitle(rb) + ': dálkový let domů (' + esc(f.name || '') + ')') + legsHTML(ret, rb) +
+                    '<p class="bpx-sub">Jméno na vstupence si každý změní klepnutím na něj. Brána, sedadlo a rezervační kód doplníš po odbavení.</p>' : ''));
             }
         }
         put('bpSinDps', head(dayTitle(TR288().date) + ': palubní vstupenka Singapur → Bali') + ticket(TR288()));
-        put('bpBoatOut', head(dayTitle(BOAT_OUT().date) + ': palubní vstupenka na loď Bali → Lombok') + ticket(BOAT_OUT()));
-        put('bpBoatBack', head(dayTitle(BOAT_BACK().date) + ': palubní vstupenka na loď Lombok → Bali') + ticket(BOAT_BACK()));
+        var pl = viaPlane();
+        put('bpBoatOut', head(dayTitle(BOAT_OUT().date) + (pl ? ': palubní vstupenka Bali → Lombok (let TransNusa)' : ': palubní vstupenka na loď Bali → Lombok')) + ticket(pl ? TN_OUT() : BOAT_OUT()));
+        put('bpBoatBack', head(dayTitle(BOAT_BACK().date) + (pl ? ': palubní vstupenka Lombok → Bali (let TransNusa)' : ': palubní vstupenka na loď Lombok → Bali')) + ticket(pl ? TN_BACK() : BOAT_BACK()) + (pl ? '<p class="bpx-sub">Čas zpátečního letu TransNusa zatím v plánu není, proto je na vstupence TBA.</p>' : ''));
+    }
+
+
+    /* ---- texty nových etap v itineráři: Liberec ➔ Praha a Odlet z Prahy ---- */
+    function setText(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
+    function dmy(d) { return d.getUTCDate() + '. ' + (d.getUTCMonth() + 1) + '. ' + d.getUTCFullYear(); }
+    function dayY(d) { return dayTitle(d) + ' ' + d.getUTCFullYear(); }
+    function tripTexts(f, ob, rb, ret) {
+        var dep = toMin(f.outDep), air = dep - 180, lib = dep - 330, hub = f.hub || '', code = (/\((\w{3})\)/.exec(hub) || [])[1] || '';
+        var lay = (f.outLayover || '').replace(/^.*?\s+v\s+/, '');
+        setText('lbDep', hm(lib)); setText('lbAir', hm(air));
+        setText('odletSub', (ob ? dmy(ob) : '') + ' · ' + esc(f.outDep) + ' · přestup ' + esc(LOC[code] ? 'v ' + LOC[code] : hub));
+        setText('odletDesc', 'Na letišti v Praze jsme zhruba 3 h před odletem, tedy v <strong>' + hm(air) + '</strong>. Odlet je v <strong>' + esc(f.outDep) + '</strong> (' + esc(f.name || '') + '). Letíme spojem <strong>' + esc(f.outFlights || '') + '</strong>.');
+        var am = /(\d{2}):(\d{2})/.exec(f.retArr || ''), arrP = am ? (+am[1]) * 60 + (+am[2]) : null;
+        var rcode = (/\((\w{3})\)/.exec(f.retLayover || '') || [])[1] || '';
+        setText('sinSub', esc(f.retDate || '') + ' · odlet ' + esc(f.retDep || '') + ' · přestup ' + (LOC[rcode] ? 'v ' + LOC[rcode] : ''));
+        setText('sinDesc', 'Po tranzitu v Singapuru (přílet z Bali ve <strong>14:10</strong>) odlétáme z Changi v <strong>' + esc(f.retDep || '') + '</strong> (' + esc(f.name || '') + '). Na letišti musíme být s rezervou, brána se zavírá 20 min před odletem. Letíme spojem <strong>' + esc(f.retFlights || '') + '</strong>.');
+        setText('sinLay', 'Přestup v ' + esc(LOC[rcode] || '') + (rcode ? ' (' + rcode + ')' : '') + ': <strong>' + esc((f.retLayover || '').split(' v ')[0].replace(/\.$/, '')) + '</strong>. Přistání v Praze <strong>' + esc(f.retArr || '') + '</strong>, celková doba cesty ' + esc((f.retDuration || '').replace(/\.$/, '')) + '.');
+        var last = ret && ret.length ? ret[ret.length - 1] : null, home = last && rb ? addDays(rb, last.aPlus) : null;
+        var hubCity = (AP[code] ? AP[code][0] : 'přestup');
+        if (ob) { setText('lbDate', '🚌 ' + dayY(ob) + ' • Liberec ➔ Praha'); setText('lbSub', dmy(ob) + ' · na letiště Václava Havla'); setText('odDate', '✈️ ' + dayY(ob) + ' • Praha ➔ ' + esc(hubCity) + ' ➔ Singapur'); }
+        if (rb) setText('sinDate', '✈️ ' + dayY(rb) + ' • Singapur ➔ ' + esc(AP[rcode] ? AP[rcode][0] : 'přestup') + ' ➔ Praha');
+        if (home) { setText('domDate', '🚌 ' + dayY(home) + ' • Praha ➔ Liberec'); setText('domSub', dmy(home) + ' · z letiště Václava Havla'); }
+        setText('domArr', arrP == null ? '--:--' : hm(arrP));
+        setText('domHome', arrP == null ? '--:--' : hm(arrP + 150));
+        setText('odletLay', 'Přestup v ' + esc(LOC[code] || hub) + (code ? ' (' + code + ')' : '') + ': <strong>' + esc((f.outLayover || '').split(' v ')[0].replace(/\.$/, '')) + '</strong>. Přílet do Singapuru <strong>' + esc(f.outArr || '') + '</strong>, celková doba cesty ' + esc((f.outDuration || '').replace(/\.$/, '')) + '.');
     }
 
     function editName() {
@@ -19683,6 +19804,8 @@ function luxQRSvg(text, px) {
         window.setFlightAirline = function () { var r = orig.apply(this, arguments); try { render(); } catch (e) {} return r; };
         window.setFlightAirline.__bpx = true;
     }
+    var lbl = document.getElementById('b3_label');
+    if (lbl && window.MutationObserver) new MutationObserver(function () { try { render(); } catch (e) {} }).observe(lbl, { childList: true, characterData: true, subtree: true });
     window.BPX = { render: render };
     try { render(); } catch (e) { console.error('BPX', e); }
 })();
