@@ -6075,7 +6075,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 10:59</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 11:09</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -11567,24 +11567,24 @@ function updatePackingWeight() {
 </div>
 
 <!-- DYNAMICKÉ SOUHRNNÉ KARTY -->
-<div class="tj-excl" role="note"><b>⚠️ Základní rozpočet NEZAHRNUJE:</b> 🍜 jídlo, 🧭 výlety, 🎟️ vstupy, 🚇 jízdné v Singapuru a 🛍️ suvenýry. <span>Mimo základ je také taxi, drobné výdaje, úschovna batohů, soukromá loď na Gili a platba za poslední hotel na místě. Jídlo spočítá sekce <a href="#jidlo">Jídlo</a>, zbytek sekce <a href="#aktivity">Vstupné a aktivity</a>. Součet včetně nich je vždy zvlášť pod základním rozpočtem.</span></div>
+<div class="tj-excl" role="note"><b>ℹ️ Cena dovolené zahrnuje všechno, co si nakonfiguruješ:</b> 🛫 letenky, 🏨 hotely, 🛵 skútry, 🛂 víza a poplatky, 🍜 jídlo, 🧭 výlety a 🎟️ vstupy. <span>Jídlo vybereš v sekci <a href="#jidlo">Jídlo</a>, výlety a vstupy v sekci <a href="#aktivity">Vstupné a aktivity</a> a vše se samo započítá do celkové ceny. Cena nezahrnuje jízdné v Singapuru, taxi, drobné výdaje, úschovnu batohů, soukromou loď na Gili, suvenýry a platbu za poslední hotel na místě.</span></div>
 
 <div class="family-card-grid">
     <div class="family-card-box">
-        <div class="fc-tag" id="calcTagPerson">👤 Základ na 1 osobu (bez jídla a aktivit)</div>
-        <div class="fc-price" id="calcPricePerson">46 638 Kč</div>
-        <div class="fc-desc" id="calcDescPerson">Let, vybrané hotely, skútry, víza a poplatky. Bez jídla, výletů, vstupů, jízdného v Singapuru a suvenýrů</div>
+        <div class="fc-tag" id="calcTagPerson">👤 Cena dovolené na 1 osobu</div>
+        <div class="fc-price" id="calcTotalPerson">46 638 Kč</div><span id="calcPricePerson" hidden>46 638 Kč</span>
+        <div class="fc-desc" id="calcDescPerson">Let, vybrané hotely, skútry, víza a poplatky, jídlo a vstupy podle tvého výběru</div>
     </div>
      <div class="family-card-box">
-        <div class="fc-tag" id="calcTagFamily">👨‍👩‍👧 Základ na pár / rodinu (2 osoby / pokoj, bez jídla a aktivit)</div>
-        <div class="fc-price" id="calcPriceFamily">93 275 Kč</div>
-        <div class="fc-desc" id="calcDescFamily">Pro 2 osoby sdílející 1 dvoulůžkový pokoj (17 nocí ubytování)</div>
+        <div class="fc-tag" id="calcTagFamily">👨‍👩‍👧 Cena dovolené pro pár / rodinu (2 osoby v pokoji)</div>
+        <div class="fc-price" id="calcTotalFamily">93 275 Kč</div><span id="calcPriceFamily" hidden>93 275 Kč</span>
+        <div class="fc-desc" id="calcDescFamily">Pro 2 osoby sdílející 1 dvoulůžkový pokoj (17 nocí ubytování), se vším, co jste si zvolili</div>
     </div>
     <!-- NOVÁ KARTA PRO SÓLO CESTOVATELE -->
     <div class="family-card-box" style="border-color: rgba(232, 212, 138, 0.4);">
         <div class="fc-tag x-c-gold">🏍️ 1 Osoba (Sólo cestovatel)</div>
-        <div class="fc-price" id="calcPriceSingle">-- Kč</div>
-        <div class="fc-desc">Sám na pokoji, platí celý skútr a celý pokoj sám za sebe</div>
+        <div class="fc-price" id="calcTotalSingle">-- Kč</div><span id="calcPriceSingle" hidden>-- Kč</span>
+        <div class="fc-desc">Sám na pokoji, platí celý skútr a celý pokoj sám za sebe, se vším, co sis zvolil</div>
     </div>
 </div>
 
@@ -11691,7 +11691,7 @@ function updatePackingWeight() {
     </button></h3>
     <div class="lux-fold-body" id="f-jidlo-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
         <div class="tj" id="jidlo">
-            <div class="tj-excl" role="note"><b>⚠️ Základní rozpočet NEZAHRNUJE jídlo, výlety, vstupy, jízdné v Singapuru a suvenýry.</b> <span>Jídlo se počítá jen tady a přičítá se nad základ. Vstupné, výlety a drobné výdaje jsou v sekci <a href="#aktivity">Vstupné a aktivity</a>.</span></div>
+            <div class="tj-excl" role="note"><b>ℹ️ Jídlo se započítává do celkové ceny dovolené.</b> <span>Úroveň jídla vybereš tady. Vstupné a výlety jsou v sekci <a href="#aktivity">Vstupné a aktivity</a>.</span></div>
             <div class="tj-card">
                 <span class="tj-eyebrow">🍜 ÚROVEŇ JÍDLA</span>
                 <div class="tj-h" role="heading" aria-level="4">Kolik chceš za jídlo utrácet?</div>
@@ -11716,7 +11716,7 @@ function updatePackingWeight() {
     </button></h3>
     <div class="lux-fold-body" id="f-aktivity-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
         <div class="tj" id="aktivity">
-            <div class="tj-excl" role="note"><b>⚠️ Základní rozpočet NEZAHRNUJE vstupy, výlety, jízdné v Singapuru, jídlo ani suvenýry.</b> <span>Všechno, co tady zaškrtneš, se počítá zvlášť. Součet se přičítá k rozpočtu a položky placené hotově se přenášejí do <a href="#hotovost">Plánu hotovosti</a>. Jídlo je v sekci <a href="#jidlo">Jídlo</a>.</span></div>
+            <div class="tj-excl" role="note"><b>ℹ️ Všechno, co tady zaškrtneš, se započítá do celkové ceny dovolené.</b> <span>Položky placené hotově se přenášejí do <a href="#hotovost">Plánu hotovosti</a>. Jídlo je v sekci <a href="#jidlo">Jídlo</a>.</span></div>
             <div class="tj-card">
                 <span class="tj-eyebrow">🎟️ VSTUPNÉ A AKTIVITY</span>
                 <div class="tj-h" role="heading" aria-level="4">Co chceš cestou zažít</div>
@@ -11913,11 +11913,11 @@ function updatePackingWeight() {
         $('tjFoodTbl').innerHTML = rows;
         $('tjMethod').innerHTML =
             '<b>Způsob výpočtu</b><ol>' +
-            '<li><b>Denní sazba</b> = součet typických jídel za den: oběd, večeře, pití a svačiny. <b>Snídaně nejsou v ceně jídla</b>, protože hotely jsou se snídaní a ta je v základním rozpočtu.</li>' +
+            '<li><b>Denní sazba</b> = součet typických jídel za den: oběd, večeře, pití a svačiny. <b>Snídaně nejsou v ceně jídla</b>, protože hotely jsou se snídaní a ta je už v ceně ubytování.</li>' +
             '<li><b>Ceny jídel</b> vycházejí z běžných cen v roce 2026: v Singapuru hawker S$4–6, kopi S$1,5–2, pivo v restauraci S$12–15, v Indonésii warung Rp 25–45 tis., Bintang v restauraci Rp 45–60 tis., večeře v turistické restauraci Rp 120–200 tis., mořské plody a beach kluby Rp 300–500 tis.</li>' +
             '<li><b>Počet dní:</b> Singapur 2 dny (7.–9. 8.) + tranzit 24. 8. (cca 9 hodin ve městě = 0,75 dne), tedy 2,75 dne. Bali a Lombok 16 dní.</li>' +
             '<li><b>Celkem</b> = S$ za den × 2,75 × kurz S$ + Rp za den × 16 × kurz Rp. Kurzy se berou z panelu Přepočet měn v Plánu hotovosti (střed), jinak ze záložního kurzu. Při změně kurzu se částky v Kč přepočtou.</li>' +
-            '<li>Částky jsou <b>na 1 osobu</b>. Pár platí dvojnásobek. Jídlo <b>není součástí základního rozpočtu</b> a přičítá se nad něj. Podíl jídla placený hotově nastavíš v Plánu hotovosti (výchozí 100 %).</li></ol>';
+            '<li>Částky jsou <b>na 1 osobu</b>. Pár platí dvojnásobek. Jídlo se <b>započítává do celkové ceny dovolené</b>. Podíl jídla placený hotově nastavíš v Plánu hotovosti (výchozí 100 %).</li></ol>';
         var mt = $('tjMetaFood'); if (mt) mt.textContent = f.name + ' · ' + kcTxt(f.kc);
     }
 
@@ -12205,7 +12205,7 @@ function updatePackingWeight() {
 </style>
 
 <div class="cx" id="hotovost">
-    <div class="tj-excl" role="note"><b>⚠️ Základní rozpočet NEZAHRNUJE:</b> 🍜 jídlo, 🧭 výlety, 🎟️ vstupy, 🚇 jízdné v Singapuru a 🛍️ suvenýry. <span>Mimo základ je také taxi, drobné výdaje, úschovna batohů, soukromá loď na Gili a platba za poslední hotel na místě. Jídlo spočítá sekce <a href="#jidlo">Jídlo</a>, zbytek sekce <a href="#aktivity">Vstupné a aktivity</a>. Součet včetně nich je vždy zvlášť pod základním rozpočtem.</span></div>
+    <div class="tj-excl" role="note"><b>ℹ️ Cena dovolené zahrnuje všechno, co si nakonfiguruješ:</b> 🛫 letenky, 🏨 hotely, 🛵 skútry, 🛂 víza a poplatky, 🍜 jídlo, 🧭 výlety a 🎟️ vstupy. <span>Jídlo vybereš v sekci <a href="#jidlo">Jídlo</a>, výlety a vstupy v sekci <a href="#aktivity">Vstupné a aktivity</a> a vše se samo započítá do celkové ceny. Cena nezahrnuje jízdné v Singapuru, taxi, drobné výdaje, úschovnu batohů, soukromou loď na Gili, suvenýry a platbu za poslední hotel na místě.</span></div>
 
     <!-- ===== HLAVNÍ KARTA ===== -->
     <div class="cx-card cx-hero">
@@ -12764,7 +12764,7 @@ function updatePackingWeight() {
         <button type="button" class="m-tab-btn" onclick="switchMobileView('sing')">Sólo</button>
     </div>
 
-    <div class="tj-excl" role="note"><b>⚠️ Základní rozpočet NEZAHRNUJE:</b> 🍜 jídlo, 🧭 výlety, 🎟️ vstupy, 🚇 jízdné v Singapuru a 🛍️ suvenýry. <span>Mimo základ je také taxi, drobné výdaje, úschovna batohů, soukromá loď na Gili a platba za poslední hotel na místě. Jídlo spočítá sekce <a href="#jidlo">Jídlo</a>, zbytek sekce <a href="#aktivity">Vstupné a aktivity</a>. Součet včetně nich je vždy zvlášť pod základním rozpočtem.</span></div>
+    <div class="tj-excl" role="note"><b>ℹ️ Cena dovolené zahrnuje všechno, co si nakonfiguruješ:</b> 🛫 letenky, 🏨 hotely, 🛵 skútry, 🛂 víza a poplatky, 🍜 jídlo, 🧭 výlety a 🎟️ vstupy. <span>Jídlo vybereš v sekci <a href="#jidlo">Jídlo</a>, výlety a vstupy v sekci <a href="#aktivity">Vstupné a aktivity</a> a vše se samo započítá do celkové ceny. Cena nezahrnuje jízdné v Singapuru, taxi, drobné výdaje, úschovnu batohů, soukromou loď na Gili, suvenýry a platbu za poslední hotel na místě.</span></div>
     <div class="vip-table-wrap">
         <table class="vip-budget-table view-pers" id="vipBudgetTable">
             <thead>
@@ -12939,7 +12939,7 @@ function updatePackingWeight() {
                     <td style="padding: 16px; border-bottom: none; border-bottom-left-radius: 14px;">
                         <div style="display: flex; align-items: center; gap: 8px; color: var(--text-main);">
                             <span class="x-fs-1-4">📊</span>
-                            <span style="font-size: 1rem; font-weight: 900; letter-spacing: 0.3px;">ZÁKLADNÍ ROZPOČET CELKEM (bez jídla a aktivit):</span>
+                            <span style="font-size: 1rem; font-weight: 900; letter-spacing: 0.3px;">MEZISOUČET: letenky, ubytování, doprava a poplatky:</span>
                         </div>
                     </td>
                     <td id="breakdownTotalPers" style="padding: 16px; text-align: right; color: var(--primary); font-size: 1.2rem; font-weight: 900; border-bottom: none;" class="col-highlight-subtle col-pers">-- Kč</td>
@@ -12947,7 +12947,7 @@ function updatePackingWeight() {
                     <td id="breakdownTotalSing" style="padding: 16px; text-align: right; color: var(--gold); font-size: 1.2rem; font-weight: 900; border-bottom: none; border-bottom-right-radius: 14px;" class="col-sing">-- Kč</td>
                 </tr>
                 <tr class="tj-extra-row"><td colspan="4" style="padding: 12px 16px; font-size: 0.85rem; font-weight: 700; color: var(--text-main);">
-                    ⚠️ Základní rozpočet výše <b>nezahrnuje jídlo, výlety, vstupy, jízdné v Singapuru ani suvenýry</b>. Tyto položky se počítají zvlášť (sekce <a href="#jidlo" style="color: var(--primary);">Jídlo</a> a <a href="#aktivity" style="color: var(--primary);">Vstupné a aktivity</a>) a přičítají se níže.
+                    ℹ️ Níže se přičítá <b>jídlo, výlety a vstupy</b>, které sis zvolil v sekcích <a href="#jidlo" style="color: var(--primary);">Jídlo</a> a <a href="#aktivity" style="color: var(--primary);">Vstupné a aktivity</a>. Tak vznikne celková cena dovolené.
                 </td></tr>
                 <tr class="tj-extra-row">
                     <td><div class="item-cell-title"><span class="item-icon-box">🍜</span><span id="bxFoodLbl">+ Jídlo (mimo základ)</span></div></td>
@@ -12962,7 +12962,7 @@ function updatePackingWeight() {
                     <td id="bxAct_sing" style="text-align: right;" class="val-num col-sing">-- Kč</td>
                 </tr>
                 <tr style="background: linear-gradient(135deg, rgba(111, 143, 176, 0.18) 0%, rgba(169, 187, 208, 0.18) 100%); font-weight: 900; font-size: 1.05rem;">
-                    <td style="padding: 16px; border-bottom: none; border-bottom-left-radius: 14px;"><div style="display: flex; align-items: center; gap: 8px; color: var(--text-main);"><span class="x-fs-1-4">💰</span><span style="font-size: 1rem; font-weight: 900;">CELKEM VČETNĚ JÍDLA A AKTIVIT:</span></div></td>
+                    <td style="padding: 16px; border-bottom: none; border-bottom-left-radius: 14px;"><div style="display: flex; align-items: center; gap: 8px; color: var(--text-main);"><span class="x-fs-1-4">💰</span><span style="font-size: 1rem; font-weight: 900;">CELKEM ZA DOVOLENOU:</span></div></td>
                     <td id="bxGrand_pers" style="padding: 16px; text-align: right; color: var(--primary); font-size: 1.2rem; font-weight: 900; border-bottom: none;" class="col-highlight-subtle col-pers">-- Kč</td>
                     <td id="bxGrand_fam" style="padding: 16px; text-align: right; color: var(--accent); font-size: 1.2rem; font-weight: 900; border-bottom: none;" class="col-fam">-- Kč</td>
                     <td id="bxGrand_sing" style="padding: 16px; text-align: right; color: var(--gold); font-size: 1.2rem; font-weight: 900; border-bottom: none; border-bottom-right-radius: 14px;" class="col-sing">-- Kč</td>
@@ -13052,15 +13052,15 @@ function updatePackingWeight() {
                 <div class="feat-pill-grid">
                     <div class="feat-pill">📍 <strong>Destinace:</strong> Singapur + Bali + Lombok + Gili ostrovy</div>
                     <div class="feat-pill">🛵 <strong>Doprava:</strong> Svoboda na skútru v malé partě přátel</div>
-                    <div class="feat-pill">✅ <strong>V základu:</strong> Letenky, trajekty, hotely, skútry, víza, eSIM</div>
-                    <div class="feat-pill x-c-accent" style="border-color: rgba(224, 103, 90, 0.6);">⚠️ <strong>Mimo základ:</strong> jídlo, výlety, vstupy, jízdné v Singapuru a suvenýry (jídlo a vstupné se počítají zvlášť, viz níže)</div>
+                    <div class="feat-pill">✅ <strong>V ceně:</strong> letenky, trajekty, hotely, skútry, víza, eSIM, jídlo, výlety a vstupy podle tvého výběru</div>
+                    <div class="feat-pill x-c-accent" style="border-color: rgba(224, 103, 90, 0.6);">⚠️ <strong>Není v ceně:</strong> jízdné v Singapuru, taxi, drobné výdaje, suvenýry a poslední hotel na místě</div>
                 </div>
             </div>
 
             <div style="background: rgba(169, 187, 208, 0.12); border: 2px solid var(--primary); padding: 12px; border-radius: 12px; text-align: center; margin-top: 10px;">
-                <div style="font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Rozpočet vč. jídla a aktivit / osoba</div>
+                <div style="font-size: 0.72rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Cena dovolené na osobu</div>
                 <div style="font-size: 1.4rem; font-weight: 900; color: var(--primary);" id="comparisonOurFinalPC">cca 55 877 Kč</div>
-                <div style="font-size: 0.7rem; color: var(--text-main); font-weight: 600;">(základ + zvolená úroveň jídla + zaškrtnuté vstupy a aktivity)</div>
+                <div style="font-size: 0.7rem; color: var(--text-main); font-weight: 600;">(letenky, hotely, skútry, víza + zvolené jídlo, vstupy a aktivity)</div>
             </div>
         </div>
 
@@ -13151,16 +13151,18 @@ function updatePackingWeight() {
             { k: 'flights', label: 'Letenky (dálková + Scoot)', ids: [1, 2], c: 'var(--c-flights)' },
             { k: 'boat', label: 'Loď na Lombok', ids: [3], c: 'var(--c-food)' },
             { k: 'hotels', label: 'Ubytování a skútry', ids: [4, 5], c: 'var(--c-hotels)' },
-            { k: 'fees', label: 'Víza a poplatky', ids: [11, 12, 13, 14], c: 'var(--c-fees)' }
+            { k: 'fees', label: 'Víza a poplatky', ids: [11, 12, 13, 14], c: 'var(--c-fees)' },
+            { k: 'food', label: 'Jídlo', fn: function (s) { return parseVal('bxFood_' + s); }, c: '#f59e0b' },
+            { k: 'acts', label: 'Vstupné a aktivity', fn: function (s) { return parseVal('bxAct_' + s); }, c: '#a78bfa' }
         ];
         var DAYS = 20; // 6. – 25. 8. 2027
         var fmt = function (n) { return Math.round(n).toLocaleString('cs-CZ') + ' Kč'; };
         var prof = {};
         ['pers', 'fam', 'sing'].forEach(function (sfx) {
             var o = { total: 0 };
-            CATS.forEach(function (c) { o[c.k] = sum(c.ids, sfx); o.total += o[c.k]; });
+            CATS.forEach(function (c) { o[c.k] = c.fn ? c.fn(sfx) : sum(c.ids, sfx); o.total += o[c.k]; });
             // kontrola proti oficiálnímu součtu v tabulce
-            var official = parseInt(((document.getElementById('breakdownTotal' + sfx.charAt(0).toUpperCase() + sfx.slice(1)) || {}).textContent || '').replace(/[^0-9]/g, ''), 10);
+            var official = parseInt(((document.getElementById('bxGrand_' + sfx) || {}).textContent || '').replace(/[^0-9]/g, ''), 10);
             if (official && Math.abs(official - o.total) > 1) console.warn('Kam jdou peníze: součet ' + o.total + ' ≠ tabulka ' + official + ' (' + sfx + ')');
             if (official) o.total = official; // celková čísla vždy přesně jako „Celkový součet nákladů“
             prof[sfx] = o;
@@ -13259,6 +13261,9 @@ function updatePackingWeight() {
                         if (e) mo.observe(e, { childList: true, characterData: true, subtree: true });
                     });
                 }
+                ['pers', 'fam', 'sing'].forEach(function (sfx) {
+                    ['bxFood_', 'bxAct_', 'bxGrand_'].forEach(function (pre) { var e = document.getElementById(pre + sfx); if (e) mo.observe(e, { childList: true, characterData: true, subtree: true }); });
+                });
                 new MutationObserver(redraw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
             } catch (e) {}
         });
@@ -14431,8 +14436,6 @@ function updatePackingWeight() {
         function shareToWhatsAppDirect() {
             const flight = flightOptions[currentAirline];
             const shareUrl = buildShareableUrl();
-            const personPrice = document.getElementById('calcPricePerson').innerText;
-            const familyPrice = document.getElementById('calcPriceFamily').innerText;
 
             let lines = [
                 `🌴 *NAŠE VOLBA – EXPEDICE SINGAPUR • BALI • LOMBOK 2027*`,
@@ -14450,12 +14453,12 @@ function updatePackingWeight() {
             });
 
             lines.push(``);
-            lines.push(`👤 *Celkem na 1 osobu:* ${personPrice}`);
-            lines.push(`👨‍👩‍👧 *Celkem na pár / pokoj:* ${familyPrice}`);
-            const singlePrice = document.getElementById('calcPriceSingle') ? document.getElementById('calcPriceSingle').innerText : '';
-            if (singlePrice) lines.push(`🏍️ *Celkem sólo cestovatel (sám pokoj i skútr):* ${singlePrice}`);
-            if (window.TRIP) { const f = TRIP.food(), a = TRIP.sums({ solo: false }); lines.push(`🍜 *Jídlo (${f.name}):* ${formatKz(f.kc)} Kč/os. · 🎟️ *Vstupné a aktivity:* ${formatKz(a.kc)} Kč/os.`); }
-            lines.push(`ℹ️ _Základ nezahrnuje jídlo, výlety, vstupy, jízdné v Singapuru a suvenýry._`);
+            const tot = id => { const e = document.getElementById(id); return e ? e.innerText : ''; };
+            lines.push(`💰 *Cena dovolené na 1 osobu (se vším):* ${tot('floatPricePerson')}`);
+            lines.push(`👨‍👩‍👧 *Cena dovolené pro pár / pokoj:* ${tot('floatPriceFamily')}`);
+            if (tot('floatPriceSingle')) lines.push(`🏍️ *Cena dovolené sólo (sám pokoj i skútr):* ${tot('floatPriceSingle')}`);
+            if (window.TRIP) { const f = TRIP.food(), a = TRIP.sums({ solo: false }); lines.push(`✅ _Zahrnuje letenky, hotely, skútry, víza, 🍜 jídlo (${f.name}) a 🎟️ vstupné a aktivity._`); }
+            lines.push(`ℹ️ _Nezahrnuje jízdné v Singapuru, taxi, drobné výdaje, úschovnu batohů, loď na Gili, suvenýry a poslední hotel na místě._`);
             lines.push(``);
             lines.push(`🔗 *Klikni sem a otevře se ti přesně tahle naše vybraná kombinace:*`);
             lines.push(shareUrl);
@@ -14964,13 +14967,15 @@ function toggleGanttCardFullscreen() {
             set('bxAct_pers', aP); set('bxAct_fam', aP * 2); set('bxAct_sing', aS);
             const grandP = b.pers + f + aP;
             set('bxGrand_pers', grandP); set('bxGrand_fam', b.fam + 2 * f + 2 * aP); set('bxGrand_sing', b.sing + f + aS);
-            const fl = document.getElementById('bxFoodLbl'); if (fl) fl.innerText = '+ Jídlo, úroveň „' + T.levelName() + '“ (mimo základ)';
-            const al = document.getElementById('bxActLbl'); if (al) al.innerText = '+ Vstupné a aktivity, zaškrtnuté položky (mimo základ)';
+            const fl = document.getElementById('bxFoodLbl'); if (fl) fl.innerText = '+ Jídlo, úroveň „' + T.levelName() + '“';
+            const al = document.getElementById('bxActLbl'); if (al) al.innerText = '+ Vstupné a aktivity, zaškrtnuté položky';
             const txt = 'cca ' + formatKz(grandP) + ' Kč';
             const fset = (id, v) => { const el = document.getElementById(id); if (el) el.innerText = formatKz(v) + ' Kč'; };
-            const bset = (id, v) => { const el = document.getElementById(id); if (el) el.innerText = 'základ ' + formatKz(v) + ' Kč'; };
+            const bset = (id, v) => { const el = document.getElementById(id); if (el) { el.innerText = ''; el.style.display = 'none'; } };
             bset('floatBasePerson', b.pers); bset('floatBaseFamily', b.fam); bset('floatBaseSingle', b.sing);
             fset('floatPricePerson', grandP); fset('floatPriceFamily', b.fam + 2 * f + 2 * aP); fset('floatPriceSingle', b.sing + f + aS);
+            set('calcTotalPerson', grandP); set('calcTotalFamily', b.fam + 2 * f + 2 * aP); set('calcTotalSingle', b.sing + f + aS);
+            ['comparisonOurPricePC', 'comparisonOurPriceMob'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = txt; });
             ['comparisonOurFinalPC', 'comparisonOurFinalMob'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = txt; });
             const sav = document.getElementById('dynamicSavingsHighlight');
             if (sav) { const d = 94500 - grandP; sav.innerText = d > 0 ? 'přes ' + formatKz(d) + ' Kč' : 'výraznou částku'; }
@@ -15078,7 +15083,7 @@ function recalculateAll() {
             const singlePriceEl = document.getElementById('calcPriceSingle');
             if (singlePriceEl) singlePriceEl.innerText = `${formatKz(totalCurrentSingle)} Kč`;
 
-            document.getElementById('calcDescPerson').innerText = `Dálkový let: ${flight.name}, vybrané hotely, skútry, víza a poplatky. Bez jídla, výletů, vstupů, jízdného v Singapuru a suvenýrů`;
+            document.getElementById('calcDescPerson').innerText = `Dálkový let: ${flight.name}, vybrané hotely, skútry, víza a poplatky, jídlo a vstupy podle tvého výběru`;
             window.__tripBase = { pers: totalCurrentPerson, fam: totalCurrentFamily, sing: totalCurrentSingle };
 
             document.getElementById('floatPricePerson').innerText = `${formatKz(totalCurrentPerson)} Kč`;
@@ -18132,7 +18137,7 @@ body.simple-on { overflow: hidden; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '31. 10. 2026 · 10:59';
+    var LUX_VERSION = '31. 10. 2026 · 11:09';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19234,10 +19239,8 @@ function luxQRSvg(text, px) {
     }
 
     function spFinal(txt) {
-        function num(s) { return parseInt(String(s).replace(/\D/g, ''), 10) || 0; }
-        var all = txt('floatPricePerson'), base = txt('floatBasePerson'), extra = num(all) - num(base);
-        return '<div class="sp-final"><small>Finální cena se vším · 1 osoba</small><b>' + all + '</b><span>základ ' + base.replace(/^základ\s*/i, '') + ' (letenky, ubytování, lodě a další) + jídlo a aktivity ' + (extra > 0 ? extra.toLocaleString('cs-CZ') + ' Kč' : '–') + '</span></div>' +
-            '<div class="sp-price2"><div><small>Pár · vše (2 osoby)</small><b>' + txt('floatPriceFamily') + '</b></div><div><small>Sólo · vše (1 osoba v pokoji)</small><b>' + txt('floatPriceSingle') + '</b></div></div>';
+        return '<div class="sp-final"><small>Cena za dovolenou celkem · 1 osoba</small><b>' + txt('floatPricePerson') + '</b><span>se vším, co sis nakonfiguroval: letenky, hotely, skútry, víza, jídlo, výlety a vstupy</span></div>' +
+            '<div class="sp-price2"><div><small>Pár · celkem (2 osoby)</small><b>' + txt('floatPriceFamily') + '</b></div><div><small>Sólo · celkem (1 osoba v pokoji)</small><b>' + txt('floatPriceSingle') + '</b></div></div>';
     }
     function spBuild() {
         var f; try { f = flightOptions[currentAirline]; } catch (e) { f = null; }
@@ -19267,9 +19270,8 @@ function luxQRSvg(text, px) {
         }).join('');
         return '<div class="sp-top"><b>Singapur · Bali · Lombok 2027</b><button type="button" class="sp-btn2 primary" data-sp="close">← Celá stránka</button></div>' +
             '<div class="sp-wrap"><div><h1>Naše cesta v kostce</h1><p class="sp-sub">6.–25. srpna 2027 · 20 dní · Singapur, Bali a Lombok' + (left ? ' · do odletu zbývá ' + left + ' dní' : '') + '</p></div>' +
-            '<section><h2>💰 Finální cena na osobu</h2>' + spFinal(txt) + '<p class="sp-note">Cena se mění podle zvolených letů a hotelů. Zahrnuje i jídlo a aktivity.</p></section>' + spCash() +
+            '<section><h2>💰 Cena dovolené</h2>' + spFinal(txt) + '<p class="sp-note">Cena se mění podle toho, co si zvolíš: lety, hotely, úroveň jídla a výlety. Nezahrnuje jízdné v Singapuru, taxi, drobné výdaje, úschovnu batohů, soukromou loď na Gili, suvenýry a platbu za poslední hotel na místě.</p></section>' + spCash() +
             '<section><h2>🗺️ Trasa a ubytování</h2><ul class="sp-tl">' + tl + '</ul></section>' +
-            '<section><h2>✅ V ceně a navíc</h2><div class="sp-inex"><div><h3>V základní ceně</h3><ul><li>Letenky Praha ⇄ Singapur a Singapur ⇄ Bali</li><li>Loď Bali ⇄ Lombok</li><li>17 nocí ubytování se snídaní</li><li>Skútry, benzín a mýto</li><li>Indonéské vízum a turistická daň</li><li>eSIM a parkování v Praze</li></ul></div><div><h3>Navíc (platí se zvlášť)</h3><ul><li>Jídlo a pití</li><li>Výlety, vstupy a aktivity</li><li>Jízdné v Singapuru</li><li>Taxi a drobné výdaje</li><li>Suvenýry</li><li>Poslední hotel (platba na místě)</li></ul></div></div></section>' +
             '<section><h2>⏳ Co nás čeká v nejbližší době</h2>' + (tasks ? '<ul class="sp-tasks">' + tasks + '</ul>' : '<p class="sp-note">Všechny úkoly jsou splněné 🎉</p>') + '</section>' +
             '<div class="sp-actions"><button type="button" class="sp-btn2 primary" data-sp="close">← Celá stránka</button><button type="button" class="sp-btn2" data-sp="present">🎞️ Prezentace</button><button type="button" class="sp-btn2" data-sp="link">🔗 Zkopírovat odkaz</button><button type="button" class="sp-btn2" data-sp="print">🖨️ Vytisknout</button></div>' +
             '<p class="sp-foot">Jednoduchý přehled. Všechny podrobnosti jsou na celé stránce. Verze ' + LUX_VERSION + '</p></div>';
