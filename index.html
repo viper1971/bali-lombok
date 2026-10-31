@@ -6074,7 +6074,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 07:11</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 07:14</div>
         <h1><img decoding="async" src="https://flagcdn.com/w40/sg.png" alt="Singapur" style="height: 1.2em; vertical-align: -0.15em; border-radius: 4px; margin-right: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);"> Singapur<br><img decoding="async" src="https://flagcdn.com/w40/id.png" alt="Indonésie" style="height: 1.2em; vertical-align: -0.15em; border-radius: 4px; margin-right: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);"> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -17996,7 +17996,7 @@ body.pres-on #presRail { display: flex; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '31. 10. 2026 · 07:11';
+    var LUX_VERSION = '31. 10. 2026 · 07:14';
     var $ = function (id) { return document.getElementById(id); };
     function toast(msg) {
         if (typeof window.showToast === 'function') { try { window.showToast(msg); return; } catch (e) {} }
@@ -18855,6 +18855,7 @@ body.pres-on #presRail { display: flex; }
         nav.appendChild(item('menuToolPresent', '🎞️', 'Režim prezentace', function () { window.luxPresent(); }));
         nav.appendChild(item('menuToolInstall', '📲', 'Přidat na plochu', window.luxInstall));
         var ver = document.createElement('div'); ver.id = 'luxVersion'; ver.style.cssText = 'margin:10px 14px 4px;font-size:.7rem;color:var(--text-muted);opacity:.85'; ver.textContent = 'Verze stránky: ' + LUX_VERSION; nav.appendChild(ver);
+        var lm = new Date(document.lastModified); if (!isNaN(lm)) { var sv = document.createElement('div'); sv.style.cssText = ver.style.cssText; sv.style.marginTop = '0'; try { sv.textContent = 'Soubor na serveru změněn: ' + lm.toLocaleString('cs-CZ', { timeZone: 'Europe/Prague', day: 'numeric', month: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(',', ' ·'); } catch (e) { sv.textContent = 'Soubor na serveru změněn: ' + lm.toLocaleString('cs-CZ'); } nav.appendChild(sv); }
         offlineLabel(); updateInstall();
     }
 
