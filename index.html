@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Než vyrazíme · pozvánka na 7. 11. 2026</title>
+<meta name="description" content="Pozvánka na společné setkání před cestou Singapur, Bali a Lombok 2027. Sobota 7. 11. 2026 v 17:00, Pražská 318, Hodkovice nad Mohelkou.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #f6f3ec; --bg2: #ece7dc; --ink: #14202b; --muted: #55606a; --line: rgba(20, 32, 43, 0.15); --card: #ffffff; --accent: #b4552d; --accent-ink: #ffffff; --deep: #0f2a36;
+    --serif: 'Fraunces', 'Iowan Old Style', Georgia, 'Times New Roman', serif; --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #0d151b; --bg2: #121c24; --ink: #eef0ec; --muted: #9eabb3; --line: rgba(255, 255, 255, 0.14); --card: #15202a; --accent: #e8905f; --accent-ink: #1a0e07; --deep: #081319; } }
+:root[data-theme="dark"] { --bg: #0d151b; --bg2: #121c24; --ink: #eef0ec; --muted: #9eabb3; --line: rgba(255, 255, 255, 0.14); --card: #15202a; --accent: #e8905f; --accent-ink: #1a0e07; --deep: #081319; }
+:root { box-sizing: border-box; padding-bottom: env(safe-area-inset-bottom, 0px); }
+html { scroll-behavior: smooth; scroll-padding-top: env(safe-area-inset-top, 0px); }
+*, *::before, *::after { box-sizing: inherit; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+img { display: block; max-width: 100%; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+
+/* ===== HERO ===== */
+.hero { position: relative; min-height: 100vh; min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto; color: #fff; isolation: isolate; overflow: hidden; background: linear-gradient(160deg, #0b1f3a 0%, #3b3a6e 45%, #d98258 100%); padding-top: env(safe-area-inset-top, 0px); }
+.hero > img.bgimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 38% 50%; z-index: -2; animation: slow 28s ease-out both; }
+@keyframes slow { from { transform: scale(1.0); } to { transform: scale(1.08); } }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8, 18, 28, .55) 0%, rgba(8, 18, 28, .15) 32%, rgba(8, 18, 28, .55) 70%, rgba(8, 18, 28, .92) 100%); }
+.nav { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; }
+.mark { font: 600 .74rem var(--sans); letter-spacing: .3em; text-transform: uppercase; display: flex; align-items: center; gap: 12px; }
+.mark::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+.theme { background: rgba(255, 255, 255, .12); color: #fff; border: 1px solid rgba(255, 255, 255, .3); border-radius: 99px; padding: 8px 14px; font: 600 .72rem var(--sans); letter-spacing: .14em; text-transform: uppercase; cursor: pointer; backdrop-filter: blur(8px); }
+.hero-main { align-self: center; padding: 6vh 0 4vh; max-width: 980px; }
+.eyebrow { font: 600 .76rem var(--sans); letter-spacing: .34em; text-transform: uppercase; color: rgba(255, 255, 255, .82); margin-bottom: 20px; }
+h1 { margin: 0; font: 300 clamp(3.2rem, 11vw, 9rem)/.95 var(--serif); letter-spacing: -.03em; font-variation-settings: 'opsz' 144; }
+h1 em { font-style: italic; font-weight: 300; }
+.sub { margin: 26px 0 0; max-width: 46ch; font: 400 clamp(1.05rem, 2vw, 1.3rem)/1.55 var(--sans); color: rgba(255, 255, 255, .88); }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 24px; border-radius: 99px; font: 600 .86rem var(--sans); letter-spacing: .06em; text-decoration: none; cursor: pointer; border: 1px solid transparent; transition: transform .2s, background .2s, border-color .2s; }
+.btn:hover { transform: translateY(-2px); }
+.btn.solid { background: #fff; color: #0d1b24; } .btn.solid:hover { background: #f1ece2; }
+.btn.line { color: #fff; border-color: rgba(255, 255, 255, .55); background: rgba(255, 255, 255, .06); backdrop-filter: blur(6px); } .btn.line:hover { background: rgba(255, 255, 255, .16); }
+.btn.acc { background: var(--accent); color: var(--accent-ink); } .btn.out { color: var(--ink); border-color: var(--line); background: transparent; } .btn.out:hover { border-color: var(--ink); }
+.facts { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 0; border-top: 1px solid rgba(255, 255, 255, .28); }
+.fact { padding: 22px 40px 28px 0; margin-right: 40px; border-right: 1px solid rgba(255, 255, 255, .22); }
+.fact:last-child { border-right: 0; margin-right: 0; }
+.fact span { display: block; font: 600 .68rem var(--sans); letter-spacing: .26em; text-transform: uppercase; color: rgba(255, 255, 255, .7); margin-bottom: 8px; }
+.fact b { display: block; font: 400 clamp(1.15rem, 2.2vw, 1.6rem)/1.2 var(--serif); font-weight: 400; }
+.fact small { display: block; font: 400 .85rem var(--sans); color: rgba(255, 255, 255, .72); margin-top: 3px; }
+
+/* ===== OBECNÉ ===== */
+section { position: relative; }
+.pad { padding: clamp(64px, 11vw, 130px) 0; }
+.kick { font: 600 .72rem var(--sans); letter-spacing: .3em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 14px; }
+.kick::after { content: ""; width: 46px; height: 1px; background: var(--accent); }
+h2 { margin: 0; font: 300 clamp(2.2rem, 5.4vw, 4rem)/1.08 var(--serif); letter-spacing: -.02em; font-variation-settings: 'opsz' 100; }
+h2 em { font-style: italic; }
+.lead { margin: 26px 0 0; max-width: 62ch; font: 300 clamp(1.25rem, 2.6vw, 1.75rem)/1.5 var(--serif); color: var(--ink); }
+.lead b { font-weight: 500; }
+.bgphoto { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.bgphoto img { width: 100%; height: 100%; object-fit: cover; opacity: .12; filter: grayscale(.6); -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 55%, #000 100%); mask-image: linear-gradient(90deg, transparent 0%, #000 55%, #000 100%); }
+[data-theme="dark"] .bgphoto img { opacity: .16; }
+.bgphoto.left img { -webkit-mask-image: linear-gradient(270deg, transparent 0%, #000 55%, #000 100%); mask-image: linear-gradient(270deg, transparent 0%, #000 55%, #000 100%); }
+
+/* ===== O ČEM TO BUDE ===== */
+.intro { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(30px, 6vw, 80px); align-items: end; }
+.three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 70px; border-top: 1px solid var(--line); }
+.col { padding: 30px 32px 10px 0; margin-right: 32px; border-right: 1px solid var(--line); }
+.col:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+.col .n { font: 300 2.6rem/1 var(--serif); color: var(--accent); margin-bottom: 16px; font-style: italic; }
+.col h3 { margin: 0 0 10px; font: 500 1.35rem/1.25 var(--serif); }
+.col p { margin: 0; color: var(--muted); font-size: .97rem; line-height: 1.65; }
+.col p b { color: var(--ink); font-weight: 600; }
+
+/* ===== SLIDESHOW ===== */
+.show { position: relative; height: min(88vh, 820px); min-height: 520px; background: var(--deep); color: #fff; overflow: hidden; isolation: isolate; }
+.slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s ease; background: linear-gradient(160deg, #0c2a3a, #1d5a64 55%, #c98a54); }
+.slide.on { opacity: 1; z-index: 1; }
+.slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.slide.on img { animation: kb 12s ease-out both; }
+@keyframes kb { from { transform: scale(1.03); } to { transform: scale(1.14); } }
+.slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6, 14, 20, .35), rgba(6, 14, 20, 0) 35%, rgba(6, 14, 20, .8) 100%); }
+.cap { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; padding-bottom: 78px; }
+.cap .k { font: 600 .72rem var(--sans); letter-spacing: .3em; text-transform: uppercase; color: rgba(255, 255, 255, .8); }
+.cap h3 { margin: 8px 0 6px; font: 300 clamp(2.4rem, 7vw, 5.2rem)/1 var(--serif); letter-spacing: -.02em; }
+.cap p { margin: 0; max-width: 52ch; font-size: 1.05rem; color: rgba(255, 255, 255, .88); }
+.cap .credit { position: absolute; right: 0; bottom: -52px; font-size: .68rem; color: rgba(255, 255, 255, .6); letter-spacing: .04em; }
+.show-head { position: absolute; z-index: 3; top: 0; left: 0; right: 0; padding: 36px 0 0; }
+.show-head .kick { color: #fff; } .show-head .kick::after { background: #fff; }
+.ctrls { position: absolute; z-index: 4; left: 0; right: 0; bottom: 26px; }
+.ctrls .wrap { display: flex; align-items: center; gap: 18px; }
+.bars { display: flex; gap: 8px; flex: 1; }
+.bars button { flex: 1; height: 24px; padding: 0; border: 0; background: transparent; cursor: pointer; position: relative; }
+.bars button::before { content: ""; position: absolute; left: 0; right: 0; top: 10px; height: 2px; background: rgba(255, 255, 255, .35); }
+.bars button i { position: absolute; left: 0; top: 10px; height: 2px; width: 0; background: #fff; }
+.bars button.on i { animation: fill 6s linear forwards; }
+.bars button.done i { width: 100%; }
+@keyframes fill { to { width: 100%; } }
+.arrows { display: flex; gap: 8px; }
+.arrows button { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .5); background: rgba(255, 255, 255, .08); color: #fff; font-size: 1.15rem; cursor: pointer; backdrop-filter: blur(6px); }
+.arrows button:hover { background: rgba(255, 255, 255, .22); }
+
+/* ===== PROGRAM ===== */
+.agenda { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(30px, 6vw, 80px); margin-top: 56px; }
+.item { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 18px; padding: 28px 0; border-top: 1px solid var(--line); }
+.item .t { font: 300 2.2rem/1 var(--serif); color: var(--accent); font-style: italic; }
+.item h3 { margin: 0 0 6px; font: 500 1.3rem/1.25 var(--serif); }
+.item p { margin: 0; color: var(--muted); font-size: .96rem; line-height: 1.65; }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.pills span { font: 600 .72rem var(--sans); letter-spacing: .08em; padding: 6px 14px; border: 1px solid var(--accent); color: var(--accent); border-radius: 99px; }
+
+/* ===== TRASA ===== */
+.route { margin-top: 56px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; position: relative; }
+.route::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 1px; background: var(--line); }
+.stop { position: relative; padding: 32px 22px 0 0; }
+.stop::before { content: ""; position: absolute; top: 0; left: 0; width: 15px; height: 15px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+.stop b { display: block; font: 400 1.7rem/1.1 var(--serif); }
+.stop span { display: block; font: 600 .7rem var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.stop p { margin: 6px 0 0; color: var(--muted); font-size: .92rem; }
+
+/* ===== KDE ===== */
+.where { background: var(--deep); color: #fff; overflow: hidden; isolation: isolate; }
+.where .bgphoto img { opacity: .22; filter: grayscale(.2); }
+.where-in { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(30px, 6vw, 80px); align-items: center; }
+.where h2 { color: #fff; }
+.where .kick { color: #f1b48f; } .where .kick::after { background: #f1b48f; }
+.addr { margin: 28px 0 6px; font: 300 clamp(1.8rem, 4vw, 2.8rem)/1.15 var(--serif); }
+.addr-sub { color: rgba(255, 255, 255, .72); margin: 0 0 8px; }
+.when { margin: 24px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+.when li { display: flex; gap: 14px; align-items: baseline; font-size: 1rem; }
+.when li span { min-width: 92px; font: 600 .7rem var(--sans); letter-spacing: .22em; text-transform: uppercase; color: rgba(255, 255, 255, .6); }
+.btns { display: grid; gap: 12px; }
+.btns .btn { justify-content: space-between; padding: 18px 26px; border-radius: 14px; background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .28); color: #fff; backdrop-filter: blur(8px); }
+.btns .btn::after { content: "→"; font-size: 1.1rem; }
+.btns .btn:hover { background: rgba(255, 255, 255, .18); }
+.btns .btn.main { background: #fff; color: #0d1b24; border-color: #fff; }
+.btns .btn.main:hover { background: #f1ece2; }
+
+/* ===== PATIČKA ===== */
+.foot { padding: 60px 0 40px; text-align: center; }
+.sign { font: italic 300 clamp(2.4rem, 6vw, 4rem)/1.1 var(--serif); }
+.foot .sec { display: inline-block; margin-top: 28px; padding: 10px 16px; color: var(--muted); opacity: .12; text-decoration: none; font-size: 1rem; line-height: 1; transition: opacity .3s; }
+.foot .sec:hover, .foot .sec:focus-visible { opacity: .6; }
+.foot p { color: var(--muted); margin: 10px 0 0; font-size: .95rem; }
+.credits { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--line); font-size: .74rem; line-height: 1.8; color: var(--muted); text-align: left; }
+.credits b { color: var(--ink); letter-spacing: .12em; text-transform: uppercase; font-size: .68rem; }
+.credits a { text-decoration: underline; text-underline-offset: 3px; }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+    .intro, .where-in { grid-template-columns: minmax(0, 1fr); }
+    .three { grid-template-columns: minmax(0, 1fr); } .col { border-right: 0; margin-right: 0; padding: 26px 0 18px; border-bottom: 1px solid var(--line); } .col:last-child { border-bottom: 0; }
+    .agenda { grid-template-columns: minmax(0, 1fr); }
+    .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fact { border-right: 0; margin-right: 0; padding: 18px 20px 14px 0; }
+    .route { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 28px; } .route::before { display: none; }
+    .bgphoto img { opacity: .08; }
+}
+@media (max-width: 560px) { .wrap { width: calc(100% - 32px); } .arrows { display: none; } .cap { padding-bottom: 70px; } .cap .credit { position: static; margin-top: 10px; } .btn { padding: 13px 20px; } .hero-main { padding-top: 3vh; } }
+@media (prefers-reduced-motion: reduce) { .hero > img.bgimg, .slide.on img { animation: none; } .reveal { opacity: 1; transform: none; transition: none; } .slide { transition: none; } .bars button.on i { animation: none; width: 100%; } html { scroll-behavior: auto; } }
+@media print { .sec, .theme, .arrows, .bars { display: none; } }
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+    <img class="bgimg" src="https://commons.wikimedia.org/wiki/Special:FilePath/Singapore%20Marina%20Bay%20Dusk%202018-02-27.jpg?width=2400" alt="Singapur, Marina Bay za soumraku" onerror="this.remove()">
+    <div class="wrap nav">
+        <div class="mark">Pozvánka</div>
+        <button class="theme" id="theme" type="button" aria-label="Přepnout světlý a tmavý vzhled">Vzhled</button>
+    </div>
+    <div class="wrap hero-main">
+        <div class="eyebrow">Singapur · Bali · Lombok 2027</div>
+        <h1>Než <em>vyrazíme</em></h1>
+        <p class="sub">Společné setkání před cestou. Kávu máme, plán je hotový a na stole je poslední slovo.</p>
+        <div class="hero-cta">
+            <a class="btn solid" id="gcal" href="#" target="_blank" rel="noopener noreferrer">Přidat do kalendáře</a>
+            <a class="btn line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pra%C5%BEsk%C3%A1+318%2C+Hodkovice+nad+Mohelkou&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">Nastavit trasu v Google Mapách</a>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="facts">
+            <div class="fact"><span>Kdy</span><b>Sobota 7. listopadu 2026</b></div>
+            <div class="fact"><span>V kolik</span><b>17:00</b></div>
+            <div class="fact"><span>Kde</span><b>Pražská 318</b><small>Hodkovice nad Mohelkou</small></div>
+            <div class="fact"><span>Do setkání</span><b id="cd">–</b><small id="cdl"></small></div>
+        </div>
+    </div>
+</header>
+
+<section class="pad">
+    <div class="bgphoto" aria-hidden="true"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rice%20terraces%2C%20Bali.jpg?width=1600" alt="" loading="lazy" onerror="this.remove()"></div>
+    <div class="wrap reveal">
+        <div class="intro">
+            <div>
+                <div class="kick">Pozvání</div>
+                <h2>Sejdeme se dřív, než <em>spolu vyrazíme</em></h2>
+            </div>
+            <p class="lead" style="margin:0">Dáme si <b>kávu</b>, poznáme se a v klidu probereme <b>celou dovolenou</b>, včetně finálního výběru mezi Plánem A, Variantou B a Variantou C.</p>
+        </div>
+        <div class="three">
+            <div class="col"><div class="n">01</div><h3>Káva a seznámení</h3><p>V sobotu <b>7. 11. 2026 v 17:00</b> u mě v Hodkovicích nad Mohelkou. Vzájemně se seznámíme dřív, než spolu vyrazíme na tři týdny.</p></div>
+            <div class="col"><div class="n">02</div><h3>Celý plán dovolené</h3><p>Podrobně projdeme <b>itinerář, lety, hotely i motorky</b> a společně se rozhodneme.</p></div>
+            <div class="col"><div class="n">03</div><h3>Administrativa na mně</h3><p>Víza, letenky, lodní lístky i povinné formuláře zařídím já, aby cestování bylo <b>bez starostí a bez stresu</b>.</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="show" id="show" aria-roledescription="carousel" aria-label="Fotografie z cesty">
+    <div class="show-head"><div class="wrap"><div class="kick">Kam míříme</div></div></div>
+
+    <div class="slide on"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Singapore%20Marina%20Bay%20Dusk%202018-02-27.jpg?width=2000" alt="Singapur, Marina Bay" onerror="this.remove()">
+        <div class="cap"><div class="wrap" style="position:relative"><div class="k">Etapa 1 · 7.–9. 8. 2027</div><h3>Singapur</h3><p>Hawkery, zátoka Marina Bay a světla velkoměsta.</p><div class="credit">Foto: Benh Lieu Song, CC BY-SA, Wikimedia Commons</div></div></div></div>
+    <div class="slide"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Uluwatu%40bali.jpg?width=2000" alt="Chrám Uluwatu na útesu" loading="lazy" onerror="this.remove()">
+        <div class="cap"><div class="wrap" style="position:relative"><div class="k">Etapa 2 · 9.–11. 8. 2027</div><h3>Uluwatu</h3><p>Chrám na útesu nad Indickým oceánem.</p><div class="credit">Foto: Nazir Amin, CC BY-SA 2.0, Wikimedia Commons</div></div></div></div>
+    <div class="slide"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rice%20terraces%2C%20Bali.jpg?width=2000" alt="Rýžové terasy na Bali" loading="lazy" onerror="this.remove()">
+        <div class="cap"><div class="wrap" style="position:relative"><div class="k">Etapa 3 · 11.–15. 8. 2027</div><h3>Ubud</h3><p>Rýžové terasy, palmy a klid kolem Ubudu.</p><div class="credit">Foto: Vyacheslav Argenberg, CC BY 4.0, Wikimedia Commons</div></div></div></div>
+    <div class="slide"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Gunung%20rinjani.jpg?width=2000" alt="Sopka Rinjani a kráterové jezero" loading="lazy" onerror="this.remove()">
+        <div class="cap"><div class="wrap" style="position:relative"><div class="k">Etapa 4 a 5 · 15.–23. 8. 2027</div><h3>Lombok</h3><p>Sopka Rinjani s kráterovým jezerem Segara Anak.</p><div class="credit">Foto: Devi Lesaldo Yuliarianto, CC BY-SA 4.0, Wikimedia Commons</div></div></div></div>
+    <div class="slide"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Beach%20-%20Gili%20Trawangan%20%2816950555226%29.jpg?width=2000" alt="Pláž na Gili Trawangan" loading="lazy" onerror="this.remove()">
+        <div class="cap"><div class="wrap" style="position:relative"><div class="k">Výlet · Gili Islands</div><h3>Gili</h3><p>Pláž na Gili Trawangan, kde nejezdí žádná auta.</p><div class="credit">Foto: Jorge Láscar, CC BY 2.0, Wikimedia Commons</div></div></div></div>
+
+    <div class="ctrls"><div class="wrap">
+        <div class="bars" id="bars" role="group" aria-label="Výběr fotografie"></div>
+        <div class="arrows"><button type="button" id="prev" aria-label="Předchozí fotografie">←</button><button type="button" id="next" aria-label="Další fotografie">→</button></div>
+    </div></div>
+</section>
+
+<section class="pad">
+    <div class="bgphoto left" aria-hidden="true"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Uluwatu%40bali.jpg?width=1600" alt="" loading="lazy" onerror="this.remove()"></div>
+    <div class="wrap reveal">
+        <div class="kick">Program setkání</div>
+        <h2>Na co se <em>podíváme</em></h2>
+        <div class="agenda">
+            <div class="item"><div class="t">I</div><div><h3>Letenky a časová osa</h3><p>Rozhodneme, jak poletíme, jestli v Changi vydržíme devět hodin, nebo vyrazíme na večeři do Singapuru, a schválíme dřívější přílet na Bali.</p></div></div>
+            <div class="item"><div class="t">II</div><div><h3>Ubytování a doprava</h3><p>Vybrané hotely, jízda na skútru (potřebujete mezinárodní řidičák) a přesun mezi Bali a Lombokem, letadlem nebo lodí.</p></div></div>
+            <div class="item"><div class="t">III</div><div><h3>Peníze a termíny</h3><p>Kapesné, hotovost, vlastní bezkontaktní karta na MHD v Singapuru a harmonogram záloh.</p><div class="pills"><span>Letenky do 15. 1. 2027</span><span>Hotely do 10. 7. 2027</span></div></div></div>
+            <div class="item"><div class="t">IV</div><div><h3>Zdraví, balení a zákazy</h3><p>Batoh nejvýš sedm kilo, platnost pasu, očkování, lékárnička a přísná pravidla v Singapuru.</p></div></div>
+        </div>
+
+        <div style="margin-top:90px"><div class="kick">Trasa 6.–25. 8. 2027</div><h2>Tři ostrovy, <em>jedna cesta</em></h2></div>
+        <div class="route">
+            <div class="stop"><span>7.–9. 8.</span><b>Singapur</b><p>Zátoka Marina Bay a hawkery.</p></div>
+            <div class="stop"><span>9.–15. 8.</span><b>Bali</b><p>Uluwatu a Ubud na skútrech.</p></div>
+            <div class="stop"><span>15.–23. 8.</span><b>Lombok</b><p>Severní a jižní pobřeží, výlet na Gili.</p></div>
+            <div class="stop"><span>23.–25. 8.</span><b>Návrat</b><p>Poslední noc u letiště a cesta domů.</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="where pad" id="kde">
+    <div class="bgphoto" aria-hidden="true"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Beach%20-%20Gili%20Trawangan%20%2816950555226%29.jpg?width=1600" alt="" loading="lazy" onerror="this.remove()"></div>
+    <div class="wrap where-in reveal">
+        <div>
+            <div class="kick">Kde se sejdeme</div>
+            <h2>Jak se k nám <em>dostanete</em></h2>
+            <div class="addr">Pražská 318</div>
+            <p class="addr-sub">Hodkovice nad Mohelkou</p>
+            <ul class="when"><li><span>Datum</span>sobota 7. listopadu 2026</li><li><span>Čas</span>17:00</li><li><span>S sebou</span>telefon (zkontrolujeme eSIM) a dobrou náladu</li></ul>
+        </div>
+        <div class="btns">
+            <a class="btn main" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pra%C5%BEsk%C3%A1+318%2C+Hodkovice+nad+Mohelkou&amp;travelmode=driving" target="_blank" rel="noopener noreferrer">Nastavit trasu v Google Mapách</a>
+            <a class="btn" id="gcal2" href="#" target="_blank" rel="noopener noreferrer">Přidat do kalendáře</a>
+            <a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=Pra%C5%BEsk%C3%A1+318%2C+Hodkovice+nad+Mohelkou" target="_blank" rel="noopener noreferrer">Ukázat na mapě</a>
+        </div>
+    </div>
+</section>
+
+<footer class="foot">
+    <div class="wrap">
+        <div class="sign">Těším se na vás</div>
+        <p>Radek · sobota 7. listopadu 2026 · 17:00 · Pražská 318, Hodkovice nad Mohelkou</p>
+        <div class="credits">
+            <b>Fotografie</b><br>
+            Singapur: Benh Lieu Song, <a href="https://commons.wikimedia.org/wiki/File:Singapore_Marina_Bay_Dusk_2018-02-27.jpg" target="_blank" rel="noopener noreferrer">Singapore Marina Bay Dusk</a>, CC BY-SA.
+            Uluwatu: Nazir Amin, <a href="https://commons.wikimedia.org/wiki/File:Uluwatu@bali.jpg" target="_blank" rel="noopener noreferrer">Uluwatu@bali</a>, CC BY-SA 2.0.
+            Ubud: Vyacheslav Argenberg, <a href="https://commons.wikimedia.org/wiki/File:Rice_terraces,_Bali.jpg" target="_blank" rel="noopener noreferrer">Rice terraces, Bali</a>, CC BY 4.0.
+            Lombok: Devi Lesaldo Yuliarianto, <a href="https://commons.wikimedia.org/wiki/File:Gunung_rinjani.jpg" target="_blank" rel="noopener noreferrer">Gunung Rinjani</a>, CC BY-SA 4.0.
+            Gili: Jorge Láscar, <a href="https://commons.wikimedia.org/wiki/File:Beach_-_Gili_Trawangan_(16950555226).jpg" target="_blank" rel="noopener noreferrer">Beach, Gili Trawangan</a>, CC BY 2.0. Zdroj všech snímků: Wikimedia Commons, upraveno ořezem a ztmavením.
+        </div>
+        <a class="sec" href="https://viper1971.site.je/Index2.html?let=swiss&amp;rezim=custom&amp;hotely=C%2CA%2CC%2CB%2CB%2CC" aria-label="Další stránka">&#9881;&#xFE0E;</a>
+    </div>
+</footer>
+
+<script>
+(function () {
+    var EVENT = new Date('2026-11-07T17:00:00+01:00').getTime();
+    function tick() {
+        var left = EVENT - Date.now(), d = document.getElementById('cd'), l = document.getElementById('cdl');
+        if (left <= 0) { d.textContent = 'Proběhlo'; l.textContent = ''; return; }
+        var s = Math.floor(left / 1000), dd = Math.floor(s / 86400), hh = Math.floor(s % 86400 / 3600);
+        d.textContent = dd + (dd === 1 ? ' den' : dd > 1 && dd < 5 ? ' dny' : ' dní'); l.textContent = 'a ' + hh + ' h';
+    }
+    tick(); setInterval(tick, 60000);
+
+    var cal = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent('Než vyrazíme: společné setkání před cestou Singapur, Bali, Lombok') +
+        '&dates=20261107T160000Z/20261107T190000Z&location=' + encodeURIComponent('Pražská 318, Hodkovice nad Mohelkou') + '&details=' + encodeURIComponent('Káva, seznámení a podrobný plán dovolené 6.–25. 8. 2027.');
+    document.getElementById('gcal').href = cal; document.getElementById('gcal2').href = cal;
+
+    var root = document.documentElement;
+    document.getElementById('theme').addEventListener('click', function () {
+        var dark = root.getAttribute('data-theme') === 'dark' || (root.getAttribute('data-theme') !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        root.setAttribute('data-theme', dark ? 'light' : 'dark');
+    });
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var slides = [].slice.call(document.querySelectorAll('#show .slide')), bars = document.getElementById('bars'), cur = 0, timer = null, show = document.getElementById('show');
+    slides.forEach(function (s, i) { var b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Fotografie ' + (i + 1) + ' z ' + slides.length); b.innerHTML = '<i></i>'; b.addEventListener('click', function () { go(i, true); }); bars.appendChild(b); });
+    function go(i, user) {
+        cur = (i + slides.length) % slides.length;
+        slides.forEach(function (s, k) { s.classList.toggle('on', k === cur); });
+        [].forEach.call(bars.children, function (b, k) { b.classList.remove('on', 'done'); void b.offsetWidth; if (k < cur) b.classList.add('done'); if (k === cur) b.classList.add('on'); });
+        clearInterval(timer); if (!reduce) timer = setInterval(function () { go(cur + 1); }, 6000);
+    }
+    document.getElementById('prev').addEventListener('click', function () { go(cur - 1, true); });
+    document.getElementById('next').addEventListener('click', function () { go(cur + 1, true); });
+    var x0 = null; show.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    show.addEventListener('touchend', function (e) { if (x0 == null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) go(cur + (dx < 0 ? 1 : -1), true); x0 = null; });
+    go(0);
+
+    var els = [].slice.call(document.querySelectorAll('.reveal'));
+    if (!('IntersectionObserver' in window) || reduce) els.forEach(function (e) { e.classList.add('in'); });
+    else {
+        var io = new IntersectionObserver(function (en) { en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.08 });
+        els.forEach(function (e) { io.observe(e); });
+        setTimeout(function () { els.forEach(function (e) { e.classList.add('in'); }); }, 4000);
+    }
+})();
+</script>
+</body>
+</html>
