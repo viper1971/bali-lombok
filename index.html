@@ -6074,7 +6074,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 08:23</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 08:32</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -18020,6 +18020,15 @@ body.brief .lux-acc-title, body.brief .lux-acc-sub, body.brief .lux-acc-btn, bod
 .cx-e li, .cx-tip li { display: block !important; position: relative; padding-left: 1.15em; line-height: 1.5; }
 .cx-e li::before, .cx-tip li::before { position: absolute; left: 0; top: 0; }
 .cx-e li > b, .cx-e li > strong, .cx-tip li > b, .cx-tip li > strong { display: inline !important; }
+
+/* ---- Přehled návštěvnosti na mobilu: až na konci stránky, ne nad hlavičkou ---- */
+#statsFoot { display: none; }
+@media (max-width: 768px) {
+    #statsFoot { display: grid; justify-items: center; gap: 6px; padding: 22px 12px calc(var(--vfb-reserve, 120px) + 24px); text-align: center; }
+    #statsFoot small { font: 700 0.7rem var(--font-ui, inherit); letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); }
+    #statsFoot #toplistFloat { position: static !important; margin: 0 !important; transform: none !important; }
+}
+body.pres-on #statsFoot { display: none !important; }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -18050,7 +18059,7 @@ body.brief .lux-acc-title, body.brief .lux-acc-sub, body.brief .lux-acc-btn, bod
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '31. 10. 2026 · 08:23';
+    var LUX_VERSION = '31. 10. 2026 · 08:32';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19121,6 +19130,17 @@ function luxQRSvg(text, px) {
         var b = $('prBrief'); if (b) b.setAttribute('aria-pressed', v ? 'true' : 'false'); try { window.dispatchEvent(new Event('resize')); } catch (e) {}
     };
     try { if (localStorage.getItem('lux_brief') === '1') document.body.classList.add('brief'); } catch (e) {}
+
+
+    /* ---------- přehled návštěvnosti: na mobilu na konec stránky, na počítači zůstává plovoucí ---------- */
+    function placeStats() {
+        var el = $('toplistFloat'); if (!el) return; var mobile = window.innerWidth <= 768, foot = $('statsFoot');
+        if (mobile) {
+            if (!foot) { foot = document.createElement('footer'); foot.id = 'statsFoot'; foot.innerHTML = '<small>Návštěvnost stránky</small>'; var mw = document.querySelector('.main-wrapper'); if (mw && mw.parentNode) mw.parentNode.insertBefore(foot, mw.nextSibling); else document.body.appendChild(foot); }
+            if (el.parentNode !== foot) foot.appendChild(el);
+        } else if (foot && el.parentNode === foot) { document.body.appendChild(el); }
+    }
+    placeStats(); window.addEventListener('resize', placeStats);
 
     /* ---------- skupina „Nástroje“ v menu ---------- */
     function addTools() {
