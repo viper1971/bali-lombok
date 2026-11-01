@@ -6072,7 +6072,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 07:30</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 07:35</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -17961,6 +17961,19 @@ body.simple-on { overflow: hidden; }
 .flight-mode-btn > .tj-pic img { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s, transform .4s; } .flight-mode-btn > .tj-pic img.is-ok { opacity: 1; }
 .flight-mode-btn:hover > .tj-pic img.is-ok { transform: scale(1.04); }
 .flight-mode-btn > .tj-pic .tj-credit { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 8px 4px; font: 600 0.58rem/1.2 var(--font-ui, inherit); color: rgba(255, 255, 255, 0.92); background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.62)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; }
+
+/* ---- Kontextové fotky: pásy nad etapami a karty měn (volné fotky z Wikimedia Commons) ---- */
+.ph-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 0 0 16px; }
+.ph-strip:empty { display: none; }
+.ph-strip > .tj-pic { position: relative; border-radius: 12px; overflow: hidden; height: clamp(130px, 13vw, 210px); background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(94, 234, 212, 0.12)); }
+.ph-strip > .tj-pic img { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s, transform .5s; } .ph-strip > .tj-pic img.is-ok { opacity: 1; }
+.ph-strip > .tj-pic:hover img.is-ok { transform: scale(1.05); }
+.ph-strip > .tj-pic .tj-credit, .cx-e > .tj-pic .tj-credit { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 8px 4px; font: 600 0.58rem/1.2 var(--font-ui, inherit); color: rgba(255, 255, 255, 0.92); background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.62)); text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; }
+.cx-e > .tj-pic { position: relative; margin: -2px -2px 10px; border-radius: 12px; overflow: hidden; height: 110px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(94, 234, 212, 0.12)); }
+.cx-e > .tj-pic img { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s; } .cx-e > .tj-pic img.is-ok { opacity: 1; }
+@media (max-width: 700px) { .ph-strip { gap: 6px; } .ph-strip > .tj-pic { height: 110px; } .ph-strip > .tj-pic .tj-credit { font-size: 0.5rem; padding: 10px 5px 3px; } }
+body.brief .ph-strip { display: none !important; }
+@media print { .ph-strip { display: none; } }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -17991,7 +18004,7 @@ body.simple-on { overflow: hidden; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '1. 11. 2026 · 07:30';
+    var LUX_VERSION = '1. 11. 2026 · 07:35';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19206,6 +19219,25 @@ function luxQRSvg(text, px) {
         air_emirates: ['Emirates Boeing 777-300ER', 'Emirates aircraft'], air_emirates_flydubai: ['flydubai Boeing 737', 'Emirates Airbus A380'], air_finnair: ['Finnair Airbus A350', 'Finnair aircraft'], air_swiss: ['Swiss International Air Lines Boeing 777', 'Swiss Airbus A330', 'Swiss aircraft'], air_turkish: ['Turkish Airlines Boeing 777', 'Turkish Airlines Airbus A330', 'Turkish Airlines aircraft'],
         f_ba_0: ['Nasi goreng', 'Indonesian fried rice'], f_ba_1: ['Jimbaran grilled seafood', 'Balinese dinner'], f_ba_2: ['Es teh iced tea Indonesia', 'fresh coconut drink'], f_ba_3: ['Pisang goreng', 'Indonesian dessert']
     };
+    var STRIPS = {
+        'f-leg-liberec': ['Liberec town hall Czech Republic', 'Ještěd tower Liberec', 'Liberec city centre', 'Liberec'],
+        'f-leg-odlet': ['Václav Havel Airport Prague terminal', 'Prague airport airplane', 'Prague Castle', 'Prague'],
+        'f-leg-sg': ['Marina Bay Sands Singapore', 'Gardens by the Bay Supertree Grove', 'Merlion Singapore', 'Singapore skyline'],
+        'f-leg-sgdps': ['Changi Airport Singapore', 'Scoot Boeing 787 Dreamliner', 'Ngurah Rai International Airport Bali', 'airliner in flight'],
+        'f-leg-uluwatu': ['Uluwatu Temple Bali', 'Uluwatu cliffs Bali', 'Padang Padang beach', 'Uluwatu'],
+        'f-leg-ubud': ['Tegalalang rice terrace', 'Ubud Monkey Forest', 'Ubud Bali', 'Ubud Bali'],
+        'f-leg-presun4': ['Sanur beach Bali', 'speedboat Bali Gili', 'Bangsal Lombok harbour', 'Bali beach'],
+        'f-leg-lombok-sever': ['Gili Trawangan', 'Senggigi beach Lombok', 'Pura Batu Bolong Lombok', 'Lombok'],
+        'f-leg-kuta': ['Tanjung Aan beach Lombok', 'Mandalika International Street Circuit', 'Selong Belanak beach', 'Lombok beach'],
+        'f-leg-back': ['Bangsal harbour Lombok', 'fast boat Bali Lombok', 'Sanur harbour Bali', 'boat Indonesia'],
+        'f-leg-rozlucka': ['Jimbaran Bay sunset', 'Jimbaran grilled seafood', 'Kuta beach Bali sunset', 'Bali sunset'],
+        'f-leg-tranzit': ['Lau Pa Sat Singapore', 'Jewel Changi Rain Vortex', 'Satay Singapore', 'Singapore'],
+        'f-leg-odlet-sin': ['Changi Airport Terminal 3', 'Singapore Changi airport aircraft', 'Jewel Changi Airport', 'airport'],
+        'f-leg-domu': ['Hodkovice nad Mohelkou', 'Liberec Czech Republic', 'Jizera Mountains', 'Czech Republic landscape'],
+        'f-karta-mhd': ['Singapore MRT train', 'Singapore bus', 'Singapore EZ-Link card', 'Singapore MRT']
+    };
+    Object.keys(STRIPS).forEach(function (k) { for (var i = 0; i < 3; i++) IMG_Q['p:' + k + ':' + i] = [STRIPS[k][i], STRIPS[k][3]]; });
+    IMG_Q.cx_0 = ['Singapore dollar banknotes', 'Singapore dollar']; IMG_Q.cx_1 = ['United States dollar banknotes', 'US dollar bills']; IMG_Q.cx_2 = ['Indonesian rupiah banknotes', 'Indonesian rupiah'];
     var IMG_FB = { sg: 'Singapore skyline', ulu: 'Uluwatu cliff Bali', ub: 'Ubud Bali', lo: 'Lombok beach', ta: 'Bali', mi: 'Bali', ho: 'Bali beach', f_: 'Indonesian food', air: 'airliner in flight' };
     var IMG_API = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=640&gsrsearch=';
     var IMG_KEY = 'lux_img_v2', imgCache = {}, imgQueue = [], imgBusy = 0, imgStarted = {};
@@ -19259,6 +19291,14 @@ function luxQRSvg(text, px) {
             if (btn.querySelector(':scope > .tj-pic')) return; var key = (btn.id || '').replace('btnFlight_', ''), id = 'air_' + key; if (!key || !IMG_Q[id] || !imgWant(id, 'letenky')) return;
             var nm = (btn.querySelector('.fc-airline span') || {}).textContent || 'Letadlo', box = imgBox(btn, id, nm.trim(), false); if (box) btn.insertBefore(box, btn.firstChild);
         });
+        [].forEach.call(document.querySelectorAll('.ph-strip'), function (st) {
+            var k = st.getAttribute('data-k'), S = STRIPS[k]; if (!S) return;
+            for (var i = 0; i < 3; i++) { var id = 'p:' + k + ':' + i; if (st.querySelector('[data-img="' + id + '"]') || !imgWant(id, 'p:' + k)) continue; var box = imgBox(st, id, S[i], true); if (box) st.appendChild(box); }
+        });
+        [].forEach.call(document.querySelectorAll('#hotovost .cx-e'), function (card, i) {
+            if (card.querySelector(':scope > .tj-pic') || i > 2) return; var id = 'cx_' + i; if (!imgWant(id, 'hotovost')) return;
+            var box = imgBox(card, id, ['Singapurské dolary', 'Americké dolary', 'Indonéské rupie'][i], true); if (box) card.insertBefore(box, card.firstChild);
+        });
         [].forEach.call(document.querySelectorAll('#tjFoodTbl .tj-grp'), function (g) {
             var sg = /Singapur/.test((g.querySelector('.tj-grp-h b') || {}).textContent || ''), pre = sg ? 'f_sg_' : 'f_ba_', k = 0;
             [].forEach.call(g.querySelectorAll(':scope > .tj-line'), function (ln) {
@@ -19278,7 +19318,13 @@ function luxQRSvg(text, px) {
             if (window.IntersectionObserver) new IntersectionObserver(start, { rootMargin: '600px' }).observe(host);
             setTimeout(start, 1500); trig();
         }
-        setup('aktivity', 'aktivity'); setup('jidlo', 'jidlo'); setup('flightPick', 'letenky');
+        setup('aktivity', 'aktivity'); setup('jidlo', 'jidlo'); setup('flightPick', 'letenky'); setup('hotovost', 'hotovost');
+        Object.keys(STRIPS).forEach(function (k) {
+            var pad = document.querySelector('#' + k + ' .lux-fold-pad'), body = $(k + '-b'); if (!pad || pad.querySelector(':scope > .ph-strip')) return;
+            var st = document.createElement('div'); st.className = 'ph-strip'; st.setAttribute('data-k', k); st.setAttribute('aria-label', 'Fotografie k tomuto místu (Wikimedia Commons)'); pad.insertBefore(st, pad.firstChild);
+            function go() { if (imgStarted['p:' + k] || !body || body.offsetHeight < 20) return; imgStarted['p:' + k] = true; imgScan(); }
+            if (window.ResizeObserver && body) new ResizeObserver(go).observe(body);
+        });
     })();
 
 
