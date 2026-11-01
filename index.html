@@ -6088,7 +6088,7 @@ e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 18:30</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 20:13</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -18209,6 +18209,23 @@ body.brief:not(.pres-on) #briefBanner { display: flex; }
 .ck-meet .x-f6241a { border-radius: 18px !important; border: 1px solid color-mix(in srgb, #f59e0b 30%, var(--border)) !important; background: radial-gradient(360px 140px at 100% 0%, color-mix(in srgb, #f59e0b 12%, transparent), transparent 70%), var(--surface) !important; }
 .ck-meet label { border-radius: 12px; padding: 6px 8px; transition: background .15s; } .ck-meet label:hover { background: color-mix(in srgb, #f59e0b 9%, transparent); }
 .ck-meet label:has(input:checked) { background: color-mix(in srgb, #22c55e 11%, transparent); } .ck-meet input.pres-check { accent-color: #22c55e; }
+
+/* ---- QR kód v úvodu: otevře stránku s aktuálním výběrem ---- */
+#heroQr { position: relative; margin: 18px auto 0; z-index: 3; display: flex; align-items: center; gap: 12px; padding: 10px 14px 10px 10px; border-radius: 18px; background: color-mix(in srgb, var(--surface) 82%, transparent); backdrop-filter: blur(10px); border: 1px solid color-mix(in srgb, var(--primary) 35%, var(--border)); box-shadow: 0 16px 34px -18px rgba(0, 0, 0, .55); max-width: 340px; text-align: left; }
+#heroQr .hq-code { flex: 0 0 auto; width: 112px; height: 112px; padding: 6px; border-radius: 12px; background: #fff; cursor: zoom-in; display: grid; place-items: center; transition: transform .15s; }
+#heroQr .hq-code:hover { transform: scale(1.04); } #heroQr .hq-code svg { width: 100%; height: 100%; display: block; }
+#heroQr b { display: block; font: 800 0.92rem var(--font-display, inherit); color: var(--text-main); } #heroQr small { display: block; margin: 3px 0 8px; font-size: 0.74rem; line-height: 1.35; color: var(--text-muted); font-weight: 600; }
+#heroQr button { border: 0; border-radius: 999px; padding: 6px 12px; font: 800 0.74rem var(--font-ui, inherit); color: #fff; background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 55%, #0ea5e9)); cursor: pointer; }
+#heroQr .hq-file { font-size: 0.74rem; color: var(--text-muted); max-width: 150px; }
+@media (max-width: 999px) { #heroQr { max-width: 360px; } }
+@media print { #heroQr { display: none; } }
+#qrBig { position: fixed; inset: 0; z-index: 10050; display: none; place-items: center; background: rgba(2, 8, 12, .72); backdrop-filter: blur(6px); padding: 16px; }
+#qrBig.is-open { display: grid; }
+#qrBig .qb-card { width: min(420px, 100%); padding: 22px; border-radius: 22px; background: var(--surface); border: 1px solid var(--border); text-align: center; box-shadow: 0 30px 60px -20px #000; }
+#qrBig .qb-code { margin: 12px auto; width: min(320px, 78vw); padding: 10px; border-radius: 14px; background: #fff; } #qrBig .qb-code svg { width: 100%; height: auto; display: block; }
+#qrBig .qb-url { font-size: 0.72rem; color: var(--text-muted); word-break: break-all; margin: 8px 0 14px; }
+#qrBig .qb-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; } #qrBig .qb-btns button { border-radius: 999px; padding: 9px 16px; font-weight: 800; border: 1px solid var(--border); background: var(--surface); color: var(--text-main); cursor: pointer; } #qrBig .qb-btns button.pri { background: var(--primary); color: #fff; border-color: transparent; }
+body.pres-on #heroQr { display: none; }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -18239,7 +18256,7 @@ body.brief:not(.pres-on) #briefBanner { display: flex; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '1. 11. 2026 · 18:30';
+    var LUX_VERSION = '1. 11. 2026 · 20:13';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19662,6 +19679,36 @@ function luxQRSvg(text, px) {
     document.addEventListener('change', function (e) { if (e.target && e.target.closest && e.target.closest('#ukolyTerminy')) setTimeout(ckTotal, 30); });
     (function () { var h = $('tasksHost'); if (h && window.MutationObserver) new MutationObserver(function () { setTimeout(ckTotal, 30); }).observe(h, { childList: true, subtree: true }); setTimeout(ckTotal, 300); })();
 
+
+    /* ---------- QR kód v úvodu (stránka s aktuálním výběrem letu a hotelů) ---------- */
+    function qrUrl() { var u = window.luxVariantUrl(); return u.length <= 200 ? u : u.split('?')[0]; }
+    var heroQrLast = '';
+    function heroQr() {
+        var hero = document.querySelector('header.hero'); if (!hero) return; var box = $('heroQr');
+        if (!box) { box = document.createElement('div'); box.id = 'heroQr'; var sel = $('heroFlightSelect'), row = sel ? sel.parentElement : null; if (row && row.parentElement) row.parentElement.insertBefore(box, row.nextSibling); else (hero.querySelector('.hero-inner') || hero).appendChild(box); }
+        var url = qrUrl(); if (url === heroQrLast) return; heroQrLast = url;
+        if (location.protocol === 'file:') { box.innerHTML = '<div class="hq-file">📱 QR kód se zobrazí, až bude stránka na webu (ne při otevření souboru z disku).</div>'; return; }
+        var svg = ''; try { svg = luxQRSvg(url, 220); } catch (e) { svg = ''; } if (!svg) { box.style.display = 'none'; return; } box.style.display = '';
+        box.innerHTML = '<div class="hq-code" role="button" tabindex="0" title="Zvětšit QR kód">' + svg + '</div><div><b>📱 Otevři v mobilu</b><small>Načti QR kód a stránka se otevře s tím, co máš teď vybrané (let a hotely).</small><button type="button">🔗 Kopírovat odkaz</button></div>';
+        box.querySelector('.hq-code').onclick = qrBigOpen; box.querySelector('.hq-code').onkeydown = function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); qrBigOpen(); } };
+        box.querySelector('button').onclick = function () { copyText(window.luxVariantUrl()).then(function (ok) { toast(ok ? '🔗 Odkaz s aktuálním výběrem je zkopírovaný' : 'Odkaz se nepodařilo zkopírovat'); }); };
+    }
+    function qrBigOpen() {
+        var el = $('qrBig'); if (!el) { el = document.createElement('div'); el.id = 'qrBig'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-label', 'QR kód stránky'); document.body.appendChild(el); el.addEventListener('click', function (e) { if (e.target === el) el.classList.remove('is-open'); }); document.addEventListener('keydown', function (e) { if (e.key === 'Escape') el.classList.remove('is-open'); }); }
+        var url = qrUrl(), svg = ''; try { svg = luxQRSvg(url, 320); } catch (e) {}
+        el.innerHTML = '<div class="qb-card"><h3 style="margin:0">📱 Načti fotoaparátem telefonu</h3><div class="qb-code">' + svg + '</div><div class="qb-url">' + spEsc(url) + '</div><div class="qb-btns"><button type="button" class="pri">🔗 Kopírovat odkaz</button><button type="button">Zavřít</button></div></div>';
+        var bs = el.querySelectorAll('button'); bs[0].onclick = function () { copyText(window.luxVariantUrl()).then(function (ok) { toast(ok ? '🔗 Odkaz je zkopírovaný' : 'Odkaz se nepodařilo zkopírovat'); }); }; bs[1].onclick = function () { el.classList.remove('is-open'); };
+        el.classList.add('is-open');
+    }
+    setInterval(function () { try { heroQr(); } catch (e) {} }, 1500);
+    /* ---------- odškrtnout všechny vstupenky (Vstupné a aktivity) ---------- */
+    window.luxClearActs = function () {
+        if (!window.confirm('Odškrtnout všechny vybrané vstupenky a aktivity? Povinné jízdné v Singapuru zůstane.')) return;
+        var b = document.querySelector('#aktivity [data-bulk="none"]'); if (b) b.click();
+        try { if ($('menuModalOverlay') && $('menuModalOverlay').classList.contains('open')) window.toggleMenuModal(); } catch (e) {}
+        toast('🎟️ Všechny vstupenky jsou odškrtnuté');
+    };
+
     /* ---------- skupina „Nástroje“ v menu ---------- */
     function addTools() {
         var nav = $('bottomNav'); if (!nav || $('menuToolShare')) return;
@@ -19674,7 +19721,7 @@ function luxQRSvg(text, px) {
         nav.appendChild(item('menuToolSimple', '📄', 'Jednoduchá stránka (jen to hlavní)', function () { window.luxSimple(true); }));
         nav.appendChild(item('menuToolShare', '🔗', 'Zkopírovat odkaz na moji variantu', window.luxCopyVariantLink));
         nav.appendChild(item('menuToolOffline', '📴', 'Uložit pro offline', window.luxOffline));
-        nav.appendChild(item('menuToolPresent', '🎞️', 'Režim prezentace', function () { window.luxPresent(); }));
+        nav.appendChild(item('menuToolPresent', '🎞️', 'Režim prezentace', function () { window.luxPresent(); })); nav.appendChild(item('menuToolClearActs', '🎟️', 'Odškrtnout všechny vstupenky (Vstupné a aktivity)', function () { window.luxClearActs(); }));
         nav.appendChild(item('menuToolBrief', '📄', 'Přepnout na stručný režim', function () { window.luxBrief(); if (typeof window.toggleMenuModal === 'function' && $('menuModalOverlay') && $('menuModalOverlay').classList.contains('open')) window.toggleMenuModal(); }));
         nav.appendChild(item('menuToolInstall', '📲', 'Přidat na plochu', window.luxInstall));
         var ver = document.createElement('div'); ver.id = 'luxVersion'; ver.style.cssText = 'margin:10px 14px 4px;font-size:.7rem;color:var(--text-muted);opacity:.85'; ver.textContent = 'Verze stránky: ' + LUX_VERSION; nav.appendChild(ver);
@@ -19700,7 +19747,7 @@ function luxQRSvg(text, px) {
     }, true);
 
     function start() {
-        place(); sync(); addTools(); initParts(); renderTasks(); initFlightDeck(); initVoyages(); renderHomeDeck(); renderTransit(); renderImpact(null, 0); updateFlightPick(); packBagFix(); setTimeout(packBagFix, 600); setTimeout(packBagFix, 2000); closeFoldsOnReload(); hideUnwanted(); closeAccordionsAtLoad(); setTimeout(closeAccordionsAtLoad, 800); setTimeout(closeAccordionsAtLoad, 2500); renderStages(); initSpeech(); addSimpleButtons(); if (window.__wantSimple) setTimeout(function () { window.luxSimple(true); }, 900); fxTexts(); if (window.TRIP && TRIP.onChange) TRIP.onChange(fxTexts); setTimeout(fxTexts, 2500); setTimeout(fxTexts, 8000); imgScan(); setTimeout(imgScan, 3000);
+        place(); sync(); addTools(); initParts(); renderTasks(); initFlightDeck(); initVoyages(); renderHomeDeck(); renderTransit(); renderImpact(null, 0); updateFlightPick(); try { heroQr(); } catch (e) {} packBagFix(); setTimeout(packBagFix, 600); setTimeout(packBagFix, 2000); closeFoldsOnReload(); hideUnwanted(); closeAccordionsAtLoad(); setTimeout(closeAccordionsAtLoad, 800); setTimeout(closeAccordionsAtLoad, 2500); renderStages(); initSpeech(); addSimpleButtons(); if (window.__wantSimple) setTimeout(function () { window.luxSimple(true); }, 900); fxTexts(); if (window.TRIP && TRIP.onChange) TRIP.onChange(fxTexts); setTimeout(fxTexts, 2500); setTimeout(fxTexts, 8000); imgScan(); setTimeout(imgScan, 3000);
         if (/[?&]prezentace\b/.test(location.search)) setTimeout(function () { window.luxPresent(); }, 700);
         var card = document.querySelector('.lux-progress');
         if (card && window.MutationObserver) new MutationObserver(req).observe(card, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['style', 'class'] });
