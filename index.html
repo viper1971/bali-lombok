@@ -6089,7 +6089,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 12:39</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 14:57</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -18029,7 +18029,7 @@ img[data-ph]:not([data-ok]), img[data-ph]:not([data-ok]) + button { display: non
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '1. 11. 2026 · 12:39';
+    var LUX_VERSION = '1. 11. 2026 · 14:57';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19262,12 +19262,12 @@ function luxQRSvg(text, px) {
         'f-karta-mhd': ['Singapore MRT train', 'Singapore bus', 'Singapore EZ-Link card', 'Singapore MRT']
     };
     Object.keys(STRIPS).forEach(function (k) { for (var i = 0; i < 3; i++) IMG_Q['p:' + k + ':' + i] = [STRIPS[k][i], STRIPS[k][3]]; });
-    IMG_Q.part_3 = ['Bali Uluwatu cliff sunset panorama', 'Bali coast panorama']; IMG_Q.part_4 = ['Gili Trawangan beach panorama', 'Lombok beach panorama']; IMG_Q.part_5 = ['Jimbaran Bay sunset beach', 'Bali sunset beach'];
+    IMG_Q.part_3 = ['Uluwatu cliffs Bali panorama', 'Bali coastline panorama', 'Nusa Penida Kelingking Beach', 'Indonesia coast landscape', 'Bali landscape']; IMG_Q.part_4 = ['Gili Trawangan beach panorama', 'Lombok beach panorama', 'Gili Islands', 'Indonesia beach', 'Lombok']; IMG_Q.part_5 = ['Jimbaran Bay sunset beach', 'Bali sunset beach', 'sunset beach Indonesia', 'Bali sunset', 'Bali'];
     IMG_Q.inl_1 = ['Marina Bay Singapore skyline night', 'Singapore skyline']; IMG_Q.inl_2 = ['Singapore Chinatown street', 'Singapore architecture street'];
-    var IMG_W = { part_3: 1600, part_4: 1600, part_5: 1600, inl_1: 960, inl_2: 960 }, IMG_MINW = { part_3: 2400, part_4: 2400, part_5: 2400 }, CASH_IMG = ['SINdolar.jpg', 'USAdolar.jpg', 'IDRbankovka.jpg'];
+    var IMG_W = { part_3: 1600, part_4: 1600, part_5: 1600, inl_1: 960, inl_2: 960 }, IMG_MINW = { part_3: 2000, part_4: 2000, part_5: 2000 }, CASH_IMG = ['SINdolar.jpg', 'USAdolar.jpg', 'IDRbankovka.jpg'];
     var IMG_FB = { sg: 'Singapore skyline', ulu: 'Uluwatu cliff Bali', ub: 'Ubud Bali', lo: 'Lombok beach', ta: 'Bali', mi: 'Bali', ho: 'Bali beach', f_: 'Indonesian food', air: 'airliner in flight' };
     var IMG_API = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=640&gsrsearch=';
-    var IMG_KEY = 'lux_img_v2', imgCache = {}, imgQueue = [], imgBusy = 0, imgStarted = {};
+    var IMG_KEY = 'lux_img_v2', imgCache = {}, imgQueue = [], imgBusy = 0, imgStarted = {}, imgFail = {}, imgPend = {}, partTry = {}, partDone = {};
     try { imgCache = JSON.parse(localStorage.getItem(IMG_KEY) || '{}') || {}; } catch (e) { imgCache = {}; }
     function imgSave() { try { localStorage.setItem(IMG_KEY, JSON.stringify(imgCache)); } catch (e) {} }
     function imgClean(s) { var d = document.createElement('div'); d.innerHTML = s || ''; return (d.textContent || '').replace(/\s+/g, ' ').trim(); }
@@ -19288,12 +19288,12 @@ function luxQRSvg(text, px) {
         var qs = (IMG_Q[id] || []).slice(); var fb = IMG_FB[id.slice(0, 3).replace(/\d/g, '')] || IMG_FB[id.slice(0, 2)] || IMG_FB[id.slice(0, 3)]; if (fb) qs.push(fb);
         var i = 0, failed = false;
         function next() {
-            if (i >= qs.length) { imgCache[id] = { none: 1, t: Date.now() }; imgSave(); return Promise.resolve(); }
-            return imgSearch(qs[i++], IMG_W[id], IMG_MINW[id]).then(function (c) { var kept = []; c.forEach(function (x) { if (kept.length < 3 && (!window.LUXIMG || window.LUXIMG.claim({ src: x.u, page: x.d }, id))) kept.push(x); }); if (kept.length) { imgCache[id] = { c: kept, t: Date.now() }; imgSave(); } else return next(); }).catch(function () { failed = true; });
+            if (i >= qs.length) { if (/^(part_|inl_)/.test(id)) imgFail[id] = Date.now(); else { imgCache[id] = { none: 1, t: Date.now() }; imgSave(); } return Promise.resolve(); }
+            var qi = i++; return imgSearch(qs[qi], IMG_W[id], IMG_MINW[id] ? (qi >= 3 ? 1400 : IMG_MINW[id]) : undefined).then(function (c) { var kept = []; c.forEach(function (x) { if (kept.length < 3 && (!window.LUXIMG || window.LUXIMG.claim({ src: x.u, page: x.d }, id))) kept.push(x); }); if (kept.length) { imgCache[id] = { c: kept, t: Date.now() }; imgSave(); } else return next(); }).catch(function () { failed = true; });
         }
         return next();
     }
-    function imgPump() { while (imgBusy < 3 && imgQueue.length) { var id = imgQueue.shift(); imgBusy++; imgResolve(id).then(function () { imgBusy--; imgScan(); imgPump(); }); } }
+    function imgPump() { while (imgBusy < 3 && imgQueue.length) { var id = imgQueue.shift(); imgBusy++; imgPend[id] = 1; (function (id) { imgResolve(id).then(function () { imgBusy--; delete imgPend[id]; imgScan(); imgPump(); }); })(id); } }
     function imgBox(host, id, title, link) {
         var c = imgCache[id]; if (!c || !c.c) return null; var idx = 0, box = document.createElement('div'); box.className = 'tj-pic'; box.setAttribute('data-img', id);
         var img = document.createElement('img'); img.alt = title; img.loading = 'lazy'; img.decoding = 'async'; img.referrerPolicy = 'no-referrer'; box.appendChild(img);
@@ -19334,18 +19334,22 @@ function luxQRSvg(text, px) {
                 if (ln.querySelector(':scope > .tj-pic') || !IMG_Q[id] || !imgWant(id, 'jidlo')) return; var box = imgBox(ln, id, (ln.querySelector('b') || {}).textContent || 'Jídlo', true); if (box) ln.appendChild(box);
             });
         });
-        imgStarted.base = true; ['part_3', 'part_4', 'part_5', 'inl_1', 'inl_2'].forEach(function (id) { imgWant(id, 'base'); });
+        imgStarted.base = true; ['inl_2', 'inl_1', 'part_5', 'part_4', 'part_3'].forEach(function (id) { var c = imgCache[id]; if ((c && c.c) || imgPend[id] || imgQueue.indexOf(id) >= 0 || (imgFail[id] && Date.now() - imgFail[id] < 60000)) return; imgQueue.unshift(id); });
         imgApplyExtra(); imgDedupeDom(); imgPump();
     }
+    function imgApplyPart(n) {
+        var c = imgCache['part_' + n]; if (!c || !c.c) return; var idx = partTry[n] || 0, x = c.c[idx]; if (!x || partDone[n] === x.u) return; partDone[n] = x.u;
+        var im = new Image(); im.onload = function () { document.documentElement.style.setProperty('--img-part-' + n, "url('" + x.u + "')"); }; im.onerror = function () { partTry[n] = idx + 1; partDone[n] = ''; imgApplyPart(n); }; im.src = x.u;
+    }
     function imgApplyExtra() {
-        [3, 4, 5].forEach(function (n) { var c = imgCache['part_' + n]; if (c && c.c && c.c[0]) document.documentElement.style.setProperty('--img-part-' + n, "url('" + c.c[0].u + "')"); });
+        [3, 4, 5].forEach(function (n) { imgApplyPart(n); });
         [].forEach.call(document.querySelectorAll('img[data-ph]:not([data-ok])'), function (im) {
             var id = im.getAttribute('data-ph'), c = imgCache[id]; if (!c || !c.c || !c.c[0]) return; var x = c.c[0];
             im.onload = function () { im.setAttribute('data-ok', '1'); }; im.setAttribute('data-full', x.u); im.src = x.u;
             if (!im.getAttribute('data-cr')) { im.setAttribute('data-cr', '1'); var btn = im.nextElementSibling; var cr = document.createElement('div'); cr.className = 'ph-credit'; cr.innerHTML = '📷 <a href="' + (x.d || 'https://commons.wikimedia.org/') + '" target="_blank" rel="noopener noreferrer">' + (x.a ? spEsc(x.a) + ' · ' : '') + spEsc(x.l || 'Wikimedia Commons') + '</a>'; (btn && btn.tagName === 'BUTTON' ? btn : im).insertAdjacentElement('afterend', cr); }
         });
         var host = $('phCredits'); if (!host) { host = document.createElement('div'); host.id = 'phCredits'; host.className = 'ph-credits'; document.body.appendChild(host); }
-        host.innerHTML = [3, 4, 5].map(function (n) { var c = imgCache['part_' + n], x = c && c.c && c.c[0]; return x ? '<a href="' + (x.d || '#') + '" target="_blank" rel="noopener noreferrer">' + (x.a ? spEsc(x.a) + ' · ' : '') + spEsc(x.l || 'Commons') + '</a>' : ''; }).filter(Boolean).join(' · ');
+        host.innerHTML = [3, 4, 5].map(function (n) { var c = imgCache['part_' + n], x = c && c.c && c.c[partTry[n] || 0]; return x ? '<a href="' + (x.d || '#') + '" target="_blank" rel="noopener noreferrer">' + (x.a ? spEsc(x.a) + ' · ' : '') + spEsc(x.l || 'Commons') + '</a>' : ''; }).filter(Boolean).join(' · ');
         host.style.display = host.innerHTML ? '' : 'none'; if (host.innerHTML) host.innerHTML = 'Fotografie v hlavičkách částí III–V (Wikimedia Commons): ' + host.innerHTML;
     }
     function imgDedupeDom() {
@@ -19358,6 +19362,7 @@ function luxQRSvg(text, px) {
     function imgPurge() {
         if (!window.LUXIMG) return;
         Object.keys(IMG_Q).forEach(function (id) { var c = imgCache[id]; if (!c || !c.c) return; c.c = c.c.filter(function (x) { return window.LUXIMG.claim({ src: x.u, page: x.d }, id); }); if (!c.c.length) delete imgCache[id]; });
+        ['part_3', 'part_4', 'part_5', 'inl_1', 'inl_2'].forEach(function (id) { if (imgCache[id] && imgCache[id].none) delete imgCache[id]; });
         imgSave();
     }
     (function imgWatch() {
