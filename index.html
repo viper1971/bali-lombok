@@ -6075,7 +6075,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 06:35</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 06:40</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -17826,6 +17826,21 @@ body.simple-on { overflow: hidden; }
     #tjFoodTbl .tj-grp > .tj-line.tj-subtot { background: rgba(169, 187, 208, 0.10); } #tjFoodTbl .tj-grp > .tj-line.tj-tot { background: rgba(111, 143, 176, 0.16); border-color: var(--primary); }
     #tjFoodTbl .tj-grp > .tj-line .tj-line-a { text-align: right; } #tjFoodTbl .tj-grp > .tj-line .tj-line-a b { font-size: 1.05rem; }
 }
+
+/* ---- Fotky u aktivit (volné obrázky z Wikimedia Commons) ---- */
+.tj-row > .tj-pic { grid-column: 1 / -1; position: relative; margin: -2px -2px 6px; border-radius: 10px; overflow: hidden; aspect-ratio: 16 / 9; max-height: 150px; width: calc(100% + 4px); background: linear-gradient(135deg, rgba(94, 234, 212, 0.18), rgba(56, 189, 248, 0.12)); }
+.tj-row > .tj-pic img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease, opacity .3s; opacity: 0; }
+.tj-row > .tj-pic img.is-ok { opacity: 1; }
+.tj-row:hover > .tj-pic img.is-ok { transform: scale(1.04); }
+.tj-row > .tj-pic .tj-credit { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 8px 4px; font: 600 0.58rem/1.2 var(--font-ui, inherit); color: rgba(255, 255, 255, 0.92); background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.62)); text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: .85; }
+.tj-row > .tj-pic .tj-credit:hover { opacity: 1; text-decoration: underline; }
+.tj-row.is-off:has(> .tj-pic) { opacity: 1; }
+.tj-row.is-off > :not(.tj-pic) { opacity: .6; }
+@media (min-width: 1000px) {
+    .tj-act-grp > .tj-row { grid-template-areas: "pic pic pic" "chk ico amt" "main main main"; }
+    .tj-act-grp > .tj-row > .tj-pic { grid-area: pic; margin: -4px -4px 4px; width: calc(100% + 8px); }
+}
+@media (max-width: 999px) { .tj-row > .tj-pic { max-height: 130px; } }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -17856,7 +17871,7 @@ body.simple-on { overflow: hidden; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '1. 11. 2026 · 06:35';
+    var LUX_VERSION = '1. 11. 2026 · 06:40';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19135,6 +19150,66 @@ function luxQRSvg(text, px) {
         var sched = false; function go() { sched = false; try { renderReviews(); } catch (e) {} }
         function trig() { if (!sched) { sched = true; requestAnimationFrame(go); } }
         var host = $('flightPick'); if (host && window.MutationObserver) new MutationObserver(trig).observe(host, { childList: true, subtree: true });
+        trig();
+    })();
+
+
+    /* ---------- fotky u aktivit: volné obrázky z Wikimedia Commons, stahují se v prohlížeči a ukládají do paměti ---------- */
+    var ACT_Q = {
+        sgMhd: 'Singapore MRT train', sgStore: 'Changi Airport baggage storage', sgGardens: 'Gardens by the Bay Flower Dome', sgSkyway: 'OCBC Skyway Supertree Grove', sgJewel: 'Jewel Changi Canopy Park', sgOrchid: 'National Orchid Garden Singapore',
+        uluTemple: 'Uluwatu Temple', uluKecak: 'Kecak dance Uluwatu', uluPadang: 'Padang Padang beach Uluwatu', uluGwk: 'Garuda Wisnu Kencana statue',
+        ubTegal: 'Tegalalang rice terrace', ubKanto: 'Kanto Lampo waterfall', ubTibu: 'Tibumana waterfall', ubTirta: 'Tirta Empul temple', ubMonkey: 'Ubud Monkey Forest', ubTegen: 'Tegenungan waterfall', ubSwing: 'Bali swing Tegalalang', ubBatur: 'Mount Batur sunrise',
+        loTiu: 'Tiu Kelep waterfall Lombok', loSade: 'Sade village Lombok', loBeach: 'Tanjung Aan beach Lombok', loGili: 'Gili Trawangan beach', loSnork: 'Gili Islands snorkeling turtle', loSurf: 'Selong Belanak beach surfing',
+        taxi: 'Bali taxi', miscSmall: 'Balinese sarong temple', hotel: 'Kuta beach Bali'
+    };
+    var ACT_API = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=640&gsrsearch=';
+    var ACT_KEY = 'lux_act_img_v1', actCache = {}, actQueue = [], actBusy = 0, actStarted = false;
+    try { actCache = JSON.parse(localStorage.getItem(ACT_KEY) || '{}') || {}; } catch (e) { actCache = {}; }
+    function actSave() { try { localStorage.setItem(ACT_KEY, JSON.stringify(actCache)); } catch (e) {} }
+    function actClean(s) { var d = document.createElement('div'); d.innerHTML = s || ''; return (d.textContent || '').replace(/\s+/g, ' ').trim(); }
+    function actFetch(id) {
+        return fetch(ACT_API + encodeURIComponent(ACT_Q[id] + ' filetype:bitmap')).then(function (r) { return r.json(); }).then(function (data) {
+            var pages = data && data.query && data.query.pages ? Object.keys(data.query.pages).map(function (k) { return data.query.pages[k]; }) : [];
+            pages.sort(function (a, b) { return (a.index || 0) - (b.index || 0); });
+            var list = pages.map(function (pg) {
+                var ii = pg.imageinfo && pg.imageinfo[0]; if (!ii || !ii.thumburl) return null; var em = ii.extmetadata || {};
+                return { title: pg.title || '', w: ii.width || 0, h: ii.height || 0, mime: ii.mime || '', u: ii.thumburl, d: ii.descriptionurl, a: actClean((em.Artist || {}).value).slice(0, 40), l: actClean((em.LicenseShortName || {}).value) };
+            }).filter(Boolean);
+            var good = list.filter(function (c) { return /jpe?g|png/i.test(c.mime) && c.w >= 900 && c.w >= c.h * 1.1 && !/map|logo|flag|diagram|plan|stamp|poster|coat|icon|sign|menu|screenshot/i.test(c.title); })[0] || list.filter(function (c) { return /jpe?g|png/i.test(c.mime) && !/map|logo|flag|diagram|stamp|icon/i.test(c.title); })[0] || null;
+            actCache[id] = good ? { u: good.u, d: good.d, a: good.a, l: good.l, t: Date.now() } : { none: 1, t: Date.now() }; actSave();
+        }).catch(function () { /* bez sítě: zkusí se příště */ });
+    }
+    function actPump() {
+        while (actBusy < 3 && actQueue.length) { var id = actQueue.shift(); actBusy++; actFetch(id).then(function () { actBusy--; actInject(); actPump(); }); }
+    }
+    function actAdd(row, id, c) {
+        var title = (row.querySelector('.tj-main b') || { childNodes: [{ textContent: '' }] }).childNodes[0].textContent.trim();
+        var box = document.createElement('div'); box.className = 'tj-pic';
+        var img = document.createElement('img'); img.alt = title; img.loading = 'lazy'; img.decoding = 'async'; img.referrerPolicy = 'no-referrer'; img.addEventListener('load', function () { img.classList.add('is-ok'); }); img.addEventListener('error', function () { box.remove(); });
+        img.src = c.u; box.appendChild(img);
+        var cr = document.createElement('a'); cr.className = 'tj-credit'; cr.href = c.d || 'https://commons.wikimedia.org/'; cr.target = '_blank'; cr.rel = 'noopener noreferrer'; cr.textContent = '📷 ' + (c.a ? c.a + ' · ' : '') + (c.l || 'Wikimedia Commons'); cr.title = 'Autor a licence fotky (Wikimedia Commons)';
+        cr.addEventListener('click', function (e) { e.stopPropagation(); }); box.appendChild(cr);
+        row.insertBefore(box, row.firstChild);
+    }
+    function actInject() {
+        if (document.hidden && actStarted) { /* i skryté se doplní, jen se nestahuje zbytečně */ }
+        var saveData = navigator.connection && navigator.connection.saveData;
+        [].forEach.call(document.querySelectorAll('#aktivity .tj-row'), function (row) {
+            if (row.querySelector(':scope > .tj-pic')) return; var inp = row.querySelector('input[data-id]'); if (!inp) return; var id = inp.getAttribute('data-id'); if (!ACT_Q[id]) return;
+            var c = actCache[id]; if (c && c.u) { actAdd(row, id, c); return; }
+            if (c && c.none && Date.now() - c.t < 7 * 86400000) return;
+            if (actStarted && !saveData && actQueue.indexOf(id) < 0 && !(c && c.pend)) { actQueue.push(id); }
+        });
+        actPump();
+    }
+    (function actWatch() {
+        var host = $('aktivity'); if (!host) return; var sched = false;
+        function trig() { if (!sched) { sched = true; requestAnimationFrame(function () { sched = false; try { actInject(); } catch (e) {} }); } }
+        if (window.MutationObserver) new MutationObserver(trig).observe(host, { childList: true, subtree: true });
+        function start() { if (actStarted || host.offsetHeight < 20) return; actStarted = true; trig(); }
+        if (window.ResizeObserver) new ResizeObserver(start).observe(host);
+        if (window.IntersectionObserver) new IntersectionObserver(start, { rootMargin: '600px' }).observe(host);
+        setTimeout(start, 1500);
         trig();
     })();
 
