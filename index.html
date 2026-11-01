@@ -6089,7 +6089,7 @@ e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 17:49</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 18:02</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -18205,6 +18205,11 @@ img[data-ph]:not([data-ok]), img[data-ph]:not([data-ok]) + button { display: non
     .bpx-host:has(> .bpx-wrap ~ .bpx-wrap) > .bpx-wrap + .bpx-conn { order: 3; justify-self: center; }
     .bpx-host:has(> .bpx-wrap ~ .bpx-wrap) > .bpx-sub { order: 4; }
 }
+
+/* ---- Upozornění: stručný režim mimo prezentaci ---- */
+#briefBanner { position: fixed; left: 50%; top: 64px; transform: translateX(-50%); z-index: 9995; display: none; align-items: center; gap: 12px; padding: 9px 10px 9px 16px; border-radius: 999px; background: linear-gradient(135deg, #f59e0b, #ea580c); color: #fff; font: 700 0.85rem var(--font-ui, inherit); box-shadow: 0 14px 30px -12px rgba(234, 88, 12, .7); max-width: calc(100vw - 24px); }
+#briefBanner button { border: 0; border-radius: 999px; padding: 7px 14px; font: 800 0.8rem var(--font-ui, inherit); background: #fff; color: #9a3412; cursor: pointer; white-space: nowrap; }
+body.brief:not(.pres-on) #briefBanner { display: flex; }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -18235,7 +18240,7 @@ img[data-ph]:not([data-ok]), img[data-ph]:not([data-ok]) + button { display: non
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '1. 11. 2026 · 17:49';
+    var LUX_VERSION = '1. 11. 2026 · 18:02';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -18637,7 +18642,7 @@ img[data-ph]:not([data-ok]), img[data-ph]:not([data-ok]) + button { display: non
         presShow(typeof start === 'number' ? start : 0);
         $('prNext').focus({ preventScroll: true });
     };
-    window.luxPresentStop = function () {
+    window.luxPresentStop = function () { if (pres.on) { try { window.luxBrief(false); } catch (e) {} }
         if (!pres.on) return; pres.on = false; pres.wantFs = false; pres.lostByTab = false; clearInterval(presT.timer); var pn = $('presNotes'); if (pn) pn.classList.remove('is-open'); [].forEach.call(document.querySelectorAll('#presEnd'), function (x) { x.classList.remove('is-cur'); }); closeViewer(); navToggle(false); var fo = $('presFs'); if (fo) fo.classList.remove('is-open');
         [].forEach.call(document.querySelectorAll('.pres-hide'), function (x) { x.classList.remove('pres-hide'); });
         document.body.classList.remove('pres-on'); document.documentElement.classList.remove('pres-on'); document.documentElement.style.fontSize = '';
@@ -19284,7 +19289,7 @@ function luxQRSvg(text, px) {
         try { localStorage.setItem('lux_brief', v ? '1' : '0'); } catch (e) {} var m = $('menuToolBrief'); if (m) m.querySelector('span:last-child').textContent = v ? 'Přepnout na podrobný režim' : 'Přepnout na stručný režim';
         var b = $('prBrief'); if (b) b.setAttribute('aria-pressed', v ? 'true' : 'false'); try { window.dispatchEvent(new Event('resize')); } catch (e) {}
     };
-    try { if (localStorage.getItem('lux_brief') === '1') document.body.classList.add('brief'); } catch (e) {}
+    try { localStorage.setItem('lux_brief', '0'); document.body.classList.remove('brief'); } catch (e) {}
 
 
     /* ---------- přehled návštěvnosti: na mobilu na konec stránky, na počítači zůstává plovoucí ---------- */
@@ -19635,6 +19640,15 @@ function luxQRSvg(text, px) {
     (function () {
         var o = window.updatePackingWeight;
         if (typeof o === 'function' && !o._bag) { window.updatePackingWeight = function () { var b = $('chkZavazadlo'); if (b) b.checked = true; return o.apply(this, arguments); }; window.updatePackingWeight._bag = 1; }
+    })();
+
+
+    /* ---------- stručný režim je jen pro prezentaci; mimo ni je vidět upozornění a jedním klepnutím se vrátí vše ---------- */
+    (function briefBanner() {
+        if ($('briefBanner')) return; var d = document.createElement('div'); d.id = 'briefBanner'; d.setAttribute('role', 'status');
+        d.innerHTML = '<span>📄 Stručný režim: část obsahu je skrytá</span><button type="button">Zobrazit vše</button>';
+        d.querySelector('button').onclick = function () { try { window.luxBrief(false); } catch (e) { document.body.classList.remove('brief'); } };
+        document.body.appendChild(d);
     })();
 
     /* ---------- skupina „Nástroje“ v menu ---------- */
