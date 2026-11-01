@@ -6054,8 +6054,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
             <div class="nav-group-title">IV · Na místě</div>
             <a href="#slovnicek" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📖</span><span>Slovníček</span></a>
             <div class="nav-group-title">V · Závěr</div>
-            <a href="#ukolyTerminy" class="nav-item" onclick="toggleMenuModal()"><span class="icon">✅</span><span>Úkoly &amp; termíny</span></a>
-            <a href="#prezentacniChecklistSekce" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🎤</span><span>Checklist schůzky</span></a>
+            <a href="#ukolyTerminy" class="nav-item" onclick="toggleMenuModal()"><span class="icon">✅</span><span>Checklist: úkoly &amp; schůzka</span></a>
         </nav>
     </div>
 </div>
@@ -6089,7 +6088,7 @@ e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 18:02</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 18:30</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -13758,20 +13757,13 @@ function updatePackingWeight() {
     </button></h3>
     <div class="lux-fold-body" id="f-checklist-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
 <div class="tk-card" id="ukolyTerminy">
-    <h3 class="tk-card-t">✅ Úkoly &amp; termíny</h3>
-    <p class="tk-card-s">Co po tobě potřebujeme a dokdy. Zaškrtni, co už máš hotové, a termíny si můžeš přidat do kalendáře.</p>
+    <h3 class="tk-card-t">✅ Checklist: úkoly, termíny a co si řekneme</h3>
+    <p class="tk-card-s">Všechno na jednom místě a nic dvakrát: nahoře úkoly s termínem (zaškrtni hotové, termíny si přidáš do kalendáře), dole rozhodnutí a pravidla, která si odsouhlasíme na schůzce.</p><div class="ck-total" id="ckTotal"></div><div class="ck-sec-h"><b>📅 Úkoly s termínem</b><span>Co po tobě potřebujeme a dokdy.</span></div>
     <div id="tasksHost"></div>
-</div>
-<!-- ==========================================================================
-     🎤 PREZENČNÍ CHECKLIST PRO KOLEGY (VLOŽIT NAKONEC STRÁNKY)
-     ========================================================================== -->
-<div class="bento-card full" id="prezentacniChecklistSekce" style="margin-top: 60px; border: 2px dashed var(--accent); background: var(--surface); padding: 32px; border-radius: 20px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);">
-    <h2 class="sec-title x-a141b9" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3); display: flex;">Kontrola, jestli jsme si všechno řekli</h2>
-    <p class="sec-sub" style="width: 100%; margin-top: 12px; margin-bottom: 28px; text-align: center; color: var(--text-muted); font-size: 0.95rem;">Odsouhlasíme si jednotlivé body na schůzce. Zaškrtnutím si ověříme, že jsme na nic nezapomněli.</p>
-
+<div class="ck-sec ck-meet" id="prezentacniChecklistSekce"><div class="ck-sec-h"><b>🤝 Na schůzce probereme</b><span>Rozhodnutí a pravidla bez termínu. Zaškrtni, co jsme si odsouhlasili.</span></div>
     <div style="background: var(--surface-hover); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 28px; box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <strong style="color: var(--text-main); font-size: 1rem; display: flex; align-items: center; gap: 8px;">📊 Probranost schůzky:</strong>
+            <strong style="color: var(--text-main); font-size: 1rem; display: flex; align-items: center; gap: 8px;">📊 Probráno na schůzce:</strong>
             <span id="presPercentage" style="font-weight: 900; color: var(--accent); font-size: 1.2rem;">0 %</span>
         </div>
         <div style="width: 100%; height: 14px; background: rgba(126, 226, 242, 0.15); border-radius: 10px; overflow: hidden; padding: 2px; border: 1px solid rgba(126, 226, 242, 0.3);">
@@ -13800,26 +13792,20 @@ function updatePackingWeight() {
 
         <!-- SKUPINA 3 -->
         <div class="x-f6241a" style="display: flex; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
-            <strong style="color: var(--primary, #0a4f5c); display: block; font-size: 1.05rem; border-bottom: 2px solid var(--border); padding-bottom: 8px; margin-bottom: 4px;">💰 3. Finance &amp; eSIM</strong>
-            <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres7_1" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>💵 Kapesné cca 600–700 USD na osobu (vše kromě letů a hotelů)</span></label>
+            <strong style="color: var(--primary, #0a4f5c); display: block; font-size: 1.05rem; border-bottom: 2px solid var(--border); padding-bottom: 8px; margin-bottom: 4px;">💰 3. Finance &amp; MHD</strong>
             <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres7_2" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>💵 Poslední hotel na Bali se bude platit hotově přidat do CASH cca 30USD</span></label>
-            <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres8" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>📱 Kontrola eSIM v telefonu (*#06# a EID)</span></label>
             <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres15" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>💳 Každý musí mít vlastní bezkontaktní kartu na MHD v Singapuru</span></label>
-            <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres9" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>📅 Harmonogram záloh (peníze poslat na letenky do 15.1.2027, na hotely 10.7.2027.</span></label>
         </div>
 
         <!-- SKUPINA 4 -->
         <div class="x-f6241a" style="display: flex; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
-            <strong style="color: var(--primary, #0a4f5c); display: block; font-size: 1.05rem; border-bottom: 2px solid var(--border); padding-bottom: 8px; margin-bottom: 4px;">🎒 4. Zdraví, Balení &amp; Zákazy</strong>
-            <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres10" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>⚠️ Zlaté pravidlo: Batoh max. 7 kg</span></label>
-            <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres11" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>🛂 Platnost pasu: Minimálně 6 měsíců po návratu (do února 2028)</span></label>
-            <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres12" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>💉 Očkování (nic není povinné, jen doporučené)</span></label>
-            <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres13" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>💊 „Bali Belly“ a lékárnička (Ercefuryl místo Endiaronu)</span></label>
+            <strong style="color: var(--primary, #0a4f5c); display: block; font-size: 1.05rem; border-bottom: 2px solid var(--border); padding-bottom: 8px; margin-bottom: 4px;">🚨 4. Zákazy v Singapuru</strong>
             <label class="checklist-item x-9f9b1d" style="display: flex;"><input type="checkbox" id="pres14" class="pres-check" style="margin-top: 3px; accent-color: var(--lux-deep-a); width: 16px; height: 16px;"><span>🚨 Přísné zákazy v Singapuru!!! (zákaz žvýkaček, e-cigaret a vapů)</span></label>
         </div>
 
     </div>
-</div>
+</div></div>
+
 
     </div></div></div>
 </section>
@@ -18210,6 +18196,19 @@ img[data-ph]:not([data-ok]), img[data-ph]:not([data-ok]) + button { display: non
 #briefBanner { position: fixed; left: 50%; top: 64px; transform: translateX(-50%); z-index: 9995; display: none; align-items: center; gap: 12px; padding: 9px 10px 9px 16px; border-radius: 999px; background: linear-gradient(135deg, #f59e0b, #ea580c); color: #fff; font: 700 0.85rem var(--font-ui, inherit); box-shadow: 0 14px 30px -12px rgba(234, 88, 12, .7); max-width: calc(100vw - 24px); }
 #briefBanner button { border: 0; border-radius: 999px; padding: 7px 14px; font: 800 0.8rem var(--font-ui, inherit); background: #fff; color: #9a3412; cursor: pointer; white-space: nowrap; }
 body.brief:not(.pres-on) #briefBanner { display: flex; }
+
+/* ---- Jeden společný checklist (úkoly s termínem + body schůzky) ---- */
+.ck-total { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; margin: 12px 0 18px; padding: 12px 16px; border-radius: 16px; border: 1px solid color-mix(in srgb, var(--primary) 30%, var(--border)); background: linear-gradient(120deg, color-mix(in srgb, var(--primary) 14%, var(--surface)), var(--surface)); }
+.ck-total b { font: 900 1.4rem var(--font-display, inherit); color: var(--text-main); } .ck-total small { display: block; font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+.ck-total .ck-bar { height: 12px; border-radius: 99px; background: color-mix(in srgb, var(--border) 80%, transparent); overflow: hidden; } .ck-total .ck-bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: linear-gradient(90deg, var(--primary), #22c55e); transition: width .4s; }
+.ck-total .ck-pct { font: 900 1.1rem var(--font-display, inherit); color: var(--primary); }
+.ck-sec-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 6px 0 10px; padding-left: 12px; border-left: 4px solid var(--primary); }
+.ck-sec-h b { font: 800 1.05rem var(--font-display, inherit); color: var(--text-main); } .ck-sec-h span { font-size: 0.82rem; color: var(--text-muted); font-weight: 600; }
+.ck-meet { margin-top: 26px; } .ck-meet .ck-sec-h { border-left-color: #f59e0b; }
+.ck-meet > div:not(.ck-sec-h):first-of-type { padding: 12px 16px !important; margin-bottom: 16px !important; border-radius: 14px !important; }
+.ck-meet .x-f6241a { border-radius: 18px !important; border: 1px solid color-mix(in srgb, #f59e0b 30%, var(--border)) !important; background: radial-gradient(360px 140px at 100% 0%, color-mix(in srgb, #f59e0b 12%, transparent), transparent 70%), var(--surface) !important; }
+.ck-meet label { border-radius: 12px; padding: 6px 8px; transition: background .15s; } .ck-meet label:hover { background: color-mix(in srgb, #f59e0b 9%, transparent); }
+.ck-meet label:has(input:checked) { background: color-mix(in srgb, #22c55e 11%, transparent); } .ck-meet input.pres-check { accent-color: #22c55e; }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -18240,7 +18239,7 @@ body.brief:not(.pres-on) #briefBanner { display: flex; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '1. 11. 2026 · 18:02';
+    var LUX_VERSION = '1. 11. 2026 · 18:30';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -18468,14 +18467,14 @@ body.brief:not(.pres-on) #briefBanner { display: flex; }
        rec: true = doporučený termín (není pevně daný organizátorem) */
     var TASKS = [
         { id: 'setkani', d: '2026-11-07', time: '17:00', off: 1, ic: '☕', title: 'Společné setkání u organizátora', note: 'Hodkovice nad Mohelkou, v sobotu v 17:00. Dáme si kávu, seznámíme se a probereme plán i výběr mezi variantami A, B a C.', link: '#hero' },
-        { id: 'pas', d: '2026-12-31', ic: '🛂', rec: true, title: 'Zkontroluj cestovní pas', note: 'Musí platit ještě aspoň 6 měsíců po vstupu do země, tedy bezpečně do 25. 2. 2028. Doporučený termín.', link: '#viza' },
-        { id: 'zaloha', d: '2027-01-31', show: ['leden', '2027'], ic: '💳', title: 'Záloha na letenky', note: 'Organizátor vybírá zálohu v lednu 2027 a nakoupí letenky. Po nákupu pošle fakturu a zbylé peníze vrátí.', link: '#rozpocet' },
-        { id: 'ockovani', d: '2027-06-25', ic: '💉', rec: true, title: 'Očkování a lékárnička', note: 'Doporučené je očkování proti tetanu, žloutence A+B a břišnímu tyfu. S lékařem se domluv aspoň 6 týdnů před odletem. Doporučený termín.', link: '#bezpecnost' },
-        { id: 'hotely', d: '2027-07-05', show: ['začátek', 'července'], ic: '🏨', title: 'Peníze na hotely', note: 'Organizátor potřebuje peníze na ubytování začátkem července 2027.', link: '#rozpocet' },
+        { id: 'pas', d: '2026-12-31', ic: '🛂', rec: true, title: 'Zkontroluj cestovní pas', note: 'Musí platit ještě aspoň 6 měsíců po návratu, tedy bezpečně do 25. 2. 2028. Doporučený termín.', link: '#viza' },
+        { id: 'zaloha', d: '2027-01-15', ic: '💳', title: 'Záloha na letenky', note: 'Peníze na letenky pošli do 15. 1. 2027. Organizátor pak nakoupí letenky, pošle fakturu a zbylé peníze vrátí.', link: '#rozpocet' },
+        { id: 'ockovani', d: '2027-06-25', ic: '💉', rec: true, title: 'Očkování a lékárnička', note: 'Nic není povinné. Doporučené je očkování proti tetanu, žloutence A+B a břišnímu tyfu, s lékařem se domluv aspoň 6 týdnů před odletem. Do lékárničky na „Bali Belly“ přibal Ercefuryl (místo Endiaronu). Doporučený termín.', link: '#bezpecnost' },
+        { id: 'hotely', d: '2027-07-10', ic: '🏨', title: 'Peníze na hotely', note: 'Peníze na ubytování pošli do 10. 7. 2027.', link: '#rozpocet' },
         { id: 'evoa', d: '2027-07-23', ic: '🇮🇩', title: 'Indonéské vízum e-VoA', note: 'Žádost se podává cca 14 dní před odletem online. Poplatek 500 000 IDR, vízum platí 30 dní.', link: '#viza' },
         { id: 'esim', d: '2027-07-30', ic: '📱', rec: true, title: 'Singtel eSIM', note: 'Ověř, že telefon eSIM umí (po vytočení *#06# musí být vidět kód EID), a kup ji před odletem. Doporučený termín.', link: '#esim' },
         { id: 'levy', d: '2027-07-30', ic: '🏷️', rec: true, title: 'Turistická daň Bali', note: 'Doporučuje se zaplatit předem online (150 000 IDR). Doporučený termín.', link: '#viza' },
-        { id: 'baleni', d: '2027-08-04', ic: '🎒', rec: true, title: 'Sbalit batoh (limit 7 kg)', note: 'Podle seznamu v sekci Balení. Doporučený termín.', link: '#baleni' },
+        { id: 'baleni', d: '2027-08-04', ic: '🎒', rec: true, title: 'Sbalit batoh (limit 7 kg)', note: 'Zlaté pravidlo: příruční batoh max. 7 kg. Podle seznamu v sekci Balení. Doporučený termín.', link: '#baleni' },
         { id: 'sgac', d: '2027-08-04', end: '2027-08-06', ic: '🇸🇬', title: 'SG Arrival Card', note: 'Vyplň 1–3 dny před příletem do Singapuru (7. 8.) a ulož si QR kód do telefonu.', link: '#viza' },
         { id: 'ecd', d: '2027-08-07', ic: '🛃', title: 'Indonéská celní deklarace (e-CD)', note: 'Vyplň 2 dny před příletem na Bali (9. 8.).', link: '#viza' }
     ];
@@ -19650,6 +19649,18 @@ function luxQRSvg(text, px) {
         d.querySelector('button').onclick = function () { try { window.luxBrief(false); } catch (e) { document.body.classList.remove('brief'); } };
         document.body.appendChild(d);
     })();
+
+
+    /* ---------- společný checklist: celkový postup úkolů i bodů schůzky ---------- */
+    function ckTotal() {
+        var el = $('ckTotal'); if (!el) return;
+        var tk = [].slice.call(document.querySelectorAll('#tasksHost .tk input[type="checkbox"]')), pr = [].slice.call(document.querySelectorAll('.pres-check'));
+        var all = tk.length + pr.length, done = tk.filter(function (c) { return c.checked; }).length + pr.filter(function (c) { return c.checked; }).length, pct = all ? Math.round(done / all * 100) : 0;
+        el.innerHTML = '<div><b>' + done + ' / ' + all + '</b><small>hotovo celkem</small></div><div class="ck-bar"><i style="width:' + pct + '%"></i></div><div class="ck-pct">' + pct + ' %</div>';
+        el.title = 'Úkoly s termínem: ' + tk.filter(function (c) { return c.checked; }).length + ' z ' + tk.length + ' · body schůzky: ' + pr.filter(function (c) { return c.checked; }).length + ' z ' + pr.length;
+    }
+    document.addEventListener('change', function (e) { if (e.target && e.target.closest && e.target.closest('#ukolyTerminy')) setTimeout(ckTotal, 30); });
+    (function () { var h = $('tasksHost'); if (h && window.MutationObserver) new MutationObserver(function () { setTimeout(ckTotal, 30); }).observe(h, { childList: true, subtree: true }); setTimeout(ckTotal, 300); })();
 
     /* ---------- skupina „Nástroje“ v menu ---------- */
     function addTools() {
