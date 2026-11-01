@@ -6089,7 +6089,7 @@ e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 17:22</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 17:32</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -17999,6 +17999,138 @@ img[data-ph]:not([data-ok]), img[data-ph]:not([data-ok]) + button { display: non
 .ph-credits { max-width: 1240px; margin: 14px auto 90px; padding: 0 16px; font-size: 0.68rem; line-height: 1.5; color: var(--text-muted); text-align: center; } .ph-credits a { color: inherit; text-decoration: underline; }
 .cx-e > .tj-pic.tj-own { cursor: zoom-in; height: auto; max-height: none; aspect-ratio: auto; display: flex; justify-content: center; align-items: center; background: rgba(148, 163, 184, 0.12); }
 .cx-e > .tj-pic.tj-own img { width: 100%; height: auto; max-height: 300px; object-fit: contain; object-position: center; }
+
+/* ---- Panel postupu: nový vzhled (kruhový ukazatel, skleněné hodiny, tlačítka, čipy částí s vlastním postupem) ---- */
+.lux-progress { position: relative; overflow: hidden; padding: 22px 26px 22px; gap: 18px; border-radius: 24px; border: 1px solid color-mix(in srgb, var(--primary) 30%, var(--border));
+    background: radial-gradient(760px 240px at 0% 0%, color-mix(in srgb, var(--primary) 15%, transparent), transparent 62%), radial-gradient(620px 220px at 100% 100%, color-mix(in srgb, #f59e0b 11%, transparent), transparent 62%), var(--surface);
+    box-shadow: 0 18px 44px -22px color-mix(in srgb, var(--primary) 55%, transparent); }
+.lux-progress::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: linear-gradient(90deg, var(--primary), #38bdf8 55%, #f59e0b); pointer-events: none; }
+.lp-trip { padding-bottom: 16px; border-bottom: 1px dashed color-mix(in srgb, var(--primary) 30%, var(--border)); }
+.lp-status { gap: 12px; }
+.lp-status b { font-size: 1.55rem; font-weight: 900; letter-spacing: -.01em; background: linear-gradient(90deg, var(--text-main), var(--primary)); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+.lp-status .lp-dot { width: 11px; height: 11px; box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 22%, transparent); }
+.lp-status .lp-dim { padding: 5px 13px; border-radius: 99px; border: 1px solid var(--border); background: color-mix(in srgb, var(--primary) 8%, transparent); font-size: 0.8rem; font-weight: 600; }
+.lp-clocks { gap: 10px; }
+.lp-clock { padding: 7px 14px; border-radius: 14px; border: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 70%, transparent); backdrop-filter: blur(6px); font-weight: 600; }
+.lp-clock::before { content: "🏠"; margin-right: 2px; } .lp-clock:last-child::before { content: "🌴"; }
+.lp-clock b { font-size: 1.25rem; font-weight: 900; letter-spacing: .02em; }
+.lp-diff { padding: 4px 10px; font-weight: 800; background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 55%, #38bdf8)); color: #fff; border: 0; box-shadow: 0 6px 14px -6px color-mix(in srgb, var(--primary) 70%, transparent); }
+.lp-diff::before { content: "✈ "; }
+.lp-top { gap: 20px; }
+.lp-score { --p: 0; position: relative; width: 92px; height: 92px; flex: 0 0 auto; justify-content: center; align-items: center; gap: 2px; border-radius: 50%; flex-wrap: wrap; align-content: center;
+    background: conic-gradient(var(--primary) calc(var(--p) * 1%), color-mix(in srgb, var(--border) 80%, transparent) 0); box-shadow: 0 10px 24px -12px color-mix(in srgb, var(--primary) 70%, transparent); transition: background .4s; }
+.lp-score::before { content: ""; position: absolute; inset: 9px; border-radius: 50%; background: var(--surface); box-shadow: inset 0 2px 8px rgba(0, 0, 0, .12); }
+.lp-score > * { position: relative; z-index: 1; }
+.lp-done { font-size: 1.9rem; line-height: 1; } .lp-of { font-size: 0.8rem; align-self: flex-end; padding-bottom: 5px; }
+.lp-title { font-size: 1.15rem; font-weight: 800; } .lp-sub { font-size: 0.86rem; font-weight: 600; }
+.lux-progress .lux-tool { border-radius: 999px; padding: 10px 18px; font-weight: 700; border: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 75%, transparent); transition: transform .15s, box-shadow .15s, border-color .15s; }
+.lux-progress .lux-tool:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -12px color-mix(in srgb, var(--primary) 65%, transparent); }
+.lux-progress .lp-btns > .lux-tool:nth-child(2) { background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 55%, #0ea5e9)); color: #fff; border-color: transparent; box-shadow: 0 10px 22px -10px color-mix(in srgb, var(--primary) 75%, transparent); }
+.lp-track { --n: 28; position: relative; height: 14px; overflow: visible; background: color-mix(in srgb, var(--border) 75%, transparent); box-shadow: inset 0 2px 5px rgba(0, 0, 0, .14); }
+.lp-track::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: repeating-linear-gradient(90deg, transparent 0, transparent calc(100% / var(--n) - 2px), rgba(255, 255, 255, .5) calc(100% / var(--n) - 2px), rgba(255, 255, 255, .5) calc(100% / var(--n))); }
+.lp-fill { position: relative; background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--primary) 50%, #38bdf8)); box-shadow: 0 0 18px color-mix(in srgb, var(--primary) 60%, transparent); }
+.lp-fill::after { content: "✈"; position: absolute; right: 0; top: 50%; transform: translate(45%, -52%); font-size: 1.15rem; filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .35)); z-index: 2; }
+.lp-fill[style*="width: 0%"]::after, .lp-fill[style*="width:0%"]::after { display: none; }
+.lp-foot { gap: 14px; }
+.lp-parts { gap: 10px; flex-wrap: wrap; }
+.lp-chip { --pc: 0; position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 9px 15px; border-radius: 14px; border: 1px solid var(--border); font-weight: 700; text-decoration: none; color: var(--text-main);
+    background: linear-gradient(90deg, color-mix(in srgb, var(--primary) 22%, var(--surface)) calc(var(--pc) * 1%), var(--surface) calc(var(--pc) * 1%)); transition: transform .15s, box-shadow .15s, border-color .15s; }
+.lp-chip:hover { transform: translateY(-2px); border-color: var(--primary); box-shadow: 0 10px 20px -12px color-mix(in srgb, var(--primary) 65%, transparent); }
+.lp-chip b { padding: 2px 9px; border-radius: 99px; font-size: 0.78rem; background: color-mix(in srgb, var(--primary) 16%, transparent); }
+.lp-chip.is-done { border-color: color-mix(in srgb, #22c55e 55%, var(--border)); background: linear-gradient(135deg, color-mix(in srgb, #22c55e 18%, var(--surface)), var(--surface)); }
+.lp-chip.is-done b { background: #22c55e; color: #fff; }
+.lp-lock { padding: 7px 14px; border-radius: 99px; border: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 70%, transparent); font-weight: 600; cursor: pointer; }
+.lp-lock input { width: 18px; height: 18px; accent-color: var(--primary); }
+@media (max-width: 760px) { .lux-progress { padding: 18px 16px 18px; } .lp-score { width: 70px; height: 70px; } .lp-score::before { inset: 7px; } .lp-done { font-size: 1.45rem; } .lp-status b { font-size: 1.25rem; } .lp-chip { padding: 8px 12px; } }
+
+/* ================= Část I – vytuněný obsah sekcí (víza, SOS, eSIM, aplikace, Live 360, balení) ================= */
+/* --- společné: úvodní nadpisy sekcí jako elegantní pruh --- */
+#f-sos h2#bezpecnost, #f-esim h2#esim, #f-apps h2#transport-apps, #f-live h2#live360, #f-viza h2#viza { position: relative; overflow: hidden; border-radius: 18px !important; background: linear-gradient(120deg, color-mix(in srgb, var(--primary) 26%, var(--surface)), var(--surface) 70%) !important; border: 1px solid color-mix(in srgb, var(--primary) 35%, var(--border)) !important; box-shadow: 0 14px 34px -22px color-mix(in srgb, var(--primary) 70%, transparent) !important; }
+#f-sos h2#bezpecnost::after, #f-esim h2#esim::after, #f-apps h2#transport-apps::after, #f-live h2#live360::after, #f-viza h2#viza::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: linear-gradient(90deg, var(--primary), #38bdf8, #f59e0b); }
+#f-esim .sec-sub, #f-apps .sec-sub, #f-live .sec-sub { font-weight: 600 !important; }
+#cast-priprava .lux-fold-pad a, #cast-priprava .lux-fold-pad button, #cast-priprava .lux-fold-pad summary { transition: transform .15s, box-shadow .15s, border-color .15s, background .15s; }
+
+/* --- Víza & portály: 4 karty vedle sebe, barevný akcent a pořadí --- */
+#f-viza .lux-fold-pad > div:first-child > div { counter-reset: viza; gap: 18px !important; }
+@media (min-width: 1300px) { #f-viza .lux-fold-pad > div:first-child > div { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; } }
+@media (min-width: 760px) and (max-width: 1299px) { #f-viza .lux-fold-pad > div:first-child > div { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+#f-viza .lux-fold-pad > div:first-child > div > div { --acc: #ef4444; counter-increment: viza; position: relative; overflow: hidden; padding: 24px 22px 22px !important; border-radius: 22px !important; border: 1px solid color-mix(in srgb, var(--acc) 35%, var(--border)) !important;
+    background: radial-gradient(420px 160px at 100% 0%, color-mix(in srgb, var(--acc) 16%, transparent), transparent 70%), var(--surface) !important; box-shadow: 0 16px 34px -24px color-mix(in srgb, var(--acc) 80%, transparent) !important; transition: transform .2s, box-shadow .2s; }
+#f-viza .lux-fold-pad > div:first-child > div > div:nth-child(2) { --acc: #f97316; } #f-viza .lux-fold-pad > div:first-child > div > div:nth-child(3) { --acc: #10b981; } #f-viza .lux-fold-pad > div:first-child > div > div:nth-child(4) { --acc: #3b82f6; }
+#f-viza .lux-fold-pad > div:first-child > div > div::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px; background: linear-gradient(90deg, var(--acc), color-mix(in srgb, var(--acc) 40%, #fff)); }
+#f-viza .lux-fold-pad > div:first-child > div > div::after { content: counter(viza); position: absolute; top: 14px; right: 16px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; font: 900 0.9rem var(--font-display, inherit); color: #fff; background: var(--acc); box-shadow: 0 6px 14px -6px var(--acc); }
+#f-viza .lux-fold-pad > div:first-child > div > div:hover { transform: translateY(-3px); box-shadow: 0 22px 40px -24px var(--acc) !important; }
+#f-viza .lux-fold-pad > div:first-child > div > div h3 { padding-right: 36px; font-size: 1.12rem !important; }
+#f-viza .lux-fold-pad > div:first-child > div > div [id$="Status"] { display: flex !important; width: 100%; box-sizing: border-box; padding: 10px 12px !important; border-radius: 12px !important; border: 1px solid color-mix(in srgb, var(--acc) 45%, var(--border)) !important; background: color-mix(in srgb, var(--acc) 12%, transparent) !important; color: var(--text-main) !important; font-size: 0.8rem !important; }
+#f-viza details { border-radius: 14px !important; border: 1px solid var(--border) !important; background: color-mix(in srgb, var(--surface) 80%, transparent) !important; }
+#f-viza details > summary { list-style: none; } #f-viza details > summary::-webkit-details-marker { display: none; }
+#f-viza details > summary:hover { background: color-mix(in srgb, var(--acc, var(--primary)) 10%, transparent); }
+#f-viza details > summary > span:last-child { transition: transform .2s; } #f-viza details[open] > summary > span:last-child { transform: rotate(180deg); }
+#f-viza details[open] { border-color: color-mix(in srgb, var(--acc, var(--primary)) 50%, var(--border)) !important; }
+#f-viza details ol { padding-left: 0 !important; list-style: none; }
+#f-viza details ol > li { padding: 10px 12px; border-radius: 10px; background: color-mix(in srgb, var(--acc, var(--primary)) 7%, transparent); border-left: 3px solid var(--acc, var(--primary)); }
+#f-viza .lux-fold-pad > div:first-child > div > div > a, #f-viza .lux-fold-pad > div:first-child > div > div > div > a:last-child { border-radius: 14px !important; background: linear-gradient(135deg, var(--acc), color-mix(in srgb, var(--acc) 55%, #0f172a)) !important; color: #fff !important; border: 0 !important; box-shadow: 0 12px 24px -14px var(--acc) !important; font-weight: 800 !important; }
+#f-viza .lux-fold-pad > div:first-child > div > div > a:hover { transform: translateY(-2px); }
+
+/* --- SOS kontakty & zdraví --- */
+#f-sos .x-06017c { --acc: #ef4444; position: relative; overflow: hidden; border-radius: 22px !important; border: 1px solid color-mix(in srgb, var(--acc) 30%, var(--border)) !important; background: radial-gradient(520px 180px at 0% 0%, color-mix(in srgb, var(--acc) 12%, transparent), transparent 70%), var(--surface) !important; }
+#f-sos .x-06017c + .x-06017c { --acc: #10b981; }
+#f-sos .x-06017c::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px; background: linear-gradient(90deg, var(--acc), color-mix(in srgb, var(--acc) 40%, #fff)); }
+#f-sos .x-06017c > div:first-child { border-bottom-color: color-mix(in srgb, var(--acc) 40%, var(--border)) !important; }
+#f-sos .x-d253e5 { position: relative; border-radius: 16px !important; border-left: 4px solid #3b82f6 !important; transition: transform .15s, box-shadow .15s; }
+#f-sos .x-d253e5:hover { transform: translateX(3px); box-shadow: 0 12px 26px -18px #3b82f6; }
+#f-sos a[href^="tel:"] { border-radius: 999px !important; padding: 8px 14px !important; font-weight: 800 !important; font-size: 0.84rem !important; }
+#f-sos a[href^="tel:"]:not(.x-ee8349) { background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 55%, #0ea5e9)) !important; color: #fff !important; border: 0 !important; }
+#f-sos a.x-ee8349 { background: linear-gradient(135deg, #ef4444, #b91c1c) !important; color: #fff !important; border: 0 !important; box-shadow: 0 8px 18px -10px #ef4444 !important; }
+#f-sos a[href^="tel:"]:hover { transform: translateY(-2px); }
+#f-sos .x-06017c:first-of-type > div:last-child > div:last-child a[href^="tel:"] { background: linear-gradient(135deg, #ef4444, #b91c1c) !important; color: #fff !important; box-shadow: 0 8px 18px -10px #ef4444 !important; font-size: 0.95rem !important; padding: 10px 16px !important; }
+#f-sos .x-06017c + .x-06017c > div:last-child > div { border-radius: 16px !important; transition: transform .15s, box-shadow .15s; }
+#f-sos .x-06017c + .x-06017c > div:last-child > div:hover { transform: translateX(3px); box-shadow: 0 12px 26px -18px #10b981; border-color: color-mix(in srgb, #10b981 45%, var(--border)) !important; }
+
+/* --- eSIM --- */
+#f-esim .esim-main-card { border-radius: 24px !important; border: 1px solid color-mix(in srgb, #a855f7 35%, var(--border)) !important; background: radial-gradient(700px 220px at 100% 0%, color-mix(in srgb, #a855f7 14%, transparent), transparent 70%), var(--surface) !important; }
+#f-esim .esim-badge-main { background: linear-gradient(135deg, #a855f7, #6366f1) !important; color: #fff !important; border: 0 !important; box-shadow: 0 10px 22px -12px #a855f7; }
+#f-esim .esim-price-box { border-radius: 20px !important; box-shadow: 0 18px 36px -20px #6366f1 !important; }
+#f-esim .esim-details-box { border-radius: 20px !important; border: 1px solid color-mix(in srgb, #a855f7 30%, var(--border)) !important; }
+#f-esim .esim-details-box ul { list-style: none; padding-left: 0 !important; }
+#f-esim .esim-details-box li { position: relative; padding: 8px 10px 8px 34px; margin-bottom: 6px; border-radius: 10px; background: color-mix(in srgb, #a855f7 7%, transparent); }
+#f-esim .esim-details-box li::before { content: "✓"; position: absolute; left: 10px; top: 8px; width: 18px; height: 18px; display: grid; place-items: center; border-radius: 50%; background: #22c55e; color: #fff; font-size: 0.7rem; font-weight: 900; }
+#f-esim .btn-action-group a { border-radius: 16px !important; background: linear-gradient(135deg, #a855f7, #6366f1) !important; color: #fff !important; border: 0 !important; box-shadow: 0 14px 28px -14px #6366f1 !important; }
+#f-esim .btn-action-group a:hover { transform: translateY(-2px); }
+
+/* --- Dopravní aplikace: barvy aplikací a tlačítka obchodů --- */
+#f-apps .transport-app-item { --acc: #00b14f; position: relative; overflow: hidden; border-radius: 22px !important; border: 1px solid color-mix(in srgb, var(--acc) 35%, var(--border)) !important; background: radial-gradient(420px 160px at 100% 0%, color-mix(in srgb, var(--acc) 15%, transparent), transparent 70%), var(--surface) !important; transition: transform .2s, box-shadow .2s; }
+#f-apps .transport-app-item:nth-child(2) { --acc: #0a9e4a; } #f-apps .transport-app-item:nth-child(3) { --acc: #f59e0b; }
+#f-apps .transport-app-item::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px; background: var(--acc); }
+#f-apps .transport-app-item:hover { transform: translateY(-3px); box-shadow: 0 22px 40px -24px var(--acc); }
+#f-apps .transport-app-title { font-size: 1.35rem !important; }
+#f-apps .transport-app-item > div:first-child > div:nth-child(2) { color: var(--acc) !important; }
+#f-apps .transport-features-box { border-radius: 16px !important; border-color: color-mix(in srgb, var(--acc) 30%, var(--border)) !important; }
+#f-apps .transport-features-box ul { list-style: none; padding-left: 0 !important; }
+#f-apps .transport-features-box li { padding: 7px 10px; border-radius: 10px; margin-bottom: 4px; }
+#f-apps .transport-features-box li:hover { background: color-mix(in srgb, var(--acc) 9%, transparent); }
+#f-apps .transport-store-btn, #f-live .store-buttons a { background: #0b0f17 !important; color: #fff !important; border: 1px solid rgba(255, 255, 255, .18) !important; border-radius: 12px !important; font-weight: 800 !important; box-shadow: 0 10px 20px -14px #000; }
+#f-apps .transport-store-btn:hover, #f-live .store-buttons a:hover { transform: translateY(-2px); border-color: var(--acc, var(--primary)) !important; }
+
+/* --- Live 360 --- */
+#f-live .live360-bento-card { --acc: #c026d3; border-radius: 24px !important; border: 1px solid color-mix(in srgb, var(--acc) 30%, var(--border)) !important; background: radial-gradient(700px 240px at 100% 0%, color-mix(in srgb, var(--acc) 13%, transparent), transparent 70%), var(--surface) !important; }
+#f-live .live360-badge { background: linear-gradient(135deg, #c026d3, #7c3aed) !important; color: #fff !important; border: 0 !important; box-shadow: 0 10px 22px -12px #c026d3; }
+#f-live .live360-content-box { border-radius: 18px !important; border-left: 4px solid var(--acc) !important; }
+#f-live .live360-content-box > p:last-child { padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, #22c55e 9%, transparent); border: 1px dashed color-mix(in srgb, #22c55e 45%, var(--border)); }
+
+/* --- Balení: kategorie jako karty, vlastní zaškrtávátka, zabalené položky zezelenají --- */
+#baleni .scooter-header { border-radius: 18px; padding: 14px 16px !important; background: linear-gradient(120deg, color-mix(in srgb, #f59e0b 18%, var(--surface)), var(--surface) 75%) !important; border: 1px solid color-mix(in srgb, #f59e0b 35%, var(--border)) !important; }
+#baleni .scooter-badge { background: linear-gradient(135deg, #f59e0b, #ea580c) !important; color: #fff !important; border: 0 !important; font-weight: 800 !important; }
+#baleni > div > div:nth-child(4) { gap: 14px !important; }
+#baleni > div > div:nth-child(4) > div, #baleni > div > div.x-mb-16 { padding: 14px 14px 8px; border-radius: 18px; border: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 85%, transparent); box-shadow: 0 12px 26px -22px #000; }
+#baleni > div > div:nth-child(4) > div > strong:first-child, #baleni > div > div.x-mb-16 > strong:first-child { display: inline-block !important; padding: 5px 12px; border-radius: 99px; margin-bottom: 12px !important; background: linear-gradient(135deg, color-mix(in srgb, #f59e0b 22%, transparent), transparent); border: 1px solid color-mix(in srgb, #f59e0b 40%, var(--border)); }
+#baleni .checklist-item { padding: 8px 10px; border-radius: 12px; border: 1px solid transparent; transition: background .15s, border-color .15s; }
+#baleni .checklist-item:hover { background: color-mix(in srgb, var(--primary) 8%, transparent); border-color: var(--border); }
+#baleni .checklist-item input[type="checkbox"] { accent-color: #22c55e; width: 20px !important; height: 20px !important; flex: 0 0 auto; }
+#baleni .checklist-item:has(input:checked) { background: color-mix(in srgb, #22c55e 11%, transparent); border-color: color-mix(in srgb, #22c55e 40%, var(--border)); }
+#baleni .checklist-item:has(input:checked) > span { text-decoration: line-through; text-decoration-color: color-mix(in srgb, #22c55e 70%, transparent); opacity: .8; }
+#baleni .checklist-item .x-c-text-muted_fs-85 { display: inline-block; margin-left: 4px; padding: 1px 8px; border-radius: 99px; font-size: 0.72rem !important; font-weight: 800; background: color-mix(in srgb, #f59e0b 16%, transparent); color: var(--text-main) !important; white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { #cast-priprava .lux-fold-pad * { transition: none !important; } }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -18029,7 +18161,7 @@ img[data-ph]:not([data-ok]), img[data-ph]:not([data-ok]) + button { display: non
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '1. 11. 2026 · 17:22';
+    var LUX_VERSION = '1. 11. 2026 · 17:32';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19401,6 +19533,23 @@ function luxQRSvg(text, px) {
         if (window.MutationObserver) new MutationObserver(function (ms) {
             if (!d.open) return; ms.forEach(function (m) { var el = m.target; if (el.classList && el.classList.contains('lux-fold') && el.classList.contains('is-open') && !/\bis-open\b/.test(m.oldValue || '')) d.open = false; });
         }).observe(document.body, { attributes: true, attributeFilter: ['class'], attributeOldValue: true, subtree: true });
+    })();
+
+
+    /* ---------- panel postupu: hodnoty pro kruhový ukazatel, značky v liště a postup v čipech částí ---------- */
+    function lpDecor() {
+        var box = document.querySelector('.lux-progress'); if (!box) return;
+        var done = parseInt(($('lpDone') || {}).textContent, 10) || 0, all = parseInt(($('lpAll') || {}).textContent, 10) || 1;
+        var sc = box.querySelector('.lp-score'), tr = box.querySelector('.lp-track'); function setv(el, k, v) { if (el && el.style.getPropertyValue(k) !== String(v)) el.style.setProperty(k, v); } setv(sc, '--p', (done / all * 100).toFixed(2)); setv(tr, '--n', all);
+        [].forEach.call(box.querySelectorAll('.lp-chip'), function (a) {
+            var m = /přečteno\s+(\d+)\s+z\s+(\d+)/i.exec(a.getAttribute('title') || ''); if (!m) return; var d = +m[1], n = +m[2] || 1;
+            setv(a, '--pc', (d / n * 100).toFixed(1)); a.classList.toggle('is-done', d >= n);
+        });
+    }
+    (function lpWatch() {
+        var box = document.querySelector('.lux-progress'); if (!box) return; var s = false; function trig() { if (s) return; s = true; requestAnimationFrame(function () { s = false; try { lpDecor(); } catch (e) {} }); }
+        if (window.MutationObserver) new MutationObserver(trig).observe(box, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['title', 'style'] });
+        trig(); setTimeout(trig, 600); setTimeout(trig, 2000);
     })();
 
     /* ---------- skupina „Nástroje“ v menu ---------- */
