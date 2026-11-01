@@ -6075,7 +6075,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 06:22</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 06:26</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -17771,7 +17771,7 @@ body.simple-on { overflow: hidden; }
 }
 
 /* ---- Výběr letenek: otevírací složka nad „Příprava před odletem“ ---- */
-.lux-flightpick { max-width: 1240px; margin: 12px auto 18px; border-radius: 18px; border: 1.5px solid var(--border); background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
+.lux-flightpick { max-width: 100%; margin: 0 0 14px; border-radius: 18px; border: 1.5px solid var(--border); background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
 .lux-flightpick > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 12px 16px; min-height: 64px; }
 .lux-flightpick > summary::-webkit-details-marker { display: none; }
 .lux-flightpick > summary:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
@@ -17783,7 +17783,7 @@ body.simple-on { overflow: hidden; }
 .lux-flightpick[open] .fp-chev { transform: rotate(180deg); }
 .lux-flightpick[open] > summary { border-bottom: 1px solid var(--border); }
 .lux-flightpick .bento-grid { padding: 10px; }
-@media (max-width: 700px) { .lux-flightpick { margin: 10px 8px 14px; } .lux-flightpick .fp-sel { display: none; } .lux-flightpick > summary { grid-template-columns: auto minmax(0, 1fr) auto; } }
+@media (max-width: 700px) { .lux-flightpick { margin: 0 0 12px; } .lux-flightpick .fp-sel { display: none; } .lux-flightpick > summary { grid-template-columns: auto minmax(0, 1fr) auto; } }
 @media print { .lux-flightpick { break-inside: avoid; } }
 
 /* ---- Hodnocení a recenze aerolinek přímo ve výběru letenek ---- */
@@ -17805,6 +17805,13 @@ body.simple-on { overflow: hidden; }
 .rv-row b { color: var(--text-main); } .rv-row .st { color: #fbbf24; letter-spacing: 1px; white-space: nowrap; } .rv-row .st u { text-decoration: none; color: rgba(148, 163, 184, 0.5); }
 .rv-v { padding: 8px 12px; border-radius: 10px; border: 1.5px solid var(--primary); font-size: 0.84rem; color: var(--text-main); } .rv-v b { color: var(--primary); text-transform: uppercase; font-size: 0.7rem; letter-spacing: .06em; margin-right: 6px; }
 @media (max-width: 700px) { .rv-grid { grid-template-columns: 1fr; } }
+
+/* karty aerolinek: název se nikdy nelámá po písmenech, cena jde pod něj, když je málo místa */
+.flight-airline-switch .flight-mode-btn .fc-header { flex-wrap: wrap; gap: 6px 8px; }
+.flight-airline-switch .flight-mode-btn .fc-header > div:first-child { flex: 1 1 140px; min-width: 0; }
+.flight-airline-switch .flight-mode-btn .fc-airline { min-width: 0; }
+.flight-airline-switch .flight-mode-btn .fc-airline span { min-width: 0; overflow-wrap: normal; word-break: normal; }
+.flight-airline-switch .flight-mode-btn .fc-price-badge { flex: 0 0 auto; }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -17835,7 +17842,7 @@ body.simple-on { overflow: hidden; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '1. 11. 2026 · 06:22';
+    var LUX_VERSION = '1. 11. 2026 · 06:26';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
