@@ -6075,7 +6075,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 06:40</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 06:49</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -17841,6 +17841,14 @@ body.simple-on { overflow: hidden; }
     .tj-act-grp > .tj-row > .tj-pic { grid-area: pic; margin: -4px -4px 4px; width: calc(100% + 8px); }
 }
 @media (max-width: 999px) { .tj-row > .tj-pic { max-height: 130px; } }
+
+/* ---- Fotky u jídla (úrovně a položky výpočtu) ---- */
+.tj-lvl > .tj-pic, .tj-line > .tj-pic { position: relative; border-radius: 10px; overflow: hidden; aspect-ratio: 16 / 9; max-height: 140px; width: 100%; background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(94, 234, 212, 0.12)); }
+.tj-lvl > .tj-pic { margin-bottom: 8px; flex: 0 0 auto; }
+.tj-lvl > .tj-pic img, .tj-line > .tj-pic img { display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .3s, transform .4s; } .tj-lvl > .tj-pic img.is-ok, .tj-line > .tj-pic img.is-ok { opacity: 1; }
+.tj-lvl > .tj-pic .tj-credit, .tj-line > .tj-pic .tj-credit { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 8px 4px; font: 600 0.58rem/1.2 var(--font-ui, inherit); color: rgba(255, 255, 255, 0.92); background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.62)); text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; }
+.tj-line { flex-wrap: wrap; } .tj-line > .tj-pic { order: -1; flex: 0 0 100%; }
+@media (min-width: 1000px) { #tjFoodTbl .tj-grp > .tj-line { flex-wrap: nowrap; } #tjFoodTbl .tj-grp > .tj-line > .tj-pic { order: 99; flex: 0 0 auto; margin-bottom: 4px; } }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -17871,7 +17879,7 @@ body.simple-on { overflow: hidden; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '1. 11. 2026 · 06:40';
+    var LUX_VERSION = '1. 11. 2026 · 06:49';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19154,63 +19162,103 @@ function luxQRSvg(text, px) {
     })();
 
 
-    /* ---------- fotky u aktivit: volné obrázky z Wikimedia Commons, stahují se v prohlížeči a ukládají do paměti ---------- */
-    var ACT_Q = {
-        sgMhd: 'Singapore MRT train', sgStore: 'Changi Airport baggage storage', sgGardens: 'Gardens by the Bay Flower Dome', sgSkyway: 'OCBC Skyway Supertree Grove', sgJewel: 'Jewel Changi Canopy Park', sgOrchid: 'National Orchid Garden Singapore',
-        uluTemple: 'Uluwatu Temple', uluKecak: 'Kecak dance Uluwatu', uluPadang: 'Padang Padang beach Uluwatu', uluGwk: 'Garuda Wisnu Kencana statue',
-        ubTegal: 'Tegalalang rice terrace', ubKanto: 'Kanto Lampo waterfall', ubTibu: 'Tibumana waterfall', ubTirta: 'Tirta Empul temple', ubMonkey: 'Ubud Monkey Forest', ubTegen: 'Tegenungan waterfall', ubSwing: 'Bali swing Tegalalang', ubBatur: 'Mount Batur sunrise',
-        loTiu: 'Tiu Kelep waterfall Lombok', loSade: 'Sade village Lombok', loBeach: 'Tanjung Aan beach Lombok', loGili: 'Gili Trawangan beach', loSnork: 'Gili Islands snorkeling turtle', loSurf: 'Selong Belanak beach surfing',
-        taxi: 'Bali taxi', miscSmall: 'Balinese sarong temple', hotel: 'Kuta beach Bali'
+
+    /* ---------- fotky: aktivity i jídlo, volné obrázky z Wikimedia Commons (stahují se v prohlížeči a ukládají do paměti) ---------- */
+    var IMG_Q = {
+        sgMhd: ['Singapore MRT train', 'Singapore subway station'], sgStore: ['luggage lockers', 'airport luggage storage'], sgGardens: ['Gardens by the Bay Flower Dome', 'Gardens by the Bay Singapore'], sgSkyway: ['OCBC Skyway Supertree Grove', 'Supertree Grove Singapore'], sgJewel: ['Jewel Changi Canopy Park', 'Jewel Changi Airport'], sgOrchid: ['National Orchid Garden Singapore', 'Singapore Botanic Gardens orchids'],
+        uluTemple: ['Uluwatu Temple', 'Pura Luhur Uluwatu'], uluKecak: ['Kecak dance Uluwatu', 'Kecak dance Bali'], uluPadang: ['Padang Padang beach Uluwatu', 'Suluban beach'], uluGwk: ['Garuda Wisnu Kencana statue', 'GWK Cultural Park Bali'],
+        ubTegal: ['Tegalalang rice terrace', 'Ubud rice terraces'], ubKanto: ['Kanto Lampo waterfall', 'Bali waterfall'], ubTibu: ['Tibumana waterfall', 'Bali waterfall'], ubTirta: ['Tirta Empul temple', 'Tirta Empul holy spring'], ubMonkey: ['Ubud Monkey Forest', 'Sacred Monkey Forest Sanctuary'], ubTegen: ['Tegenungan waterfall', 'Bali waterfall'], ubSwing: ['Bali swing Tegalalang', 'Bali swing'], ubBatur: ['Mount Batur sunrise', 'Mount Batur'],
+        loTiu: ['Tiu Kelep waterfall Lombok', 'Lombok waterfall'], loSade: ['Sade village Lombok', 'Sasak village Lombok'], loBeach: ['Tanjung Aan beach Lombok', 'Selong Belanak beach'], loGili: ['Gili Trawangan beach', 'Gili Islands'], loSnork: ['Gili Islands snorkeling turtle', 'Sea turtle snorkeling'], loSurf: ['Selong Belanak beach surfing', 'Surfing Lombok'],
+        taxi: ['Bali taxi', 'Blue taxi Indonesia'], miscSmall: ['Balinese sarong temple', 'Bali temple sarong'], hotel: ['Kuta beach Bali hotel', 'Kuta beach Bali'],
+        f_lvl0: ['Nasi campur warung', 'Indonesian street food'], f_lvl1: ['Satay Singapore', 'Singapore hawker centre food'], f_lvl2: ['Chilli crab Singapore', 'seafood restaurant dinner'],
+        f_sg_0: ['Hainanese chicken rice', 'Singapore hawker centre food'], f_sg_1: ['Chilli crab Singapore', 'Singapore restaurant dinner'], f_sg_2: ['Kopi kaya toast Singapore', 'iced coffee'],
+        f_ba_0: ['Nasi goreng', 'Indonesian fried rice'], f_ba_1: ['Jimbaran grilled seafood', 'Balinese dinner'], f_ba_2: ['Es teh iced tea Indonesia', 'fresh coconut drink'], f_ba_3: ['Pisang goreng', 'Indonesian dessert']
     };
-    var ACT_API = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=640&gsrsearch=';
-    var ACT_KEY = 'lux_act_img_v1', actCache = {}, actQueue = [], actBusy = 0, actStarted = false;
-    try { actCache = JSON.parse(localStorage.getItem(ACT_KEY) || '{}') || {}; } catch (e) { actCache = {}; }
-    function actSave() { try { localStorage.setItem(ACT_KEY, JSON.stringify(actCache)); } catch (e) {} }
-    function actClean(s) { var d = document.createElement('div'); d.innerHTML = s || ''; return (d.textContent || '').replace(/\s+/g, ' ').trim(); }
-    function actFetch(id) {
-        return fetch(ACT_API + encodeURIComponent(ACT_Q[id] + ' filetype:bitmap')).then(function (r) { return r.json(); }).then(function (data) {
+    var IMG_FB = { sg: 'Singapore skyline', ulu: 'Uluwatu cliff Bali', ub: 'Ubud Bali', lo: 'Lombok beach', ta: 'Bali', mi: 'Bali', ho: 'Bali beach', f_: 'Indonesian food' };
+    var IMG_API = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=640&gsrsearch=';
+    var IMG_KEY = 'lux_img_v2', imgCache = {}, imgQueue = [], imgBusy = 0, imgStarted = {};
+    try { imgCache = JSON.parse(localStorage.getItem(IMG_KEY) || '{}') || {}; } catch (e) { imgCache = {}; }
+    function imgSave() { try { localStorage.setItem(IMG_KEY, JSON.stringify(imgCache)); } catch (e) {} }
+    function imgClean(s) { var d = document.createElement('div'); d.innerHTML = s || ''; return (d.textContent || '').replace(/\s+/g, ' ').trim(); }
+    function imgSearch(q) {
+        return fetch(IMG_API + encodeURIComponent(q + ' filetype:bitmap')).then(function (r) { return r.json(); }).then(function (data) {
             var pages = data && data.query && data.query.pages ? Object.keys(data.query.pages).map(function (k) { return data.query.pages[k]; }) : [];
             pages.sort(function (a, b) { return (a.index || 0) - (b.index || 0); });
             var list = pages.map(function (pg) {
                 var ii = pg.imageinfo && pg.imageinfo[0]; if (!ii || !ii.thumburl) return null; var em = ii.extmetadata || {};
-                return { title: pg.title || '', w: ii.width || 0, h: ii.height || 0, mime: ii.mime || '', u: ii.thumburl, d: ii.descriptionurl, a: actClean((em.Artist || {}).value).slice(0, 40), l: actClean((em.LicenseShortName || {}).value) };
+                return { title: pg.title || '', w: ii.width || 0, h: ii.height || 0, mime: ii.mime || '', u: ii.thumburl, d: ii.descriptionurl, a: imgClean((em.Artist || {}).value).slice(0, 40), l: imgClean((em.LicenseShortName || {}).value) };
             }).filter(Boolean);
-            var good = list.filter(function (c) { return /jpe?g|png/i.test(c.mime) && c.w >= 900 && c.w >= c.h * 1.1 && !/map|logo|flag|diagram|plan|stamp|poster|coat|icon|sign|menu|screenshot/i.test(c.title); })[0] || list.filter(function (c) { return /jpe?g|png/i.test(c.mime) && !/map|logo|flag|diagram|stamp|icon/i.test(c.title); })[0] || null;
-            actCache[id] = good ? { u: good.u, d: good.d, a: good.a, l: good.l, t: Date.now() } : { none: 1, t: Date.now() }; actSave();
-        }).catch(function () { /* bez sítě: zkusí se příště */ });
-    }
-    function actPump() {
-        while (actBusy < 3 && actQueue.length) { var id = actQueue.shift(); actBusy++; actFetch(id).then(function () { actBusy--; actInject(); actPump(); }); }
-    }
-    function actAdd(row, id, c) {
-        var title = (row.querySelector('.tj-main b') || { childNodes: [{ textContent: '' }] }).childNodes[0].textContent.trim();
-        var box = document.createElement('div'); box.className = 'tj-pic';
-        var img = document.createElement('img'); img.alt = title; img.loading = 'lazy'; img.decoding = 'async'; img.referrerPolicy = 'no-referrer'; img.addEventListener('load', function () { img.classList.add('is-ok'); }); img.addEventListener('error', function () { box.remove(); });
-        img.src = c.u; box.appendChild(img);
-        var cr = document.createElement('a'); cr.className = 'tj-credit'; cr.href = c.d || 'https://commons.wikimedia.org/'; cr.target = '_blank'; cr.rel = 'noopener noreferrer'; cr.textContent = '📷 ' + (c.a ? c.a + ' · ' : '') + (c.l || 'Wikimedia Commons'); cr.title = 'Autor a licence fotky (Wikimedia Commons)';
-        cr.addEventListener('click', function (e) { e.stopPropagation(); }); box.appendChild(cr);
-        row.insertBefore(box, row.firstChild);
-    }
-    function actInject() {
-        if (document.hidden && actStarted) { /* i skryté se doplní, jen se nestahuje zbytečně */ }
-        var saveData = navigator.connection && navigator.connection.saveData;
-        [].forEach.call(document.querySelectorAll('#aktivity .tj-row'), function (row) {
-            if (row.querySelector(':scope > .tj-pic')) return; var inp = row.querySelector('input[data-id]'); if (!inp) return; var id = inp.getAttribute('data-id'); if (!ACT_Q[id]) return;
-            var c = actCache[id]; if (c && c.u) { actAdd(row, id, c); return; }
-            if (c && c.none && Date.now() - c.t < 7 * 86400000) return;
-            if (actStarted && !saveData && actQueue.indexOf(id) < 0 && !(c && c.pend)) { actQueue.push(id); }
+            var bad = /map|logo|flag|diagram|plan|stamp|poster|coat|icon|sign|menu|screenshot|svg/i, ok = function (c) { return /jpe?g|png/i.test(c.mime) && !bad.test(c.title); };
+            var best = list.filter(function (c) { return ok(c) && c.w >= 900 && c.w >= c.h * 1.1; }), rest = list.filter(function (c) { return ok(c) && best.indexOf(c) < 0; });
+            return best.concat(rest).slice(0, 3).map(function (c) { return { u: c.u, d: c.d, a: c.a, l: c.l }; });
         });
-        actPump();
     }
-    (function actWatch() {
-        var host = $('aktivity'); if (!host) return; var sched = false;
-        function trig() { if (!sched) { sched = true; requestAnimationFrame(function () { sched = false; try { actInject(); } catch (e) {} }); } }
-        if (window.MutationObserver) new MutationObserver(trig).observe(host, { childList: true, subtree: true });
-        function start() { if (actStarted || host.offsetHeight < 20) return; actStarted = true; trig(); }
-        if (window.ResizeObserver) new ResizeObserver(start).observe(host);
-        if (window.IntersectionObserver) new IntersectionObserver(start, { rootMargin: '600px' }).observe(host);
-        setTimeout(start, 1500);
-        trig();
+    function imgResolve(id) {
+        var qs = (IMG_Q[id] || []).slice(); var fb = IMG_FB[id.slice(0, 3).replace(/\d/g, '')] || IMG_FB[id.slice(0, 2)] || IMG_FB[id.slice(0, 3)]; if (fb) qs.push(fb);
+        var i = 0, failed = false;
+        function next() {
+            if (i >= qs.length) { imgCache[id] = { none: 1, t: Date.now() }; imgSave(); return Promise.resolve(); }
+            return imgSearch(qs[i++]).then(function (c) { if (c.length) { imgCache[id] = { c: c, t: Date.now() }; imgSave(); } else return next(); }).catch(function () { failed = true; });
+        }
+        return next();
+    }
+    function imgPump() { while (imgBusy < 3 && imgQueue.length) { var id = imgQueue.shift(); imgBusy++; imgResolve(id).then(function () { imgBusy--; imgScan(); imgPump(); }); } }
+    function imgBox(host, id, title, link) {
+        var c = imgCache[id]; if (!c || !c.c) return null; var idx = 0, box = document.createElement('div'); box.className = 'tj-pic'; box.setAttribute('data-img', id);
+        var img = document.createElement('img'); img.alt = title; img.loading = 'lazy'; img.decoding = 'async'; img.referrerPolicy = 'no-referrer'; box.appendChild(img);
+        var cr = document.createElement(link ? 'a' : 'span'); cr.className = 'tj-credit'; box.appendChild(cr);
+        function show() { var x = c.c[idx]; if (!x) { box.remove(); return; } img.classList.remove('is-ok'); img.src = x.u; cr.textContent = '📷 ' + (x.a ? x.a + ' · ' : '') + (x.l || 'Wikimedia Commons'); cr.title = 'Autor a licence fotky (Wikimedia Commons)' + (x.d ? ': ' + x.d : ''); if (link) { cr.href = x.d || 'https://commons.wikimedia.org/'; cr.target = '_blank'; cr.rel = 'noopener noreferrer'; cr.addEventListener('click', function (e) { e.stopPropagation(); }); } }
+        img.addEventListener('load', function () { img.classList.add('is-ok'); }); img.addEventListener('error', function () { idx++; show(); });
+        show(); return box;
+    }
+    function imgWant(id, el) {
+        var c = imgCache[id]; if (c && c.c) return true; if (c && c.none && Date.now() - c.t < 7 * 86400000) return false;
+        var sd = navigator.connection && navigator.connection.saveData; if (imgStarted[el] && !sd && imgQueue.indexOf(id) < 0) imgQueue.push(id); return false;
+    }
+    function imgScan() {
+        [].forEach.call(document.querySelectorAll('#aktivity .tj-row'), function (row) {
+            if (row.querySelector(':scope > .tj-pic')) return; var inp = row.querySelector('input[data-id]'); if (!inp) return; var id = inp.getAttribute('data-id'); if (!IMG_Q[id] || !imgWant(id, 'aktivity')) return;
+            var title = (row.querySelector('.tj-main b') || { childNodes: [{ textContent: '' }] }).childNodes[0].textContent.trim(), box = imgBox(row, id, title, true); if (box) row.insertBefore(box, row.firstChild);
+        });
+        [].forEach.call(document.querySelectorAll('#tjLevels .tj-lvl'), function (btn, i) {
+            if (btn.querySelector(':scope > .tj-pic')) return; var id = 'f_lvl' + i; if (!IMG_Q[id] || !imgWant(id, 'jidlo')) return; var box = imgBox(btn, id, (btn.querySelector('b') || {}).textContent || 'Jídlo', false); if (box) btn.insertBefore(box, btn.firstChild);
+        });
+        [].forEach.call(document.querySelectorAll('#tjFoodTbl .tj-grp'), function (g) {
+            var sg = /Singapur/.test((g.querySelector('.tj-grp-h b') || {}).textContent || ''), pre = sg ? 'f_sg_' : 'f_ba_', k = 0;
+            [].forEach.call(g.querySelectorAll(':scope > .tj-line'), function (ln) {
+                if (ln.classList.contains('tj-subtot') || ln.classList.contains('tj-tot')) return; var id = pre + k++;
+                if (ln.querySelector(':scope > .tj-pic') || !IMG_Q[id] || !imgWant(id, 'jidlo')) return; var box = imgBox(ln, id, (ln.querySelector('b') || {}).textContent || 'Jídlo', true); if (box) ln.appendChild(box);
+            });
+        });
+        imgPump();
+    }
+    (function imgWatch() {
+        function setup(hostId, key) {
+            var host = $(hostId); if (!host) return; var sched = false;
+            function trig() { if (!sched) { sched = true; requestAnimationFrame(function () { sched = false; try { imgScan(); } catch (e) {} }); } }
+            if (window.MutationObserver) new MutationObserver(trig).observe(host, { childList: true, subtree: true });
+            function start() { if (imgStarted[key] || host.offsetHeight < 20) return; imgStarted[key] = true; trig(); }
+            if (window.ResizeObserver) new ResizeObserver(start).observe(host);
+            if (window.IntersectionObserver) new IntersectionObserver(start, { rootMargin: '600px' }).observe(host);
+            setTimeout(start, 1500); trig();
+        }
+        setup('aktivity', 'aktivity'); setup('jidlo', 'jidlo');
+    })();
+
+
+    /* ---------- po obnovení stránky všechno zavřené; „Výběr letenek“ se zavírá a otevírá jako ostatní sekce ---------- */
+    function closeFoldsOnReload() {
+        var nav = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) || {}; if (nav.type !== 'reload' && nav.type !== 'back_forward') return;
+        function run() { [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (f) { try { window.luxToggle(f.id); } catch (e) {} }); var d = $('flightPick'); if (d) d.open = false; }
+        if (location.hash) { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+        run(); setTimeout(run, 400); setTimeout(run, 1500);
+    }
+    (function flightPickExclusive() {
+        var d = $('flightPick'); if (!d) return;
+        d.addEventListener('toggle', function () { if (!d.open) return; [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (f) { try { window.luxToggle(f.id); } catch (e) {} }); });
+        if (window.MutationObserver) new MutationObserver(function (ms) {
+            if (!d.open) return; ms.forEach(function (m) { var el = m.target; if (el.classList && el.classList.contains('lux-fold') && el.classList.contains('is-open') && !/\bis-open\b/.test(m.oldValue || '')) d.open = false; });
+        }).observe(document.body, { attributes: true, attributeFilter: ['class'], attributeOldValue: true, subtree: true });
     })();
 
     /* ---------- skupina „Nástroje“ v menu ---------- */
@@ -19251,7 +19299,7 @@ function luxQRSvg(text, px) {
     }, true);
 
     function start() {
-        place(); sync(); addTools(); initParts(); renderTasks(); initFlightDeck(); initVoyages(); renderHomeDeck(); renderTransit(); renderImpact(null, 0); renderPasses(); updateFlightPick(); hideUnwanted(); closeAccordionsAtLoad(); setTimeout(closeAccordionsAtLoad, 800); setTimeout(closeAccordionsAtLoad, 2500); renderStages(); initSpeech(); addSimpleButtons(); if (window.__wantSimple) setTimeout(function () { window.luxSimple(true); }, 900); fxTexts(); if (window.TRIP && TRIP.onChange) TRIP.onChange(fxTexts); setTimeout(fxTexts, 2500); setTimeout(fxTexts, 8000); imgScan(); setTimeout(imgScan, 3000);
+        place(); sync(); addTools(); initParts(); renderTasks(); initFlightDeck(); initVoyages(); renderHomeDeck(); renderTransit(); renderImpact(null, 0); renderPasses(); updateFlightPick(); closeFoldsOnReload(); hideUnwanted(); closeAccordionsAtLoad(); setTimeout(closeAccordionsAtLoad, 800); setTimeout(closeAccordionsAtLoad, 2500); renderStages(); initSpeech(); addSimpleButtons(); if (window.__wantSimple) setTimeout(function () { window.luxSimple(true); }, 900); fxTexts(); if (window.TRIP && TRIP.onChange) TRIP.onChange(fxTexts); setTimeout(fxTexts, 2500); setTimeout(fxTexts, 8000); imgScan(); setTimeout(imgScan, 3000);
         if (/[?&]prezentace\b/.test(location.search)) setTimeout(function () { window.luxPresent(); }, 700);
         var card = document.querySelector('.lux-progress');
         if (card && window.MutationObserver) new MutationObserver(req).observe(card, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['style', 'class'] });
