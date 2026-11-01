@@ -4816,9 +4816,9 @@
         :root {
             --img-part-1: url('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1800&q=70');   /* I   Plán & rozpočet  – Marina Bay */
             --img-part-2: url('https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1800&q=70');   /* II  Příprava         – Singapur, ulice */
-            --img-part-3: url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1800&q=70');   /* III Itinerář         – fotka z úvodní hlavičky */
-            --img-part-4: url('https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1800&q=70');   /* IV  Na místě         – (nahraď fotkou z Bali/Lomboku) */
-            --img-part-5: url('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1800&q=70');   /* V   Závěr            – (nahraď fotkou dle chuti) */
+            --img-part-3: none;   /* III Itinerář         – fotka z úvodní hlavičky */
+            --img-part-4: none;   /* IV  Na místě         – (nahraď fotkou z Bali/Lomboku) */
+            --img-part-5: none;   /* V   Závěr            – (nahraď fotkou dle chuti) */
         }
         .lux-part-head {
             background-image:
@@ -5792,9 +5792,9 @@ a.is-locked.nav-item::after { content: "🔒"; margin-left: auto; font-size: 0.8
                 url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85') center/cover no-repeat; }
   :root { --img-part-1: url('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1000&q=70'); }
   :root { --img-part-2: url('https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1000&q=70'); }
-  :root { --img-part-3: url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=70'); }
-  :root { --img-part-4: url('https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1000&q=70'); }
-  :root { --img-part-5: url('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1000&q=70'); }
+  :root { --img-part-3: none; }
+  :root { --img-part-4: none; }
+  :root { --img-part-5: none; }
   .hero { background: linear-gradient(180deg, color-mix(in srgb, var(--bg-color) 45%, transparent) 0%, var(--bg-color) 100%),
         url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85') center/cover no-repeat !important; }
   .hero, [data-theme="light"] .hero { background: linear-gradient(180deg,
@@ -5913,6 +5913,23 @@ h4 > .share-link { margin-left: 8px; padding: 1px 8px; font-size: 0.72rem; }
 .skip-link:focus { top: 12px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 </style>
+<script id="luximg-registry">
+/* Žádná fotka se na stránce nesmí objevit dvakrát: každý soubor z Wikimedia Commons si modul "zabere" (claim) a další ho už nedostane. */
+(function () {
+    var used = {};
+    function key(src, page) {
+        var s = page || src || '', m = /\/wiki\/(?:File|Soubor|Datei):([^?#]+)/i.exec(s), n = m ? m[1] : null;
+        if (!n) { m = /\/commons\/(?:thumb\/)?[0-9a-f]\/[0-9a-f]{2}\/([^\/?#]+)/i.exec(src || s); n = m ? m[1] : null; }
+        if (!n) { m = /([^\/?#]+\.(?:jpe?g|png|webp|gif))(?:[?#]|$)/i.exec(src || ''); n = m ? m[1] : null; }
+        if (!n) return ''; try { n = decodeURIComponent(n); } catch (e) {} return n.replace(/_/g, ' ').toLowerCase();
+    }
+    window.LUXIMG = {
+        key: key,
+        claim: function (c, owner) { var k = key(c.src || c.u, c.page || c.d); if (!k) return true; if (used[k] && used[k] !== owner) return false; used[k] = owner; return true; },
+        taken: function (c, owner) { var k = key(c.src || c.u, c.page || c.d); return !!(k && used[k] && used[k] !== owner); }
+    };
+})();
+</script>
 </head>
 <body id="hero">
 <script>
@@ -6072,7 +6089,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 07:35</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 12:03</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -7468,8 +7485,8 @@ function updatePackingWeight() {
 
         <p class="x-mt-10"><strong>Detaily dne:</strong> Po příletu a ubytování na hotelu se vydáme k zátoce <strong>Marina Bay</strong> na světelnou show <strong>Spectra</strong> a k osvětleným superstromům v <strong>Gardens by the Bay</strong>. Alternativně můžeme zvolit klidnou večeři v <strong>Indické čtvrti</strong>. 🧳✨</p>
 
-        <img decoding="async" src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80" width="800" height="360" loading="lazy" alt="Marina Bay Singapur" class="inline-context-img clickable-img" onclick="openImageInModal('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80')">
-        <button class="btn-fullscreen-iframe" onclick="openImageInModal('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=80')">🔍 Zvětšit fotografii Marina Bay na celou obrazovku</button>
+        <img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="800" height="360" loading="lazy" alt="Marina Bay Singapur" data-ph="inl_1" class="inline-context-img clickable-img" onclick="openImageInModal(this.getAttribute('data-full')||this.src)">
+        <button class="btn-fullscreen-iframe" onclick="var i=this.previousElementSibling;openImageInModal(i.getAttribute('data-full')||i.src)">🔍 Zvětšit fotografii Marina Bay na celou obrazovku</button>
 
         <div class="spots-grid x-mt-16">
             <!-- MÍSTO 1: MARINA BAY SANDS -->
@@ -7521,8 +7538,8 @@ function updatePackingWeight() {
             <li><strong>Koloniální čtvrť a Marina Bay přes den:</strong> Projdeme se kolem hotelu Fullerton a sochy lva Merliona. 🏙️📸</li>
         </ul>
 
-        <img decoding="async" src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80" width="800" height="360" loading="lazy" alt="Singapur ulice a architektura" class="inline-context-img clickable-img" onclick="openImageInModal('https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=80')">
-        <button class="btn-fullscreen-iframe" onclick="openImageInModal('https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1200&q=80')">🔍 Zvětšit fotografii Singapuru na celou obrazovku</button>
+        <img decoding="async" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="800" height="360" loading="lazy" alt="Singapur ulice a architektura" data-ph="inl_2" class="inline-context-img clickable-img" onclick="openImageInModal(this.getAttribute('data-full')||this.src)">
+        <button class="btn-fullscreen-iframe" onclick="var i=this.previousElementSibling;openImageInModal(i.getAttribute('data-full')||i.src)">🔍 Zvětšit fotografii Singapuru na celou obrazovku</button>
 
         <div class="spots-grid x-mt-16">
             <!-- MÍSTO 3: MERLION PARK -->
@@ -11864,7 +11881,7 @@ function updatePackingWeight() {
 <div class="cx" id="hotovost">
     <div class="tj-excl" role="note"><b>ℹ️ Cena dovolené zahrnuje všechno, co si nakonfiguruješ:</b> 🛫 letenky, 🏨 hotely, 🛵 skútry, 🛂 víza a poplatky, 🍜 jídlo, 🧭 výlety a 🎟️ vstupy. <span>Jídlo vybereš v sekci <a href="#jidlo">Jídlo</a>, výlety a vstupy v sekci <a href="#aktivity">Vstupné a aktivity</a> a vše se samo započítá do celkové ceny. Cena nezahrnuje jízdné v Singapuru, taxi, drobné výdaje, úschovnu batohů, soukromou loď na Gili, suvenýry a platbu za poslední hotel na místě.</span></div>
 
- <!-- ===== HLAVNÍ KARTA ===== -->
+    <!-- ===== HLAVNÍ KARTA ===== -->
     <div class="cx-card cx-hero">
         <div class="cx-top">
             <div>
@@ -11890,20 +11907,20 @@ function updatePackingWeight() {
 
         <div class="cx-env">
             <div class="cx-e cx-e-sg">
-                <div class="cx-e-top"><img src="SINdolar.jpg" alt="Singapurské dolary"><div><b>Singapurské dolary</b><small>koupit doma před odletem</small></div></div>
+                <div class="cx-e-top"><span class="cx-flag" aria-hidden="true"><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur"></span></span><div><b>Singapurské dolary</b><small>koupit doma před odletem</small></div></div>
                 <div class="cx-big" id="cxSgd">–</div>
                 <div class="cx-kc" id="cxSgdKc"></div>
                 <ul id="cxSgdList"></ul>
                 <a class="cx-cta" href="https://www.valuty.net/smenarny?pobocka=4" target="_blank" rel="noopener noreferrer">Objednat v Jablonci nad Nisou ↗</a>
             </div>
             <div class="cx-e cx-e-usd">
-                <div class="cx-e-top"><img src="USAdolar.jpg" alt="Americké dolary"><div><b>Americké dolary</b><small>vzít s sebou na Bali a Lombok</small></div></div>
+                <div class="cx-e-top"><span class="cx-flag" aria-hidden="true">💵</span><div><b>Americké dolary</b><small>vzít s sebou na Bali a Lombok</small></div></div>
                 <div class="cx-big" id="cxUsd">–</div>
                 <div class="cx-kc" id="cxUsdKc"></div>
                 <ul id="cxUsdList"></ul>
             </div>
             <div class="cx-e cx-e-idr">
-                <div class="cx-e-top"><img src="IDRbankovka.jpg" alt="Indonéské rupie"><div><b>Indonéské rupie</b><small>doma se nekupují, měníš v Bali</small></div></div>
+                <div class="cx-e-top"><span class="cx-flag" aria-hidden="true"><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie"></span></span><div><b>Indonéské rupie</b><small>doma se nekupují, měníš v Bali</small></div></div>
                 <div class="cx-big" id="cxIdr">–</div>
                 <div class="cx-kc" id="cxIdrKc"></div>
                 <ul id="cxIdrList"></ul>
@@ -11923,6 +11940,7 @@ function updatePackingWeight() {
             </div>
         </div>
     </div>
+
     <!-- ===== NASTAVENÍ + KOLÁČ ===== -->
     <div class="cx-card">
         <div class="cx-two">
@@ -14428,7 +14446,7 @@ function updatePackingWeight() {
 
                 html += `
                     <div class="deck-item" onclick="document.getElementById('${info.targetId}').scrollIntoView({behavior:'smooth'})">
-                        <img decoding="async" loading="lazy" src="${chosen.img}" alt="${chosen.name}" class="deck-thumb" onerror="this.src='https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=200&q=60'">
+                        <img decoding="async" loading="lazy" src="${chosen.img}" alt="${chosen.name}" class="deck-thumb" onerror="this.onerror=null;this.style.display='none'">
                         <div class="deck-meta">
                             <div class="deck-stage">${info.stageTitle}</div>
                             <div class="deck-hotel-name">${chosen.name}</div>
@@ -16429,11 +16447,11 @@ function recalculateAll() {
     }
 
     // Všech 10 dotazů běží souběžně; pak se vybere vždy první fotka, která se ještě neopakuje
-    function resolve(topics) {
+    function resolve(topics, uid) {
         return Promise.all(topics.map(function (t) { return candidates(t[1]); })).then(function (lists) {
             var used = {}, items = [];
             lists.forEach(function (list, n) {
-                var pick = list.find(function (c) { return !used[c.src]; });
+                var pick = list.find(function (c) { return !used[c.src] && (!window.LUXIMG || window.LUXIMG.claim({ src: c.src, page: c.page }, (uid || 'show') + ':' + n)); });
                 if (pick) { used[pick.src] = 1; items.push({ cap: topics[n][0], ph: pick }); }
             });
             return items;
@@ -16445,6 +16463,7 @@ function recalculateAll() {
     function build(container, topics) {
         var show = document.createElement('div');
         show.className = 'trip-show';
+        show._uid = 'show' + (window.__showN = (window.__showN || 0) + 1);
         show.setAttribute('role', 'region');
         show.setAttribute('aria-roledescription', 'prezentace');
         show.setAttribute('aria-label', 'Fotky z míst itineráře');
@@ -16455,7 +16474,7 @@ function recalculateAll() {
         // připraví data a přednačte první 3 fotky – volá se v klidu po načtení stránky
         // nebo hned, když uživatel najede na tlačítko itineráře
         show._prepare = function (eagerCount) {
-            if (!state.ready) state.ready = resolve(topics).then(function (items) {
+            if (!state.ready) state.ready = resolve(topics, show._uid).then(function (items) {
                 state.items = items;
                 if (!items.length) { show.remove(); return items; }
                 render(items);
@@ -17973,6 +17992,12 @@ body.simple-on { overflow: hidden; }
 @media (max-width: 700px) { .ph-strip { gap: 6px; } .ph-strip > .tj-pic { height: 110px; } .ph-strip > .tj-pic .tj-credit { font-size: 0.5rem; padding: 10px 5px 3px; } }
 body.brief .ph-strip { display: none !important; }
 @media print { .ph-strip { display: none; } }
+
+/* ---- Vložené fotky (načtené za běhu), jejich zdroje a vlastní fotky peněz ---- */
+img[data-ph]:not([data-ok]), img[data-ph]:not([data-ok]) + button { display: none !important; }
+.ph-credit { margin: 4px 0 10px; font-size: 0.7rem; color: var(--text-muted); } .ph-credit a { color: inherit; text-decoration: underline; }
+.ph-credits { max-width: 1240px; margin: 14px auto 90px; padding: 0 16px; font-size: 0.68rem; line-height: 1.5; color: var(--text-muted); text-align: center; } .ph-credits a { color: inherit; text-decoration: underline; }
+.cx-e > .tj-pic.tj-own { cursor: zoom-in; } .cx-e > .tj-pic.tj-own img { object-fit: cover; object-position: center; }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -18003,7 +18028,7 @@ body.brief .ph-strip { display: none !important; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '1. 11. 2026 · 07:35';
+    var LUX_VERSION = '1. 11. 2026 · 12:03';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19236,15 +19261,17 @@ function luxQRSvg(text, px) {
         'f-karta-mhd': ['Singapore MRT train', 'Singapore bus', 'Singapore EZ-Link card', 'Singapore MRT']
     };
     Object.keys(STRIPS).forEach(function (k) { for (var i = 0; i < 3; i++) IMG_Q['p:' + k + ':' + i] = [STRIPS[k][i], STRIPS[k][3]]; });
-    IMG_Q.cx_0 = ['Singapore dollar banknotes', 'Singapore dollar']; IMG_Q.cx_1 = ['United States dollar banknotes', 'US dollar bills']; IMG_Q.cx_2 = ['Indonesian rupiah banknotes', 'Indonesian rupiah'];
+    IMG_Q.part_3 = ['Bali Uluwatu cliff sunset panorama', 'Bali coast panorama']; IMG_Q.part_4 = ['Gili Trawangan beach panorama', 'Lombok beach panorama']; IMG_Q.part_5 = ['Jimbaran Bay sunset beach', 'Bali sunset beach'];
+    IMG_Q.inl_1 = ['Marina Bay Singapore skyline night', 'Singapore skyline']; IMG_Q.inl_2 = ['Singapore Chinatown street', 'Singapore architecture street'];
+    var IMG_W = { part_3: 1600, part_4: 1600, part_5: 1600, inl_1: 960, inl_2: 960 }, IMG_MINW = { part_3: 2400, part_4: 2400, part_5: 2400 }, CASH_IMG = ['SINdolar.jpg', 'USAdolar.jpg', 'IDRbankovka.jpg'];
     var IMG_FB = { sg: 'Singapore skyline', ulu: 'Uluwatu cliff Bali', ub: 'Ubud Bali', lo: 'Lombok beach', ta: 'Bali', mi: 'Bali', ho: 'Bali beach', f_: 'Indonesian food', air: 'airliner in flight' };
     var IMG_API = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=640&gsrsearch=';
     var IMG_KEY = 'lux_img_v2', imgCache = {}, imgQueue = [], imgBusy = 0, imgStarted = {};
     try { imgCache = JSON.parse(localStorage.getItem(IMG_KEY) || '{}') || {}; } catch (e) { imgCache = {}; }
     function imgSave() { try { localStorage.setItem(IMG_KEY, JSON.stringify(imgCache)); } catch (e) {} }
     function imgClean(s) { var d = document.createElement('div'); d.innerHTML = s || ''; return (d.textContent || '').replace(/\s+/g, ' ').trim(); }
-    function imgSearch(q) {
-        return fetch(IMG_API + encodeURIComponent(q + ' filetype:bitmap')).then(function (r) { return r.json(); }).then(function (data) {
+    function imgSearch(q, w, minw) {
+        return fetch(IMG_API.replace('iiurlwidth=640', 'iiurlwidth=' + (w || 640)) + encodeURIComponent(q + ' filetype:bitmap')).then(function (r) { return r.json(); }).then(function (data) {
             var pages = data && data.query && data.query.pages ? Object.keys(data.query.pages).map(function (k) { return data.query.pages[k]; }) : [];
             pages.sort(function (a, b) { return (a.index || 0) - (b.index || 0); });
             var list = pages.map(function (pg) {
@@ -19252,8 +19279,8 @@ function luxQRSvg(text, px) {
                 return { title: pg.title || '', w: ii.width || 0, h: ii.height || 0, mime: ii.mime || '', u: ii.thumburl, d: ii.descriptionurl, a: imgClean((em.Artist || {}).value).slice(0, 40), l: imgClean((em.LicenseShortName || {}).value) };
             }).filter(Boolean);
             var bad = /map|logo|flag|diagram|plan|stamp|poster|coat|icon|sign|menu|screenshot|svg/i, ok = function (c) { return /jpe?g|png/i.test(c.mime) && !bad.test(c.title); };
-            var best = list.filter(function (c) { return ok(c) && c.w >= 900 && c.w >= c.h * 1.1; }), rest = list.filter(function (c) { return ok(c) && best.indexOf(c) < 0; });
-            return best.concat(rest).slice(0, 3).map(function (c) { return { u: c.u, d: c.d, a: c.a, l: c.l }; });
+            var best = list.filter(function (c) { return ok(c) && c.w >= (minw || 900) && c.w >= c.h * 1.1; }), rest = list.filter(function (c) { return ok(c) && best.indexOf(c) < 0; });
+            return (minw ? best : best.concat(rest)).slice(0, 10).map(function (c) { return { u: c.u, d: c.d, a: c.a, l: c.l }; });
         });
     }
     function imgResolve(id) {
@@ -19261,7 +19288,7 @@ function luxQRSvg(text, px) {
         var i = 0, failed = false;
         function next() {
             if (i >= qs.length) { imgCache[id] = { none: 1, t: Date.now() }; imgSave(); return Promise.resolve(); }
-            return imgSearch(qs[i++]).then(function (c) { if (c.length) { imgCache[id] = { c: c, t: Date.now() }; imgSave(); } else return next(); }).catch(function () { failed = true; });
+            return imgSearch(qs[i++], IMG_W[id], IMG_MINW[id]).then(function (c) { var kept = []; c.forEach(function (x) { if (kept.length < 3 && (!window.LUXIMG || window.LUXIMG.claim({ src: x.u, page: x.d }, id))) kept.push(x); }); if (kept.length) { imgCache[id] = { c: kept, t: Date.now() }; imgSave(); } else return next(); }).catch(function () { failed = true; });
         }
         return next();
     }
@@ -19295,8 +19322,9 @@ function luxQRSvg(text, px) {
             for (var i = 0; i < 3; i++) { var id = 'p:' + k + ':' + i; if (st.querySelector('[data-img="' + id + '"]') || !imgWant(id, 'p:' + k)) continue; var box = imgBox(st, id, S[i], true); if (box) st.appendChild(box); }
         });
         [].forEach.call(document.querySelectorAll('#hotovost .cx-e'), function (card, i) {
-            if (card.querySelector(':scope > .tj-pic') || i > 2) return; var id = 'cx_' + i; if (!imgWant(id, 'hotovost')) return;
-            var box = imgBox(card, id, ['Singapurské dolary', 'Americké dolary', 'Indonéské rupie'][i], true); if (box) card.insertBefore(box, card.firstChild);
+            if (card.querySelector(':scope > .tj-pic') || i > 2) return; var f = CASH_IMG[i], box = document.createElement('div'), im = document.createElement('img');
+            box.className = 'tj-pic tj-own'; im.alt = ['Singapurské dolary', 'Americké dolary', 'Indonéské rupie'][i]; im.decoding = 'async'; im.loading = 'lazy'; im.addEventListener('load', function () { im.classList.add('is-ok'); }); im.addEventListener('error', function () { box.remove(); }); im.src = f; box.appendChild(im);
+            box.addEventListener('click', function () { if (window.openImageInModal) window.openImageInModal(f); }); card.insertBefore(box, card.firstChild);
         });
         [].forEach.call(document.querySelectorAll('#tjFoodTbl .tj-grp'), function (g) {
             var sg = /Singapur/.test((g.querySelector('.tj-grp-h b') || {}).textContent || ''), pre = sg ? 'f_sg_' : 'f_ba_', k = 0;
@@ -19305,9 +19333,34 @@ function luxQRSvg(text, px) {
                 if (ln.querySelector(':scope > .tj-pic') || !IMG_Q[id] || !imgWant(id, 'jidlo')) return; var box = imgBox(ln, id, (ln.querySelector('b') || {}).textContent || 'Jídlo', true); if (box) ln.appendChild(box);
             });
         });
-        imgPump();
+        imgStarted.base = true; ['part_3', 'part_4', 'part_5', 'inl_1', 'inl_2'].forEach(function (id) { imgWant(id, 'base'); });
+        imgApplyExtra(); imgDedupeDom(); imgPump();
+    }
+    function imgApplyExtra() {
+        [3, 4, 5].forEach(function (n) { var c = imgCache['part_' + n]; if (c && c.c && c.c[0]) document.documentElement.style.setProperty('--img-part-' + n, "url('" + c.c[0].u + "')"); });
+        [].forEach.call(document.querySelectorAll('img[data-ph]:not([data-ok])'), function (im) {
+            var id = im.getAttribute('data-ph'), c = imgCache[id]; if (!c || !c.c || !c.c[0]) return; var x = c.c[0];
+            im.onload = function () { im.setAttribute('data-ok', '1'); }; im.setAttribute('data-full', x.u); im.src = x.u;
+            if (!im.getAttribute('data-cr')) { im.setAttribute('data-cr', '1'); var btn = im.nextElementSibling; var cr = document.createElement('div'); cr.className = 'ph-credit'; cr.innerHTML = '📷 <a href="' + (x.d || 'https://commons.wikimedia.org/') + '" target="_blank" rel="noopener noreferrer">' + (x.a ? spEsc(x.a) + ' · ' : '') + spEsc(x.l || 'Wikimedia Commons') + '</a>'; (btn && btn.tagName === 'BUTTON' ? btn : im).insertAdjacentElement('afterend', cr); }
+        });
+        var host = $('phCredits'); if (!host) { host = document.createElement('div'); host.id = 'phCredits'; host.className = 'ph-credits'; document.body.appendChild(host); }
+        host.innerHTML = [3, 4, 5].map(function (n) { var c = imgCache['part_' + n], x = c && c.c && c.c[0]; return x ? '<a href="' + (x.d || '#') + '" target="_blank" rel="noopener noreferrer">' + (x.a ? spEsc(x.a) + ' · ' : '') + spEsc(x.l || 'Commons') + '</a>' : ''; }).filter(Boolean).join(' · ');
+        host.style.display = host.innerHTML ? '' : 'none'; if (host.innerHTML) host.innerHTML = 'Fotografie v hlavičkách částí III–V (Wikimedia Commons): ' + host.innerHTML;
+    }
+    function imgDedupeDom() {
+        if (!window.LUXIMG) return; var seen = {};
+        [].forEach.call(document.querySelectorAll('.tj-pic img, .trip-show img, img[data-ph][data-ok]'), function (im) {
+            var k = window.LUXIMG.key(im.currentSrc || im.src, ''); if (!k) return; if (!seen[k]) { seen[k] = 1; return; }
+            var b = im.closest('.tj-pic') || im.closest('figure'); if (b) b.remove();
+        });
+    }
+    function imgPurge() {
+        if (!window.LUXIMG) return;
+        Object.keys(IMG_Q).forEach(function (id) { var c = imgCache[id]; if (!c || !c.c) return; c.c = c.c.filter(function (x) { return window.LUXIMG.claim({ src: x.u, page: x.d }, id); }); if (!c.c.length) delete imgCache[id]; });
+        imgSave();
     }
     (function imgWatch() {
+        imgPurge();
         function setup(hostId, key) {
             var host = $(hostId); if (!host) return; var sched = false;
             function trig() { if (!sched) { sched = true; requestAnimationFrame(function () { sched = false; try { imgScan(); } catch (e) {} }); } }
@@ -19317,6 +19370,8 @@ function luxQRSvg(text, px) {
             if (window.IntersectionObserver) new IntersectionObserver(start, { rootMargin: '600px' }).observe(host);
             setTimeout(start, 1500); trig();
         }
+        (function () { var s = 0; if (window.MutationObserver) new MutationObserver(function () { if (s) return; s = 1; setTimeout(function () { s = 0; try { imgApplyExtra(); imgDedupeDom(); } catch (e) {} }, 600); }).observe(document.body, { childList: true, subtree: true }); })();
+        setTimeout(function () { try { imgScan(); } catch (e) {} }, 400);
         setup('aktivity', 'aktivity'); setup('jidlo', 'jidlo'); setup('flightPick', 'letenky'); setup('hotovost', 'hotovost');
         Object.keys(STRIPS).forEach(function (k) {
             var pad = document.querySelector('#' + k + ' .lux-fold-pad'), body = $(k + '-b'); if (!pad || pad.querySelector(':scope > .ph-strip')) return;
