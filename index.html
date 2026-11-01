@@ -5140,7 +5140,10 @@ window.getDepartureDate = function () {
                 // při načtení je vše sbalené (odkaz s #kotvou rozbalí jen svůj cíl)
                 [].forEach.call(folds, function (f) { setState(f, false, true); });
                 try { localStorage.removeItem(KEY); } catch (e) {}
-                /* vše zavřené: kotva v adrese po načtení nic neotevírá */
+                if (location.hash) {
+                    var t = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+                    if (t) goTo(t);
+                }
                 syncMeta();
                 setTimeout(syncMeta, 800);
                 setTimeout(syncMeta, 2500);
@@ -6007,7 +6010,6 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
         </div>
         <nav class="menu-grid" id="bottomNav">
             <a href="#hero" class="nav-item active" onclick="toggleMenuModal()"><span class="icon">🏠</span><span>Domů &amp; Mapa letů</span></a>
-            <a href="#f-lety" class="nav-item" onclick="toggleMenuModal()"><span class="icon">✈️</span><span>Výběr letenek</span></a>
             <div class="nav-group-title">I · Před odletem</div>
             <a href="#viza" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛂</span><span>Víza &amp; Portály</span></a>
             <a href="#bezpecnost" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛡️</span><span>SOS &amp; Zdraví</span></a>
@@ -6028,6 +6030,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
             <a href="#singapore-layover-program" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛄</span><span>7. Tranzit Singapur</span></a>
             <div class="nav-group-title">III · Konfigurátor cesty &amp; rozpočet</div>
             <a href="#rozpocet" class="nav-item" onclick="toggleMenuModal()"><span class="icon">💰</span><span>Konfigurátor rozpočtu</span></a>
+            <a href="#ganttAuditCard" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📊</span><span>Gantt &amp; Návaznosti</span></a>
             <a href="#jidlo" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🍜</span><span>Jídlo</span></a>
             <a href="#aktivity" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🎟️</span><span>Vstupné a aktivity</span></a>
             <a href="#hotovost" class="nav-item" onclick="toggleMenuModal()"><span class="icon">💵</span><span>Plán hotovosti</span></a>
@@ -6072,7 +6075,7 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 31. 10. 2026 · 12:17</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 1. 11. 2026 · 06:05</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -6083,6 +6086,14 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
         </div>
 
         <p style="color: #ffffff; font-size: 1rem; margin-top: 16px; margin-bottom: 12px; font-weight: 600;">✈️ Odlet 6. 8. 2027 • 🏡 Návrat 25. 8. 2027 • 🎒 Příruční batoh max 7 kg</p>
+
+        <!-- NOVÝ PŘEPÍNAČ LETŮ NAD MAPOU -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; position: relative; z-index: 10;">
+            <label style="font-size: 0.85rem; font-weight: 800; color: rgba(255,255,255,0.85);">Zobrazit trasu pro let:</label>
+            <select id="heroFlightSelect" onchange="setFlightAirline(this.value)" style="background: rgba(11, 24, 28, 0.85); color: #fff; border: 1px solid var(--primary); padding: 6px 12px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; cursor: pointer; backdrop-filter: blur(8px); outline: none;">
+                <!-- Možnosti se sem nahrají automaticky přes JavaScript -->
+            </select>
+        </div>
 
         <div class="map-box"><div id="flightMap" style="width: 100%; height: 100%;"></div></div>
         <button class="map-fullscreen-btn" onclick="openMapFullscreen('flight')">🔍 Zvětšit mapu všech letových tras (Full screen)</button>
@@ -6113,344 +6124,6 @@ window.addEventListener('appinstalled', function () { window.__luxInstall = null
     <div class="lp-track" aria-hidden="true"><div class="lp-fill" id="lpFill"></div></div>
     <div class="lp-parts" id="lpParts"></div>
 </div>
-</div>
-
-<div class="lux-part-body" style="margin: 0 0 24px;">
-<section class="lux-fold " id="f-lety" data-nocount>
-    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-lety-b" onclick="luxToggle('f-lety')">
-        <span class="lux-fold-node" aria-hidden="true">✈️</span>
-        <span class="lux-fold-txt"><span class="lux-fold-t">Výběr letenek</span><span class="lux-fold-s">Dálkový let Praha ⇄ Singapur a srovnání aerolinek</span></span>
-        <span class="lux-fold-meta"></span>
-        <span class="lux-fold-chev" aria-hidden="true">▾</span>
-    </button></h3>
-    <div class="lux-fold-body" id="f-lety-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
-<p style="font-size: 0.95rem; margin-bottom: 12px; color: var(--text-muted);">Vyber si variantu dálkového letu Praha ⇄ Singapur. Podle ní se přepočítá celá stránka: itinerář, mapa trasy, boarding passy, přestupy i cena.</p>
-                <!-- 1. KROK: PŘEPÍNAČ 5 DETAILNÍCH VARIANT DÁLKOVÉHO LETU -->
-                <div class="x-mb-16">
-                    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 6px; color: var(--primary-light);">
-                        ✈️ 1. Vyber variantu dálkového letu Praha (PRG) ⇄ Singapur (SIN) — kompletní časy a přestupy:
-                    </div>
-<div class="flight-airline-switch">
-    <!-- 1. EMIRATES (16:10) -->
-    <button id="btnFlight_emirates" class="flight-mode-btn active" onclick="setFlightAirline('emirates')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="emirates.png" alt="Emirates" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>Emirates (Odpolední)</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Dubaj (DXB) • Nejvýhodnější</span>
-            </div>
-            <span class="fc-price-badge">22 000 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">16:10 PRG ➔ 14:05<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 15h 55m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 DXB 2h 25m</span>
-                <span class="fc-pill">✈️ EK140 + EK348</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • st 25. 8.</span>
-                <span class="fc-times">01:40 SIN ➔ 13:00 PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 17h 20m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 DXB 3h 45m</span>
-                <span class="fc-pill">✈️ EK349 + EK139</span>
-            </div>
-        </div>
-    </button>
-
-    <!-- 2. EMIRATES + FLYDUBAI (21:15) -->
-    <button id="btnFlight_emirates_flydubai" class="flight-mode-btn" onclick="setFlightAirline('emirates_flydubai')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="emirates.png" alt="Emirates" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>Emirates + flydubai</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Dubaj (DXB) • Večerní odlet</span>
-            </div>
-            <span class="fc-price-badge">22 000 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">21:15 PRG ➔ 21:45<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 18h 30m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 DXB 4h 35m</span>
-                <span class="fc-pill">✈️ EK2239 + EK352</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • st 25. 8.</span>
-                <span class="fc-times">00:50 SIN ➔ 13:00 PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 18h 10m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 DXB 4h 30m</span>
-                <span class="fc-pill">✈️ EK353 + EK139</span>
-            </div>
-        </div>
-    </button>
-
-    <!-- 3. FINNAIR (19:30 přes Helsinky) -->
-    <button id="btnFlight_finnair" class="flight-mode-btn" onclick="setFlightAirline('finnair')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="finair.jpg" alt="Finnair" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>Finnair (Helsinky)</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Helsinky (HEL) • Severní trasa</span>
-            </div>
-            <span class="fc-price-badge">24 900 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">19:30 PRG ➔ 18:30<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 17h 00m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 HEL 1h 50m</span>
-                <span class="fc-pill">✈️ AY1226 + AY131</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
-                <span class="fc-times">21:35 SIN ➔ 10:50<sup>+1</sup> PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 19h 15m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 HEL 3h 40m</span>
-                <span class="fc-pill">✈️ AY132 + AY1223</span>
-            </div>
-        </div>
-    </button>
-
-    <!-- 4. SWISS (19:30 přes Curych) -->
-    <button id="btnFlight_swiss" class="flight-mode-btn" onclick="setFlightAirline('swiss')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="swiss.png" alt="SWISS" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>SWISS (Curych)</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Curych (ZRH) • Nejrychlejší let</span>
-            </div>
-            <span class="fc-price-badge">23 909 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">19:30 PRG ➔ 17:10<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 15h 40m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 ZRH 1h 50m</span>
-                <span class="fc-pill">✈️ LX1489 + LX176</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
-                <span class="fc-times">23:25 SIN ➔ 08:40<sup>+1</sup> PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 15h 15m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 ZRH 1h 10m</span>
-                <span class="fc-pill">✈️ LX177 + LX1484</span>
-            </div>
-        </div>
-    </button>
-
-    <!-- 5. TURKISH AIRLINES (19:15 přes Istanbul) -->
-    <button id="btnFlight_turkish" class="flight-mode-btn" onclick="setFlightAirline('turkish')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="turkish.png" alt="Turkish Airlines" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>Turkish Airlines</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Istanbul (IST) • Top servis</span>
-            </div>
-            <span class="fc-price-badge">26 505 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">19:15 PRG ➔ 17:55<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 16h 40m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 IST 3h 05m</span>
-                <span class="fc-pill">✈️ TK1770 + TK54</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
-                <span class="fc-times">23:05 SIN ➔ 08:35<sup>+1</sup> PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 15h 30m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 IST 1h 45m</span>
-                <span class="fc-pill">✈️ TK55 + TK1767</span>
-            </div>
-        </div>
-    </button>
-</div>
-                    <!-- ŽIVÝ DETAILNÍ BOX AKTIVNÍHO LETU -->
-                    <div class="active-flight-detail-box" id="activeFlightDetailBox">
-                        <!-- Dynamicky vykresleno JavaScriptem dle vybraného letu -->
-                    </div>
-                </div>
-<!-- KOMPLETNÍ HODNOCENÍ LETECKÝCH SPOLEČNOSTÍ PRO ECONOMY -->
-<div class="airline-review-section" style="margin-top: 30px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
-    <div style="text-align: center; margin-bottom: 24px;">
-        <span style="background: rgba(169, 187, 208, 0.12); color: var(--primary); border: 1px solid var(--border); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 20px;">
-            ✈️ RECENZE A ZKUŠENOSTI CESTOVATELŮ
-        </span>
- <h3 class="x-a141b9" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3); display: flex;">Detailní srovnání aerolinek pro Economy třídu</h3>
-        <p style="font-size: 0.88rem; color: var(--text-muted); max-width: 700px; margin: 0 auto;">
-            Nezávislé hodnocení poměru cena/výkon, prostoru na nohy, šířky sedadel, servisu, jídla a přesnosti v přehledných hvězdičkách.
-        </p>
-    </div>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-
-        <!-- 1. EMIRATES (Odpolední) -->
-        <div style="background: var(--surface-hover); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <strong class="x-fs-1-05_c-text-main">1. Emirates (Odpolední)</strong>
-                    <span class="x-665a01">22 000 Kč</span>
-                </div>
-                <div class="x-fs-85_c-gold_fw-900_mb-4">⭐⭐⭐⭐⭐ (5 / 5)</div>
-                <div style="font-size: 0.82rem; color: var(--primary); font-weight: 800; margin-bottom: 12px;">🏆 Poměr cena/výkon: Špičková volba</div>
-
-                <div class="x-e54646" style="display: flex;">
-                    <div>🦵 <strong>Místo na nohy:</strong> Nadstandardní rozestup (81–86 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
-                    <div>↔️ <strong>Šířka sedadel:</strong> Široké a pohodlné (44–45 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
-                    <div>🍽️ <strong>Jídlo & Servis:</strong> Výborné chody, neomezeno, ICE <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
-                    <div>⏱️ <strong>Přesnost:</strong> Občasné fronty v Dubaji (DXB) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
-                </div>
-            </div>
-            <div style="background: rgba(169, 187, 208, 0.1); border: 1.5px solid var(--primary); border-radius: 8px; padding: 10px; margin-top: 14px;">
-                <div style="font-size: 0.75rem; font-weight: 900; color: var(--primary); text-transform: uppercase; margin-bottom: 2px;">💡 Verdikt cestovatelů:</div>
-                <div class="x-fs-82_fw-800_c-text-main">Jasná volba pro maximální komfort za skvělou cenu.</div>
-            </div>
-        </div>
-
-        <!-- 2. EMIRATES + FLYDUBAI -->
-        <div style="background: var(--surface-hover); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <strong class="x-fs-1-05_c-text-main">2. Emirates + flydubai</strong>
-                    <span class="x-665a01">22 000 Kč</span>
-                </div>
-                <div class="x-fs-85_c-gold_fw-900_mb-4">⭐⭐⭐⭐☆ (4 / 5)</div>
-                <div style="font-size: 0.82rem; color: var(--primary); font-weight: 800; margin-bottom: 12px;">⚖️ Poměr cena/výkon: Velmi dobrý (večerní let)</div>
-
-                <div class="x-e54646" style="display: flex;">
-                    <div>🦵 <strong>Místo na nohy:</strong> Kombinace (flydubai 76–79 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★</span><span class="x-c-text-muted">☆☆</span></span></div>
-                    <div>↔️ <strong>Šířka sedadel:</strong> Úzkotrupé / široké tělo (43–45 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★</span><span class="x-c-text-muted">☆☆</span></span></div>
-                    <div>🍽️ <strong>Jídlo & Servis:</strong> Teplé jídlo, chybí plný systém <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
-                    <div>⏱️ <strong>Přesnost:</strong> Delší čas na přestup dává jistotu <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
-                </div>
-            </div>
-            <div style="background: rgba(169, 187, 208, 0.1); border: 1.5px solid var(--primary); border-radius: 8px; padding: 10px; margin-top: 14px;">
-                <div style="font-size: 0.75rem; font-weight: 900; color: var(--primary); text-transform: uppercase; margin-bottom: 2px;">💡 Verdikt cestovatelů:</div>
-                <div class="x-fs-82_fw-800_c-text-main">Vhodné, pokud potřebujete odletět až večer.</div>
-            </div>
-        </div>
-
-        <!-- 3. FINNAIR -->
-        <div style="background: var(--surface-hover); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <strong class="x-fs-1-05_c-text-main">3. Finnair (Helsinky)</strong>
-                    <span class="x-665a01">24 900 Kč</span>
-                </div>
-                <div class="x-fs-85_c-gold_fw-900_mb-4">⭐⭐⭐⭐☆ (4 / 5)</div>
-                <div style="font-size: 0.82rem; color: var(--primary); font-weight: 800; margin-bottom: 12px;">⚖️ Poměr cena/výkon: Dobrý (severní trasa)</div>
-
-                <div class="x-e54646" style="display: flex;">
-                    <div>🦵 <strong>Místo na nohy:</strong> Standard v A350 (79–81 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
-                    <div>↔️ <strong>Šířka sedadel:</strong> Standardní šířka (45–46 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
-                    <div>🍽️ <strong>Jídlo & Servis:</strong> Severská kuchyně, borůvkový džus <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
-                    <div>⏱️ <strong>Přesnost:</strong> Extrémně rychlé a kompaktní letiště <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
-                </div>
-            </div>
-            <div style="background: rgba(169, 187, 208, 0.1); border: 1.5px solid var(--primary); border-radius: 8px; padding: 10px; margin-top: 14px;">
-                <div style="font-size: 0.75rem; font-weight: 900; color: var(--primary); text-transform: uppercase; margin-bottom: 2px;">💡 Verdikt cestovatelů:</div>
-                <div class="x-fs-82_fw-800_c-text-main">Nejpohodovější letiště na přestup a severský pořádek.</div>
-            </div>
-        </div>
-
-        <!-- 4. SWISS -->
-        <div style="background: var(--surface-hover); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <strong class="x-fs-1-05_c-text-main">4. SWISS (Curych)</strong>
-                    <span class="x-665a01">23 909 Kč</span>
-                </div>
-                <div class="x-fs-85_c-gold_fw-900_mb-4">⭐⭐⭐⭐☆ (4 / 5)</div>
-                <div style="font-size: 0.82rem; color: var(--primary); font-weight: 800; margin-bottom: 12px;">⚡ Poměr cena/výkon: Velmi dobrý (nejrychlejší)</div>
-
-                <div class="x-e54646" style="display: flex;">
-                    <div>🦵 <strong>Místo na nohy:</strong> Standardní prostor (79–81 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
-                    <div>↔️ <strong>Šířka sedadel:</strong> Standardní šířka (cca 44 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
-                    <div>🍽️ <strong>Jídlo & Servis:</strong> Čokoláda, kvalitní hlavní jídla <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
-                    <div>⏱️ <strong>Přesnost:</strong> Přesný ZRH, ale krátký přestup <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
-                </div>
-            </div>
-            <div style="background: rgba(169, 187, 208, 0.1); border: 1.5px solid var(--primary); border-radius: 8px; padding: 10px; margin-top: 14px;">
-                <div style="font-size: 0.75rem; font-weight: 900; color: var(--primary); text-transform: uppercase; margin-bottom: 2px;">💡 Verdikt cestovatelů:</div>
-                <div class="x-fs-82_fw-800_c-text-main">Ideální pro ty, co chtějí nejkratší čas strávený na palubě.</div>
-            </div>
-        </div>
-
-        <!-- 5. TURKISH AIRLINES -->
-        <div style="background: var(--surface-hover); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <strong class="x-fs-1-05_c-text-main">5. Turkish Airlines</strong>
-                    <span class="x-665a01">26 505 Kč</span>
-                </div>
-                <div class="x-fs-85_c-gold_fw-900_mb-4">⭐⭐⭐⭐⭐ (4.5 / 5)</div>
-                <div style="font-size: 0.82rem; color: var(--primary); font-weight: 800; margin-bottom: 12px;">👑 Poměr cena/výkon: Skvělý servis (vyšší cena)</div>
-
-                <div class="x-e54646" style="display: flex;">
-                    <div>🦵 <strong>Místo na nohy:</strong> Štědrý rozestup (až 81–84 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
-                    <div>↔️ <strong>Šířka sedadel:</strong> Širší a pohodlnější (45–46 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
-                    <div>🍽️ <strong>Jídlo & Servis:</strong> Nejlepší catering v economy, dárky <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
-                    <div>⏱️ <strong>Přesnost:</strong> Obří letiště IST vyžaduje delší chůzi <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
-                </div>
-            </div>
-            <div style="background: rgba(169, 187, 208, 0.1); border: 1.5px solid var(--primary); border-radius: 8px; padding: 10px; margin-top: 14px;">
-                <div style="font-size: 0.75rem; font-weight: 900; color: var(--primary); text-transform: uppercase; margin-bottom: 2px;">💡 Verdikt cestovatelů:</div>
-                <div class="x-fs-82_fw-800_c-text-main">Nejkomfortnější sezení a jídlo v economy, ale za vyšší cenu.</div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-    </div></div></div>
-</section>
 </div>
 
 <section class="lux-part" id="cast-priprava" aria-labelledby="cast-priprava-h">
@@ -7227,48 +6900,9 @@ function updatePackingWeight() {
     <div class="to-map"><div class="to-head"><b>Trasa</b><span>Klikni na zastávku a otevře se její etapa</span></div><div id="routeMap"></div>
         <div class="to-legend"><span><i class="lg lg-fly"></i>let</span><span><i class="lg lg-boat"></i>loď</span><span><i class="lg lg-car"></i>auto</span></div>
     </div>
+    <div class="to-nights"><div class="to-head"><b>19 nocí</b><span>Kde se spí a jak dlouho</span></div><div id="nightsBar"></div></div>
 </div>
 <div class="lux-spine">
-<section class="lux-fold is-transfer" id="f-leg-liberec">
-    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-leg-liberec-b" onclick="luxToggle('f-leg-liberec')">
-        <span class="lux-fold-node" aria-hidden="true">🚌</span>
-        <span class="lux-fold-txt"><span class="lux-fold-t">Odjezd Liberec ➔ Praha</span><span class="lux-fold-s" id="lbSub">6. 8. 2027 · na letiště Václava Havla</span></span>
-        <span class="lux-fold-meta"></span>
-        <span class="lux-fold-chev" aria-hidden="true">▾</span>
-    </button></h3>
-    <div class="lux-fold-body" id="f-leg-liberec-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
-<div class="t-row filter-padang">
-    <div class="t-point"></div>
-    <div class="timeline-date-container x-a8f6a5" id="lbDate" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3);">🚌 Pátek 6. 8. 2027 • Liberec ➔ Praha</div>
-    <div class="t-bubble transfer-bubble">
-        <h3 class="stage-title">Z Liberce na letiště v Praze</h3>
-        <p class="stage-desc">Sraz a odjezd z Liberce nejpozději v <strong id="lbDep">--:--</strong>, aby byla celá skupina na letišti v Praze v <strong id="lbAir">--:--</strong> (zhruba 3 hodiny před odletem). Cesta autobusem nebo vlakem z Liberce do Prahy a dál na letiště vychází orientačně na 2 h 30 min včetně rezervy na přestup. Konkrétní spoj a jízdenky se doplní podle toho, jak se domluvíme na srazu.</p>
-        <span class="transfer-distance">📍 Orientační čas, není to jízdní řád. Před odjezdem ho ověř ve vyhledávači spojení.</span>
-    </div>
-</div>
-    </div></div></div>
-</section>
-<section class="lux-fold is-transfer" id="f-leg-odlet">
-    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-leg-odlet-b" onclick="luxToggle('f-leg-odlet')">
-        <span class="lux-fold-node" aria-hidden="true">✈️</span>
-        <span class="lux-fold-txt"><span class="lux-fold-t">Odlet z Prahy a přestup</span><span class="lux-fold-s" id="odletSub">6. 8. 2027</span></span>
-        <span class="lux-fold-meta"></span>
-        <span class="lux-fold-chev" aria-hidden="true">▾</span>
-    </button></h3>
-    <div class="lux-fold-body" id="f-leg-odlet-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
-<div class="t-row filter-padang">
-    <div class="t-point"></div>
-    <div class="timeline-date-container x-a8f6a5" id="odDate" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3);">✈️ Pátek 6. 8. 2027 • Praha ➔ přestup ➔ Singapur</div>
-    <div class="t-bubble transfer-bubble">
-        <h3 class="stage-title">Odlet z Prahy (PRG) a přestup</h3>
-        <p class="stage-desc" id="odletDesc"></p>
-        <p class="stage-desc" id="odletLay"></p>
-        <span class="transfer-distance">📍 Variantu letu přepneš v sekci s výběrem dálkového letu, tady se přepočítá sama.</span>
-    </div>
-</div>
-<div class="bpx-host" id="bpOutTrip"></div>
-    </div></div></div>
-</section>
 <section class="lux-fold is-leg" id="f-leg-sg" data-stage="singapore">
     <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-leg-sg-b" onclick="luxToggle('f-leg-sg')">
         <span class="lux-fold-node" aria-hidden="true">1</span>
@@ -7277,6 +6911,7 @@ function updatePackingWeight() {
         <span class="lux-fold-chev" aria-hidden="true">▾</span>
     </button></h3>
     <div class="lux-fold-body" id="f-leg-sg-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+<div class="passes" id="passes-out"></div>
 <div class="fl-deck st-deck" id="stDeck-f-leg-sg" data-fold="f-leg-sg" aria-label="Etapa v kostce"></div>
 <!-- SEKCE SINGAPUR (1x VEČER + 1x CELÝ DEN) S ODLOŽENÝM NAČÍTÁNÍM MAP -->
 <div class="bento-card full" id="singapur-program" style="margin-top: 24px; margin-bottom: 24px;">
@@ -7778,8 +7413,8 @@ function updatePackingWeight() {
     </div>
 </div>
 
-                <div class="bpx-host" id="bpSinDps"></div>
                 <div class="fl-deck" id="flightDeck" aria-label="Interaktivní přehled letu Singapur – Bali"></div>
+<div class="passes" id="passes-sgdps"></div>
                 <div class="map-container-wrapper x-429a02" style="box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
     <!-- Hlavní výrazný nadpis sekce -->
     <div style="text-align: center; margin-bottom: 16px;">
@@ -9219,7 +8854,7 @@ function updatePackingWeight() {
     </div>
 </div>
 
-<div class="bpx-host" id="bpBoatOut"></div>
+<div class="passes" id="passes-boat-out"></div>
 <div class="fl-deck fl-sea" id="voyageOut" aria-label="Interaktivní přehled plavby Bali – Lombok"></div>
 <div class="ubud-port-map-widget">
 
@@ -10496,6 +10131,7 @@ function updatePackingWeight() {
         <span class="lux-fold-chev" aria-hidden="true">▾</span>
     </button></h3>
     <div class="lux-fold-body" id="f-leg-back-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+<div class="passes" id="passes-boat-back"></div>
 <div class="bento-card full x-4c7ef9" style="box-shadow: var(--shadow);">
 
     <!-- 1. ČÁST: ČASOVÁ OSA -->
@@ -10509,8 +10145,6 @@ function updatePackingWeight() {
             <p class="stage-desc" style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">Ve <strong>13:30</strong> odplutí lodí Wahana Virendra zpět na Bali (příjezd do přístavu Sanur v 17:00). Krátký transfer do hotelu u letiště v Denpasaru.</p>
         </div>
     </div>
-
-    <div class="bpx-host" id="bpBoatBack"></div>
 
     <hr style="border: none; height: 2px; background-color: var(--border); margin: 24px 0; border-radius: 2px;">
 
@@ -11029,7 +10663,7 @@ function updatePackingWeight() {
     <span class="transfer-distance" id="dpsSinFlightNote" style="color: var(--text-muted) !important; font-size: 0.82rem; font-weight: 600;">📍 Přímý let Scoot TR281 (přibližně 2 h 55 min)</span>
     <button class="map-fullscreen-btn" onclick="openImageInModal('DPS-SIN.jpg')" style="background: linear-gradient(135deg, var(--lux-deep-b) 0%, var(--lux-deep-a) 100%); color: #ffffff; border: 1px solid var(--primary-light); border-radius: 10px; padding: 8px 14px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);"><span>🔍</span> Zvětšit obrázek</button>
 </div>
-    <div class="bpx-host" id="bpHome"></div>
+    <div class="fl-deck fl-home" id="homeDeck" aria-label="Odlet domů a celá cesta zpátky"></div>
 </div>
 
     </div></div></div>
@@ -11195,48 +10829,7 @@ function updatePackingWeight() {
 </div>
 
     </div></div></div>
-</section>
-<section class="lux-fold is-transfer" id="f-leg-odlet-sin">
-    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-leg-odlet-sin-b" onclick="luxToggle('f-leg-odlet-sin')">
-        <span class="lux-fold-node" aria-hidden="true">✈️</span>
-        <span class="lux-fold-txt"><span class="lux-fold-t">Odlet ze Singapuru a mezipřistání</span><span class="lux-fold-s" id="sinSub">25. 8. 2027</span></span>
-        <span class="lux-fold-meta"></span>
-        <span class="lux-fold-chev" aria-hidden="true">▾</span>
-    </button></h3>
-    <div class="lux-fold-body" id="f-leg-odlet-sin-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
-<div class="t-row filter-padang">
-    <div class="t-point"></div>
-    <div class="timeline-date-container x-a8f6a5" id="sinDate" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3);">✈️ Singapur ➔ přestup ➔ Praha</div>
-    <div class="t-bubble transfer-bubble">
-        <h3 class="stage-title">Odlet ze Singapuru (SIN) a mezipřistání</h3>
-        <p class="stage-desc" id="sinDesc"></p>
-        <p class="stage-desc" id="sinLay"></p>
-        <span class="transfer-distance">📍 Variantu letu přepneš v sekci s výběrem dálkového letu, tady se přepočítá sama.</span>
-    </div>
-</div>
-<div class="bpx-host" id="bpRetTrip"></div>
-    </div></div></div>
-</section>
-<section class="lux-fold is-transfer" id="f-leg-domu">
-    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-leg-domu-b" onclick="luxToggle('f-leg-domu')">
-        <span class="lux-fold-node" aria-hidden="true">🚌</span>
-        <span class="lux-fold-txt"><span class="lux-fold-t">Odjezd domů do Liberce</span><span class="lux-fold-s" id="domSub">25. 8. 2027 · z letiště Václava Havla</span></span>
-        <span class="lux-fold-meta"></span>
-        <span class="lux-fold-chev" aria-hidden="true">▾</span>
-    </button></h3>
-    <div class="lux-fold-body" id="f-leg-domu-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
-<div class="t-row filter-padang">
-    <div class="t-point"></div>
-    <div class="timeline-date-container x-a8f6a5" id="domDate" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3);">🚌 Středa 25. 8. 2027 • Praha ➔ Liberec</div>
-    <div class="t-bubble transfer-bubble">
-        <h3 class="stage-title">Z letiště v Praze domů do Liberce</h3>
-        <p class="stage-desc">Přistáváme v Praze v <strong id="domArr">--:--</strong>. Po vyzvednutí zavazadel a přesunu z letiště do centra a dál na spoj do Liberce počítej orientačně s 2 h 30 min, doma jsme tedy zhruba kolem <strong id="domHome">--:--</strong>. Konkrétní spoj a jízdenky se doplní podle toho, jak se domluvíme.</p>
-        <span class="transfer-distance">📍 Orientační čas, není to jízdní řád. Před odjezdem ho ověř ve vyhledávači spojení.</span>
-    </div>
-</div>
-    </div></div></div>
-</section>
-</div>
+</section></div>
     </div>
 </section>
 
@@ -11254,7 +10847,7 @@ function updatePackingWeight() {
 <section class="lux-fold " id="f-konfig">
     <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-konfig-b" onclick="luxToggle('f-konfig')">
         <span class="lux-fold-node" aria-hidden="true">💰</span>
-        <span class="lux-fold-txt"><span class="lux-fold-t">Konfigurátor expedice</span><span class="lux-fold-s">Hotely a souhrn cen</span></span>
+        <span class="lux-fold-txt"><span class="lux-fold-t">Konfigurátor expedice</span><span class="lux-fold-s">Lety, hotely, souhrn cen a Gantt návazností</span></span>
         <span class="lux-fold-meta"></span>
         <span class="lux-fold-chev" aria-hidden="true">▾</span>
     </button></h3>
@@ -11273,6 +10866,198 @@ function updatePackingWeight() {
                         <a href="https://1parking.cz/rezervace/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: var(--lux-deep-b); color: #ffffff; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 0.85rem;">
                             Rezervovat parkování ↗
                         </a>
+                    </div>
+                </div>
+
+                <!-- 1. KROK: PŘEPÍNAČ 5 DETAILNÍCH VARIANT DÁLKOVÉHO LETU -->
+                <div class="x-mb-16">
+                    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 6px; color: var(--primary-light);">
+                        ✈️ 1. Vyber variantu dálkového letu Praha (PRG) ⇄ Singapur (SIN) — kompletní časy a přestupy:
+                    </div>
+<div class="flight-airline-switch">
+    <!-- 1. EMIRATES (16:10) -->
+    <button id="btnFlight_emirates" class="flight-mode-btn active" onclick="setFlightAirline('emirates')">
+        <div class="fc-header">
+            <div>
+                <div class="fc-airline">
+                    <img decoding="async" loading="lazy" src="emirates.png" alt="Emirates" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
+                    <span>Emirates (Odpolední)</span>
+                </div>
+                <span class="fc-hub-sub">📍 Přestup: Dubaj (DXB) • Nejvýhodnější</span>
+            </div>
+            <span class="fc-price-badge">22 000 Kč / os.</span>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
+                <span class="fc-times">16:10 PRG ➔ 14:05<sup>+1</sup> SIN</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 15h 55m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 DXB 2h 25m</span>
+                <span class="fc-pill">✈️ EK140 + EK348</span>
+            </div>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • st 25. 8.</span>
+                <span class="fc-times">01:40 SIN ➔ 13:00 PRG</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 17h 20m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 DXB 3h 45m</span>
+                <span class="fc-pill">✈️ EK349 + EK139</span>
+            </div>
+        </div>
+    </button>
+
+    <!-- 2. EMIRATES + FLYDUBAI (21:15) -->
+    <button id="btnFlight_emirates_flydubai" class="flight-mode-btn" onclick="setFlightAirline('emirates_flydubai')">
+        <div class="fc-header">
+            <div>
+                <div class="fc-airline">
+                    <img decoding="async" loading="lazy" src="emirates.png" alt="Emirates" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
+                    <span>Emirates + flydubai</span>
+                </div>
+                <span class="fc-hub-sub">📍 Přestup: Dubaj (DXB) • Večerní odlet</span>
+            </div>
+            <span class="fc-price-badge">22 000 Kč / os.</span>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
+                <span class="fc-times">21:15 PRG ➔ 21:45<sup>+1</sup> SIN</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 18h 30m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 DXB 4h 35m</span>
+                <span class="fc-pill">✈️ EK2239 + EK352</span>
+            </div>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • st 25. 8.</span>
+                <span class="fc-times">00:50 SIN ➔ 13:00 PRG</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 18h 10m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 DXB 4h 30m</span>
+                <span class="fc-pill">✈️ EK353 + EK139</span>
+            </div>
+        </div>
+    </button>
+
+    <!-- 3. FINNAIR (19:30 přes Helsinky) -->
+    <button id="btnFlight_finnair" class="flight-mode-btn" onclick="setFlightAirline('finnair')">
+        <div class="fc-header">
+            <div>
+                <div class="fc-airline">
+                    <img decoding="async" loading="lazy" src="finair.jpg" alt="Finnair" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
+                    <span>Finnair (Helsinky)</span>
+                </div>
+                <span class="fc-hub-sub">📍 Přestup: Helsinky (HEL) • Severní trasa</span>
+            </div>
+            <span class="fc-price-badge">24 900 Kč / os.</span>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
+                <span class="fc-times">19:30 PRG ➔ 18:30<sup>+1</sup> SIN</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 17h 00m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 HEL 1h 50m</span>
+                <span class="fc-pill">✈️ AY1226 + AY131</span>
+            </div>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
+                <span class="fc-times">21:35 SIN ➔ 10:50<sup>+1</sup> PRG</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 19h 15m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 HEL 3h 40m</span>
+                <span class="fc-pill">✈️ AY132 + AY1223</span>
+            </div>
+        </div>
+    </button>
+
+    <!-- 4. SWISS (19:30 přes Curych) -->
+    <button id="btnFlight_swiss" class="flight-mode-btn" onclick="setFlightAirline('swiss')">
+        <div class="fc-header">
+            <div>
+                <div class="fc-airline">
+                    <img decoding="async" loading="lazy" src="swiss.png" alt="SWISS" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
+                    <span>SWISS (Curych)</span>
+                </div>
+                <span class="fc-hub-sub">📍 Přestup: Curych (ZRH) • Nejrychlejší let</span>
+            </div>
+            <span class="fc-price-badge">23 909 Kč / os.</span>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
+                <span class="fc-times">19:30 PRG ➔ 17:10<sup>+1</sup> SIN</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 15h 40m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 ZRH 1h 50m</span>
+                <span class="fc-pill">✈️ LX1489 + LX176</span>
+            </div>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
+                <span class="fc-times">23:25 SIN ➔ 08:40<sup>+1</sup> PRG</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 15h 15m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 ZRH 1h 10m</span>
+                <span class="fc-pill">✈️ LX177 + LX1484</span>
+            </div>
+        </div>
+    </button>
+
+    <!-- 5. TURKISH AIRLINES (19:15 přes Istanbul) -->
+    <button id="btnFlight_turkish" class="flight-mode-btn" onclick="setFlightAirline('turkish')">
+        <div class="fc-header">
+            <div>
+                <div class="fc-airline">
+                    <img decoding="async" loading="lazy" src="turkish.png" alt="Turkish Airlines" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
+                    <span>Turkish Airlines</span>
+                </div>
+                <span class="fc-hub-sub">📍 Přestup: Istanbul (IST) • Top servis</span>
+            </div>
+            <span class="fc-price-badge">26 505 Kč / os.</span>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
+                <span class="fc-times">19:15 PRG ➔ 17:55<sup>+1</sup> SIN</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 16h 40m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 IST 3h 05m</span>
+                <span class="fc-pill">✈️ TK1770 + TK54</span>
+            </div>
+        </div>
+        <div class="fc-leg-box">
+            <div class="fc-leg-top">
+                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
+                <span class="fc-times">23:05 SIN ➔ 08:35<sup>+1</sup> PRG</span>
+            </div>
+            <div class="fc-meta-pills">
+                <span class="fc-pill">⏱️ 15h 30m</span>
+                <span class="fc-pill fc-pill-transfer">🔄 IST 1h 45m</span>
+                <span class="fc-pill">✈️ TK55 + TK1767</span>
+            </div>
+        </div>
+    </button>
+</div>
+                    <!-- ŽIVÝ DETAILNÍ BOX AKTIVNÍHO LETU -->
+                    <div class="active-flight-detail-box" id="activeFlightDetailBox">
+                        <!-- Dynamicky vykresleno JavaScriptem dle vybraného letu -->
                     </div>
                 </div>
 
@@ -11316,6 +11101,445 @@ function updatePackingWeight() {
         }
     });
 </script>
+
+<!-- KOMPLETNÍ HODNOCENÍ LETECKÝCH SPOLEČNOSTÍ PRO ECONOMY -->
+<div class="airline-review-section" style="margin-top: 30px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+    <div style="text-align: center; margin-bottom: 24px;">
+        <span style="background: rgba(169, 187, 208, 0.12); color: var(--primary); border: 1px solid var(--border); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 20px;">
+            ✈️ RECENZE A ZKUŠENOSTI CESTOVATELŮ
+        </span>
+ <h3 class="x-a141b9" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3); display: flex;">Detailní srovnání aerolinek pro Economy třídu</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); max-width: 700px; margin: 0 auto;">
+            Nezávislé hodnocení poměru cena/výkon, prostoru na nohy, šířky sedadel, servisu, jídla a přesnosti v přehledných hvězdičkách.
+        </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+
+        <!-- 1. EMIRATES (Odpolední) -->
+        <div style="background: var(--surface-hover); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <strong class="x-fs-1-05_c-text-main">1. Emirates (Odpolední)</strong>
+                    <span class="x-665a01">22 000 Kč</span>
+                </div>
+                <div class="x-fs-85_c-gold_fw-900_mb-4">⭐⭐⭐⭐⭐ (5 / 5)</div>
+                <div style="font-size: 0.82rem; color: var(--primary); font-weight: 800; margin-bottom: 12px;">🏆 Poměr cena/výkon: Špičková volba</div>
+
+                <div class="x-e54646" style="display: flex;">
+                    <div>🦵 <strong>Místo na nohy:</strong> Nadstandardní rozestup (81–86 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
+                    <div>↔️ <strong>Šířka sedadel:</strong> Široké a pohodlné (44–45 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
+                    <div>🍽️ <strong>Jídlo & Servis:</strong> Výborné chody, neomezeno, ICE <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
+                    <div>⏱️ <strong>Přesnost:</strong> Občasné fronty v Dubaji (DXB) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
+                </div>
+            </div>
+            <div style="background: rgba(169, 187, 208, 0.1); border: 1.5px solid var(--primary); border-radius: 8px; padding: 10px; margin-top: 14px;">
+                <div style="font-size: 0.75rem; font-weight: 900; color: var(--primary); text-transform: uppercase; margin-bottom: 2px;">💡 Verdikt cestovatelů:</div>
+                <div class="x-fs-82_fw-800_c-text-main">Jasná volba pro maximální komfort za skvělou cenu.</div>
+            </div>
+        </div>
+
+        <!-- 2. EMIRATES + FLYDUBAI -->
+        <div style="background: var(--surface-hover); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <strong class="x-fs-1-05_c-text-main">2. Emirates + flydubai</strong>
+                    <span class="x-665a01">22 000 Kč</span>
+                </div>
+                <div class="x-fs-85_c-gold_fw-900_mb-4">⭐⭐⭐⭐☆ (4 / 5)</div>
+                <div style="font-size: 0.82rem; color: var(--primary); font-weight: 800; margin-bottom: 12px;">⚖️ Poměr cena/výkon: Velmi dobrý (večerní let)</div>
+
+                <div class="x-e54646" style="display: flex;">
+                    <div>🦵 <strong>Místo na nohy:</strong> Kombinace (flydubai 76–79 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★</span><span class="x-c-text-muted">☆☆</span></span></div>
+                    <div>↔️ <strong>Šířka sedadel:</strong> Úzkotrupé / široké tělo (43–45 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★</span><span class="x-c-text-muted">☆☆</span></span></div>
+                    <div>🍽️ <strong>Jídlo & Servis:</strong> Teplé jídlo, chybí plný systém <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
+                    <div>⏱️ <strong>Přesnost:</strong> Delší čas na přestup dává jistotu <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
+                </div>
+            </div>
+            <div style="background: rgba(169, 187, 208, 0.1); border: 1.5px solid var(--primary); border-radius: 8px; padding: 10px; margin-top: 14px;">
+                <div style="font-size: 0.75rem; font-weight: 900; color: var(--primary); text-transform: uppercase; margin-bottom: 2px;">💡 Verdikt cestovatelů:</div>
+                <div class="x-fs-82_fw-800_c-text-main">Vhodné, pokud potřebujete odletět až večer.</div>
+            </div>
+        </div>
+
+        <!-- 3. FINNAIR -->
+        <div style="background: var(--surface-hover); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <strong class="x-fs-1-05_c-text-main">3. Finnair (Helsinky)</strong>
+                    <span class="x-665a01">24 900 Kč</span>
+                </div>
+                <div class="x-fs-85_c-gold_fw-900_mb-4">⭐⭐⭐⭐☆ (4 / 5)</div>
+                <div style="font-size: 0.82rem; color: var(--primary); font-weight: 800; margin-bottom: 12px;">⚖️ Poměr cena/výkon: Dobrý (severní trasa)</div>
+
+                <div class="x-e54646" style="display: flex;">
+                    <div>🦵 <strong>Místo na nohy:</strong> Standard v A350 (79–81 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
+                    <div>↔️ <strong>Šířka sedadel:</strong> Standardní šířka (45–46 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
+                    <div>🍽️ <strong>Jídlo & Servis:</strong> Severská kuchyně, borůvkový džus <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
+                    <div>⏱️ <strong>Přesnost:</strong> Extrémně rychlé a kompaktní letiště <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
+                </div>
+            </div>
+            <div style="background: rgba(169, 187, 208, 0.1); border: 1.5px solid var(--primary); border-radius: 8px; padding: 10px; margin-top: 14px;">
+                <div style="font-size: 0.75rem; font-weight: 900; color: var(--primary); text-transform: uppercase; margin-bottom: 2px;">💡 Verdikt cestovatelů:</div>
+                <div class="x-fs-82_fw-800_c-text-main">Nejpohodovější letiště na přestup a severský pořádek.</div>
+            </div>
+        </div>
+
+        <!-- 4. SWISS -->
+        <div style="background: var(--surface-hover); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <strong class="x-fs-1-05_c-text-main">4. SWISS (Curych)</strong>
+                    <span class="x-665a01">23 909 Kč</span>
+                </div>
+                <div class="x-fs-85_c-gold_fw-900_mb-4">⭐⭐⭐⭐☆ (4 / 5)</div>
+                <div style="font-size: 0.82rem; color: var(--primary); font-weight: 800; margin-bottom: 12px;">⚡ Poměr cena/výkon: Velmi dobrý (nejrychlejší)</div>
+
+                <div class="x-e54646" style="display: flex;">
+                    <div>🦵 <strong>Místo na nohy:</strong> Standardní prostor (79–81 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
+                    <div>↔️ <strong>Šířka sedadel:</strong> Standardní šířka (cca 44 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
+                    <div>🍽️ <strong>Jídlo & Servis:</strong> Čokoláda, kvalitní hlavní jídla <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
+                    <div>⏱️ <strong>Přesnost:</strong> Přesný ZRH, ale krátký přestup <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
+                </div>
+            </div>
+            <div style="background: rgba(169, 187, 208, 0.1); border: 1.5px solid var(--primary); border-radius: 8px; padding: 10px; margin-top: 14px;">
+                <div style="font-size: 0.75rem; font-weight: 900; color: var(--primary); text-transform: uppercase; margin-bottom: 2px;">💡 Verdikt cestovatelů:</div>
+                <div class="x-fs-82_fw-800_c-text-main">Ideální pro ty, co chtějí nejkratší čas strávený na palubě.</div>
+            </div>
+        </div>
+
+        <!-- 5. TURKISH AIRLINES -->
+        <div style="background: var(--surface-hover); border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <strong class="x-fs-1-05_c-text-main">5. Turkish Airlines</strong>
+                    <span class="x-665a01">26 505 Kč</span>
+                </div>
+                <div class="x-fs-85_c-gold_fw-900_mb-4">⭐⭐⭐⭐⭐ (4.5 / 5)</div>
+                <div style="font-size: 0.82rem; color: var(--primary); font-weight: 800; margin-bottom: 12px;">👑 Poměr cena/výkon: Skvělý servis (vyšší cena)</div>
+
+                <div class="x-e54646" style="display: flex;">
+                    <div>🦵 <strong>Místo na nohy:</strong> Štědrý rozestup (až 81–84 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
+                    <div>↔️ <strong>Šířka sedadel:</strong> Širší a pohodlnější (45–46 cm) <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
+                    <div>🍽️ <strong>Jídlo & Servis:</strong> Nejlepší catering v economy, dárky <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★★</span></span></div>
+                    <div>⏱️ <strong>Přesnost:</strong> Obří letiště IST vyžaduje delší chůzi <span class="x-fs-1-25_fw-900_fl-right_lh-1"><span class="x-c-gold">★★★★</span><span class="x-c-text-muted">☆</span></span></div>
+                </div>
+            </div>
+            <div style="background: rgba(169, 187, 208, 0.1); border: 1.5px solid var(--primary); border-radius: 8px; padding: 10px; margin-top: 14px;">
+                <div style="font-size: 0.75rem; font-weight: 900; color: var(--primary); text-transform: uppercase; margin-bottom: 2px;">💡 Verdikt cestovatelů:</div>
+                <div class="x-fs-82_fw-800_c-text-main">Nejkomfortnější sezení a jídlo v economy, ale za vyšší cenu.</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- 1. GANTTŮV DIAGRAM: CESTA TAM (PRG ➔ SIN) -->
+<div class="bento-card full" id="ganttFlightsComparison_outbound" style="margin-top: 32px; margin-bottom: 28px; padding: 28px; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.15); border-top: 1px solid rgba(255, 255, 255, 0.3); background: color-mix(in srgb, var(--surface) 75%, transparent); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.3);">
+
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);">
+        <div>
+            <span class="badge" style="background: rgba(169, 187, 208, 0.15); color: var(--primary); border: 1px solid rgba(169, 187, 208, 0.3); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.8px; padding: 6px 14px; border-radius: 20px; box-shadow: 0 4px 12px rgba(169, 187, 208, 0.15);">
+                ✈️ HODINOVÝ GANTTŮV DIAGRAM LETŮ (TAM)
+            </span>
+       <h3 class="x-a141b9" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3); display: flex;">Porovnání letů PRG ➔ SIN</h3>
+            <div style="font-size: 0.85rem; color: var(--primary); font-weight: 700; opacity: 0.9;">
+                ⏱️ Odlety PRG (SELČ) ➔ Fyzická doba cesty ➔ Přechod na SGT lokální čas (+6h)
+            </div>
+        </div>
+    </div>
+
+    <div class="gantt-wrapper x-dd4933" style="overflow-x: auto; box-shadow: inset 0 4px 16px rgba(0, 0, 0, 0.04);">
+        <div class="gantt-chart x-min-1470_fd-column_gap-14" style="display: flex;">
+
+            <div class="gantt-header" style="display: flex; border-bottom: 2px solid color-mix(in srgb, var(--primary) 40%, transparent); padding-bottom: 10px; font-size: 0.65rem; font-weight: 900; color: var(--text-main); letter-spacing: 0.5px;">
+                <div class="x-w-150_fle-0_pl-6_tex-uppercase">Letecká společnost</div>
+                <div class="x-w-1320_c-color-mix-" style="display: flex;">
+                    <div class="x-w-40_ta-left">14:00</div><div class="x-w-40_ta-left">15:00</div>
+                    <div class="x-w-40_ta-left">16:00</div><div class="x-w-40_ta-left">17:00</div>
+                    <div class="x-w-40_ta-left">18:00</div><div class="x-w-40_ta-left">19:00</div>
+                    <div class="x-w-40_ta-left">20:00</div><div class="x-w-40_ta-left">21:00</div>
+                    <div class="x-w-40_ta-left">22:00</div><div class="x-w-40_ta-left">23:00</div>
+                    <div class="x-w-40_ta-left">00:00</div><div class="x-w-40_ta-left">01:00</div>
+                    <div class="x-w-40_ta-left">02:00</div><div class="x-w-40_ta-left">03:00</div>
+                    <div class="x-w-40_ta-left">04:00</div><div class="x-w-40_ta-left">05:00</div>
+                    <div class="x-w-40_ta-left">06:00</div><div class="x-w-40_ta-left">07:00</div>
+                    <div class="x-w-40_ta-left">08:00</div><div class="x-w-40_ta-left">09:00</div>
+                    <div class="x-w-40_ta-left">10:00</div><div class="x-w-40_ta-left">11:00</div>
+                    <div class="x-w-40_ta-left">12:00</div><div class="x-w-40_ta-left">13:00</div>
+                    <div class="x-w-40_ta-left">14:00</div><div class="x-w-40_ta-left">15:00</div>
+                    <div class="x-w-40_ta-left">16:00</div><div class="x-w-40_ta-left">17:00</div>
+                    <div class="x-w-40_ta-left">18:00</div><div class="x-w-40_ta-left">19:00</div>
+                    <div class="x-w-40_ta-left">20:00</div><div class="x-w-40_ta-left">21:00</div>
+                    <div class="x-w-40_ta-left">22:00</div>
+                </div>
+            </div>
+
+            <!-- 1. Emirates -->
+            <div class="gantt-row" id="ganttRow_outbound_emirates" onclick="handleGanttClick('emirates')">
+                <div class="x-b95198" style="position: sticky; left: 0; z-index: 2;">
+                    1. Emirates (Odpolední)
+                </div>
+                <div class="x-w-1320_ai-center" style="display: flex; height: 28px;">
+                    <div style="width: calc(130 * 40px / 60); flex-shrink: 0;"></div>
+                    <div class="x-ecf225" style="height: 28px; display: flex; box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        PRG ➔ DXB (EK140)
+                    </div>
+                    <div style="width: calc(145 * 40px / 60); flex-shrink: 0; background: rgba(232, 212, 138, 0.1); border: 1px dashed rgba(232, 212, 138, 0.5); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 0.58rem; font-weight: 900; box-shadow: inset 0 2px 8px rgba(232, 212, 138, 0.1);">
+                        ⏳ DXB 2h 25m
+                    </div>
+                    <div style="width: calc(450 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px 0 0 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); border-right: none; box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        DXB ➔ SIN (EK348)
+                    </div>
+                    <div style="width: calc(360 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border: 2px solid var(--primary-light); border-left: none; border-radius: 0 6px 6px 0; height: 28px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.65rem; font-weight: 900; text-shadow: 0 1px 3px rgba(0,0,0,0.6); box-shadow: 0 4px 16px rgba(109, 40, 217, 0.5);">
+                        +6h posun ➔ Přílet 14:05
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Emirates + flydubai -->
+            <div class="gantt-row" id="ganttRow_outbound_emirates_flydubai" onclick="handleGanttClick('emirates_flydubai')">
+                <div class="x-b95198" style="position: sticky; left: 0; z-index: 2;">
+                    2. Emirates + flydubai
+                </div>
+                <div class="x-w-1320_ai-center" style="display: flex; height: 28px;">
+                    <div style="width: calc(435 * 40px / 60); flex-shrink: 0;"></div>
+                    <div class="x-ecf225" style="height: 28px; display: flex; box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        PRG ➔ DXB (EK2239)
+                    </div>
+                    <div style="width: calc(275 * 40px / 60); flex-shrink: 0; background: rgba(232, 212, 138, 0.1); border: 1px dashed rgba(232, 212, 138, 0.5); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 0.58rem; font-weight: 900; box-shadow: inset 0 2px 8px rgba(232, 212, 138, 0.1);">
+                        ⏳ DXB 4h 35m
+                    </div>
+                    <div style="width: calc(475 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px 0 0 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); border-right: none; box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        DXB ➔ SIN (EK352)
+                    </div>
+                    <div style="width: calc(360 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border: 2px solid var(--primary-light); border-left: none; border-radius: 0 6px 6px 0; height: 28px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.65rem; font-weight: 900; text-shadow: 0 1px 3px rgba(0,0,0,0.6); box-shadow: 0 4px 16px rgba(109, 40, 217, 0.5);">
+                        +6h posun ➔ Přílet 21:45
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Finnair -->
+            <div class="gantt-row" id="ganttRow_outbound_finnair" onclick="handleGanttClick('finnair')">
+                <div class="x-b95198" style="position: sticky; left: 0; z-index: 2;">
+                    3. Finnair (Helsinky)
+                </div>
+                <div class="x-w-1320_ai-center" style="display: flex; height: 28px;">
+                    <div class="x-w-calc-330-4_fle-0"></div>
+                    <div style="width: calc(130 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        PRG ➔ HEL (AY1226)
+                    </div>
+                    <div class="x-e5b14f" style="height: 28px; display: flex; box-shadow: inset 0 2px 8px rgba(232, 212, 138, 0.1);">
+                        ⏳ HEL 1h 50m
+                    </div>
+                    <div style="width: calc(780 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px 0 0 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); border-right: none; box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        HEL ➔ SIN (AY131)
+                    </div>
+                    <div style="width: calc(360 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border: 2px solid var(--primary-light); border-left: none; border-radius: 0 6px 6px 0; height: 28px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.65rem; font-weight: 900; text-shadow: 0 1px 3px rgba(0,0,0,0.6); box-shadow: 0 4px 16px rgba(109, 40, 217, 0.5);">
+                        +6h posun ➔ Přílet 18:30
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. SWISS -->
+            <div class="gantt-row" id="ganttRow_outbound_swiss" onclick="handleGanttClick('swiss')">
+                <div class="x-b95198" style="position: sticky; left: 0; z-index: 2;">
+                    4. SWISS (Curych)
+                </div>
+                <div class="x-w-1320_ai-center" style="display: flex; height: 28px;">
+                    <div class="x-w-calc-330-4_fle-0"></div>
+                    <div style="width: calc(90 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        PRG ➔ ZRH (LX1489)
+                    </div>
+                    <div class="x-e5b14f" style="height: 28px; display: flex; box-shadow: inset 0 2px 8px rgba(232, 212, 138, 0.1);">
+                        ⏳ ZRH 1h 50m
+                    </div>
+                    <div style="width: calc(740 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px 0 0 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); border-right: none; box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        ZRH ➔ SIN (LX176)
+                    </div>
+                    <div style="width: calc(360 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border: 2px solid var(--primary-light); border-left: none; border-radius: 0 6px 6px 0; height: 28px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.65rem; font-weight: 900; text-shadow: 0 1px 3px rgba(0,0,0,0.6); box-shadow: 0 4px 16px rgba(109, 40, 217, 0.5);">
+                        +6h posun ➔ Přílet 17:10
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Turkish Airlines -->
+            <div class="gantt-row" id="ganttRow_outbound_turkish" onclick="handleGanttClick('turkish')" style="border-bottom: none;">
+                <div class="x-b95198" style="position: sticky; left: 0; z-index: 2;">
+                    5. Turkish Airlines
+                </div>
+                <div class="x-w-1320_ai-center" style="display: flex; height: 28px;">
+                    <div style="width: calc(315 * 40px / 60); flex-shrink: 0;"></div>
+                    <div class="x-62656a" style="height: 28px; display: flex; box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        PRG ➔ IST (TK1770)
+                    </div>
+                    <div style="width: calc(185 * 40px / 60); flex-shrink: 0; background: rgba(232, 212, 138, 0.1); border: 1px dashed rgba(232, 212, 138, 0.5); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 0.58rem; font-weight: 900; box-shadow: inset 0 2px 8px rgba(232, 212, 138, 0.1);">
+                        ⏳ IST 3h 05m
+                    </div>
+                    <div style="width: calc(660 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px 0 0 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); border-right: none; box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        IST ➔ SIN (TK54)
+                    </div>
+                    <div style="width: calc(360 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border: 2px solid var(--primary-light); border-left: none; border-radius: 0 6px 6px 0; height: 28px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.65rem; font-weight: 900; text-shadow: 0 1px 3px rgba(0,0,0,0.6); box-shadow: 0 4px 16px rgba(109, 40, 217, 0.5);">
+                        +6h posun ➔ Přílet 17:55
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- 2. GANTTŮV DIAGRAM: CESTA ZPĚT (SIN ➔ PRG) -->
+<div class="bento-card full" id="ganttFlightsComparison_return" style="margin-top: 32px; margin-bottom: 28px; padding: 28px; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.15); border-top: 1px solid rgba(255, 255, 255, 0.3); background: color-mix(in srgb, var(--surface) 75%, transparent); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.3);">
+
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);">
+        <div>
+            <span class="badge" style="background: rgba(169, 187, 208, 0.15); color: var(--primary); border: 1px solid rgba(169, 187, 208, 0.3); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.8px; padding: 6px 14px; border-radius: 20px; box-shadow: 0 4px 12px rgba(169, 187, 208, 0.15);">
+                ✈️ HODINOVÝ GANTTŮV DIAGRAM LETŮ (ZPĚT)
+            </span>
+  <h3 class="x-a141b9" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3); display: flex;">Porovnání letů SIN ➔ PRG</h3>
+            <div style="font-size: 0.85rem; color: var(--primary); font-weight: 700; opacity: 0.9;">
+                ⏱️ Osa ukazuje lokální čas SIN (SGT) ➔ Zahrnuto přesné trvání ➔ Fyzický přílet PRG (SELČ) zobrazen
+            </div>
+        </div>
+    </div>
+
+    <div class="gantt-wrapper x-dd4933" style="overflow-x: auto; box-shadow: inset 0 4px 16px rgba(0, 0, 0, 0.04);">
+        <div class="gantt-chart x-min-1470_fd-column_gap-14" style="display: flex;">
+
+            <div class="gantt-header" style="display: flex; border-bottom: 2px solid color-mix(in srgb, var(--primary) 40%, transparent); padding-bottom: 10px; font-size: 0.65rem; font-weight: 900; color: var(--text-main); letter-spacing: 0.5px;">
+                <div class="x-w-150_fle-0_pl-6_tex-uppercase">Letecká společnost</div>
+                <div class="x-w-1320_c-color-mix-" style="display: flex;">
+                    <div class="x-w-40_ta-left">20:00</div><div class="x-w-40_ta-left">21:00</div>
+                    <div class="x-w-40_ta-left">22:00</div><div class="x-w-40_ta-left">23:00</div>
+                    <div class="x-w-40_ta-left">00:00</div><div class="x-w-40_ta-left">01:00</div>
+                    <div class="x-w-40_ta-left">02:00</div><div class="x-w-40_ta-left">03:00</div>
+                    <div class="x-w-40_ta-left">04:00</div><div class="x-w-40_ta-left">05:00</div>
+                    <div class="x-w-40_ta-left">06:00</div><div class="x-w-40_ta-left">07:00</div>
+                    <div class="x-w-40_ta-left">08:00</div><div class="x-w-40_ta-left">09:00</div>
+                    <div class="x-w-40_ta-left">10:00</div><div class="x-w-40_ta-left">11:00</div>
+                    <div class="x-w-40_ta-left">12:00</div><div class="x-w-40_ta-left">13:00</div>
+                    <div class="x-w-40_ta-left">14:00</div><div class="x-w-40_ta-left">15:00</div>
+                    <div class="x-w-40_ta-left">16:00</div><div class="x-w-40_ta-left">17:00</div>
+                    <div class="x-w-40_ta-left">18:00</div><div class="x-w-40_ta-left">19:00</div>
+                    <div class="x-w-40_ta-left">20:00</div><div class="x-w-40_ta-left">21:00</div>
+                    <div class="x-w-40_ta-left">22:00</div>
+                </div>
+            </div>
+
+            <!-- 1. Emirates (Zpět) -->
+            <div class="gantt-row" id="ganttRow_return_emirates" onclick="handleGanttClick('emirates')">
+                <div class="x-b95198" style="position: sticky; left: 0; z-index: 2;">
+                    1. Emirates (Odpolední)
+                </div>
+                <div class="x-w-1320_ai-center" style="display: flex; height: 28px;">
+                    <div style="width: calc(340 * 40px / 60); flex-shrink: 0;"></div>
+                    <div class="x-88956d" style="height: 28px; display: flex; box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        SIN ➔ DXB (EK349)
+                    </div>
+                    <div style="width: calc(225 * 40px / 60); flex-shrink: 0; background: rgba(232, 212, 138, 0.1); border: 1px dashed rgba(232, 212, 138, 0.5); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 0.58rem; font-weight: 900; box-shadow: inset 0 2px 8px rgba(232, 212, 138, 0.1);">
+                        ⏳ DXB 3h 45m
+                    </div>
+                    <div style="width: calc(375 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        DXB ➔ PRG (EK139)
+                    </div>
+                    <div style="flex-shrink: 0; padding: 0 14px; margin-left: 8px; background: linear-gradient(135deg, #4c1d95, var(--lux-deep-a)); border: 2px solid var(--primary-light); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.65rem; font-weight: 900; text-shadow: 0 1px 3px rgba(0,0,0,0.6); box-shadow: 0 4px 16px rgba(76, 29, 149, 0.5);">
+                        Přílet 13:00
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Emirates + flydubai (Zpět) -->
+            <div class="gantt-row" id="ganttRow_return_emirates_flydubai" onclick="handleGanttClick('emirates_flydubai')">
+                <div class="x-b95198" style="position: sticky; left: 0; z-index: 2;">
+                    2. Emirates + flydubai
+                </div>
+                <div class="x-w-1320_ai-center" style="display: flex; height: 28px;">
+                    <div style="width: calc(290 * 40px / 60); flex-shrink: 0;"></div>
+                    <div class="x-88956d" style="height: 28px; display: flex; box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        SIN ➔ DXB (EK353)
+                    </div>
+                    <div style="width: calc(270 * 40px / 60); flex-shrink: 0; background: rgba(232, 212, 138, 0.1); border: 1px dashed rgba(232, 212, 138, 0.5); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 0.58rem; font-weight: 900; box-shadow: inset 0 2px 8px rgba(232, 212, 138, 0.1);">
+                        ⏳ DXB 4h 30m
+                    </div>
+                    <div style="width: calc(380 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        DXB ➔ PRG (EK139)
+                    </div>
+                    <div style="flex-shrink: 0; padding: 0 14px; margin-left: 8px; background: linear-gradient(135deg, #4c1d95, var(--lux-deep-a)); border: 2px solid var(--primary-light); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.65rem; font-weight: 900; text-shadow: 0 1px 3px rgba(0,0,0,0.6); box-shadow: 0 4px 16px rgba(76, 29, 149, 0.5);">
+                        Přílet 13:00
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Finnair (Zpět) -->
+            <div class="gantt-row" id="ganttRow_return_finnair" onclick="handleGanttClick('finnair')">
+                <div class="x-b95198" style="position: sticky; left: 0; z-index: 2;">
+                    3. Finnair (Helsinky)
+                </div>
+                <div class="x-w-1320_ai-center" style="display: flex; height: 28px;">
+                    <div style="width: calc(95 * 40px / 60); flex-shrink: 0;"></div>
+                    <div style="width: calc(780 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        SIN ➔ HEL (AY132)
+                    </div>
+                    <div style="width: calc(220 * 40px / 60); flex-shrink: 0; background: rgba(232, 212, 138, 0.1); border: 1px dashed rgba(232, 212, 138, 0.5); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 0.58rem; font-weight: 900; box-shadow: inset 0 2px 8px rgba(232, 212, 138, 0.1);">
+                        ⏳ HEL 3h 40m
+                    </div>
+                    <div class="x-62656a" style="height: 28px; display: flex; box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        HEL ➔ PRG (AY1223)
+                    </div>
+                    <div style="flex-shrink: 0; padding: 0 14px; margin-left: 8px; background: linear-gradient(135deg, #4c1d95, var(--lux-deep-a)); border: 2px solid var(--primary-light); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.65rem; font-weight: 900; text-shadow: 0 1px 3px rgba(0,0,0,0.6); box-shadow: 0 4px 16px rgba(76, 29, 149, 0.5);">
+                        Přílet 10:50
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. SWISS (Zpět) -->
+            <div class="gantt-row" id="ganttRow_return_swiss" onclick="handleGanttClick('swiss')">
+                <div class="x-b95198" style="position: sticky; left: 0; z-index: 2;">
+                    4. SWISS (Curych)
+                </div>
+                <div class="x-w-1320_ai-center" style="display: flex; height: 28px;">
+                    <div style="width: calc(205 * 40px / 60); flex-shrink: 0;"></div>
+                    <div style="width: calc(765 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        SIN ➔ ZRH (LX177)
+                    </div>
+                    <div style="width: calc(70 * 40px / 60); flex-shrink: 0; background: rgba(232, 212, 138, 0.1); border: 1px dashed rgba(232, 212, 138, 0.5); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 0.58rem; font-weight: 900; box-shadow: inset 0 2px 8px rgba(232, 212, 138, 0.1);">
+                        ⏳ ZRH 1h 10m
+                    </div>
+                    <div style="width: calc(80 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        ZRH ➔ PRG (LX1484)
+                    </div>
+                    <div style="flex-shrink: 0; padding: 0 14px; margin-left: 8px; background: linear-gradient(135deg, #4c1d95, var(--lux-deep-a)); border: 2px solid var(--primary-light); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.65rem; font-weight: 900; text-shadow: 0 1px 3px rgba(0,0,0,0.6); box-shadow: 0 4px 16px rgba(76, 29, 149, 0.5);">
+                        Přílet 08:40
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Turkish Airlines (Zpět) -->
+            <div class="gantt-row" id="ganttRow_return_turkish" onclick="handleGanttClick('turkish')" style="border-bottom: none;">
+                <div class="x-b95198" style="position: sticky; left: 0; z-index: 2;">
+                    5. Turkish Airlines
+                </div>
+                <div class="x-w-1320_ai-center" style="display: flex; height: 28px;">
+                    <div style="width: calc(185 * 40px / 60); flex-shrink: 0;"></div>
+                    <div style="width: calc(660 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        SIN ➔ IST (TK55)
+                    </div>
+                    <div style="width: calc(105 * 40px / 60); flex-shrink: 0; background: rgba(232, 212, 138, 0.1); border: 1px dashed rgba(232, 212, 138, 0.5); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 0.58rem; font-weight: 900; box-shadow: inset 0 2px 8px rgba(232, 212, 138, 0.1);">
+                        ⏳ IST 1h 45m
+                    </div>
+                    <div style="width: calc(165 * 40px / 60); flex-shrink: 0; background: linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.58rem; font-weight: 800; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 12px rgba(169, 187, 208, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);">
+                        IST ➔ PRG (TK1767)
+                    </div>
+                    <div style="flex-shrink: 0; padding: 0 14px; margin-left: 8px; background: linear-gradient(135deg, #4c1d95, var(--lux-deep-a)); border: 2px solid var(--primary-light); border-radius: 6px; height: 28px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.65rem; font-weight: 900; text-shadow: 0 1px 3px rgba(0,0,0,0.6); box-shadow: 0 4px 16px rgba(76, 29, 149, 0.5);">
+                        Přílet 08:35
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
    <!-- 2. KROK: PŘEPÍNAČ VARIANT HOTELŮ (VČETNĚ VARIANTY C!) -->
 <div>
@@ -11415,7 +11639,50 @@ function updatePackingWeight() {
 </div>
 
 
+<!-- Gantt & kontrola návazností: součást konfigurátoru -->
+<!-- VIP SEKCE: GANTTŮV DIAGRAM & KONTROLA NÁVAZNOSTÍ -->
+<div class="bento-card full" id="ganttAuditCard" style="margin-top: 32px; margin-bottom: 28px; padding: 26px; border-radius: 22px; border: 1.5px solid var(--border); background: var(--surface); box-shadow: var(--shadow); position: relative; overflow: hidden;">
 
+    <!-- HORNÍ BLOCK: GANTTŮV DIAGRAM -->
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px; padding-bottom: 14px; border-bottom: 1.5px solid var(--border);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <span class="badge" style="background: rgba(169, 187, 208, 0.12); color: var(--primary); border: 1px solid var(--border); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 20px;">
+                📈 LOGISTICKÝ AUDIT TRASY
+            </span>
+            <div style="font-size: 0.82rem; color: var(--primary); font-weight: 800;">
+                🗓️ Termín: 6. 8. – 25. 8. 2027 (18 čistých dní / 17 nocí)
+            </div>
+        </div>
+
+        <h3 class="x-a141b9" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3); display: flex;">Ganttův diagram &amp; Kontrola návazností</h3>
+
+        <div style="display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: wrap;">
+            <span id="ganttActiveBadge" style="background: rgba(37, 211, 102, 0.15); border: 1.5px solid #25d366; color: var(--lux-ok); padding: 6px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 900; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.2); display: inline-flex; align-items: center; gap: 6px;">
+                <span style="width: 8px; height: 8px; background: #25d366; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #25d366;"></span>
+                Všechny přestupy a časy check-in sedí
+            </span>
+
+            <!-- FULLSCREEN TLAČÍTKO PRO DIAGRAM -->
+            <button onclick="toggleGanttCardFullscreen()" title="Celá obrazovka" style="background: var(--surface-hover); border: 1px solid var(--border); color: var(--text-main); padding: 6px 12px; border-radius: 10px; font-weight: 800; font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s;">
+                ⛶ Celá obrazovka
+            </button>
+        </div>
+    </div>
+
+    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px; font-weight: 600; line-height: 1.5;">
+        Grafická časová osa níže v reálném čase prověřuje přelety, trajekty, návaznosti ubytování a logistické návaznosti podle tvého aktuálního nastavení. Na mobilu posouvej diagram do stran.
+    </p>
+
+    <!-- STYLY PRO GANTT -->
+
+    <!-- KONTEJNER PRO GANTTŮV DIAGRAM -->
+    <div class="gantt-wrapper">
+        <div class="gantt-chart" id="ganttChartContainer">
+            <!-- Dynamicky generováno JavaScriptem -->
+        </div>
+    </div>
+
+</div>
 
     </div></div></div>
 </section>
@@ -15973,13 +16240,12 @@ function recalculateAll() {
         book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><path d="M6.5 17A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5"/><path d="M9 7h7M9 11h5"/>',
         wallet: '<path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>',
         card: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/>',
-        bus: '<rect x="4" y="3" width="16" height="14" rx="2"/><path d="M4 11h16M8 17v3M16 17v3"/><circle cx="8" cy="14" r=".7"/><circle cx="16" cy="14" r=".7"/>',
         checklist: '<rect x="5" y="4" width="14" height="18" rx="2"/><path d="M9 2h6v4H9z"/><path d="M8.5 13l2 2 4-4.5"/>'
     };
     var MAP = {
         'f-konfig': 'sliders', 'f-srovnani': 'scale', 'f-rozpis': 'receipt', 'f-jidlo': 'receipt', 'f-aktivity': 'palm', 'f-hotovost': 'wallet', 'f-karta-mhd': 'card',
         'f-viza': 'passport', 'f-sos': 'sos', 'f-esim': 'sim', 'f-apps': 'apps', 'f-live': 'live', 'f-baleni': 'backpack',
-        'f-leg-liberec': 'bus', 'f-leg-odlet': 'plane', 'f-leg-odlet-sin': 'plane', 'f-leg-domu': 'bus', 'f-lety': 'plane', 'f-lety': 'plane', 'f-leg-sg': 'city', 'f-leg-sgdps': 'plane', 'f-leg-uluwatu': 'cliff', 'f-leg-ubud': 'leaf',
+        'f-leg-sg': 'city', 'f-leg-sgdps': 'plane', 'f-leg-uluwatu': 'cliff', 'f-leg-ubud': 'leaf',
         'f-leg-presun4': 'ship', 'f-leg-lombok-sever': 'mountain', 'f-leg-kuta': 'palm', 'f-leg-back': 'ship',
         'f-leg-rozlucka': 'sunset', 'f-leg-tranzit': 'transit', 'f-slovnicek': 'book', 'f-checklist': 'checklist'
     };
@@ -16094,71 +16360,6 @@ function recalculateAll() {
     var LOMBOK = [[-8.49,116.04],[-8.42,116.06],[-8.35,116.12],[-8.30,116.20],[-8.24,116.40],[-8.30,116.58],[-8.38,116.70],[-8.50,116.68],[-8.62,116.62],[-8.75,116.58],[-8.87,116.45],[-8.90,116.36],[-8.91,116.28],[-8.88,116.16],[-8.85,116.05],[-8.78,115.86],[-8.72,115.95],[-8.72,116.07],[-8.58,116.07]];
     var GILI = [[-8.35,116.035],[-8.345,116.06],[-8.36,116.085]];
 
-    /* ---------- celá trasa: Liberec ➔ Praha ➔ hub ➔ Singapur a zpět (horní panel mapy) ---------- */
-    var OFFY = 252;
-    var HUBF = { DXB: 0.5, HEL: 0.32, ZRH: 0.28, IST: 0.4 };
-    var HUBN = { DXB: 'Dubaj', HEL: 'Helsinky', ZRH: 'Curych', IST: 'Istanbul' };
-    function legInfo(s) {
-        var out = [];
-        String(s || '').split(' + ').forEach(function (x) {
-            var m = /([A-Z0-9]{2}\d{1,4})\s*\((\d{2}:\d{2}(?:\+\d)?)\s+(\w{3})\s+➔\s+(\d{2}:\d{2}(?:\+\d)?)\s+(\w{3})/.exec(x);
-            if (m) out.push({ no: m[1], dep: m[2], from: m[3], arr: m[4], to: m[5] });
-        });
-        return out;
-    }
-    function shortDate(d) { var m = /(\d{1,2})\.\s*(\d{1,2})\./.exec(d || ''); return m ? m[1] + '. ' + m[2] + '.' : ''; }
-    function clockShift(hm, mins) {
-        var m = /(\d{2}):(\d{2})/.exec(hm || ''); if (!m) return '--:--';
-        var t = (((+m[1]) * 60 + (+m[2]) + mins) % 1440 + 1440) % 1440;
-        return ('0' + Math.floor(t / 60)).slice(-2) + ':' + ('0' + (t % 60)).slice(-2);
-    }
-    function topPanel() {
-        var f = null; try { f = window.getSelectedFlight(); } catch (e) {}
-        var code = (f && (/\((\w{3})\)/.exec(f.hub || '') || [])[1]) || 'DXB';
-        var hub = HUBN[code] || (f && f.hub) || 'přestup';
-        var oL = f ? legInfo(f.outFlights) : [], rL = f ? legInfo(f.retFlights) : [];
-        var xL = 66, xP = 190, xS = 770, yB = 112, xH = Math.round(xP + (xS - xP) * (HUBF[code] || 0.4));
-        var g = '<rect class="rt-sea" x="0" y="0" width="900" height="232" rx="12"/>';
-        g += '<text class="rt-gap" x="14" y="20">CESTA TAM A ZPĚT · Liberec ➔ Praha ➔ ' + hub + ' ➔ Singapur · nahoře cesta tam, dole zpět (schéma, ne v měřítku)</text>';
-        function arc(x1, x2, up, cls) {
-            var peak = up ? -40 : 40;
-            return '<path class="rt-path ' + cls + '" d="M' + x1 + ',' + yB + ' Q ' + Math.round((x1 + x2) / 2) + ',' + (yB + peak * 2) + ' ' + x2 + ',' + yB + '"/>';
-        }
-        function lab(x1, x2, up, L) {
-            if (!L) return '';
-            return '<text class="rt-gap" x="' + Math.round((x1 + x2) / 2) + '" y="' + (up ? yB - 48 : yB + 68) + '" text-anchor="middle">' + L.no + ' · ' + L.dep + ' → ' + L.arr + '</text>';
-        }
-        // spojnice a oblouky
-        g += '<path class="rt-path rt-car" d="M' + (xL + 12) + ',' + yB + ' L' + (xP - 12) + ',' + yB + '"/>';
-        g += arc(xP, xH, true, 'rt-fly') + arc(xH, xS, true, 'rt-fly') + arc(xS, xH, false, 'rt-fly') + arc(xH, xP, false, 'rt-fly');
-        g += lab(xP, xH, true, oL[0]) + lab(xH, xS, true, oL[1]) + lab(xS, xH, false, rL[0]) + lab(xH, xP, false, rL[1]);
-        function node(x, href, face, name, sub, aria) {
-            return '<a href="#' + href + '" class="rt-stop" aria-label="' + aria + '"><title>' + aria + '</title>' +
-                '<circle class="rt-c" cx="' + x + '" cy="' + yB + '" r="13" style="fill:var(--text-muted)"/>' +
-                '<text class="rt-n" x="' + x + '" y="' + yB + '" style="font-size:14px">' + face + '</text>' +
-                '<text class="rt-l" x="' + x + '" y="' + (yB + 30) + '" text-anchor="middle">' + name + '</text>' +
-                (sub ? '<text class="rt-d" x="' + x + '" y="' + (yB + 43) + '" text-anchor="middle">' + sub + '</text>' : '') + '</a>';
-        }
-        function back(x, href, text, y) {
-            return '<a href="#' + href + '" class="rt-stop"><text class="rt-d" x="' + x + '" y="' + y + '" text-anchor="middle">' + text + '</text></a>';
-        }
-        var dep = f ? f.outDep : '', oDate = f ? shortDate(f.outDate) : '', rDate = f ? shortDate(f.retDate) : '';
-        var arrP = f ? (/(\d{2}:\d{2})/.exec(f.retArr || '') || [])[1] : '';
-        g += node(xL, 'f-leg-liberec', '🚌', 'Liberec', 'odjezd ' + (dep ? clockShift(dep, -330) : '--:--') + ' · ' + oDate, 'Odjezd Liberec ➔ Praha');
-        g += back(xL, 'f-leg-domu', '↩ doma ~' + (arrP ? clockShift(arrP, 150) : '--:--'), yB + 92);
-        g += node(xP, 'f-leg-odlet', '🛫', 'Praha (PRG)', 'odlet ' + oDate + ' · ' + (dep || '--:--'), 'Odlet z Prahy a přestup');
-        g += back(xP, 'f-leg-odlet-sin', '↩ přílet ' + (arrP || '--:--'), yB + 92);
-        g += node(xH, 'f-leg-odlet', '⏳', hub + ' (' + code + ')', f ? 'přestup tam ' + ((f.outLayover || '').split(' v ')[0].replace(/\.$/, '')) : '', 'Přestup: ' + hub);
-        g += back(xH, 'f-leg-odlet-sin', '↩ zpět ' + (f ? (f.retLayover || '').split(' v ')[0].replace(/\.$/, '') : ''), yB + 92);
-        // Singapur: stejné značky jako ve spodní mapě
-        g += '<a href="#f-leg-sg" class="rt-stop" aria-label="1. Singapur, 7.–9. 8."><title>1 · Singapur (7.–9. 8.)</title><circle class="rt-c" cx="' + (xS - 14) + '" cy="' + yB + '" r="11" style="fill:' + REG.sg + '"/><text class="rt-n" x="' + (xS - 14) + '" y="' + yB + '">1</text></a>';
-        g += '<a href="#f-leg-tranzit" class="rt-stop" aria-label="7. Singapur, tranzit 24. 8."><title>7 · Singapur, tranzit (24. 8.)</title><circle class="rt-c" cx="' + (xS + 14) + '" cy="' + yB + '" r="11" style="fill:' + REG.sg + '"/><text class="rt-n" x="' + (xS + 14) + '" y="' + yB + '">7</text></a>';
-        g += '<a href="#f-leg-sg" class="rt-stop"><text class="rt-l" x="' + xS + '" y="' + (yB + 30) + '" text-anchor="middle">Singapur (SIN)</text><text class="rt-d" x="' + xS + '" y="' + (yB + 43) + '" text-anchor="middle">7.–9. 8. · tranzit 24. 8.</text></a>';
-        g += back(xS, 'f-leg-odlet-sin', '↩ odlet zpět ' + (f ? (f.retDate ? shortDate(f.retDate) + ' · ' : '') + (f.retDep || '') : ''), yB + 92);
-        g += '<text class="rt-gap" x="' + xS + '" y="' + (yB + 114) + '" text-anchor="middle">dál: Bali a Lombok ↓</text>';
-        return g;
-    }
-
     function renderMap() {
         var host = $('routeMap'); if (!host) return;
         var read = readSet(), info = todayInfo();
@@ -16170,6 +16371,8 @@ function recalculateAll() {
         g += '<rect class="rt-sea" x="0" y="0" width="900" height="330" rx="12"/>';
         // Singapur
         g += '<ellipse class="rt-land" cx="' + sg[0] + '" cy="' + sg[1] + '" rx="34" ry="20"/>';
+        g += '<text class="rt-gap" x="14" y="' + (sg[1] - 84) + '">z Prahy</text><path class="rt-path rt-fly" d="M22,' + (sg[1] - 74) + ' Q 30,' + (sg[1] - 10) + ' ' + (sg[0] - 26) + ',' + (sg[1] - 2) + '"/>';
+        g += '<text class="rt-gap" x="14" y="' + (sg[1] + 58) + '">do Prahy</text><path class="rt-path rt-fly" d="M' + (sg[0] + 4) + ',' + (sg[1] + 14) + ' Q 40,' + (sg[1] + 30) + ' 18,' + (sg[1] + 46) + '"/>';
         g += '<text class="rt-gap" x="205" y="315" text-anchor="middle">≈ 1 700 km · let cca 2,5 h</text>';
         // ostrovy
         g += '<polygon class="rt-land" points="' + poly(BALI) + '"/><polygon class="rt-land" points="' + poly(PENIDA) + '"/><polygon class="rt-land" points="' + poly(LOMBOK) + '"/>';
@@ -16207,18 +16410,16 @@ function recalculateAll() {
                     '<text class="rt-d" x="' + lb[0] + '" y="' + (lb[1] + 13) + '" text-anchor="' + lb[2] + '">' + (l.id === 'f-leg-sg' ? '7.–9. 8.' : l.id === 'f-leg-tranzit' ? '24. 8.' : dates) + '</text>' : '') +
                 '</a>';
         });
-        g = '<text class="rt-gap" x="14" y="20">NA MÍSTĚ · Singapur, Bali a Lombok</text>' + g;
-        host.innerHTML = '<svg viewBox="0 0 900 ' + (OFFY + 330) + '" role="img" aria-label="Mapa celé trasy: z Liberce přes Prahu do Singapuru, Bali a Lombok a zpět">' + topPanel() + '<g transform="translate(0,' + OFFY + ')">' + g + '</g></svg>';
+        host.innerHTML = '<svg viewBox="0 0 900 330" role="img" aria-label="Mapa trasy Singapur, Bali, Lombok">' + g + '</svg>';
     }
-    window.renderRouteMap = renderMap;
 
     /* ---------- noclehy ---------- */
     function renderNights() {
         var host = $('nightsBar'); if (!host) return;
         var info = todayInfo();
-        var segs = [{ plane: true, nights: 1, name: 'Let', sub: '6./7. 8.', id: 'f-leg-odlet' }];
+        var segs = [{ plane: true, nights: 1, name: 'Let', sub: '6./7. 8.', id: 'f-leg-sg' }];
         LEGS.forEach(function (l) { var n = l.to - l.from; if (n > 0) segs.push({ nights: n, name: l.short || l.name, sub: l.from + '.–' + l.to + '. 8.', id: l.id, reg: l.reg }); });
-        segs.push({ plane: true, nights: 1, name: 'Let', sub: '24./25. 8.', id: 'f-leg-odlet-sin' });
+        segs.push({ plane: true, nights: 1, name: 'Let', sub: '24./25. 8.', id: 'f-leg-tranzit' });
         var row = '';
         segs.forEach(function (s) {
             row += '<a class="nb-seg' + (s.plane ? ' nb-plane' : '') + '" href="#' + s.id + '" style="flex:' + s.nights + ' 1 0" title="' + s.name + ' · ' + s.sub + ' · ' + s.nights + ' ' + plural(s.nights, 'noc', 'noci', 'nocí') + '">' +
@@ -16311,7 +16512,7 @@ function recalculateAll() {
             }
         });
         var main = info.main && $(info.main.id);
-        /* dnešní etapa se sama neotevírá: vše zavřené */
+        if (main && !location.hash && !main.classList.contains('is-open') && typeof window.luxToggle === 'function') window.luxToggle(main.id);
     }
 
     /* ---------- počítadlo zabalených věcí ---------- */
@@ -17009,7 +17210,7 @@ function recalculateAll() {
 
     // spouští se hned (DOM nad skriptem je hotový), aby kotvy existovaly dřív než se zpracuje #odkaz
     shareInit();
-    document.addEventListener('DOMContentLoaded', function () { icsInit(); shareInit(); /* kotva z adresy po načtení nic neotevírá */ });
+    document.addEventListener('DOMContentLoaded', function () { icsInit(); shareInit(); setTimeout(function () { openHashTarget(initialHash); }, 50); });
     window.addEventListener('hashchange', function () { setTimeout(function () { openHashTarget(location.hash); }, 50); });
     window.addEventListener('load', function () { (window.requestIdleCallback || setTimeout)(fxInit); });
 })();
@@ -17910,6 +18111,88 @@ body.simple-on { overflow: hidden; }
 #simplePage .sp-money b { display: block; margin: 2px 0; font: 800 1.15rem/1.2 var(--font-display, inherit); font-variant-numeric: tabular-nums; }
 #simplePage .sp-money span { font-size: 0.8rem; color: var(--text-muted); }
 @media (max-width: 560px) { #simplePage .sp-money { grid-template-columns: 1fr; } }
+
+/* ---- Palubní vstupenky a lodní lístky ---- */
+.passes { display: grid; gap: 14px; margin: 0 0 20px; }
+.pass-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 0 16px; }
+.pass-bar h4 { margin: 0; font: 800 0.8rem var(--font-ui, inherit); letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
+.pass-name { display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--text-muted); }
+.pass-name input { min-height: 36px; width: 210px; max-width: 60vw; padding: 0 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text-main); font: 700 0.85rem var(--font-ui, inherit); text-transform: uppercase; }
+.pass-note { margin: 0 16px; font-size: 0.72rem; line-height: 1.45; color: var(--text-muted); }
+.bpx { --bg: #1d4ed8; --fg: #fff; --ac: #1d4ed8; position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 212px; margin: 0 16px; border-radius: 18px; overflow: hidden; color: #0f172a; font-family: var(--font-ui, system-ui, sans-serif);
+    background: linear-gradient(180deg, #ffffff 0%, #f6f7f9 100%); box-shadow: 0 12px 34px rgba(0, 0, 0, 0.32), 0 1px 0 rgba(255, 255, 255, 0.6) inset;
+    -webkit-mask: radial-gradient(circle 11px at calc(100% - 212px) 0, #0000 98%, #000) , radial-gradient(circle 11px at calc(100% - 212px) 100%, #0000 98%, #000); -webkit-mask-composite: source-in; mask: radial-gradient(circle 11px at calc(100% - 212px) 0, #0000 98%, #000), radial-gradient(circle 11px at calc(100% - 212px) 100%, #0000 98%, #000); mask-composite: intersect; }
+.bpx-main { display: grid; grid-template-rows: auto 1fr auto; min-width: 0; }
+.bpx-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 20px; background: var(--bg); color: var(--fg); }
+.bpx-logo { display: block; line-height: 0; } .bpx-logo svg { height: 32px; width: auto; display: block; }
+.bpx-type { text-align: right; font: 800 0.7rem/1.25 var(--font-ui, inherit); letter-spacing: .2em; text-transform: uppercase; } .bpx-type b { display: block; font-size: 0.95rem; letter-spacing: .12em; }
+.bpx-body { padding: 14px 20px 10px; display: grid; gap: 14px; }
+.bpx-l { display: block; font: 700 0.58rem/1.2 var(--font-ui, inherit); letter-spacing: .14em; text-transform: uppercase; color: #64748b; }
+.bpx-v { display: block; font: 800 1.02rem/1.25 var(--font-ui, inherit); color: #0f172a; font-variant-numeric: tabular-nums; }
+.bpx-name .bpx-v { font-size: 1.15rem; letter-spacing: .04em; }
+.bpx-route { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 12px; align-items: center; }
+.bpx-city .c { display: block; font: 900 2.7rem/1 var(--font-display, var(--font-ui, inherit)); letter-spacing: .02em; color: #0f172a; }
+.bpx-city .n { display: block; font-size: 0.8rem; font-weight: 700; color: #334155; margin-top: 2px; } .bpx-city .s { display: block; font-size: 0.68rem; color: #64748b; }
+.bpx-city.r { text-align: right; }
+.bpx-mid { display: grid; justify-items: center; gap: 3px; color: var(--ac); font-size: 0.7rem; font-weight: 800; }
+.bpx-mid .ln { position: relative; width: clamp(48px, 9vw, 120px); height: 2px; background: repeating-linear-gradient(90deg, var(--ac) 0 7px, transparent 7px 12px); }
+.bpx-mid .ln::after { content: attr(data-i); position: absolute; left: 50%; top: 50%; transform: translate(-50%, -54%); background: #fff; padding: 0 5px; font-size: 1rem; line-height: 1; }
+.bpx-v { white-space: nowrap; }
+.bpx-fields { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.55fr) repeat(4, minmax(0, 1fr)); gap: 10px 12px; padding-top: 12px; border-top: 1px dashed #cbd5e1; }
+.bpx-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 14px; padding: 8px 20px 12px; font: 600 0.6rem/1.4 var(--font-ui, inherit); letter-spacing: .1em; color: #94a3b8; text-transform: uppercase; border-top: 1px solid #eef2f7; }
+.bpx-stub { position: relative; display: grid; align-content: space-between; gap: 10px; padding: 14px 16px; background: linear-gradient(180deg, #f8fafc, #eef2f7); border-left: 2px dashed #cbd5e1; }
+.bpx-stub .sh { padding: 7px 10px; margin: -14px -16px 2px; background: var(--bg); color: var(--fg); font: 800 0.66rem var(--font-ui, inherit); letter-spacing: .2em; text-transform: uppercase; text-align: center; }
+.bpx-stub .big { font: 900 1.7rem/1 var(--font-display, var(--font-ui, inherit)); letter-spacing: .03em; color: #0f172a; }
+.bpx-stub .big i { font-style: normal; color: var(--ac); margin: 0 4px; }
+.bpx-stub .row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 10px; }
+.bpx-qr { padding: 7px; background: #fff; border-radius: 8px; border: 1px solid #e2e8f0; line-height: 0; justify-self: center; } .bpx-qr svg { width: 108px; height: 108px; display: block; }
+.bpx.sea .bpx-city .c { font-size: 1.7rem; letter-spacing: 0; }
+.bpx.sea .bpx-stub .big { font-size: 1.05rem; letter-spacing: 0; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.bpx.sea .bpx-watermark { display: none; }
+.bpx.sea .bpx-fields { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.5fr) minmax(0, 0.9fr) minmax(0, 0.9fr) minmax(0, 1.3fr) minmax(0, 1fr); }
+.bpx.sea .bpx-fields > div:first-child .bpx-v, .bpx-stub .bpx-v { white-space: normal; overflow-wrap: anywhere; }
+.bpx-stub { min-width: 0; overflow: hidden; }
+.bpx-stub .sh { background: var(--sbg, var(--bg)); color: var(--sfg, var(--fg)); }
+.bpx-watermark { position: absolute; right: 232px; bottom: 36px; font: 900 5.5rem/1 var(--font-display, var(--font-ui, inherit)); color: rgba(15, 23, 42, 0.035); letter-spacing: .06em; pointer-events: none; white-space: nowrap; }
+.bpx-ops { font-size: 0.68rem; font-weight: 700; color: #64748b; }
+@media (max-width: 760px) {
+    .bpx { grid-template-columns: 1fr; -webkit-mask: none; mask: none; margin: 0 10px; }
+    .bpx-stub { border-left: 0; border-top: 2px dashed #cbd5e1; grid-template-columns: minmax(0, 1fr) 124px; grid-template-areas: "sh sh" "nm qr" "bg qr" "rw qr"; align-items: center; column-gap: 14px; }
+    .bpx-stub .sh { grid-area: sh; margin: -14px -16px 4px; } .bpx-stub .st-name { grid-area: nm; } .bpx-stub .big { grid-area: bg; } .bpx-stub .row { grid-area: rw; } .bpx-stub .bpx-qr { grid-area: qr; align-self: center; }
+    .bpx-stub .big { font-size: 1.2rem; white-space: nowrap; } .bpx-stub .bpx-v { font-size: 0.85rem; } .bpx-stub .bpx-l { letter-spacing: .06em; } .bpx-stub .bpx-qr svg { width: 100px; height: 100px; }
+    .bpx-fields, .bpx.sea .bpx-fields { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .bpx-v { white-space: normal; font-size: 0.95rem; }
+    .bpx-stub .row { gap: 8px 16px; }
+    .bpx-city .c { font-size: 2.1rem; } .bpx-watermark { display: none; }
+    .pass-bar, .pass-note { padding: 0 10px; margin: 0 10px; }
+}
+@media print { .bpx { box-shadow: none; border: 1px solid #999; } }
+
+/* ---- Úpravy podle zpětné vazby: menší mapy vedle textu, mřížka položek, odstraněné bloky ---- */
+/* statické mapy přeletu SIN ⇄ DPS, „Způsob výpočtu“, „Ověření odhadů“ a „Než poprvé ťukneš na bráně“ jsou pryč */
+#f-leg-sgdps .map-container-wrapper, #dpsSinFlightTitle, #dpsSinFlightWrapper, #dpsSinFlightWrapper + div, #tjMethod, .lux-removed { display: none !important; }
+/* PC: animovaná mapa letu i plavby zabírá třetinu šířky a text je vedle ní; na mobilu beze změny */
+@media (min-width: 1000px) {
+    #flightDeck, #voyageOut { display: grid; grid-template-columns: minmax(280px, 1fr) minmax(0, 2fr); align-items: start; }
+    #flightDeck > .fl-sky, #voyageOut > .fl-sky { grid-column: 1; grid-row: 1 / span 3; border-radius: 0; }
+    #flightDeck > .fl-sky svg, #voyageOut > .fl-sky svg { min-height: 250px; }
+    #flightDeck > .fl-read, #voyageOut > .fl-read { grid-column: 2; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    #flightDeck > .fl-tips, #voyageOut > .fl-tips { grid-column: 2; grid-template-columns: 1fr; }
+}
+/* PC: položky ve Vstupném a aktivitách i v Plánu hotovosti v 4–5 sloupcích */
+@media (min-width: 1000px) {
+    .tj-act-grp { display: grid; grid-template-columns: repeat(auto-fit, minmax(max(230px, calc((100% - 40px) / 5)), 1fr)); gap: 10px; padding: 10px; align-items: stretch; }
+    .tj-act-grp > .tj-grp-h { grid-column: 1 / -1; border-radius: 10px; }
+    .tj-act-grp > .tj-row { display: grid; grid-template-columns: auto auto minmax(0, 1fr); grid-template-areas: "chk ico amt" "main main main"; gap: 8px 10px; align-items: center; align-content: start; padding: 12px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
+    .tj-act-grp > .tj-row > input { grid-area: chk; } .tj-act-grp > .tj-row > .tj-ico { grid-area: ico; } .tj-act-grp > .tj-row > .tj-main { grid-area: main; min-width: 0; }
+    .tj-act-grp > .tj-row > .tj-amt { grid-area: amt; justify-self: end; text-align: right; }
+    .tj-act-grp > .tj-row .tj-main small { display: block; margin-top: 4px; font-size: 0.74rem; line-height: 1.4; }
+    .cx-tbl .cx-grp { grid-template-columns: repeat(auto-fit, minmax(max(230px, calc((100% - 40px) / 5)), 1fr)); gap: 10px; }
+    .cx-tbl .cx-grp > .cx-grp-h { grid-column: 1 / -1; }
+    .cx-tbl .cx-grp > .cx-row { grid-template-columns: auto 38px minmax(0, 1fr); grid-template-areas: "sw ico amt" "main main main" "bar bar bar"; align-items: center; align-content: start; gap: 8px 10px; padding: 12px; }
+    .cx-tbl .cx-grp > .cx-row > .cx-sw { grid-area: sw; } .cx-tbl .cx-grp > .cx-row > .cx-r-ico { grid-area: ico; } .cx-tbl .cx-grp > .cx-row > .cx-r-main { grid-area: main; min-width: 0; }
+    .cx-tbl .cx-grp > .cx-row > .cx-r-amt { grid-area: amt; justify-self: end; text-align: right; } .cx-tbl .cx-grp > .cx-row > .cx-bar { grid-area: bar; }
+}
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -17940,7 +18223,7 @@ body.simple-on { overflow: hidden; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '31. 10. 2026 · 11:09';
+    var LUX_VERSION = '1. 11. 2026 · 06:05';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -18159,7 +18442,13 @@ body.simple-on { overflow: hidden; }
             h.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
             var f = partFolds(p); window.luxPartCount(p.id, f.filter(function (x) { return x.classList.contains('is-read'); }).length, f.length);
         });
-        /* vše zavřené: po načtení se žádná část ani sekce sama neotevírá */
+        /* po načtení: otevřená je část s otevřenou sekcí / cílem odkazu, jinak naposledy otevřená, jinak první */
+        if (!document.querySelector('.lux-part.is-open')) {
+            var h = location.hash && location.hash.length > 1 ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null, saved = null;
+            try { saved = localStorage.getItem(PKEY); } catch (e) {}
+            if (h && h.closest && h.closest('.lux-part')) openPart(h.closest('.lux-part'), false);
+            else openPart(document.getElementById(saved) || document.getElementById('cast-priprava') || allParts()[0], false);
+        }
     }
 
 
@@ -18621,7 +18910,8 @@ body.simple-on { overflow: hidden; }
         });
         var total = blocks.reduce(function (a, b) { return a + b.min; }, 0);
         function dur(m) { return Math.floor(m / 60) + ' h' + (m % 60 ? ' ' + (m % 60) + ' min' : ''); }
-        var html = '<h4 class="fl-h">Celá cesta domů v kostce</h4>' +
+        var html = '<h4 class="fl-h">Úterý 24. 8.: odlet domů</h4>' +
+            '<div class="passes" id="passes-dps"></div>' +
             '<div class="jr-wrap"><div class="jr-total"><div><span>Celá cesta domů od odletu z Bali</span><br><b>' + dur(total) + '</b></div><span>' + (f.name || '') + ' · přistání v Praze ' + (f.retArr || '') + '</span></div><div class="jr">' +
             blocks.map(function (b) { return '<div class="jr-b ' + b.k + '" style="--m:' + Math.max(b.min, 120) + '"><span class="jr-i" aria-hidden="true">' + b.i + '</span><span class="jr-t">' + b.t + '</span><span class="jr-s">' + b.s + '</span><span class="jr-d">' + dur(b.min) + '</span></div>'; }).join('') + '</div>' +
             '<p class="jr-arr">Časy letů se řídí aerolinkou vybranou v konfigurátoru, takže se tahle osa přepočítá po změně letu.</p></div>';
@@ -18630,7 +18920,7 @@ body.simple-on { overflow: hidden; }
     (function wrapAirline() {
         if (typeof window.setFlightAirline === 'function' && !window.setFlightAirline.__home) {
             var o = window.setFlightAirline;
-            window.setFlightAirline = function () { var r = o.apply(this, arguments); try { renderHomeDeck(); } catch (e) {} try { txState.plan = null; renderTransit(); } catch (e) {} return r; };
+            window.setFlightAirline = function () { var r = o.apply(this, arguments); try { renderHomeDeck(); } catch (e) {} try { txState.plan = null; renderTransit(); } catch (e) {} try { renderPasses(); } catch (e) {} return r; };
             window.setFlightAirline.__home = true;
         }
     })();
@@ -18728,7 +19018,7 @@ body.simple-on { overflow: hidden; }
             '<div class="tx-tr"><b>A</b><div class="tx-wrap">' + txBarHtml(A, F, arr, A.status === 'no' ? 'is-no' : '', dly) + '</div></div><div class="tx-tr"><b>B</b><div class="tx-wrap">' + txBarHtml(B, F, arr, '', dly) + '</div></div></div>' +
             '<div class="tx-axis" aria-hidden="true">' + ticks + '</div>' + legend + '<p class="tx-res" style="margin-top:0"><b>' + verdict + '</b></p>' +
             '<h4 class="fl-h">Co když přiletíme se zpožděním?</h4><div class="tx-ctl"><span class="l">Zpoždění letu z Bali:</span>' + [0, 30, 60, 90, 120].map(function (d) { return '<button type="button" class="tx-chip" data-d="' + d + '" aria-pressed="' + (txState.delay === d) + '">' + (d ? '+' + d + ' min' : 'žádné') + '</button>'; }).join('') + '</div><div class="tx-res" id="txDelayRes"></div>' +
-            '<h4 class="fl-h">Než vstoupíme do města</h4><ul class="tx-check" id="txCheck"></ul>';
+            '<h4 class="fl-h">Než vstoupíme do města</h4><ul class="tx-check" id="txCheck"></ul><div class="passes" id="passes-home"></div>';
         host.setAttribute('data-ok', '1');
         function delayRes() {
             var a2 = A, el = $('txDelayRes'); if (!el) return;
@@ -18751,6 +19041,7 @@ body.simple-on { overflow: hidden; }
         var st = {}; try { st = JSON.parse(localStorage.getItem('lux_tx_check_v1') || '{}') || {}; } catch (e) {}
         $('txCheck').innerHTML = CK.map(function (c) { return '<li class="' + (st[c[0]] ? 'is-done' : '') + '"><label><input type="checkbox" data-k="' + c[0] + '"' + (st[c[0]] ? ' checked' : '') + '><span>' + c[1] + '<small>' + c[2] + '</small></span></label></li>'; }).join('');
         $('txCheck').addEventListener('change', function (e) { var k = e.target.getAttribute('data-k'); if (!k) return; if (e.target.checked) st[k] = 1; else delete st[k]; try { localStorage.setItem('lux_tx_check_v1', JSON.stringify(st)); } catch (er) {} e.target.closest('li').classList.toggle('is-done', e.target.checked); });
+        try { renderPasses(); } catch (e) {}
     }
 
     /* ---------- „Co to znamená pro tebe“ po změně aerolinky ---------- */
@@ -19086,6 +19377,96 @@ function luxQRSvg(text, px) {
         var hi = document.querySelector('.hero-inner'); if (hi && !$('heroSimpleBtn')) { var b = document.createElement('button'); b.type = 'button'; b.id = 'heroSimpleBtn'; b.className = 'hero-simple-btn'; b.textContent = '📄 Jednoduchá stránka: jen to nejdůležitější'; b.addEventListener('click', function () { window.luxSimple(true); }); hi.appendChild(b); }
     }
 
+
+    /* ---------- palubní vstupenky a lodní lístky pro všechny úseky ---------- */
+    var AIRPORTS = { PRG: ['Praha', 'Václav Havel'], ZRH: ['Curych', 'Zürich'], DXB: ['Dubaj', 'Dubai International'], HEL: ['Helsinky', 'Helsinki-Vantaa'], IST: ['Istanbul', 'Istanbul Airport'], SIN: ['Singapur', 'Changi'], DPS: ['Bali · Denpasar', 'Ngurah Rai'] };
+    var MON3 = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'], DOW = ['ne', 'po', 'út', 'st', 'čt', 'pá', 'so'];
+    function lg(w, h, inner) { return '<svg viewBox="0 0 ' + w + ' ' + h + '" xmlns="http://www.w3.org/2000/svg" role="img">' + inner + '</svg>'; }
+    var BRANDS = {
+        LX: { name: 'SWISS', bg: '#D8232A', fg: '#fff', ac: '#D8232A', logo: lg(112, 32, "<rect width='32' height='32' rx='3' fill='#fff'/><rect width='32' height='32' rx='3' fill='#D8232A' transform='scale(.86) translate(2.6 2.6)'/><path d='M13 6h6v7h7v6h-7v7h-6v-7H6v-6h7z' fill='#fff' transform='translate(1.2 1.2) scale(.9)'/><text x='40' y='23' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='20' letter-spacing='1.5' fill='#fff'>SWISS</text>") },
+        EK: { name: 'Emirates', bg: '#ffffff', fg: '#111', ac: '#D71921', border: '#D71921', logo: lg(130, 32, "<text x='0' y='23' font-family='Georgia,Times,serif' font-style='italic' font-weight='700' font-size='25' fill='#D71921'>Emirates</text><rect x='2' y='27' width='110' height='2.2' fill='#C5A55A'/>") },
+        AY: { name: 'Finnair', bg: '#0B1560', fg: '#fff', ac: '#0B1560', logo: lg(124, 32, "<path d='M2 24 L14 6 L26 24 Z' fill='none' stroke='#fff' stroke-width='2.4'/><text x='34' y='23' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='19' letter-spacing='3' fill='#fff'>FINNAIR</text>") },
+        TK: { name: 'Turkish Airlines', bg: '#C8102E', fg: '#fff', ac: '#C8102E', logo: lg(190, 32, "<circle cx='16' cy='16' r='14' fill='#fff'/><path d='M9 20c4-9 10-11 15-6-3-1-6 0-8 4 3-1 5-1 8 2-5 1-11 1-15 0z' fill='#C8102E'/><text x='38' y='14' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='13' letter-spacing='1' fill='#fff'>TURKISH</text><text x='38' y='28' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='11' letter-spacing='2.2' fill='#fff'>AIRLINES</text>") },
+        TR: { name: 'Scoot', bg: '#FFD100', fg: '#111', ac: '#B38F00', logo: lg(120, 32, "<rect x='0' y='2' width='110' height='28' rx='14' fill='#111'/><text x='55' y='23' text-anchor='middle' font-family='Arial Rounded MT Bold,Arial,Helvetica,sans-serif' font-weight='900' font-size='21' fill='#FFD100'>scoot</text>") },
+        STAR: { name: 'Starfish', bg: '#0E7490', fg: '#fff', ac: '#0E7490', logo: lg(150, 32, "<polygon points='16,2 20,12 31,12 22,19 25.5,30 16,23.5 6.5,30 10,19 1,12 12,12' fill='#F59E0B'/><text x='38' y='23' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='20' letter-spacing='2' fill='#fff'>STARFISH</text>") },
+        WAH: { name: 'Wahana Virendra', bg: '#0B4F9C', fg: '#fff', ac: '#0B4F9C', logo: lg(190, 32, "<path d='M0 20q5-7 10 0t10 0 10 0' fill='none' stroke='#7dd3fc' stroke-width='3' stroke-linecap='round'/><path d='M0 27q5-7 10 0t10 0 10 0' fill='none' stroke='#fff' stroke-width='3' stroke-linecap='round'/><text x='40' y='15' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='15' letter-spacing='2' fill='#fff'>WAHANA</text><text x='40' y='29' font-family='Arial,Helvetica,sans-serif' font-weight='700' font-size='12' letter-spacing='3' fill='#bae6fd'>VIRENDRA</text>") }
+    };
+    function passName() { var n = ''; try { n = localStorage.getItem('lux_pass_name') || ''; } catch (e) {} return n; }
+    function passNameNorm() { var n = passName().trim(); if (!n) return 'PŘÍJMENÍ/JMÉNO'; return n.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase(); }
+    function pDate(d) { return String(d.getDate()).padStart(2, '0') + ' ' + MON3[d.getMonth()] + ' ' + d.getFullYear(); }
+    function pDow(d) { return DOW[d.getDay()]; }
+    function addMin(d, hm, m) { var x = new Date(d.getFullYear(), d.getMonth(), d.getDate(), +hm.slice(0, 2), +hm.slice(3, 5) + m); return x; }
+    function pHM(d) { return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
+    function dayShift(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
+    /* rozpad letů z textu aerolinky na úseky s daty (datum = podle hodin a značek +1) */
+    function passLegs(f, which) {
+        var ds = /(\d+)\.\s*(\d+)\.\s*(\d{4})/.exec(which === 'out' ? f.outDate : f.retDate); if (!ds) return [];
+        var cur = new Date(+ds[3], +ds[2] - 1, +ds[1]), prevArr = null, out = [];
+        ((which === 'out' ? f.outFlights : f.retFlights) || '').split(' + ').forEach(function (s) {
+            var m = /^(.*?)\s+([A-Z0-9]{2})(\d{1,4})\s*\((\d{2}:\d{2})(\+\d)?\s+(\w{3})\s+➔\s+(\d{2}:\d{2})(\+\d)?\s+(\w{3}),\s*([^)]+)\)/.exec(s.trim()); if (!m) return;
+            var depD = cur; if (prevArr && m[4] < pHM(prevArr)) depD = dayShift(prevArr, 1); else if (prevArr) depD = new Date(prevArr.getFullYear(), prevArr.getMonth(), prevArr.getDate());
+            var arrD = depD; if (m[8]) arrD = dayShift(depD, +m[8].slice(1)); else if (m[7] < m[4] && false) arrD = dayShift(depD, 1);
+            var depDt = addMin(depD, m[4], 0), arrDt = addMin(arrD, m[7], 0);
+            out.push({ air: true, code: m[2], num: m[3], carrier: m[1].replace(/\/.*$/, ''), ops: /\//.test(m[1]) ? m[1].split('/')[1] : '', from: m[6], to: m[9], dep: depDt, arr: arrDt, dur: m[10].replace('h', ' h').replace('m', ' min') });
+            prevArr = arrDt; cur = depD;
+        });
+        return out;
+    }
+    function bcbp(p, nm) { var j = Math.floor((p.dep - new Date(p.dep.getFullYear(), 0, 0)) / 86400000); return 'M1' + nm.padEnd(20).slice(0, 20) + 'E------ ' + (p.from || 'XXX') + (p.to || 'XXX') + (p.code + '   ').slice(0, 3) + String(p.num).padStart(5, ' ') + ' ' + String(j).padStart(3, '0') + 'Y---- ' + pHM(p.dep).replace(':', ''); }
+    function passHtml(p) {
+        var B = BRANDS[p.brand] || BRANDS.LX, nm = passNameNorm(), air = !!p.air, f = AIRPORTS[p.from] || [p.fromCity, p.fromSub], t_ = AIRPORTS[p.to] || [p.toCity, p.toSub];
+        var fromCity = air ? f[0] : p.fromCity, fromSub = air ? f[1] : p.fromSub, toCity = air ? t_[0] : p.toCity, toSub = air ? t_[1] : p.toSub;
+        var fromCode = air ? p.from : p.fromCode, toCode = air ? p.to : p.toCode;
+        var board = air ? pHM(addMin(new Date(p.dep.getFullYear(), p.dep.getMonth(), p.dep.getDate()), pHM(p.dep), -45)) : '';
+        var qr = ''; try { qr = luxQRSvg(air ? bcbp(p, nm) : ('BOAT ' + p.brand + ' ' + fromCode + '-' + toCode + ' ' + pDate(p.dep) + ' ' + pHM(p.dep) + ' ' + nm), 120); } catch (e) {}
+        qr = qr.replace(/ width="\d+" height="\d+"/, '');
+        var sameDay = p.arr.toDateString() === p.dep.toDateString(), arrTxt = pHM(p.arr) + (sameDay ? '' : ' · ' + pDate(p.arr).slice(0, 6));
+        var fno = air ? p.code + ' ' + p.num : p.vessel;
+        var head = '<div class="bpx-head"><span class="bpx-logo" aria-label="' + B.name + '">' + B.logo + '</span><span class="bpx-type">' + (air ? 'Boarding pass' : 'Fast boat ticket') + '<b>' + (air ? 'Palubní vstupenka' : 'Lodní lístek') + '</b></span></div>';
+        var fields = air ?
+            '<div><span class="bpx-l">Flight</span><span class="bpx-v">' + fno + '</span></div><div><span class="bpx-l">Date</span><span class="bpx-v">' + pDate(p.dep) + '</span></div><div><span class="bpx-l">Departs</span><span class="bpx-v">' + pHM(p.dep) + '</span></div><div><span class="bpx-l">Boarding</span><span class="bpx-v">' + board + '</span></div><div><span class="bpx-l">Gate</span><span class="bpx-v">—</span></div><div><span class="bpx-l">Seat</span><span class="bpx-v">—</span></div>' :
+            '<div><span class="bpx-l">Vessel</span><span class="bpx-v">' + fno + '</span></div><div><span class="bpx-l">Date</span><span class="bpx-v">' + pDate(p.dep) + '</span></div><div><span class="bpx-l">Departs</span><span class="bpx-v">' + pHM(p.dep) + '</span></div><div><span class="bpx-l">Arrives</span><span class="bpx-v">' + pHM(p.arr) + '</span></div><div><span class="bpx-l">Crossing</span><span class="bpx-v">' + p.dur + '</span></div><div><span class="bpx-l">Class</span><span class="bpx-v">Economy</span></div>';
+        var route = '<div class="bpx-route"><div class="bpx-city"><span class="bpx-l">' + 'From' + '</span><span class="c">' + spEsc(fromCode) + '</span><span class="n">' + spEsc(fromCity) + '</span><span class="s">' + spEsc(fromSub) + '</span></div>' +
+            '<div class="bpx-mid"><span class="ln" data-i="' + (air ? '✈' : '⛴') + '"></span><span>' + (air ? p.dur : p.dur) + '</span></div>' +
+            '<div class="bpx-city r"><span class="bpx-l">' + 'To' + '</span><span class="c">' + spEsc(toCode) + '</span><span class="n">' + spEsc(toCity) + '</span><span class="s">' + spEsc(toSub) + '</span></div></div>';
+        var foot = '<div class="bpx-foot"><span>' + (air ? 'Přílet ' + arrTxt + ' · ' + 'Economy' : 'Příjezd ' + arrTxt) + (p.ops ? ' · provozuje ' + spEsc(p.ops) : '') + '</span><span>' + (air ? 'Brána a sedadlo se přidělí při odbavení' : 'Odbavení v přístavu') + '</span></div>';
+        var stub = '<div class="bpx-stub"><div class="sh">' + (air ? 'Boarding pass' : 'Boat ticket') + '</div><div class="st-name"><span class="bpx-l">Passenger</span><span class="bpx-v" style="font-size:.86rem">' + spEsc(nm) + '</span></div><div class="big">' + spEsc(fromCode) + '<i>›</i>' + spEsc(toCode) + '</div>' +
+            '<div class="row"><div><span class="bpx-l">' + (air ? 'Flight' : 'Vessel') + '</span><span class="bpx-v">' + fno + '</span></div><div><span class="bpx-l">Date</span><span class="bpx-v">' + pDate(p.dep).slice(0, 6) + '</span></div><div><span class="bpx-l">Departs</span><span class="bpx-v">' + pHM(p.dep) + '</span></div><div><span class="bpx-l">Seat</span><span class="bpx-v">—</span></div></div>' + (qr ? '<div class="bpx-qr" aria-label="QR kód (ilustrační)">' + qr + '</div>' : '') + '</div>';
+        return '<article class="bpx ' + (air ? 'air' : 'sea') + '" style="--bg:' + B.bg + ';--fg:' + B.fg + ';--ac:' + B.ac + ';' + (B.bg === '#ffffff' ? '--sbg:' + B.ac + ';--sfg:#fff;' : '') + (B.border ? 'box-shadow:0 12px 34px rgba(0,0,0,.32),inset 0 -4px 0 ' + B.border + ';' : '') + '" aria-label="' + (air ? 'Palubní vstupenka ' : 'Lodní lístek ') + fno + ' ' + fromCode + ' ➔ ' + toCode + '"><div class="bpx-main">' + head + '<div class="bpx-body"><div class="bpx-name"><span class="bpx-l">Passenger name</span><span class="bpx-v">' + spEsc(nm) + '</span></div>' + route + '<div class="bpx-fields">' + fields + '</div></div>' + foot + '</div><span class="bpx-watermark" aria-hidden="true">' + spEsc(fromCode) + ' ' + spEsc(toCode) + '</span>' + stub + '</article>';
+    }
+    function passBlock(id, title, list) {
+        var el = $(id); if (!el) return;
+        el.innerHTML = '<div class="pass-bar"><h4>' + title + '</h4><label class="pass-name">Jméno na vstupenkách <input type="text" class="pass-name-in" value="' + spEsc(passName()) + '" placeholder="PŘÍJMENÍ/JMÉNO" autocomplete="name" aria-label="Jméno na palubních vstupenkách"></label></div>' + list.map(passHtml).join('') +
+            '<p class="pass-note">Ilustrační vstupenka vytvořená pro plánování, nejde o platný doklad. Sedadlo, bránu a číslo rezervace přidělí dopravce při odbavení. Loga jsou zjednodušená ilustrace, ne oficiální grafika značek.</p>';
+    }
+    function renderPasses() {
+        var f; try { f = flightOptions[currentAirline]; } catch (e) { f = null; } if (!f) return;
+        var brandOf = function (code) { return BRANDS[code] ? code : (code === 'FZ' ? 'EK' : 'LX'); };
+        var out = passLegs(f, 'out').map(function (l) { l.brand = brandOf(l.code); return l; }), ret = passLegs(f, 'ret').map(function (l) { l.brand = brandOf(l.code); return l; });
+        passBlock('passes-out', '🛫 Cesta tam: Praha ➔ Singapur (' + out.length + ' lety)', out);
+        passBlock('passes-home', '🛬 Cesta domů: Singapur ➔ Praha (' + ret.length + ' lety)', ret);
+        passBlock('passes-sgdps', '✈️ Přelet Singapur ➔ Bali', [{ air: true, brand: 'TR', code: 'TR', num: '288', from: 'SIN', to: 'DPS', dep: new Date(2027, 7, 9, 10, 15), arr: new Date(2027, 7, 9, 13, 5), dur: '2 h 50 min' }]);
+        passBlock('passes-dps', '✈️ Odlet z Bali do Singapuru', [{ air: true, brand: 'TR', code: 'TR', num: '281', from: 'DPS', to: 'SIN', dep: new Date(2027, 7, 24, 11, 15), arr: new Date(2027, 7, 24, 14, 10), dur: '2 h 55 min' }]);
+        passBlock('passes-boat-out', '⛴️ Rychlolod Bali ➔ Lombok', [{ air: false, brand: 'STAR', vessel: 'Starfish', fromCode: 'SANUR', fromCity: 'Sanur', fromSub: 'Bali · přístav Sanur', toCode: 'BANGSAL', toCity: 'Bangsal', toSub: 'Lombok · přístav Bangsal', dep: new Date(2027, 7, 15, 13, 0), arr: new Date(2027, 7, 15, 15, 0), dur: '2 h' }]);
+        passBlock('passes-boat-back', '⛴️ Rychlolod Lombok ➔ Bali', [{ air: false, brand: 'WAH', vessel: 'Wahana Virendra', fromCode: 'BANGSAL', fromCity: 'Bangsal', fromSub: 'Lombok · přístav Bangsal', toCode: 'SANUR', toCity: 'Sanur', toSub: 'Bali · přístav Sanur', dep: new Date(2027, 7, 23, 13, 30), arr: new Date(2027, 7, 23, 17, 0), dur: '3 h 30 min' }]);
+    }
+    document.addEventListener('input', function (e) {
+        var i = e.target.closest && e.target.closest('.pass-name-in'); if (!i) return;
+        try { localStorage.setItem('lux_pass_name', i.value); } catch (er) {}
+        var pos = i.selectionStart; clearTimeout(window.__passT); window.__passT = setTimeout(function () { var act = document.activeElement, id = act && act.closest ? (act.closest('.passes') || {}).id : ''; renderPasses(); if (id) { var ni = document.querySelector('#' + id + ' .pass-name-in'); if (ni) { ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (x) {} } } }, 350);
+    });
+
+
+    /* ---------- odstranění bloků a rozbalovací programy vždy zavřené při načtení ---------- */
+    function hideUnwanted() {
+        [].forEach.call(document.querySelectorAll('#hotovost .cx-card'), function (c) { if (/Ověření odhadů a čísel/.test(c.textContent)) c.classList.add('lux-removed'); });
+        [].forEach.call(document.querySelectorAll('#karta-mhd .mh-card'), function (c) { if (/Než poprvé ťukneš na bráně/.test(c.textContent)) c.classList.add('lux-removed'); });
+    }
+    function closeAccordionsAtLoad() {
+        [].forEach.call(document.querySelectorAll('.lux-acc-btn[aria-expanded="true"]'), function (b) { try { b.click(); } catch (e) {} });
+        try { Object.keys(localStorage).forEach(function (k) { if (/(^|_)acc(ordion)?(_|$)/i.test(k) && !/lux_lock|lux_read/.test(k)) localStorage.removeItem(k); }); } catch (e) {}
+    }
+
     /* ---------- skupina „Nástroje“ v menu ---------- */
     function addTools() {
         var nav = $('bottomNav'); if (!nav || $('menuToolShare')) return;
@@ -19124,7 +19505,7 @@ function luxQRSvg(text, px) {
     }, true);
 
     function start() {
-        place(); sync(); addTools(); initParts(); renderTasks(); initFlightDeck(); initVoyages(); renderHomeDeck(); renderTransit(); renderImpact(null, 0); renderStages(); initSpeech(); addSimpleButtons(); if (window.__wantSimple) setTimeout(function () { window.luxSimple(true); }, 900); fxTexts(); if (window.TRIP && TRIP.onChange) TRIP.onChange(fxTexts); setTimeout(fxTexts, 2500); setTimeout(fxTexts, 8000); imgScan(); setTimeout(imgScan, 3000);
+        place(); sync(); addTools(); initParts(); renderTasks(); initFlightDeck(); initVoyages(); renderHomeDeck(); renderTransit(); renderImpact(null, 0); renderPasses(); hideUnwanted(); closeAccordionsAtLoad(); setTimeout(closeAccordionsAtLoad, 800); setTimeout(closeAccordionsAtLoad, 2500); renderStages(); initSpeech(); addSimpleButtons(); if (window.__wantSimple) setTimeout(function () { window.luxSimple(true); }, 900); fxTexts(); if (window.TRIP && TRIP.onChange) TRIP.onChange(fxTexts); setTimeout(fxTexts, 2500); setTimeout(fxTexts, 8000); imgScan(); setTimeout(imgScan, 3000);
         if (/[?&]prezentace\b/.test(location.search)) setTimeout(function () { window.luxPresent(); }, 700);
         var card = document.querySelector('.lux-progress');
         if (card && window.MutationObserver) new MutationObserver(req).observe(card, { subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['style', 'class'] });
@@ -19163,363 +19544,6 @@ function luxQRSvg(text, px) {
     }
     window.luxClimInit = function (box) { if (!box || box.__fx) return; box.__fx = 1; if (io) io.observe(box); else box.classList.add('is-in'); };
     [].forEach.call(document.querySelectorAll('.clim'), window.luxClimInit);
-})();
-</script>
-
-<style id="bpx-style">
-/* ---- Palubní vstupenky (boarding passy): letadla i lodě ---- */
-.bpx-wrap { margin: 8px 16px 14px; filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.28)); }
-.bpx-host { padding-bottom: 6px; }
-.bpx {
-    --b1: #d71921; --b2: #8f0f15; --ac: #c3141b; --hi: #ffffff;
-    display: grid; grid-template-columns: minmax(0, 1fr) 190px; position: relative; overflow: hidden;
-    border-radius: 16px; color: #14171c; text-align: left;
-    background:
-        repeating-linear-gradient(135deg, rgba(0, 0, 0, 0.012) 0 2px, transparent 2px 5px),
-        linear-gradient(180deg, #fefefd 0%, #f6f6f2 100%);
-    font-family: "Helvetica Neue", Helvetica, Arial, "Segoe UI", sans-serif;
-    -webkit-mask:
-        radial-gradient(circle 11px at calc(100% - 190px) 0, #0000 98%, #000) top / 100% 51% no-repeat,
-        radial-gradient(circle 11px at calc(100% - 190px) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
-    mask:
-        radial-gradient(circle 11px at calc(100% - 190px) 0, #0000 98%, #000) top / 100% 51% no-repeat,
-        radial-gradient(circle 11px at calc(100% - 190px) 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
-}
-.bpx-main { display: grid; grid-template-rows: auto 1fr auto auto; min-width: 0; grid-template-columns: minmax(0, 1fr); }
-.bpx-head { display: flex; align-items: center; gap: 14px; padding: 11px 18px; color: var(--hi); background: linear-gradient(100deg, var(--b1) 0%, var(--b2) 100%); }
-.bpx-logo { position: relative; flex: 0 0 auto; width: 138px; height: 38px; border-radius: 8px; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25); overflow: hidden; }
-.bpx-logo svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.bpx-logo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 3px 6px; background: #fff; box-sizing: border-box; }
-.bpx-title { display: grid; gap: 1px; min-width: 0; overflow: hidden; flex: 1 1 0; }
-.bpx-title b { font-size: 0.98rem; font-weight: 800; letter-spacing: 0.2em; }
-.bpx-title span { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; opacity: 0.85; text-transform: uppercase; }
-.bpx-cls { flex: 0 0 auto; padding: 4px 10px; border: 1.5px solid currentColor; border-radius: 6px; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.14em; opacity: 0.95; }
-.bpx-body { padding: 14px 20px 8px; display: grid; gap: 12px; align-content: start; }
-.bpx-lab { display: block; font-size: 0.56rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6b7280; }
-.bpx-pax b { display: inline-block; margin-top: 2px; font-size: 1.08rem; font-weight: 800; letter-spacing: 0.06em; color: #0f1216; }
-.bpx-name { cursor: pointer; border-bottom: 1px dotted #9aa0a8; }
-.bpx-name:hover, .bpx-name:focus-visible { color: var(--ac); border-bottom-color: var(--ac); outline: none; }
-.bpx-edit { margin-left: 8px; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.04em; color: #8a909a; text-transform: none; }
-.bpx-route { display: grid; grid-template-columns: minmax(0, 1fr) minmax(110px, 1.1fr) minmax(0, 1fr); align-items: center; gap: 10px; }
-.bpx-pt { display: grid; gap: 1px; min-width: 0; }
-.bpx-pt.r { text-align: right; }
-.bpx-code { font-size: 2.7rem; font-weight: 800; line-height: 1; letter-spacing: 0.02em; color: #0f1216; }
-.bpx-city { font-size: 0.78rem; font-weight: 700; color: #2b313a; }
-.bpx-apn { font-size: 0.66rem; color: #7b828d; }
-.bpx-tm { margin-top: 3px; font-size: 1.4rem; font-weight: 800; color: var(--ac); font-variant-numeric: tabular-nums; }
-.bpx-tm sup { font-size: 0.6rem; margin-left: 2px; color: #7b828d; font-weight: 800; }
-.bpx-path { display: grid; justify-items: center; gap: 4px; color: #6b7280; font-size: 0.68rem; font-weight: 700; text-align: center; }
-.bpx-line { position: relative; width: 100%; height: 22px; }
-.bpx-line::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 2px dashed #b7bcc4; }
-.bpx-line::after { content: ""; position: absolute; left: 0; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%; background: #9aa0a8; }
-.bpx-line i { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; display: grid; place-items: center; background: #fbfbf8; border-radius: 50%; color: var(--ac); }
-.bpx-line svg { width: 22px; height: 22px; fill: currentColor; }
-.bpx-line svg.pl { transform: rotate(90deg); }
-.bpx-line b { position: absolute; right: 0; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%; background: #9aa0a8; }
-.bpx-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px 14px; padding-top: 10px; border-top: 1px dashed #cdd1d7; }
-.bpx-grid > div { display: grid; gap: 1px; min-width: 0; }
-.bpx-grid b { font-size: 0.98rem; font-weight: 800; color: #0f1216; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
-.bpx-grid b small { display: block; font-size: 0.6rem; font-weight: 700; color: #7b828d; }
-.bpx-grid b.hl { color: var(--ac); }
-.bpx-code417 { padding: 4px 20px 6px; }
-.bpx-pdf { display: block; width: 100%; height: 50px; }
-.bpx-bcbp { margin-top: 3px; font: 500 0.56rem/1.2 ui-monospace, "SF Mono", Menlo, Consolas, monospace; color: #8a909a; letter-spacing: 0.04em; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-.bpx-foot { padding: 8px 20px 11px; font-size: 0.62rem; line-height: 1.35; color: #707784; border-top: 1px solid #e4e6ea; background: rgba(0, 0, 0, 0.025); }
-.bpx-foot b { color: #3a414b; }
-.bpx-stub { position: relative; display: grid; gap: 9px; align-content: space-between; padding: 14px 16px 14px 18px; border-left: 2px dashed #c7ccd3; background: linear-gradient(180deg, #f1f2ee 0%, #e8eae4 100%); }
-.bpx-st-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding-bottom: 7px; border-bottom: 2px solid var(--b1); }
-.bpx-st-top span { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #4a515c; }
-.bpx-st-top b { font-size: 1.15rem; font-weight: 800; color: var(--ac); }
-.bpx-st-rt { display: flex; align-items: center; justify-content: space-between; font-size: 1.6rem; font-weight: 800; color: #0f1216; letter-spacing: 0.02em; }
-.bpx-st-rt svg { width: 20px; height: 20px; fill: var(--ac); }
-.bpx-st-rt svg.pl { transform: rotate(90deg); }
-.bpx-st-kv { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 8px; }
-.bpx-st-kv div { display: grid; gap: 0; }
-.bpx-st-kv b { font-size: 0.88rem; font-weight: 800; color: #0f1216; font-variant-numeric: tabular-nums; }
-.bpx-bar { display: block; width: 100%; height: 40px; }
-.bpx-conn { display: flex; align-items: center; gap: 10px; margin: -4px 18px 12px 34px; padding-left: 14px; border-left: 2px dashed var(--border); font-size: 0.8rem; font-weight: 700; color: var(--text-muted); min-height: 30px; }
-.bpx-sub { margin: 2px 18px 12px; font-size: 0.8rem; line-height: 1.5; color: var(--text-muted); }
-@media (max-width: 800px) {
-    .bpx-wrap { margin: 8px 10px 14px; }
-    .bpx {
-        grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 120px;
-        -webkit-mask:
-            radial-gradient(circle 11px at 0 calc(100% - 120px), #0000 98%, #000) left / 51% 100% no-repeat,
-            radial-gradient(circle 11px at 100% calc(100% - 120px), #0000 98%, #000) right / 51% 100% no-repeat;
-        mask:
-            radial-gradient(circle 11px at 0 calc(100% - 120px), #0000 98%, #000) left / 51% 100% no-repeat,
-            radial-gradient(circle 11px at 100% calc(100% - 120px), #0000 98%, #000) right / 51% 100% no-repeat;
-    }
-    .bpx-head { padding: 10px 14px; gap: 10px; }
-    .bpx-logo { width: 120px; height: 34px; }
-    .bpx-title b { font-size: 0.82rem; letter-spacing: 0.12em; white-space: nowrap; }
-    .bpx-title span { display: none; }
-    .bpx-body { padding: 12px 14px 6px; }
-    .bpx-code { font-size: 2.1rem; }
-    .bpx-tm { font-size: 1.15rem; }
-    .bpx-route { grid-template-columns: minmax(0, 1fr) minmax(70px, 0.8fr) minmax(0, 1fr); gap: 6px; }
-    .bpx-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .bpx-code417 { padding: 4px 14px 6px; }
-    .bpx-foot { padding: 8px 14px 10px; }
-    .bpx-stub { grid-template-columns: 1fr 1fr; align-items: center; border-left: 0; border-top: 2px dashed #c7ccd3; padding: 10px 14px; gap: 6px 14px; height: 120px; box-sizing: border-box; overflow: hidden; }
-    .bpx-st-top { grid-column: 1; padding-bottom: 4px; }
-    .bpx-st-rt { grid-column: 1; font-size: 1.15rem; gap: 6px; }
-    .bpx-st-kv { display: none; }
-    .bpx-stub .bpx-bar { grid-column: 2; grid-row: 1 / span 2; height: 64px; }
-    .bpx-conn { margin-left: 22px; }
-}
-
-/* trip-folds */
-#f-leg-odlet > .lux-fold-h > .lux-fold-btn::before, #f-leg-odlet-sin > .lux-fold-h > .lux-fold-btn::before, #f-lety > .lux-fold-h > .lux-fold-btn::before { background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 100' preserveAspectRatio='xMaxYMid slice'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%231e3a8a'/%3E%3Cstop offset='1' stop-color='%2393c5fd'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='360' height='100' fill='url(%23g)'/%3E%3Ccircle cx='318' cy='66' r='13' fill='%23fef3c7'/%3E%3Cg transform='translate(170 30) scale(1.1)' fill='%23fff' opacity='.85'%3E%3Cellipse rx='16' ry='6'/%3E%3Cellipse cx='-9' cy='-4' rx='9' ry='7'/%3E%3Cellipse cx='5' cy='-6' rx='11' ry='8'/%3E%3C/g%3E%3Cpath d='M110 72Q170 62 230 46' stroke='%23fff' stroke-width='2' stroke-dasharray='2 6' stroke-linecap='round' fill='none' opacity='.7'/%3E%3Cg transform='translate(250 40) rotate(-14) scale(1.3)' fill='%23fff'%3E%3Cpath d='M-22 0Q-18-3.5 0-3.5L18-2.5Q26 0 18 2.5L0 3.5Q-18 3.5-22 0Z'/%3E%3Cpath d='M-3-2L-13-19-8-19 9-2Z'/%3E%3Cpath d='M-3 2L-13 19-8 19 9 2Z'/%3E%3Cpath d='M-19-1.5L-24-8-20-8-14-1.5Z'/%3E%3Cpath d='M-19 1.5L-24 8-20 8-14 1.5Z'/%3E%3C/g%3E%3C/svg%3E"); }
-#f-leg-liberec > .lux-fold-h > .lux-fold-btn::before, #f-leg-domu > .lux-fold-h > .lux-fold-btn::before { background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 100' preserveAspectRatio='xMaxYMid slice'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23334155'/%3E%3Cstop offset='1' stop-color='%23fdba74'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='360' height='100' fill='url(%23g)'/%3E%3Ccircle cx='300' cy='60' r='14' fill='%23fef3c7'/%3E%3Cpath d='M0 74Q60 50 120 66T240 60T360 62V100H0Z' fill='%231f4d3a'/%3E%3Cpath d='M0 86Q90 74 180 84T360 80V100H0Z' fill='%2314342a'/%3E%3Crect y='88' width='360' height='12' fill='%233f3f46'/%3E%3Cpath d='M0 94H360' stroke='%23fde68a' stroke-width='1.6' stroke-dasharray='10 8'/%3E%3Cg transform='translate(220 62)'%3E%3Crect width='64' height='26' rx='5' fill='%23f8fafc'/%3E%3Crect x='0' y='15' width='64' height='5' fill='%232563eb'/%3E%3Crect x='6' y='4' width='11' height='9' rx='1.5' fill='%2393c5fd'/%3E%3Crect x='21' y='4' width='11' height='9' rx='1.5' fill='%2393c5fd'/%3E%3Crect x='36' y='4' width='11' height='9' rx='1.5' fill='%2393c5fd'/%3E%3Crect x='51' y='4' width='9' height='9' rx='1.5' fill='%2393c5fd'/%3E%3Ccircle cx='14' cy='27' r='5.5' fill='%230f172a'/%3E%3Ccircle cx='50' cy='27' r='5.5' fill='%230f172a'/%3E%3C/g%3E%3C/svg%3E"); }
-</style>
-<script id="bpx-script">
-/* ---- Palubní vstupenky (boarding passy): letadla i lodě ---- */
-(function () {
-    'use strict';
-    var MON = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-    var WD = ['neděle', 'pondělí', 'úterý', 'středa', 'čtvrtek', 'pátek', 'sobota'];
-    var AP = {
-        PRG: ['Praha', 'Václav Havel Airport'], DXB: ['Dubaj', 'Dubai International'], HEL: ['Helsinky', 'Helsinki-Vantaa'],
-        ZRH: ['Curych', 'Zürich Airport'], IST: ['Istanbul', 'Istanbul Airport'], SIN: ['Singapur', 'Changi Airport'],
-        DPS: ['Denpasar · Bali', 'Ngurah Rai Airport'], LOP: ['Praya · Lombok', 'Lombok International'], SNR: ['Sanur · Bali', 'Sanur Harbour'], BNG: ['Bangsal · Lombok', 'Bangsal Harbour']
-    };
-    var BR = {
-        EK: { n: 'Emirates', b1: '#d71921', b2: '#8f0f15', ac: '#c3141b', hi: '#ffffff', img: 'emirates.png' },
-        FZ: { n: 'flydubai', b1: '#f26a21', b2: '#c4410c', ac: '#c4410c', hi: '#ffffff' },
-        AY: { n: 'Finnair', b1: '#1b2a8a', b2: '#0b1560', ac: '#0b1560', hi: '#ffffff', img: 'finair.jpg' },
-        LX: { n: 'SWISS', b1: '#e30613', b2: '#a1000b', ac: '#c40510', hi: '#ffffff', img: 'swiss.png' },
-        TK: { n: 'Turkish Airlines', b1: '#d7192d', b2: '#8c0d1c', ac: '#b8101f', hi: '#ffffff', img: 'turkish.png' },
-        TR: { n: 'Scoot', b1: '#ffdd00', b2: '#f2b800', ac: '#1a1a1a', hi: '#111111' },
-        TN: { n: 'TransNusa', b1: '#e2231a', b2: '#951410', ac: '#c41d14', hi: '#ffffff' },
-        SF: { n: 'Starfish', b1: '#00a6c8', b2: '#005f86', ac: '#00708f', hi: '#ffffff', boat: 1 },
-        WH: { n: 'Wahana Virendra', b1: '#1565b8', b2: '#0a3a74', ac: '#0d4a94', hi: '#ffffff', boat: 1 }
-    };
-    var LOC = { PRG: 'Praze', DXB: 'Dubaji', HEL: 'Helsinkách', ZRH: 'Curychu', IST: 'Istanbulu', SIN: 'Singapuru' };
-    var OPERATED = { EK2239: 'flydubai', LX1484: 'Helvetic Airways' };
-    var PLANE = 'M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z';
-    var BOAT = 'M2.5 16h19l-3 4.5h-13z M5.5 14.8v-4h13v4z M8.5 9.8v-4h7v4z M11 5.8V3h2v2.8z';
-
-    function pad(n) { return (n < 10 ? '0' : '') + n; }
-    function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-    function toMin(hm) { var p = String(hm).split(':'); return (+p[0]) * 60 + (+p[1]); }
-    function hm(min) { min = ((min % 1440) + 1440) % 1440; return pad(Math.floor(min / 60)) + ':' + pad(min % 60); }
-    function fmt(m) { return Math.floor(m / 60) + ' h' + (m % 60 ? ' ' + pad(m % 60) + ' min' : ''); }
-    function addDays(d, n) { return new Date(d.getTime() + n * 86400000); }
-    function dstr(d) { return pad(d.getUTCDate()) + ' ' + MON[d.getUTCMonth()] + ' ' + d.getUTCFullYear(); }
-    function dayTitle(d) { var w = WD[d.getUTCDay()]; return w.charAt(0).toUpperCase() + w.slice(1) + ' ' + d.getUTCDate() + '. ' + (d.getUTCMonth() + 1) + '.'; }
-    function parseDate(s) { var m = /(\d{1,2})\.\s*(\d{1,2})\.\s*(\d{4})/.exec(s || ''); return m ? new Date(Date.UTC(+m[3], +m[2] - 1, +m[1])) : null; }
-    function absMin(d, off, clock) { return d.getTime() / 60000 + off * 1440 + clock; }
-
-    /* ---- jméno cestujícího (každý si ho nastaví u sebe) ---- */
-    function getName() { try { return localStorage.getItem('bpx_name') || 'PRIJMENI/JMENO'; } catch (e) { return 'PRIJMENI/JMENO'; } }
-    function cleanName(v) { return String(v || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/[^A-Z\/ .\-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 40); }
-
-    /* ---- deterministické „náhodné“ čárové kódy ---- */
-    function rng(seed) {
-        var h = 1779033703 ^ seed.length, i;
-        for (i = 0; i < seed.length; i++) { h = Math.imul(h ^ seed.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
-        return function () { h = Math.imul(h ^ (h >>> 16), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); h ^= h >>> 16; return (h >>> 0) / 4294967296; };
-    }
-    function pdf417(seed) {
-        var R = rng(seed), rows = 15, cols = 5, rh = 3, d = '', START = [8, 1, 1, 1, 1, 1, 1, 3], STOP = [7, 1, 1, 3, 1, 1, 1, 2, 1], r, c;
-        function cw() { var w = [1, 1, 1, 1, 1, 1, 1, 1], e = 9; while (e--) w[(R() * 8) | 0]++; return w; }
-        function put(x0, y0, ws) { var x = x0; ws.forEach(function (w, i) { if (i % 2 === 0) d += 'M' + x + ' ' + y0 + 'h' + w + 'v' + rh + 'h-' + w + 'z'; x += w; }); return x; }
-        for (r = 0; r < rows; r++) {
-            var x = put(0, r * rh, START);
-            x = put(x, r * rh, cw());
-            for (c = 0; c < cols; c++) x = put(x, r * rh, cw());
-            x = put(x, r * rh, cw());
-            put(x, r * rh, STOP);
-        }
-        return '<svg class="bpx-pdf" viewBox="0 0 154 ' + rows * rh + '" preserveAspectRatio="none" aria-hidden="true"><path d="' + d + '" fill="#111"/></svg>';
-    }
-    function bars(seed) {
-        var R = rng(seed + '#1d'), x = 0, d = '', i, w;
-        for (i = 0; i < 46; i++) { w = 1 + ((R() * 3) | 0); if (i % 2 === 0) d += 'M' + x + ' 0h' + w + 'v40h-' + w + 'z'; x += w; }
-        return '<svg class="bpx-bar" viewBox="0 0 ' + x + ' 40" preserveAspectRatio="none" aria-hidden="true"><path d="' + d + '" fill="#111"/></svg>';
-    }
-
-    /* ---- loga (zjednodušené kresby; pokud na webu leží soubor loga, překryje je) ---- */
-    function logo(k) {
-        var B = BR[k], s = '<svg viewBox="0 0 150 40" role="img" aria-label="' + esc(B.n) + '">';
-        if (k === 'EK') s += '<text x="75" y="19" text-anchor="middle" font-size="17" font-weight="700" fill="#d71921" font-family="Noto Naskh Arabic, Tahoma, Arial, serif">طيران الإمارات</text><text x="75" y="35" text-anchor="middle" font-size="14" font-weight="800" font-style="italic" fill="#d71921" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">Emirates</text>';
-        else if (k === 'FZ') s += '<text x="75" y="27" text-anchor="middle" font-size="22" font-weight="800" font-family="Arial, Helvetica, sans-serif"><tspan fill="#f26a21">fly</tspan><tspan fill="#2a3547">dubai</tspan></text>';
-        else if (k === 'AY') s += '<path d="M14 28 L26 12 L30 12 L22 24 L34 24 L32 28z" fill="#0b1560"/><text x="42" y="27" font-size="20" font-weight="800" fill="#0b1560" font-family="Arial, Helvetica, sans-serif" letter-spacing="2.5">FINNAIR</text>';
-        else if (k === 'LX') s += '<rect x="10" y="5" width="30" height="30" rx="2" fill="#e30613"/><path d="M23 11h4v7h7v4h-7v7h-4v-7h-7v-4h7z" fill="#fff"/><text x="47" y="28" font-size="21" font-weight="800" fill="#1a1a1a" font-family="Arial, Helvetica, sans-serif" letter-spacing="1.5">SWISS</text>';
-        else if (k === 'TK') s += '<circle cx="24" cy="20" r="15" fill="#c8102e"/><circle cx="24" cy="20" r="11" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M17 24 L28 12 L26 21 L32 20 L21 29 L23 22z" fill="#fff"/><text x="44" y="17" font-size="12.5" font-weight="800" fill="#c8102e" font-family="Arial, Helvetica, sans-serif" letter-spacing="0.6">TURKISH</text><text x="44" y="31" font-size="12.5" font-weight="800" fill="#c8102e" font-family="Arial, Helvetica, sans-serif" letter-spacing="0.6">AIRLINES</text>';
-        else if (k === 'TR') s += '<rect x="20" y="5" width="110" height="30" rx="15" fill="#ffdd00"/><text x="75" y="29" text-anchor="middle" font-size="23" font-weight="900" fill="#111" font-family="Arial Black, Arial, Helvetica, sans-serif" letter-spacing="0.5">scoot</text>';
-        else if (k === 'TN') s += '<path d="M12 27 L30 11 L34 11 L26 22 L38 22 L36 27z" fill="#e2231a"/><text x="44" y="26" font-size="19" font-weight="800" fill="#1d2b53" font-family="Arial, Helvetica, sans-serif"><tspan fill="#e2231a">Trans</tspan>Nusa</text>';
-        else if (k === 'SF') s += '<path d="M26 5l4.4 9.2 10.1 1.3-7.4 7 1.9 10-9-4.9-9 4.9 1.9-10-7.4-7 10.1-1.3z" fill="#ff8a1f"/><text x="48" y="27" font-size="19" font-weight="800" fill="#005f86" font-family="Arial, Helvetica, sans-serif" letter-spacing="0.5">Starfish</text>';
-        else if (k === 'WH') s += '<path d="M10 24q5-8 10 0t10 0 10 0" fill="none" stroke="#1565b8" stroke-width="3.2" stroke-linecap="round"/><path d="M10 31q5-8 10 0t10 0 10 0" fill="none" stroke="#5bb4ee" stroke-width="3.2" stroke-linecap="round"/><text x="58" y="19" font-size="14" font-weight="800" fill="#0a3a74" font-family="Arial, Helvetica, sans-serif" letter-spacing="1.5">WAHANA</text><text x="58" y="33" font-size="11" font-weight="700" fill="#1565b8" font-family="Arial, Helvetica, sans-serif" letter-spacing="1">Virendra</text>';
-        s += '</svg>';
-        if (B.img) s += '<img src="' + B.img + '" alt="" loading="lazy" onerror="this.remove()">';
-        return s;
-    }
-
-    /* ---- jedna palubní vstupenka ---- */
-    function ticket(c) {
-        var B = BR[c.brand], boat = !!B.boat, A = AP[c.from] || [c.from, ''], Z = AP[c.to] || [c.to, ''];
-        var icon = boat ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + BOAT + '"/></svg>' : '<svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="' + PLANE + '"/></svg>';
-        var dm = c.dep ? toMin(c.dep) : null, lead = boat ? 30 : (c.durMin >= 180 ? 60 : 45);
-        var bt = dm == null ? 'TBA' : hm(dm - lead), depT = c.dep || 'TBA', arrT = c.arr || 'TBA';
-        var date = dstr(c.date), wd = WD[c.date.getUTCDay()];
-        var seed = c.no + c.from + c.to + date;
-        var arrSup = c.aPlus > c.dPlus ? '<sup>+' + (c.aPlus - c.dPlus) + '</sup>' : '';
-        var opLine = c.op ? ' · operated by ' + esc(c.op) : '';
-        var pax = getName();
-        var bcbp = 'M1' + pax.replace(/ /g, '') + ' ' + (boat ? 'FB' : 'E') + ' ' + c.from + c.to + ' ' + c.no.replace(/\s/g, '') + ' ' + date.replace(/ /g, '');
-        return '<div class="bpx-wrap"><article class="bpx" style="--b1:' + B.b1 + ';--b2:' + B.b2 + ';--ac:' + B.ac + ';--hi:' + B.hi + '" aria-label="' + esc((boat ? 'Palubní vstupenka na loď ' : 'Palubní vstupenka ') + c.no + ' ' + A[0] + ' ➔ ' + Z[0] + ', ' + date) + '">' +
-            '<div class="bpx-main">' +
-            '<div class="bpx-head"><div class="bpx-logo">' + logo(c.brand) + '</div>' +
-            '<div class="bpx-title"><b>BOARDING PASS</b><span>' + (boat ? 'Palubní vstupenka · rychloloď' : 'Palubní vstupenka') + esc(opLine) + '</span></div>' +
-            '<div class="bpx-cls">' + esc(c.cls) + '</div></div>' +
-            '<div class="bpx-body">' +
-            '<div class="bpx-pax"><span class="bpx-lab">Passenger / Cestující</span><b class="bpx-name" role="button" tabindex="0" data-bpx-name title="Klepni a změň jméno na vstupence">' + esc(pax) + '</b><span class="bpx-edit">✎ změnit jméno</span></div>' +
-            '<div class="bpx-route">' +
-            '<div class="bpx-pt"><span class="bpx-lab">From / Odkud</span><span class="bpx-code">' + c.from + '</span><span class="bpx-city">' + esc(A[0]) + '</span><span class="bpx-apn">' + esc(A[1]) + '</span><span class="bpx-tm">' + depT + '</span></div>' +
-            '<div class="bpx-path"><div class="bpx-line"><i>' + icon + '</i><b></b></div><span>' + esc(c.dur) + (boat ? ' · plavba' : (c.stops ? '' : ' · přímý let')) + '</span></div>' +
-            '<div class="bpx-pt r"><span class="bpx-lab">To / Kam</span><span class="bpx-code">' + c.to + '</span><span class="bpx-city">' + esc(Z[0]) + '</span><span class="bpx-apn">' + esc(Z[1]) + '</span><span class="bpx-tm">' + arrT + arrSup + '</span></div>' +
-            '</div>' +
-            '<div class="bpx-grid">' +
-            '<div><span class="bpx-lab">' + (boat ? 'Ship / Loď' : 'Flight / Let') + '</span><b class="hl">' + esc(c.no) + '</b></div>' +
-            '<div><span class="bpx-lab">Date / Datum</span><b>' + date + '<small>' + wd + '</small></b></div>' +
-            '<div><span class="bpx-lab">Boarding / Nástup</span><b class="hl">' + bt + '</b></div>' +
-            '<div><span class="bpx-lab">' + (boat ? 'Pier / Molo' : 'Gate / Brána') + '</span><b>TBA</b></div>' +
-            '<div><span class="bpx-lab">Seat / Sedadlo</span><b>TBA</b></div>' +
-            '<div><span class="bpx-lab">Class / Třída</span><b>' + esc(c.cls) + '</b></div>' +
-            '<div><span class="bpx-lab">Departs / Odlet</span><b>' + depT + '</b></div>' +
-            '<div><span class="bpx-lab">Booking ref.</span><b>TBA</b></div>' +
-            '</div></div>' +
-            '<div class="bpx-code417">' + pdf417(seed) + '<div class="bpx-bcbp">' + esc(bcbp) + '</div></div>' +
-            '<div class="bpx-foot"><b>' + (boat ? 'Nástup se uzavírá 15 minut před odplutím.' : 'Brána se zavírá 20 minut před odletem.') + '</b> ' + (boat ? 'Boarding closes 15 min before departure. Mějte u sebe pas a e-ticket.' : 'Gate closes 20 min before departure. Časy jsou místní.') + '</div>' +
-            '</div>' +
-            '<aside class="bpx-stub"><div class="bpx-st-top"><span>' + (boat ? 'Boat' : esc(B.n)) + '</span><b>' + esc(c.short || c.no) + '</b></div>' +
-            '<div class="bpx-st-rt"><span>' + c.from + '</span>' + icon + '<span>' + c.to + '</span></div>' +
-            '<div class="bpx-st-kv"><div><span class="bpx-lab">Date</span><b>' + pad(c.date.getUTCDate()) + ' ' + MON[c.date.getUTCMonth()] + '</b></div><div><span class="bpx-lab">Boarding</span><b>' + bt + '</b></div><div><span class="bpx-lab">' + (boat ? 'Pier' : 'Gate') + '</span><b>TBA</b></div><div><span class="bpx-lab">Seat</span><b>TBA</b></div></div>' +
-            bars(seed) + '</aside></article></div>';
-    }
-
-    function conn(min, where) { return '<div class="bpx-conn"><span aria-hidden="true">⏳</span><span>' + (where || 'Přestup') + ' · ' + fmt(min) + '</span></div>'; }
-    function head(t) { return '<h4 class="fl-h">' + t + '</h4>'; }
-    function dur(s) { return String(s || '').replace(/(\d+)h/, '$1 h').replace(/(\d+)m/, '$1 min').trim(); }
-
-    /* ---- rozbor dálkových letů z dat konfigurátoru ---- */
-    function legs(str, base) {
-        var out = [], prev = null;
-        String(str || '').split(' + ').forEach(function (x) {
-            var m = /^(.*?)\s*\((\d{2}):(\d{2})(?:\+(\d))?\s+(\w{3})\s+➔\s+(\d{2}):(\d{2})(?:\+(\d))?\s+(\w{3}),\s*([^)]+)\)/.exec(x.trim());
-            if (!m) return;
-            var f = /([A-Z0-9]{2})\s?(\d{1,4})\s*$/.exec(m[1]); if (!f) return;
-            var dmn = (+m[2]) * 60 + (+m[3]), amn = (+m[6]) * 60 + (+m[7]);
-            var dP = m[4] !== undefined ? +m[4] : (prev ? prev.aPlus + (dmn < prev.amn ? 1 : 0) : 0);
-            var aP = m[8] !== undefined ? +m[8] : dP + (amn < dmn ? 1 : 0);
-            var no = f[1] + f[2], brand = no === 'EK2239' ? 'FZ' : f[1];
-            if (!BR[brand]) return;
-            var L = { brand: brand, no: no, from: m[5], to: m[9], dep: hm(dmn), arr: hm(amn), dPlus: dP, aPlus: aP, dmn: dmn, amn: amn, date: addDays(base, dP), dur: dur(m[10]), durMin: 0, op: OPERATED[no] || '', cls: 'ECONOMY', stops: 0 };
-            var dd = /(\d+)h\s*(?:(\d+)m)?/.exec(m[10]); L.durMin = dd ? (+dd[1]) * 60 + (+(dd[2] || 0)) : 0;
-            out.push(L); prev = L;
-        });
-        return out;
-    }
-    function legsHTML(arr, base) {
-        var h = '';
-        arr.forEach(function (L, i) {
-            h += ticket(L);
-            var N = arr[i + 1];
-            if (N) h += conn(Math.round(absMin(base, N.dPlus, N.dmn) - absMin(base, L.aPlus, L.amn)), 'Přestup v ' + (LOC[L.to] || (AP[L.to] ? AP[L.to][0] : L.to)) + ' (' + L.to + ')');
-        });
-        return h;
-    }
-
-    /* ---- pevné lety a lodě z itineráře ---- */
-    function fixed(brand, no, from, to, dep, arr, durMin, y, mo, d, extra) {
-        var o = { brand: brand, no: no, from: from, to: to, dep: dep, arr: arr, dPlus: 0, aPlus: 0, dur: fmt(durMin), durMin: durMin, date: new Date(Date.UTC(y, mo - 1, d)), op: '', cls: 'ECONOMY', stops: 0 };
-        for (var k in extra) o[k] = extra[k];
-        return o;
-    }
-    var TR288 = function () { return fixed('TR', 'TR288', 'SIN', 'DPS', '10:15', '13:05', 170, 2027, 8, 9); };
-    var TR281 = function () { return fixed('TR', 'TR281', 'DPS', 'SIN', '11:15', '14:10', 175, 2027, 8, 24); };
-    var TN_OUT = function () { return fixed('TN', 'TRANSNUSA', 'DPS', 'LOP', '12:40', '13:20', 40, 2027, 8, 15); };
-    var TN_BACK = function () { return fixed('TN', 'TRANSNUSA', 'LOP', 'DPS', null, null, 40, 2027, 8, 23); };
-    function viaPlane() { var l = document.getElementById('b3_label'); return !!(l && /TransNusa/i.test(l.textContent)); }
-    var BOAT_OUT = function () { return fixed('SF', 'STARFISH', 'SNR', 'BNG', '13:00', '15:00', 120, 2027, 8, 15, { cls: 'STANDARD', short: 'STARFISH' }); };
-    var BOAT_BACK = function () { return fixed('WH', 'WAHANA VIRENDRA', 'BNG', 'SNR', '13:30', '17:00', 210, 2027, 8, 23, { cls: 'STANDARD', short: 'WAHANA' }); };
-
-    function curFlight() { try { return flightOptions[currentAirline]; } catch (e) { return null; } }
-    function put(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
-
-    function render() {
-        var f = curFlight();
-        if (f) {
-            var ob = parseDate(f.outDate), rb = parseDate(f.retDate);
-            if (ob) {
-                var outHTML = head(dayTitle(ob) + ': odlet z Prahy do Singapuru (' + esc(f.name || '') + ')') + legsHTML(legs(f.outFlights, ob), ob) +
-                    '<p class="bpx-sub">Jméno na vstupence si každý změní klepnutím na něj. Brána, sedadlo a rezervační kód doplníš po odbavení.</p>';
-                put('bpOutTrip', outHTML);
-            }
-            var fm = document.querySelector('#f-lety .lux-fold-meta'); if (fm) fm.textContent = '✈️ ' + (f.name || '') + ' · ' + Math.round(f.pricePerson || 0).toLocaleString('cs-CZ') + ' Kč';
-            tripTexts(f, ob, rb, ob && rb ? legs(f.retFlights, rb) : []);
-            if (ob && rb) {
-                var t281 = TR281(), ret = legs(f.retFlights, rb);
-                put('bpHome', head(dayTitle(t281.date) + ': odlet z Bali do Singapuru') + ticket(t281));
-                put('bpRetTrip', (ret.length ? conn(Math.round(absMin(rb, ret[0].dPlus, ret[0].dmn) - absMin(t281.date, 0, toMin('14:10'))), 'Tranzit v Singapuru') +
-                    head(dayTitle(rb) + ': dálkový let domů (' + esc(f.name || '') + ')') + legsHTML(ret, rb) +
-                    '<p class="bpx-sub">Jméno na vstupence si každý změní klepnutím na něj. Brána, sedadlo a rezervační kód doplníš po odbavení.</p>' : ''));
-            }
-        }
-        put('bpSinDps', head(dayTitle(TR288().date) + ': palubní vstupenka Singapur → Bali') + ticket(TR288()));
-        var pl = viaPlane();
-        put('bpBoatOut', head(dayTitle(BOAT_OUT().date) + (pl ? ': palubní vstupenka Bali → Lombok (let TransNusa)' : ': palubní vstupenka na loď Bali → Lombok')) + ticket(pl ? TN_OUT() : BOAT_OUT()));
-        put('bpBoatBack', head(dayTitle(BOAT_BACK().date) + (pl ? ': palubní vstupenka Lombok → Bali (let TransNusa)' : ': palubní vstupenka na loď Lombok → Bali')) + ticket(pl ? TN_BACK() : BOAT_BACK()) + (pl ? '<p class="bpx-sub">Čas zpátečního letu TransNusa zatím v plánu není, proto je na vstupence TBA.</p>' : ''));
-    }
-
-
-    /* ---- texty nových etap v itineráři: Liberec ➔ Praha a Odlet z Prahy ---- */
-    function setText(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
-    function dmy(d) { return d.getUTCDate() + '. ' + (d.getUTCMonth() + 1) + '. ' + d.getUTCFullYear(); }
-    function dayY(d) { return dayTitle(d) + ' ' + d.getUTCFullYear(); }
-    function tripTexts(f, ob, rb, ret) {
-        var dep = toMin(f.outDep), air = dep - 180, lib = dep - 330, hub = f.hub || '', code = (/\((\w{3})\)/.exec(hub) || [])[1] || '';
-        var lay = (f.outLayover || '').replace(/^.*?\s+v\s+/, '');
-        setText('lbDep', hm(lib)); setText('lbAir', hm(air));
-        setText('odletSub', (ob ? dmy(ob) : '') + ' · ' + esc(f.outDep) + ' · přestup ' + esc(LOC[code] ? 'v ' + LOC[code] : hub));
-        setText('odletDesc', 'Na letišti v Praze jsme zhruba 3 h před odletem, tedy v <strong>' + hm(air) + '</strong>. Odlet je v <strong>' + esc(f.outDep) + '</strong> (' + esc(f.name || '') + '). Letíme spojem <strong>' + esc(f.outFlights || '') + '</strong>.');
-        var am = /(\d{2}):(\d{2})/.exec(f.retArr || ''), arrP = am ? (+am[1]) * 60 + (+am[2]) : null;
-        var rcode = (/\((\w{3})\)/.exec(f.retLayover || '') || [])[1] || '';
-        setText('sinSub', esc(f.retDate || '') + ' · odlet ' + esc(f.retDep || '') + ' · přestup ' + (LOC[rcode] ? 'v ' + LOC[rcode] : ''));
-        setText('sinDesc', 'Po tranzitu v Singapuru (přílet z Bali ve <strong>14:10</strong>) odlétáme z Changi v <strong>' + esc(f.retDep || '') + '</strong> (' + esc(f.name || '') + '). Na letišti musíme být s rezervou, brána se zavírá 20 min před odletem. Letíme spojem <strong>' + esc(f.retFlights || '') + '</strong>.');
-        setText('sinLay', 'Přestup v ' + esc(LOC[rcode] || '') + (rcode ? ' (' + rcode + ')' : '') + ': <strong>' + esc((f.retLayover || '').split(' v ')[0].replace(/\.$/, '')) + '</strong>. Přistání v Praze <strong>' + esc(f.retArr || '') + '</strong>, celková doba cesty ' + esc((f.retDuration || '').replace(/\.$/, '')) + '.');
-        var last = ret && ret.length ? ret[ret.length - 1] : null, home = last && rb ? addDays(rb, last.aPlus) : null;
-        var hubCity = (AP[code] ? AP[code][0] : 'přestup');
-        if (ob) { setText('lbDate', '🚌 ' + dayY(ob) + ' • Liberec ➔ Praha'); setText('lbSub', dmy(ob) + ' · na letiště Václava Havla'); setText('odDate', '✈️ ' + dayY(ob) + ' • Praha ➔ ' + esc(hubCity) + ' ➔ Singapur'); }
-        if (rb) setText('sinDate', '✈️ ' + dayY(rb) + ' • Singapur ➔ ' + esc(AP[rcode] ? AP[rcode][0] : 'přestup') + ' ➔ Praha');
-        if (home) { setText('domDate', '🚌 ' + dayY(home) + ' • Praha ➔ Liberec'); setText('domSub', dmy(home) + ' · z letiště Václava Havla'); }
-        setText('domArr', arrP == null ? '--:--' : hm(arrP));
-        setText('domHome', arrP == null ? '--:--' : hm(arrP + 150));
-        setText('odletLay', 'Přestup v ' + esc(LOC[code] || hub) + (code ? ' (' + code + ')' : '') + ': <strong>' + esc((f.outLayover || '').split(' v ')[0].replace(/\.$/, '')) + '</strong>. Přílet do Singapuru <strong>' + esc(f.outArr || '') + '</strong>, celková doba cesty ' + esc((f.outDuration || '').replace(/\.$/, '')) + '.');
-    }
-
-    function editName() {
-        var v = window.prompt('Jméno na palubní vstupence ve tvaru PŘÍJMENÍ/JMÉNO (bez diakritiky se doplní samo):', getName());
-        if (v === null) return;
-        v = cleanName(v); if (!v) return;
-        try { localStorage.setItem('bpx_name', v); } catch (e) {}
-        render();
-    }
-    document.addEventListener('click', function (e) { var t = e.target.closest && e.target.closest('[data-bpx-name], .bpx-edit'); if (t) editName(); });
-    document.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-bpx-name]')) { e.preventDefault(); editName(); } });
-
-    if (typeof window.setFlightAirline === 'function' && !window.setFlightAirline.__bpx) {
-        var orig = window.setFlightAirline;
-        window.setFlightAirline = function () { var r = orig.apply(this, arguments); try { render(); } catch (e) {} try { if (window.renderRouteMap) window.renderRouteMap(); } catch (e) {} return r; };
-        window.setFlightAirline.__bpx = true;
-    }
-    var lbl = document.getElementById('b3_label');
-    if (lbl && window.MutationObserver) new MutationObserver(function () { try { render(); } catch (e) {} }).observe(lbl, { childList: true, characterData: true, subtree: true });
-    window.BPX = { render: render };
-    try { render(); } catch (e) { console.error('BPX', e); }
-    try { if (window.renderRouteMap) window.renderRouteMap(); } catch (e) {}
 })();
 </script>
 
