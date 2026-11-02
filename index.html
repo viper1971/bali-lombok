@@ -6942,6 +6942,37 @@ body.pm-merged-ready{padding-bottom:0!important}
 body.pres-on #v29TopTab,body.pres-on #v29BottomTab{display:none!important}
 @media print{#v29TopTab,#v29BottomTab{display:none!important}}
 </style>
+<style id="v31-combined-budget-styles">
+#f-konfig .v31-financial-detail{margin-top:26px;padding-top:24px;border-top:1px solid var(--border,#d4dfe3);min-width:0;}
+#f-konfig .v31-section-label{margin:0 0 16px;color:var(--text-main,#203546);}
+#f-konfig .v31-section-label>span{font-size:.68rem;font-weight:850;color:var(--primary,#0c8580);letter-spacing:.13em;}
+#f-konfig .v31-section-label h3{font-size:clamp(1.3rem,2.2vw,1.8rem);margin:6px 0;font-weight:850;}
+#f-konfig .v31-section-label p{margin:0;font-size:.86rem;color:var(--text-muted,#647484);}
+#f-konfig #f-rozpis .p22{width:100%;max-width:100%;min-width:0;}
+@media(max-width:640px){#f-konfig .v31-financial-detail{margin-top:16px;padding-top:16px;}#f-konfig .v31-section-label{padding:0 4px;}}
+</style>
+
+<style id="v32-planflow-style">
+#cast-plan .v32-planflow{margin:0 0 18px;padding:20px;border:1px solid var(--border);background:var(--surface);border-radius:20px;box-shadow:0 8px 24px rgba(24,68,75,.055);min-width:0}
+#cast-plan .v32-planflow-header{display:flex;flex-wrap:wrap;gap:9px 16px;align-items:center;margin-bottom:13px;color:var(--text-main)}
+#cast-plan .v32-planflow-header>span{font-size:.65rem;letter-spacing:.13em;font-weight:900;color:var(--primary)}
+#cast-plan .v32-planflow-header strong{font-size:1.05rem}
+#cast-plan .v32-planflow-steps{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+#cast-plan .v32-planflow-steps a{display:grid;grid-template-columns:auto 1fr;column-gap:9px;align-items:center;min-width:0;padding:11px 10px;border:1px solid var(--border);background:var(--lux-card);border-radius:12px;color:var(--text-main);text-decoration:none;transition:border-color .15s,background .15s}
+#cast-plan .v32-planflow-steps a:hover{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 6%,var(--lux-card))}
+#cast-plan .v32-planflow-steps b{grid-row:1/3;display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:color-mix(in srgb,var(--primary) 14%,var(--surface));color:var(--primary);font-size:.74rem}
+#cast-plan .v32-planflow-steps span{font-size:.78rem;font-weight:850;line-height:1.3;overflow-wrap:anywhere}
+#cast-plan .v32-planflow-steps small{font-size:.64rem;color:var(--text-muted);line-height:1.3}
+#cast-plan .v32-planflow-steps .v32-planflow-last{border-color:color-mix(in srgb,var(--primary) 50%,var(--border));background:color-mix(in srgb,var(--primary) 8%,var(--surface))}
+#cast-plan .v32-flow-note{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 0 14px;padding:14px 17px;background:color-mix(in srgb,var(--primary) 8%,var(--surface));border:1px solid color-mix(in srgb,var(--primary) 35%,var(--border));border-radius:13px;color:var(--text-main)}
+#cast-plan .v32-flow-note>div{display:grid;gap:3px;flex:1 1 300px}
+#cast-plan .v32-flow-note strong{font-size:.87rem}
+#cast-plan .v32-flow-note span{font-size:.74rem;color:var(--text-muted)}
+#cast-plan .v32-flow-note a{color:var(--primary);font-size:.76rem;font-weight:800;border:1px solid var(--border);background:var(--surface);padding:7px 10px;text-decoration:none;border-radius:8px}
+#cast-plan .v32-planflow a:focus-visible,#cast-plan .v32-flow-note a:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+@media(max-width:1200px){#cast-plan .v32-planflow-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){#cast-plan .v32-planflow{padding:12px;margin-bottom:12px}#cast-plan .v32-planflow-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}#cast-plan .v32-planflow-steps a{padding:9px 7px;column-gap:6px}#cast-plan .v32-planflow-steps b{width:25px;height:25px;font-size:.65rem}#cast-plan .v32-planflow-steps span{font-size:.72rem}#cast-plan .v32-flow-note{padding:12px}#cast-plan .v32-flow-note>div{flex-basis:100%}}
+</style>
 </head>
 <body id="hero">
 <a class="premium-skip" href="#hlavni-obsah">Přeskočit na obsah</a>
@@ -12180,268 +12211,22 @@ function updatePackingWeight() {
         <div>
             <span class="lux-part-eyebrow">Část III · Rozhodnutí a rezervace</span>
             <div class="lux-part-title" id="cast-plan-h" role="heading" aria-level="2">Konfigurátor cesty & rozpočet</div>
-            <p class="lux-part-sub">Výběr hotelů, srovnání s cestovní kanceláří, transparentní rozpis nákladů, jídlo, vstupné a aktivity, plán hotovosti, karta do MHD a kontrola návazností.</p>
+            <p class="lux-part-sub">Postupně zvolíš lety a hotely v itineráři, tady nastavíš jídlo, aktivity a hotovost. Na konci tě čeká kompletní finanční dashboard se srovnáním s CK SEN.</p>
         </div>
     </header>
     <div class="lux-part-body">
-
-<section class="lux-fold " id="f-konfig">
-    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-konfig-b" onclick="luxToggle('f-konfig')">
-        <span class="lux-fold-node" aria-hidden="true">💰</span>
-        <span class="lux-fold-txt"><span class="lux-fold-t">Konfigurátor expedice</span><span class="lux-fold-s">Hotely, souhrn cen a logistika cesty</span></span>
-        <span class="lux-fold-meta"></span>
-        <span class="lux-fold-chev" aria-hidden="true">▾</span>
-    </button></h3>
-    <div class="lux-fold-body" id="f-konfig-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
-
-        <!-- SEKCE: KOMPLETNÍ ROZPOČET SE 4 REŽIMY, 5 LETOVÝMI  MI A ŽIVÝM PŘEHLEDEM HOTELŮ -->
-        <div id="rozpocet" class="bento-grid">
-            <div class="bento-card highlight full">
-<!-- PREMIUM V18: Finanční dashboard. Všechny ovládací prvky a výpočty jsou původní, jen přesunuté. -->
-<div class="pf18-shell" id="pf18-dashboard">
-  <div class="pf18-hero">
-    <div class="pf18-hero-copy">
-      <span class="pf18-eyebrow"><span class="pf18-live-dot"></span> ŽIVÝ ROZPOČET EXPEDICE · SRPEN 2027</span>
-      <h2>Finance celé cesty <span>pod kontrolou.</span></h2>
-      <p>Vyber si hotely a letenky. Celková cena, rozdělení výdajů i sestava ubytování se průběžně aktualizují.</p>
-    </div>
-    <div class="pf18-hero-badge"><span>06—25</span><small>SRPEN 2027</small><b>Singapur · Bali · Lombok</b></div>
-  </div>
-
-  <div class="pf18-section-heading"><div><span class="pf18-kicker">01 / SOUHRN CESTY</span><h3>Kolik dovolená stojí</h3></div><span class="pf18-help">Aktuální částky ze stávající kalkulace</span></div>
-  <div id="pf18-kpi-slot" class="pf18-kpi-slot"></div>
-
-  <div class="pf18-finance-grid">
-    <article class="pf18-panel pf18-breakdown">
-      <div class="pf18-card-header"><div><span class="pf18-kicker">02 / NÁKLADOVÁ STRUKTURA</span><h3>Kam jdou peníze</h3><p>Rozdělení výdajů na 1 osobu při sdíleném pokoji</p></div><span class="pf18-small-pill">Živé údaje</span></div>
-      <div class="pf18-chart-body">
-        <div class="pf18-donut" id="pf18-donut" role="img" aria-label="Graf nákladů podle kategorií">
-          <div class="pf18-donut-center"><span>CELKEM / OSOBA</span><strong id="pf18-ring-total">– Kč</strong><small>včetně zvolených položek</small></div>
-        </div>
-        <div class="pf18-legend" id="pf18-legend" aria-live="polite"><span class="pf18-placeholder">Načítání aktuálního rozpočtu…</span></div>
-      </div>
-      <a href="#f-rozpis" class="pf18-text-link" data-pf18-open="f-rozpis">Otevřít úplný rozpis všech položek <span aria-hidden="true">↗</span></a>
-    </article>
-
-    <article class="pf18-panel pf18-overview">
-      <div class="pf18-card-header"><div><span class="pf18-kicker">03 / AKTUÁLNÍ VOLBY</span><h3>Tvoje cestovní sestava</h3><p>Výběr hotelů ovlivní konečnou cenu celé cesty.</p></div></div>
-      <div class="pf18-overview-number"><span>UBYTOVÁNÍ · 17 NOCÍ</span><strong id="pf18-hotel-price">– Kč</strong><small>za vybraný pokoj</small></div>
-      <div class="pf18-choice-status" id="pf18-choice-status" aria-live="polite">Načítám zvolenou variantu…</div>
-      <div class="pf18-quicklinks">
-        <a href="#f-jidlo" data-pf18-open="f-jidlo"><span class="pf18-quick-icon">🍜</span><span><b>Jídlo</b><small>Vybrat způsob stravování</small></span><span>↗</span></a>
-        <a href="#f-aktivity" data-pf18-open="f-aktivity"><span class="pf18-quick-icon">🎟️</span><span><b>Aktivity</b><small>Vstupy a výlety</small></span><span>↗</span></a>
-        <a href="#f-hotovost" data-pf18-open="f-hotovost"><span class="pf18-quick-icon">💵</span><span><b>Hotovost</b><small>Kolik peněz připravit</small></span><span>↗</span></a>
-      </div>
-    </article>
-  </div>
-
-  <section class="pf18-panel pf18-hotel-panel" aria-labelledby="pf18-hotels-heading">
-    <div class="pf18-card-header"><div><span class="pf18-kicker">04 / NASTAVENÍ UBYTOVÁNÍ</span><h3 id="pf18-hotels-heading">Vyber hotelovou variantu</h3><p>Hotové kombinace A, B, C nebo individuální výběr po etapách. Ovládání a ceny zůstávají propojené s původním konfigurátorem.</p></div></div>
-    <div id="pf18-mode-slot"></div>
-    <div id="pf18-hotels-slot"></div>
-  </section>
-
-  <div class="pf18-support-grid">
-    <details class="pf18-details" id="pf18-info"><summary><span class="pf18-details-icon">ⓘ</span><span><b>Platby, zálohy a co zahrnuje cena</b><small>Podrobnosti a praktické informace</small></span><span class="pf18-details-arrow">⌄</span></summary><div class="pf18-details-content" id="pf18-info-slot"></div></details>
-    <details class="pf18-details" id="pf18-map"><summary><span class="pf18-details-icon">⌖</span><span><b>Mapa vybraných hotelů</b><small>Lokality a vzdálenosti po ostrovech</small></span><span class="pf18-details-arrow">⌄</span></summary><div class="pf18-details-content" id="pf18-map-slot"></div></details>
+<div class="v32-planflow" aria-label="Postup plánování cesty">
+  <div class="v32-planflow-header"><span>TVŮJ PLÁN</span><strong>Nejdřív vybíráš, nakonec počítáš.</strong></div>
+  <div class="v32-planflow-steps">
+    <a href="#flightPick"><b>01</b><span>Letenky</span><small>výběr letu</small></a>
+    <a href="#etapa-singapur"><b>02</b><span>Hotely</span><small>v itineráři</small></a>
+    <a href="#jidlo"><b>03</b><span>Jídlo</span><small>styl stravování</small></a>
+    <a href="#aktivity"><b>04</b><span>Aktivity</span><small>výběr zážitků</small></a>
+    <a href="#hotovost"><b>05</b><span>Hotovost</span><small>měny a rezerva</small></a>
+    <a class="v32-planflow-last" href="#rozpocet"><b>06</b><span>Finální rozpočet</span><small>+ CK SEN</small></a>
   </div>
 </div>
-<!-- /PREMIUM V18 -->
 
-               <h2 class="x-a141b9" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3); display: flex;">Rozpočet a výběr hotelů</h2>
-                <p style="font-size: 0.95rem; margin-bottom: 12px; color: var(--text-muted);">📊 Klikni na libovolnou kombinaci hotelů. Letovou variantu vybereš nahoře ve složce „Výběr letenek“, celá stránka se pak sama přepočítá (lety, hotely i ceny).</p>
-
-     <div style="background: var(--surface-hover); padding: 14px 16px; border-radius: 12px; margin-bottom: 16px; font-size: 0.9rem; line-height: 1.5; font-weight: 500; border: 1px solid var(--border); color: var(--text-main);">
-                    🤝 <strong>Placení:</strong> Letenky a ubytování zařizuji já. Zálohu vybírám v lednu 2027 pro okamžitý flexibilní nákup. Po nákupu rozešlu oficiální fakturu a zbylé peníze vracím zpět. Zakládám si na 100% transparentnosti. O všem co budu dělat, Vás budu informovat. První nakupuju velké letenky z Prahy do Singapuru a zpět. Dále budu kupovat letenky ze Singapuru na Bali a pak objednávám lodní lístky z Bali na Lombok. Není to najednou, ale snažím se to vyřešit po nákupu velkých letenek co nejdříve. Na hotely budu potřebovat peníze začátkem července 2027. Co se týká vlastní výměny za USD doporučuji hlídat výhodný kurz a pak sami nakoupit. Odhad je cca 700 USD na osobu. Ale je to na Vás.
-                    <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.15); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-                        <span>🚗 <strong>Tip na parkování u letiště:</strong> Zkoušel jsem to rezervovat a vyšla mi cena 1000 Kč, tak jsem to za tu cenu zarezervoval 💰. Jinak bude léto, nebude potřeba řešit, kam dát zimní věci, tak se dá na letiště dojet StudentAgency a metrem, ale po dlouhém letu zpátky je to dost otravné a únavné, jet ještě busem domů....po zkušenostech, to nedoporučuji..</span>
-                        <a href="https://1parking.cz/rezervace/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: var(--lux-deep-b); color: #ffffff; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 0.85rem;">
-                            Rezervovat parkování ↗
-                        </a>
-                    </div>
-                </div>
-
-                <!-- 1. KROK: PŘEPÍNAČ 5 DETAILNÍCH VARIANT DÁLKOVÉHO LETU -->
-                
-
-<script>
-    function updateGanttActiveRow(airlineKey) {
-        document.querySelectorAll('.gantt-row').forEach(row => row.classList.remove('active'));
-
-        const targetRowOutbound = document.getElementById('ganttRow_outbound_' + airlineKey);
-        if (targetRowOutbound) targetRowOutbound.classList.add('active');
-
-        const targetRowReturn = document.getElementById('ganttRow_return_' + airlineKey);
-        if (targetRowReturn) targetRowReturn.classList.add('active');
-    }
-
-    function handleGanttClick(airlineKey) {
-        if (typeof setFlightAirline === 'function') {
-            setFlightAirline(airlineKey);
-        }
-        updateGanttActiveRow(airlineKey);
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        if (typeof window.setFlightAirline === 'function') {
-            const originalSetFlightAirline = window.setFlightAirline;
-            window.setFlightAirline = function(airlineKey) {
-                originalSetFlightAirline(airlineKey);
-                updateGanttActiveRow(airlineKey);
-            };
-        }
-
-        const activeBtn = document.querySelector('.flight-mode-btn.active, button.flight-mode-btn[class*="active"]');
-        if (activeBtn) {
-            const idAttr = activeBtn.id || '';
-            const parts = idAttr.split('_');
-            if (parts.length > 1) {
-                const key = parts.slice(1).join('_');
-                updateGanttActiveRow(key);
-            }
-        } else if (typeof currentFlightAirline !== 'undefined' && currentFlightAirline) {
-            updateGanttActiveRow(currentFlightAirline);
-        }
-    });
-</script>
-
-<!-- KOMPLETNÍ HODNOCENÍ LETECKÝCH SPOLEČNOSTÍ PRO ECONOMY -->
-
-
-
-
-
-
-   <!-- 2. KROK: PŘEPÍNAČ VARIANT HOTELŮ (VČETNĚ VARIANTY C!) -->
-<div>
-    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 6px; color: var(--primary-light);">
-        🏨 2. Vyber variantu hotelů (automaticky přeskupí hotely níže):
-    </div>
-    <div class="budget-mode-switch">
-        <button id="btnModePlanA" class="budget-mode-btn" onclick="setBudgetMode('planA')">📋 1. Všechny hotely:  A<br><small class="x-fs-73" style="opacity: 0.85;">Původní výběr (21 204 Kč/pokoj)</small></button>
-        <button id="btnModePlanB" class="budget-mode-btn active" onclick="setBudgetMode('planB')">⭐ 2. Všechny hotely:    B<br><small class="x-fs-73" style="opacity: 0.85;">Nejvyšší úspora (14 611 Kč/pokoj)</small></button>
-        <button id="btnModePlanC" class="budget-mode-btn" onclick="setBudgetMode('planC')">💎 3.   C (TOP Komfort)<br><small class="x-fs-73" style="opacity: 0.85;">Hotel 81 Gold + Bije Suite Villa</small></button>
-
-        <button id="btnModeCustom" class="budget-mode-btn" onclick="setBudgetMode('custom')">🎛️ 5. Vlastní mix (dle kliknutí)<br><small class="x-fs-73" style="opacity: 0.85;">Nakombinuj si každou etapu zvlášť</small></button>
-    </div>
-</div>
-
-<!-- ŽIVÝ PŘEHLED AKTUÁLNĚ VYBRANÝCH HOTELŮ (PŘESKUPUJE SE V REÁLNÉM ČASE) -->
-<div class="selected-hotels-deck-wrapper">
-    <div class="deck-header">
-        <span style="font-size: 0.85rem; font-weight: 800; color: var(--primary-light); text-transform: uppercase; letter-spacing: 0.8px;">
-            🏨 Aktuálně vybraná sestava hotelů (17 nocí) — klikni na A/B/C pro okamžitou změnu nebo na kartu pro skok do etapy:
-        </span>
-        <span id="deckTotalBadge" style="font-size: 0.82rem; font-weight: 900; background: var(--accent); color: #fff; padding: 4px 12px; border-radius: 20px;">
-            Celkem za hotely: 14 611 Kč / pokoj
-        </span>
-    </div>
-    <div class="selected-hotels-deck" id="selectedHotelsDeck">
-        <!-- Generováno dynamicky z JavaScriptu při každém přepnutí -->
-    </div>
-</div>
-
-<!-- DYNAMICKÉ SOUHRNNÉ KARTY -->
-<div class="tj-excl" role="note"><b>ℹ️ Cena dovolené zahrnuje všechno, co si nakonfiguruješ:</b> 🛫 letenky, 🏨 hotely, 🛵 skútry, 🛂 víza a poplatky, 🍜 jídlo, 🧭 výlety a 🎟️ vstupy. <span>Jídlo vybereš v sekci <a href="#jidlo">Jídlo</a>, výlety a vstupy v sekci <a href="#aktivity">Vstupné a aktivity</a> a vše se samo započítá do celkové ceny. Cena nezahrnuje jízdné v Singapuru, taxi, drobné výdaje, úschovnu batohů, soukromou loď na Gili, suvenýry a platbu za poslední hotel na místě.</span></div>
-
-<div class="family-card-grid">
-    <div class="family-card-box">
-        <div class="fc-tag" id="calcTagPerson">👤 Cena dovolené na 1 osobu</div>
-        <div class="fc-price" id="calcTotalPerson">46 638 Kč</div><span id="calcPricePerson" hidden>46 638 Kč</span>
-        <div class="fc-desc" id="calcDescPerson">Let, vybrané hotely, skútry, víza a poplatky, jídlo a vstupy podle tvého výběru</div>
-    </div>
-     <div class="family-card-box">
-        <div class="fc-tag" id="calcTagFamily">👨‍👩‍👧 Cena dovolené pro pár / rodinu (2 osoby v pokoji)</div>
-        <div class="fc-price" id="calcTotalFamily">93 275 Kč</div><span id="calcPriceFamily" hidden>93 275 Kč</span>
-        <div class="fc-desc" id="calcDescFamily">Pro 2 osoby sdílející 1 dvoulůžkový pokoj (17 nocí ubytování), se vším, co jste si zvolili</div>
-    </div>
-    <!-- NOVÁ KARTA PRO SÓLO CESTOVATELE -->
-    <div class="family-card-box" style="border-color: rgba(232, 212, 138, 0.4);">
-        <div class="fc-tag x-c-gold">🏍️ 1 Osoba (Sólo cestovatel)</div>
-        <div class="fc-price" id="calcTotalSingle">-- Kč</div><span id="calcPriceSingle" hidden>-- Kč</span>
-        <div class="fc-desc">Sám na pokoji, platí celý skútr a celý pokoj sám za sebe, se vším, co sis zvolil</div>
-    </div>
-</div>
-
-<div style="text-align: center; margin-top: 12px; font-size: 0.95rem; font-weight: 800; color: #fff;">
-    💡 Stav kalkulace: <span id="budgetStatusLabel" style="color: var(--lux-ok);">Aktivní:   B • Let s Emirates (16:10) (Max. úspora 8 387 Kč na rodinu)</span>
-</div>
-
-<div class="bento-card full x-4c7ef9" style="box-shadow: var(--shadow);">
-    <div class="x-fd-column_gap-12_mb-20_w-100pc" style="display: flex;">
-        <div class="x-jc-center_ai-center_w-100pc" style="display: flex;">
-            <span class="badge" style="background: rgba(169, 187, 208, 0.15); color: var(--primary); border: 1px solid var(--primary); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 20px;">
-                🗺️ INTERAKTIVNÍ LOKACE
-            </span>
-        </div>
-
-        <h2 class="sec-title" style="font-size: 1.5rem; margin-bottom: 6px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; text-align: center; text-transform: uppercase; background: linear-gradient(135deg, var(--lux-deep-a) 0%, var(--lux-deep-b) 100%); color: #ffffff; padding: 16px 24px; border-radius: 14px; border: 2.5px solid rgba(255, 255, 255, 0.25); box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3); width: 100%; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 0;">
-            Dynamická mapa akčního rádiusu (20 km) podle tvých vybraných hotelů
-        </h2>
-
-        <p class="sec-sub x-bc6de9">
-            Když přepneš variantu hotelu (např. na Lomboku ze Sekotongu na Tanjung), kruhy na mapě se automaticky přesunou na přesné souřadnice vybraného ubytování!
-        </p>
-    </div>
-
-    <!-- PŘEPÍNAČ VARIANT HOTELŮ PŘÍMO NAD MAPOU -->
-    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; background: var(--surface-hover); padding: 12px; border-radius: 12px; border: 1px solid var(--border);">
-        <span style="font-size: 0.8rem; font-weight: 800; color: var(--primary); text-transform: uppercase;">Zvolit variantu hotelů:</span>
-        <div style="display: flex; gap: 8px; width: 100%; flex-wrap: wrap;">
-            <button id="mapModeBtn_planA" class="sqs-btn" onclick="setBudgetMode('planA')" style="flex: 1; min-width: 0; padding: 8px 10px; font-size: 0.78rem; text-align: center; justify-content: center;">📋 A</button>
-            <button id="mapModeBtn_planB" class="sqs-btn" onclick="setBudgetMode('planB')" style="flex: 1; min-width: 0; padding: 8px 10px; font-size: 0.78rem; text-align: center; justify-content: center;">⭐ B</button>
-            <button id="mapModeBtn_planC" class="sqs-btn" onclick="setBudgetMode('planC')" style="flex: 1; min-width: 0; padding: 8px 10px; font-size: 0.78rem; text-align: center; justify-content: center;">💎 C</button>
-
-            <button id="mapModeBtn_custom" class="sqs-btn" onclick="setBudgetMode('custom')" style="flex: 1; min-width: 0; padding: 8px 10px; font-size: 0.78rem; text-align: center; justify-content: center;">🎛️ Vlastní mix</button>
-        </div>
-    </div>
-
-    <div class="map-controls" style="display: flex; gap: 8px; width: 100%; flex-wrap: wrap; margin-bottom: 12px;">
-        <button class="sqs-btn active x-flex-1_min-0_ta-center_jc-center" onclick="setIslandZoomRegion('all', this)">Vše</button>
-        <button class="sqs-btn x-flex-1_min-0_ta-center_jc-center" onclick="setIslandZoomRegion('singapore', this)">Singapur</button>
-        <button class="sqs-btn x-flex-1_min-0_ta-center_jc-center" onclick="setIslandZoomRegion('bali', this)">Bali</button>
-        <button class="sqs-btn x-flex-1_min-0_ta-center_jc-center" onclick="setIslandZoomRegion('lombok', this)">Lombok</button>
-    </div>
-
-    <div class="map-box"><div id="islandMap" style="width: 100%; height: 100%;"></div></div>
-    <button class="map-fullscreen-btn" onclick="openMapFullscreen('island')">🔍 Zvětšit interaktivní mapu ostrovů (Full screen)</button>
-</div>
-</div>
-</div>
-
-
-<!-- PREMIUM V19: Logistický plán cesty — náhrada nepřehledného Ganttu -->
-<section class="pf19-journey" id="ganttAuditCard" aria-labelledby="pf19-title">
-  <div class="pf19-hero">
-    <div class="pf19-hero-copy">
-      <span class="pf19-eyebrow"><span class="pf19-dot"></span> LOGISTIKA EXPEDICE · SRPEN 2027</span>
-      <h3 id="pf19-title">Trasa cesty <em>bez zbytečných mezer</em></h3>
-      <p>Přehled letů, přesunů a navazujících noclehů podle aktuálně vybraných variant. Bez drobných políček Ganttova diagramu.</p>
-    </div>
-    <div class="pf19-hero-dates"><strong>6.–25. 8.</strong><span>2027 · Singapur / Bali / Lombok</span></div>
-  </div>
-
-  <div class="pf19-controls">
-    <label class="pf19-airline">Zvolený dálkový let <select id="pf19-flight-select" aria-label="Vybrat leteckou společnost" onchange="setFlightAirline(this.value)"></select></label>
-    <button class="pf19-fullscreen" type="button" onclick="toggleGanttCardFullscreen()" aria-label="Zobrazit plán na celou obrazovku">⛶ Celá obrazovka</button>
-  </div>
-
-  <div class="pf19-stats" id="pf19-stats" aria-label="Souhrn plánované trasy"></div>
-  <div class="pf19-layout" id="ganttChartContainer">
-    <div class="pf19-main">
-      <div class="pf19-subheading"><div><span class="pf19-mini">01 / PRŮBĚH CESTY</span><h4>Jak na sebe jednotlivé etapy navazují</h4></div><span class="pf19-subhint">Vybrané hotely se aktualizují automaticky</span></div>
-      <div class="pf19-route" id="pf19-route" aria-live="polite"></div>
-    </div>
-    <aside class="pf19-side" aria-label="Kontrola návazností">
-      <div class="pf19-side-head"><span class="pf19-mini">02 / ČASOVÉ REZERVY</span><h4>Na co si dát pozor</h4><p>Vyhodnocení z uloženého itineráře, nikoli z aktuálních dat dopravců.</p></div>
-      <div class="pf19-checks" id="pf19-checks" aria-live="polite"></div>
-      <div class="pf19-advice"><b>Než vše zarezervuješ</b><p>Ověř aktuální lety, podmínky přestupů, časy lodí, dostupnost pokojů a čas potřebný pro check-in. Výběr hotelu není potvrzená rezervace.</p></div>
-    </aside>
-  </div>
-</section>
-<!-- /PREMIUM V19 -->
-    </div></div></div>
-</section>
 <section class="lux-fold " id="f-jidlo">
     <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-jidlo-b" onclick="luxToggle('f-jidlo')">
         <span class="lux-fold-node" aria-hidden="true">🍜</span>
@@ -12844,6 +12629,424 @@ function updatePackingWeight() {
     window.addEventListener('load', function () { renderFood(); renderActs(); });
 })();
 </script>
+<section class="lux-fold " id="f-karta-mhd">
+    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-karta-mhd-b" onclick="luxToggle('f-karta-mhd')">
+        <span class="lux-fold-node" aria-hidden="true">💳</span>
+        <span class="lux-fold-txt"><span class="lux-fold-t">Karta do MHD v Singapuru</span><span class="lux-fold-s">MRT a autobusy · kalkulačka karty · praktický návod</span></span>
+        <span class="lux-fold-meta" id="mhMeta"></span>
+        <span class="lux-fold-chev" aria-hidden="true">▾</span>
+    </button></h3>
+    <div class="lux-fold-body" id="f-karta-mhd-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+<style id="mhd-design">
+/* ===== Karta do MHD v Singapuru ===== */
+.mh { --mh-sg: #e0675a; --mh-ok: var(--lux-ok); display: grid; gap: 22px; margin: 28px 0 24px; font-family: var(--font-ui); color: var(--text-main); }
+.mh *, .mh *::before, .mh *::after { box-sizing: border-box; }
+.mh button { font: inherit; }
+.mh-card { position: relative; border: 1.5px solid var(--border); border-radius: 22px; background: var(--surface); box-shadow: var(--shadow); padding: 24px; overflow: hidden; }
+.mh-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 20px; background: rgba(169, 187, 208, 0.12); color: var(--primary); border: 1px solid var(--border); }
+.mh-h { font: 800 clamp(1.3rem, 2.6vw, 1.85rem)/1.18 var(--font-display); margin: 10px 0 8px; letter-spacing: -0.015em; }
+.mh-h2 { font: 800 1.12rem/1.25 var(--font-display); margin: 10px 0 4px; letter-spacing: -0.01em; }
+.mh-sub { margin: 0; font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); font-weight: 600; max-width: 68ch; }
+.mh-lbl { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.mh a:focus-visible, .mh button:focus-visible, .mh input:focus-visible, .mh summary:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+/* hero */
+.mh-hero { background: radial-gradient(620px 300px at 0% 0%, rgba(120, 140, 255, 0.28), transparent 70%), radial-gradient(520px 260px at 100% 100%, rgba(63, 179, 166, 0.28), transparent 70%), linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-color: rgba(255,255,255,.22); color: #fff; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px; align-items: center; }
+.mh-hero .mh-eyebrow { background: rgba(255,255,255,.14); color: #fff; border-color: rgba(255,255,255,.3); }
+.mh-hero .mh-h { color: #fff; }
+.mh-hero .mh-sub { color: rgba(255,255,255,.86); }
+.mh-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.mh-pills span { font-size: 0.78rem; font-weight: 800; padding: 6px 12px; border-radius: 99px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28); color: #fff; }
+.mh-stage { position: relative; min-height: 230px; display: grid; place-items: center; perspective: 900px; }
+.mh-ring { position: absolute; left: 50%; top: 50%; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; border: 2px solid rgba(255,255,255,.5); opacity: 0; animation: mhRing 3s ease-out infinite; }
+.mh-ring:nth-child(2) { animation-delay: 1s; } .mh-ring:nth-child(3) { animation-delay: 2s; }
+@keyframes mhRing { 0% { transform: scale(.5); opacity: .7; } 100% { transform: scale(2.6); opacity: 0; } }
+.mh-plastic { position: relative; z-index: 1; width: min(310px, 88%); aspect-ratio: 1.586; border-radius: 18px; padding: 18px 20px; display: grid; align-content: space-between; color: #fff; background: linear-gradient(135deg, #1c2540 0%, #3b2f8f 55%, #1fa7a0 120%); border: 1px solid rgba(255,255,255,.3); box-shadow: 0 24px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.3); transform: rotateY(-14deg) rotateX(8deg); animation: mhFloat 6s ease-in-out infinite; }
+@keyframes mhFloat { 0%, 100% { transform: rotateY(-14deg) rotateX(8deg) translateY(0); } 50% { transform: rotateY(-8deg) rotateX(5deg) translateY(-8px); } }
+.mh-chip { width: 40px; height: 30px; border-radius: 7px; background: linear-gradient(135deg, #f3dc9c, #b89440); box-shadow: inset 0 0 0 1px rgba(0,0,0,.25); }
+.mh-plastic-top { display: flex; justify-content: space-between; align-items: center; }
+.mh-nfc { width: 28px; height: 28px; opacity: .9; }
+.mh-plastic b { font: 800 1.05rem var(--font-display); letter-spacing: .04em; }
+.mh-plastic small { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .12em; opacity: .8; text-transform: uppercase; }
+.mh-gate { position: absolute; right: 2%; bottom: 4%; z-index: 2; padding: 6px 12px; border-radius: 10px; font-size: .72rem; font-weight: 800; background: #0e1a18; color: #8fd47c; border: 1px solid rgba(143,212,124,.5); box-shadow: 0 6px 18px rgba(0,0,0,.4); }
+
+/* kroky */
+.mh-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 16px; counter-reset: s; }
+.mh-step { position: relative; padding: 16px 15px 15px; border: 1px solid var(--border); border-radius: 18px; background: var(--lux-card); display: grid; gap: 7px; align-content: start; counter-increment: s; transition: transform .2s, border-color .2s; }
+.mh-step:hover { transform: translateY(-3px); border-color: var(--primary); }
+.mh-step::before { content: counter(s); position: absolute; top: -12px; left: 14px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font: 800 .86rem var(--font-display); background: var(--primary); color: var(--on-primary); box-shadow: 0 4px 12px rgba(0,0,0,.25); }
+.mh-step i { font-style: normal; font-size: 1.5rem; margin-top: 6px; }
+.mh-step b { font: 800 .95rem/1.25 var(--font-display); }
+.mh-step p { margin: 0; font-size: .8rem; line-height: 1.55; color: var(--text-muted); font-weight: 600; }
+.mh-step p strong { color: var(--text-main); }
+
+/* proč Revolut */
+.mh-why { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+.mh-w { padding: 15px; border: 1px solid var(--border); border-radius: 18px; background: var(--lux-card); display: grid; gap: 6px; align-content: start; }
+.mh-w > span { font-size: 1.4rem; }
+.mh-w b { font: 800 .93rem/1.25 var(--font-display); }
+.mh-w p { margin: 0; font-size: .8rem; line-height: 1.55; color: var(--text-muted); font-weight: 600; }
+.mh-quote { margin-top: 16px; padding: 14px 16px; border-left: 4px solid var(--primary); border-radius: 0 14px 14px 0; background: var(--lux-card-2); font-size: .9rem; line-height: 1.6; font-weight: 700; }
+.mh-quote small { display: block; margin-top: 4px; font-size: .74rem; color: var(--text-muted); font-weight: 700; }
+
+/* kalkulačka */
+.mh-two { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 22px; margin-top: 14px; }
+.mh-ctl { display: grid; gap: 16px; align-content: start; }
+.mh-f { display: grid; gap: 6px; }
+.mh-f-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.mh-f-head label { font-size: .84rem; font-weight: 800; }
+.mh-f-val { font: 800 .95rem var(--font-display); color: var(--primary); font-variant-numeric: tabular-nums; }
+.mh-range { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 99px; outline: none; cursor: pointer; margin: 4px 0; background: linear-gradient(90deg, var(--primary) var(--p, 0%), var(--border) var(--p, 0%)); }
+.mh-range::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--primary); border: 4px solid var(--lux-card); box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+.mh-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--primary); border: 4px solid var(--lux-card); }
+.mh-chk { display: flex; gap: 10px; align-items: flex-start; font-size: .84rem; font-weight: 700; line-height: 1.45; cursor: pointer; }
+.mh-chk input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--primary); }
+.mh-chk small { display: block; font-weight: 600; color: var(--text-muted); font-size: .76rem; }
+.mh-total { display: grid; gap: 8px; align-content: center; padding: 20px; border-radius: 20px; border: 1.5px solid color-mix(in srgb, var(--mh-sg) 45%, var(--border)); background: linear-gradient(160deg, color-mix(in srgb, var(--mh-sg) 14%, var(--lux-card)), var(--lux-card) 65%); text-align: center; }
+.mh-total b { font: 800 clamp(2rem, 4vw, 2.6rem)/1.05 var(--font-display); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.mh-total em { font-style: normal; font: 800 1.05rem var(--font-display); color: var(--mh-sg); font-variant-numeric: tabular-nums; }
+[data-theme="light"] .mh-total em { color: #b23a2d; }
+.mh-total small { font-size: .76rem; line-height: 1.5; color: var(--text-muted); font-weight: 600; }
+
+/* doporučení */
+.mh-ref { background: radial-gradient(520px 260px at 100% 0%, color-mix(in srgb, var(--mh-sg) 16%, transparent), transparent 70%), radial-gradient(520px 260px at 0% 100%, color-mix(in srgb, var(--primary) 16%, transparent), transparent 70%), var(--lux-card-2); }
+.mh-ref-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; align-items: flex-start; }
+.mh-count { display: grid; gap: 1px; justify-items: center; padding: 10px 18px; border-radius: 16px; border: 1.5px solid var(--border); background: var(--surface); min-width: 130px; }
+.mh-count b { font: 800 1.9rem/1 var(--font-display); font-variant-numeric: tabular-nums; color: var(--primary); }
+.mh-count span { font-size: .7rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); }
+.mh-count.is-late b { color: var(--lux-bad); }
+.mh-math { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+.mh-m { padding: 14px; border-radius: 16px; border: 1px solid var(--border); background: var(--surface); display: grid; gap: 2px; text-align: center; }
+.mh-m b { font: 800 1.45rem var(--font-display); font-variant-numeric: tabular-nums; }
+.mh-m span { font-size: .74rem; font-weight: 700; color: var(--text-muted); line-height: 1.4; }
+.mh-m.hl { border-color: var(--lux-ok); background: color-mix(in srgb, var(--lux-ok) 12%, var(--surface)); }
+.mh-m.hl b { color: var(--lux-ok); }
+.mh-cond { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; }
+.mh-cond li { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; align-items: start; padding: 11px 14px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); font-size: .84rem; font-weight: 700; line-height: 1.45; }
+.mh-cond li i { font-style: normal; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--lux-card-2); border: 1px solid var(--border); }
+.mh-cond li small { display: block; font-size: .76rem; font-weight: 600; color: var(--text-muted); }
+.mh-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; align-items: center; }
+.mh-btn { display: inline-flex; align-items: center; gap: 8px; border: 0; cursor: pointer; font-weight: 800; font-size: .88rem; padding: 12px 20px; border-radius: 99px; background: var(--primary); color: var(--on-primary); text-decoration: none; transition: transform .15s, box-shadow .15s; }
+.mh-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 35%, transparent); }
+.mh-btn.wa { background: #25d366; color: #06301a; }
+.mh-btn.ghost { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
+.mh-btn.ghost:hover { border-color: var(--primary); box-shadow: none; }
+.mh-note { margin: 12px 0 0; font-size: .74rem; line-height: 1.55; color: var(--text-muted); font-weight: 600; }
+
+/* faq */
+.mh-faq { display: grid; gap: 8px; margin-top: 14px; }
+.mh-faq details { border: 1px solid var(--border); border-radius: 14px; background: var(--lux-card); padding: 0 14px; }
+.mh-faq summary { cursor: pointer; list-style: none; padding: 13px 0; font-size: .88rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
+.mh-faq summary::-webkit-details-marker { display: none; }
+.mh-faq summary::after { content: "▾"; margin-left: auto; color: var(--primary); transition: transform .2s; }
+.mh-faq details[open] summary::after { transform: rotate(180deg); }
+.mh-faq details p { margin: 0 0 13px; font-size: .82rem; line-height: 1.6; color: var(--text-muted); font-weight: 600; }
+.mh-faq details p strong { color: var(--text-main); }
+
+@media (max-width: 960px) { .mh-hero, .mh-two { grid-template-columns: minmax(0, 1fr); } .mh-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } .mh-why { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) { .mh-card { padding: 18px 16px; } .mh-steps, .mh-math { grid-template-columns: minmax(0, 1fr); } .mh-stage { min-height: 200px; } }
+@media (prefers-reduced-motion: reduce) { .mh-ring, .mh-plastic { animation: none; } .mh-step, .mh-btn { transition: none; } .mh-step:hover, .mh-btn:hover { transform: none; } }
+@media print { .mh-actions, .mh-stage { display: none !important; } }
+
+/* ===== PREMIUM v23 / MHD: platební centrum, nové kompoziční rozvržení ===== */
+#f-karta-mhd .mh23 { --mh23-navy:#102c3d; --mh23-teal:#087f7d; display:grid; gap:18px; width:100%; max-width:none; margin:12px 0 26px; min-width:0; }
+#f-karta-mhd .mh23 > * { min-width:0; }
+#f-karta-mhd .mh23-intro { border-radius:22px; padding:clamp(20px,2.5vw,32px); background:linear-gradient(118deg,#102638 0%,#164958 60%,#0e706c 120%); color:#fff; box-shadow:0 16px 34px rgba(12,39,54,.13); overflow:hidden; }
+#f-karta-mhd .mh23-kicker { color:#a8f0e3; letter-spacing:.13em; font-weight:850; font-size:.7rem; display:flex; gap:9px; align-items:center; }
+#f-karta-mhd .mh23-kicker-dot { background:#56e0ba; width:7px; height:7px; border-radius:50%; box-shadow:0 0 0 4px rgba(86,224,186,.13); }
+#f-karta-mhd .mh23-intro-row { display:grid; grid-template-columns:minmax(0,1fr) minmax(190px,275px); gap:24px; align-items:center; margin:10px 0 18px; }
+#f-karta-mhd .mh23-intro h3 { margin:0; color:white; font:800 clamp(1.6rem,3vw,2.6rem)/1.13 var(--font-display); letter-spacing:-.035em; }
+#f-karta-mhd .mh23-intro h3 em { font-style:normal; color:#aaf2dd; }
+#f-karta-mhd .mh23-intro p { max-width:68ch; color:#e1ecf3; margin:11px 0 0; font-size:.88rem; line-height:1.6; }
+#f-karta-mhd .mh23-summary { border:1px solid rgba(255,255,255,.26); background:rgba(255,255,255,.105); border-radius:17px; padding:17px 19px; display:grid; gap:5px; }
+#f-karta-mhd .mh23-summary span { color:#bdd7df; font-weight:800; font-size:.64rem; letter-spacing:.09em; }
+#f-karta-mhd .mh23-summary strong { font:850 clamp(1.65rem,2.6vw,2.2rem)/1.15 var(--font-display); color:white; white-space:nowrap; font-variant-numeric:tabular-nums; }
+#f-karta-mhd .mh23-summary small { color:#d4e5e6; font-size:.69rem; }
+#f-karta-mhd .mh23-nav { display:flex; flex-wrap:wrap; gap:8px; }
+#f-karta-mhd .mh23-nav a { display:inline-flex; align-items:center; justify-content:center; border-radius:11px; background:rgba(255,255,255,.11); color:#fff; text-decoration:none; font-size:.76rem; font-weight:750; border:1px solid rgba(255,255,255,.24); padding:10px 13px; line-height:1.25; transition:background .15s; }
+#f-karta-mhd .mh23-nav a:hover { background:rgba(255,255,255,.24); }
+#f-karta-mhd .mh23-featuregrid { display:grid; grid-template-columns:minmax(0,1fr) minmax(355px,.98fr); align-items:stretch; gap:16px; }
+#f-karta-mhd .mh23-transport,#f-karta-mhd .mh23-calculator { min-width:0; }
+#f-karta-mhd .mh23-featuregrid .mh-card { height:100%; min-width:0; margin:0; }
+#f-karta-mhd .mh23-featuregrid .mh-hero { grid-template-columns:minmax(0,1fr); gap:4px; align-content:start; background:linear-gradient(145deg,#123348,#123c4f); }
+#f-karta-mhd .mh23-featuregrid .mh-hero .mh-h { font-size:clamp(1.26rem,1.8vw,1.65rem); }
+#f-karta-mhd .mh23-featuregrid .mh-hero .mh-stage { min-height:165px; margin:-8px auto -14px; width:min(100%,360px); }
+#f-karta-mhd .mh23-featuregrid .mh-hero .mh-plastic { width:min(220px,78%); padding:14px; border-radius:13px; animation:none; transform:rotate(-5deg); box-shadow:0 16px 25px rgba(0,0,0,.28); }
+#f-karta-mhd .mh23-featuregrid .mh-hero .mh-plastic b { font-size:.85rem; }
+#f-karta-mhd .mh23-featuregrid .mh-hero .mh-ring { animation:none; display:none; }
+#f-karta-mhd .mh23-featuregrid .mh-hero .mh-gate { font-size:.67rem; bottom:12%; right:5%; }
+#f-karta-mhd .mh23-featuregrid .mh-pills { gap:6px; margin-top:12px; }
+#f-karta-mhd .mh23-featuregrid .mh-pills span { font-size:.69rem; padding:5px 9px; }
+#f-karta-mhd .mh23-calculator .mh-card { background:var(--lux-card); border:1px solid var(--border); box-shadow:0 10px 26px rgba(16,44,61,.055); }
+#f-karta-mhd .mh23-calculator .mh-h2 { font-size:1.25rem; margin-bottom:8px; }
+#f-karta-mhd .mh23-calculator .mh-two { grid-template-columns:1fr; gap:15px; }
+#f-karta-mhd .mh23-calculator .mh-total { padding:16px; border-radius:14px; text-align:left; grid-template-columns:auto 1fr; gap:6px 12px; align-items:baseline; background:color-mix(in srgb, var(--primary) 7%, var(--lux-card)); border-color:color-mix(in srgb, var(--primary) 32%, var(--border)); }
+#f-karta-mhd .mh23-calculator .mh-total .mh-lbl { grid-column:1/-1; }
+#f-karta-mhd .mh23-calculator .mh-total b { font-size:2rem; }
+#f-karta-mhd .mh23-calculator .mh-total em { font-size:.86rem; justify-self:end; }
+#f-karta-mhd .mh23-calculator .mh-total small { grid-column:1/-1; }
+#f-karta-mhd .mh23-calculator .mh-f-head { gap:3px 14px; }
+#f-karta-mhd .mh23-steps > .mh-card,#f-karta-mhd .mh23-lower .mh-card { margin:0; height:100%; border:1px solid var(--border); background:var(--lux-card); box-shadow:0 9px 22px rgba(16,44,61,.045); }
+#f-karta-mhd .mh23-steps .mh-steps { grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-top:19px; }
+#f-karta-mhd .mh23-steps .mh-step { background:var(--surface); border-radius:14px; padding:20px 14px 13px; }
+#f-karta-mhd .mh23-steps .mh-step::before { top:-10px; }
+#f-karta-mhd .mh23-lower { display:grid; grid-template-columns:1.15fr 1fr; gap:16px; }
+#f-karta-mhd .mh23-lower > * { min-width:0; }
+#f-karta-mhd .mh23-lower .mh-faq details { background:var(--surface); }
+#f-karta-mhd .mh23-benefits .mh-why { grid-template-columns:1fr; }
+#f-karta-mhd .mh23-benefits .mh-w { grid-template-columns:26px 1fr; gap:4px 10px; background:var(--surface); border-radius:13px; }
+#f-karta-mhd .mh23-benefits .mh-w>span { grid-row:span 2; }
+#f-karta-mhd .mh23-benefits .mh-w>p { grid-column:2; }
+#f-karta-mhd .mh23-benefits .mh-quote { font-size:.8rem; margin-top:12px; }
+#f-karta-mhd .mh23-offer { border:1px solid var(--border); border-radius:17px; background:var(--lux-card); overflow:hidden; }
+#f-karta-mhd .mh23-offer > summary { display:flex; align-items:center; gap:14px; cursor:pointer; padding:16px 20px; list-style:none; }
+#f-karta-mhd .mh23-offer > summary::-webkit-details-marker { display:none; }
+#f-karta-mhd .mh23-offer > summary .mh23-offer-icon { display:grid; place-items:center; width:40px; height:40px; border-radius:12px; background:var(--lux-card-2); font-size:1.2rem; flex:none; }
+#f-karta-mhd .mh23-offer > summary strong { color:var(--text-main); font-size:.91rem; display:block; }
+#f-karta-mhd .mh23-offer > summary small { color:var(--text-muted); font-size:.75rem; display:block; margin-top:3px; }
+#f-karta-mhd .mh23-offer > summary .mh23-offer-chevron { margin-left:auto; color:var(--primary); font-size:1.5rem; line-height:1; transition:transform .15s; }
+#f-karta-mhd .mh23-offer[open] > summary .mh23-offer-chevron { transform:rotate(180deg); }
+#f-karta-mhd .mh23-offer-inner { padding:0 16px 16px; }
+#f-karta-mhd .mh23-offer-inner .mh-card { box-shadow:none; border-radius:13px; padding:20px; }
+#f-karta-mhd .mh23-footnote { color:var(--text-muted); font-size:.77rem; line-height:1.6; margin:0; padding:0 4px; }
+#f-karta-mhd :is(#mh23-calc,#mh23-steps,#mh23-help,#mh23-offer) { scroll-margin-top:100px; }
+@media(max-width:1090px){
+ #f-karta-mhd .mh23-featuregrid { grid-template-columns:minmax(0,1fr) minmax(310px,1fr); }
+ #f-karta-mhd .mh23-featuregrid .mh-stage { display:none; }
+ #f-karta-mhd .mh23-steps .mh-steps { grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:18px; }
+}
+@media(max-width:760px){
+ #f-karta-mhd .mh23-intro-row,#f-karta-mhd .mh23-featuregrid,#f-karta-mhd .mh23-lower { grid-template-columns:1fr; }
+ #f-karta-mhd .mh23-intro { padding:20px 17px; }
+ #f-karta-mhd .mh23-summary { padding:12px 15px; }
+ #f-karta-mhd .mh23-summary strong { font-size:1.65rem; }
+ #f-karta-mhd .mh23-nav { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+ #f-karta-mhd .mh23-nav a { padding:10px 6px; font-size:.72rem; }
+ #f-karta-mhd .mh23-featuregrid .mh-stage { display:none; }
+ #f-karta-mhd .mh23-calculator .mh-two { grid-template-columns:1fr; }
+ #f-karta-mhd .mh23-calculator .mh-total { grid-template-columns:1fr; }
+ #f-karta-mhd .mh23-calculator .mh-total em { justify-self:start; }
+ #f-karta-mhd .mh23-steps .mh-steps { grid-template-columns:1fr; }
+ #f-karta-mhd .mh23-lower .mh-card { padding:18px 15px; }
+}
+@media(max-width:390px){
+ #f-karta-mhd .mh23-intro h3 { font-size:1.5rem; }
+ #f-karta-mhd .mh23-nav a { font-size:.68rem; }
+ #f-karta-mhd .mh23-intro-row { gap:15px; }
+}
+@media print { #f-karta-mhd .mh23-nav { display:none; } #f-karta-mhd .mh23-offer { break-inside:avoid; } }
+
+</style>
+
+<div class="mh mh23" id="karta-mhd">
+
+<header class="mh23-intro" aria-label="Průvodce platbami singapurské dopravy">
+  <div class="mh23-kicker"><span class="mh23-kicker-dot"></span> SINGAPUR 2027 · PLATEBNÍ PRŮVODCE</div>
+  <div class="mh23-intro-row">
+    <div class="mh23-intro-copy">
+      <h3>Metro, autobus a platby <em>bez hledání jízdenek</em></h3>
+      <p>Na jednom místě máš postup pro MRT, interaktivní kalkulačku peněz na kartu, odpovědi na důležité otázky i podmínky doporučovací akce.</p>
+    </div>
+    <div class="mh23-summary" aria-live="polite">
+      <span>ORIENTAČNĚ NABÍT NA KARTU</span>
+      <strong id="mh23TopTotal">–</strong>
+      <small>Za 1 osobu · podle nastavení níže</small>
+    </div>
+  </div>
+  <nav class="mh23-nav" aria-label="Rychlé přepnutí částí průvodce">
+    <a href="#mh23-calc">💳 Kalkulačka nabití</a>
+    <a href="#mh23-steps">🚇 Jak platit</a>
+    <a href="#mh23-help">❓ Otázky a odpovědi</a>
+    <a href="#mh23-offer">🎁 Bonus a podmínky</a>
+  </nav>
+</header>
+
+<div class="mh23-featuregrid" id="mh23-top">
+  <div class="mh23-transport"><div class="mh-card mh-hero">
+<div>
+<span class="mh-eyebrow">💳 PLATBA KARTOU</span>
+<div aria-level="3" class="mh-h" role="heading">MHD v Singapuru se platí ťuknutím kartou nebo mobilem</div>
+<p class="mh-sub">V metru MRT i v autobusech se nekupují jízdenky. Na bráně přiložíš bezkontaktní kartu Visa nebo Mastercard, nebo telefon s Apple Pay či Google Pay, a při výstupu ťukneš znovu. Cena se spočítá podle ujeté trasy.</p>
+<div class="mh-pills"><span>🚇 MRT</span><span>🚌 Autobusy</span><span>💳 Visa i Mastercard</span><span>📱 Apple Pay a Google Pay</span><span>👤 Každý vlastní kartu</span></div>
+</div>
+<div aria-hidden="true" class="mh-stage">
+<span class="mh-ring"></span><span class="mh-ring"></span><span class="mh-ring"></span>
+<div class="mh-plastic">
+<div class="mh-plastic-top"><span class="mh-chip"></span>
+<svg class="mh-nfc" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24"><path d="M8 6c3 3.5 3 8.5 0 12M12 4c4.5 4.5 4.5 11.5 0 16M16 2c6 5.5 6 14.5 0 20"></path></svg></div>
+<div><small>tap in · tap out</small><b>SINGAPUR 2027</b></div>
+</div>
+<span class="mh-gate">✓ Vstup povolen</span>
+</div>
+</div></div>
+  <div class="mh23-calculator" id="mh23-calc"><div class="mh-card">
+<span class="mh-eyebrow">🧮 KOLIK NAHRÁT</span>
+<div aria-level="3" class="mh-h2" role="heading">Kolik peněz si dát na Revolut před Singapurem</div>
+<p class="mh-sub">MHD, Grab a restaurace v obchoďácích se platí kartou. Hawkery a stánky ne, na ty je hotovost (viz <a href="#hotovost" style="color:var(--primary);font-weight:800">Plán hotovosti</a>). Přepočet na S$ se bere z kurzů v panelu Přepočet měn v Plánu hotovosti.</p>
+<div class="mh-two">
+<div class="mh-ctl">
+<div class="mh-f">
+<div class="mh-f-head"><label for="mhMhd">MHD v Singapuru (z rozpisu nákladů)</label><span class="mh-f-val" id="mhMhdV"></span></div>
+<input class="mh-range" id="mhMhd" max="1500" min="200" step="50" type="range" value="500"/>
+</div>
+<div class="mh-f">
+<div class="mh-f-head"><label for="mhRez">Rezerva na Grab, obchody a restaurace kartou</label><span class="mh-f-val" id="mhRezV"></span></div>
+<input class="mh-range" id="mhRez" max="3000" min="0" step="100" type="range" value="500"/>
+</div>
+<label class="mh-chk"><input id="mhStore" type="checkbox"/><span>Úschovna batohů při tranzitu 24. 8.<small>S$10,90 za batoh na 24 hodin, platí se obvykle kartou u automatu nebo online</small></span></label>
+</div>
+<div aria-live="polite" class="mh-total">
+<span class="mh-lbl">Nahrát na osobu</span>
+<b id="mhTotKc">–</b>
+<em id="mhTotSgd">–</em>
+<small id="mhTotNote"></small>
+</div>
+</div>
+</div></div>
+</div>
+<div class="mh23-steps" id="mh23-steps"><div class="mh-card">
+<span class="mh-eyebrow">🆔 JAK NA TO</span>
+<div aria-level="3" class="mh-h2" role="heading">Čtyři kroky, hotovo za pár minut</div>
+<div class="mh-steps">
+<div class="mh-step"><i aria-hidden="true">📲</i><b>Založ si Revolut</b><p>Stáhni aplikaci, ověř totožnost a okamžitě máš <strong>virtuální kartu</strong>. Fyzickou si objednáš k tomu.</p></div>
+<div class="mh-step"><i aria-hidden="true">⚡</i><b>Nahraj peníze</b><p>Z jakékoli české karty nebo převodem. Peníze tam jsou <strong>během pár vteřin</strong>, tak je nemusíš řešit dopředu.</p></div>
+<div class="mh-step"><i aria-hidden="true">📱</i><b>Přidej kartu do telefonu</b><p>Do <strong>Apple Pay nebo Google Pay</strong>. Pak ti stačí mobil, fyzická karta je záloha.</p></div>
+<div class="mh-step"><i aria-hidden="true">🚇</i><b>Ťukni na bráně</b><p>Při vstupu i výstupu <strong>stejnou kartou nebo telefonem</strong>. Platí se ve S$, převod udělá Revolut.</p></div>
+</div>
+</div></div>
+<div class="mh23-lower" id="mh23-help">
+  <div class="mh23-faq"><div class="mh-card">
+<span class="mh-eyebrow">🧠 DOBRÉ VĚDĚT</span>
+<div aria-level="3" class="mh-h2" role="heading">Než poprvé ťukneš na bráně</div>
+<div class="mh-faq">
+<details><summary>🚪 Může jedna karta platit za víc lidí?</summary><p><strong>Ne.</strong> Každý cestující musí mít vlastní kartu nebo telefon a ťukat sám za sebe. Pípnout jednou kartou víckrát za sebou pro víc lidí nejde. Proto potřebuje Revolut každý z party.</p></details>
+<details><summary>👛 Co když mám v peněžence víc karet?</summary><p>Ťukej <strong>jen tou jednou kartou</strong>, kterou chceš platit, a ostatní karty od čtečky odtáhni, nebo raději používej telefon. Při vstupu a výstupu musí být použita stejná karta nebo telefon, jinak se jízda nespáruje.</p></details>
+<details><summary>🕒 Kdy mi strhnou peníze za jízdy?</summary><p>Jízdy se nestrhávají po jedné. Podle pravidel systému SimplyGo se u Visa účtují denně a u Mastercard se sčítají až 5 dní nebo do chvíle, kdy dosáhnou S$15. V aplikaci se platba proto objeví s odstupem. <strong>Nech si na Revolutu rezervu</strong>, ať se strhne bez potíží.</p></details>
+<details><summary>🛒 Co ještě platit kartou v Singapuru?</summary><p>Grab v aplikaci, obchody a restaurace v nákupních centrech a úschovnu zavazadel. Naopak <strong>hawkery a staré rodinné stánky berou většinou jen hotovost</strong>, proto si vezmi i S$ v drobných bankovkách.</p></details>
+<details><summary>⏱️ Kdy si kartu objednat?</summary><p>Virtuální kartu máš hned po ověření. Fyzickou objednej s velkým předstihem, ideálně během letošního roku, ať dorazí v klidu a máš čas ji vyzkoušet na platbě v obchodě. Akce s bonusem končí 17. 11. 2026.</p></details>
+</div>
+</div></div>
+  <div class="mh23-benefits"><div class="mh-card">
+<span class="mh-eyebrow">💜 PROČ REVOLUT</span>
+<div aria-level="3" class="mh-h2" role="heading">Pro Singapur a placení v cizině je to naše jistota</div>
+<p class="mh-sub">Revolut je mezi cestovateli oblíbený, protože na něm všechno vidíš a ovládáš z telefonu. Nahraješ si přesně tolik, kolik potřebuješ, a nic nevisí na jedné kartě, na které máš celé úspory.</p>
+<div class="mh-why">
+<div class="mh-w"><span aria-hidden="true">⚡</span><b>Peníze za pár vteřin</b><p>Kdykoli v Singapuru si z aplikace dobiješ další částku. Žádné čekání na převod ani návštěvu směnárny.</p></div>
+<div class="mh-w"><span aria-hidden="true">🔒</span><b>Pod kontrolou v telefonu</b><p>Kartu zamkneš jedním klepnutím, vidíš každou platbu hned a limity si nastavíš sám. Když kartu ztratíš, zablokuješ ji z aplikace.</p></div>
+<div class="mh-w"><span aria-hidden="true">🌏</span><b>Placení v cizině bez starostí</b><p>Platíš rovnou ve S$ a Revolut převádí z tvých peněz. Funguje jak v MHD, tak v obchodech a při platbách v aplikaci Grab.</p></div>
+</div>
+<div class="mh-quote">Pro Singapur máme Revolut celá rodina a je to naprosto spolehlivá karta na MHD i na platby v cizině.<small>Radek, osobní zkušenost</small></div>
+</div></div>
+</div>
+<details class="mh23-offer" id="mh23-offer" open>
+  <summary><span class="mh23-offer-icon">🎁</span><span><strong>Revolut: doporučovací bonus a podmínky</strong><small>Volitelná nabídka – podrobnosti jsou rovnou zobrazené</small></span><span class="mh23-offer-chevron" aria-hidden="true">⌄</span></summary>
+  <div class="mh23-offer-inner"><div class="mh-card mh-ref">
+<div class="mh-ref-head">
+<div>
+<span class="mh-eyebrow">🎁 BONUS PRO TEBE</span>
+<div aria-level="3" class="mh-h" role="heading" style="margin-bottom:4px">Založ si Revolut přes můj kód a kartu máš zaplacenou</div>
+<p class="mh-sub">Přidejte se ke mně a více než 80 milionům zákazníků, kteří si Revolut zamilovali. Zaregistruj se pomocí odkazu níže. Když splníš podmínky akce, <strong>pošlu ti půlku odměny</strong> a fyzická karta tě nic nestojí.</p>
+</div>
+<div class="mh-count" id="mhCount"><b id="mhDays">–</b><span id="mhDaysL">dní do konce akce</span></div>
+</div>
+<div class="mh-math">
+<div class="mh-m"><b>1 250 Kč</b><span>odměna od Revolutu za každého, kdo splní podmínky</span></div>
+<div class="mh-m hl"><b>625 Kč</b><span>půlku pošlu tobě, jakmile mi odměna přijde</span></div>
+<div class="mh-m"><b>≈ 178 Kč</b><span>doručení fyzické karty v tarifu Standard (expres ≈ 507 Kč), zbytek je tvůj</span></div>
+</div>
+<ol class="mh-cond">
+<li><i aria-hidden="true">1️⃣</i><div>Zaregistruj se přes můj odkaz a ověř totožnost</div></li>
+<li><i aria-hidden="true">2️⃣</i><div>Přidej peníze na účet<small>debetní kartou nebo bankovním převodem</small></div></li>
+<li><i aria-hidden="true">3️⃣</i><div>Udělej 3 nákupy, každý za aspoň 100 Kč<small>některé hotovostní transakce, jako hazardní hry, dárkové karty nebo převody, se nepočítají</small></div></li>
+<li><i aria-hidden="true">4️⃣</i><div>Objednej si fyzickou kartu<small>přidej ji do Apple nebo Google Pay a začni platit bezkontaktně</small></div></li>
+</ol>
+<div class="mh-actions">
+<a class="mh-btn" href="https://revolut.com/referral/?referral-code=radekqk3!NOV1-26-AR-CTRL-RFC&amp;geo-redirect" id="mhLink" rel="noopener noreferrer" target="_blank">💜 Založit Revolut přes můj odkaz ↗</a>
+<button class="mh-btn ghost" id="mhCopy" type="button">📋 Zkopírovat odkaz</button>
+<a class="mh-btn wa" href="#" id="mhWa" rel="noopener noreferrer" target="_blank">💬 Poslat kamarádovi</a>
+</div>
+<p class="mh-note">Je to doporučovací odkaz: Revolut za nového zákazníka vyplácí odměnu mně a já z ní půlku posílám dál. Akce platí do 17. 11. 2026 a podmínky určuje Revolut, mohou se tedy změnit. Poplatky za doručení karty a rozsah bezplatné směny měn závisí na tarifu a ověříš je v aplikaci.</p>
+</div></div>
+</details>
+<p class="mh23-footnote">Kalkulačka plánuje částku k nabití platební karty. Nemění sama o sobě náklady celé expedice ani skutečný bankovní kurz. Informace o akcích a poplatcích si ověř před použitím v aplikaci poskytovatele.</p>
+</div>
+
+<script>
+(function () {
+    'use strict';
+    var root = document.getElementById('karta-mhd'); if (!root) return;
+    var $ = function (s) { return root.querySelector(s); };
+    var NF = function (v, d) { return new Intl.NumberFormat('cs-CZ', { maximumFractionDigits: d == null ? 0 : d, minimumFractionDigits: 0 }).format(v); };
+    var NB = '\u00a0';
+    var LINK = 'https://revolut.com/referral/?referral-code=radekqk3!NOV1-26-AR-CTRL-RFC&geo-redirect';
+    var DEADLINE = new Date('2026-11-17T23:59:59+01:00').getTime();
+
+    function sgdRate() { var x = window.luxFx; return x && x.mid && x.mid.SGD ? x.mid.SGD : 24.347 / 1.4285; }
+
+    function calc() {
+        var mhd = +$('#mhMhd').value, rez = +$('#mhRez').value, store = $('#mhStore').checked, r = sgdRate();
+        var storeKc = store ? 10.9 * r : 0, kc = mhd + rez + storeKc, sgd = kc / r;
+        [['#mhMhd', 200, 1500], ['#mhRez', 0, 3000]].forEach(function (p) { var el = $(p[0]); el.style.setProperty('--p', ((el.value - p[1]) / (p[2] - p[1]) * 100) + '%'); });
+        $('#mhMhdV').textContent = NF(mhd) + NB + 'Kč ≈ S$' + NF(mhd / r);
+        $('#mhRezV').textContent = NF(rez) + NB + 'Kč ≈ S$' + NF(rez / r);
+        $('#mhTotKc').textContent = NF(Math.ceil(kc / 50) * 50) + NB + 'Kč';
+        $('#mhTotSgd').textContent = '≈ S$' + NF(sgd) + ' (1 S$ = ' + NF(r, 2) + ' Kč)';
+        $('#mhTotNote').textContent = 'Zaokrouhleno nahoru na 50 Kč. Revolut převádí podle vlastního kurzu, částka je orientační.';
+        var m = document.getElementById('mhMeta'); if (m) m.textContent = '≈ ' + NF(Math.ceil(kc / 50) * 50) + ' Kč na kartě';
+    }
+    ['#mhMhd', '#mhRez'].forEach(function (s) { $(s).addEventListener('input', calc); });
+    $('#mhStore').addEventListener('change', calc);
+    window.addEventListener('lux:fx', calc);
+
+    function countdown() {
+        var left = DEADLINE - Date.now(), box = $('#mhCount');
+        if (left > 0) { var d = Math.ceil(left / 86400000); $('#mhDays').textContent = d; $('#mhDaysL').textContent = (d === 1 ? 'den' : d < 5 ? 'dny' : 'dní') + ' do konce akce'; box.classList.remove('is-late'); }
+        else { $('#mhDays').textContent = '✕'; $('#mhDaysL').textContent = 'akce skončila'; box.classList.add('is-late'); }
+    }
+
+    $('#mhCopy').addEventListener('click', function () {
+        var done = function (ok) { if (typeof window.showToast === 'function') { try { window.showToast(ok ? '📋 Odkaz zkopírován' : 'Kopírování se nepovedlo'); } catch (e) {} } };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(LINK).then(function () { done(true); }, function () { done(false); });
+        else { try { var ta = document.createElement('textarea'); ta.value = LINK; ta.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(ta); ta.select(); done(document.execCommand('copy')); ta.remove(); } catch (e) { done(false); } }
+    });
+    $('#mhWa').href = 'https://wa.me/?text=' + encodeURIComponent('Přidej se ke mně na Revolutu. Když přes tenhle odkaz splníš podmínky akce, pošlu ti půlku odměny a karta je zadarmo. Pro Singapur (MHD i platby) je to ideální: ' + LINK);
+
+    calc(); countdown(); setInterval(countdown, 3600000);
+    window.addEventListener('load', calc);
+})();
+</script>
+    </div></div></div>
+
+<script id="mh23-mini-amount-sync">
+(function(){
+  'use strict';
+  function init(){
+    const from=document.getElementById('mhTotKc');
+    const target=document.getElementById('mh23TopTotal');
+    if(!from||!target)return;
+    const sync=()=>{target.textContent=from.textContent||'–';};
+    sync();
+    new MutationObserver(sync).observe(from,{childList:true,characterData:true,subtree:true});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
+})();
+</script>
+</section>
+    </div>
+</section>
+
+<section class="lux-part" id="cast-misto" aria-labelledby="cast-misto-h">
+    <header class="lux-part-head">
+        <span class="lux-part-no" aria-hidden="true">IV</span>
+        <div>
+            <span class="lux-part-eyebrow">Část IV · Na místě</span>
+            <div class="lux-part-title" id="cast-misto-h" role="heading" aria-level="2">Slovníček</div>
+            <p class="lux-part-sub">Praktické fráze v interaktivních překlápěcích kartách s výslovností.</p>
+        </div>
+    </header>
+    <div class="lux-part-body">
+
 <section class="lux-fold " id="f-hotovost">
     <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-hotovost-b" onclick="luxToggle('f-hotovost')">
         <span class="lux-fold-node" aria-hidden="true">💵</span>
@@ -13564,14 +13767,269 @@ function updatePackingWeight() {
 </script>
     </div></div></div>
 </section>
-<section class="lux-fold " id="f-rozpis">
-    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-rozpis-b" onclick="luxToggle('f-rozpis')">
-        <span class="lux-fold-node" aria-hidden="true">📋</span>
-        <span class="lux-fold-txt"><span class="lux-fold-t">Transparentní rozpis nákladů</span><span class="lux-fold-s">Všechny položky, grafy a srovnání s CK SEN</span></span>
+<section class="lux-fold " id="f-konfig">
+    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-konfig-b" onclick="luxToggle('f-konfig')">
+        <span class="lux-fold-node" aria-hidden="true">💰</span>
+        <span class="lux-fold-txt"><span class="lux-fold-t">Finální finanční dashboard</span><span class="lux-fold-s">Souhrn vybraných letů, hotelů, jídla, aktivit i hotovosti · na závěr CK SEN</span></span>
         <span class="lux-fold-meta"></span>
         <span class="lux-fold-chev" aria-hidden="true">▾</span>
     </button></h3>
-    <div class="lux-fold-body" id="f-rozpis-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+    <div class="lux-fold-body" id="f-konfig-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
+
+        <div class="v32-flow-note" role="note">
+          <div><strong>05 · Finální kontrola ceny</strong><span>Hotely a lety už vybíráš v itineráři. Tady máš vše na jednom místě.</span></div>
+          <a href="#jidlo">Jídlo</a><a href="#aktivity">Aktivity</a><a href="#hotovost">Hotovost</a>
+        </div>
+        <!-- SEKCE: KOMPLETNÍ ROZPOČET SE 4 REŽIMY, 5 LETOVÝMI  MI A ŽIVÝM PŘEHLEDEM HOTELŮ -->
+        <div id="rozpocet" class="bento-grid">
+            <div class="bento-card highlight full">
+<!-- PREMIUM V18: Finanční dashboard. Všechny ovládací prvky a výpočty jsou původní, jen přesunuté. -->
+<div class="pf18-shell" id="pf18-dashboard">
+  <div class="pf18-hero">
+    <div class="pf18-hero-copy">
+      <span class="pf18-eyebrow"><span class="pf18-live-dot"></span> ZÁVĚREČNÉ SHRNUTÍ · AKTUÁLNÍ VOLBY</span>
+      <h2>Tvá cesta. <span>Kompletní finanční přehled.</span></h2>
+      <p>Nejdřív vyber lety a hotely v itineráři, potom jídlo, výlety a hotovost. Tady uvidíš výslednou cenu, všechny položky, rozdíly variant a nakonec srovnání s CK SEN. Ceny reagují na každou změnu výběru.</p>
+    </div>
+    <div class="pf18-hero-badge"><span>06—25</span><small>SRPEN 2027</small><b>Singapur · Bali · Lombok</b></div>
+  </div>
+
+  <div class="pf18-section-heading"><div><span class="pf18-kicker">01 / SOUHRN CESTY</span><h3>Kolik dovolená stojí</h3></div><span class="pf18-help">Aktuální částky ze stávající kalkulace</span></div>
+  <div id="pf18-kpi-slot" class="pf18-kpi-slot"></div>
+
+  <div class="pf18-finance-grid">
+    <article class="pf18-panel pf18-breakdown">
+      <div class="pf18-card-header"><div><span class="pf18-kicker">02 / NÁKLADOVÁ STRUKTURA</span><h3>Kam jdou peníze</h3><p>Rozdělení výdajů na 1 osobu při sdíleném pokoji</p></div><span class="pf18-small-pill">Živé údaje</span></div>
+      <div class="pf18-chart-body">
+        <div class="pf18-donut" id="pf18-donut" role="img" aria-label="Graf nákladů podle kategorií">
+          <div class="pf18-donut-center"><span>CELKEM / OSOBA</span><strong id="pf18-ring-total">– Kč</strong><small>včetně zvolených položek</small></div>
+        </div>
+        <div class="pf18-legend" id="pf18-legend" aria-live="polite"><span class="pf18-placeholder">Načítání aktuálního rozpočtu…</span></div>
+      </div>
+      <a href="#rozpis-nakladu" class="pf18-text-link" data-pf18-open="f-konfig">Otevřít úplný rozpis všech položek <span aria-hidden="true">↗</span></a>
+    </article>
+
+    <article class="pf18-panel pf18-overview">
+      <div class="pf18-card-header"><div><span class="pf18-kicker">03 / AKTUÁLNÍ VOLBY</span><h3>Tvoje cestovní sestava</h3><p>Výběr hotelů ovlivní konečnou cenu celé cesty.</p></div></div>
+      <div class="pf18-overview-number"><span>UBYTOVÁNÍ · 17 NOCÍ</span><strong id="pf18-hotel-price">– Kč</strong><small>za vybraný pokoj</small></div>
+      <div class="pf18-choice-status" id="pf18-choice-status" aria-live="polite">Načítám zvolenou variantu…</div>
+      <div class="pf18-quicklinks">
+        <a href="#f-jidlo" data-pf18-open="f-jidlo"><span class="pf18-quick-icon">🍜</span><span><b>Jídlo</b><small>Vybrat způsob stravování</small></span><span>↗</span></a>
+        <a href="#f-aktivity" data-pf18-open="f-aktivity"><span class="pf18-quick-icon">🎟️</span><span><b>Aktivity</b><small>Vstupy a výlety</small></span><span>↗</span></a>
+        <a href="#f-hotovost" data-pf18-open="f-hotovost"><span class="pf18-quick-icon">💵</span><span><b>Hotovost</b><small>Kolik peněz připravit</small></span><span>↗</span></a>
+      </div>
+    </article>
+  </div>
+
+  <section class="pf18-panel pf18-hotel-panel" aria-labelledby="pf18-hotels-heading">
+    <div class="pf18-card-header"><div><span class="pf18-kicker">04 / NASTAVENÍ UBYTOVÁNÍ</span><h3 id="pf18-hotels-heading">Vyber hotelovou variantu</h3><p>Hotové kombinace A, B, C nebo individuální výběr po etapách. Ovládání a ceny zůstávají propojené s původním konfigurátorem.</p></div></div>
+    <div id="pf18-mode-slot"></div>
+    <div id="pf18-hotels-slot"></div>
+  </section>
+
+  <div class="pf18-support-grid">
+    <details class="pf18-details" id="pf18-info"><summary><span class="pf18-details-icon">ⓘ</span><span><b>Platby, zálohy a co zahrnuje cena</b><small>Podrobnosti a praktické informace</small></span><span class="pf18-details-arrow">⌄</span></summary><div class="pf18-details-content" id="pf18-info-slot"></div></details>
+    <details class="pf18-details" id="pf18-map"><summary><span class="pf18-details-icon">⌖</span><span><b>Mapa vybraných hotelů</b><small>Lokality a vzdálenosti po ostrovech</small></span><span class="pf18-details-arrow">⌄</span></summary><div class="pf18-details-content" id="pf18-map-slot"></div></details>
+  </div>
+</div>
+<!-- /PREMIUM V18 -->
+
+               <h2 class="x-a141b9" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3); display: flex;">Rozpočet a výběr hotelů</h2>
+                <p style="font-size: 0.95rem; margin-bottom: 12px; color: var(--text-muted);">📊 Klikni na libovolnou kombinaci hotelů. Letovou variantu vybereš nahoře ve složce „Výběr letenek“, celá stránka se pak sama přepočítá (lety, hotely i ceny).</p>
+
+     <div style="background: var(--surface-hover); padding: 14px 16px; border-radius: 12px; margin-bottom: 16px; font-size: 0.9rem; line-height: 1.5; font-weight: 500; border: 1px solid var(--border); color: var(--text-main);">
+                    🤝 <strong>Placení:</strong> Letenky a ubytování zařizuji já. Zálohu vybírám v lednu 2027 pro okamžitý flexibilní nákup. Po nákupu rozešlu oficiální fakturu a zbylé peníze vracím zpět. Zakládám si na 100% transparentnosti. O všem co budu dělat, Vás budu informovat. První nakupuju velké letenky z Prahy do Singapuru a zpět. Dále budu kupovat letenky ze Singapuru na Bali a pak objednávám lodní lístky z Bali na Lombok. Není to najednou, ale snažím se to vyřešit po nákupu velkých letenek co nejdříve. Na hotely budu potřebovat peníze začátkem července 2027. Co se týká vlastní výměny za USD doporučuji hlídat výhodný kurz a pak sami nakoupit. Odhad je cca 700 USD na osobu. Ale je to na Vás.
+                    <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.15); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                        <span>🚗 <strong>Tip na parkování u letiště:</strong> Zkoušel jsem to rezervovat a vyšla mi cena 1000 Kč, tak jsem to za tu cenu zarezervoval 💰. Jinak bude léto, nebude potřeba řešit, kam dát zimní věci, tak se dá na letiště dojet StudentAgency a metrem, ale po dlouhém letu zpátky je to dost otravné a únavné, jet ještě busem domů....po zkušenostech, to nedoporučuji..</span>
+                        <a href="https://1parking.cz/rezervace/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: var(--lux-deep-b); color: #ffffff; text-decoration: none; padding: 8px 14px; border-radius: 8px; font-weight: 700; font-size: 0.85rem;">
+                            Rezervovat parkování ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 1. KROK: PŘEPÍNAČ 5 DETAILNÍCH VARIANT DÁLKOVÉHO LETU -->
+                
+
+<script>
+    function updateGanttActiveRow(airlineKey) {
+        document.querySelectorAll('.gantt-row').forEach(row => row.classList.remove('active'));
+
+        const targetRowOutbound = document.getElementById('ganttRow_outbound_' + airlineKey);
+        if (targetRowOutbound) targetRowOutbound.classList.add('active');
+
+        const targetRowReturn = document.getElementById('ganttRow_return_' + airlineKey);
+        if (targetRowReturn) targetRowReturn.classList.add('active');
+    }
+
+    function handleGanttClick(airlineKey) {
+        if (typeof setFlightAirline === 'function') {
+            setFlightAirline(airlineKey);
+        }
+        updateGanttActiveRow(airlineKey);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        if (typeof window.setFlightAirline === 'function') {
+            const originalSetFlightAirline = window.setFlightAirline;
+            window.setFlightAirline = function(airlineKey) {
+                originalSetFlightAirline(airlineKey);
+                updateGanttActiveRow(airlineKey);
+            };
+        }
+
+        const activeBtn = document.querySelector('.flight-mode-btn.active, button.flight-mode-btn[class*="active"]');
+        if (activeBtn) {
+            const idAttr = activeBtn.id || '';
+            const parts = idAttr.split('_');
+            if (parts.length > 1) {
+                const key = parts.slice(1).join('_');
+                updateGanttActiveRow(key);
+            }
+        } else if (typeof currentFlightAirline !== 'undefined' && currentFlightAirline) {
+            updateGanttActiveRow(currentFlightAirline);
+        }
+    });
+</script>
+
+<!-- KOMPLETNÍ HODNOCENÍ LETECKÝCH SPOLEČNOSTÍ PRO ECONOMY -->
+
+
+
+
+
+
+   <!-- 2. KROK: PŘEPÍNAČ VARIANT HOTELŮ (VČETNĚ VARIANTY C!) -->
+<div>
+    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 6px; color: var(--primary-light);">
+        🏨 2. Vyber variantu hotelů (automaticky přeskupí hotely níže):
+    </div>
+    <div class="budget-mode-switch">
+        <button id="btnModePlanA" class="budget-mode-btn" onclick="setBudgetMode('planA')">📋 1. Všechny hotely:  A<br><small class="x-fs-73" style="opacity: 0.85;">Původní výběr (21 204 Kč/pokoj)</small></button>
+        <button id="btnModePlanB" class="budget-mode-btn active" onclick="setBudgetMode('planB')">⭐ 2. Všechny hotely:    B<br><small class="x-fs-73" style="opacity: 0.85;">Nejvyšší úspora (14 611 Kč/pokoj)</small></button>
+        <button id="btnModePlanC" class="budget-mode-btn" onclick="setBudgetMode('planC')">💎 3.   C (TOP Komfort)<br><small class="x-fs-73" style="opacity: 0.85;">Hotel 81 Gold + Bije Suite Villa</small></button>
+
+        <button id="btnModeCustom" class="budget-mode-btn" onclick="setBudgetMode('custom')">🎛️ 5. Vlastní mix (dle kliknutí)<br><small class="x-fs-73" style="opacity: 0.85;">Nakombinuj si každou etapu zvlášť</small></button>
+    </div>
+</div>
+
+<!-- ŽIVÝ PŘEHLED AKTUÁLNĚ VYBRANÝCH HOTELŮ (PŘESKUPUJE SE V REÁLNÉM ČASE) -->
+<div class="selected-hotels-deck-wrapper">
+    <div class="deck-header">
+        <span style="font-size: 0.85rem; font-weight: 800; color: var(--primary-light); text-transform: uppercase; letter-spacing: 0.8px;">
+            🏨 Aktuálně vybraná sestava hotelů (17 nocí) — klikni na A/B/C pro okamžitou změnu nebo na kartu pro skok do etapy:
+        </span>
+        <span id="deckTotalBadge" style="font-size: 0.82rem; font-weight: 900; background: var(--accent); color: #fff; padding: 4px 12px; border-radius: 20px;">
+            Celkem za hotely: 14 611 Kč / pokoj
+        </span>
+    </div>
+    <div class="selected-hotels-deck" id="selectedHotelsDeck">
+        <!-- Generováno dynamicky z JavaScriptu při každém přepnutí -->
+    </div>
+</div>
+
+<!-- DYNAMICKÉ SOUHRNNÉ KARTY -->
+<div class="tj-excl" role="note"><b>ℹ️ Cena dovolené zahrnuje všechno, co si nakonfiguruješ:</b> 🛫 letenky, 🏨 hotely, 🛵 skútry, 🛂 víza a poplatky, 🍜 jídlo, 🧭 výlety a 🎟️ vstupy. <span>Jídlo vybereš v sekci <a href="#jidlo">Jídlo</a>, výlety a vstupy v sekci <a href="#aktivity">Vstupné a aktivity</a> a vše se samo započítá do celkové ceny. Cena nezahrnuje jízdné v Singapuru, taxi, drobné výdaje, úschovnu batohů, soukromou loď na Gili, suvenýry a platbu za poslední hotel na místě.</span></div>
+
+<div class="family-card-grid">
+    <div class="family-card-box">
+        <div class="fc-tag" id="calcTagPerson">👤 Cena dovolené na 1 osobu</div>
+        <div class="fc-price" id="calcTotalPerson">46 638 Kč</div><span id="calcPricePerson" hidden>46 638 Kč</span>
+        <div class="fc-desc" id="calcDescPerson">Let, vybrané hotely, skútry, víza a poplatky, jídlo a vstupy podle tvého výběru</div>
+    </div>
+     <div class="family-card-box">
+        <div class="fc-tag" id="calcTagFamily">👨‍👩‍👧 Cena dovolené pro pár / rodinu (2 osoby v pokoji)</div>
+        <div class="fc-price" id="calcTotalFamily">93 275 Kč</div><span id="calcPriceFamily" hidden>93 275 Kč</span>
+        <div class="fc-desc" id="calcDescFamily">Pro 2 osoby sdílející 1 dvoulůžkový pokoj (17 nocí ubytování), se vším, co jste si zvolili</div>
+    </div>
+    <!-- NOVÁ KARTA PRO SÓLO CESTOVATELE -->
+    <div class="family-card-box" style="border-color: rgba(232, 212, 138, 0.4);">
+        <div class="fc-tag x-c-gold">🏍️ 1 Osoba (Sólo cestovatel)</div>
+        <div class="fc-price" id="calcTotalSingle">-- Kč</div><span id="calcPriceSingle" hidden>-- Kč</span>
+        <div class="fc-desc">Sám na pokoji, platí celý skútr a celý pokoj sám za sebe, se vším, co sis zvolil</div>
+    </div>
+</div>
+
+<div style="text-align: center; margin-top: 12px; font-size: 0.95rem; font-weight: 800; color: #fff;">
+    💡 Stav kalkulace: <span id="budgetStatusLabel" style="color: var(--lux-ok);">Aktivní:   B • Let s Emirates (16:10) (Max. úspora 8 387 Kč na rodinu)</span>
+</div>
+
+<div class="bento-card full x-4c7ef9" style="box-shadow: var(--shadow);">
+    <div class="x-fd-column_gap-12_mb-20_w-100pc" style="display: flex;">
+        <div class="x-jc-center_ai-center_w-100pc" style="display: flex;">
+            <span class="badge" style="background: rgba(169, 187, 208, 0.15); color: var(--primary); border: 1px solid var(--primary); font-weight: 800; font-size: 0.72rem; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 20px;">
+                🗺️ INTERAKTIVNÍ LOKACE
+            </span>
+        </div>
+
+        <h2 class="sec-title" style="font-size: 1.5rem; margin-bottom: 6px; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; text-align: center; text-transform: uppercase; background: linear-gradient(135deg, var(--lux-deep-a) 0%, var(--lux-deep-b) 100%); color: #ffffff; padding: 16px 24px; border-radius: 14px; border: 2.5px solid rgba(255, 255, 255, 0.25); box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3); width: 100%; box-sizing: border-box; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 0;">
+            Dynamická mapa akčního rádiusu (20 km) podle tvých vybraných hotelů
+        </h2>
+
+        <p class="sec-sub x-bc6de9">
+            Když přepneš variantu hotelu (např. na Lomboku ze Sekotongu na Tanjung), kruhy na mapě se automaticky přesunou na přesné souřadnice vybraného ubytování!
+        </p>
+    </div>
+
+    <!-- PŘEPÍNAČ VARIANT HOTELŮ PŘÍMO NAD MAPOU -->
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; background: var(--surface-hover); padding: 12px; border-radius: 12px; border: 1px solid var(--border);">
+        <span style="font-size: 0.8rem; font-weight: 800; color: var(--primary); text-transform: uppercase;">Zvolit variantu hotelů:</span>
+        <div style="display: flex; gap: 8px; width: 100%; flex-wrap: wrap;">
+            <button id="mapModeBtn_planA" class="sqs-btn" onclick="setBudgetMode('planA')" style="flex: 1; min-width: 0; padding: 8px 10px; font-size: 0.78rem; text-align: center; justify-content: center;">📋 A</button>
+            <button id="mapModeBtn_planB" class="sqs-btn" onclick="setBudgetMode('planB')" style="flex: 1; min-width: 0; padding: 8px 10px; font-size: 0.78rem; text-align: center; justify-content: center;">⭐ B</button>
+            <button id="mapModeBtn_planC" class="sqs-btn" onclick="setBudgetMode('planC')" style="flex: 1; min-width: 0; padding: 8px 10px; font-size: 0.78rem; text-align: center; justify-content: center;">💎 C</button>
+
+            <button id="mapModeBtn_custom" class="sqs-btn" onclick="setBudgetMode('custom')" style="flex: 1; min-width: 0; padding: 8px 10px; font-size: 0.78rem; text-align: center; justify-content: center;">🎛️ Vlastní mix</button>
+        </div>
+    </div>
+
+    <div class="map-controls" style="display: flex; gap: 8px; width: 100%; flex-wrap: wrap; margin-bottom: 12px;">
+        <button class="sqs-btn active x-flex-1_min-0_ta-center_jc-center" onclick="setIslandZoomRegion('all', this)">Vše</button>
+        <button class="sqs-btn x-flex-1_min-0_ta-center_jc-center" onclick="setIslandZoomRegion('singapore', this)">Singapur</button>
+        <button class="sqs-btn x-flex-1_min-0_ta-center_jc-center" onclick="setIslandZoomRegion('bali', this)">Bali</button>
+        <button class="sqs-btn x-flex-1_min-0_ta-center_jc-center" onclick="setIslandZoomRegion('lombok', this)">Lombok</button>
+    </div>
+
+    <div class="map-box"><div id="islandMap" style="width: 100%; height: 100%;"></div></div>
+    <button class="map-fullscreen-btn" onclick="openMapFullscreen('island')">🔍 Zvětšit interaktivní mapu ostrovů (Full screen)</button>
+</div>
+</div>
+</div>
+
+
+<!-- PREMIUM V19: Logistický plán cesty — náhrada nepřehledného Ganttu -->
+<section class="pf19-journey" id="ganttAuditCard" aria-labelledby="pf19-title">
+  <div class="pf19-hero">
+    <div class="pf19-hero-copy">
+      <span class="pf19-eyebrow"><span class="pf19-dot"></span> LOGISTIKA EXPEDICE · SRPEN 2027</span>
+      <h3 id="pf19-title">Trasa cesty <em>bez zbytečných mezer</em></h3>
+      <p>Přehled letů, přesunů a navazujících noclehů podle aktuálně vybraných variant. Bez drobných políček Ganttova diagramu.</p>
+    </div>
+    <div class="pf19-hero-dates"><strong>6.–25. 8.</strong><span>2027 · Singapur / Bali / Lombok</span></div>
+  </div>
+
+  <div class="pf19-controls">
+    <label class="pf19-airline">Zvolený dálkový let <select id="pf19-flight-select" aria-label="Vybrat leteckou společnost" onchange="setFlightAirline(this.value)"></select></label>
+    <button class="pf19-fullscreen" type="button" onclick="toggleGanttCardFullscreen()" aria-label="Zobrazit plán na celou obrazovku">⛶ Celá obrazovka</button>
+  </div>
+
+  <div class="pf19-stats" id="pf19-stats" aria-label="Souhrn plánované trasy"></div>
+  <div class="pf19-layout" id="ganttChartContainer">
+    <div class="pf19-main">
+      <div class="pf19-subheading"><div><span class="pf19-mini">01 / PRŮBĚH CESTY</span><h4>Jak na sebe jednotlivé etapy navazují</h4></div><span class="pf19-subhint">Vybrané hotely se aktualizují automaticky</span></div>
+      <div class="pf19-route" id="pf19-route" aria-live="polite"></div>
+    </div>
+    <aside class="pf19-side" aria-label="Kontrola návazností">
+      <div class="pf19-side-head"><span class="pf19-mini">02 / ČASOVÉ REZERVY</span><h4>Na co si dát pozor</h4><p>Vyhodnocení z uloženého itineráře, nikoli z aktuálních dat dopravců.</p></div>
+      <div class="pf19-checks" id="pf19-checks" aria-live="polite"></div>
+      <div class="pf19-advice"><b>Než vše zarezervuješ</b><p>Ověř aktuální lety, podmínky přestupů, časy lodí, dostupnost pokojů a čas potřebný pro check-in. Výběr hotelu není potvrzená rezervace.</p></div>
+    </aside>
+  </div>
+</section>
+<!-- /PREMIUM V19 -->
+
+<!-- PREMIUM v31: sjednocený konfigurátor a položkový rozpis -->
+<div id="f-rozpis" class="v31-financial-detail" aria-label="Podrobný rozpis všech nákladů">
+  <div class="v31-section-label"><span>02 / TRANSPARENTNÍ ROZPOČET</span><h3>Podrobný rozpis nákladů</h3><p>Rozdělení ceny, přehled vybraných hotelů a jednotlivé výdaje na jednom místě.</p></div>
 <!-- PREMIUM v22: Finanční centrum – nové rozložení, původní výpočty ponechány -->
 <div class="p22" id="rozpis-nakladu">
   <header class="p22-mast">
@@ -13832,7 +14290,7 @@ function updatePackingWeight() {
   </div></details>
 </div>
 
-<details class="p22-disclosure p22-comparison-details" id="p22CkComparison"><summary><span>⚖</span><span><b>Volitelné srovnání s CK SEN</b><small>Historické orientační ceny; nikoli aktuální nabídka</small></span><span class="p22-disclosure-arrow">▾</span></summary><div class="p22-disclosure-content"><p class="p22-ck-warning">Následující část zachovává původní orientační srovnání. Ceny CK SEN nejsou živě ověřovány a rozsah zahrnutých služeb se může lišit.</p>
+<details class="p22-disclosure p22-comparison-details" id="p22CkComparison" open><summary><span>⚖</span><span><b>Závěrečné srovnání s CK SEN</b><small>Orientační historické ceny, ne aktuální nabídka · rozdílný rozsah služeb</small></span><span class="p22-disclosure-arrow">▾</span></summary><div class="p22-disclosure-content"><p class="p22-ck-warning">Následující část zachovává původní orientační srovnání. Ceny CK SEN nejsou živě ověřovány a rozsah zahrnutých služeb se může lišit.</p>
 <!-- SEKCE: POROVNÁNÍ S CK SEN (SROVNÁNÍ OBOU VARIANT A ÚSPOR) -->
 <div class="bento-card full" id="srovnani" style="margin-top: 40px; margin-bottom: 20px; overflow: hidden; position: relative; box-sizing: border-box; width: 100%; max-width: 100%;">
 
@@ -14303,436 +14761,10 @@ function updatePackingWeight() {
 })();
 </script>
 
+
+</div>
     </div></div></div>
 </section>
-<!-- =====================================================================
-     NOVÉ SEKCE: JÍDLO (f-jidlo) a VSTUPNÉ A AKTIVITY (f-aktivity)
-     Obě sekce sdílí jeden stav (window.TRIP). Změna úrovně jídla nebo zaškrtnutí
-     položky se hned promítne do:  rozpisu nákladů (řádky pod základním součtem),
-     souhrnu "vč. jídla a aktivit" a do Plánu hotovosti.
-
-     ZÁKLADNÍ ROZPOČET NEZAHRNUJE: jídlo, výlety, vstupy, jízdné v Singapuru
-     a suvenýry (+ taxi, drobné výdaje, úschovnu batohů, soukromou loď na Gili a
-     platbu za poslední hotel na místě - to vše je v sekci Vstupné a aktivity).
-     ===================================================================== -->
-<section class="lux-fold " id="f-karta-mhd">
-    <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-karta-mhd-b" onclick="luxToggle('f-karta-mhd')">
-        <span class="lux-fold-node" aria-hidden="true">💳</span>
-        <span class="lux-fold-txt"><span class="lux-fold-t">Karta do MHD v Singapuru</span><span class="lux-fold-s">MRT a autobusy · kalkulačka karty · praktický návod</span></span>
-        <span class="lux-fold-meta" id="mhMeta"></span>
-        <span class="lux-fold-chev" aria-hidden="true">▾</span>
-    </button></h3>
-    <div class="lux-fold-body" id="f-karta-mhd-b" inert><div class="lux-fold-inner"><div class="lux-fold-pad">
-<style id="mhd-design">
-/* ===== Karta do MHD v Singapuru ===== */
-.mh { --mh-sg: #e0675a; --mh-ok: var(--lux-ok); display: grid; gap: 22px; margin: 28px 0 24px; font-family: var(--font-ui); color: var(--text-main); }
-.mh *, .mh *::before, .mh *::after { box-sizing: border-box; }
-.mh button { font: inherit; }
-.mh-card { position: relative; border: 1.5px solid var(--border); border-radius: 22px; background: var(--surface); box-shadow: var(--shadow); padding: 24px; overflow: hidden; }
-.mh-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.8px; padding: 4px 12px; border-radius: 20px; background: rgba(169, 187, 208, 0.12); color: var(--primary); border: 1px solid var(--border); }
-.mh-h { font: 800 clamp(1.3rem, 2.6vw, 1.85rem)/1.18 var(--font-display); margin: 10px 0 8px; letter-spacing: -0.015em; }
-.mh-h2 { font: 800 1.12rem/1.25 var(--font-display); margin: 10px 0 4px; letter-spacing: -0.01em; }
-.mh-sub { margin: 0; font-size: 0.92rem; line-height: 1.6; color: var(--text-muted); font-weight: 600; max-width: 68ch; }
-.mh-lbl { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
-.mh a:focus-visible, .mh button:focus-visible, .mh input:focus-visible, .mh summary:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-
-/* hero */
-.mh-hero { background: radial-gradient(620px 300px at 0% 0%, rgba(120, 140, 255, 0.28), transparent 70%), radial-gradient(520px 260px at 100% 100%, rgba(63, 179, 166, 0.28), transparent 70%), linear-gradient(135deg, var(--lux-deep-a), var(--lux-deep-b)); border-color: rgba(255,255,255,.22); color: #fff; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px; align-items: center; }
-.mh-hero .mh-eyebrow { background: rgba(255,255,255,.14); color: #fff; border-color: rgba(255,255,255,.3); }
-.mh-hero .mh-h { color: #fff; }
-.mh-hero .mh-sub { color: rgba(255,255,255,.86); }
-.mh-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-.mh-pills span { font-size: 0.78rem; font-weight: 800; padding: 6px 12px; border-radius: 99px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28); color: #fff; }
-.mh-stage { position: relative; min-height: 230px; display: grid; place-items: center; perspective: 900px; }
-.mh-ring { position: absolute; left: 50%; top: 50%; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; border: 2px solid rgba(255,255,255,.5); opacity: 0; animation: mhRing 3s ease-out infinite; }
-.mh-ring:nth-child(2) { animation-delay: 1s; } .mh-ring:nth-child(3) { animation-delay: 2s; }
-@keyframes mhRing { 0% { transform: scale(.5); opacity: .7; } 100% { transform: scale(2.6); opacity: 0; } }
-.mh-plastic { position: relative; z-index: 1; width: min(310px, 88%); aspect-ratio: 1.586; border-radius: 18px; padding: 18px 20px; display: grid; align-content: space-between; color: #fff; background: linear-gradient(135deg, #1c2540 0%, #3b2f8f 55%, #1fa7a0 120%); border: 1px solid rgba(255,255,255,.3); box-shadow: 0 24px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.3); transform: rotateY(-14deg) rotateX(8deg); animation: mhFloat 6s ease-in-out infinite; }
-@keyframes mhFloat { 0%, 100% { transform: rotateY(-14deg) rotateX(8deg) translateY(0); } 50% { transform: rotateY(-8deg) rotateX(5deg) translateY(-8px); } }
-.mh-chip { width: 40px; height: 30px; border-radius: 7px; background: linear-gradient(135deg, #f3dc9c, #b89440); box-shadow: inset 0 0 0 1px rgba(0,0,0,.25); }
-.mh-plastic-top { display: flex; justify-content: space-between; align-items: center; }
-.mh-nfc { width: 28px; height: 28px; opacity: .9; }
-.mh-plastic b { font: 800 1.05rem var(--font-display); letter-spacing: .04em; }
-.mh-plastic small { display: block; font-size: .7rem; font-weight: 700; letter-spacing: .12em; opacity: .8; text-transform: uppercase; }
-.mh-gate { position: absolute; right: 2%; bottom: 4%; z-index: 2; padding: 6px 12px; border-radius: 10px; font-size: .72rem; font-weight: 800; background: #0e1a18; color: #8fd47c; border: 1px solid rgba(143,212,124,.5); box-shadow: 0 6px 18px rgba(0,0,0,.4); }
-
-/* kroky */
-.mh-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 16px; counter-reset: s; }
-.mh-step { position: relative; padding: 16px 15px 15px; border: 1px solid var(--border); border-radius: 18px; background: var(--lux-card); display: grid; gap: 7px; align-content: start; counter-increment: s; transition: transform .2s, border-color .2s; }
-.mh-step:hover { transform: translateY(-3px); border-color: var(--primary); }
-.mh-step::before { content: counter(s); position: absolute; top: -12px; left: 14px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font: 800 .86rem var(--font-display); background: var(--primary); color: var(--on-primary); box-shadow: 0 4px 12px rgba(0,0,0,.25); }
-.mh-step i { font-style: normal; font-size: 1.5rem; margin-top: 6px; }
-.mh-step b { font: 800 .95rem/1.25 var(--font-display); }
-.mh-step p { margin: 0; font-size: .8rem; line-height: 1.55; color: var(--text-muted); font-weight: 600; }
-.mh-step p strong { color: var(--text-main); }
-
-/* proč Revolut */
-.mh-why { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
-.mh-w { padding: 15px; border: 1px solid var(--border); border-radius: 18px; background: var(--lux-card); display: grid; gap: 6px; align-content: start; }
-.mh-w > span { font-size: 1.4rem; }
-.mh-w b { font: 800 .93rem/1.25 var(--font-display); }
-.mh-w p { margin: 0; font-size: .8rem; line-height: 1.55; color: var(--text-muted); font-weight: 600; }
-.mh-quote { margin-top: 16px; padding: 14px 16px; border-left: 4px solid var(--primary); border-radius: 0 14px 14px 0; background: var(--lux-card-2); font-size: .9rem; line-height: 1.6; font-weight: 700; }
-.mh-quote small { display: block; margin-top: 4px; font-size: .74rem; color: var(--text-muted); font-weight: 700; }
-
-/* kalkulačka */
-.mh-two { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 22px; margin-top: 14px; }
-.mh-ctl { display: grid; gap: 16px; align-content: start; }
-.mh-f { display: grid; gap: 6px; }
-.mh-f-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
-.mh-f-head label { font-size: .84rem; font-weight: 800; }
-.mh-f-val { font: 800 .95rem var(--font-display); color: var(--primary); font-variant-numeric: tabular-nums; }
-.mh-range { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 99px; outline: none; cursor: pointer; margin: 4px 0; background: linear-gradient(90deg, var(--primary) var(--p, 0%), var(--border) var(--p, 0%)); }
-.mh-range::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--primary); border: 4px solid var(--lux-card); box-shadow: 0 2px 8px rgba(0,0,0,.35); }
-.mh-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--primary); border: 4px solid var(--lux-card); }
-.mh-chk { display: flex; gap: 10px; align-items: flex-start; font-size: .84rem; font-weight: 700; line-height: 1.45; cursor: pointer; }
-.mh-chk input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--primary); }
-.mh-chk small { display: block; font-weight: 600; color: var(--text-muted); font-size: .76rem; }
-.mh-total { display: grid; gap: 8px; align-content: center; padding: 20px; border-radius: 20px; border: 1.5px solid color-mix(in srgb, var(--mh-sg) 45%, var(--border)); background: linear-gradient(160deg, color-mix(in srgb, var(--mh-sg) 14%, var(--lux-card)), var(--lux-card) 65%); text-align: center; }
-.mh-total b { font: 800 clamp(2rem, 4vw, 2.6rem)/1.05 var(--font-display); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-.mh-total em { font-style: normal; font: 800 1.05rem var(--font-display); color: var(--mh-sg); font-variant-numeric: tabular-nums; }
-[data-theme="light"] .mh-total em { color: #b23a2d; }
-.mh-total small { font-size: .76rem; line-height: 1.5; color: var(--text-muted); font-weight: 600; }
-
-/* doporučení */
-.mh-ref { background: radial-gradient(520px 260px at 100% 0%, color-mix(in srgb, var(--mh-sg) 16%, transparent), transparent 70%), radial-gradient(520px 260px at 0% 100%, color-mix(in srgb, var(--primary) 16%, transparent), transparent 70%), var(--lux-card-2); }
-.mh-ref-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; align-items: flex-start; }
-.mh-count { display: grid; gap: 1px; justify-items: center; padding: 10px 18px; border-radius: 16px; border: 1.5px solid var(--border); background: var(--surface); min-width: 130px; }
-.mh-count b { font: 800 1.9rem/1 var(--font-display); font-variant-numeric: tabular-nums; color: var(--primary); }
-.mh-count span { font-size: .7rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--text-muted); }
-.mh-count.is-late b { color: var(--lux-bad); }
-.mh-math { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
-.mh-m { padding: 14px; border-radius: 16px; border: 1px solid var(--border); background: var(--surface); display: grid; gap: 2px; text-align: center; }
-.mh-m b { font: 800 1.45rem var(--font-display); font-variant-numeric: tabular-nums; }
-.mh-m span { font-size: .74rem; font-weight: 700; color: var(--text-muted); line-height: 1.4; }
-.mh-m.hl { border-color: var(--lux-ok); background: color-mix(in srgb, var(--lux-ok) 12%, var(--surface)); }
-.mh-m.hl b { color: var(--lux-ok); }
-.mh-cond { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; }
-.mh-cond li { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; align-items: start; padding: 11px 14px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); font-size: .84rem; font-weight: 700; line-height: 1.45; }
-.mh-cond li i { font-style: normal; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--lux-card-2); border: 1px solid var(--border); }
-.mh-cond li small { display: block; font-size: .76rem; font-weight: 600; color: var(--text-muted); }
-.mh-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; align-items: center; }
-.mh-btn { display: inline-flex; align-items: center; gap: 8px; border: 0; cursor: pointer; font-weight: 800; font-size: .88rem; padding: 12px 20px; border-radius: 99px; background: var(--primary); color: var(--on-primary); text-decoration: none; transition: transform .15s, box-shadow .15s; }
-.mh-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px color-mix(in srgb, var(--primary) 35%, transparent); }
-.mh-btn.wa { background: #25d366; color: #06301a; }
-.mh-btn.ghost { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
-.mh-btn.ghost:hover { border-color: var(--primary); box-shadow: none; }
-.mh-note { margin: 12px 0 0; font-size: .74rem; line-height: 1.55; color: var(--text-muted); font-weight: 600; }
-
-/* faq */
-.mh-faq { display: grid; gap: 8px; margin-top: 14px; }
-.mh-faq details { border: 1px solid var(--border); border-radius: 14px; background: var(--lux-card); padding: 0 14px; }
-.mh-faq summary { cursor: pointer; list-style: none; padding: 13px 0; font-size: .88rem; font-weight: 800; display: flex; align-items: center; gap: 10px; }
-.mh-faq summary::-webkit-details-marker { display: none; }
-.mh-faq summary::after { content: "▾"; margin-left: auto; color: var(--primary); transition: transform .2s; }
-.mh-faq details[open] summary::after { transform: rotate(180deg); }
-.mh-faq details p { margin: 0 0 13px; font-size: .82rem; line-height: 1.6; color: var(--text-muted); font-weight: 600; }
-.mh-faq details p strong { color: var(--text-main); }
-
-@media (max-width: 960px) { .mh-hero, .mh-two { grid-template-columns: minmax(0, 1fr); } .mh-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } .mh-why { grid-template-columns: minmax(0, 1fr); } }
-@media (max-width: 560px) { .mh-card { padding: 18px 16px; } .mh-steps, .mh-math { grid-template-columns: minmax(0, 1fr); } .mh-stage { min-height: 200px; } }
-@media (prefers-reduced-motion: reduce) { .mh-ring, .mh-plastic { animation: none; } .mh-step, .mh-btn { transition: none; } .mh-step:hover, .mh-btn:hover { transform: none; } }
-@media print { .mh-actions, .mh-stage { display: none !important; } }
-
-/* ===== PREMIUM v23 / MHD: platební centrum, nové kompoziční rozvržení ===== */
-#f-karta-mhd .mh23 { --mh23-navy:#102c3d; --mh23-teal:#087f7d; display:grid; gap:18px; width:100%; max-width:none; margin:12px 0 26px; min-width:0; }
-#f-karta-mhd .mh23 > * { min-width:0; }
-#f-karta-mhd .mh23-intro { border-radius:22px; padding:clamp(20px,2.5vw,32px); background:linear-gradient(118deg,#102638 0%,#164958 60%,#0e706c 120%); color:#fff; box-shadow:0 16px 34px rgba(12,39,54,.13); overflow:hidden; }
-#f-karta-mhd .mh23-kicker { color:#a8f0e3; letter-spacing:.13em; font-weight:850; font-size:.7rem; display:flex; gap:9px; align-items:center; }
-#f-karta-mhd .mh23-kicker-dot { background:#56e0ba; width:7px; height:7px; border-radius:50%; box-shadow:0 0 0 4px rgba(86,224,186,.13); }
-#f-karta-mhd .mh23-intro-row { display:grid; grid-template-columns:minmax(0,1fr) minmax(190px,275px); gap:24px; align-items:center; margin:10px 0 18px; }
-#f-karta-mhd .mh23-intro h3 { margin:0; color:white; font:800 clamp(1.6rem,3vw,2.6rem)/1.13 var(--font-display); letter-spacing:-.035em; }
-#f-karta-mhd .mh23-intro h3 em { font-style:normal; color:#aaf2dd; }
-#f-karta-mhd .mh23-intro p { max-width:68ch; color:#e1ecf3; margin:11px 0 0; font-size:.88rem; line-height:1.6; }
-#f-karta-mhd .mh23-summary { border:1px solid rgba(255,255,255,.26); background:rgba(255,255,255,.105); border-radius:17px; padding:17px 19px; display:grid; gap:5px; }
-#f-karta-mhd .mh23-summary span { color:#bdd7df; font-weight:800; font-size:.64rem; letter-spacing:.09em; }
-#f-karta-mhd .mh23-summary strong { font:850 clamp(1.65rem,2.6vw,2.2rem)/1.15 var(--font-display); color:white; white-space:nowrap; font-variant-numeric:tabular-nums; }
-#f-karta-mhd .mh23-summary small { color:#d4e5e6; font-size:.69rem; }
-#f-karta-mhd .mh23-nav { display:flex; flex-wrap:wrap; gap:8px; }
-#f-karta-mhd .mh23-nav a { display:inline-flex; align-items:center; justify-content:center; border-radius:11px; background:rgba(255,255,255,.11); color:#fff; text-decoration:none; font-size:.76rem; font-weight:750; border:1px solid rgba(255,255,255,.24); padding:10px 13px; line-height:1.25; transition:background .15s; }
-#f-karta-mhd .mh23-nav a:hover { background:rgba(255,255,255,.24); }
-#f-karta-mhd .mh23-featuregrid { display:grid; grid-template-columns:minmax(0,1fr) minmax(355px,.98fr); align-items:stretch; gap:16px; }
-#f-karta-mhd .mh23-transport,#f-karta-mhd .mh23-calculator { min-width:0; }
-#f-karta-mhd .mh23-featuregrid .mh-card { height:100%; min-width:0; margin:0; }
-#f-karta-mhd .mh23-featuregrid .mh-hero { grid-template-columns:minmax(0,1fr); gap:4px; align-content:start; background:linear-gradient(145deg,#123348,#123c4f); }
-#f-karta-mhd .mh23-featuregrid .mh-hero .mh-h { font-size:clamp(1.26rem,1.8vw,1.65rem); }
-#f-karta-mhd .mh23-featuregrid .mh-hero .mh-stage { min-height:165px; margin:-8px auto -14px; width:min(100%,360px); }
-#f-karta-mhd .mh23-featuregrid .mh-hero .mh-plastic { width:min(220px,78%); padding:14px; border-radius:13px; animation:none; transform:rotate(-5deg); box-shadow:0 16px 25px rgba(0,0,0,.28); }
-#f-karta-mhd .mh23-featuregrid .mh-hero .mh-plastic b { font-size:.85rem; }
-#f-karta-mhd .mh23-featuregrid .mh-hero .mh-ring { animation:none; display:none; }
-#f-karta-mhd .mh23-featuregrid .mh-hero .mh-gate { font-size:.67rem; bottom:12%; right:5%; }
-#f-karta-mhd .mh23-featuregrid .mh-pills { gap:6px; margin-top:12px; }
-#f-karta-mhd .mh23-featuregrid .mh-pills span { font-size:.69rem; padding:5px 9px; }
-#f-karta-mhd .mh23-calculator .mh-card { background:var(--lux-card); border:1px solid var(--border); box-shadow:0 10px 26px rgba(16,44,61,.055); }
-#f-karta-mhd .mh23-calculator .mh-h2 { font-size:1.25rem; margin-bottom:8px; }
-#f-karta-mhd .mh23-calculator .mh-two { grid-template-columns:1fr; gap:15px; }
-#f-karta-mhd .mh23-calculator .mh-total { padding:16px; border-radius:14px; text-align:left; grid-template-columns:auto 1fr; gap:6px 12px; align-items:baseline; background:color-mix(in srgb, var(--primary) 7%, var(--lux-card)); border-color:color-mix(in srgb, var(--primary) 32%, var(--border)); }
-#f-karta-mhd .mh23-calculator .mh-total .mh-lbl { grid-column:1/-1; }
-#f-karta-mhd .mh23-calculator .mh-total b { font-size:2rem; }
-#f-karta-mhd .mh23-calculator .mh-total em { font-size:.86rem; justify-self:end; }
-#f-karta-mhd .mh23-calculator .mh-total small { grid-column:1/-1; }
-#f-karta-mhd .mh23-calculator .mh-f-head { gap:3px 14px; }
-#f-karta-mhd .mh23-steps > .mh-card,#f-karta-mhd .mh23-lower .mh-card { margin:0; height:100%; border:1px solid var(--border); background:var(--lux-card); box-shadow:0 9px 22px rgba(16,44,61,.045); }
-#f-karta-mhd .mh23-steps .mh-steps { grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-top:19px; }
-#f-karta-mhd .mh23-steps .mh-step { background:var(--surface); border-radius:14px; padding:20px 14px 13px; }
-#f-karta-mhd .mh23-steps .mh-step::before { top:-10px; }
-#f-karta-mhd .mh23-lower { display:grid; grid-template-columns:1.15fr 1fr; gap:16px; }
-#f-karta-mhd .mh23-lower > * { min-width:0; }
-#f-karta-mhd .mh23-lower .mh-faq details { background:var(--surface); }
-#f-karta-mhd .mh23-benefits .mh-why { grid-template-columns:1fr; }
-#f-karta-mhd .mh23-benefits .mh-w { grid-template-columns:26px 1fr; gap:4px 10px; background:var(--surface); border-radius:13px; }
-#f-karta-mhd .mh23-benefits .mh-w>span { grid-row:span 2; }
-#f-karta-mhd .mh23-benefits .mh-w>p { grid-column:2; }
-#f-karta-mhd .mh23-benefits .mh-quote { font-size:.8rem; margin-top:12px; }
-#f-karta-mhd .mh23-offer { border:1px solid var(--border); border-radius:17px; background:var(--lux-card); overflow:hidden; }
-#f-karta-mhd .mh23-offer > summary { display:flex; align-items:center; gap:14px; cursor:pointer; padding:16px 20px; list-style:none; }
-#f-karta-mhd .mh23-offer > summary::-webkit-details-marker { display:none; }
-#f-karta-mhd .mh23-offer > summary .mh23-offer-icon { display:grid; place-items:center; width:40px; height:40px; border-radius:12px; background:var(--lux-card-2); font-size:1.2rem; flex:none; }
-#f-karta-mhd .mh23-offer > summary strong { color:var(--text-main); font-size:.91rem; display:block; }
-#f-karta-mhd .mh23-offer > summary small { color:var(--text-muted); font-size:.75rem; display:block; margin-top:3px; }
-#f-karta-mhd .mh23-offer > summary .mh23-offer-chevron { margin-left:auto; color:var(--primary); font-size:1.5rem; line-height:1; transition:transform .15s; }
-#f-karta-mhd .mh23-offer[open] > summary .mh23-offer-chevron { transform:rotate(180deg); }
-#f-karta-mhd .mh23-offer-inner { padding:0 16px 16px; }
-#f-karta-mhd .mh23-offer-inner .mh-card { box-shadow:none; border-radius:13px; padding:20px; }
-#f-karta-mhd .mh23-footnote { color:var(--text-muted); font-size:.77rem; line-height:1.6; margin:0; padding:0 4px; }
-#f-karta-mhd :is(#mh23-calc,#mh23-steps,#mh23-help,#mh23-offer) { scroll-margin-top:100px; }
-@media(max-width:1090px){
- #f-karta-mhd .mh23-featuregrid { grid-template-columns:minmax(0,1fr) minmax(310px,1fr); }
- #f-karta-mhd .mh23-featuregrid .mh-stage { display:none; }
- #f-karta-mhd .mh23-steps .mh-steps { grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:18px; }
-}
-@media(max-width:760px){
- #f-karta-mhd .mh23-intro-row,#f-karta-mhd .mh23-featuregrid,#f-karta-mhd .mh23-lower { grid-template-columns:1fr; }
- #f-karta-mhd .mh23-intro { padding:20px 17px; }
- #f-karta-mhd .mh23-summary { padding:12px 15px; }
- #f-karta-mhd .mh23-summary strong { font-size:1.65rem; }
- #f-karta-mhd .mh23-nav { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
- #f-karta-mhd .mh23-nav a { padding:10px 6px; font-size:.72rem; }
- #f-karta-mhd .mh23-featuregrid .mh-stage { display:none; }
- #f-karta-mhd .mh23-calculator .mh-two { grid-template-columns:1fr; }
- #f-karta-mhd .mh23-calculator .mh-total { grid-template-columns:1fr; }
- #f-karta-mhd .mh23-calculator .mh-total em { justify-self:start; }
- #f-karta-mhd .mh23-steps .mh-steps { grid-template-columns:1fr; }
- #f-karta-mhd .mh23-lower .mh-card { padding:18px 15px; }
-}
-@media(max-width:390px){
- #f-karta-mhd .mh23-intro h3 { font-size:1.5rem; }
- #f-karta-mhd .mh23-nav a { font-size:.68rem; }
- #f-karta-mhd .mh23-intro-row { gap:15px; }
-}
-@media print { #f-karta-mhd .mh23-nav { display:none; } #f-karta-mhd .mh23-offer { break-inside:avoid; } }
-
-</style>
-
-<div class="mh mh23" id="karta-mhd">
-
-<header class="mh23-intro" aria-label="Průvodce platbami singapurské dopravy">
-  <div class="mh23-kicker"><span class="mh23-kicker-dot"></span> SINGAPUR 2027 · PLATEBNÍ PRŮVODCE</div>
-  <div class="mh23-intro-row">
-    <div class="mh23-intro-copy">
-      <h3>Metro, autobus a platby <em>bez hledání jízdenek</em></h3>
-      <p>Na jednom místě máš postup pro MRT, interaktivní kalkulačku peněz na kartu, odpovědi na důležité otázky i podmínky doporučovací akce.</p>
-    </div>
-    <div class="mh23-summary" aria-live="polite">
-      <span>ORIENTAČNĚ NABÍT NA KARTU</span>
-      <strong id="mh23TopTotal">–</strong>
-      <small>Za 1 osobu · podle nastavení níže</small>
-    </div>
-  </div>
-  <nav class="mh23-nav" aria-label="Rychlé přepnutí částí průvodce">
-    <a href="#mh23-calc">💳 Kalkulačka nabití</a>
-    <a href="#mh23-steps">🚇 Jak platit</a>
-    <a href="#mh23-help">❓ Otázky a odpovědi</a>
-    <a href="#mh23-offer">🎁 Bonus a podmínky</a>
-  </nav>
-</header>
-
-<div class="mh23-featuregrid" id="mh23-top">
-  <div class="mh23-transport"><div class="mh-card mh-hero">
-<div>
-<span class="mh-eyebrow">💳 PLATBA KARTOU</span>
-<div aria-level="3" class="mh-h" role="heading">MHD v Singapuru se platí ťuknutím kartou nebo mobilem</div>
-<p class="mh-sub">V metru MRT i v autobusech se nekupují jízdenky. Na bráně přiložíš bezkontaktní kartu Visa nebo Mastercard, nebo telefon s Apple Pay či Google Pay, a při výstupu ťukneš znovu. Cena se spočítá podle ujeté trasy.</p>
-<div class="mh-pills"><span>🚇 MRT</span><span>🚌 Autobusy</span><span>💳 Visa i Mastercard</span><span>📱 Apple Pay a Google Pay</span><span>👤 Každý vlastní kartu</span></div>
-</div>
-<div aria-hidden="true" class="mh-stage">
-<span class="mh-ring"></span><span class="mh-ring"></span><span class="mh-ring"></span>
-<div class="mh-plastic">
-<div class="mh-plastic-top"><span class="mh-chip"></span>
-<svg class="mh-nfc" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24"><path d="M8 6c3 3.5 3 8.5 0 12M12 4c4.5 4.5 4.5 11.5 0 16M16 2c6 5.5 6 14.5 0 20"></path></svg></div>
-<div><small>tap in · tap out</small><b>SINGAPUR 2027</b></div>
-</div>
-<span class="mh-gate">✓ Vstup povolen</span>
-</div>
-</div></div>
-  <div class="mh23-calculator" id="mh23-calc"><div class="mh-card">
-<span class="mh-eyebrow">🧮 KOLIK NAHRÁT</span>
-<div aria-level="3" class="mh-h2" role="heading">Kolik peněz si dát na Revolut před Singapurem</div>
-<p class="mh-sub">MHD, Grab a restaurace v obchoďácích se platí kartou. Hawkery a stánky ne, na ty je hotovost (viz <a href="#hotovost" style="color:var(--primary);font-weight:800">Plán hotovosti</a>). Přepočet na S$ se bere z kurzů v panelu Přepočet měn v Plánu hotovosti.</p>
-<div class="mh-two">
-<div class="mh-ctl">
-<div class="mh-f">
-<div class="mh-f-head"><label for="mhMhd">MHD v Singapuru (z rozpisu nákladů)</label><span class="mh-f-val" id="mhMhdV"></span></div>
-<input class="mh-range" id="mhMhd" max="1500" min="200" step="50" type="range" value="500"/>
-</div>
-<div class="mh-f">
-<div class="mh-f-head"><label for="mhRez">Rezerva na Grab, obchody a restaurace kartou</label><span class="mh-f-val" id="mhRezV"></span></div>
-<input class="mh-range" id="mhRez" max="3000" min="0" step="100" type="range" value="500"/>
-</div>
-<label class="mh-chk"><input id="mhStore" type="checkbox"/><span>Úschovna batohů při tranzitu 24. 8.<small>S$10,90 za batoh na 24 hodin, platí se obvykle kartou u automatu nebo online</small></span></label>
-</div>
-<div aria-live="polite" class="mh-total">
-<span class="mh-lbl">Nahrát na osobu</span>
-<b id="mhTotKc">–</b>
-<em id="mhTotSgd">–</em>
-<small id="mhTotNote"></small>
-</div>
-</div>
-</div></div>
-</div>
-<div class="mh23-steps" id="mh23-steps"><div class="mh-card">
-<span class="mh-eyebrow">🆔 JAK NA TO</span>
-<div aria-level="3" class="mh-h2" role="heading">Čtyři kroky, hotovo za pár minut</div>
-<div class="mh-steps">
-<div class="mh-step"><i aria-hidden="true">📲</i><b>Založ si Revolut</b><p>Stáhni aplikaci, ověř totožnost a okamžitě máš <strong>virtuální kartu</strong>. Fyzickou si objednáš k tomu.</p></div>
-<div class="mh-step"><i aria-hidden="true">⚡</i><b>Nahraj peníze</b><p>Z jakékoli české karty nebo převodem. Peníze tam jsou <strong>během pár vteřin</strong>, tak je nemusíš řešit dopředu.</p></div>
-<div class="mh-step"><i aria-hidden="true">📱</i><b>Přidej kartu do telefonu</b><p>Do <strong>Apple Pay nebo Google Pay</strong>. Pak ti stačí mobil, fyzická karta je záloha.</p></div>
-<div class="mh-step"><i aria-hidden="true">🚇</i><b>Ťukni na bráně</b><p>Při vstupu i výstupu <strong>stejnou kartou nebo telefonem</strong>. Platí se ve S$, převod udělá Revolut.</p></div>
-</div>
-</div></div>
-<div class="mh23-lower" id="mh23-help">
-  <div class="mh23-faq"><div class="mh-card">
-<span class="mh-eyebrow">🧠 DOBRÉ VĚDĚT</span>
-<div aria-level="3" class="mh-h2" role="heading">Než poprvé ťukneš na bráně</div>
-<div class="mh-faq">
-<details><summary>🚪 Může jedna karta platit za víc lidí?</summary><p><strong>Ne.</strong> Každý cestující musí mít vlastní kartu nebo telefon a ťukat sám za sebe. Pípnout jednou kartou víckrát za sebou pro víc lidí nejde. Proto potřebuje Revolut každý z party.</p></details>
-<details><summary>👛 Co když mám v peněžence víc karet?</summary><p>Ťukej <strong>jen tou jednou kartou</strong>, kterou chceš platit, a ostatní karty od čtečky odtáhni, nebo raději používej telefon. Při vstupu a výstupu musí být použita stejná karta nebo telefon, jinak se jízda nespáruje.</p></details>
-<details><summary>🕒 Kdy mi strhnou peníze za jízdy?</summary><p>Jízdy se nestrhávají po jedné. Podle pravidel systému SimplyGo se u Visa účtují denně a u Mastercard se sčítají až 5 dní nebo do chvíle, kdy dosáhnou S$15. V aplikaci se platba proto objeví s odstupem. <strong>Nech si na Revolutu rezervu</strong>, ať se strhne bez potíží.</p></details>
-<details><summary>🛒 Co ještě platit kartou v Singapuru?</summary><p>Grab v aplikaci, obchody a restaurace v nákupních centrech a úschovnu zavazadel. Naopak <strong>hawkery a staré rodinné stánky berou většinou jen hotovost</strong>, proto si vezmi i S$ v drobných bankovkách.</p></details>
-<details><summary>⏱️ Kdy si kartu objednat?</summary><p>Virtuální kartu máš hned po ověření. Fyzickou objednej s velkým předstihem, ideálně během letošního roku, ať dorazí v klidu a máš čas ji vyzkoušet na platbě v obchodě. Akce s bonusem končí 17. 11. 2026.</p></details>
-</div>
-</div></div>
-  <div class="mh23-benefits"><div class="mh-card">
-<span class="mh-eyebrow">💜 PROČ REVOLUT</span>
-<div aria-level="3" class="mh-h2" role="heading">Pro Singapur a placení v cizině je to naše jistota</div>
-<p class="mh-sub">Revolut je mezi cestovateli oblíbený, protože na něm všechno vidíš a ovládáš z telefonu. Nahraješ si přesně tolik, kolik potřebuješ, a nic nevisí na jedné kartě, na které máš celé úspory.</p>
-<div class="mh-why">
-<div class="mh-w"><span aria-hidden="true">⚡</span><b>Peníze za pár vteřin</b><p>Kdykoli v Singapuru si z aplikace dobiješ další částku. Žádné čekání na převod ani návštěvu směnárny.</p></div>
-<div class="mh-w"><span aria-hidden="true">🔒</span><b>Pod kontrolou v telefonu</b><p>Kartu zamkneš jedním klepnutím, vidíš každou platbu hned a limity si nastavíš sám. Když kartu ztratíš, zablokuješ ji z aplikace.</p></div>
-<div class="mh-w"><span aria-hidden="true">🌏</span><b>Placení v cizině bez starostí</b><p>Platíš rovnou ve S$ a Revolut převádí z tvých peněz. Funguje jak v MHD, tak v obchodech a při platbách v aplikaci Grab.</p></div>
-</div>
-<div class="mh-quote">Pro Singapur máme Revolut celá rodina a je to naprosto spolehlivá karta na MHD i na platby v cizině.<small>Radek, osobní zkušenost</small></div>
-</div></div>
-</div>
-<details class="mh23-offer" id="mh23-offer" open>
-  <summary><span class="mh23-offer-icon">🎁</span><span><strong>Revolut: doporučovací bonus a podmínky</strong><small>Volitelná nabídka – podrobnosti jsou rovnou zobrazené</small></span><span class="mh23-offer-chevron" aria-hidden="true">⌄</span></summary>
-  <div class="mh23-offer-inner"><div class="mh-card mh-ref">
-<div class="mh-ref-head">
-<div>
-<span class="mh-eyebrow">🎁 BONUS PRO TEBE</span>
-<div aria-level="3" class="mh-h" role="heading" style="margin-bottom:4px">Založ si Revolut přes můj kód a kartu máš zaplacenou</div>
-<p class="mh-sub">Přidejte se ke mně a více než 80 milionům zákazníků, kteří si Revolut zamilovali. Zaregistruj se pomocí odkazu níže. Když splníš podmínky akce, <strong>pošlu ti půlku odměny</strong> a fyzická karta tě nic nestojí.</p>
-</div>
-<div class="mh-count" id="mhCount"><b id="mhDays">–</b><span id="mhDaysL">dní do konce akce</span></div>
-</div>
-<div class="mh-math">
-<div class="mh-m"><b>1 250 Kč</b><span>odměna od Revolutu za každého, kdo splní podmínky</span></div>
-<div class="mh-m hl"><b>625 Kč</b><span>půlku pošlu tobě, jakmile mi odměna přijde</span></div>
-<div class="mh-m"><b>≈ 178 Kč</b><span>doručení fyzické karty v tarifu Standard (expres ≈ 507 Kč), zbytek je tvůj</span></div>
-</div>
-<ol class="mh-cond">
-<li><i aria-hidden="true">1️⃣</i><div>Zaregistruj se přes můj odkaz a ověř totožnost</div></li>
-<li><i aria-hidden="true">2️⃣</i><div>Přidej peníze na účet<small>debetní kartou nebo bankovním převodem</small></div></li>
-<li><i aria-hidden="true">3️⃣</i><div>Udělej 3 nákupy, každý za aspoň 100 Kč<small>některé hotovostní transakce, jako hazardní hry, dárkové karty nebo převody, se nepočítají</small></div></li>
-<li><i aria-hidden="true">4️⃣</i><div>Objednej si fyzickou kartu<small>přidej ji do Apple nebo Google Pay a začni platit bezkontaktně</small></div></li>
-</ol>
-<div class="mh-actions">
-<a class="mh-btn" href="https://revolut.com/referral/?referral-code=radekqk3!NOV1-26-AR-CTRL-RFC&amp;geo-redirect" id="mhLink" rel="noopener noreferrer" target="_blank">💜 Založit Revolut přes můj odkaz ↗</a>
-<button class="mh-btn ghost" id="mhCopy" type="button">📋 Zkopírovat odkaz</button>
-<a class="mh-btn wa" href="#" id="mhWa" rel="noopener noreferrer" target="_blank">💬 Poslat kamarádovi</a>
-</div>
-<p class="mh-note">Je to doporučovací odkaz: Revolut za nového zákazníka vyplácí odměnu mně a já z ní půlku posílám dál. Akce platí do 17. 11. 2026 a podmínky určuje Revolut, mohou se tedy změnit. Poplatky za doručení karty a rozsah bezplatné směny měn závisí na tarifu a ověříš je v aplikaci.</p>
-</div></div>
-</details>
-<p class="mh23-footnote">Kalkulačka plánuje částku k nabití platební karty. Nemění sama o sobě náklady celé expedice ani skutečný bankovní kurz. Informace o akcích a poplatcích si ověř před použitím v aplikaci poskytovatele.</p>
-</div>
-
-<script>
-(function () {
-    'use strict';
-    var root = document.getElementById('karta-mhd'); if (!root) return;
-    var $ = function (s) { return root.querySelector(s); };
-    var NF = function (v, d) { return new Intl.NumberFormat('cs-CZ', { maximumFractionDigits: d == null ? 0 : d, minimumFractionDigits: 0 }).format(v); };
-    var NB = '\u00a0';
-    var LINK = 'https://revolut.com/referral/?referral-code=radekqk3!NOV1-26-AR-CTRL-RFC&geo-redirect';
-    var DEADLINE = new Date('2026-11-17T23:59:59+01:00').getTime();
-
-    function sgdRate() { var x = window.luxFx; return x && x.mid && x.mid.SGD ? x.mid.SGD : 24.347 / 1.4285; }
-
-    function calc() {
-        var mhd = +$('#mhMhd').value, rez = +$('#mhRez').value, store = $('#mhStore').checked, r = sgdRate();
-        var storeKc = store ? 10.9 * r : 0, kc = mhd + rez + storeKc, sgd = kc / r;
-        [['#mhMhd', 200, 1500], ['#mhRez', 0, 3000]].forEach(function (p) { var el = $(p[0]); el.style.setProperty('--p', ((el.value - p[1]) / (p[2] - p[1]) * 100) + '%'); });
-        $('#mhMhdV').textContent = NF(mhd) + NB + 'Kč ≈ S$' + NF(mhd / r);
-        $('#mhRezV').textContent = NF(rez) + NB + 'Kč ≈ S$' + NF(rez / r);
-        $('#mhTotKc').textContent = NF(Math.ceil(kc / 50) * 50) + NB + 'Kč';
-        $('#mhTotSgd').textContent = '≈ S$' + NF(sgd) + ' (1 S$ = ' + NF(r, 2) + ' Kč)';
-        $('#mhTotNote').textContent = 'Zaokrouhleno nahoru na 50 Kč. Revolut převádí podle vlastního kurzu, částka je orientační.';
-        var m = document.getElementById('mhMeta'); if (m) m.textContent = '≈ ' + NF(Math.ceil(kc / 50) * 50) + ' Kč na kartě';
-    }
-    ['#mhMhd', '#mhRez'].forEach(function (s) { $(s).addEventListener('input', calc); });
-    $('#mhStore').addEventListener('change', calc);
-    window.addEventListener('lux:fx', calc);
-
-    function countdown() {
-        var left = DEADLINE - Date.now(), box = $('#mhCount');
-        if (left > 0) { var d = Math.ceil(left / 86400000); $('#mhDays').textContent = d; $('#mhDaysL').textContent = (d === 1 ? 'den' : d < 5 ? 'dny' : 'dní') + ' do konce akce'; box.classList.remove('is-late'); }
-        else { $('#mhDays').textContent = '✕'; $('#mhDaysL').textContent = 'akce skončila'; box.classList.add('is-late'); }
-    }
-
-    $('#mhCopy').addEventListener('click', function () {
-        var done = function (ok) { if (typeof window.showToast === 'function') { try { window.showToast(ok ? '📋 Odkaz zkopírován' : 'Kopírování se nepovedlo'); } catch (e) {} } };
-        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(LINK).then(function () { done(true); }, function () { done(false); });
-        else { try { var ta = document.createElement('textarea'); ta.value = LINK; ta.style.cssText = 'position:fixed;opacity:0'; document.body.appendChild(ta); ta.select(); done(document.execCommand('copy')); ta.remove(); } catch (e) { done(false); } }
-    });
-    $('#mhWa').href = 'https://wa.me/?text=' + encodeURIComponent('Přidej se ke mně na Revolutu. Když přes tenhle odkaz splníš podmínky akce, pošlu ti půlku odměny a karta je zadarmo. Pro Singapur (MHD i platby) je to ideální: ' + LINK);
-
-    calc(); countdown(); setInterval(countdown, 3600000);
-    window.addEventListener('load', calc);
-})();
-</script>
-    </div></div></div>
-
-<script id="mh23-mini-amount-sync">
-(function(){
-  'use strict';
-  function init(){
-    const from=document.getElementById('mhTotKc');
-    const target=document.getElementById('mh23TopTotal');
-    if(!from||!target)return;
-    const sync=()=>{target.textContent=from.textContent||'–';};
-    sync();
-    new MutationObserver(sync).observe(from,{childList:true,characterData:true,subtree:true});
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
-  else init();
-})();
-</script>
-</section>
-    </div>
-</section>
-
-<section class="lux-part" id="cast-misto" aria-labelledby="cast-misto-h">
-    <header class="lux-part-head">
-        <span class="lux-part-no" aria-hidden="true">IV</span>
-        <div>
-            <span class="lux-part-eyebrow">Část IV · Na místě</span>
-            <div class="lux-part-title" id="cast-misto-h" role="heading" aria-level="2">Slovníček</div>
-            <p class="lux-part-sub">Praktické fráze v interaktivních překlápěcích kartách s výslovností.</p>
-        </div>
-    </header>
-    <div class="lux-part-body">
-
 <section class="lux-fold " id="f-slovnicek">
     <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-slovnicek-b" onclick="luxToggle('f-slovnicek')">
         <span class="lux-fold-node" aria-hidden="true">📖</span>
@@ -20788,7 +20820,7 @@ function luxQRSvg(text, px) {
         'f-leg-back': '23. 8. plavba zpět: Wahana Virendra ve 13:30 z Lomboku, příjezd do přístavu Sanur v 17:00.',
         'f-leg-rozlucka': '23.–24. 8., poslední noc u letiště. Večer Jimbaran, ráno snídaně v 8:30, odjezd v 9:00 a odlet Scoot TR281 v 11:15.',
         'f-leg-tranzit': 'Tranzit v Singapuru: čas závisí na zvolené aerolince. Plán A metro do centra a večeře v Lau Pa Sat (nejvýše hodinu), plán B Jewel a letiště. K bráně nejpozději dvě hodiny před odletem.',
-        'f-konfig': 'Tady se vybírají hotely a ukazuje se souhrn cen. Lety se vybírají nahoře ve složce Výběr letenek. Cena se mění živě.',
+        'f-konfig': 'Výběr hotelů, živá kalkulace a podrobný rozpis všech nákladů na jednom místě. Lety se vybírají v samostatné sekci.',
         'f-jidlo': 'Jídlo se počítá podle zvolené úrovně: skromné, pohodové nebo luxusní.',
         'f-aktivity': 'Zaškrtáváš vstupné a aktivity, které chceš, a cena se přičte.',
         'f-hotovost': 'Plán hotovosti: kolik S$ a USD si vzít a kde měnit. Rupie se doma nekupují, mění se na Bali.',
@@ -22369,7 +22401,7 @@ body.dark #rozpocet .pf18-details summary small,html.dark #rozpocet .pf18-detail
         }catch(ex){console.warn('Dashboard: otevření sekce',ex);}
       }
       window.history.replaceState(null,'','#'+id);
-      window.setTimeout(function(){target.scrollIntoView({behavior:'smooth',block:'start'});},80);
+      window.setTimeout(function(){(id==='f-konfig' && link.classList.contains('pf18-text-link') ? byId('rozpis-nakladu') : target).scrollIntoView({behavior:'smooth',block:'start'});},120);
     });
   });
   var detailsMap=byId('pf18-map');
