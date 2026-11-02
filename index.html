@@ -6088,7 +6088,7 @@ e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 2. 11. 2026 · 05:25</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 2. 11. 2026 · 06:04</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -18334,7 +18334,7 @@ body.pres-on #heroQr { display: none; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '2. 11. 2026 · 05:25';
+    var LUX_VERSION = '2. 11. 2026 · 06:04';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19179,7 +19179,7 @@ body.pres-on #heroQr { display: none; }
             '<li><span>🛫</span><div><b>Odlet z Prahy ' + (f.outDate || '') + ' v ' + f.outDep + '.</b> Na letiště se vyplatí dorazit zhruba ' + txHM(cur.depPrg - 180) + ' (tři hodiny před odletem). Přestup: ' + (f.outLayover || '') + '.</div></li>' +
             '<li><span>🛬</span><div><b>Do Singapuru ' + (f.outArr || '') + '.</b> ' + lateTxt + ' SG Arrival Card vyplň 1–3 dny předem <a href="#ukolyTerminy">úkoly a termíny</a>.</div></li>' +
             '<li><span>⏳</span><div><b>Tranzit na zpáteční cestě: ' + txDur(cur.L) + '</b> (14:10 až ' + txHM(cur.F.dep) + ', brána ' + txHM(cur.F.gate) + '). ' + planTxt + ' <a href="#f-leg-tranzit">Otevřít tranzit</a></div></li>' +
-            '<li><span>🏠</span><div><b>Do Prahy ' + (f.retArr || '') + '.</b> Celá cesta domů z Bali trvá ' + txDur(cur.home) + '. Domluv si na ten čas odvoz z letiště a hlídej, jestli ti vyhovuje příchod v takovou hodinu.</div></li></ul>';
+            '<li><span>🏠</span><div><b>Do Prahy ' + (f.retArr || '') + '.</b> Celá cesta domů z Bali trvá ' + txDur(cur.home) + '. Z letiště pojedeme buď autem z parkoviště u letiště, nebo autobusem 100 na Zličín, metrem B na Černý Most a odtud autobusem RegioJet (Student Agency) do Liberce.</div></li></ul>';
         host.innerHTML = '<div class="ai-h"><b>✈️ Co to znamená pro tebe: ' + f.name + '</b><span>' + (prev ? 'změna oproti předchozí volbě: ' + prev.f.name.replace(/\s*\(.*$/, '') : 'přehled zvolené varianty letu') + '</span></div>' + chg + doHtml;
     }
     (function wrapAirline2() {
@@ -19789,6 +19789,38 @@ function luxQRSvg(text, px) {
         try { if ($('menuModalOverlay') && $('menuModalOverlay').classList.contains('open')) window.toggleMenuModal(); } catch (e) {}
         toast('🎟️ Všechny vstupenky jsou odškrtnuté');
     };
+
+
+    /* ---------- po rozbalení akordeonu se stránka srovná: tlačítko nahoře, obsah pod ním, a drží to i když se obsah načítá ---------- */
+    (function accAlign() {
+        var pin = null;
+        function topOffset(el) {
+            var off = 8, pb = $('pbar'); if (pb) { var r = pb.getBoundingClientRect(); if (r.height && r.bottom > 0 && r.bottom < 160) off = Math.max(off, r.bottom); }
+            var fold = el.closest('.lux-fold.is-open'), head = fold && (fold.querySelector(':scope > .lux-fold-h') || fold.querySelector(':scope > .lux-fold-head'));
+            if (head && getComputedStyle(head).position === 'sticky') off = Math.max(off, (parseFloat(getComputedStyle(head).top) || 0) + head.offsetHeight);
+            return off + 10;
+        }
+        function stop() { if (pin) { cancelAnimationFrame(pin.raf); pin = null; } }
+        ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) { window.addEventListener(ev, function (e) { if (pin && !(ev === 'mousedown' && pin.t0 > performance.now() - 150)) stop(); }, { passive: true }); });
+        function align(el) {
+            stop(); var t0 = performance.now(), first = true;
+            pin = { t0: t0, raf: 0 };
+            (function loop() {
+                if (!pin) return; var y = el.getBoundingClientRect().top - topOffset(el);
+                if (Math.abs(y) > 3) window.scrollTo({ top: window.scrollY + y, behavior: first ? 'smooth' : 'auto' });
+                if (first) { first = false; pin.raf = setTimeout(function () { pin && (pin.raf = requestAnimationFrame(loop)); }, 420); return; }
+                if (performance.now() - t0 < 1800) pin.raf = requestAnimationFrame(loop); else pin = null;
+            })();
+        }
+        document.addEventListener('click', function (e) {
+            var tg = e.target; if (!tg || !tg.closest || (window.pres && window.pres.on) || document.body.classList.contains('pres-on')) return;
+            var btn = tg.closest('.lux-acc-btn, .acc-header, .acc-trigger, details > summary'); if (!btn || !btn.closest('.lux-fold-pad, #flightPick')) return;
+            setTimeout(function () {
+                var open = btn.matches('summary') ? btn.parentElement.open : (btn.getAttribute('aria-expanded') === 'true' || (btn.parentElement && btn.parentElement.classList.contains('open')));
+                if (open) align(btn);
+            }, 30);
+        }, true);
+    })();
 
     /* ---------- skupina „Nástroje“ v menu ---------- */
     function addTools() {
