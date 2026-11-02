@@ -6973,6 +6973,19 @@ body.pres-on #v29TopTab,body.pres-on #v29BottomTab{display:none!important}
 @media(max-width:1200px){#cast-plan .v32-planflow-steps{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:650px){#cast-plan .v32-planflow{padding:12px;margin-bottom:12px}#cast-plan .v32-planflow-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}#cast-plan .v32-planflow-steps a{padding:9px 7px;column-gap:6px}#cast-plan .v32-planflow-steps b{width:25px;height:25px;font-size:.65rem}#cast-plan .v32-planflow-steps span{font-size:.72rem}#cast-plan .v32-flow-note{padding:12px}#cast-plan .v32-flow-note>div{flex-basis:100%}}
 </style>
+<style id="v34-consolidated-costs">
+/* PREMIUM v34 – jediný přehled nákladů místo dvou podobných dashboardů.
+   Prvky v18 zůstávají v DOM jako zdroj pro původní JS a přepočty. */
+#f-konfig #rozpocet .pf18-hero,
+#f-konfig #rozpocet .pf18-section-heading,
+#f-konfig #rozpocet .pf18-kpi-slot,
+#f-konfig #rozpocet .pf18-finance-grid {display:none!important;}
+#f-konfig .v31-financial-detail{margin-top:12px!important;padding-top:0!important;border-top:0!important;}
+#f-konfig #rozpocet .pf18-shell{gap:13px!important;}
+#f-konfig #rozpocet .pf18-hotel-panel{margin-bottom:0;}
+#f-konfig #rozpis-nakladu{margin-top:0;}
+#f-konfig .p22-mast-copy h3{max-width:680px;}
+</style>
 </head>
 <body id="hero">
 <a class="premium-skip" href="#hlavni-obsah">Přeskočit na obsah</a>
@@ -13033,20 +13046,6 @@ function updatePackingWeight() {
 })();
 </script>
 </section>
-    </div>
-</section>
-
-<section class="lux-part" id="cast-misto" aria-labelledby="cast-misto-h">
-    <header class="lux-part-head">
-        <span class="lux-part-no" aria-hidden="true">IV</span>
-        <div>
-            <span class="lux-part-eyebrow">Část IV · Na místě</span>
-            <div class="lux-part-title" id="cast-misto-h" role="heading" aria-level="2">Slovníček</div>
-            <p class="lux-part-sub">Praktické fráze v interaktivních překlápěcích kartách s výslovností.</p>
-        </div>
-    </header>
-    <div class="lux-part-body">
-
 <section class="lux-fold " id="f-hotovost">
     <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-hotovost-b" onclick="luxToggle('f-hotovost')">
         <span class="lux-fold-node" aria-hidden="true">💵</span>
@@ -14029,13 +14028,13 @@ function updatePackingWeight() {
 
 <!-- PREMIUM v31: sjednocený konfigurátor a položkový rozpis -->
 <div id="f-rozpis" class="v31-financial-detail" aria-label="Podrobný rozpis všech nákladů">
-  <div class="v31-section-label"><span>02 / TRANSPARENTNÍ ROZPOČET</span><h3>Podrobný rozpis nákladů</h3><p>Rozdělení ceny, přehled vybraných hotelů a jednotlivé výdaje na jednom místě.</p></div>
+  
 <!-- PREMIUM v22: Finanční centrum – nové rozložení, původní výpočty ponechány -->
 <div class="p22" id="rozpis-nakladu">
   <header class="p22-mast">
     <div class="p22-mast-top"><span class="p22-eyebrow">FINANČNÍ CENTRUM · SINGAPUR / BALI / LOMBOK</span><span class="p22-live"><i></i> Živý rozpočet</span></div>
     <div class="p22-mast-grid">
-      <div class="p22-mast-copy"><h3>Každá koruna<br><em>pod kontrolou.</em></h3><p>Celková cena, struktura výdajů a transparentní položkový rozpis – vše se přepočítává podle vybraných letů, hotelů, jídla a zážitků.</p></div>
+      <div class="p22-mast-copy"><h3>Kolik dovolená stojí<br><em>a za co platíš.</em></h3><p>Jeden společný přehled celkové ceny, výdajových kategorií a jejich podrobného rozpisu. Vše se přepočítává podle vybraných letů, hotelů, jídla a zážitků.</p></div>
       <div class="p22-mast-price"><span id="p22Who">Jedna osoba · sdílený pokoj</span><strong id="p22Total">— Kč</strong><div class="p22-mast-perday"><span id="p22PerDay">— Kč</span> / den · 20 dní</div></div>
     </div>
     <div class="p22-switch" role="group" aria-label="Zobrazit rozpočet pro">
@@ -14065,7 +14064,7 @@ function updatePackingWeight() {
   </div>
 
   <section class="p22-ledger" aria-label="Položkový rozpis nákladů">
-    <div class="p22-ledger-top"><div><span class="p22-kicker">03 / PODROBNÝ ROZPIS</span><h4>Za co přesně platíš</h4><p>Každá položka má svůj původní výpočet. Rozbal kategorii a uvidíš jednotlivé částky.</p></div><button type="button" class="p22-copy" id="p22Copy"><span aria-hidden="true">⧉</span> Kopírovat rozpočet</button></div>
+    <div class="p22-ledger-top"><div><span class="p22-kicker">PŘEHLED JEDNOTLIVÝCH POLOŽEK</span><h4>Za co přesně platíš</h4><p>Každá položka má svůj původní výpočet. Rozbal kategorii a uvidíš jednotlivé částky.</p></div><button type="button" class="p22-copy" id="p22Copy"><span aria-hidden="true">⧉</span> Kopírovat rozpočet</button></div>
     <div class="p22-groups" id="p22Groups"></div>
   </section>
 
@@ -14765,6 +14764,20 @@ function updatePackingWeight() {
 </div>
     </div></div></div>
 </section>
+    </div>
+</section>
+
+<section class="lux-part" id="cast-misto" aria-labelledby="cast-misto-h">
+    <header class="lux-part-head">
+        <span class="lux-part-no" aria-hidden="true">IV</span>
+        <div>
+            <span class="lux-part-eyebrow">Část IV · Na místě</span>
+            <div class="lux-part-title" id="cast-misto-h" role="heading" aria-level="2">Slovníček</div>
+            <p class="lux-part-sub">Praktické fráze v interaktivních překlápěcích kartách s výslovností.</p>
+        </div>
+    </header>
+    <div class="lux-part-body">
+
 <section class="lux-fold " id="f-slovnicek">
     <h3 class="lux-fold-h"><button type="button" class="lux-fold-btn" aria-expanded="false" aria-controls="f-slovnicek-b" onclick="luxToggle('f-slovnicek')">
         <span class="lux-fold-node" aria-hidden="true">📖</span>
