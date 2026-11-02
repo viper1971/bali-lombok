@@ -6889,8 +6889,8 @@ html[data-theme="dark"] #f-rozpis .p22-ck-warning,body.dark #f-rozpis .p22-ck-wa
   }
   header.hero > .hero-inner {
     width:min(100%,1530px)!important;max-width:1530px!important;
-    max-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important;
-    scrollbar-width:thin;overscroll-behavior:contain;
+    max-height:none!important;overflow:visible!important;
+    scrollbar-width:none;overscroll-behavior:auto;
     padding:6px 10px!important;box-sizing:border-box!important;
     grid-auto-rows:auto!important;align-content:center!important;
   }
@@ -22645,7 +22645,7 @@ body.dark #rozpocet .pf18-details summary small,html.dark #rozpocet .pf18-detail
    document.body.appendChild(el);return el;
   }
   var t=tab('v29TopTab','Průběh čtení','▾','top');
-  var b=tab('v29BottomTab','Rozpočet a ovládání','▴','bottom');
+  var b=tab('v29BottomTab','MENU','▴','bottom');
   function sync(){
    var a=document.body.classList.contains('v29-top-open');
    var c=document.body.classList.contains('v29-bottom-open');
