@@ -6088,7 +6088,7 @@ e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 2. 11. 2026 · 06:16</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 2. 11. 2026 · 06:27</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -18321,6 +18321,10 @@ body.pres-on #heroQr { display: none; }
     .hero-inner > #heroQr { margin-top: 6px !important; }
     .hero-inner > div:not(.map-box):not(#countdown):not(#heroQr):not(.badge):not(.hero-ver) { width: 100%; }
 }
+
+/* ---- Na úvodní obrazovce se lišty (postup, cena dole, TOPlist) nezobrazují, objeví se až po odjetí z úvodu ---- */
+#pbar, #vipFloatingBar, #toplistFloat { transition: opacity .35s ease, visibility .35s ease; }
+body.on-hero:not(.pres-on) :is(#pbar, #vipFloatingBar, #toplistFloat), body.in-plan:not(.pres-on) :is(#pbar, #vipFloatingBar, #toplistFloat), body.before-itin:not(.pres-on) #vipFloatingBar { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -18351,7 +18355,7 @@ body.pres-on #heroQr { display: none; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '2. 11. 2026 · 06:16';
+    var LUX_VERSION = '2. 11. 2026 · 06:27';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19842,6 +19846,22 @@ function luxQRSvg(text, px) {
 
     /* úvod: po přeskládání do sloupců ať si mapa přepočítá rozměr */
     setTimeout(function () { try { window.dispatchEvent(new Event('resize')); (window.__luxMaps || []).forEach(function (m) { m.invalidateSize && m.invalidateSize(); }); } catch (e) {} }, 700);
+
+
+    /* ---------- lišty se ukážou až pod úvodem (úvod zabírá víc než polovinu obrazovky = jsme „na úvodu“) ---------- */
+    (function onHeroWatch() {
+        var hero = document.querySelector('header.hero'); if (!hero) return; var s = false;
+        function upd() {
+            s = false; var H = window.innerHeight, r = hero.getBoundingClientRect(), on = hero.offsetHeight > 0 && r.bottom > H * 0.5; document.body.classList.toggle('on-hero', on);
+            /* rozbalený podrobný plán na obrazovce = schovat všechny lišty */
+            var inPlan = [].some.call(document.querySelectorAll('[id$="AccContent"].open'), function (c) { if (!c.offsetHeight) return false; var q = c.getBoundingClientRect(); return q.top < H * 0.55 && q.bottom > H * 0.45; });
+            document.body.classList.toggle('in-plan', inPlan);
+            /* dolní lišta s cenou až od Itineráře krok za krokem */
+            var osa = $('osa'); document.body.classList.toggle('before-itin', !!osa && osa.getBoundingClientRect().top > H * 0.3);
+        }
+        function trig() { if (!s) { s = true; requestAnimationFrame(upd); } }
+        window.addEventListener('scroll', trig, { passive: true }); window.addEventListener('resize', trig); document.addEventListener('click', function () { setTimeout(trig, 60); setTimeout(trig, 700); }, true); upd(); setTimeout(upd, 800);
+    })();
 
     /* ---------- skupina „Nástroje“ v menu ---------- */
     function addTools() {
