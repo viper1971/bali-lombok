@@ -6088,7 +6088,7 @@ e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 2. 11. 2026 · 05:19</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 2. 11. 2026 · 05:25</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -18334,7 +18334,7 @@ body.pres-on #heroQr { display: none; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '2. 11. 2026 · 05:19';
+    var LUX_VERSION = '2. 11. 2026 · 05:25';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19546,7 +19546,7 @@ function luxQRSvg(text, px) {
         taxi: ['Bali taxi', 'Blue taxi Indonesia'], miscSmall: ['Balinese sarong temple', 'Bali temple sarong'], hotel: ['Kuta beach Bali hotel', 'Kuta beach Bali'],
         f_lvl0: ['Nasi campur warung', 'Indonesian street food'], f_lvl1: ['Satay Singapore', 'Singapore hawker centre food'], f_lvl2: ['Chilli crab Singapore', 'seafood restaurant dinner'],
         f_sg_0: ['Hainanese chicken rice', 'Singapore hawker centre food'], f_sg_1: ['Chilli crab Singapore', 'Singapore restaurant dinner'], f_sg_2: ['Kopi kaya toast Singapore', 'iced coffee'],
-        air_emirates: ['Emirates Boeing 777-300ER', 'Emirates aircraft'], air_emirates_flydubai: ['flydubai Boeing 737', 'Emirates Airbus A380'], air_finnair: ['Finnair Airbus A350', 'Finnair aircraft'], air_swiss: ['Swiss International Air Lines Boeing 777', 'Swiss Airbus A330', 'Swiss aircraft'], air_turkish: ['Turkish Airlines Boeing 777', 'Turkish Airlines Airbus A330', 'Turkish Airlines aircraft'],
+        air_emirates: ['Emirates Boeing 777-300ER', 'Emirates aircraft'], air_emirates_flydubai: ['flydubai Boeing 737', 'Emirates Airbus A380'], air_finnair: ['Finnair Airbus A350-941', 'Finnair A350 OH-LW', 'Finnair Airbus A350 landing', 'Finnair Airbus A330', 'Finnair aircraft'], air_swiss: ['Swiss International Air Lines Boeing 777', 'Swiss Airbus A330', 'Swiss aircraft'], air_turkish: ['Turkish Airlines Boeing 777', 'Turkish Airlines Airbus A330', 'Turkish Airlines aircraft'],
         f_ba_0: ['Nasi goreng', 'Indonesian fried rice'], f_ba_1: ['Jimbaran grilled seafood', 'Balinese dinner'], f_ba_2: ['Es teh iced tea Indonesia', 'fresh coconut drink'], f_ba_3: ['Pisang goreng', 'Indonesian dessert']
     };
     var STRIPS = {
@@ -19570,6 +19570,8 @@ function luxQRSvg(text, px) {
     IMG_Q.part_3 = ['Uluwatu cliffs Bali panorama', 'Bali coastline panorama', 'Nusa Penida Kelingking Beach', 'Indonesia coast landscape', 'Bali landscape']; IMG_Q.part_4 = ['Gili Trawangan beach panorama', 'Lombok beach panorama', 'Gili Islands', 'Indonesia beach', 'Lombok']; IMG_Q.part_5 = ['Jimbaran Bay sunset beach', 'Bali sunset beach', 'sunset beach Indonesia', 'Bali sunset', 'Bali'];
     IMG_Q.inl_1 = ['Marina Bay Singapore skyline night', 'Singapore skyline']; IMG_Q.inl_2 = ['Singapore Chinatown street', 'Singapore architecture street'];
     var IMG_W = { part_3: 1600, part_4: 1600, part_5: 1600, inl_1: 960, inl_2: 960 }, IMG_MINW = { part_3: 2000, part_4: 2000, part_5: 2000 }, CASH_IMG = ['SINdolar.jpg', 'USAdolar.jpg', 'IDRbankovka.jpg'];
+    var IMG_MUST = { air_emirates: /emirates/i, air_emirates_flydubai: /flydubai|emirates/i, air_finnair: /finnair/i, air_swiss: /swiss/i, air_turkish: /turkish/i };
+    var IMG_VER = { air_finnair: 2 };
     var IMG_FB = { sg: 'Singapore skyline', ulu: 'Uluwatu cliff Bali', ub: 'Ubud Bali', lo: 'Lombok beach', ta: 'Bali', mi: 'Bali', ho: 'Bali beach', f_: 'Indonesian food', air: 'airliner in flight' };
     var IMG_API = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=640&gsrsearch=';
     var IMG_KEY = 'lux_img_v2', imgCache = {}, imgQueue = [], imgBusy = 0, imgStarted = {}, imgFail = {}, imgPend = {}, partTry = {}, partDone = {};
@@ -19586,7 +19588,7 @@ function luxQRSvg(text, px) {
             }).filter(Boolean);
             var bad = /map|logo|flag|diagram|plan|stamp|poster|coat|icon|sign|menu|screenshot|svg/i, ok = function (c) { return /jpe?g|png/i.test(c.mime) && !bad.test(c.title); };
             var best = list.filter(function (c) { return ok(c) && c.w >= (minw || 900) && c.w >= c.h * 1.1; }), rest = list.filter(function (c) { return ok(c) && best.indexOf(c) < 0; });
-            return (minw ? best : best.concat(rest)).slice(0, 10).map(function (c) { return { u: c.u, d: c.d, a: c.a, l: c.l }; });
+            return (minw ? best : best.concat(rest)).slice(0, 10).map(function (c) { return { u: c.u, d: c.d, a: c.a, l: c.l, t: c.title }; });
         });
     }
     function imgResolve(id) {
@@ -19594,7 +19596,7 @@ function luxQRSvg(text, px) {
         var i = 0, failed = false;
         function next() {
             if (i >= qs.length) { if (/^(part_|inl_)/.test(id)) imgFail[id] = Date.now(); else { imgCache[id] = { none: 1, t: Date.now() }; imgSave(); } return Promise.resolve(); }
-            var qi = i++; return imgSearch(qs[qi], IMG_W[id], IMG_MINW[id] ? (qi >= 3 ? 1400 : IMG_MINW[id]) : undefined).then(function (c) { var kept = []; c.forEach(function (x) { if (kept.length < 3 && (!window.LUXIMG || window.LUXIMG.claim({ src: x.u, page: x.d }, id))) kept.push(x); }); if (kept.length) { imgCache[id] = { c: kept, t: Date.now() }; imgSave(); } else return next(); }).catch(function () { failed = true; });
+            var qi = i++; return imgSearch(qs[qi], IMG_W[id], IMG_MINW[id] ? (qi >= 3 ? 1400 : IMG_MINW[id]) : undefined).then(function (c) { var must = IMG_MUST[id], ban = /^air_/.test(id) ? /cabin|interior|seat|lounge|meal|food|logo|engine|cockpit|crew|office|check-?in|ticket|menu|amenity/i : null; c = c.filter(function (x) { return (!must || must.test(x.t || '')) && (!ban || !ban.test(x.t || '')); }); var kept = []; c.forEach(function (x) { if (kept.length < 3 && (!window.LUXIMG || window.LUXIMG.claim({ src: x.u, page: x.d }, id))) kept.push(x); }); if (kept.length) { imgCache[id] = { c: kept.map(function (x) { return { u: x.u, d: x.d, a: x.a, l: x.l }; }), t: Date.now(), v: IMG_VER[id] || 1 }; imgSave(); } else return next(); }).catch(function () { failed = true; });
         }
         return next();
     }
@@ -19666,6 +19668,7 @@ function luxQRSvg(text, px) {
     }
     function imgPurge() {
         if (!window.LUXIMG) return;
+        Object.keys(IMG_VER).forEach(function (id) { var c = imgCache[id]; if (c && (c.v || 1) !== IMG_VER[id]) delete imgCache[id]; });
         Object.keys(IMG_Q).forEach(function (id) { var c = imgCache[id]; if (!c || !c.c) return; c.c = c.c.filter(function (x) { return window.LUXIMG.claim({ src: x.u, page: x.d }, id); }); if (!c.c.length) delete imgCache[id]; });
         ['part_3', 'part_4', 'part_5', 'inl_1', 'inl_2'].forEach(function (id) { if (imgCache[id] && imgCache[id].none) delete imgCache[id]; });
         imgSave();
