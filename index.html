@@ -7730,6 +7730,20 @@ body.dark-mode #f-konfig .p35-footer a{color:#80e0d4!important;}
 }
 @media(prefers-reduced-motion:reduce){#flightPick .fp-chev{transition:none!important;}}
 </style>
+
+<style id="premium-v59-jednotne-letenky">
+/* V59: jediný přehled aerolinek na všech šířkách; starý seznam byl odstraněn i z HTML.
+   Záměrně vyšší specificita a !important kvůli starému mobilnímu přepisu display:flex. */
+#flightPick .flight-airline-switch,
+#flightPick #activeFlightDetailBox,
+#flightPick #rvLegend {display:none!important;visibility:hidden!important;}
+#flightPick #airlineImpact {display:block!important;width:100%;max-width:100%;min-width:0;}
+#flightPick .fp-card,#flightPick .x-mb-16 {min-width:0;}
+@media(max-width:730px){
+  #flightPick #airlineImpact .ai-v52-table {display:grid!important;grid-template-columns:minmax(0,1fr)!important;}
+  #flightPick #airlineImpact .ai-v52-row {min-width:0!important;max-width:100%;}
+}
+</style>
 </head>
 <body id="hero">
 <a class="premium-skip" href="#hlavni-obsah">Přeskočit na obsah</a>
@@ -7976,194 +7990,10 @@ e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
     </summary>
     <div class="bento-grid"><div class="bento-card highlight full fp-card">
 <div class="x-mb-16">
-                    <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 6px; color: var(--primary-light);">
-                        ✈️ 1. Vyber variantu dálkového letu Praha (PRG) ⇄ Singapur (SIN) — kompletní časy a přestupy:
-                    </div>
-<div class="flight-airline-switch">
-    <!-- 1. EMIRATES (16:10) -->
-    <button id="btnFlight_emirates" class="flight-mode-btn active" onclick="setFlightAirline('emirates')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="https://viper1971.github.io/bali-lombok/emirates.png" alt="Emirates" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>Emirates (Odpolední)</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Dubaj (DXB) • Nejvýhodnější</span>
-            </div>
-            <span class="fc-price-badge">22 000 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">16:10 PRG ➔ 14:05<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 15h 55m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 DXB 2h 25m</span>
-                <span class="fc-pill">✈️ EK140 + EK348</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • st 25. 8.</span>
-                <span class="fc-times">01:40 SIN ➔ 13:00 PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 17h 20m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 DXB 3h 45m</span>
-                <span class="fc-pill">✈️ EK349 + EK139</span>
-            </div>
-        </div>
-    </button>
 
-    <!-- 2. EMIRATES + FLYDUBAI (21:15) -->
-    <button id="btnFlight_emirates_flydubai" class="flight-mode-btn" onclick="setFlightAirline('emirates_flydubai')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="https://viper1971.github.io/bali-lombok/emirates.png" alt="Emirates" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>Emirates + flydubai</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Dubaj (DXB) • Večerní odlet</span>
-            </div>
-            <span class="fc-price-badge">22 000 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">21:15 PRG ➔ 21:45<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 18h 30m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 DXB 4h 35m</span>
-                <span class="fc-pill">✈️ EK2239 + EK352</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • st 25. 8.</span>
-                <span class="fc-times">00:50 SIN ➔ 13:00 PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 18h 10m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 DXB 4h 30m</span>
-                <span class="fc-pill">✈️ EK353 + EK139</span>
-            </div>
-        </div>
-    </button>
-
-    <!-- 3. FINNAIR (19:30 přes Helsinky) -->
-    <button id="btnFlight_finnair" class="flight-mode-btn" onclick="setFlightAirline('finnair')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="https://viper1971.github.io/bali-lombok/finair.jpg" alt="Finnair" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>Finnair (Helsinky)</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Helsinky (HEL) • Severní trasa</span>
-            </div>
-            <span class="fc-price-badge">24 900 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">19:30 PRG ➔ 18:30<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 17h 00m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 HEL 1h 50m</span>
-                <span class="fc-pill">✈️ AY1226 + AY131</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
-                <span class="fc-times">21:35 SIN ➔ 10:50<sup>+1</sup> PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 19h 15m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 HEL 3h 40m</span>
-                <span class="fc-pill">✈️ AY132 + AY1223</span>
-            </div>
-        </div>
-    </button>
-
-    <!-- 4. SWISS (19:30 přes Curych) -->
-    <button id="btnFlight_swiss" class="flight-mode-btn" onclick="setFlightAirline('swiss')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="https://viper1971.github.io/bali-lombok/swiss.png" alt="SWISS" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>SWISS (Curych)</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Curych (ZRH) • Nejrychlejší let</span>
-            </div>
-            <span class="fc-price-badge">23 909 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">19:30 PRG ➔ 17:10<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 15h 40m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 ZRH 1h 50m</span>
-                <span class="fc-pill">✈️ LX1489 + LX176</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
-                <span class="fc-times">23:25 SIN ➔ 08:40<sup>+1</sup> PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 15h 15m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 ZRH 1h 10m</span>
-                <span class="fc-pill">✈️ LX177 + LX1484</span>
-            </div>
-        </div>
-    </button>
-
-    <!-- 5. TURKISH AIRLINES (19:15 přes Istanbul) -->
-    <button id="btnFlight_turkish" class="flight-mode-btn" onclick="setFlightAirline('turkish')">
-        <div class="fc-header">
-            <div>
-                <div class="fc-airline">
-                    <img decoding="async" loading="lazy" src="https://viper1971.github.io/bali-lombok/turkish.png" alt="Turkish Airlines" class="fc-flag" style="width: 32px; height: 22px; object-fit: contain;">
-                    <span>Turkish Airlines</span>
-                </div>
-                <span class="fc-hub-sub">📍 Přestup: Istanbul (IST) • Top servis</span>
-            </div>
-            <span class="fc-price-badge">26 505 Kč / os.</span>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-out">🛫 TAM • pá 6. 8.</span>
-                <span class="fc-times">19:15 PRG ➔ 17:55<sup>+1</sup> SIN</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 16h 40m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 IST 3h 05m</span>
-                <span class="fc-pill">✈️ TK1770 + TK54</span>
-            </div>
-        </div>
-        <div class="fc-leg-box">
-            <div class="fc-leg-top">
-                <span class="fc-dir-tag fc-dir-ret">🛬 ZPĚT • út 24. 8.</span>
-                <span class="fc-times">23:05 SIN ➔ 08:35<sup>+1</sup> PRG</span>
-            </div>
-            <div class="fc-meta-pills">
-                <span class="fc-pill">⏱️ 15h 30m</span>
-                <span class="fc-pill fc-pill-transfer">🔄 IST 1h 45m</span>
-                <span class="fc-pill">✈️ TK55 + TK1767</span>
-            </div>
-        </div>
-    </button>
-</div>
-                    <!-- ŽIVÝ DETAILNÍ BOX AKTIVNÍHO LETU -->
-                    <div class="active-flight-detail-box" id="activeFlightDetailBox">
-                        <!-- Dynamicky vykresleno JavaScriptem dle vybraného letu -->
-                    </div>
+<!-- Původní duplicitní karty aerolinek odstraněny: jediný výběr je v #airlineImpact pro PC i mobil. -->
+                    <!-- Kotva pro vkládání jednotného srovnání všech leteckých společností -->
+                    <div class="active-flight-detail-box" id="activeFlightDetailBox" hidden aria-hidden="true" style="display:none!important"></div>
                 </div>
 
     </div></div>
