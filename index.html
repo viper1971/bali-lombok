@@ -6986,6 +6986,263 @@ body.pres-on #v29TopTab,body.pres-on #v29BottomTab{display:none!important}
 #f-konfig #rozpis-nakladu{margin-top:0;}
 #f-konfig .p22-mast-copy h3{max-width:680px;}
 </style>
+<style id="p35-final-polish">
+/* v35 — finanční dashboard představuje výsledek, nikoliv znovu nastavení */
+#f-konfig #ganttAuditCard {display:none!important}
+#f-konfig #rozpocet .pf18-hotel-panel,
+#f-konfig #rozpocet .pf18-support-grid,
+#f-konfig #rozpocet .pf18-quicklinks {display:none!important}
+#f-konfig #rozpocet .pf18-shell {margin:0!important;padding:0!important;gap:0!important}
+#f-konfig #rozpocet .pf18-shell>.pf18-hotel-panel{display:none!important}
+#f-konfig .p35-final {--p35-ink:#143044;--p35-muted:#647b87;display:grid;gap:18px;margin:10px 0 22px;width:100%;max-width:100%;min-width:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',system-ui,sans-serif}
+#f-konfig .p35-final *{box-sizing:border-box}
+#f-konfig .p35-intro{display:flex;justify-content:space-between;align-items:center;gap:22px;flex-wrap:wrap;padding:clamp(23px,3.2vw,40px);border-radius:22px;background:linear-gradient(115deg,#102b3b,#185764 80%,#127d76);color:white;box-shadow:0 14px 28px rgba(20,60,75,.12)}
+#f-konfig .p35-kicker{display:block;color:#0b8580;font-size:11px;font-weight:850;letter-spacing:.09em;line-height:1.4}
+#f-konfig .p35-intro .p35-kicker{color:#91eddb}
+#f-konfig .p35-intro h2{font-size:clamp(29px,4vw,48px)!important;line-height:1.11!important;color:white!important;margin:10px 0!important;letter-spacing:-.035em}
+#f-konfig .p35-intro h2 em{font-style:normal;color:#8ff0dd}
+#f-konfig .p35-intro p{font-size:14px;color:#dfedf1;line-height:1.65;margin:0;max-width:64ch}
+#f-konfig .p35-stamp{display:grid;gap:6px;text-align:center;border:1px solid #7dadb5;border-radius:16px;padding:17px 20px;background:#ffffff12;min-width:190px}
+#f-konfig .p35-stamp span{font-size:20px;font-weight:850;color:white}
+#f-konfig .p35-stamp b{font-size:12px;color:#d8ecee}
+#f-konfig .p35-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+#f-konfig .p35-card{min-width:0;padding:22px;border:1px solid #d8e5ea;border-radius:18px;background:#fff;box-shadow:0 6px 24px #183e4e0c;display:flex;flex-direction:column;gap:13px;color:var(--p35-ink)}
+#f-konfig .p35-card header{display:flex;align-items:center;gap:12px;border-bottom:1px solid #e5edf0;padding:0 0 13px}
+#f-konfig .p35-card h3{font-size:18px!important;line-height:1.3!important;margin:3px 0 0!important;color:#143044!important}
+#f-konfig .p35-icon{width:42px;height:42px;flex:0 0 42px;border-radius:12px;background:#e3f4f0;display:grid;place-items:center;font-size:21px}
+#f-konfig .p35-content{min-width:0;color:#2c4758;font-size:13px;line-height:1.55;display:grid;gap:9px}
+#f-konfig .p35-content strong{color:#123c4e}
+#f-konfig .p35-card>a,#f-konfig .p35-footer a{margin-top:auto;align-self:flex-start;text-decoration:none;font-size:12px;font-weight:800;color:#087e7e;border-bottom:1px solid #60b5ab;padding-bottom:3px}
+#f-konfig .p35-line{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:12px;border-bottom:1px solid #ecf1f3;padding:8px 0}
+#f-konfig .p35-line:last-child{border-bottom:0}
+#f-konfig .p35-line small{display:block;color:#617b8a;font-size:11px;margin-top:3px}
+#f-konfig .p35-line b{font-size:13px;color:#0b7878;white-space:nowrap}
+#f-konfig .p35-flight-grid{display:grid;gap:10px}
+#f-konfig .p35-flight-name{font-size:17px;font-weight:850;color:#103447}
+#f-konfig .p35-flight-meta{font-size:12px;color:#587486}
+#f-konfig .p35-pill{display:inline-flex;width:max-content;max-width:100%;flex-wrap:wrap;background:#ecf7f5;border-radius:10px;padding:7px 10px;color:#0a7773;font-weight:800}
+#f-konfig .p35-sum{margin-top:auto;padding:12px 14px;border:1px solid #bce1da;background:#f0f9f7;border-radius:12px;font-weight:850;color:#11695f;font-size:13px}
+#f-konfig .p35-activity-list{display:grid;gap:2px;max-height:300px;overflow-y:auto}
+#f-konfig .p35-activity-list li{padding:5px 0;border-bottom:1px solid #edf2f4;list-style:none;font-size:12px;overflow-wrap:anywhere}
+#f-konfig .p35-activity-list li:last-child{border:0}
+#f-konfig .p35-footer{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;border-radius:16px;border:1px solid #cddfe2;background:#eff7f7;padding:18px 22px;color:#183d4c}
+#f-konfig .p35-footer strong{font-size:15px;color:#123d4e}
+#f-konfig .p35-footer p{margin:5px 0 0;color:#597380;font-size:12px}
+#f-konfig .p22-mast{margin-top:8px}
+@media(max-width:760px){#f-konfig .p35-cards{grid-template-columns:1fr}#f-konfig .p35-intro{padding:21px 17px}#f-konfig .p35-stamp{width:100%;text-align:left}#f-konfig .p35-card{padding:16px}#f-konfig .p35-footer{padding:16px}}
+@media(min-width:761px) and (max-width:1100px){#f-konfig .p35-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+
+<style id="v36CompactDashboard">
+/* v36 — kompaktní finální dashboard */
+#f-konfig .p35-final{gap:12px!important;margin:6px 0 14px!important;}
+#f-konfig .p35-intro{padding:14px 18px!important;border-radius:16px!important;gap:14px!important;align-items:center!important;box-shadow:0 8px 18px rgba(20,60,75,.10)!important;}
+#f-konfig .p35-intro h2{font-size:clamp(23px,2.2vw,34px)!important;line-height:1.08!important;margin:6px 0 4px!important;}
+#f-konfig .p35-intro p{font-size:12.5px!important;line-height:1.45!important;max-width:58ch!important;}
+#f-konfig .p35-kicker{font-size:10px!important;letter-spacing:.11em!important;}
+#f-konfig .p35-stamp{padding:10px 14px!important;min-width:160px!important;border-radius:12px!important;gap:3px!important;}
+#f-konfig .p35-stamp span{font-size:16px!important;line-height:1.15!important;}
+#f-konfig .p35-stamp b{font-size:11px!important;}
+#f-konfig .p35-cards{gap:10px!important;}
+#f-konfig .p35-card{padding:14px 15px!important;border-radius:14px!important;gap:10px!important;box-shadow:0 6px 14px rgba(24,62,78,.06)!important;}
+#f-konfig .p35-card header{gap:10px!important;padding:0 0 9px!important;}
+#f-konfig .p35-icon{width:34px!important;height:34px!important;flex-basis:34px!important;border-radius:10px!important;font-size:17px!important;}
+#f-konfig .p35-card h3{font-size:16px!important;line-height:1.22!important;margin:1px 0 0!important;}
+#f-konfig .p35-content{font-size:12.5px!important;line-height:1.42!important;gap:6px!important;}
+#f-konfig .p35-flight-name{font-size:15px!important;}
+#f-konfig .p35-flight-meta{font-size:11.5px!important;line-height:1.4!important;}
+#f-konfig .p35-pill{padding:5px 9px!important;border-radius:8px!important;font-size:12px!important;}
+#f-konfig .p35-line{gap:9px!important;padding:5px 0!important;}
+#f-konfig .p35-line small{font-size:10.5px!important;margin-top:2px!important;line-height:1.35!important;}
+#f-konfig .p35-line b{font-size:12.5px!important;}
+#f-konfig .p35-sum{padding:9px 11px!important;border-radius:10px!important;font-size:12.5px!important;}
+#f-konfig .p35-activity-list{gap:0!important;max-height:220px!important;}
+#f-konfig .p35-activity-list li{padding:4px 0!important;font-size:11.5px!important;line-height:1.35!important;}
+#f-konfig .p35-card>a,#f-konfig .p35-footer a{font-size:11px!important;padding-bottom:2px!important;}
+#f-konfig .p35-footer{padding:12px 15px!important;border-radius:14px!important;gap:10px!important;}
+#f-konfig .p35-footer strong{font-size:13px!important;}
+#f-konfig .p35-footer p{font-size:11.5px!important;line-height:1.4!important;}
+
+#f-rozpis .p22{gap:12px!important;}
+#f-rozpis .p22-mast{padding:16px 18px!important;border-radius:18px!important;box-shadow:0 10px 24px -18px rgba(11,35,51,.42)!important;}
+#f-rozpis .p22-mast::after{right:-130px!important;bottom:-250px!important;width:330px!important;height:330px!important;border-width:42px!important;}
+#f-rozpis .p22-mast-top{gap:8px!important;}
+#f-rozpis .p22-mast-grid{gap:16px!important;margin:14px 0 14px!important;align-items:center!important;}
+#f-rozpis .p22-mast h3{font-size:clamp(22px,2.4vw,34px)!important;line-height:1.05!important;margin:0 0 8px!important;}
+#f-rozpis .p22-mast-copy p{font-size:12.5px!important;line-height:1.45!important;max-width:52ch!important;}
+#f-rozpis .p22-mast-price{padding:12px 14px!important;border-radius:14px!important;gap:4px!important;}
+#f-rozpis .p22-mast-price>span{font-size:11px!important;}
+#f-rozpis .p22-mast-price strong{font-size:clamp(24px,2.3vw,32px)!important;}
+#f-rozpis .p22-mast-perday{font-size:11.5px!important;}
+#f-rozpis .p22-switch{padding:4px!important;gap:4px!important;}
+#f-rozpis .p22-switch button{min-height:38px!important;padding:8px 12px!important;font-size:12px!important;border-radius:10px!important;}
+#f-rozpis .p22-metrics{gap:9px!important;}
+#f-rozpis .p22-metric{padding:10px 12px!important;border-radius:13px!important;gap:5px!important;}
+#f-rozpis .p22-metric>span{font-size:10px!important;line-height:1.3!important;}
+#f-rozpis .p22-metric strong{font-size:clamp(17px,1.7vw,24px)!important;line-height:1.1!important;}
+#f-rozpis .p22-metric small{font-size:10px!important;line-height:1.3!important;}
+#f-rozpis .p22-insights{gap:10px!important;}
+#f-rozpis .p22-card{padding:14px 15px!important;border-radius:16px!important;box-shadow:0 8px 18px -20px rgba(16,41,56,.3)!important;}
+#f-rozpis .p22-card-header{margin-bottom:12px!important;gap:10px!important;}
+#f-rozpis .p22-card h4,#f-rozpis .p22-ledger h4{font-size:18px!important;margin:4px 0 0!important;}
+#f-rozpis .p22-subtle,#f-rozpis .p22-caption,#f-rozpis .p22-difference span,#f-rozpis .p22-reconcile{font-size:11px!important;line-height:1.4!important;}
+#f-rozpis .p22-visual{gap:14px!important;}
+#f-rozpis .p22-donut{width:min(220px,100%)!important;}
+#f-rozpis .p22-legend{gap:8px 12px!important;}
+#f-rozpis .p22-legend-row{font-size:11px!important;}
+#f-rozpis .p22-compare-rows{gap:8px!important;}
+#f-rozpis .p22-ledger{padding:14px 15px!important;border-radius:16px!important;}
+#f-rozpis .p22-ledger-top{margin-bottom:12px!important;gap:10px!important;}
+#f-rozpis .p22-ledger-top p{font-size:11px!important;line-height:1.4!important;margin:5px 0 0!important;}
+#f-rozpis .p22-copy{padding:8px 11px!important;font-size:11px!important;border-radius:10px!important;}
+#f-rozpis .p22-groups{gap:9px!important;}
+#f-rozpis .p22-group{border-radius:13px!important;}
+#f-rozpis .p22-group>summary{padding:11px 12px!important;min-height:58px!important;gap:9px!important;}
+#f-rozpis .p22-group-icon{width:34px!important;height:34px!important;flex-basis:34px!important;border-radius:10px!important;font-size:16px!important;}
+#f-rozpis .p22-group-name{gap:3px!important;}
+#f-rozpis .p22-group-name b{font-size:12.5px!important;line-height:1.25!important;}
+#f-rozpis .p22-group-name small{font-size:10px!important;line-height:1.25!important;}
+#f-rozpis .p22-group-amount{gap:3px!important;}
+#f-rozpis .p22-group-amount b{font-size:13px!important;}
+#f-rozpis .p22-group-amount small{font-size:10px!important;}
+#f-rozpis .p22-group-bar{margin:0 12px 9px!important;height:3px!important;}
+#f-rozpis .p22-group-lines{padding:3px 12px 9px!important;}
+#f-rozpis .p22-line{padding:6px 0!important;gap:8px!important;}
+#f-rozpis .p22-line b{font-size:12px!important;}
+#f-rozpis .p22-line small{font-size:10px!important;}
+#f-rozpis .p22-footnotes{gap:10px!important;}
+#f-rozpis .p22-footnotes > div{padding:11px 12px!important;border-radius:13px!important;}
+#f-rozpis .p22-footnotes b{font-size:12px!important;}
+#f-rozpis .p22-footnotes span{font-size:11px!important;line-height:1.45!important;}
+#ck-sen-compare .sen-box,#ck-sen-compare .lux-card{padding:14px 15px!important;border-radius:16px!important;}
+#ck-sen-compare h3,#ck-sen-compare h4{margin-bottom:8px!important;}
+
+@media (min-width:1101px){
+  #f-konfig .p35-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+}
+@media (max-width:760px){
+  #f-konfig .p35-intro{padding:13px 14px!important;}
+  #f-konfig .p35-intro h2{font-size:24px!important;}
+  #f-konfig .p35-card{padding:13px!important;}
+  #f-rozpis .p22-mast{padding:15px 14px!important;}
+}
+</style>
+
+<style id="v37NoDuplicatedLedger">
+/* Shrnutí už obsahuje jednotlivé lety, hotely, stravu a výlety.
+   Výpočetní DOM a posluchače ponecháváme aktivní a připojené. */
+#f-rozpis .p22-ledger{display:none!important}
+#f-konfig .p35-final{gap:8px!important;margin:0 0 9px!important}
+#f-konfig .p35-cards{align-items:start!important;gap:8px!important}
+#f-konfig .p35-card{align-self:start!important;height:auto!important;padding:11px 13px!important;gap:7px!important;border-radius:12px!important}
+#f-konfig .p35-card header{padding-bottom:6px!important;gap:8px!important}
+#f-konfig .p35-content{gap:4px!important;line-height:1.35!important}
+#f-konfig .p35-flight-grid{gap:6px!important}
+#f-konfig .p35-line{padding:4px 0!important;gap:7px!important}
+#f-konfig .p35-line small{margin-top:1px!important}
+#f-konfig .p35-sum{padding:7px 10px!important}
+#f-konfig .p35-intro{padding:11px 15px!important;gap:10px!important}
+#f-konfig .p35-intro h2{font-size:clamp(21px,2vw,29px)!important;margin:4px 0 2px!important}
+#f-konfig .p35-intro p{font-size:11.5px!important}
+#f-konfig .p35-stamp{padding:8px 10px!important}
+#f-konfig .p35-footer{padding:9px 12px!important}
+#f-rozpis .p22{gap:8px!important;margin:0 0 10px!important}
+#f-rozpis .p22-mast{padding:12px 16px!important;border-radius:14px!important}
+#f-rozpis .p22-mast-grid{margin:9px 0!important;gap:12px!important}
+#f-rozpis .p22-mast h3{font-size:clamp(19px,2.1vw,27px)!important;margin:0 0 4px!important}
+#f-rozpis .p22-mast-copy p{font-size:11.5px!important;line-height:1.35!important}
+#f-rozpis .p22-mast-price{padding:9px 12px!important}
+#f-rozpis .p22-mast-price strong{font-size:clamp(21px,2vw,28px)!important}
+#f-rozpis .p22-metrics{gap:7px!important}
+#f-rozpis .p22-metric{padding:8px 10px!important;gap:3px!important}
+#f-rozpis .p22-insights{gap:8px!important;align-items:start!important}
+#f-rozpis .p22-card{padding:11px 12px!important;border-radius:12px!important}
+#f-rozpis .p22-card-header{margin-bottom:7px!important}
+#f-rozpis .p22-card h4{font-size:16px!important}
+#f-rozpis .p22-visual{gap:9px!important}
+#f-rozpis .p22-donut{width:min(170px,100%)!important;padding:12px!important}
+#f-rozpis .p22-donut-hole{gap:2px!important}
+#f-rozpis .p22-footnotes{gap:7px!important}
+#f-rozpis .p22-footnotes>div{padding:9px 11px!important;gap:4px!important}
+#f-rozpis .p37-mast-actions{display:flex;align-items:center;flex-wrap:wrap;gap:7px}
+#f-rozpis .p37-copy{display:inline-flex;gap:5px;align-items:center;border-radius:9px;padding:7px 10px!important;background:#e8f6f4;color:#075c58;border:1px solid #9acbc5;font-size:11px!important;font-weight:800;cursor:pointer;min-height:32px}
+#f-rozpis .p37-copy:hover{background:#fff}
+@media(max-width:760px){
+ #f-konfig .p35-cards{grid-template-columns:1fr!important}
+ #f-rozpis .p22-mast-grid{grid-template-columns:1fr!important}
+ #f-rozpis .p22-mast{padding:11px 12px!important}
+ #f-rozpis .p22-mast-price strong{white-space:normal!important}
+ #f-rozpis .p37-mast-actions{width:100%;justify-content:space-between}
+ #f-rozpis .p22-visual{grid-template-columns:1fr!important}
+}
+</style>
+
+<style id="v39FourColumns">
+/* Premium v39 — skutečná mřížka: 4 karty na čtyři stejně široké sloupce PC.
+   Opravuje CSS columns, které rozdělilo karty do dvou sloupců a ponechalo prázdné místo. */
+#f-konfig .p35-cards{
+ display:grid!important;
+ grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ grid-auto-flow:row!important;
+ align-items:start!important;
+ align-content:start!important;
+ gap:12px!important;
+ columns:auto!important;
+ column-count:auto!important;
+ width:100%!important;
+ max-width:100%!important;
+ min-width:0!important;
+}
+#f-konfig .p35-cards>.p35-card{
+ display:flex!important;
+ flex-direction:column!important;
+ width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ max-width:none!important;
+ min-width:0!important;
+ margin:0!important;
+ padding:14px!important;
+ align-self:start!important;
+ break-inside:auto!important;
+ vertical-align:initial!important;
+}
+#f-konfig .p35-card .p35-content{min-width:0!important;overflow-wrap:anywhere!important}
+#f-konfig .p35-card .p35-line{grid-template-columns:minmax(0,1fr) auto!important;gap:5px!important}
+#f-konfig .p35-card .p35-line b{white-space:nowrap!important}
+#f-konfig .p35-card header{min-width:0!important;gap:8px!important}
+#f-konfig .p35-card header>div{min-width:0!important}
+#f-konfig .p35-card h3{font-size:14px!important;line-height:1.25!important}
+#f-konfig .p35-card .p35-kicker{font-size:9px!important}
+#f-konfig .p35-card .p35-content{font-size:11.5px!important;line-height:1.4!important}
+#f-konfig .p35-card .p35-icon{width:30px!important;height:30px!important;flex:0 0 30px!important;font-size:16px!important}
+#f-konfig .p35-card>a{margin-top:7px!important}
+#f-rozpis .p22-metrics{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+#f-rozpis .p22-metrics>*{min-width:0!important;height:auto!important}
+@media(max-width:1150px){
+ #f-konfig .p35-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #f-rozpis .p22-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:680px){
+ #f-konfig .p35-cards{grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+ #f-konfig .p35-cards>.p35-card{padding:12px!important}
+ #f-rozpis .p22-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+</style>
+
+<style id="premium-v40-top-offset">
+/* Trvale odstranit horní indikátor i jeho záložku; data o přečtení zůstávají pro accordiony. */
+#pbar,#v29TopTab{display:none!important;visibility:hidden!important;pointer-events:none!important;}
+body.v29-top-open #pbar{display:none!important;visibility:hidden!important;}
+/* Otevřené accordiony se přichytí k horní hraně bez někdejší 56–64px mezery. */
+html body .lux-fold{--stick-top:5px!important;}
+html body .lux-fold.is-open > .lux-fold-h{
+  top:calc(5px + env(safe-area-inset-top,0px))!important;
+}
+/* Při skoku z navigace respektuj stejný úzký horní odstup. */
+html body .lux-fold{scroll-margin-top:8px;}
+</style>
+<style id="v41ActivityScrollFix">#tjActs{overflow-anchor:none!important;} #tjActs .tj-act-grp{overflow-anchor:none!important;}</style>
 </head>
 <body id="hero">
 <a class="premium-skip" href="#hlavni-obsah">Přeskočit na obsah</a>
@@ -12430,7 +12687,7 @@ function updatePackingWeight() {
 
     var T = { people: 8, solo: false };
     var subs = [];
-    function emit() { save(); subs.forEach(function (f) { try { f(); } catch (e) { if (window.console) console.warn(e); } }); try { window.dispatchEvent(new Event('trip:change')); } catch (e) {} }
+    function emit(skipActivityRerender) { save(); subs.forEach(function (f) { if (skipActivityRerender && (f === renderFood || f === renderActs)) return; try { f(); } catch (e) { if (window.console) console.warn(e); } }); try { window.dispatchEvent(new Event('trip:change')); } catch (e) {} }
 
     function lastHotel() {
         try { var v = selectedHotels.kutaLast, h = hotelCatalog.kutaLast.options[v]; if (h && h.price > 0) return { v: v, name: h.name, price: h.price }; } catch (e) {}
@@ -12551,7 +12808,7 @@ function updatePackingWeight() {
             html += '</div>';
         });
         host.innerHTML = html;
-        if (focusId) { var el = host.querySelector('input[data-id="' + focusId + '"]'); if (el) el.focus(); }
+        if (focusId) { var el = host.querySelector('input[data-id="' + focusId + '"]'); if (el) { try { el.focus({ preventScroll: true }); } catch (e) { /* focus is optional; never scroll to an item */ } } }
         $('tjActSum').innerHTML =
             '<div><span>Vybráno</span><b>' + S.count + (S.count === 1 ? ' položka' : (S.count >= 2 && S.count <= 4 ? ' položky' : ' položek')) + '</b></div>' +
             '<div class="tj-sum-main"><span>Vstupné a aktivity celkem na osobu</span><b>' + kcTxt(S.kc) + '</b></div>' +
@@ -12560,6 +12817,38 @@ function updatePackingWeight() {
             '<div class="tj-sum-note">Pár (2 osoby): ' + kcTxt(S.kc * 2) + ' · počet lidí ve skupině pro dělené položky: ' + c.people + '</div>';
         var mt = $('tjMetaAct'); if (mt) mt.textContent = S.count + ' pol. · ' + kcTxt(S.kc);
         applyActivityFilters();
+    }
+
+    /* v42: při změně jediného zaškrtávátka NENAHRAZUJEME DOM seznamu.
+       Aktualizují se jen součty, skupiny a související finanční výpočty. */
+    function updateActivityNumbersInPlace() {
+        var c=mkctx(), S=sums();
+        GROUPS.forEach(function(g) {
+            var group=document.querySelector('#tjActs .tj-act-grp[data-p20-id="'+g.id+'"]');
+            if (!group) return;
+            var items=ACTS.filter(function(a){return a.g===g.id;});
+            var value=0,count=0;
+            items.forEach(function(a){
+                var active=isOn(a) && !(a.hotel && hotelNa(c));
+                if(active){count++;value+=amtOf(a,c)*c.m[a.cur];}
+                var cb=group.querySelector('input[data-id="'+a.id+'"]');
+                if(cb){
+                    cb.checked=active;
+                    cb.closest('.tj-row').classList.toggle('is-off',!active);
+                }
+            });
+            var summary=group.querySelector('.tj-grp-h > span');
+            if(summary)summary.textContent=count+' vybráno · '+kcTxt(value);
+        });
+        var sum=$('tjActSum');
+        if(sum)sum.innerHTML =
+            '<div><span>Vybráno</span><b>'+S.count+(S.count===1?' položka':S.count<5?' položky':' položek')+'</b></div>'+
+            '<div class="tj-sum-main"><span>Vstupné a aktivity celkem na osobu</span><b>'+kcTxt(S.kc)+'</b></div>'+
+            '<div><span>z toho hotově (jde do Plánu hotovosti)</span><b>'+kcTxt(S.cashKc)+'</b></div>'+
+            '<div><span>z toho kartou</span><b>'+kcTxt(S.cardKc)+'</b></div>'+
+            '<div class="tj-sum-note">Pár (2 osoby): '+kcTxt(S.kc*2)+' · počet lidí ve skupině pro dělené položky: '+c.people+'</div>';
+        var meta=$('tjMetaAct');
+        if(meta)meta.textContent=S.count+' pol. · '+kcTxt(S.kc);
     }
 
     /* ---------- PREMIUM v20: filtrování pouze pohledu, nikdy nemění zaškrtnuté položky ani součty ---------- */
@@ -12607,7 +12896,9 @@ function updatePackingWeight() {
     if (rootA) {
         rootA.addEventListener('change', function (e) {
             var cb = e.target.closest('input[data-id]'); if (!cb) return;
-            st.c[cb.getAttribute('data-id')] = cb.checked ? 1 : 0; emit();
+            st.c[cb.getAttribute('data-id')] = cb.checked ? 1 : 0;
+            updateActivityNumbersInPlace();
+            emit(true); // žádné překreslení seznamu ani obnova focusu
         });
         rootA.addEventListener('click', function (e) {
             var b = e.target.closest('[data-bulk]'); if (!b) return;
@@ -14030,11 +14321,22 @@ function updatePackingWeight() {
 <div id="f-rozpis" class="v31-financial-detail" aria-label="Podrobný rozpis všech nákladů">
   
 <!-- PREMIUM v22: Finanční centrum – nové rozložení, původní výpočty ponechány -->
+<!-- PREMIUM v35: jediné závěrečné cestovní shrnutí, napojené na výběr -->
+<div class="p35-final" id="p35Final">
+ <div class="p35-intro"><div><span class="p35-kicker">FINÁLNÍ SHRNUTÍ CESTY · SRPEN 2027</span><h2>Vybráno, spočítáno, připraveno.</h2><p>Přehled letenek, hotelů, jídla, aktivit a výsledné ceny bez zbytečné omáčky.</p></div><div class="p35-stamp"><span>06.–25. 08. 2027</span><b>20 dní · 3 destinace</b></div></div>
+ <div class="p35-cards">
+  <article class="p35-card p35-flight"><header><span class="p35-icon">✈️</span><div><span class="p35-kicker">01 · LETENKY</span><h3>Zvolené letecké spojení</h3></div></header><div id="p35Flight" class="p35-content">Načítám vybraný let…</div><a href="#vyber-letenek" data-p35-target="flights">Zobrazit výběr letenek ↗</a></article>
+  <article class="p35-card p35-hotels"><header><span class="p35-icon">🏨</span><div><span class="p35-kicker">02 · UBYTOVÁNÍ</span><h3>Šest vybraných hotelů</h3></div></header><div id="p35Hotels" class="p35-content">Načítám výběr hotelů…</div><div id="p35HotelsTotal" class="p35-sum"></div></article>
+  <article class="p35-card"><header><span class="p35-icon">🍜</span><div><span class="p35-kicker">03 · STRAVOVÁNÍ</span><h3>Jak budeme jíst</h3></div></header><div id="p35Food" class="p35-content">Načítám stravování…</div><a href="#jidlo">Upravit jídlo ↗</a></article>
+  <article class="p35-card"><header><span class="p35-icon">🎟️</span><div><span class="p35-kicker">04 · ZÁŽITKY</span><h3>Vybrané výlety a vstupy</h3></div></header><div id="p35Activities" class="p35-content">Načítám vybrané aktivity…</div><a href="#aktivity">Upravit aktivity ↗</a></article>
+ </div>
+ <div class="p35-footer"><div><strong>💵 Co připravit na cestu</strong><p>Hotovost v SGD, USD a IDR, rezervy a plán směny najdeš ve svém přepočítávaném plánu.</p></div><a href="#hotovost">Otevřít plán hotovosti ↗</a></div>
+</div>
 <div class="p22" id="rozpis-nakladu">
   <header class="p22-mast">
-    <div class="p22-mast-top"><span class="p22-eyebrow">FINANČNÍ CENTRUM · SINGAPUR / BALI / LOMBOK</span><span class="p22-live"><i></i> Živý rozpočet</span></div>
+    <div class="p22-mast-top"><span class="p22-eyebrow">FINANČNÍ CENTRUM · SINGAPUR / BALI / LOMBOK</span><div class="p37-mast-actions"><span class="p22-live"><i></i> Živý rozpočet</span><button type="button" class="p22-copy p37-copy" id="p22Copy"><span aria-hidden="true">⧉</span> Kopírovat rozpočet</button></div></div>
     <div class="p22-mast-grid">
-      <div class="p22-mast-copy"><h3>Kolik dovolená stojí<br><em>a za co platíš.</em></h3><p>Jeden společný přehled celkové ceny, výdajových kategorií a jejich podrobného rozpisu. Vše se přepočítává podle vybraných letů, hotelů, jídla a zážitků.</p></div>
+      <div class="p22-mast-copy"><h3>Úplný rozpis ceny<br><em>a co je zahrnuto.</em></h3><p>Výsledný rozpočet na osobu, pár i sólo cestovatele, rozdělení částek a detail všech kategorií. Přepočet používá tvoje skutečné volby.</p></div>
       <div class="p22-mast-price"><span id="p22Who">Jedna osoba · sdílený pokoj</span><strong id="p22Total">— Kč</strong><div class="p22-mast-perday"><span id="p22PerDay">— Kč</span> / den · 20 dní</div></div>
     </div>
     <div class="p22-switch" role="group" aria-label="Zobrazit rozpočet pro">
@@ -14064,7 +14366,7 @@ function updatePackingWeight() {
   </div>
 
   <section class="p22-ledger" aria-label="Položkový rozpis nákladů">
-    <div class="p22-ledger-top"><div><span class="p22-kicker">PŘEHLED JEDNOTLIVÝCH POLOŽEK</span><h4>Za co přesně platíš</h4><p>Každá položka má svůj původní výpočet. Rozbal kategorii a uvidíš jednotlivé částky.</p></div><button type="button" class="p22-copy" id="p22Copy"><span aria-hidden="true">⧉</span> Kopírovat rozpočet</button></div>
+    <div class="p22-ledger-top"><div><span class="p22-kicker">PŘEHLED JEDNOTLIVÝCH POLOŽEK</span><h4>Za co přesně platíš</h4><p>Každá položka má svůj původní výpočet. Rozbal kategorii a uvidíš jednotlivé částky.</p></div></div>
     <div class="p22-groups" id="p22Groups"></div>
   </section>
 
@@ -22678,36 +22980,61 @@ body.dark #rozpocet .pf18-details summary small,html.dark #rozpocet .pf18-detail
 </script>
 
 <script id="premium-v29-slide-tabs">
+/* v40: pouze spodní záložka MENU; horní ukazatel čtení odstraněn z rozhraní. */
 (function(){
  'use strict';
  function init(){
-  var top=document.getElementById('pbar'),bottom=document.getElementById('vipFloatingBar');
-  if(!top||!bottom||document.getElementById('v29TopTab'))return;
-  function tab(id,txt,chev,position){
-   var el=document.createElement('button');el.type='button';el.id=id;
-   el.setAttribute('aria-expanded','false');el.setAttribute('aria-controls',position==='top'?'pbar':'vipFloatingBar');
-   el.innerHTML='<span class="v29-chevron" aria-hidden="true">'+chev+'</span><span>'+txt+'</span>';
-   document.body.appendChild(el);return el;
-  }
-  var t=tab('v29TopTab','Průběh čtení','▾','top');
-  var b=tab('v29BottomTab','MENU','▴','bottom');
+  var bottom=document.getElementById('vipFloatingBar');
+  if(!bottom||document.getElementById('v29BottomTab'))return;
+  document.body.classList.remove('v29-top-open');
+  var b=document.createElement('button');b.type='button';b.id='v29BottomTab';
+  b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls','vipFloatingBar');
+  b.innerHTML='<span class="v29-chevron" aria-hidden="true">▴</span><span>MENU</span>';
+  document.body.appendChild(b);
   function sync(){
-   var a=document.body.classList.contains('v29-top-open');
-   var c=document.body.classList.contains('v29-bottom-open');
-   t.setAttribute('aria-expanded',String(a));b.setAttribute('aria-expanded',String(c));
-   t.querySelector('.v29-chevron').textContent=a?'▴':'▾';
-   b.querySelector('.v29-chevron').textContent=c?'▾':'▴';
+   var opened=document.body.classList.contains('v29-bottom-open');
+   b.setAttribute('aria-expanded',String(opened));
+   b.querySelector('.v29-chevron').textContent=opened?'▾':'▴';
   }
-  t.addEventListener('click',function(){document.body.classList.toggle('v29-top-open');sync()});
   b.addEventListener('click',function(){document.body.classList.toggle('v29-bottom-open');sync()});
   document.addEventListener('keydown',function(e){
-   if(e.key==='Escape'&&(document.body.classList.contains('v29-top-open')||document.body.classList.contains('v29-bottom-open'))){
-    document.body.classList.remove('v29-top-open','v29-bottom-open');sync();
+   if(e.key==='Escape'&&document.body.classList.contains('v29-bottom-open')){
+    document.body.classList.remove('v29-bottom-open');sync();
    }
   });
   sync();
  }
- if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);else init();
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<script id="p35-final-snapshot">
+/* Čtení aktuálních hodnot bez zásahu do finančních vzorců */
+(function(){'use strict';
+ var el=function(id){return document.getElementById(id)},fmt=function(v){return Math.round(v||0).toLocaleString('cs-CZ')+' Kč'},esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})},readNum=function(id){var e=el(id),t=e&&e.textContent||'';return Number(t.replace(/[\s\u00a0\u202f]/g,'').replace(/[^0-9-]/g,''))||0};
+ var source=function(name){try{return Function('return typeof '+name+'!=="undefined"?'+name+':null')()}catch(e){return null}};
+ // Přímý přístup do původního globálního katalogu bez opakování jeho dat
+ function update(){if(!el('p35Final'))return;
+  var flights=source('flightOptions'),chosenAirline=source('currentAirline'),catalog=source('hotelCatalog'),choices=source('selectedHotels'),order=source('stageOrder');
+  var flight=flights&&flights[chosenAirline],flightBox=el('p35Flight');
+  if(flight){flightBox.innerHTML='<div class="p35-flight-grid"><span class="p35-flight-name">'+esc(flight.name)+'</span><span class="p35-pill">'+fmt(flight.pricePerson)+' / osoba · '+fmt(flight.priceRoom)+' / pár</span><div><strong>🛫 Tam:</strong> '+esc(flight.outDate)+' · '+esc(flight.outDep)+' PRG → '+esc(flight.outArr)+' SIN</div><div><strong>🛬 Zpět:</strong> '+esc(flight.retDate)+' · '+esc(flight.retDep)+' SIN → '+esc(flight.retArr)+' PRG</div><div class="p35-flight-meta">Přestup: '+esc(flight.hub)+' · '+esc(flight.outLayover)+' tam · '+esc(flight.retLayover)+' zpět</div></div>';}else{flightBox.textContent='Zvolená letenka se načítá z konfigurátoru.';}
+  var box=el('p35Hotels'),sum=0,count=0;
+  if(catalog&&choices&&order){box.innerHTML=order.map(function(stage){var data=catalog[stage],v=choices[stage],h=data&&data.options&&data.options[v];if(!h)return '';count++;sum+=Number(h.price)||0;return '<div class="p35-line"><div><strong>'+esc(h.name)+'</strong><small>'+esc(data.stageTitle)+' · varianta '+esc(v)+'</small></div><b>'+fmt(h.price)+'</b></div>';}).join('');}
+  if(!count)box.textContent='Výběr hotelů se načítá.';
+  el('p35HotelsTotal').textContent=count?'Součet 6 hotelů · '+fmt(sum)+' / pokoj · '+fmt(sum/2)+' / osoba při sdílení':'Ceny podle aktuálního hotelového konfigurátoru';
+  var trip=window.TRIP,foodBox=el('p35Food'),actBox=el('p35Activities');
+  if(trip&&typeof trip.food==='function'){
+    var f=trip.food(),cost=readNum('bxFood_pers');
+    foodBox.innerHTML='<div class="p35-flight-name">'+esc(f.name)+'</div><div>Singapur: '+esc(f.sgd)+' SGD / den · Bali a Lombok: '+Number(f.idr||0).toLocaleString('cs-CZ')+' IDR / den</div><span class="p35-pill">Započítané jídlo: '+fmt(cost)+' / osoba</span><small>Hotelové snídaně jsou zahrnuté v ubytování.</small>';
+    var selected=[];
+    (trip.ACTS||[]).forEach(function(a){var input=document.querySelector('#aktivity input[data-id="'+a.id+'"],#actsContent input[data-id="'+a.id+'"],input[data-id="'+a.id+'"]');if(a.hotel)return;if(input?input.checked:!!a.must)selected.push(a);});
+    var total=readNum('bxAct_pers');
+    actBox.innerHTML='<span class="p35-pill">Zahrnuté aktivity: '+fmt(total)+' / osoba</span>'+(selected.length?'<ul class="p35-activity-list">'+selected.map(function(a){return '<li>'+esc(a.ico||'✓')+' '+esc(a.t)+'</li>';}).join('')+'</ul>':'<p>Nemáš vybrané žádné volitelné výlety. Aktivity z itineráře automaticky neznamenají placený vstup.</p>')+'<small>Částky a položky odpovídají označeným aktivitám v konfigurátoru.</small>';
+  }
+ }
+ var ticking=false;function schedule(){if(ticking)return;ticking=true;requestAnimationFrame(function(){ticking=false;update()})}
+ document.addEventListener('DOMContentLoaded',function(){schedule();var trg=el('f-konfig');if(trg){var mo=new MutationObserver(schedule);mo.observe(trg,{attributes:true,attributeFilter:['class']});}['bxGrand_pers','b4_pers','bxFood_pers','bxAct_pers'].forEach(function(id){var node=el(id);if(node)new MutationObserver(schedule).observe(node,{subtree:true,childList:true,characterData:true});});if(window.TRIP&&TRIP.onChange)TRIP.onChange(schedule);});
+ window.addEventListener('load',schedule);document.addEventListener('trip:change',schedule);document.addEventListener('lux:fx',schedule);
+ document.addEventListener('click',function(ev){var a=ev.target.closest('[data-p35-target]');if(!a)return;ev.preventDefault();var target=el('f-letenky')||el('letovy-plan')||el('vyber-letenek');if(target){if(target.classList.contains('lux-fold')&&!target.classList.contains('is-open')&&typeof window.luxToggle==='function')window.luxToggle(target.id);target.scrollIntoView({behavior:'smooth',block:'start'});}});
 })();
 </script>
 </body>
