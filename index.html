@@ -7609,6 +7609,127 @@ body.dark-mode #f-konfig .p35-footer a{color:#80e0d4!important;}
  #airlineImpact .ai-v52-choice,#airlineImpact .ai-v52-airline{grid-column:1;}
 }
 </style>
+
+<style id="premium-v56-flight-hero">
+/* PREMIUM v56: výrazná úvodní volba letů, přístupný summary bez vnořených tlačítek. */
+#flightPick.lux-flightpick {
+  width:100%;max-width:100%;margin:2px 0 20px!important;
+  border:1px solid rgba(35,197,187,.37)!important;
+  border-radius:22px!important;
+  background:var(--surface)!important;
+  box-shadow:0 16px 32px -22px rgba(6,41,57,.48)!important;
+  overflow:hidden!important;
+}
+#flightPick.lux-flightpick > summary {
+  display:grid!important;grid-template-columns:minmax(0,1fr) minmax(325px,37%)!important;
+  gap:20px!important;align-items:stretch!important;
+  padding:16px!important;min-height:150px!important;
+  color:#fff!important;position:relative!important;isolation:isolate;
+  background:linear-gradient(113deg,#102b3d 0%,#123d4d 52%,#087e79 100%)!important;
+}
+#flightPick.lux-flightpick > summary::before {
+  content:"";pointer-events:none;position:absolute;inset:0;
+  background:radial-gradient(ellipse 52% 108% at 7% 110%,rgba(73,230,213,.18),transparent 72%),
+    radial-gradient(ellipse 60% 80% at 85% -32%,rgba(255,255,255,.09),transparent 68%);
+  z-index:-1;
+}
+#flightPick.lux-flightpick > summary::after {
+  content:"";pointer-events:none;position:absolute!important;
+  bottom:0!important;left:16px!important;right:16px!important;height:3px!important;
+  background:linear-gradient(90deg,#56e3d0,#38bdf8 58%,#edc477)!important;
+}
+#flightPick .fp-v2-left {display:flex!important;align-items:center!important;gap:18px!important;min-width:0!important;padding:12px 10px 12px 14px;}
+#flightPick .fp-ico {width:76px!important;height:76px!important;flex:0 0 76px!important;display:grid!important;place-items:center!important;
+  border-radius:22px!important;font-size:35px!important;color:#baf6ed!important;
+  background:linear-gradient(145deg,rgba(86,227,208,.25),rgba(255,255,255,.07))!important;
+  border:1px solid rgba(137,246,228,.33)!important;box-shadow:none!important;
+}
+#flightPick .fp-t {min-width:0!important;gap:6px!important;display:grid!important;align-content:center!important;}
+#flightPick .fp-kicker {color:#93eae0!important;font:900 10px/1.35 var(--font-ui,inherit)!important;letter-spacing:.11em!important;text-transform:uppercase!important;}
+#flightPick .fp-step {display:inline-block;background:rgba(137,246,228,.18);border:1px solid rgba(137,246,228,.3);border-radius:6px;padding:3px 6px;margin-right:6px;color:#fff;}
+#flightPick .fp-t > b {font:900 clamp(1.45rem,2.15vw,2.25rem)/1.07 var(--font-display,inherit)!important;letter-spacing:-.035em;color:#fff!important;
+  overflow-wrap:normal;word-break:normal;}
+#flightPick .fp-t > small {color:#c9e2e7!important;font:500 .82rem/1.48 var(--font-ui,inherit)!important;max-width:52ch;}
+/* v57: vybraný dopravce — jeho skutečné logo jako celoplošné pozadí panelu. */
+#flightPick .fp-v2-right {min-width:0;align-self:stretch;display:flex;flex-direction:column;justify-content:center;
+  gap:9px;padding:14px 17px;border:1px solid rgba(171,247,231,.34);border-radius:16px;
+  position:relative;isolation:isolate;overflow:hidden;
+  background:linear-gradient(124deg,#174855,#087e79);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12);}
+#flightPick .fp-v2-right::before {
+  content:"";position:absolute;inset:-2px;z-index:0;pointer-events:none;
+  background-image:var(--fp-airline-logo,none);background-repeat:no-repeat;
+  background-size:contain;background-position:center center;
+  opacity:.84;filter:saturate(1.06);
+  transition:background-image .22s ease;
+}
+#flightPick .fp-v2-right::after {
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,rgba(5,30,45,.90),rgba(6,48,60,.20) 50%,rgba(5,42,52,.86));
+}
+#flightPick .fp-v2-right > * {position:relative;z-index:2;}
+#flightPick .fp-v2-right .fp-sel,#flightPick .fp-v2-right .fp-choice-price {
+  text-shadow:0 2px 7px rgba(0,18,26,.55);
+}
+#flightPick .fp-choice-label {display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:#c5e8e9;
+  font:800 9px/1.2 var(--font-ui,inherit);letter-spacing:.09em;}
+#flightPick .fp-live-dot {width:7px;height:7px;border-radius:50%;background:#6bf2bf;box-shadow:0 0 0 3px rgba(107,242,191,.12);}
+#flightPick .fp-deal {padding:3px 6px;background:rgba(101,241,184,.19);border:1px solid rgba(101,241,184,.3);
+  border-radius:6px;color:#baffd6;letter-spacing:.03em;font-size:9px;}
+#flightPick .fp-deal[hidden]{display:none!important;}
+#flightPick .fp-choice-main {display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap;min-width:0;}
+#flightPick .fp-sel {display:block!important;flex:1 1 130px;min-width:0;max-width:none!important;margin:0!important;
+  padding:0!important;border:none!important;background:none!important;box-shadow:none!important;overflow:visible!important;
+  text-overflow:clip!important;white-space:normal!important;color:#fff!important;
+  font:900 clamp(.95rem,1.18vw,1.25rem)/1.2 var(--font-display,inherit)!important;overflow-wrap:anywhere;}
+#flightPick .fp-sel::before {content:none!important;}
+#flightPick .fp-choice-price {color:#b9fff0;white-space:nowrap;font:900 clamp(1.08rem,1.45vw,1.5rem)/1.1 var(--font-display,inherit);letter-spacing:-.03em;}
+#flightPick .fp-choice-bottom {display:flex;align-items:center;justify-content:space-between;gap:9px;flex-wrap:wrap;}
+#flightPick .fp-hub {color:#c3e2e6;font:600 10.5px/1.35 var(--font-ui,inherit);}
+#flightPick .fp-cta {display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:35px;
+  padding:8px 10px 8px 13px;border-radius:10px;background:#bcf9eb;color:#083a41;
+  font:900 10px/1.1 var(--font-ui,inherit);letter-spacing:.025em;white-space:nowrap;
+  box-shadow:0 4px 10px rgba(3,27,32,.18);}
+#flightPick .fp-chev {width:20px!important;height:20px!important;flex:0 0 20px!important;display:grid;place-items:center;
+  border:0!important;box-shadow:none!important;border-radius:50%!important;background:rgba(2,67,63,.13)!important;
+  color:#083a41!important;font-size:17px!important;transition:transform .2s ease;}
+#flightPick[open] .fp-chev {transform:rotate(180deg)!important;}
+#flightPick > summary:hover .fp-cta {background:#d9fff2;}
+#flightPick > summary:focus-visible {outline:3px solid #bdfde8!important;outline-offset:-6px!important;}
+#flightPick.is-best-flight .fp-v2-right {border-color:rgba(125,250,182,.65);}
+#flightPick .bento-grid {padding:12px!important;}
+@media(max-width:1040px){
+  #flightPick.lux-flightpick > summary {grid-template-columns:minmax(0,1fr) minmax(280px,42%)!important;gap:12px!important;padding:12px!important;min-height:133px!important;}
+  #flightPick .fp-v2-left{padding:9px!important;gap:12px!important;}
+  #flightPick .fp-ico {width:58px!important;height:58px!important;flex-basis:58px!important;border-radius:17px!important;font-size:28px!important;}
+  #flightPick .fp-v2-right{padding:12px!important;gap:7px;}
+  #flightPick .fp-route{display:none;}
+}
+@media(max-width:720px){
+  #flightPick.lux-flightpick {border-radius:17px!important;margin-bottom:14px!important;}
+  #flightPick.lux-flightpick > summary {grid-template-columns:minmax(0,1fr)!important;gap:8px!important;padding:12px!important;min-height:0!important;}
+  #flightPick .fp-v2-left{gap:10px!important;align-items:center!important;padding:3px 2px 5px!important;}
+  #flightPick .fp-ico{width:45px!important;height:45px!important;flex-basis:45px!important;font-size:22px!important;border-radius:13px!important;}
+  #flightPick .fp-t{gap:3px!important;}
+  #flightPick .fp-kicker{font-size:9px!important;letter-spacing:.06em!important;}
+  #flightPick .fp-t>b {font-size:1.25rem!important;line-height:1.12!important;}
+  #flightPick .fp-t>small{font-size:11px!important;line-height:1.3!important;}
+  #flightPick .fp-v2-right{padding:11px!important;border-radius:12px!important;gap:6px;}
+  #flightPick .fp-choice-label{font-size:9px!important;}
+  #flightPick .fp-sel{font-size:.99rem!important;}
+  #flightPick .fp-choice-price{font-size:1.08rem!important;}
+  #flightPick .fp-choice-bottom{gap:6px;}
+  #flightPick .fp-hub{font-size:10px;}
+  #flightPick .fp-cta{min-height:32px;font-size:10px;padding:7px 10px;}
+}
+@media(max-width:380px){
+  #flightPick .fp-choice-main{gap:4px;}
+  #flightPick .fp-choice-price{font-size:1rem!important;}
+  #flightPick .fp-choice-bottom{align-items:stretch;flex-direction:column;}
+  #flightPick .fp-cta{width:100%;}
+}
+@media(prefers-reduced-motion:reduce){#flightPick .fp-chev{transition:none!important;}}
+</style>
 </head>
 <body id="hero">
 <a class="premium-skip" href="#hlavni-obsah">Přeskočit na obsah</a>
@@ -7838,7 +7959,21 @@ e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
 </div>
 
 <details class="lux-flightpick" id="flightPick">
-    <summary><span class="fp-ico" aria-hidden="true">✈️</span><span class="fp-t"><b>Výběr letenek</b><small>Vyber aerolinku: časy, přestupy, cena i hodnocení cestovatelů na jednom místě</small></span><span class="fp-sel" id="fpSel"></span><span class="fp-chev" aria-hidden="true">▾</span></summary>
+    <summary aria-label="Otevřít nebo zavřít srovnání všech leteckých variant">
+        <span class="fp-v2-left">
+            <span class="fp-ico" aria-hidden="true">✈</span>
+            <span class="fp-t">
+                <span class="fp-kicker"><span class="fp-step">01</span> PRVNÍ KROK TVÉ CESTY <span class="fp-route">· PRAHA ⇄ SINGAPUR</span></span>
+                <b>Vyber si ideální let</b>
+                <small>Porovnej všech 5 aerolinek. Cena, délka cesty i přestupy na jednom místě.</small>
+            </span>
+        </span>
+        <span class="fp-v2-right">
+            <span class="fp-choice-label"><span class="fp-live-dot" aria-hidden="true"></span> AKTUÁLNĚ VYBRANÝ LET <span class="fp-deal" id="fpDealBadge" hidden>NEJLEVNĚJŠÍ</span></span>
+            <span class="fp-choice-main"><strong class="fp-sel" id="fpSel">Načítání…</strong><strong class="fp-choice-price" id="fpSelectedPrice">—</strong></span>
+            <span class="fp-choice-bottom"><span class="fp-hub" id="fpSelectedHub"></span><span class="fp-cta">POROVNAT A VYBRAT <span class="fp-chev" aria-hidden="true">⌄</span></span></span>
+        </span>
+    </summary>
     <div class="bento-grid"><div class="bento-card highlight full fp-card">
 <div class="x-mb-16">
                     <div style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 6px; color: var(--primary-light);">
@@ -16381,32 +16516,10 @@ function updatePackingWeight() {
             if (lbl && f) lbl.innerText = f.name;
 
             const detailBox = document.getElementById('activeFlightDetailBox');
-            if (detailBox && f) {
-                detailBox.innerHTML = `
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border);">
-                        <div style="display: flex; align-items: center; gap: 12px;">
-                            <img decoding="async" loading="lazy" src="${f.logo}" alt="" style="height: 34px; width: auto; max-width: 110px; object-fit: contain; background: var(--lux-card); padding: 3px 6px; border-radius: 6px; border: 1px solid var(--border); box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
-                            <strong style="color: var(--text-main); font-size: 1.05rem;">Aktivní letový řád: ${f.name}</strong>
-                        </div>
-                        <span style="background: var(--accent); color: #fff; padding: 5px 14px; border-radius: 20px; font-weight: 800; font-size: 0.85rem;">
-                            ${formatKz(f.pricePerson)} Kč / os. (${formatKz(f.priceRoom)} Kč / pár)
-                        </span>
-                    </div>
-                    <div class="afd-grid">
-                        <div class="afd-leg">
-                            <div style="color: var(--primary-light); font-weight: 800; margin-bottom: 4px;">🛫 CESTA TAM (${f.outDate}) • Celkem ${f.outDuration}</div>
-                            <div><strong>Časy:</strong> Odlet <strong>${f.outDep}</strong> z Prahy (PRG) ➔ Přílet <strong>${f.outArr}</strong> do Singapuru (SIN)</div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;"><strong>Spoje:</strong> ${f.outFlights}</div>
-                            <div style="font-size: 0.8rem; color: var(--gold); margin-top: 3px;">⏱️ <strong>Mezipřistání (${f.hub}):</strong> ${f.outLayover}</div>
-                        </div>
-                        <div class="afd-leg">
-                            <div style="color: var(--accent); font-weight: 800; margin-bottom: 4px;">🛬 CESTA ZPĚT (${f.retDate}) • Celkem ${f.retDuration}</div>
-                            <div><strong>Časy:</strong> Odlet <strong>${f.retDep}</strong> ze Singapuru (SIN) ➔ Přílet <strong>${f.retArr}</strong> do Prahy (PRG)</div>
-                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;"><strong>Spoje:</strong> ${f.retFlights}</div>
-                            <div style="font-size: 0.8rem; color: var(--gold); margin-top: 3px;">⏱️ <strong>Mezipřistání (${f.hub}):</strong> ${f.retLayover}</div>
-                        </div>
-                    </div>
-                `;
+            if (detailBox) {
+                detailBox.innerHTML = '';
+                detailBox.hidden = true;
+                detailBox.style.display = 'none';
             }
 
             // AKTUALIZACE ROZEVÍRACÍHO SEZNAMU NAD MAPOU
@@ -20017,19 +20130,25 @@ body.simple-on { overflow: hidden; }
 }
 
 /* ---- Výběr letenek: otevírací složka nad „Příprava před odletem“ ---- */
-.lux-flightpick { max-width: 100%; margin: 0 0 14px; border-radius: 18px; border: 1.5px solid var(--border); background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
-.lux-flightpick > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 12px; align-items: center; padding: 12px 16px; min-height: 64px; }
+.lux-flightpick { max-width: 100%; margin: 0 0 18px; border-radius: 22px; border: 1px solid color-mix(in srgb, var(--primary) 30%, var(--border)); background: radial-gradient(720px 220px at 0% 0%, color-mix(in srgb, var(--primary) 18%, transparent), transparent 65%), linear-gradient(135deg, color-mix(in srgb, var(--surface) 78%, #ffffff), var(--surface)); box-shadow: 0 18px 42px -24px color-mix(in srgb, var(--primary) 55%, transparent); overflow: hidden; }
+.lux-flightpick > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 14px; align-items: center; padding: 16px 18px; min-height: 86px; position: relative; }
+.lux-flightpick > summary::after { content: ""; position: absolute; left: 18px; right: 18px; bottom: 0; height: 3px; border-radius: 999px; background: linear-gradient(90deg, var(--primary), #38bdf8 60%, #f59e0b); opacity: .96; }
 .lux-flightpick > summary::-webkit-details-marker { display: none; }
 .lux-flightpick > summary:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
-.lux-flightpick .fp-ico { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; font-size: 1.25rem; background: color-mix(in srgb, var(--primary) 16%, transparent); border: 1px solid var(--border); }
-.lux-flightpick .fp-t b { display: block; font: 800 1.05rem var(--font-display, inherit); color: var(--text-main); }
-.lux-flightpick .fp-t small { display: block; margin-top: 2px; font-size: 0.78rem; color: var(--text-muted); }
-.lux-flightpick .fp-sel { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: color-mix(in srgb, var(--primary) 10%, transparent); font: 800 0.78rem var(--font-ui, inherit); color: var(--text-main); white-space: nowrap; max-width: 46vw; overflow: hidden; text-overflow: ellipsis; }
-.lux-flightpick .fp-chev { transition: transform .2s; color: var(--text-muted); }
+.lux-flightpick .fp-ico { width: 54px; height: 54px; display: grid; place-items: center; border-radius: 16px; font-size: 1.45rem; color: #fff; background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 52%, #0ea5e9)); border: 0; box-shadow: 0 12px 28px -16px color-mix(in srgb, var(--primary) 85%, transparent); }
+.lux-flightpick .fp-t { min-width: 0; display: grid; gap: 3px; }
+.lux-flightpick .fp-kicker { display: block; font: 800 0.72rem/1.2 var(--font-ui, inherit); text-transform: uppercase; letter-spacing: .12em; color: var(--primary); }
+.lux-flightpick .fp-t b { display: block; font: 900 1.28rem/1.08 var(--font-display, inherit); color: var(--text-main); }
+.lux-flightpick .fp-t small { display: block; margin-top: 2px; font-size: 0.84rem; line-height: 1.45; color: var(--text-muted); max-width: 72ch; }
+.lux-flightpick .fp-sel { padding: 10px 14px; border-radius: 14px; border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent); background: linear-gradient(135deg, var(--primary), color-mix(in srgb, var(--primary) 62%, #0ea5e9)); font: 900 0.82rem/1.2 var(--font-ui, inherit); color: #fff; white-space: nowrap; max-width: 34vw; overflow: hidden; text-overflow: ellipsis; box-shadow: 0 12px 26px -18px color-mix(in srgb, var(--primary) 80%, transparent); }
+.lux-flightpick .fp-sel:not(:empty)::before { content: "Aktivně: "; opacity: .85; font-weight: 700; }
+.lux-flightpick .fp-chev { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 999px; border: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 76%, transparent); transition: transform .2s, background .2s, border-color .2s; color: var(--text-main); font-size: 1rem; }
+.lux-flightpick:hover > summary .fp-chev { border-color: color-mix(in srgb, var(--primary) 45%, var(--border)); background: color-mix(in srgb, var(--primary) 10%, transparent); }
 .lux-flightpick[open] .fp-chev { transform: rotate(180deg); }
 .lux-flightpick[open] > summary { border-bottom: 1px solid var(--border); }
-.lux-flightpick .bento-grid { padding: 10px; }
-@media (max-width: 700px) { .lux-flightpick { margin: 0 0 12px; } .lux-flightpick .fp-sel { display: none; } .lux-flightpick > summary { grid-template-columns: auto minmax(0, 1fr) auto; } }
+.lux-flightpick .bento-grid { padding: 12px; }
+@media (max-width: 900px) { .lux-flightpick .fp-sel { max-width: 42vw; } }
+@media (max-width: 700px) { .lux-flightpick { margin: 0 0 12px; border-radius: 18px; } .lux-flightpick .fp-sel { display: none; } .lux-flightpick > summary { grid-template-columns: auto minmax(0, 1fr) auto; padding: 14px 14px; min-height: 74px; gap: 10px; } .lux-flightpick > summary::after { left: 14px; right: 14px; } .lux-flightpick .fp-ico { width: 44px; height: 44px; border-radius: 14px; font-size: 1.2rem; } .lux-flightpick .fp-kicker { font-size: 0.66rem; } .lux-flightpick .fp-t b { font-size: 1.08rem; } .lux-flightpick .fp-t small { font-size: 0.75rem; } .lux-flightpick .fp-chev { width: 34px; height: 34px; } }
 @media print { .lux-flightpick { break-inside: avoid; } }
 
 /* ---- Hodnocení a recenze aerolinek přímo ve výběru letenek ---- */
@@ -21384,6 +21503,18 @@ body.pres-on #fsAsk { display: none; }
         }).join('');
         host.innerHTML = header + '<div class="ai-v52-table">'+cols+rows+'</div>'+
             '<p class="ai-v52-notice">Ceny a časy pocházejí z uložených variant tohoto webu, nikoliv z živé nabídky dopravců. Údaj o tranzitu v Singapuru vychází z plánovaného příletu z Bali ve 14:10. Výběr aerolinky upraví letenky i rozpočet; ostatní nastavení zůstávají zachována.</p>';
+
+        var legacySwitch = document.querySelector('#flightPick .flight-airline-switch');
+        if (legacySwitch) legacySwitch.style.display = 'none';
+        var legacyDetail = $('activeFlightDetailBox');
+        if (legacyDetail) {
+            legacyDetail.innerHTML = '';
+            legacyDetail.hidden = true;
+            legacyDetail.style.display = 'none';
+        }
+        var legacyLegend = $('rvLegend');
+        if (legacyLegend) legacyLegend.remove();
+
         if (!host._aiV52ClickBound) {
             host.addEventListener('click',function(ev){
                 var button=ev.target.closest('button[data-ai-select]');
@@ -21738,8 +21869,26 @@ function luxQRSvg(text, px) {
 
     /* ---------- složka „Výběr letenek“ nad Částí I ---------- */
     function updateFlightPick() {
-        var el = $('fpSel'); if (!el) return; var f; try { f = flightOptions[currentAirline]; } catch (e) { f = null; } if (!f) return;
-        el.textContent = f.name.replace(/\s*\(.*$/, '') + ' · ' + f.pricePerson.toLocaleString('cs-CZ') + ' Kč/os.';
+        var el = $('fpSel'); if (!el) return;
+        var f; try { f = flightOptions[currentAirline]; } catch (e) { f = null; }
+        if (!f) return;
+        el.textContent = f.name.replace(/\s*\(.*$/, '');
+        var price = $('fpSelectedPrice');
+        if (price) price.textContent = Number(f.pricePerson).toLocaleString('cs-CZ') + ' Kč / os.';
+        var hub = $('fpSelectedHub');
+        if (hub) hub.textContent = 'Přestup: ' + f.hub;
+        var deal = $('fpDealBadge'), wrap = $('flightPick');
+        // Stejné URL loga jako ve stávajících kartách aerolinek (žádné nové soubory).
+        // Pozadí se mění při každém přepnutí letu; při chybě načtení zůstane gradient.
+        var selectedPanel = wrap && wrap.querySelector('.fp-v2-right');
+        if (selectedPanel) {
+            var logoUrl = typeof f.logo === 'string' && /^https:\/\//.test(f.logo) ? f.logo : '';
+            selectedPanel.style.setProperty('--fp-airline-logo', logoUrl ? 'url("' + logoUrl.replace(/"/g, '%22') + '")' : 'none');
+        }
+        var prices = Object.keys(flightOptions).map(function (k) { return +flightOptions[k].pricePerson; }).filter(function (p) { return Number.isFinite(p); });
+        var cheapest = prices.length > 0 && +f.pricePerson === Math.min.apply(null, prices);
+        if (deal) deal.hidden = !cheapest;
+        if (wrap) wrap.classList.toggle('is-best-flight', cheapest);
     }
     window.luxOpenFlightPick = function () { var d = $('flightPick'); if (!d) return; d.open = true; setTimeout(function () { d.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60); };
     window.addEventListener('hashchange', function () { if (location.hash === '#flightPick') window.luxOpenFlightPick(); });
@@ -21763,8 +21912,8 @@ function luxQRSvg(text, px) {
             var btn = $('btnFlight_' + k); if (!btn || btn.querySelector('.rv-mini')) return; var hdr = btn.querySelector('.fc-header'); if (!hdr) return;
             hdr.insertAdjacentHTML('afterend', rvMini(AIRLINE_REVIEWS[k]));
         });
-        var sw = document.querySelector('#flightPick .flight-airline-switch'); if (sw && !$('rvLegend')) sw.insertAdjacentHTML('beforebegin', '<p id="rvLegend" class="rv-legend">Hodnocení cestovatelů pro Economy třídu: 🦵 místo na nohy · ↔️ šířka sedadel · 🍽️ jídlo a servis · ⏱️ přesnost (puntíky = počet hvězdiček z 5, podrobnosti uvidíš u zvolené aerolinky níže).</p>');
-        var box = $('activeFlightDetailBox'); if (box) { var old = box.querySelector(':scope > .rv-detail'); var cur = AIRLINE_REVIEWS[typeof currentAirline !== 'undefined' ? currentAirline : '']; if (cur && (!old || old.getAttribute('data-k') !== currentAirline)) { if (old) old.remove(); box.insertAdjacentHTML('beforeend', rvDetail(cur)); box.lastElementChild.setAttribute('data-k', currentAirline); } }
+        var sw = document.querySelector('#flightPick .flight-airline-switch');
+        if (sw && getComputedStyle(sw).display !== 'none' && !$('rvLegend')) sw.insertAdjacentHTML('beforebegin', '<p id="rvLegend" class="rv-legend">Hodnocení cestovatelů pro Economy třídu: 🦵 místo na nohy · ↔️ šířka sedadel · 🍽️ jídlo a servis · ⏱️ přesnost (puntíky = počet hvězdiček z 5).</p>');
     }
     (function rvWatch() {
         var sched = false; function go() { sched = false; try { renderReviews(); } catch (e) {} }
