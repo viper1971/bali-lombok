@@ -6088,7 +6088,7 @@ e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 2. 11. 2026 · 06:04</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 2. 11. 2026 · 06:16</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -18304,6 +18304,23 @@ body.pres-on #heroQr { display: none; }
 .lux-fold-pad :is(div, a, button)[style*="border-radius: 12px"], .lux-fold-pad :is(div, a, button)[style*="border-radius:12px"] { border-radius: var(--ds-r3) !important; }
 .lux-fold-pad div[style*="border-radius: 18px"], .lux-fold-pad div[style*="border-radius:18px"], .lux-fold-pad div[style*="border-radius: 20px"], .lux-fold-pad div[style*="border-radius:20px"] { border-radius: var(--ds-r2) !important; }
 .lux-fold-pad div[style*="border-radius: 24px"], .lux-fold-pad div[style*="border-radius:24px"], .lux-fold-pad div[style*="border-radius: 26px"], .lux-fold-pad div[style*="border-radius:26px"] { border-radius: var(--ds-r1) !important; }
+
+/* ---- Úvod: výběr aerolinky pryč (vybírá se ve „Výběru letenek“), na PC dva sloupce – vlevo informace, vpravo mapa ---- */
+.hero-inner > div:has(#heroFlightSelect) { display: none !important; }
+@media (min-width: 1100px) {
+    .hero { min-height: auto !important; padding-top: 86px !important; padding-bottom: 48px !important; }
+    .hero-inner { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr); column-gap: 40px; row-gap: 16px; align-items: center; align-content: center; max-width: 1480px; margin: 0 auto; }
+    .hero-inner > * { grid-column: 1; margin-left: 0 !important; margin-right: 0 !important; justify-self: center; max-width: 100%; }
+    .hero-inner > * { margin-top: 0 !important; margin-bottom: 0 !important; }
+    .hero-inner > .map-box { grid-column: 2; grid-row: 1 / span 6; align-self: stretch; justify-self: stretch; width: 100% !important; height: auto !important; min-height: 480px; margin: 0 !important; border-radius: var(--ds-r1, 22px) !important; overflow: hidden; }
+    .hero-inner > .map-fullscreen-btn { grid-column: 2; grid-row: 7; justify-self: stretch; width: 100% !important; margin: 0 !important; }
+    .hero-inner > .map-fullscreen-btn + div { grid-column: 1 / -1; grid-row: 8; justify-self: stretch; margin-top: 14px !important; }
+    .hero-inner > #heroSimpleBtn { grid-column: 1 / -1; grid-row: 9; }
+    .hero-inner > h1 { font-size: clamp(2.4rem, 1.2rem + 2.6vw, 4.2rem) !important; }
+    .hero-inner > #countdown { justify-content: center; }
+    .hero-inner > #heroQr { margin-top: 6px !important; }
+    .hero-inner > div:not(.map-box):not(#countdown):not(#heroQr):not(.badge):not(.hero-ver) { width: 100%; }
+}
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -18334,7 +18351,7 @@ body.pres-on #heroQr { display: none; }
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '2. 11. 2026 · 06:04';
+    var LUX_VERSION = '2. 11. 2026 · 06:16';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19821,6 +19838,10 @@ function luxQRSvg(text, px) {
             }, 30);
         }, true);
     })();
+
+
+    /* úvod: po přeskládání do sloupců ať si mapa přepočítá rozměr */
+    setTimeout(function () { try { window.dispatchEvent(new Event('resize')); (window.__luxMaps || []).forEach(function (m) { m.invalidateSize && m.invalidateSize(); }); } catch (e) {} }, 700);
 
     /* ---------- skupina „Nástroje“ v menu ---------- */
     function addTools() {
