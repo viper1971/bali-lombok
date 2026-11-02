@@ -20394,5 +20394,59 @@ function luxQRSvg(text, px) {
 })();
 </script>
 
+
+<!-- UX 2026: přístupnost, rychlé hledání v sekcích a indikátor posunu -->
+<style id="ux2026-style">
+:root{scroll-padding-top:85px}
+#uxProgress{position:fixed;top:0;left:0;width:0;height:3px;background:var(--accent,#36a6b5);z-index:11000;pointer-events:none;transition:width .1s linear}
+#uxSkip{position:fixed;top:-90px;left:12px;z-index:11010;background:var(--surface,#fff);color:var(--text-main,#111);padding:12px 18px;border-radius:12px;border:2px solid currentColor}
+#uxSkip:focus{top:8px}
+#uxSearchBtn{position:fixed;right:16px;bottom:calc(88px + env(safe-area-inset-bottom));top:auto;z-index:10008;border:2px solid var(--border,#aaa);background:var(--surface,#fff);color:var(--text-main,#111);border-radius:30px;padding:8px 13px;min-height:40px;font-weight:800;cursor:pointer;box-shadow:var(--shadow,0 3px 14px #0003)}
+#uxSearchOverlay[hidden]{display:none!important}
+#uxSearchOverlay{position:fixed;inset:0;z-index:11020;background:#000b;display:flex;align-items:flex-start;justify-content:center;padding:clamp(20px,12vh,100px) 12px 20px}
+#uxSearchPanel{background:var(--surface,#fff);color:var(--text-main,#111);border:1px solid var(--border,#888);border-radius:18px;width:min(640px,100%);padding:18px;box-shadow:0 22px 60px #0007;max-height:80vh;display:flex;flex-direction:column;gap:12px}
+#uxSearchInput{width:100%;min-height:48px;border-radius:10px;border:2px solid var(--border,#aaa);background:var(--surface-hover,#eee);color:var(--text-main,#111);padding:12px;font:inherit}
+.uxFoundMark{background:#ffdc58!important;color:#171717!important;border-radius:3px;padding:1px 2px;box-shadow:0 0 0 3px #ffdc5840}
+#uxSearchCount{font-size:.82rem;color:var(--text-muted);font-weight:700}
+#uxSearchResults{overflow-y:auto;min-height:70px;overscroll-behavior:contain}
+.uxResult{display:block;width:100%;text-align:left;background:transparent;color:inherit;border:0;border-bottom:1px solid var(--border,#ddd);padding:13px 10px;cursor:pointer;font:inherit;border-radius:6px}
+.uxResult:hover,.uxResult:focus-visible{background:var(--surface-hover,#eee)}
+.uxSearchTop{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.uxClose{border:1px solid var(--border,#aaa);background:var(--surface-hover,#eee);color:inherit;border-radius:8px;padding:7px 12px;cursor:pointer}
+:where(button,a,input,select,textarea,[tabindex]):focus-visible{outline:3px solid var(--accent,#31a6bc)!important;outline-offset:3px}
+@media(max-width:768px){#uxSearchBtn{right:12px;bottom:calc(96px + env(safe-area-inset-bottom));top:auto;font-size:.8rem;padding:7px 10px}#uxSearchOverlay{padding-top:60px}#uxSearchPanel{max-height:85vh}}
+@media(prefers-reduced-motion:reduce){html,body{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media print{#uxProgress,#uxSkip,#uxSearchBtn,#uxSearchOverlay{display:none!important}}
+</style>
+<script id="ux2026-script">
+(function(){'use strict';
+function init(){
+ if(document.getElementById('uxSearchBtn'))return;
+ var progress=document.createElement('div');progress.id='uxProgress';progress.setAttribute('aria-hidden','true');document.body.appendChild(progress);
+ var skip=document.createElement('a');skip.id='uxSkip';skip.href='#uxMainStart';skip.textContent='Přeskočit na obsah';document.body.insertBefore(skip,document.body.firstChild);
+ var target=document.querySelector('.main-wrapper')||document.querySelector('main')||document.querySelector('.bento-grid');if(target){target.id=target.id||'uxMainStart';skip.href='#'+target.id;}
+ var btn=document.createElement('button');btn.type='button';btn.id='uxSearchBtn';btn.textContent='⌕ Hledat na stránce';btn.title='Hledání v celém textu (Ctrl+K)';btn.setAttribute('aria-haspopup','dialog');document.body.appendChild(btn);
+ var overlay=document.createElement('div');overlay.id='uxSearchOverlay';overlay.hidden=true;
+ overlay.innerHTML='<div id="uxSearchPanel" role="dialog" aria-modal="true" aria-label="Hledat na stránce"><div class="uxSearchTop"><strong>Hledání v celém obsahu</strong><button type="button" class="uxClose" id="uxSearchClose">Zavřít ✕</button></div><input id="uxSearchInput" type="search" autocomplete="off" placeholder="Např. Ubud, skútr, hotel, vízum…" aria-label="Hledat slovo nebo frázi"><div id="uxSearchCount" role="status" aria-live="polite"></div><div id="uxSearchResults" role="list"></div><small>Hledání ignoruje diakritiku · Enter první výsledek · Esc zavře · Ctrl+K otevře</small></div>';
+ document.body.appendChild(overlay);
+ var input=document.getElementById('uxSearchInput'),results=document.getElementById('uxSearchResults'),count=document.getElementById('uxSearchCount'),previous=null,marks=[];
+ function norm(t){return String(t).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
+ function clearMarks(){marks.forEach(function(m){if(m.isConnected)m.replaceWith(document.createTextNode(m.textContent))});marks=[];document.body.normalize()}
+ function searchNodes(q){var found=[],root=document.body,walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var el=n.parentElement;if(!el||!n.nodeValue.trim()||el.closest('script,style,noscript,svg,template,#uxSearchOverlay,#uxSearchBtn,#menuModalOverlay,nav,button,select,textarea,[aria-hidden="true"]'))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT}});while(walker.nextNode()){var node=walker.currentNode,raw=node.nodeValue,normalized=norm(raw),at=0,idx;while((idx=normalized.indexOf(q,at))!==-1){found.push({node:node,start:idx,end:idx+q.length,text:raw});if(found.length>=500)return found;at=idx+Math.max(q.length,1)}}return found}
+ function context(hit){var s=hit.text,a=Math.max(0,hit.start-65),b=Math.min(s.length,hit.end+85);return (a?'…':'')+s.slice(a,b).replace(/\s+/g,' ').trim()+(b<s.length?'…':'')}
+ function highlight(hit){clearMarks();var n=hit.node;if(!n.isConnected)return n.parentElement;var text=n.nodeValue,span=document.createElement('mark');span.className='uxFoundMark';span.textContent=text.slice(hit.start,hit.end);var after=n.splitText(hit.end);var middle=n.splitText(hit.start);middle.replaceWith(span);marks.push(span);return span}
+ function go(hit){close(false);var el=highlight(hit);if(!el)return;var parent=el.parentElement;var details=parent&&parent.closest('details');if(details)details.open=true;var hidden=parent&&parent.closest('.alt-hotels-collapse');if(hidden){hidden.classList.add('open')}el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}
+ var timer;function render(){clearMarks();results.replaceChildren();var q=norm(input.value.trim());if(!q){count.textContent='Zadejte hledané slovo nebo frázi.';return}var found=searchNodes(q);count.textContent=found.length+(found.length===500?' a více':'')+' nalezených výskytů';found.slice(0,100).forEach(function(hit,i){var b=document.createElement('button');b.type='button';b.className='uxResult';var strong=document.createElement('strong');strong.textContent=(i+1)+'. ';b.appendChild(strong);b.appendChild(document.createTextNode(context(hit)));b.addEventListener('click',function(){go(hit)});results.appendChild(b)});if(found.length>100){var more=document.createElement('p');more.textContent='Zobrazeno prvních 100 výsledků. Upřesněte hledaný výraz.';results.appendChild(more)}if(!found.length){var msg=document.createElement('p');msg.textContent='Nic nenalezeno. Zkuste jiné slovo.';msg.style.padding='14px';results.appendChild(msg)}}
+ function open(){clearMarks();previous=document.activeElement;overlay.hidden=false;input.value='';render();input.focus()}
+ function close(restore){overlay.hidden=true;if(restore!==false&&previous&&previous.focus)previous.focus()}
+ btn.addEventListener('click',open);document.getElementById('uxSearchClose').addEventListener('click',function(){close()});overlay.addEventListener('click',function(e){if(e.target===overlay)close()});input.addEventListener('input',function(){clearTimeout(timer);timer=setTimeout(render,120)});
+ document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();overlay.hidden?open():close()}else if(!overlay.hidden&&e.key==='Escape'){e.preventDefault();close()}else if(!overlay.hidden&&e.key==='Enter'&&document.activeElement===input){var first=results.querySelector('button');if(first)first.click()}else if(!overlay.hidden&&e.key==='Tab'){var focusables=[input].concat(Array.from(overlay.querySelectorAll('button')));var i=focusables.indexOf(document.activeElement);if(e.shiftKey&&i===0){e.preventDefault();focusables[focusables.length-1].focus()}else if(!e.shiftKey&&i===focusables.length-1){e.preventDefault();focusables[0].focus()}}});
+ var ticking=false;function update(){var h=document.documentElement,available=h.scrollHeight-h.clientHeight;progress.style.width=(available>0?Math.min(100,Math.max(0,h.scrollTop/available*100)):0)+'%';ticking=false}window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});window.addEventListener('resize',update);update();
+ document.querySelectorAll('a[target="_blank"]').forEach(function(a){var rel=new Set((a.getAttribute('rel')||'').split(/\s+/).filter(Boolean));rel.add('noopener');rel.add('noreferrer');a.setAttribute('rel',Array.from(rel).join(' '))});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+
 </body>
 </html>
