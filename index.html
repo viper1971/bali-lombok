@@ -7534,6 +7534,18 @@ body.dark-mode #f-konfig .p35-footer a{color:#80e0d4!important;}
   #srovnani .cmp-v2-grid+div>div {min-width:0!important;margin-bottom:6px!important}
 }
 </style>
+
+<style id="premium-v51-activity-prices">
+/* V51: dva údaje ke každé vybrané aktivitě bez ztráty čitelnosti */
+#f-konfig .p35-activity-list{list-style:none!important;padding:0!important;margin:0!important;max-height:none!important;overflow:visible!important;}
+#f-konfig .p35-activity-list .p51-activity-row{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:7px 12px!important;align-items:center!important;padding:7px 0!important;margin:0!important;border-bottom:1px solid var(--border,#e3ebee)!important;min-width:0!important;}
+#f-konfig .p35-activity-list .p51-activity-row:last-child{border-bottom:none!important;}
+#f-konfig .p51-activity-name{min-width:0!important;overflow-wrap:anywhere!important;font-size:12px!important;line-height:1.4!important;color:var(--text-main,#173044)!important;}
+#f-konfig .p51-activity-price{min-width:0;display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:2px;white-space:nowrap;font-variant-numeric:tabular-nums;}
+#f-konfig .p51-activity-price b{color:var(--primary,#087e7e)!important;font-size:12px;line-height:1.2;}
+#f-konfig .p51-activity-price small{font-size:10px!important;line-height:1.2;color:var(--text-muted,#647b87)!important;}
+@media(max-width:500px){#f-konfig .p35-activity-list .p51-activity-row{grid-template-columns:minmax(0,1fr) auto!important;gap:6px!important;}#f-konfig .p51-activity-name{font-size:11.5px!important;}#f-konfig .p51-activity-price b{font-size:11.5px;}}
+</style>
 </head>
 <body id="hero">
 <a class="premium-skip" href="#hlavni-obsah">Přeskočit na obsah</a>
@@ -23334,10 +23346,23 @@ body.dark #rozpocet .pf18-details summary small,html.dark #rozpocet .pf18-detail
   if(trip&&typeof trip.food==='function'){
     var f=trip.food(),cost=readNum('bxFood_pers');
     foodBox.innerHTML='<div class="p35-flight-name">'+esc(f.name)+'</div><div>Singapur: '+esc(f.sgd)+' SGD / den · Bali a Lombok: '+Number(f.idr||0).toLocaleString('cs-CZ')+' IDR / den</div><span class="p35-pill">Započítané jídlo: '+fmt(cost)+' / osoba</span><small>Hotelové snídaně jsou zahrnuté v ubytování.</small>';
-    var selected=[];
-    (trip.ACTS||[]).forEach(function(a){var input=document.querySelector('#aktivity input[data-id="'+a.id+'"],#actsContent input[data-id="'+a.id+'"],input[data-id="'+a.id+'"]');if(a.hotel)return;if(input?input.checked:!!a.must)selected.push(a);});
+    // Aktivity i částky čerpáme z JEDNOHO výpočetního zdroje (TRIP.sums).
+    // Tím zobrazujeme přesně položky zahrnuté v rozpočtu, včetně povinných.
+    var activityTotal=trip.sums({solo:false}),selected=(activityTotal&&activityTotal.items||[]).filter(function(item){return !item.a.hotel;});
     var total=readNum('bxAct_pers');
-    actBox.innerHTML='<span class="p35-pill">Zahrnuté aktivity: '+fmt(total)+' / osoba</span>'+(selected.length?'<ul class="p35-activity-list">'+selected.map(function(a){return '<li>'+esc(a.ico||'✓')+' '+esc(a.t)+'</li>';}).join('')+'</ul>':'<p>Nemáš vybrané žádné volitelné výlety. Aktivity z itineráře automaticky neznamenají placený vstup.</p>')+'<small>Částky a položky odpovídají označeným aktivitám v konfigurátoru.</small>';
+    function originalPrice(item){
+      var a=item.a,amount=Number(item.amt)||0,cur=a.cur||'CZK';
+      if(cur==='IDR')return (a.kc!=null?'≈ ':'')+Math.round(amount).toLocaleString('cs-CZ')+' IDR';
+      if(cur==='SGD'||cur==='USD')return (a.kc!=null?'≈ ':'')+amount.toLocaleString('cs-CZ',{minimumFractionDigits:0,maximumFractionDigits:2})+' '+cur;
+      return '';
+    }
+    actBox.innerHTML='<span class="p35-pill">Zahrnuté aktivity: '+fmt(total)+' / osoba</span>'+
+      (selected.length?'<ul class="p35-activity-list">'+selected.map(function(item){
+        var foreign=originalPrice(item);
+        return '<li class="p51-activity-row"><span class="p51-activity-name">'+esc(item.a.ico||'✓')+' '+esc(item.a.t)+'</span>'+
+          '<span class="p51-activity-price"><b>'+fmt(item.kc)+'</b>'+(foreign?'<small>'+esc(foreign)+'</small>':'')+'</span></li>';
+      }).join('')+'</ul>':'<p>Nemáš vybrané žádné volitelné výlety. Aktivity z itineráře automaticky neznamenají placený vstup.</p>')+
+      '<small>Ceny na osobu podle aktuálního výběru a kurzu; ≈ označuje přepočet z pevné částky v Kč.</small>';
   }
  }
  var ticking=false;function schedule(){if(ticking)return;ticking=true;requestAnimationFrame(function(){ticking=false;update()})}
@@ -23450,5 +23475,69 @@ html body .lux-fold.is-open>.lux-fold-h{top:calc(5px + env(safe-area-inset-top,0
 })();
 </script>
 
+
+<style id="premium-v50-single-row-desktop">
+/* Desktop: a single horizontal row, overriding historic two-row rules. */
+@media (min-width: 701px) {
+ html body.v29-bottom-open #vipFloatingBar.pm-merged {
+  display:flex!important;flex-flow:row nowrap!important;align-items:center!important;
+  justify-content:space-between!important;gap:clamp(6px,.8vw,14px)!important;
+  width:min(1580px,calc(100vw - 28px))!important;max-width:calc(100vw - 28px)!important;
+  padding:9px 13px!important;min-height:0!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails {
+  display:flex!important;flex:1 1 auto!important;flex-flow:row nowrap!important;
+  align-items:center!important;justify-content:flex-start!important;gap:clamp(6px,.7vw,12px)!important;
+  width:auto!important;min-width:0!important;max-width:none!important;
+  order:1!important;grid-column:auto!important;grid-row:auto!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-info {
+  display:flex!important;flex:1 1 auto!important;flex-flow:row nowrap!important;
+  align-items:center!important;justify-content:space-between!important;
+  gap:clamp(5px,.7vw,12px)!important;min-width:0!important;width:auto!important;
+  grid-template-columns:none!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-price-block {
+  flex:1 1 0!important;min-width:0!important;padding-left:clamp(4px,.6vw,12px)!important;
+  margin:0!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-label {
+  white-space:nowrap!important;font-size:clamp(.57rem,.68vw,.72rem)!important;line-height:1.2!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-val {
+  white-space:nowrap!important;font-size:clamp(.78rem,.96vw,1.1rem)!important;line-height:1.2!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions {
+  display:flex!important;flex:0 0 auto!important;align-items:center!important;
+  flex-flow:row nowrap!important;gap:5px!important;min-width:0!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions .vfb-btn {
+  min-height:36px!important;padding:7px clamp(6px,.7vw,12px)!important;
+  white-space:nowrap!important;font-size:clamp(.63rem,.72vw,.78rem)!important;
+ }
+ #vipFloatingBar.pm-merged #premiumMergedNav {
+  display:flex!important;flex:0 0 auto!important;flex-flow:row nowrap!important;
+  align-items:center!important;justify-content:flex-end!important;
+  order:2!important;gap:clamp(3px,.35vw,7px)!important;
+  width:auto!important;min-width:0!important;grid-column:auto!important;grid-row:auto!important;
+ }
+ #vipFloatingBar.pm-merged .pm-nav-btn {
+  display:inline-flex!important;flex-flow:row nowrap!important;flex:0 0 auto!important;
+  align-items:center!important;justify-content:center!important;gap:4px!important;
+  width:auto!important;min-width:0!important;max-width:none!important;
+  min-height:36px!important;height:36px!important;
+  padding:6px clamp(5px,.58vw,11px)!important;
+  font-size:clamp(.61rem,.7vw,.76rem)!important;white-space:nowrap!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetSummary{display:none!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetToggle{display:none!important;}
+}
+@media (min-width:701px) and (max-width:1099px) {
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-price-block:nth-child(4){display:none!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions .vfb-btn.secondary{display:none!important;}
+ #vipFloatingBar.pm-merged .pm-nav-btn{padding:5px!important;font-size:.61rem!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-val{font-size:.76rem!important;}
+}
+</style>
 </body>
 </html>
