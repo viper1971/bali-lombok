@@ -6806,6 +6806,74 @@ html[data-theme="dark"] #f-rozpis .p22-ck-warning,body.dark #f-rozpis .p22-ck-wa
 #f-checklist .tk-calendar-info{margin:2px 0 10px;color:var(--text-muted);font-size:.78rem;line-height:1.55}
 @media(max-width:640px){#f-checklist .tk-calendar-heading{align-items:stretch;gap:10px}#f-checklist .tk-calendar-heading .tk-card-t{flex-basis:100%}#f-checklist .tk-calendar-all{width:100%}}
 </style>
+<style id="premium-v28-mobile">
+/* PREMIUM v28: mobilní oprava kompozice; výpočty a struktura beze změn */
+@media (max-width: 767px) {
+  /* Rychlý přístup na mobilu zcela pryč, navigaci zajišťuje spodní lišta. */
+  #premiumQuickNav, .premium-quicknav-wrap { display:none !important; }
+  html,body {max-width:100%;margin-inline:0;}
+  body { overflow-x: clip; }
+  main,.main-wrapper,.lux-main,.lux-part,.lux-fold,.lux-fold-body,.lux-fold-inner,.lux-fold-pad,
+  #osa,#rozpocet,#hotovost,#rozpis-nakladu,.p22,.p22-ledger,.p22-card,
+  #f-jidlo,#f-aktivity,#f-rozpis,#f-karta-mhd {min-width:0!important;max-width:100%;box-sizing:border-box;}
+  .main-wrapper {width:100%!important;padding-inline:clamp(10px,3vw,16px)!important;}
+  .lux-part-body,.lux-part-inner,.lux-part-pad,.lux-fold-body,.lux-fold-inner,.lux-fold-pad {min-width:0;box-sizing:border-box;}
+  /* Vnořené široké mřížky: na telefonu přirozeně pod sebe. */
+  #f-rozpis .p22-metrics,#f-rozpis .p22-insights,#f-rozpis .p22-groups,
+  #f-rozpis .p22-footnotes,#f-rozpis .p22-mast-grid,#f-rozpis .p22-visual,
+  #hotovost .cx-two,#hotovost .cx-hero,#hotovost .cx-env,
+  #f-karta-mhd .mh23-featuregrid,#f-karta-mhd .mh23-intro-row,
+  #f-karta-mhd .mh23-steps .mh-steps {grid-template-columns:minmax(0,1fr)!important;}
+  #f-rozpis .p22-mast,#f-rozpis .p22-ledger,#f-rozpis .p22-card,
+  #f-karta-mhd .mh23-intro {padding:clamp(12px,3.5vw,18px)!important;}
+  #f-rozpis .p22-group,#f-rozpis .p22-line,#f-rozpis .p22-group-lines,
+  #f-rozpis .p22-group-name,#f-rozpis .p22-group-amount {min-width:0!important;}
+  #f-rozpis .p22-line {display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:start;gap:8px!important;}
+  #f-rozpis .p22-line span {overflow-wrap:anywhere;white-space:normal!important;}
+  #f-rozpis .p22-line b {white-space:nowrap!important;}
+  #f-rozpis .p22-group>summary {gap:7px!important;padding:11px 9px!important;}
+  #f-rozpis .p22-group-amount b {font-size:clamp(12px,3.5vw,15px)!important;}
+  #f-rozpis .p22-copy {min-width:0;white-space:normal;}
+  /* Dlouhé řádky tabulek mají vlastní horizontální posun, nikoliv celá stránka. */
+  .vip-table-wrap,.table-responsive,.table-scroll,.budget-table-wrap,
+  #f-rozpis .p22-disclosure-content .vip-table-wrap {width:100%!important;max-width:100%!important;overflow-x:auto!important;-webkit-overflow-scrolling:touch;}
+  table:not(.calendar-grid) {max-width:100%;}
+  img,video,canvas,iframe {max-width:100%;}
+  iframe {display:block;}
+  .lux-fold-btn,.lux-part-btn {min-width:0!important;box-sizing:border-box;}
+  .lux-fold-txt,.lux-part-txt,.lux-fold-t,.lux-fold-s {min-width:0;overflow-wrap:anywhere;}
+  /* Celá ilustrace zůstane v záhlaví, text a cena mají vyšší kontrast. */
+  #osa .lux-spine {width:100%!important;max-width:100%!important;padding-inline:0!important;}
+  #osa .lux-spine>.lux-fold {width:100%!important;max-width:100%!important;}
+  #osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn {max-width:100%!important;}
+  #osa .lux-fold-meta {max-width:38%!important;min-width:0!important;}
+  #osa .lux-fold-meta * {max-width:100%;overflow-wrap:anywhere;}
+  /* Všechny široké přehledy zůstávají uvnitř svých karet. */
+  .pf18-dashboard,.pf18-overview,.pf19-dashboard,.pf19-board,.pf20-dashboard,
+  .p21-cash-overview,.p22-visual,.p22-compare-rows,
+  #selectedHotelsDeck,.selected-hotels-deck {max-width:100%!important;min-width:0!important;}
+  /* Plovoucí lišta: na běžném telefonu bez přetečení a bez překryvu tlačítek. */
+  #vipFloatingBar.pm-merged {left:50%!important;right:auto!important;transform:translateX(-50%)!important;
+    width:calc(100% - 10px)!important;max-width:calc(100% - 10px)!important;
+    box-sizing:border-box!important;padding:5px!important;}
+  #vipFloatingBar.pm-merged #premiumMergedNav {display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;
+    width:auto!important;min-width:0!important;flex:1 1 auto!important;gap:2px!important;}
+  #vipFloatingBar.pm-merged .pm-nav-btn {width:100%!important;min-width:0!important;max-width:100%!important;
+    padding:5px 0!important;min-height:43px!important;}
+  #vipFloatingBar.pm-merged #premiumBudgetSummary {min-width:65px!important;max-width:105px!important;flex:0 1 auto!important;}
+  body.pm-merged-ready {padding-bottom:calc(80px + env(safe-area-inset-bottom))!important;}
+}
+@media (max-width: 375px) {
+  #vipFloatingBar.pm-merged #premiumBudgetSummary {min-width:57px!important;max-width:75px!important;}
+  #vipFloatingBar.pm-merged #premiumBudgetAmount {font-size:.69rem!important;}
+  #vipFloatingBar.pm-merged .pm-nav-icon {font-size:1.03rem!important;}
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .premium-quicknav-wrap {max-width:100%;}
+  .lux-part-meta {min-width:0!important;max-width:44%!important;}
+  .lux-part-count {min-width:0!important;max-width:100%!important;}
+}
+</style>
 </head>
 <body id="hero">
 <a class="premium-skip" href="#hlavni-obsah">Přeskočit na obsah</a>
