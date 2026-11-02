@@ -6099,6 +6099,9 @@ e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
         </div>
 
         <p style="color: #ffffff; font-size: 1rem; margin-top: 16px; margin-bottom: 12px; font-weight: 600;">✈️ Odlet 6. 8. 2027 • 🏡 Návrat 25. 8. 2027 • 🎒 Příruční batoh max 7 kg</p>
+        <div class="page-fs-holder page-fs-hero">
+            <button type="button" class="page-fullscreen-btn" onclick="togglePageFullscreen()" aria-label="Zapnout režim celé obrazovky">⛶ Zapnout fullscreen</button>
+        </div>
 
         <!-- NOVÝ PŘEPÍNAČ LETŮ NAD MAPOU -->
         <div style="display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; position: relative; z-index: 10;">
@@ -6122,6 +6125,10 @@ e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
 </header>
 
     <div class="main-wrapper" id="hlavni-obsah" tabindex="-1">
+
+<div class="page-fs-holder page-fs-content">
+    <button type="button" class="page-fullscreen-btn" onclick="togglePageFullscreen()" aria-label="Zapnout režim celé obrazovky">⛶ Zapnout fullscreen</button>
+</div>
 
 <div class="lux-dash">
 <div class="lux-progress" aria-label="Přehled přečtených sekcí">
@@ -20342,5 +20349,50 @@ function luxQRSvg(text, px) {
     try { if (window.renderRouteMap) window.renderRouteMap(); } catch (e) {}
 })();
 </script>
+
+<style id="pageFullscreenButtonsStyle">
+.page-fs-holder{display:flex;justify-content:center;align-items:center;margin:12px auto;position:relative;z-index:20}
+.page-fs-hero{margin:4px auto 14px}
+.page-fs-content{margin:0 auto 16px}
+.page-fullscreen-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 19px;border:1px solid rgba(255,255,255,.38);border-radius:12px;background:linear-gradient(135deg,#176b78,#124b61);color:#fff;font:800 .9rem/1.2 system-ui,sans-serif;letter-spacing:.2px;cursor:pointer;box-shadow:0 5px 16px rgba(0,0,0,.2);transition:transform .18s ease,filter .18s ease,box-shadow .18s ease}
+.page-fullscreen-btn:hover{filter:brightness(1.12);transform:translateY(-1px);box-shadow:0 7px 20px rgba(0,0,0,.25)}
+.page-fullscreen-btn:focus-visible{outline:3px solid #facc15;outline-offset:3px}
+.page-fs-content .page-fullscreen-btn{background:linear-gradient(135deg,#243449,#142235);border-color:var(--border,rgba(255,255,255,.25))}
+@media(max-width:600px){.page-fullscreen-btn{width:min(100%,320px);min-height:44px}.page-fs-holder{padding:0 12px}}
+</style>
+<script id="pageFullscreenButtonsScript">
+(function(){
+    'use strict';
+    var buttons=function(){return document.querySelectorAll('.page-fullscreen-btn')};
+    function isFullscreen(){return !!(document.fullscreenElement||document.webkitFullscreenElement||document.msFullscreenElement)}
+    function updateButtons(){
+        var active=isFullscreen();
+        buttons().forEach(function(btn){
+            btn.innerHTML=active?'⛶ Vypnout fullscreen':'⛶ Zapnout fullscreen';
+            btn.setAttribute('aria-label',active?'Vypnout režim celé obrazovky':'Zapnout režim celé obrazovky');
+            btn.setAttribute('aria-pressed',active?'true':'false');
+        });
+    }
+    window.togglePageFullscreen=function(){
+        var el=document.documentElement, request=el.requestFullscreen||el.webkitRequestFullscreen||el.msRequestFullscreen;
+        var exit=document.exitFullscreen||document.webkitExitFullscreen||document.msExitFullscreen;
+        try{
+            if(isFullscreen()){
+                if(exit){var result=exit.call(document);if(result&&result.catch)result.catch(function(){});}
+            }else if(request){
+                var result=request.call(el,{navigationUI:'hide'});if(result&&result.catch)result.catch(function(){});
+            }else{
+                alert('Režim celé obrazovky tento prohlížeč nepodporuje.');
+            }
+        }catch(e){console.warn('Fullscreen není dostupný:',e);}
+    };
+    document.addEventListener('fullscreenchange',updateButtons);
+    document.addEventListener('webkitfullscreenchange',updateButtons);
+    document.addEventListener('MSFullscreenChange',updateButtons);
+    document.addEventListener('DOMContentLoaded',updateButtons);
+    updateButtons();
+})();
+</script>
+
 </body>
 </html>
