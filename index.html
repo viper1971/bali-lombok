@@ -6088,7 +6088,7 @@ e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
 <header class="hero">
     <div class="hero-inner">
         <div class="badge">Naše cesta 6.–25. srpna 2027</div>
-        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 2. 11. 2026 · 06:27</div>
+        <div class="hero-ver" id="heroVer" title="Verze stránky (datum a čas sestavení)">Verze 2. 11. 2026 · 06:33</div>
         <h1><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Singapur<br><span class="flag" data-cc="ID" role="img" aria-label="Indonésie" title="Indonésie" style="width:1.7em;height:1.15em;margin-right:8px;vertical-align:-0.12em"></span> Bali • Lombok</h1>
 
         <div class="countdown-flex" id="countdown">
@@ -18325,6 +18325,16 @@ body.pres-on #heroQr { display: none; }
 /* ---- Na úvodní obrazovce se lišty (postup, cena dole, TOPlist) nezobrazují, objeví se až po odjetí z úvodu ---- */
 #pbar, #vipFloatingBar, #toplistFloat { transition: opacity .35s ease, visibility .35s ease; }
 body.on-hero:not(.pres-on) :is(#pbar, #vipFloatingBar, #toplistFloat), body.in-plan:not(.pres-on) :is(#pbar, #vipFloatingBar, #toplistFloat), body.before-itin:not(.pres-on) #vipFloatingBar { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+
+/* ---- Nabídka celé obrazovky (při načtení a po návratu z jiného webu) ---- */
+#fsAsk { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); z-index: 10040; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; max-width: calc(100vw - 24px);
+    padding: 12px 12px 12px 18px; border-radius: 20px; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(12px); border: 1px solid color-mix(in srgb, var(--primary) 40%, var(--border));
+    box-shadow: 0 24px 50px -20px rgba(0, 0, 0, .65); color: var(--text-main); font: 700 0.92rem var(--font-ui, inherit); opacity: 0; visibility: hidden; transition: opacity .3s, transform .3s, visibility .3s; }
+#fsAsk.is-on { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+#fsAsk .fa-ic { font-size: 1.3rem; }
+#fsAsk button { border-radius: 14px; padding: 9px 16px; font: 800 0.85rem var(--font-ui, inherit); cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--text-main); }
+#fsAsk button.pri { border: 0; color: #fff; background: var(--ds-grad, var(--primary)); box-shadow: 0 10px 22px -12px var(--primary); }
+body.pres-on #fsAsk { display: none; }
 </style>
 
 <div id="presBar" role="toolbar" aria-label="Ovládání prezentace">
@@ -18355,7 +18365,7 @@ body.on-hero:not(.pres-on) :is(#pbar, #vipFloatingBar, #toplistFloat), body.in-p
 <script>
 /* Doplňky: lišta postupu, nástroje v menu (odkaz na variantu, offline), mobilní lišta, odkaz na kurzy */
 (function () {
-    var LUX_VERSION = '2. 11. 2026 · 06:27';
+    var LUX_VERSION = '2. 11. 2026 · 06:33';
 
     /* ---------- vlajky: emoji vlajky se převedou na vektorové (Windows je neumí zobrazit) ---------- */
     var FLAG_NAMES = {"SG": "Singapur", "ID": "Indonésie", "CZ": "Česko", "GB": "Spojené království", "US": "USA", "EU": "Evropská unie", "AE": "Spojené arabské emiráty", "TR": "Turecko", "CH": "Švýcarsko", "QA": "Katar", "MY": "Malajsie", "TH": "Thajsko", "DE": "Německo", "NL": "Nizozemsko", "AU": "Austrálie"};
@@ -19861,6 +19871,39 @@ function luxQRSvg(text, px) {
         }
         function trig() { if (!s) { s = true; requestAnimationFrame(upd); } }
         window.addEventListener('scroll', trig, { passive: true }); window.addEventListener('resize', trig); document.addEventListener('click', function () { setTimeout(trig, 60); setTimeout(trig, 700); }, true); upd(); setTimeout(upd, 800);
+    })();
+
+
+    /* ---------- celá obrazovka: nabídka při načtení a dotaz po návratu z jiného webu ---------- */
+    (function fullscreenOffer() {
+        var de = document.documentElement, can = !!(de.requestFullscreen || de.webkitRequestFullscreen) && (document.fullscreenEnabled !== false || document.webkitFullscreenEnabled);
+        if (!can) return;
+        function isFs() { return !!(document.fullscreenElement || document.webkitFullscreenElement); }
+        function goFs() { try { var r = de.requestFullscreen ? de.requestFullscreen({ navigationUI: 'hide' }) : de.webkitRequestFullscreen(); if (r && r.catch) r.catch(function () {}); } catch (e) {} hide(); }
+        var box = document.createElement('div'); box.id = 'fsAsk'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-live', 'polite'); document.body.appendChild(box);
+        var timer = 0;
+        function show(text, yes) {
+            if (isFs() || (window.pres && window.pres.on) || document.body.classList.contains('pres-on')) return;
+            box.innerHTML = '<span class="fa-ic" aria-hidden="true">⛶</span><span>' + text + '</span><button type="button" class="pri">' + yes + '</button><button type="button">Ne, díky</button>';
+            var bs = box.querySelectorAll('button'); bs[0].onclick = goFs; bs[1].onclick = hide;
+            box.classList.add('is-on'); clearTimeout(timer); timer = setTimeout(hide, 15000);
+        }
+        function hide() { box.classList.remove('is-on'); clearTimeout(timer); }
+        var fsExitAt = 0, left = false, fsKnown = false;
+        function fsCh() { if (!isFs()) { if (fsKnown) fsExitAt = Date.now(); fsKnown = false; } else { fsKnown = true; hide(); } }
+        document.addEventListener('fullscreenchange', fsCh); document.addEventListener('webkitfullscreenchange', fsCh);
+        function markLeave() { if (isFs() || fsKnown || Date.now() - fsExitAt < 2000) { left = true; try { sessionStorage.setItem('lux_fs_was', '1'); } catch (e) {} } }
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) { markLeave(); return; }
+            if (left && !isFs()) { left = false; try { sessionStorage.removeItem('lux_fs_was'); } catch (e) {} show('Vítej zpět. Vrátit stránku na celou obrazovku?', 'Ano, celá obrazovka'); }
+        });
+        window.addEventListener('pagehide', markLeave);
+        function onLoadAsk(persisted) {
+            var was = false; try { was = sessionStorage.getItem('lux_fs_was') === '1'; sessionStorage.removeItem('lux_fs_was'); } catch (e) {}
+            setTimeout(function () { show(was ? 'Vítej zpět. Vrátit stránku na celou obrazovku?' : 'Zobrazit stránku přes celou obrazovku?', was ? 'Ano, celá obrazovka' : 'Zapnout celou obrazovku'); }, persisted ? 300 : 1200);
+        }
+        window.addEventListener('pageshow', function (e) { if (e.persisted) onLoadAsk(true); });
+        onLoadAsk(false);
     })();
 
     /* ---------- skupina „Nástroje“ v menu ---------- */
