@@ -10,13 +10,13 @@ Statický web, bez závislostí Node.js v produkci. Publikovaná stránka je `in
 - `src/sw.js`: zdroj offline workeru.
 - `assets/build/`: generované soubory s hashem obsahu, neupravovat ručně.
 - `assets/build-manifest.json`: mapování každého výstupu na zdroje.
-- `tools/build.py`: deterministický build bez externích Python balíčků.
+- `tools/build.py`: deterministický build bez externích Python balíčků; vyžaduje Node.js a `npm ci`.
 - `tests/`: kontroly struktury, workeru a prohlížečové regrese.
 
-Po každé změně spustit `python3 tools/build.py` a commitnout zdroje i výstupy.
+Před buildem nainstalovat vývojové závislosti přes `npm ci`. Po každé změně spustit `python3 tools/build.py` a commitnout zdroje i výstupy.
 Build spojuje pouze sousední CSS bloky; nepřesouvá je přes skripty nebo obsah.
 Zachovává ID původních stylesheetů jako prázdné style kotvy a hranice JS skriptů.
-Osm prázdných/comment-only skriptů se nestahuje; jejich zdroje zůstávají pro dohledatelnost.
+Devět ověřených prázdných skriptů bylo odstraněno; seznam je v `docs/removed-scripts.json`. ID kotvy zůstávají zachované. JavaScript minifikuje Terser bez compression a mangling; scope i funkce zůstávají zachované.
 
 ## Testy
 
@@ -35,3 +35,5 @@ Obrázky, externí písma a mapové dlaždice se ukládají při použití, př�
 `.htaccess` zapíná kompresi a cache pravidla pouze na Apache. GitHub Pages jej nepoužívá.
 
 Po nasazení ponechat soubory předchozí verze `assets/build/` po dobu přechodu existujících klientů. Novou verzi nejdřív ověřit na testovacím hostingu. Tento PR se neslučuje automaticky.
+
+Rozšířená kontrola: `BASELINE_DIR=baseline node tests/extended.cjs`. Porovnává geometrii a vybrané computed styles všech rozbalených sekcí na dvou šířkách, ukládá snímky a měří tři studené návštěvy pro desktop a simulovaný mobil. Externí služby jsou zablokované shodně, soubory se přenášejí bez komprese. Výsledky nejsou produkční Core Web Vitals.

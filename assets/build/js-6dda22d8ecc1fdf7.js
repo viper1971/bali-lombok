@@ -1,1 +1,0 @@
-window.__wantSimple = /[?&]jednoduse(?:&|=|$)/.test(location.search);

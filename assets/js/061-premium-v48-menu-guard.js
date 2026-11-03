@@ -1,1 +1,0 @@
-/* Ovládání převzalo levé menu v53. */

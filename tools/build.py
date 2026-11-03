@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Deterministic static build; preserves script boundaries and CSS cascade order."""
-import hashlib, json, pathlib, re
+import hashlib, json, pathlib, re, subprocess
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 source = (ROOT / 'src/index.html').read_text()
 out = ROOT / 'assets/build'
@@ -8,6 +8,8 @@ out.mkdir(exist_ok=True)
 for old in out.glob('*'):
     old.unlink()
 manifest = []
+js_sources = {p: (ROOT / p).read_text() for p in re.findall(r'<script\b[^>]*src="(assets/js/[^\"]+)"', source)}
+minified = json.loads(subprocess.run(['node', 'tools/minify-js.cjs'], cwd=ROOT, input=json.dumps(js_sources), text=True, capture_output=True, check=True).stdout)
 def emit(kind, content, sources):
     digest = hashlib.sha256(content.encode()).hexdigest()[:16]
     name = f'assets/build/{kind}-{digest}.{kind}'
@@ -22,7 +24,7 @@ def script(m):
     executable = re.sub(r'/\*.*?\*/|//[^\n]*', '', content, flags=re.S).strip()
     if not executable:
         return re.sub(r'\s+src="[^"]+"', '', tag)
-    return tag.replace(path, emit('js', content, [path]))
+    return tag.replace(path, emit('js', minified[path], [path]))
 source = re.sub(r'<script\b[^>]*src="(assets/js/[^"]+)"[^>]*></script>', script, source)
 # Merge only neighbouring stylesheets separated by whitespace/comments: never
 # move CSS across a script or markup boundary. Preserve IDs as inert anchors.

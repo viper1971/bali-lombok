@@ -1,4 +1,0 @@
-
-            if (typeof loadStreetViewCustom !== 'function') {
-            }
-        

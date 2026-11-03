@@ -1,5 +1,0 @@
-
-(function(d,e,s) {d.getElementById('toplistcz1843706').innerHTML='<img src="https://toplist.cz/count.asp?id=1843706&logo=bc&http='+
-e(d.referrer)+'&t='+e(d.title)+'&l='+e(d.URL)+'&wi='+e(s.width)+'&he='+e(s.height)+'&cd='+
-e(s.colorDepth)+'" width="88" height="120" border="0" alt="TOPlist" />';
-}(document,encodeURIComponent,window.screen))

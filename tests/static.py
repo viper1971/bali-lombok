@@ -21,7 +21,8 @@ class BuildTests(unittest.TestCase):
   manifest=json.loads((ROOT/'assets/build-manifest.json').read_text())
   for m in manifest:
    content=(ROOT/m['output']).read_text()
-   if m['output'].endswith('.js'):self.assertEqual(content,(ROOT/m['sources'][0]).read_text())
+   if m['output'].endswith('.js'):
+    self.assertTrue(content.strip());subprocess.run(['node','--check',str(ROOT/m['output'])],check=True,capture_output=True)
    else:self.assertEqual(content,'\n'.join('/* '+p+' */\n'+(ROOT/p).read_text() for p in m['sources']))
   for ext,attr in [('js','src'),('css','href')]:
    src=re.findall(attr+r'="(assets/'+ext+r'/[^"]+)"',(ROOT/'src/index.html').read_text())

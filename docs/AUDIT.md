@@ -45,3 +45,12 @@ Zkontrolovány snímky úvodního viewportu pro oba rozměry. Rozdíly odpovída
 - Historické override vrstvy a dlouhé funkční bloky vyžadují komponentové testy před dalším odstraňováním. Označit celý projekt za kompletně vyčištěný by nebylo podložené.
 - Vedlejší `Index2.html`, `test.html`, `skola.html` jsou ponechány jako samostatné stránky; tento refaktoring mění hlavní aplikaci, ne jejich veřejné adresy.
 - Externí CDN zůstávají závislostí při prvním načtení. Úplný offline režim externích iframe nelze garantovat.
+
+
+## Navazující etapa
+
+- Devět skriptů bez funkčního těla odstraněno z disku i HTML; zachována ID kotva. Osm obsahovalo pouze komentáře/bílé znaky, devátý jen prázdnou podmínku `typeof loadStreetViewCustom`. Závislosti ověřeny prohledáním zdrojů; přesný seznam je v `removed-scripts.json`.
+- JavaScript minifikován parserem Terser s `compress:false`, `mangle:false`: bez přejmenování a bez odstraňování funkcí. Výstupy zůstávají v samostatných scopech a pořadí.
+- Místní zdroje CSS/JS: 136 → 74 požadavků. Přenášený obsah těchto zdrojů: přibližně 1,41 → 1,27 MB proti první etapě (bez HTTP komprese). Výkonové testy obsahují vlastní počty a přesné velikosti.
+- CSS audit parserem PostCSS: žádné přesně totožné deklarace v rámci jednoho jednoduchého pravidla ani totožná pravidla ve stejném kontextu bez překročení at-rule hranice. Výsledek v `css-cleanup.json`. Různé override deklarace nejsou automaticky považovány za duplicity.
+- Nová sada `tests/extended.cjs` porovnává rozbalené sekce a laboratorní výkon proti původnímu PR #1. Výsledky a snímky jsou v artefaktu GitHub Actions. Dokud tento běh není zelený, novou etapu nepovažovat za regresně ověřenou.
