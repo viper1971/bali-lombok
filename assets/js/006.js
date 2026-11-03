@@ -15,7 +15,7 @@
                 maps.forEach(function (m) { try { m.invalidateSize(); } catch (e) {} });
                 try { window.dispatchEvent(new Event('resize')); } catch (e) {}
             }
-            // Keep the clicked header fixed through the collapse/expand animation.
+            // Align the opened header 8px below the viewport top throughout the animation.
             // Stop immediately when the reader scrolls, touches or uses the keyboard.
             var headerPin = null;
             function stopHeaderPin() {
@@ -35,7 +35,7 @@
                 stopHeaderPin();
                 var root = document.documentElement;
                 var pin = headerPin = {
-                    top: header.getBoundingClientRect().top, frame: 0, timer: 0,
+                    top: 8, frame: 0, timer: 0,
                     style: { value: root.style.getPropertyValue('overflow-anchor'), priority: root.style.getPropertyPriority('overflow-anchor') }
                 };
                 root.style.setProperty('overflow-anchor', 'none', 'important');
@@ -110,7 +110,7 @@
             function goTo(t) {
                 openAncestors(t);
                 requestAnimationFrame(function () { requestAnimationFrame(function () {
-                    var y = t.getBoundingClientRect().top + window.scrollY - 84;
+                    var y = t.getBoundingClientRect().top + window.scrollY - 8;
                     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
                 }); });
             }

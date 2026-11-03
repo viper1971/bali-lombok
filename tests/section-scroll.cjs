@@ -1,4 +1,4 @@
-// Exercise the real clicked headers after scrolling past an already-open section.
+// Opened section headers align just below the viewport top, even after switching sections.
 const engines = require('playwright');
 const {spawn} = require('node:child_process');
 const fs = require('node:fs');
@@ -64,16 +64,16 @@ const report = {engine, baseline, cases: [], passed: false};
                     await sleep(delay);
                     samples.push(await locator.evaluate(header => header.getBoundingClientRect().top));
                 }
-                const drift = Math.max(...samples.map(top => Math.abs(top - before)));
+                const drift = Math.max(...samples.map(top => Math.abs(top - (baseline ? before : 8))));
                 report.cases.push({width, name, keyboard, before, samples, drift});
                 if (!baseline && drift > 4) {
                     await page.screenshot({path: `test-results/scroll-failure-${engine}-${width}.png`});
-                    assert.fail(`${engine} ${width} ${name}: clicked header moved ${drift.toFixed(1)}px: ${JSON.stringify({before, samples})}`);
+                    assert.fail(`${engine} ${width} ${name}: opened header missed the 8px top offset by ${drift.toFixed(1)}px: ${JSON.stringify({before, samples})}`);
                 }
                 const expanded = await locator.evaluate(header => header.matches('summary') ? header.parentElement.open : header.getAttribute('aria-expanded') === 'true');
                 assert(expanded, `${name}: header expanded`);
             }
-            // All closed: keep the existing, correct opening behavior.
+            // All closed: opening also aligns the header at the top.
             await page.evaluate(() => luxAll(null, false));
             await page.evaluate(id => luxPartFor(document.getElementById(id)), groups[0].folds[0]);
             await sleep(650);
