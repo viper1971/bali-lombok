@@ -1216,7 +1216,7 @@ function luxQRSvg(text, px) {
         if (v) { if (typeof window.toggleMenuModal === 'function' && $('menuModalOverlay') && $('menuModalOverlay').classList.contains('open')) window.toggleMenuModal(); var h = el.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
     };
     function addSimpleButtons() {
-        var hi = document.querySelector('.hero-inner'); if (hi && !$('heroSimpleBtn')) { var b = document.createElement('button'); b.type = 'button'; b.id = 'heroSimpleBtn'; b.className = 'hero-simple-btn'; b.textContent = '📄 Jednoduchá stránka: jen to nejdůležitější'; b.addEventListener('click', function () { window.luxSimple(true); }); hi.appendChild(b); }
+        var hi = document.querySelector('.hero-inner'); if (hi && !$('heroSimpleBtn')) { var b = document.createElement('button'); b.type = 'button'; b.id = 'heroSimpleBtn'; b.className = 'hero-simple-btn'; b.innerHTML = '<span class="hero-journal-icon" aria-hidden="true">📖</span><span class="hero-journal-copy"><span class="hero-journal-label">Vše na jednom místě</span><span class="hero-journal-title">Otevřít cestovatelský deník</span><span class="hero-journal-sub">Trasa, hotely a rozpočet · přehledně a k tisku</span></span><span class="hero-journal-arrow" aria-hidden="true">→</span>'; b.addEventListener('click', function () { window.luxSimple(true); }); hi.appendChild(b); }
     }
 
 
