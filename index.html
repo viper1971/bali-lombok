@@ -8121,7 +8121,7 @@ body.dark-mode #f-konfig .p35-footer a{color:#80e0d4!important;}
 @media(max-width:600px){#floatingMenuBtn{width:38px!important;min-height:94px!important;padding:10px 5px!important}#menuModalOverlay .menu-modal-box{width:min(350px,calc(100vw - 42px))!important;max-width:calc(100vw - 42px)!important;padding:18px 14px calc(16px + env(safe-area-inset-bottom))!important}}
 @media(prefers-reduced-motion:reduce){#menuModalOverlay,#menuModalOverlay .menu-modal-box{transition:none!important}}
 </style>
-<meta name="bali-menu-revision" content="two-tabs-v57">
+<meta name="bali-menu-revision" content="two-tabs-v58">
 </head>
 <body id="hero">
 <a class="premium-skip" href="#hlavni-obsah">Přeskočit na obsah</a>
@@ -23812,31 +23812,21 @@ body.dark #rozpocet .pf18-details summary small,html.dark #rozpocet .pf18-detail
 </script>
 
 <script id="premium-v29-slide-tabs">
-/* v40: pouze spodní záložka MENU; horní ukazatel čtení odstraněn z rozhraní. */
+/* V58: starý skript pouze založí tlačítko. Kliknutí ovládá výhradně bali-v54-left-budget-control. */
 (function(){
  'use strict';
  function init(){
-  var bottom=document.getElementById('vipFloatingBar');
-  if(!bottom||document.getElementById('v29BottomTab'))return;
-  document.body.classList.remove('v29-top-open');
-  var b=document.createElement('button');b.type='button';b.id='v29BottomTab';
-  b.setAttribute('aria-expanded','false');b.setAttribute('aria-controls','vipFloatingBar');
-  b.innerHTML='<span class="v29-chevron" aria-hidden="true">▴</span><span>MENU</span>';
-  document.body.appendChild(b);
-  function sync(){
-   var opened=document.body.classList.contains('v29-bottom-open');
-   b.setAttribute('aria-expanded',String(opened));
-   b.querySelector('.v29-chevron').textContent=opened?'▾':'▴';
-  }
-  b.addEventListener('click',function(){document.body.classList.toggle('v29-bottom-open');sync()});
-  document.addEventListener('keydown',function(e){
-   if(e.key==='Escape'&&document.body.classList.contains('v29-bottom-open')){
-    document.body.classList.remove('v29-bottom-open');sync();
-   }
-  });
-  sync();
+  if(document.getElementById('v29BottomTab'))return;
+  var bar=document.getElementById('vipFloatingBar');if(!bar)return;
+  var button=document.createElement('button');
+  button.type='button';button.id='v29BottomTab';
+  button.setAttribute('aria-controls','vipFloatingBar');
+  button.setAttribute('aria-expanded','false');
+  button.innerHTML='<span class="v29-chevron" aria-hidden="true">▸</span><span>MENU</span>';
+  document.body.appendChild(button);
  }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+ else init();
 })();
 </script>
 <script id="p35-final-snapshot">
