@@ -213,10 +213,10 @@
     }
     function openPart(p, keepPos) {
         if (!p || p.classList.contains('is-open')) return;
-        var flightPick = document.getElementById('flightPick');
-        if (flightPick && flightPick.open) flightPick.open = false;
         var h = p.querySelector(':scope > .lux-part-head');
         function change() {
+            var flightPick = document.getElementById('flightPick');
+            if (flightPick && flightPick.open) flightPick.open = false;
             allParts().forEach(function (o) { if (o !== p && o.classList.contains('is-open')) setPart(o, false, true); });
             setPart(p, true);
         }
@@ -1493,13 +1493,18 @@ function luxQRSvg(text, px) {
         var d = $('flightPick'); if (!d) return;
         d.addEventListener('toggle', function () {
             if (!d.open) return;
-            [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (f) {
-                try { window.luxToggle(f.id); } catch (e) {}
-            });
-            [].forEach.call(document.querySelectorAll('.lux-part.is-open'), function (p) {
-                var h = p.querySelector(':scope > .lux-part-head');
-                if (h) h.click();
-            });
+            function change() {
+                [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (f) {
+                    try { window.luxToggle(f.id, { preserveScroll: true }); } catch (e) {}
+                });
+                [].forEach.call(document.querySelectorAll('.lux-part.is-open'), function (p) {
+                    setPart(p, false, true);
+                });
+                try { localStorage.removeItem(PKEY); } catch (e) {}
+            }
+            var summary = d.querySelector(':scope > summary');
+            if (summary) window.luxPreserveHeader(summary, change);
+            else change();
         });
         if (window.MutationObserver) new MutationObserver(function (ms) {
             if (!d.open) return; ms.forEach(function (m) { var el = m.target; if (el.classList && el.classList.contains('lux-fold') && el.classList.contains('is-open') && !/\bis-open\b/.test(m.oldValue || '')) d.open = false; });

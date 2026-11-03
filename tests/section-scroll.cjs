@@ -46,12 +46,19 @@ const report = {engine, baseline, cases: [], passed: false};
             async function clickHeader(selector, name, keyboard = false) {
                 const locator = page.locator(selector);
                 await locator.evaluate(header => window.scrollTo({top: window.scrollY + header.getBoundingClientRect().top - 240, behavior: 'instant'}));
-                await sleep(120);
-                if (keyboard) await locator.focus();
+                await sleep(650);
+                if (keyboard) await locator.evaluate(header => header.focus({preventScroll: true}));
                 const before = await locator.evaluate(header => header.getBoundingClientRect().top);
                 assert(before >= 0 && before < 850, `${name}: header must be visible before activation`);
                 if (keyboard) await page.keyboard.press('Enter');
-                else await locator.click({position: {x: 100, y: 20}});
+                else {
+                    // Use pointer coordinates: Locator.click may call the app's patched
+                    // scrollIntoView, which opens a fold before the actual click.
+                    const box = await locator.boundingBox();
+                    const x = box.x + Math.min(100, box.width / 2), y = box.y + Math.min(20, box.height / 2);
+                    if (width === 390 && engine === 'webkit') await page.touchscreen.tap(x, y);
+                    else await page.mouse.click(x, y);
+                }
                 const samples = [];
                 for (const delay of [80, 180, 300, 350]) {
                     await sleep(delay);
@@ -61,13 +68,15 @@ const report = {engine, baseline, cases: [], passed: false};
                 report.cases.push({width, name, keyboard, before, samples, drift});
                 if (!baseline && drift > 4) {
                     await page.screenshot({path: `test-results/scroll-failure-${engine}-${width}.png`});
-                    assert.fail(`${engine} ${width} ${name}: clicked header moved ${drift.toFixed(1)}px`);
+                    assert.fail(`${engine} ${width} ${name}: clicked header moved ${drift.toFixed(1)}px: ${JSON.stringify({before, samples})}`);
                 }
-                assert.equal(await locator.getAttribute('aria-expanded'), 'true', `${name}: header expanded`);
+                const expanded = await locator.evaluate(header => header.matches('summary') ? header.parentElement.open : header.getAttribute('aria-expanded') === 'true');
+                assert(expanded, `${name}: header expanded`);
             }
             // All closed: keep the existing, correct opening behavior.
             await page.evaluate(() => luxAll(null, false));
             await page.evaluate(id => luxPartFor(document.getElementById(id)), groups[0].folds[0]);
+            await sleep(650);
             await clickHeader(`#${groups[0].folds[0]} > .lux-fold-h > .lux-fold-btn`, 'first opening');
             if (baseline) {
                 await openFold('f-viza');
@@ -91,6 +100,9 @@ const report = {engine, baseline, cases: [], passed: false};
                 await page.emulateMedia({reducedMotion: 'reduce'});
                 await openFold('f-viza');
                 await clickHeader('#f-sos > .lux-fold-h > .lux-fold-btn', 'reduced motion');
+                await openFold('f-viza');
+                await clickHeader('#flightPick > summary', 'section -> flight selection');
+                await clickHeader('#cast-priprava > .lux-part-head', 'flight selection -> preparation');
                 // Explicit navigation still scrolls to its requested destination.
                 await page.evaluate(() => {
                     const link = document.createElement('a'); link.href = '#f-leg-ubud';

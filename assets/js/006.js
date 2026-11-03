@@ -15,32 +15,49 @@
                 maps.forEach(function (m) { try { m.invalidateSize(); } catch (e) {} });
                 try { window.dispatchEvent(new Event('resize')); } catch (e) {}
             }
-            // Keep a clicked header fixed while the old and new content change.
-            // Native scroll anchoring must not compensate for the same change.
-            var anchorTimer = null, anchorStyle = null;
+            // Keep the clicked header fixed through the collapse/expand animation.
+            // Stop immediately when the reader scrolls, touches or uses the keyboard.
+            var headerPin = null;
+            function stopHeaderPin() {
+                if (!headerPin) return;
+                cancelAnimationFrame(headerPin.frame);
+                clearTimeout(headerPin.timer);
+                var style = headerPin.style, root = document.documentElement;
+                if (style.value) root.style.setProperty('overflow-anchor', style.value, style.priority);
+                else root.style.removeProperty('overflow-anchor');
+                headerPin = null;
+            }
+            ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(function (name) {
+                window.addEventListener(name, stopHeaderPin, { capture: true, passive: true });
+            });
+            window.addEventListener('pagehide', stopHeaderPin);
             window.luxPreserveHeader = function (header, change) {
+                stopHeaderPin();
                 var root = document.documentElement;
-                var before = header.getBoundingClientRect().top;
-                if (!anchorStyle) anchorStyle = {
-                    value: root.style.getPropertyValue('overflow-anchor'),
-                    priority: root.style.getPropertyPriority('overflow-anchor')
+                var pin = headerPin = {
+                    top: header.getBoundingClientRect().top, frame: 0, timer: 0,
+                    style: { value: root.style.getPropertyValue('overflow-anchor'), priority: root.style.getPropertyPriority('overflow-anchor') }
                 };
-                clearTimeout(anchorTimer);
                 root.style.setProperty('overflow-anchor', 'none', 'important');
-                try {
-                    change();
-                    // Measure after both mutations, including collapse scroll clamping.
-                    var shift = header.getBoundingClientRect().top - before;
+                function correct() {
+                    if (headerPin !== pin) return;
+                    if (!header.isConnected) { stopHeaderPin(); return; }
+                    var shift = header.getBoundingClientRect().top - pin.top;
                     if (Math.abs(shift) > 0.5) window.scrollTo({
                         top: Math.max(0, window.scrollY + shift), behavior: 'instant'
                     });
-                } finally {
-                    anchorTimer = setTimeout(function () {
-                        if (anchorStyle.value) root.style.setProperty('overflow-anchor', anchorStyle.value, anchorStyle.priority);
-                        else root.style.removeProperty('overflow-anchor');
-                        anchorStyle = null; anchorTimer = null;
-                    }, 600);
                 }
+                function frame() {
+                    if (headerPin !== pin) return;
+                    correct();
+                    if (headerPin === pin) pin.frame = requestAnimationFrame(frame);
+                }
+                try {
+                    change();
+                    correct();
+                    pin.frame = requestAnimationFrame(frame);
+                    pin.timer = setTimeout(stopHeaderPin, 600);
+                } catch (error) { stopHeaderPin(); throw error; }
             };
             function setState(f, open, instant) {
                 if (!f) return;
@@ -80,6 +97,7 @@
                 save();
             };
             function openAncestors(el) {
+                stopHeaderPin();
                 if (window.luxPartFor) window.luxPartFor(el);
                 var changed = false, f = el && el.closest ? el.closest('.lux-fold') : null;
                 while (f) {
