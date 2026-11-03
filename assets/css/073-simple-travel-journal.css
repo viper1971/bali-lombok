@@ -2,6 +2,10 @@
 html body.simple-on #baliUnifiedRail,html body.simple-on #baliMobileHamburger,html body.simple-on #vipFloatingBar,html body.simple-on #uxSearchBtn,html body.simple-on #fsAsk,html body.simple-on #bttBtn{display:none!important}
 #simplePage.sj-page{--sj-ink:#3e3024;--sj-muted:#786552;--sj-line:#cbb99b;--sj-accent:#8b5436;--sj-paper:#f4e8cc;background:#302b25!important;color:var(--sj-ink)!important;font:400 17px/1.75 Georgia,'Times New Roman',serif;padding:38px 24px;overscroll-behavior:contain;scroll-behavior:auto}
 #simplePage.sj-page *{box-sizing:border-box}
+#simplePage.sj-page .sj-toolbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;gap:12px;max-width:980px;margin:0 auto 18px;padding:10px 12px;border:1px solid #9e8058;border-radius:6px;background:#f4e8cc;box-shadow:0 3px 14px #0003}
+#simplePage.sj-page .sj-toolbar-button{appearance:none;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:9px 18px;border:1px solid #9e8058;border-radius:4px;background:#fcf4df;color:#3e3024;font:600 14px/1.4 'Plus Jakarta Sans',system-ui,sans-serif;cursor:pointer}
+#simplePage.sj-page .sj-toolbar-button:hover{background:#e8d6b1}
+#simplePage.sj-page .sj-toolbar-button:focus-visible{outline:2px solid #8b5436;outline-offset:3px}
 #simplePage.sj-page .sj-book{position:relative;isolation:isolate;max-width:980px;margin:0 auto;min-width:0;padding:0;background-color:var(--sj-paper);background-image:radial-gradient(ellipse at 0 0,rgba(91,46,17,.19),transparent 40%),radial-gradient(ellipse at 100% 100%,rgba(98,52,22,.16),transparent 46%),repeating-linear-gradient(0deg,rgba(90,61,27,.018) 0,rgba(90,61,27,.018) 1px,transparent 1px,transparent 4px),linear-gradient(95deg,#d9bf8b 0,#f1e2bf 1.4%,#f7edd5 6%,#f4e7c9 50%,#f7ecd1 94%,#d5b77d 100%);box-shadow:0 18px 70px #0008,inset 0 0 35px #84511d55; border:1px solid #b7955d;border-radius:3px 6px 5px 2px}
 #simplePage.sj-page .sj-book:before,#simplePage.sj-page .sj-book:after{content:'';position:absolute;pointer-events:none;top:0;bottom:0;width:9px;z-index:-1;background:linear-gradient(90deg,#55321f99,#a2733060,transparent);opacity:.7}
 #simplePage.sj-page .sj-book:before{left:0}#simplePage.sj-page .sj-book:after{right:0;transform:scaleX(-1)}
@@ -119,6 +123,7 @@ html body.simple-on #baliUnifiedRail,html body.simple-on #baliMobileHamburger,ht
 }
 @page sj-journal{size:A4 portrait;margin:12mm 13mm 14mm}
 @media print{
+ #simplePage.sj-page .sj-toolbar{display:none!important}
  html:has(body.simple-on),body.simple-on{height:auto!important;overflow:visible!important;margin:0!important;padding:0!important;background:#fff!important}
  body.simple-on>*:not(#simplePage){display:none!important}
  body.simple-on #simplePage.sj-page{page:sj-journal;position:static!important;inset:auto!important;display:block!important;height:auto!important;max-height:none!important;width:auto!important;overflow:visible!important;padding:0!important;margin:0!important;background:white!important;font-size:10pt;line-height:1.4}
