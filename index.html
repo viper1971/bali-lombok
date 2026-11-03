@@ -8121,7 +8121,7 @@ body.dark-mode #f-konfig .p35-footer a{color:#80e0d4!important;}
 @media(max-width:600px){#floatingMenuBtn{width:38px!important;min-height:94px!important;padding:10px 5px!important}#menuModalOverlay .menu-modal-box{width:min(350px,calc(100vw - 42px))!important;max-width:calc(100vw - 42px)!important;padding:18px 14px calc(16px + env(safe-area-inset-bottom))!important}}
 @media(prefers-reduced-motion:reduce){#menuModalOverlay,#menuModalOverlay .menu-modal-box{transition:none!important}}
 </style>
-<meta name="bali-menu-revision" content="two-tabs-v56">
+<meta name="bali-menu-revision" content="two-tabs-v57">
 </head>
 <body id="hero">
 <a class="premium-skip" href="#hlavni-obsah">Přeskočit na obsah</a>
@@ -24332,7 +24332,7 @@ html body:not(.pres-on) #v29BottomTab{
  transform:translateY(-50%)!important;
 }
 html body:not(.pres-on) #floatingMenuBtn{
- top:calc(50% + var(--bali-tab-height) / 2 + var(--bali-tab-gap))!important;
+ top:calc(50% + 64px)!important; /* výška 112/2 + mezera 8 px; bez nepodporovaného dělení v calc() */
  transform:none!important;
 }
 html body:not(.pres-on) #floatingMenuBtn:hover{transform:none!important}
@@ -24348,6 +24348,7 @@ html body #baliLeftNavSection:not([hidden]){display:block!important}
 html body.pres-on #floatingMenuBtn{display:none!important}
 @media(max-width:600px){
  :root{--bali-tab-height:96px;--bali-tab-gap:6px}
+ html body:not(.pres-on) #floatingMenuBtn{top:calc(50% + 54px)!important;} /* 96/2 + 6 */
  html body:not(.pres-on) #v29BottomTab,
  html body:not(.pres-on) #floatingMenuBtn{
   width:38px!important;min-width:38px!important;max-width:38px!important;
