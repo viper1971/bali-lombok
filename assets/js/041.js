@@ -886,7 +886,7 @@ function recalculateAll() {
         const htmlRoot = document.documentElement;
         const themeToggleBtn = document.getElementById('themeToggleBtn');
 
-        const savedTheme = localStorage.getItem('theme') || 'dark';
+        const savedTheme = localStorage.getItem('theme') || 'light';
         htmlRoot.setAttribute('data-theme', savedTheme);
         if (themeToggleBtn) {
             themeToggleBtn.innerText = savedTheme === 'light' ? '🌙' : '☀️';

@@ -1,0 +1,68 @@
+/* Shared tropical background; existing cards and their controls keep their design. */
+html[data-theme="light"] {
+  --bg-color: #e5f2ea;
+  --bg-gradient: url('https://viper1971.github.io/bali-lombok/assets/images/tropical-background.webp');
+}
+html[data-theme="dark"] {
+  --bg-color: #102c29;
+  --bg-gradient: linear-gradient(rgba(8, 30, 27, .89), rgba(8, 30, 27, .89)), url('https://viper1971.github.io/bali-lombok/assets/images/tropical-background.webp');
+}
+html[data-theme] body {
+  background-color: var(--bg-color) !important;
+  background-image: var(--bg-gradient) !important;
+  background-position: center top !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+}
+html[data-theme] .hero {
+  background: transparent !important;
+}
+html[data-theme] .hero::before,
+html[data-theme] .hero::after {
+  background: none !important;
+}
+html[data-theme="light"] .hero {
+  --surface: #ffffff;
+  --surface-hover: #eef5ef;
+  --text-main: #143d36;
+  --text-muted: #48685e;
+  --primary: #087d69;
+  --border: rgba(20, 61, 54, .18);
+  color: var(--text-main) !important;
+}
+html[data-theme="light"] .hero h1,
+html[data-theme="light"] .hero h1 span,
+html[data-theme="light"] .hero p,
+html[data-theme="light"] .hero label {
+  color: #143d36 !important;
+  text-shadow: none !important;
+}
+html[data-theme="light"] .hero .cd-card .cd-value { color: #a4f3df !important; }
+html[data-theme="light"] .hero .cd-card .cd-key { color: #edf7f0 !important; }
+.hotel-location-map {
+  margin: 16px 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--text-main);
+}
+.hotel-location-map-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  padding: 12px 14px;
+  font-size: .9rem;
+}
+.hotel-location-map-head a { color: var(--primary); }
+.hotel-location-map iframe {
+  display: block;
+  width: 100%;
+  height: 270px;
+  border: 0;
+}
+@media (max-width: 600px) {
+  .hotel-location-map iframe { height: 230px; }
+}
