@@ -141,7 +141,7 @@
 
     function preload(src) { var im = new Image(); im.decoding = 'async'; im.src = src; return im; }
 
-    function build(container, topics) {
+    function build(container, topics, fixedItems) {
         var show = document.createElement('div');
         show.className = 'trip-show';
         show._uid = 'show' + (window.__showN = (window.__showN || 0) + 1);
@@ -155,7 +155,7 @@
         // připraví data a přednačte první 3 fotky – volá se v klidu po načtení stránky
         // nebo hned, když uživatel najede na tlačítko itineráře
         show._prepare = function (eagerCount) {
-            if (!state.ready) state.ready = resolve(topics, show._uid).then(function (items) {
+            if (!state.ready) state.ready = (fixedItems ? Promise.resolve(fixedItems) : resolve(topics, show._uid)).then(function (items) {
                 state.items = items;
                 if (!items.length) { show.remove(); return items; }
                 render(items);
@@ -196,6 +196,12 @@
                 cap.innerHTML = '<strong></strong><small>Foto: <a target="_blank" rel="noopener"></a></small>';
                 cap.querySelector('strong').textContent = it.cap;
                 var a = cap.querySelector('a'); a.textContent = credit; a.href = it.ph.page || 'https://commons.wikimedia.org';
+                if (it.ph.licenseUrl) {
+                    var license = document.createElement('a');
+                    license.href = it.ph.licenseUrl; license.target = '_blank'; license.rel = 'noopener noreferrer';
+                    license.textContent = 'Licence';
+                    cap.querySelector('small').append(' · ', license);
+                }
                 fig.appendChild(img); fig.appendChild(cap); show.appendChild(fig); slides.push(fig);
                 dot.type = 'button'; dot.setAttribute('aria-label', 'Fotka ' + (n + 1) + ': ' + it.cap);
                 dot.onclick = function () { go(slides.indexOf(fig)); restart(); };
@@ -250,6 +256,12 @@
                 btn.addEventListener(ev, function () { show._prepare(3); }, { once: true, passive: true });
             });
         });
+        var nest = document.getElementById('nestStatuesSlideshow');
+        if (nest) {
+            var nestShow = build(nest, [], [{"cap": "NEST – kruh podvodních soch na Gili Meno", "ph": {"src": "https://images.pexels.com/photos/2499769/pexels-photo-2499769.jpeg?auto=compress&dpr=1&h=750&w=1260", "page": "https://www.pexels.com/photo/grey-statues-on-seabed-2499769/", "author": "Stijn Dijkstra", "license": "Pexels", "licenseUrl": "https://www.pexels.com/license/"}}, {"cap": "NEST – potápěč nad sochami", "ph": {"src": "https://images.pexels.com/photos/31973396/pexels-photo-31973396/free-photo-of-underwater-sculpture-circle-at-gili-meno.jpeg?auto=compress&dpr=1&h=750&w=1260", "page": "https://www.pexels.com/photo/underwater-sculpture-circle-at-gili-meno-31973396/", "author": "Eric Jo", "license": "Pexels", "licenseUrl": "https://www.pexels.com/license/"}}, {"cap": "NEST – sochy na mořském dně", "ph": {"src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Gili_Underwater_Sculpture_%2849615256547%29.jpg/1280px-Gili_Underwater_Sculpture_%2849615256547%29.jpg", "page": "https://commons.wikimedia.org/wiki/File:Gili_Underwater_Sculpture_(49615256547).jpg", "author": "Enrico Strocchi", "license": "CC BY-SA 2.0 · zmenšený náhled", "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/"}}]);
+            nestShow.setAttribute('aria-label', 'Podvodní sochy NEST na Gili Meno');
+            shows.push(nestShow);
+        }
         // Po načtení stránky v klidu postupně připraví všechny itineráře (texty + první fotky)
         window.addEventListener('load', function () {
             var cn = navigator.connection;
