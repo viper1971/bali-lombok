@@ -202,10 +202,10 @@
         c.querySelector('.pc-bar i').style.width = (len ? Math.round(n / len * 100) : 0) + '%';
         c.classList.toggle('is-done', !!len && n >= len);
     };
-    function setPart(p, open) {
+    function setPart(p, open, preserveScroll) {
         if (!p) return;
         if (!open) {   /* zavírání části zavře i otevřenou sekci uvnitř, ať nezůstane „přilepená“ hlavička skryté sekce */
-            [].forEach.call(p.querySelectorAll('.lux-fold.is-open'), function (f) { if (typeof window.luxToggle === 'function') window.luxToggle(f.id); });
+            [].forEach.call(p.querySelectorAll('.lux-fold.is-open'), function (f) { if (typeof window.luxToggle === 'function') window.luxToggle(f.id, { preserveScroll: !!preserveScroll }); });
         }
         p.classList.toggle('is-open', open);
         var h = p.querySelector(':scope > .lux-part-head'); if (h) h.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -213,15 +213,15 @@
     }
     function openPart(p, keepPos) {
         if (!p || p.classList.contains('is-open')) return;
-        var flightPick = document.getElementById('flightPick');
-        if (flightPick && flightPick.open) flightPick.open = false;
-        var h = p.querySelector(':scope > .lux-part-head'), before = h ? h.getBoundingClientRect().top : 0, closed = false;
-        allParts().forEach(function (o) { if (o !== p && o.classList.contains('is-open')) { setPart(o, false); closed = true; } });
-        if (closed && keepPos && h) {   /* zavřená část nad námi posunula obsah: hlavička otevírané části zůstane na místě */
-            var shift = h.getBoundingClientRect().top - before;
-            if (Math.abs(shift) > 1) window.scrollTo({ top: Math.max(0, window.scrollY + shift), behavior: 'instant' });
+        var h = p.querySelector(':scope > .lux-part-head');
+        function change() {
+            var flightPick = document.getElementById('flightPick');
+            if (flightPick && flightPick.open) flightPick.open = false;
+            allParts().forEach(function (o) { if (o !== p && o.classList.contains('is-open')) setPart(o, false, true); });
+            setPart(p, true);
         }
-        setPart(p, true);
+        if (keepPos && h) window.luxPreserveHeader(h, change);
+        else change();
         try { localStorage.setItem(PKEY, p.id); } catch (e) {}
     }
     window.luxPartFor = function (el) { var p = el && el.closest ? el.closest('.lux-part') : null; if (p) openPart(p, false); };
@@ -1493,13 +1493,18 @@ function luxQRSvg(text, px) {
         var d = $('flightPick'); if (!d) return;
         d.addEventListener('toggle', function () {
             if (!d.open) return;
-            [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (f) {
-                try { window.luxToggle(f.id); } catch (e) {}
-            });
-            [].forEach.call(document.querySelectorAll('.lux-part.is-open'), function (p) {
-                var h = p.querySelector(':scope > .lux-part-head');
-                if (h) h.click();
-            });
+            function change() {
+                [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (f) {
+                    try { window.luxToggle(f.id, { preserveScroll: true }); } catch (e) {}
+                });
+                [].forEach.call(document.querySelectorAll('.lux-part.is-open'), function (p) {
+                    setPart(p, false, true);
+                });
+                try { localStorage.removeItem(PKEY); } catch (e) {}
+            }
+            var summary = d.querySelector(':scope > summary');
+            if (summary) window.luxPreserveHeader(summary, change);
+            else change();
         });
         if (window.MutationObserver) new MutationObserver(function (ms) {
             if (!d.open) return; ms.forEach(function (m) { var el = m.target; if (el.classList && el.classList.contains('lux-fold') && el.classList.contains('is-open') && !/\bis-open\b/.test(m.oldValue || '')) d.open = false; });
@@ -1610,7 +1615,7 @@ function luxQRSvg(text, px) {
         }
         document.addEventListener('click', function (e) {
             var tg = e.target; if (!tg || !tg.closest || (window.pres && window.pres.on) || document.body.classList.contains('pres-on')) return;
-            var btn = tg.closest('.lux-acc-btn, .acc-header, .acc-trigger, details > summary'); if (!btn || !btn.closest('.lux-fold-pad, #flightPick')) return;
+            var btn = tg.closest('.lux-acc-btn, .acc-header, .acc-trigger, details > summary'); if (!btn || btn.matches('#flightPick > summary') || !btn.closest('.lux-fold-pad, #flightPick')) return;
             setTimeout(function () {
                 var open = btn.matches('summary') ? btn.parentElement.open : (btn.getAttribute('aria-expanded') === 'true' || (btn.parentElement && btn.parentElement.classList.contains('open')));
                 if (open) align(btn);

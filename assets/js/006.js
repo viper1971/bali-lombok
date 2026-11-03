@@ -15,33 +15,75 @@
                 maps.forEach(function (m) { try { m.invalidateSize(); } catch (e) {} });
                 try { window.dispatchEvent(new Event('resize')); } catch (e) {}
             }
+            // Keep the clicked header fixed through the collapse/expand animation.
+            // Stop immediately when the reader scrolls, touches or uses the keyboard.
+            var headerPin = null;
+            function stopHeaderPin() {
+                if (!headerPin) return;
+                cancelAnimationFrame(headerPin.frame);
+                clearTimeout(headerPin.timer);
+                var style = headerPin.style, root = document.documentElement;
+                if (style.value) root.style.setProperty('overflow-anchor', style.value, style.priority);
+                else root.style.removeProperty('overflow-anchor');
+                headerPin = null;
+            }
+            ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(function (name) {
+                window.addEventListener(name, stopHeaderPin, { capture: true, passive: true });
+            });
+            window.addEventListener('pagehide', stopHeaderPin);
+            window.luxPreserveHeader = function (header, change) {
+                stopHeaderPin();
+                var root = document.documentElement;
+                var pin = headerPin = {
+                    top: header.getBoundingClientRect().top, frame: 0, timer: 0,
+                    style: { value: root.style.getPropertyValue('overflow-anchor'), priority: root.style.getPropertyPriority('overflow-anchor') }
+                };
+                root.style.setProperty('overflow-anchor', 'none', 'important');
+                function correct() {
+                    if (headerPin !== pin) return;
+                    if (!header.isConnected) { stopHeaderPin(); return; }
+                    var shift = header.getBoundingClientRect().top - pin.top;
+                    if (Math.abs(shift) > 0.5) window.scrollTo({
+                        top: Math.max(0, window.scrollY + shift), behavior: 'instant'
+                    });
+                }
+                function frame() {
+                    if (headerPin !== pin) return;
+                    correct();
+                    if (headerPin === pin) pin.frame = requestAnimationFrame(frame);
+                }
+                try {
+                    change();
+                    correct();
+                    pin.frame = requestAnimationFrame(frame);
+                    pin.timer = setTimeout(stopHeaderPin, 600);
+                } catch (error) { stopHeaderPin(); throw error; }
+            };
             function setState(f, open, instant) {
                 if (!f) return;
-                /* vždy jen jedna otevřená sekce; ostatní se zavřou samy (vnořené podrobnosti uvnitř otevřené sekce se netýkají) */
-                if (open) {
-                    var flightPick = document.getElementById('flightPick');
-                    if (flightPick && flightPick.open) flightPick.open = false;
-                    if (window.luxPartFor) window.luxPartFor(f);
-                    var before = f.getBoundingClientRect().top, closedAny = false;
-                    [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (o) {
-                        if (o !== f && !o.contains(f) && !f.contains(o)) { setState(o, false, true); closedAny = true; }
-                    });
-                    if (closedAny && !instant) {
-                        /* zavřená sekce nad námi posunula obsah: vrátíme stránku tak, aby otevíraná hlavička zůstala pod prstem */
-                        var shift = f.getBoundingClientRect().top - before;
-                        if (Math.abs(shift) > 1) window.scrollTo({ top: Math.max(0, window.scrollY + shift), behavior: 'instant' });
+                function change() {
+                    /* vždy jen jedna otevřená sekce; ostatní se zavřou samy (vnořené podrobnosti uvnitř otevřené sekce se netýkají) */
+                    if (open) {
+                        var flightPick = document.getElementById('flightPick');
+                        if (flightPick && flightPick.open) flightPick.open = false;
+                        if (window.luxPartFor) window.luxPartFor(f);
+                        [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (o) {
+                            if (o !== f && !o.contains(f) && !f.contains(o)) { setState(o, false, true); }
+                        });
                     }
+                    var body = f.querySelector(':scope > .lux-fold-body');
+                    var btn = f.querySelector(':scope > .lux-fold-h .lux-fold-btn');
+                    if (instant) f.classList.add('no-anim');
+                    f.classList.toggle('is-open', open);
+                    if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    if (body) { if (open) body.removeAttribute('inert'); else body.setAttribute('inert', ''); }
+                    clearTimeout(f._t);
+                    if (open) { f._t = setTimeout(function () { f.classList.add('is-settled'); refresh(); }, instant ? 30 : 480); }
+                    else { f.classList.remove('is-settled'); }
+                    if (instant) requestAnimationFrame(function () { requestAnimationFrame(function () { f.classList.remove('no-anim'); }); });
                 }
-                var body = f.querySelector(':scope > .lux-fold-body');
-                var btn = f.querySelector(':scope > .lux-fold-h .lux-fold-btn');
-                if (instant) f.classList.add('no-anim');
-                f.classList.toggle('is-open', open);
-                if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-                if (body) { if (open) body.removeAttribute('inert'); else body.setAttribute('inert', ''); }
-                clearTimeout(f._t);
-                if (open) { f._t = setTimeout(function () { f.classList.add('is-settled'); refresh(); }, instant ? 30 : 480); }
-                else { f.classList.remove('is-settled'); }
-                if (instant) requestAnimationFrame(function () { requestAnimationFrame(function () { f.classList.remove('no-anim'); }); });
+                if (open && !instant) window.luxPreserveHeader(f, change);
+                else change();
             }
             window.luxToggle = function (id) {
                 var f = document.getElementById(id);
@@ -55,6 +97,7 @@
                 save();
             };
             function openAncestors(el) {
+                stopHeaderPin();
                 if (window.luxPartFor) window.luxPartFor(el);
                 var changed = false, f = el && el.closest ? el.closest('.lux-fold') : null;
                 while (f) {
@@ -139,4 +182,4 @@
             if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
             window.addEventListener('load', function () { syncMeta(); refresh(); });
         })();
-    
+
