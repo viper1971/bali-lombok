@@ -23177,14 +23177,12 @@ function init(){
   if(!bar||document.getElementById('premiumMergedNav'))return;
   var nav=document.createElement('nav');nav.id='premiumMergedNav';nav.setAttribute('aria-label','Navigace a rozpočet');
   var actions=[
-   ['☰','Obsah',function(){var b=document.getElementById('floatingMenuBtn');if(b)b.click();}],
    ['⌕','Hledat',function(){var b=document.getElementById('uxSearchBtn');if(b)b.click();}],
    ['↑','Nahoru',function(){window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}],
    ['◐','Režim',function(){var b=document.getElementById('themeToggleBtn');if(b)b.click();}],
    ['⚙','Nastavení',function(){var b=document.getElementById('floatingSettingsBtn');if(b)b.click();}]
   ];
   actions.forEach(function(a){var b=document.createElement('button');b.type='button';b.className='pm-nav-btn';b.setAttribute('aria-label',a[1]);b.title=a[1];var ic=document.createElement('span');ic.className='pm-nav-icon';ic.textContent=a[0];var tx=document.createElement('span');tx.className='pm-nav-text';tx.textContent=a[1];b.append(ic,tx);b.addEventListener('click',a[2]);nav.appendChild(b);});
-  var toggle=document.createElement('button');toggle.type='button';toggle.id='premiumBudgetToggle';toggle.className='pm-nav-btn';toggle.setAttribute('aria-controls','premiumBudgetDetails');toggle.setAttribute('aria-expanded','false');toggle.title='Zobrazit nebo skrýt podrobnosti rozpočtu';toggle.innerHTML='<span class="pm-nav-icon">▤</span><span class="pm-nav-text">Rozpočet</span>';toggle.addEventListener('click',function(){var open=bar.classList.toggle('pm-expanded');toggle.setAttribute('aria-expanded',String(open));});nav.appendChild(toggle);
   var info=bar.querySelector('.vfb-info');var oldActions=bar.querySelector('.vfb-actions');
   var details=document.createElement('div');details.id='premiumBudgetDetails';
   if(info)details.appendChild(info);if(oldActions)details.appendChild(oldActions);
@@ -24328,17 +24326,6 @@ html body.pres-on #v29BottomTab{display:none!important}
   });
   document.getElementById('baliLeftBudgetClose').addEventListener('click',function(){setOpen(false);});
   document.getElementById('baliLeftNavClose').addEventListener('click',function(){setContents(false);});
-  // Starý ovladač Obsah vyvolával druhý panel. Nyní rozbaluje Obsah pod cenami a tlačítky.
-  var btn=Array.from(nav.querySelectorAll('button')).find(function(x){return x.title==='Obsah'||x.getAttribute('aria-label')==='Obsah';});
-  if(btn){
-    var cloned=btn.cloneNode(true);btn.replaceWith(cloned);
-    cloned.setAttribute('aria-controls','baliLeftNavSection');
-    cloned.setAttribute('aria-expanded','false');
-    cloned.addEventListener('click',function(){
-      setContents(true);
-      cloned.setAttribute('aria-expanded','true');
-    });
-  }
   // Zavírat oba panely po aktivaci jakékoliv navigační položky.
   original.addEventListener('click',function(ev){
     if(ev.target.closest('a,button,[role="button"]')){setOpen(false);}
