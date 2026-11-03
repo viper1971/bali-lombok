@@ -1615,7 +1615,7 @@ function luxQRSvg(text, px) {
         }
         document.addEventListener('click', function (e) {
             var tg = e.target; if (!tg || !tg.closest || (window.pres && window.pres.on) || document.body.classList.contains('pres-on')) return;
-            var btn = tg.closest('.lux-acc-btn, .acc-header, .acc-trigger, details > summary'); if (!btn || !btn.closest('.lux-fold-pad, #flightPick')) return;
+            var btn = tg.closest('.lux-acc-btn, .acc-header, .acc-trigger, details > summary'); if (!btn || btn.matches('#flightPick > summary') || !btn.closest('.lux-fold-pad, #flightPick')) return;
             setTimeout(function () {
                 var open = btn.matches('summary') ? btn.parentElement.open : (btn.getAttribute('aria-expanded') === 'true' || (btn.parentElement && btn.parentElement.classList.contains('open')));
                 if (open) align(btn);
