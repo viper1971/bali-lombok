@@ -3,7 +3,7 @@
    - kurzy a API: nejdřív síť, při výpadku poslední uložená hodnota
    - obrázky, písma, skripty, dlaždice map: z uložené kopie hned, na pozadí se obnoví
    Tlačítko „Uložit pro offline“ v menu pošle seznam souborů zprávou 'precache'. */
-const CACHE = 'cesta-offline-v1';
+const CACHE = 'cesta-offline-v52';
 const TILES = 'cesta-tiles-v1';
 const MAX_TILES = 600;
 
@@ -56,7 +56,7 @@ self.addEventListener('fetch', function (e) {
     var req = e.request;
     if (req.method !== 'GET' || !/^https?:/.test(req.url)) return;
     var url = new URL(req.url);
-    if (req.mode === 'navigate') { e.respondWith(networkFirst(req, CACHE, 4000)); return; }
+    if (req.mode === 'navigate') { e.respondWith(networkFirst(req, CACHE, 0)); return; }
     if (/kurzy\.cz|frankfurter|api\.|wikimedia\.org\/w\/api/.test(url.hostname + url.pathname)) { e.respondWith(networkFirst(req, CACHE, 0)); return; }
     if (/tile\.openstreetmap\.org/.test(url.hostname)) { e.respondWith(staleWhileRevalidate(req, TILES, MAX_TILES)); return; }
     e.respondWith(staleWhileRevalidate(req, CACHE, 0));
