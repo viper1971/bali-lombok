@@ -18,6 +18,7 @@
     attach(fresh);
   }
   function attach(frame) {
+    if (frame.closest('.hotel-location-map')) return;
     var url = googleUrl(frame);
     if (!url || frame.dataset.googleRecovery) return;
     frame.dataset.googleRecovery = '1';
