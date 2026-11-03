@@ -1195,43 +1195,8 @@ function luxQRSvg(text, px) {
         return '<section><h2>💶 Peníze: kolik, kdy a kde</h2>' + tiles + '<ul class="sp-tl">' + rows + '</ul><p class="sp-note">Částky jsou na osobu a berou se živě z plánu hotovosti. Dolary k výměně se mezi letiště, Uluwatu či Ubud a Sanur dělí ve stejném poměru jako rupie v plánu hotovosti a jsou zaokrouhlené na 5 $. Datum u jednotlivých směnáren je odvozené z trasy.</p></section>';
     }
 
-    function spFinal(txt) {
-        return '<div class="sp-final"><small>Cena za dovolenou celkem · 1 osoba</small><b>' + txt('floatPricePerson') + '</b><span>se vším, co sis nakonfiguroval: letenky, hotely, skútry, víza, jídlo, výlety a vstupy</span></div>' +
-            '<div class="sp-price2"><div><small>Pár · celkem (2 osoby)</small><b>' + txt('floatPriceFamily') + '</b></div><div><small>Sólo · celkem (1 osoba v pokoji)</small><b>' + txt('floatPriceSingle') + '</b></div></div>';
-    }
     function spBuild() {
-        var f; try { f = flightOptions[currentAirline]; } catch (e) { f = null; }
-        function txt(id) { var e = $(id); return e ? e.textContent.trim().replace(/\u00a0/g, ' ') : '–'; }
-        function hotel(key) { var h = stHotel(key); return h ? spEsc(h.name) + ' <small>(' + h.price.toLocaleString('cs-CZ') + ' Kč / pokoj)</small>' : '–'; }
-        var left = Math.max(0, Math.ceil((new Date(2027, 7, 6, 19, 30) - new Date()) / 86400000));
-        var cash = ''; try { cash = document.querySelector('#f-hotovost .lux-fold-meta').textContent.trim(); } catch (e) {}
-        var row = function (d, title, det, mv) { return '<li' + (mv ? ' class="mv"' : '') + '><time>' + d + '</time><div><b>' + title + '</b>' + (det ? '<span>' + det + '</span>' : '') + '</div></li>'; };
-        var tl = '';
-        if (f) tl += row('6.–7. 8.', '✈️ Praha → Singapur', spEsc(f.name) + '. Odlet ' + spEsc(f.outDate || '') + ' v ' + spEsc(f.outDep) + ', přílet ' + spEsc(f.outArr) + '. Přestup: ' + spEsc(f.outLayover || ''), true);
-        tl += row('7.–9. 8.', '🇸🇬 Singapur · 2 noci', hotel('singapore'));
-        tl += row('9. 8.', '✈️ Singapur → Bali', 'Scoot TR288, 10:15–13:05, stejné časové pásmo. Na letišti převezmeme skútry.', true);
-        tl += row('9.–11. 8.', '🌊 Uluwatu · 2 noci', hotel('uluwatu'));
-        tl += row('11.–15. 8.', '🌿 Ubud · 4 noci', hotel('ubud'));
-        tl += row('15. 8.', '🚤 Bali → Lombok', 'Rychlolod Starfish: 13:00 ze Sanuru, 15:00 v přístavu Bangsal.', true);
-        tl += row('15.–19. 8.', '🏝️ Lombok sever · 4 noci', hotel('lombokNorth'));
-        tl += row('19.–23. 8.', '🌴 Kuta Lombok · 4 noci', hotel('lombokSouth'));
-        tl += row('23. 8.', '🚤 Lombok → Bali', 'Loď Wahana Virendra: 13:30 odplutí, 17:00 příjezd do Sanuru.', true);
-        tl += row('23.–24. 8.', '🌅 Bali u letiště · 1 noc', hotel('kutaLast'));
-        if (f) {
-            var F = txFlight(), L = F ? F.dep - TXARR : 0;
-            tl += row('24. 8.', '✈️ Bali → Singapur → domů', 'Scoot TR281 11:15–14:10. Tranzit v Singapuru ' + txDur(L) + ' (do ' + txHM(F.dep) + (F.dep >= 1440 ? ', následující den' : '') + '), brána 2 h před odletem.', true);
-            tl += row('25. 8.', '🏠 Přílet do Prahy', spEsc(f.retArr) + ' · celá cesta domů ' + txDur(aiInfo(currentAirline).home), true);
-        }
-        var done = tkDone(), tasks = TASKS.filter(function (x) { return !done[x.id] && dayDiff(x.end || x.d) >= 0; }).sort(function (a, b) { return a.d < b.d ? -1 : 1; }).slice(0, 6).map(function (x) {
-            var d = new Date(x.d + 'T00:00:00'); return '<li><time>' + (x.show ? x.show[0] : d.getDate() + '. ' + (d.getMonth() + 1) + '.') + '</time><div><b>' + spEsc(x.title) + '</b><small>' + leftTxt(dayDiff(x.end || x.d)) + '</small></div></li>';
-        }).join('');
-        return '<div class="sp-top"><b>Singapur · Bali · Lombok 2027</b><button type="button" class="sp-btn2 primary" data-sp="close">← Celá stránka</button></div>' +
-            '<div class="sp-wrap"><div><h1>Naše cesta v kostce</h1><p class="sp-sub">6.–25. srpna 2027 · 20 dní · Singapur, Bali a Lombok' + (left ? ' · do odletu zbývá ' + left + ' dní' : '') + '</p></div>' +
-            '<section><h2>💰 Cena dovolené</h2>' + spFinal(txt) + '<p class="sp-note">Cena se mění podle toho, co si zvolíš: lety, hotely, úroveň jídla a výlety. Nezahrnuje jízdné v Singapuru, taxi, drobné výdaje, úschovnu batohů, soukromou loď na Gili, suvenýry a platbu za poslední hotel na místě.</p></section>' + spCash() +
-            '<section><h2>🗺️ Trasa a ubytování</h2><ul class="sp-tl">' + tl + '</ul></section>' +
-            '<section><h2>⏳ Co nás čeká v nejbližší době</h2>' + (tasks ? '<ul class="sp-tasks">' + tasks + '</ul>' : '<p class="sp-note">Všechny úkoly jsou splněné 🎉</p>') + '</section>' +
-            '<div class="sp-actions"><button type="button" class="sp-btn2 primary" data-sp="close">← Celá stránka</button><button type="button" class="sp-btn2" data-sp="present">🎞️ Prezentace</button><button type="button" class="sp-btn2" data-sp="link">🔗 Zkopírovat odkaz</button><button type="button" class="sp-btn2" data-sp="print">🖨️ Vytisknout</button></div>' +
-            '<p class="sp-foot">Jednoduchý přehled. Všechny podrobnosti jsou na celé stránce. Verze ' + LUX_VERSION + '</p></div>';
+        return window.baliSimpleTravel.build({ cashHtml: spCash() });
     }
     window.luxSimple = function (on) {
         var el = $('simplePage'); if (!el) { el = document.createElement('div'); el.id = 'simplePage'; el.setAttribute('role', 'document'); el.setAttribute('aria-label', 'Jednoduchá stránka s tím nejdůležitějším'); document.body.appendChild(el);

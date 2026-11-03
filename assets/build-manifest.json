@@ -280,11 +280,11 @@
     "bytes": 20034
   },
   {
-    "output": "assets/build/js-bba473605db1cec5.js",
+    "output": "assets/build/js-3a3cbf88ed12480d.js",
     "sources": [
       "assets/js/049.js"
     ],
-    "bytes": 144877
+    "bytes": 140673
   },
   {
     "output": "assets/build/js-d597c7bc58059231.js",
@@ -397,6 +397,13 @@
       "assets/js/066-google-frame-recovery.js"
     ],
     "bytes": 661
+  },
+  {
+    "output": "assets/build/js-7534dc151c5f3719.js",
+    "sources": [
+      "assets/js/067-simple-travel-journal.js"
+    ],
+    "bytes": 14248
   },
   {
     "output": "assets/build/css-613ec9680ad29884.css",
@@ -607,5 +614,12 @@
       "assets/css/072-tropical-background-hotel-maps.css"
     ],
     "bytes": 1776
+  },
+  {
+    "output": "assets/build/css-deb90e3f8e24a2ec.css",
+    "sources": [
+      "assets/css/073-simple-travel-journal.css"
+    ],
+    "bytes": 12830
   }
 ]
