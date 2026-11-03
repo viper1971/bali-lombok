@@ -103,8 +103,21 @@ const report = {engine, baseline, cases: [], passed: false};
                 await openFold('f-viza');
                 await clickHeader('#flightPick > summary', 'section -> flight selection');
                 await clickHeader('#cast-priprava > .lux-part-head', 'flight selection -> preparation');
-                // Explicit navigation still scrolls to its requested destination.
+                // A reader's wheel input must stop the temporary position hold.
+                await openFold('f-viza');
+                const next = page.locator('#f-sos > .lux-fold-h > .lux-fold-btn');
+                await next.evaluate(header => window.scrollTo({top: window.scrollY + header.getBoundingClientRect().top - 240, behavior: 'instant'}));
+                await sleep(100);
+                const box = await next.boundingBox();
+                await page.mouse.click(box.x + 100, box.y + 20);
+                await sleep(80);
+                const scrollBeforeWheel = await page.evaluate(() => scrollY);
+                await page.mouse.wheel(0, 300);
+                await sleep(550);
+                assert(await page.evaluate(y => scrollY > y + 100, scrollBeforeWheel), 'position hold must yield to user scrolling');
+                // Explicit navigation during an active hold must reach its destination.
                 await page.evaluate(() => {
+                    luxToggle('f-esim');
                     const link = document.createElement('a'); link.href = '#f-leg-ubud';
                     document.body.appendChild(link); link.click(); link.remove();
                 });
