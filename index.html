@@ -24158,7 +24158,7 @@ html body.pres-on #v29BottomTab{display:none!important}
     contentTab.onclick=null;
     contentTab.addEventListener('click',function(ev){
       ev.preventDefault();ev.stopPropagation();
-      setContents(sub.hidden);
+      setContents(!document.body.classList.contains('bali-content-mode'));
     });
   }
   var header=document.createElement('div');
@@ -24183,25 +24183,36 @@ html body.pres-on #v29BottomTab{display:none!important}
     tab.setAttribute('aria-expanded',String(on));
     tab.setAttribute('aria-label',on?'Zavřít rozpočet a ovládání':'Otevřít rozpočet a ovládání');
     var arrow=tab.querySelector('.v29-chevron');if(arrow)arrow.textContent=on?'◂':'▸';
-    // Záložka MENU otevře rozpočet; záložka OBSAH zobrazí seznam pod ním.
-    if(!on){sub.hidden=true;bar.classList.remove('bali-nav-open');}
+    if(!on){
+      document.body.classList.remove('bali-content-mode');
+      sub.hidden=true;bar.classList.remove('bali-nav-open');
+      if(contentTab)contentTab.setAttribute('aria-expanded','false');
+    }
   }
   function setContents(on){
     if(on){
-      if(!document.body.classList.contains('v29-bottom-open'))setOpen(true);
+      setOpen(true);
+      document.body.classList.add('bali-content-mode');
       sub.hidden=false;
       bar.classList.add('bali-nav-open');
-      // Nevynucovat posun celé stránky při otevření navigace.
+      bar.scrollTop=0;
     }else{
+      document.body.classList.remove('bali-content-mode');
       sub.hidden=true;
       bar.classList.remove('bali-nav-open');
     }
+    if(contentTab)contentTab.setAttribute('aria-expanded',String(!!on));
   }
   setOpen(false);
   window.setMenuModalOpen=function(on){setContents(!!on);};
-  window.toggleMenuModal=function(){setContents(sub.hidden);};
+  window.toggleMenuModal=function(){setContents(!document.body.classList.contains('bali-content-mode'));};
   window.closeMenuModal=function(){setContents(false);};
-  tab.addEventListener('click',function(ev){ev.stopPropagation();setOpen(!document.body.classList.contains('v29-bottom-open'));});
+  tab.addEventListener('click',function(ev){
+    ev.preventDefault();ev.stopPropagation();
+    var isMenuOpen=document.body.classList.contains('v29-bottom-open') && !document.body.classList.contains('bali-content-mode');
+    setOpen(!isMenuOpen);
+    setContents(false);
+  });
   document.getElementById('baliLeftBudgetClose').addEventListener('click',function(){setOpen(false);});
   document.getElementById('baliLeftNavClose').addEventListener('click',function(){setContents(false);});
   // Starý ovladač Obsah vyvolával druhý panel. Nyní rozbaluje Obsah pod cenami a tlačítky.
@@ -24366,6 +24377,25 @@ html body.pres-on #floatingMenuBtn{display:none!important}
  }
 }
 @media print{html body #floatingMenuBtn,html body #v29BottomTab{display:none!important}}
+</style>
+
+<style id="bali-v57-two-independent-panel-modes">
+/* MENU zobrazuje finance a ovládání; OBSAH samostatnou navigaci v témže výsuvném panelu. */
+html body.bali-content-mode #vipFloatingBar.pm-merged > #baliLeftBudgetHeader,
+html body.bali-content-mode #vipFloatingBar.pm-merged > #premiumBudgetDetails,
+html body.bali-content-mode #vipFloatingBar.pm-merged > #premiumBudgetSummary,
+html body.bali-content-mode #vipFloatingBar.pm-merged > #premiumMergedNav{
+ display:none!important;
+}
+html body.bali-content-mode #vipFloatingBar.pm-merged > #baliLeftNavSection{
+ display:block!important;visibility:visible!important;
+ order:0!important;border-top:0!important;padding:0!important;margin:0!important;
+}
+html body:not(.bali-content-mode) #vipFloatingBar.pm-merged > #baliLeftNavSection{
+ display:none!important;
+}
+html body:not(.pres-on) #v29BottomTab,
+html body:not(.pres-on) #floatingMenuBtn{touch-action:manipulation!important;cursor:pointer!important;}
 </style>
 </body>
 </html>
