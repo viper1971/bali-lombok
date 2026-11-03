@@ -8121,7 +8121,7 @@ body.dark-mode #f-konfig .p35-footer a{color:#80e0d4!important;}
 @media(max-width:600px){#floatingMenuBtn{width:38px!important;min-height:94px!important;padding:10px 5px!important}#menuModalOverlay .menu-modal-box{width:min(350px,calc(100vw - 42px))!important;max-width:calc(100vw - 42px)!important;padding:18px 14px calc(16px + env(safe-area-inset-bottom))!important}}
 @media(prefers-reduced-motion:reduce){#menuModalOverlay,#menuModalOverlay .menu-modal-box{transition:none!important}}
 </style>
-<meta name="bali-menu-revision" content="left-budget-v54">
+<meta name="bali-menu-revision" content="left-budget-v55">
 </head>
 <body id="hero">
 <a class="premium-skip" href="#hlavni-obsah">Přeskočit na obsah</a>
@@ -24177,12 +24177,20 @@ html body.pres-on #v29BottomTab{display:none!important}
     tab.setAttribute('aria-expanded',String(on));
     tab.setAttribute('aria-label',on?'Zavřít rozpočet a ovládání':'Otevřít rozpočet a ovládání');
     var arrow=tab.querySelector('.v29-chevron');if(arrow)arrow.textContent=on?'◂':'▸';
-    if(!on){sub.hidden=true;bar.classList.remove('bali-nav-open');}
-  }
-  function setContents(on){
+    // Rozpočet, ovládání i Obsah zůstávají v jednom sloupci pod sebou.
     sub.hidden=!on;
     bar.classList.toggle('bali-nav-open',on);
-    if(on&&!document.body.classList.contains('v29-bottom-open'))setOpen(true);
+  }
+  function setContents(on){
+    if(on){
+      if(!document.body.classList.contains('v29-bottom-open'))setOpen(true);
+      sub.hidden=false;
+      bar.classList.add('bali-nav-open');
+      sub.scrollIntoView({block:'nearest',behavior:'smooth'});
+    }else{
+      // Bez překrývání: Obsah pouze zůstává pod tlačítky.
+      if(document.body.classList.contains('v29-bottom-open'))sub.hidden=false;
+    }
   }
   setOpen(false);
   window.setMenuModalOpen=function(on){setContents(!!on);};
@@ -24198,7 +24206,8 @@ html body.pres-on #v29BottomTab{display:none!important}
     cloned.setAttribute('aria-controls','baliLeftNavSection');
     cloned.setAttribute('aria-expanded','false');
     cloned.addEventListener('click',function(){
-      var open=sub.hidden;setContents(open);cloned.setAttribute('aria-expanded',String(open));
+      setContents(true);
+      cloned.setAttribute('aria-expanded','true');
     });
   }
   original.addEventListener('click',function(ev){
@@ -24250,6 +24259,44 @@ html body #baliLeftNavSection #bottomNav.menu-grid{
 html body #baliLeftNavSection #bottomNav .nav-group-title{grid-column:1/-1!important}
 html body #baliLeftNavSection #bottomNav .nav-item{min-height:43px!important}
 html body #baliLeftNavSection #bottomNav button.nav-item{width:100%;text-align:left;cursor:pointer}
+</style>
+<style id="bali-v55-stacked-sidebar">
+/* V55: skutečně svislý obsah v jediném levém panelu, bez absolutních překryvů. */
+html body:not(.pres-on) #vipFloatingBar.pm-merged {
+ display:flex!important;flex-flow:column nowrap!important;align-items:stretch!important;
+ justify-content:flex-start!important;gap:0!important;
+ overflow-x:hidden!important;overflow-y:auto!important;
+}
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #baliLeftBudgetHeader,
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #premiumBudgetDetails,
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #premiumMergedNav,
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #baliLeftNavSection{
+ position:relative!important;inset:auto!important;float:none!important;
+ transform:none!important;flex:0 0 auto!important;
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ overflow:visible!important;
+}
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #baliLeftBudgetHeader{order:0!important;margin:0 0 14px!important}
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #premiumBudgetDetails{order:1!important;margin:0 0 18px!important}
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #premiumMergedNav{order:2!important;margin:0 0 18px!important}
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #baliLeftNavSection{
+ order:3!important;display:block!important;visibility:visible!important;
+ padding:18px 0 0!important;margin:0!important;
+ border-top:2px solid var(--border)!important;
+}
+html body:not(.pres-on) #vipFloatingBar.pm-merged.v29-bottom-open > #baliLeftNavSection,
+html body.v29-bottom-open #vipFloatingBar.pm-merged > #baliLeftNavSection{display:block!important}
+html body #baliLeftNavSection #bottomNav,
+html body #baliLeftNavSection .bali-left-nav-heading{
+ position:relative!important;inset:auto!important;transform:none!important;
+ z-index:auto!important;
+}
+html body #baliLeftNavSection #bottomNav{
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+ width:100%!important;max-width:100%!important;gap:8px!important;
+}
+html body #menuModalOverlay{display:none!important;pointer-events:none!important}
 </style>
 </body>
 </html>
