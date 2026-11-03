@@ -29,9 +29,27 @@ for(const width of [390,1440]){
    },id));
    await page.screenshot({path:`test-results/sections/${label}-${width}-${id}.png`});
   }
-  assert.equal(errors.length,0,JSON.stringify(errors));assert(sections.every(s=>s.open));states[label]=sections;await context.close();
+  const controls=[];
+  for(const mode of ['all','none','def']){
+   await page.locator('#aktivity [data-bulk="'+mode+'"]').first().evaluate(n=>n.click());await sleep(150);
+   controls.push(await page.evaluate(mode=>({kind:'activities',mode,total:TRIP.sums({solo:false}).kc,budget:document.getElementById('bxGrand_pers').textContent}),mode));
+  }
+  const packing=await page.locator('.packing-checkbox:not(:disabled)').evaluateAll(ns=>ns.map(n=>n.id).filter(Boolean));
+  for(const id of packing){
+   await page.locator('#'+id).evaluate(n=>n.click());
+   controls.push(await page.evaluate(id=>({kind:'packing',id,badge:document.getElementById('totalWeightBadge').textContent}),id));
+  }
+  for(const id of ['cxBuf','cxFoodCash','cxAir']){
+   if(await page.locator('#'+id).count()){
+    await page.locator('#'+id).evaluate(n=>{n.value=Number(n.value)+1;n.dispatchEvent(new Event('input',{bubbles:true}));});await sleep(400);
+    controls.push(await page.evaluate(id=>({kind:'cash',id,stored:localStorage.getItem('cash_plan_v1'),summary:document.getElementById('cxSumSub')?.textContent}),id));
+   }
+  }
+  await page.evaluate(()=>toggleSettingsModal());assert(await page.locator('#settingsModalOverlay').evaluate(n=>n.classList.contains('open')));await page.evaluate(()=>toggleSettingsModal());
+  const stored=await page.evaluate(()=>localStorage.getItem('cash_plan_v1'));await page.reload();await sleep(3500);assert.equal(await page.evaluate(()=>localStorage.getItem('cash_plan_v1')),stored);
+  assert.equal(errors.length,0,JSON.stringify(errors));assert(sections.every(s=>s.open));states[label]={sections,controls};await context.close();
  }
- assert.deepEqual(states.current,states.baseline,`section layout differs at ${width}px`);results.sections.push({width,count:states.current.length,layoutsEqual:true});
+ assert.deepEqual(states.current,states.baseline,`section layout differs at ${width}px`);results.sections.push({width,count:states.current.sections.length,controlScenarios:states.current.controls.length,layoutsEqual:true});
 }
 // Controlled cold-cache measurements. External resources are blocked identically.
 // Python serves uncompressed files. These are lab measurements, not production CWV.
