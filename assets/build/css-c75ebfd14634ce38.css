@@ -1,0 +1,698 @@
+/* assets/css/007-premium2027Design.css */
+
+
+/* ============================================================
+   PREMIUM 2027 — design layer, keeps legacy calculations intact
+   ============================================================ */
+:root { --premium-ink:#0b1627; --premium-teal:#13b6aa; --premium-gold:#e2c58c; --premium-radius:22px; }
+[data-theme="dark"] {
+ --bg-color:#071321; --bg-gradient:radial-gradient(ellipse 90% 55% at 50% -12%,rgba(14,120,126,.22),transparent 72%),linear-gradient(180deg,#071321,#0b1728 58%,#071321);
+ --surface:#101f31;--surface-hover:#192b40;--hotel-surface:#12253a;
+ --primary:#6ce0d2;--primary-light:#b4f3e9;--accent:#28c2b1;
+ --accent-gradient:linear-gradient(135deg,#0c827e,#1cbaae);
+ --gold:#e2c58c;--text-main:#f4f8fc;--text-muted:#b5c5d4;
+ --border:rgba(173,210,231,.17);--shadow:0 16px 48px rgba(0,0,0,.23);
+ --lux-card:#112338;--lux-card-2:#182d43;--lux-card-3:#203951;
+ --lux-deep-a:#123c4b;--lux-deep-b:#176b73;--on-primary:#071321;
+}
+[data-theme="light"] {
+ --bg-color:#f3f7fa;--bg-gradient:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(23,173,167,.1),transparent 70%),linear-gradient(180deg,#f3f7fa,#eaf1f5);
+ --surface:#ffffff;--surface-hover:#edf5f7;--hotel-surface:#ffffff;
+ --primary:#087d79;--primary-light:#087d79;--accent:#087e7b;
+ --accent-gradient:linear-gradient(135deg,#087d79,#10a99d);
+ --gold:#9c6c26;--text-main:#102337;--text-muted:#4e6578;
+ --border:rgba(24,71,98,.17);--shadow:0 12px 38px rgba(24,58,83,.09);
+ --lux-card:#fff;--lux-card-2:#f2f7fa;--lux-card-3:#e7f0f5;
+ --lux-deep-a:#0a5962;--lux-deep-b:#128e8b;--on-primary:#fff;
+}
+html { scroll-padding-top:88px; }
+body {font-family:'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:-.012em; overflow-wrap:break-word;}
+body::selection {background:#2cb5a5;color:#061827;}
+:where(button,a,input,select,textarea,summary):focus-visible {outline:3px solid #24c7b9!important;outline-offset:3px;}
+button,select,input,textarea {font:inherit;}
+button {touch-action:manipulation;}
+.hero {min-height:min(790px,88svh);padding:112px 24px 98px;isolation:isolate;}
+.hero::before {content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(5,17,31,.89),rgba(5,24,37,.64) 50%,rgba(5,17,31,.76)),url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2000&q=82') center/cover no-repeat;}
+.hero::after {content:"";position:absolute;inset:auto 0 0;height:32%;z-index:-1;background:linear-gradient(transparent,var(--bg-color));}
+.hero-inner {max-width:1040px; margin:auto;}
+.hero h1 {font-size:clamp(2.5rem,6.5vw,5.7rem);font-weight:800;letter-spacing:-.065em;line-height:1.08;text-wrap:balance;text-shadow:0 8px 35px rgba(0,0,0,.5);}
+.hero .badge {background:rgba(7,26,42,.68);border:1px solid rgba(173,241,227,.45);color:#d9fff7;backdrop-filter:blur(14px);letter-spacing:.13em;}
+.hero .cd-card {background:rgba(7,25,39,.64);border:1px solid rgba(211,236,243,.28);border-radius:16px;min-width:94px;padding:15px 19px;box-shadow:0 12px 30px rgba(0,0,0,.13);}
+.hero .cd-value {color:#92fff0;font-size:clamp(1.45rem,2.6vw,2.2rem);}
+.hero .cd-key {color:#d5e8ec;}
+/* Hero intentionally stays white in both themes over its photograph */
+[data-theme="light"] .hero h1,[data-theme="light"] .hero p,[data-theme="light"] .hero label,[data-theme="light"] .hero .cd-value,[data-theme="light"] .hero .cd-key {color:#fff!important;}
+[data-theme="light"] .hero .cd-value {color:#92fff0!important;}
+.main-wrapper {max-width:1520px;margin:auto;padding:clamp(18px,3vw,48px);}
+.sec-title {font-size:clamp(1.45rem,2.4vw,2.2rem);letter-spacing:-.04em;line-height:1.25;}
+.sec-sub {line-height:1.7;max-width:80ch;}
+.bento-grid {gap:clamp(12px,1.8vw,24px);}
+.bento-card,.family-card-box,.selected-hotels-deck-wrapper,.active-flight-detail-box,.lux-progress {border-radius:var(--premium-radius)!important;box-shadow:var(--shadow);}
+.bento-card {padding:clamp(18px,2.2vw,32px);border:1px solid var(--border);}
+.bento-card:hover {transform:translateY(-3px);box-shadow:0 20px 54px rgba(0,0,0,.17);}
+.deck-item,.flight-mode-btn,.budget-mode-btn,.nav-item {border-radius:15px!important;transition:transform .18s ease,border-color .18s ease,background .18s ease;}
+.deck-item:hover,.flight-mode-btn:hover,.budget-mode-btn:hover {transform:translateY(-2px);}
+.fc-price {letter-spacing:-.06em;}
+.table-responsive {border:1px solid var(--border);background:var(--surface);}
+.table-responsive table {border-collapse:separate;border-spacing:0;}
+.table-responsive th {position:sticky;top:0;background:var(--lux-card-2);z-index:1;}
+.table-responsive tr:nth-child(even) {background:color-mix(in srgb,var(--surface-hover) 48%,transparent);}
+#floatingMenuBtn,#themeToggleBtn {top:16px;min-height:46px;box-shadow:0 10px 30px rgba(0,0,0,.17);backdrop-filter:blur(18px);}
+#floatingMenuBtn {right:18px;padding:10px 18px;border:1px solid var(--border);}
+#themeToggleBtn {left:18px;width:46px;height:46px;border:1px solid var(--border);}
+#toplistFloat {top:80px;right:18px;opacity:.83;transform:scale(.88);transform-origin:top right;}
+.menu-modal-box {width:min(760px,96vw);max-height:min(86svh,850px);border:1px solid var(--border);border-radius:26px;padding:clamp(18px,3vw,34px);box-shadow:0 35px 90px rgba(0,0,0,.4);}
+.menu-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.nav-item {min-height:58px;}
+.nav-item:hover {border-color:var(--accent);}
+.vip-floating-bar {border:1px solid var(--border);border-radius:18px;box-shadow:0 18px 55px rgba(0,0,0,.25);backdrop-filter:blur(22px);}
+.vfb-btn {min-height:40px;justify-content:center;border-radius:12px;}
+#uxSearchBtn {position:fixed!important;right:18px!important;top:auto!important;bottom:calc(110px + env(safe-area-inset-bottom))!important;z-index:10001!important;border-radius:999px!important;box-shadow:0 14px 38px rgba(0,0,0,.25)!important;}
+#uxSearchOverlay {z-index:11000!important;}
+#uxSearchOverlay .uxSearchDialog {border-radius:22px;}
+.premium-skip {position:fixed;left:50%;top:-100px;transform:translateX(-50%);z-index:12000;background:#fff;color:#102337;padding:12px 20px;border-radius:12px;}
+.premium-skip:focus {top:12px;}
+.premium-dock {position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:4px;z-index:9997;padding:6px;background:color-mix(in srgb,var(--surface) 92%,transparent);border:1px solid var(--border);border-radius:999px;box-shadow:0 14px 40px rgba(0,0,0,.24);backdrop-filter:blur(18px);}
+.premium-dock button {border:0;background:transparent;color:var(--text-main);padding:9px 14px;border-radius:999px;cursor:pointer;font-weight:800;font-size:.76rem;white-space:nowrap;}
+.premium-dock button:hover {background:var(--surface-hover);}
+.premium-dock button:first-child {background:var(--accent-gradient);color:#fff;}
+body {padding-bottom:calc(225px + env(safe-area-inset-bottom));}
+@media(max-width:900px){.selected-hotels-deck {grid-template-columns:repeat(2,minmax(0,1fr));}.hero {min-height:65svh;}.main-wrapper {padding:22px 14px;}}
+@media(max-width:650px){
+ .hero {padding:112px 16px 76px;min-height:70svh;}
+ .hero h1 {font-size:clamp(2.15rem,10vw,3.5rem);}
+ .hero .cd-card {min-width:65px;padding:10px 11px;}
+ .bento-grid {grid-template-columns:minmax(0,1fr);}
+ .bento-card,.bento-card.full {grid-column:1/-1;}
+ .selected-hotels-deck,.menu-grid {grid-template-columns:minmax(0,1fr);}
+ .flight-airline-switch,.budget-mode-switch {grid-template-columns:minmax(0,1fr);}
+ .premium-dock {bottom:calc(10px + env(safe-area-inset-bottom));width:min(96vw,440px);justify-content:space-around;}
+ .premium-dock button {padding:10px 9px;font-size:.72rem;}
+ #uxSearchBtn {bottom:calc(175px + env(safe-area-inset-bottom))!important;right:12px!important;}
+ #toplistFloat {top:76px;right:10px;transform:scale(.72);}
+ .vip-floating-bar {bottom:calc(72px + env(safe-area-inset-bottom));max-width:96vw;}
+ body {padding-bottom:calc(245px + env(safe-area-inset-bottom));}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after {scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+
+/* PREMIUM 2027 / ETAPA 2: čitelnost, navigace a konzistentní komponenty */
+:root{--p2-space:clamp(16px,2vw,28px);--p2-ease:cubic-bezier(.2,.8,.2,1)}
+html{scroll-padding-top:90px}
+:is(section,[id],h2,h3){scroll-margin-top:92px}
+.premium-dock{max-width:calc(100vw - 24px)}
+.premium-dock button{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.premium-dock button[aria-current="page"]{background:var(--surface-hover);box-shadow:inset 0 0 0 1px var(--border)}
+/* Vyhledávání je dostupné v docku a přes Ctrl+K: žádné druhé plovoucí tlačítko. */
+body.premium-dock-ready #uxSearchBtn{position:absolute!important;left:-10000px!important;right:auto!important;bottom:auto!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}
+.premium-quicknav{display:flex;gap:9px;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;padding:12px 2px 16px;margin:0 auto 22px;max-width:1520px;scroll-snap-type:x proximity}
+.premium-quicknav a{flex:0 0 auto;scroll-snap-align:start;text-decoration:none;border:1px solid var(--border);background:var(--surface);color:var(--text-main);padding:10px 15px;border-radius:999px;font-size:.84rem;font-weight:750;box-shadow:0 5px 16px rgba(0,0,0,.07)}
+.premium-quicknav a:hover,.premium-quicknav a:focus-visible{border-color:var(--accent);background:var(--surface-hover)}
+.premium-quicknav a[aria-current="location"]{background:var(--accent-gradient);color:#fff;border-color:transparent}
+.premium-quicknav-wrap{max-width:1520px;margin:auto;padding:0 clamp(18px,3vw,48px)}
+.premium-quicknav-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--text-muted);margin-top:15px}
+.premium-backtop{display:none;position:fixed;right:18px;bottom:calc(88px + env(safe-area-inset-bottom));z-index:9995;border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--text-main);padding:11px 14px;box-shadow:var(--shadow);font-weight:800;cursor:pointer}
+.premium-backtop.is-visible{display:block}
+.bento-card,.selected-hotels-deck-wrapper,.family-card-box{transition:border-color .2s var(--p2-ease),box-shadow .2s var(--p2-ease),transform .2s var(--p2-ease)}
+.bento-card:focus-within,.deck-item:focus-within{border-color:var(--accent)}
+:where(.bento-card,.menu-modal-box,.selected-hotels-deck-wrapper) :is(p,li){line-height:1.7}
+:where(.bento-card,.menu-modal-box) a:not(.vfb-btn):not(.nav-item){text-underline-offset:3px}
+:where(button,input,select,textarea){accent-color:var(--accent)}
+:where(input,select,textarea){max-width:100%}
+:where(.table-responsive){overscroll-behavior-x:contain}
+:where(.table-responsive) :is(td,th){vertical-align:top}
+@media(max-width:650px){.premium-quicknav-wrap{padding:0 14px}.premium-quicknav{margin-bottom:12px}.premium-backtop{right:12px;bottom:calc(142px + env(safe-area-inset-bottom));padding:9px 12px}.premium-dock button{font-size:.75rem}.premium-dock{z-index:10002}.hero{padding-top:116px}}
+@media(prefers-reduced-motion:reduce){.premium-quicknav{scroll-behavior:auto}}
+/* PREMIUM v3: všechny odkazy rychlého přístupu na PC bez horizontálního posuvníku */
+@media (min-width: 901px) {
+ .premium-quicknav {display:flex;flex-wrap:wrap;overflow:visible;scroll-snap-type:none;justify-content:center;gap:8px;padding:12px 0 18px;max-width:none;}
+ .premium-quicknav a {flex:0 1 auto;white-space:normal;text-align:center;line-height:1.3;padding:10px 13px;}
+ .premium-quicknav-wrap {max-width:1600px;}
+}
+@media (max-width:900px) {
+ .premium-quicknav {display:flex;flex-wrap:wrap;overflow:visible;scroll-snap-type:none;gap:7px;}
+ .premium-quicknav a {flex:1 1 auto;text-align:center;white-space:normal;}
+}
+/* Samostatné viditelné vyhledávání, nezasahuje do TOPlist ani horního menu. */
+#premiumSearchQuick {display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent-gradient);color:#fff;border:1px solid transparent;border-radius:999px;padding:11px 18px;font:inherit;font-size:.9rem;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.14);min-height:44px;}
+#premiumSearchQuick:hover {filter:brightness(1.1)}
+#premiumSearchQuick:focus-visible {outline:3px solid var(--accent);outline-offset:3px}
+.premium-quicknav-heading {display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:15px;}
+.premium-quicknav-heading .premium-quicknav-label {margin:0;}
+@media(max-width:650px){#premiumSearchQuick{width:100%;}.premium-quicknav-heading{align-items:stretch;}}
+
+/* PREMIUM v4: jediné ovládání Obsah / Hledat / Nahoru.
+   Dock se umisťuje NAD rozpočtový banner, nikoliv přes něj. */
+#floatingMenuBtn, #bttBtn, .premium-backtop {display:none!important;}
+.premium-dock {bottom:calc(var(--premium-budget-clearance, 105px) + 12px + env(safe-area-inset-bottom))!important;z-index:10003;}
+@media(max-width:650px){.premium-dock{bottom:calc(var(--premium-budget-clearance, 120px) + 10px + env(safe-area-inset-bottom))!important;}}
+body.pres-on .premium-dock {display:none!important;}
+
+/* assets/css/008-premium2027MergedBarStyles.css */
+
+/* ===== PREMIUM v5: JEDEN KOMPAKTNÍ PANEL ===== */
+.premium-dock{display:none!important}
+#vipFloatingBar.pm-merged{
+  position:fixed!important;left:50%!important;right:auto!important;bottom:calc(8px + env(safe-area-inset-bottom))!important;
+  transform:translateX(-50%)!important;display:flex!important;flex-direction:row!important;align-items:center!important;
+  gap:14px!important;width:min(1120px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;
+  padding:9px 12px!important;border:1px solid var(--border)!important;border-radius:20px!important;
+  background:var(--surface)!important;box-shadow:0 12px 35px rgba(0,0,0,.25)!important;
+  opacity:1!important;pointer-events:auto!important;visibility:visible!important;
+  transition:none!important;z-index:10003!important;
+}
+#vipFloatingBar.pm-merged #premiumBudgetSummary{display:none}
+#vipFloatingBar.pm-merged #premiumMergedNav{order:2;display:flex;flex:0 0 auto;align-items:center;gap:5px;min-width:0}
+#vipFloatingBar.pm-merged #premiumBudgetDetails{order:1;display:flex;flex:1 1 auto;align-items:center;gap:10px;min-width:0}
+#vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-info{flex:1 1 auto;min-width:0}
+#vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions{flex:0 0 auto}
+#vipFloatingBar.pm-merged .pm-nav-btn{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:5px;border:1px solid var(--border);border-radius:12px;background:var(--surface-hover);color:var(--text-main);font:inherit;font-size:.77rem;font-weight:800;min-height:42px;padding:7px 10px;cursor:pointer;white-space:nowrap}
+#vipFloatingBar.pm-merged .pm-nav-btn:hover,#vipFloatingBar.pm-merged .pm-nav-btn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+#vipFloatingBar.pm-merged .pm-nav-icon{font-size:1.12rem;line-height:1}
+#premiumBudgetToggle{display:none!important}
+@media(max-width:1050px){
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions{display:none!important}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-price-block:nth-child(4){display:none!important}
+}
+@media(max-width:700px){
+ body.pm-merged-ready{padding-bottom:calc(75px + env(safe-area-inset-bottom))!important}
+ #vipFloatingBar.pm-merged{bottom:calc(5px + env(safe-area-inset-bottom))!important;width:calc(100vw - 12px)!important;max-width:calc(100vw - 12px)!important;min-height:54px!important;padding:5px 7px!important;gap:5px!important;border-radius:15px!important;flex-wrap:wrap!important}
+ #vipFloatingBar.pm-merged #premiumBudgetSummary{display:flex!important;order:1;flex:1 1 auto;min-width:0;flex-direction:column;justify-content:center;gap:0;padding:0 3px}
+ #vipFloatingBar.pm-merged .pm-sum-caption{font-size:.59rem;line-height:1.1;color:var(--text-muted);font-weight:700;white-space:nowrap}
+ #vipFloatingBar.pm-merged #premiumBudgetAmount{font-size:clamp(.81rem,3.5vw,1.04rem);line-height:1.2;font-weight:900;color:var(--primary);white-space:nowrap}
+ #vipFloatingBar.pm-merged #premiumMergedNav{order:2;flex:0 0 auto;gap:3px}
+ #vipFloatingBar.pm-merged .pm-nav-btn{flex-direction:column;gap:0;min-height:43px;min-width:43px;padding:3px 4px;font-size:.58rem;border-radius:9px}
+ #vipFloatingBar.pm-merged .pm-nav-icon{font-size:1.05rem}
+ #vipFloatingBar.pm-merged .pm-nav-text{font-size:.57rem;line-height:1.2}
+ #premiumBudgetToggle{display:inline-flex!important}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails{display:none!important;order:3;flex:1 0 100%;width:100%;padding:8px 3px 4px;border-top:1px solid var(--border);max-height:min(45vh,330px);overflow-y:auto;flex-direction:column;align-items:stretch}
+ #vipFloatingBar.pm-merged.pm-expanded #premiumBudgetDetails{display:flex!important}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-info{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%!important;gap:8px!important}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-price-block{display:flex!important;grid-column:auto!important;padding:4px 5px!important;border:0!important}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-price-block:nth-child(4){display:flex!important}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions{display:flex!important;flex-wrap:wrap;width:100%;justify-content:center}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions>*{flex:1 1 auto}
+ #vipFloatingBar.pm-merged.pm-expanded #premiumBudgetToggle{background:var(--accent-gradient);color:#fff}
+}
+@media(max-width:380px){#vipFloatingBar.pm-merged .pm-nav-btn{min-width:38px;padding:3px 2px}#vipFloatingBar.pm-merged #premiumMergedNav{gap:2px}#vipFloatingBar.pm-merged .pm-nav-text{font-size:.52rem}}
+body.pres-on #vipFloatingBar.pm-merged #premiumMergedNav,body.pres-on #vipFloatingBar.pm-merged #premiumBudgetSummary{display:none!important}
+body.pres-on #vipFloatingBar.pm-merged #premiumBudgetDetails{display:flex!important}
+
+/* assets/css/009-premium2027-v6-controls.css */
+
+/* Jediné ovládání režimu a nastavení je součástí spodní lišty. Původní
+   tlačítka zůstávají v DOM jako funkční spouštěče původních skriptů. */
+#themeToggleBtn, #floatingSettingsBtn {display:none!important}
+/* TOPlist je běžný obsah hero na PC, ne plovoucí překryv. */
+@media(min-width:769px){
+ .hero #toplistFloat {position:relative!important;inset:auto!important;top:auto!important;right:auto!important;left:auto!important;bottom:auto!important;display:flex!important;width:max-content;max-width:100%;margin:18px auto 0!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important;z-index:1!important}
+ #statsFoot{display:none!important}
+ body.on-hero:not(.pres-on) .hero #toplistFloat,body.in-plan:not(.pres-on) .hero #toplistFloat{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+}
+@media(max-width:768px){
+ #statsFoot{display:grid!important;justify-items:center;gap:6px;padding:24px 12px calc(86px + env(safe-area-inset-bottom))!important;text-align:center}
+ #statsFoot #toplistFloat{position:static!important;inset:auto!important;transform:none!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;margin:0!important;display:flex!important}
+ body.on-hero:not(.pres-on) #statsFoot #toplistFloat,body.in-plan:not(.pres-on) #statsFoot #toplistFloat{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+}
+/* Šest akcí v jediné nízké liště: na telefonu ikony s přístupnými názvy. */
+@media(max-width:700px){
+ #vipFloatingBar.pm-merged{gap:3px!important;padding:5px!important;flex-wrap:wrap!important}
+ #vipFloatingBar.pm-merged #premiumBudgetSummary{padding:0 1px!important;min-width:72px!important}
+ #vipFloatingBar.pm-merged .pm-sum-caption{font-size:.52rem!important}
+ #vipFloatingBar.pm-merged #premiumBudgetAmount{font-size:clamp(.73rem,3vw,.94rem)!important}
+ #vipFloatingBar.pm-merged #premiumMergedNav{gap:2px!important}
+ #vipFloatingBar.pm-merged .pm-nav-btn{min-width:36px!important;width:36px!important;min-height:43px!important;padding:4px 1px!important}
+ #vipFloatingBar.pm-merged .pm-nav-icon{font-size:1.15rem!important}
+ #vipFloatingBar.pm-merged .pm-nav-text{display:none!important}
+}
+@media(max-width:370px){
+ #vipFloatingBar.pm-merged .pm-nav-btn{min-width:32px!important;width:32px!important}
+ #vipFloatingBar.pm-merged #premiumMergedNav{gap:1px!important}
+ #vipFloatingBar.pm-merged #premiumBudgetAmount{font-size:.75rem!important}
+}
+body.pres-on #statsFoot,body.pres-on .hero #toplistFloat{display:none!important}
+
+/* assets/css/010-premium2027-v7-aligned-bar.css */
+
+/* V7: pevná mřížka cen, jednotná výška tlačítek, žádné oříznutí textů. */
+@media (min-width: 701px) {
+ #vipFloatingBar.pm-merged { width:min(1510px,calc(100vw - 32px))!important;max-width:calc(100vw - 32px)!important;gap:clamp(10px,1.2vw,22px)!important;padding:12px 16px!important;box-sizing:border-box!important; }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails {display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center!important;gap:14px!important;flex:1 1 auto!important;min-width:0!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-info {display:grid!important;grid-template-columns:repeat(3,minmax(92px,1fr)) minmax(160px,1.45fr)!important;align-items:center!important;gap:0!important;width:100%!important;min-width:0!important;overflow:visible!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-price-block {display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;min-width:0!important;padding:0 12px!important;box-sizing:border-box!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-price-block:first-child {padding-left:0!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-label {white-space:normal!important;font-size:.65rem!important;line-height:1.3!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-val {font-size:clamp(.88rem,1.05vw,1.1rem)!important;line-height:1.3!important;white-space:normal!important;overflow-wrap:anywhere!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-sub {white-space:normal!important;overflow:visible!important;text-overflow:clip!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-price-block:nth-child(4) .vfb-val {font-size:clamp(.78rem,.95vw,1rem)!important;white-space:normal!important;overflow-wrap:break-word!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions {display:flex!important;align-items:center!important;gap:6px!important;}
+ #vipFloatingBar.pm-merged #premiumMergedNav {display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;flex-wrap:wrap!important;}
+ #vipFloatingBar.pm-merged .pm-nav-btn {height:44px!important;min-height:44px!important;box-sizing:border-box!important;line-height:1.2!important;}
+}
+@media (min-width:701px) and (max-width:1390px) {
+ #vipFloatingBar.pm-merged {flex-wrap:wrap!important;justify-content:center!important;row-gap:9px!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails {order:1!important;flex:1 1 100%!important;width:100%!important;grid-template-columns:minmax(0,1fr) auto!important;}
+ #vipFloatingBar.pm-merged #premiumMergedNav {order:2!important;flex:1 1 100%!important;justify-content:center!important;}
+}
+@media (min-width:701px) and (max-width:1050px) {
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-info {grid-template-columns:repeat(3,minmax(0,1fr)) minmax(130px,1.35fr)!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions {display:none!important;}
+}
+@media (max-width:700px) {
+ #vipFloatingBar.pm-merged {box-sizing:border-box!important;display:grid!important;grid-template-columns:minmax(74px,1fr) auto!important;align-items:center!important;column-gap:4px!important;row-gap:5px!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetSummary {grid-column:1!important;grid-row:1!important;min-width:0!important;}
+ #vipFloatingBar.pm-merged #premiumMergedNav {grid-column:2!important;grid-row:1!important;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:2px!important;min-width:0!important;}
+ #vipFloatingBar.pm-merged .pm-nav-btn {width:clamp(29px,8.1vw,38px)!important;min-width:0!important;min-height:42px!important;padding:3px 0!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails {grid-column:1/-1!important;grid-row:2!important;min-width:0!important;}
+ #vipFloatingBar.pm-merged.pm-expanded #premiumBudgetDetails .vfb-info {grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+ #vipFloatingBar.pm-merged.pm-expanded #premiumBudgetDetails .vfb-val,
+ #vipFloatingBar.pm-merged.pm-expanded #premiumBudgetDetails .vfb-sub {white-space:normal!important;overflow-wrap:anywhere!important;}
+}
+
+/* assets/css/011-premium2027Stage9CSS.css */
+
+/* PREMIUM v9 – čitelnější itinerář, bez zásahu do obsahu a výpočtů */
+#premiumStageNavigator{margin:18px 0 22px;padding:18px;border:1px solid var(--border);border-radius:22px;background:var(--surface);box-shadow:var(--shadow);min-width:0}
+.psn-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.psn-heading strong{font-size:1.03rem;color:var(--text-main)}
+.psn-heading small{color:var(--text-muted);font-weight:600}
+.psn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:9px}
+.psn-link{display:flex;align-items:center;gap:10px;min-width:0;text-decoration:none!important;border:1px solid var(--border);background:var(--surface-hover);color:var(--text-main)!important;padding:11px 12px;border-radius:13px;transition:border-color .2s,background .2s,transform .2s}
+.psn-link:hover,.psn-link:focus-visible{border-color:var(--primary);transform:translateY(-1px);outline-offset:2px}
+.psn-num{display:grid;place-items:center;flex:0 0 31px;width:31px;height:31px;border-radius:10px;background:linear-gradient(135deg,#0d9488,#176b84);color:white;font-size:.78rem;font-weight:800}
+.psn-name{min-width:0;overflow-wrap:anywhere;font-size:.86rem;font-weight:750;line-height:1.3}
+.psn-link.is-current{border-color:#0d9488;box-shadow:inset 0 0 0 1px #0d9488}
+#osa .lux-spine{gap:17px}
+#osa .lux-fold:not(.is-transfer)>.lux-fold-h>.lux-fold-btn{border-radius:19px;border-width:1px;border-left:4px solid #0d9488;padding:19px 21px;min-height:76px}
+#osa .lux-fold.is-open:not(.is-transfer)>.lux-fold-h>.lux-fold-btn{background-image:linear-gradient(110deg,rgba(13,148,136,.12),transparent 55%);border-color:#0d9488}
+#osa .lux-fold.is-transfer>.lux-fold-h>.lux-fold-btn{border-radius:14px}
+#osa .lux-fold-t{line-height:1.28}
+#osa .lux-fold-s{line-height:1.45}
+#osa .lux-fold-btn{min-width:0}
+#osa .lux-fold-txt{min-width:0}
+#osa .lux-fold-pad{min-width:0}
+#osa .timeline-date-container{white-space:normal;line-height:1.4;overflow-wrap:anywhere}
+@media(max-width:720px){
+ #premiumStageNavigator{padding:13px;margin:14px 0 18px;border-radius:17px}
+ .psn-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .psn-link{padding:9px 8px;gap:7px;border-radius:11px}
+ .psn-num{width:26px;height:26px;flex-basis:26px;font-size:.72rem}
+ .psn-name{font-size:.76rem}
+ #osa .lux-spine{padding-left:40px;gap:12px}
+ #osa .lux-spine>.lux-fold>.lux-fold-h .lux-fold-node{left:-39px}
+ #osa .lux-spine>.lux-fold.is-transfer>.lux-fold-h .lux-fold-node{left:-37px}
+ #osa .lux-spine::before{left:17px}
+ #osa .lux-fold:not(.is-transfer)>.lux-fold-h>.lux-fold-btn{padding:13px 11px;gap:7px;min-height:66px;border-radius:14px}
+ #osa .lux-fold-t{font-size:.96rem}
+ #osa .lux-fold-s{font-size:.73rem}
+ #osa .lux-fold-meta{max-width:42%;font-size:.65rem;padding:4px 6px}
+ #osa .lux-fold.is-transfer>.lux-fold-h>.lux-fold-btn{padding:10px 9px}
+ #osa .lux-fold-pad{padding-top:11px}
+}
+@media(max-width:370px){.psn-grid{grid-template-columns:1fr 1fr}.psn-link{padding:8px 6px}.psn-name{font-size:.72rem}}
+@media(prefers-reduced-motion:reduce){.psn-link{transition:none}}
+
+/* assets/css/012-premium2027Stage10Styles.css */
+
+/* Etapa 10: jednotné karty výběru letenek a hotelových plánů; pouze prezentace. */
+.flight-airline-switch,
+.budget-mode-switch {
+  gap: clamp(10px, 1.2vw, 18px) !important;
+  align-items: stretch;
+}
+.flight-airline-switch > .flight-mode-btn,
+.budget-mode-switch > .budget-mode-btn {
+  min-width: 0 !important;
+  height: 100%;
+  border-radius: 18px !important;
+  border: 1px solid rgba(95,130,148,.30) !important;
+  background: var(--card-bg, var(--card, #fff)) !important;
+  box-shadow: 0 5px 20px rgba(10,25,40,.08) !important;
+  text-align: left !important;
+  overflow-wrap: anywhere;
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease !important;
+}
+.flight-airline-switch > .flight-mode-btn:hover,
+.budget-mode-switch > .budget-mode-btn:hover {
+  border-color: #0d9488 !important;
+  box-shadow: 0 10px 28px rgba(13,148,136,.14) !important;
+  transform: translateY(-2px);
+}
+.flight-airline-switch > .flight-mode-btn.active,
+.budget-mode-switch > .budget-mode-btn.active {
+  border: 2px solid #0d9488 !important;
+  box-shadow: 0 0 0 3px rgba(13,148,136,.13), 0 10px 25px rgba(10,25,40,.09) !important;
+}
+.flight-airline-switch .fc-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.flight-airline-switch .fc-header > * { min-width: 0; }
+.flight-airline-switch .fc-airline { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+.flight-airline-switch .fc-price-badge { max-width: 100%; white-space: normal !important; overflow-wrap: anywhere; }
+.flight-airline-switch .fc-leg-top { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.flight-airline-switch .fc-times { white-space: normal !important; overflow-wrap: anywhere; }
+.flight-airline-switch .fc-meta-pills { display: flex; flex-wrap: wrap; gap: 5px; }
+.budget-mode-switch > .budget-mode-btn { padding: 16px 18px !important; line-height: 1.45 !important; }
+.budget-mode-switch > .budget-mode-btn small { display: inline-block; margin-top: 5px; line-height: 1.45; }
+.selected-hotels-deck-wrapper { border-radius: 20px !important; overflow: hidden; }
+.selected-hotels-deck-wrapper .deck-header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+@media (min-width: 1024px) {
+  .budget-mode-switch { display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .budget-mode-switch { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+@media (max-width: 767px) {
+  .budget-mode-switch { display: grid !important; grid-template-columns: minmax(0,1fr) !important; }
+  .flight-airline-switch { display: flex !important; flex-direction: column !important; }
+  .flight-airline-switch > .flight-mode-btn { width: 100%; }
+  .budget-mode-switch > .budget-mode-btn { min-height: 65px; }
+}
+@media (prefers-reduced-motion: reduce) {
+ .flight-airline-switch > .flight-mode-btn,
+ .budget-mode-switch > .budget-mode-btn { transition: none !important; transform: none !important; }
+}
+
+/* assets/css/013-premium2027Stage12CSS.css */
+
+/* PREMIUM v12: nové kompoziční řešení, nikoliv pouze změna barev. */
+:root{--p12-ink:#102238;--p12-teal:#0e9d99;--p12-line:rgba(135,162,185,.23);--p12-elev:0 16px 48px rgba(6,25,41,.10)}
+#premium2027Overview{max-width:1480px;margin:22px auto 38px;padding:0 14px;box-sizing:border-box;color:var(--text-main)}
+.p12-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:19px;flex-wrap:wrap}
+.p12-kicker{font-size:.73rem;font-weight:850;letter-spacing:.17em;text-transform:uppercase;color:#0c9896}
+.p12-head h2{margin:5px 0 0;font-size:clamp(1.6rem,2.8vw,2.6rem);line-height:1.13;font-weight:850;letter-spacing:-.035em;color:var(--text-main)}
+.p12-head p{margin:7px 0 0;color:var(--text-muted);font-size:.93rem}
+.p12-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:16px}
+.p12-card{position:relative;display:flex;flex-direction:column;justify-content:end;isolation:isolate;min-height:260px;padding:24px;overflow:hidden;border-radius:25px;background:#11263a;color:#fff;text-decoration:none!important;box-shadow:var(--p12-elev);border:1px solid rgba(255,255,255,.16);transition:transform .22s,box-shadow .22s}
+.p12-card:hover{transform:translateY(-4px);box-shadow:0 24px 55px rgba(5,24,44,.2)}
+.p12-card:focus-visible{outline:3px solid #11b9b1;outline-offset:4px}
+.p12-card:before{content:"";position:absolute;inset:0;z-index:-2;background:var(--p12-photo) center/cover no-repeat;transform:scale(1.01);transition:transform .35s}
+.p12-card:hover:before{transform:scale(1.055)}
+.p12-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(3,15,29,.04),rgba(3,15,29,.38) 42%,rgba(3,15,29,.94))}
+.p12-card.p12-feature{min-height:370px;grid-row:span 2}
+.p12-card.p12-budget{background:radial-gradient(circle at 80% 10%,#167f86,#092238 65%)}
+.p12-card.p12-budget:before{background:radial-gradient(circle at 80% 18%,rgba(32,214,195,.42),transparent 45%),linear-gradient(130deg,#16455a,#0a1b31)}
+.p12-card.p12-budget:after{background:linear-gradient(180deg,transparent,rgba(2,14,28,.8))}
+.p12-chip{align-self:flex-start;border:1px solid rgba(255,255,255,.34);background:rgba(5,25,40,.45);border-radius:100px;padding:6px 11px;font-size:.72rem;font-weight:800;letter-spacing:.05em;backdrop-filter:blur(8px);margin-bottom:12px}
+.p12-card strong{display:block;color:white;font-size:clamp(1.35rem,2vw,2.15rem);font-weight:850;line-height:1.12;letter-spacing:-.02em;text-shadow:0 2px 8px rgba(0,0,0,.25)}
+.p12-card p{color:rgba(255,255,255,.88);font-size:.88rem;line-height:1.45;margin:10px 0 14px;max-width:45ch}
+.p12-cta{display:inline-flex;align-items:center;gap:7px;font-weight:850;font-size:.81rem;color:#79f2e3}
+.p12-metrics{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 13px}
+.p12-metric{border:1px solid rgba(255,255,255,.24);border-radius:12px;background:rgba(0,0,0,.22);padding:9px 12px;min-width:0}
+.p12-metric small{display:block;color:#b8d4df;font-size:.65rem;text-transform:uppercase;font-weight:750}
+.p12-metric b{display:block;font-size:1.15rem;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+/* skutečně nové karty pro jednotlivé úseky itineráře */
+#osa .lux-spine{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;max-width:1120px;margin:0 auto;padding-left:54px}
+#osa .lux-spine>.lux-fold:not(.is-transfer){border:1px solid var(--p12-line);border-radius:23px;overflow:visible;background:var(--surface);box-shadow:var(--p12-elev)}
+#osa .lux-spine>.lux-fold:not(.is-transfer)>.lux-fold-h>.lux-fold-btn{border:0!important;border-radius:23px!important;box-shadow:none!important;padding:24px 26px!important;background:linear-gradient(115deg,rgba(13,153,150,.13),transparent 65%)!important;min-height:105px}
+#osa .lux-spine>.lux-fold:not(.is-transfer).is-open{border-color:rgba(14,157,153,.6)}
+#osa .lux-spine>.lux-fold:not(.is-transfer) .lux-fold-pad{padding:16px 24px 24px}
+#osa .lux-spine>.lux-fold.is-transfer>.lux-fold-h>.lux-fold-btn{background:var(--surface-hover)!important;border:1px dashed var(--p12-line)!important}
+#premiumStageNavigator{max-width:1120px;margin:22px auto 28px!important;border-radius:24px!important;padding:20px!important}
+#premiumStageNavigator .psn-grid{grid-template-columns:repeat(auto-fit,minmax(175px,1fr))}
+/* hotelové karty s důrazem na velkou fotografii, cenu a výběr */
+.uber-hotel-card{position:relative;border:1px solid var(--p12-line)!important;border-radius:24px!important;overflow:hidden;background:var(--surface)!important;box-shadow:var(--p12-elev)!important;padding:20px!important;margin:16px 0!important}
+.uber-hotel-card.hotel-active{border:2px solid #0e9d99!important;box-shadow:0 15px 45px rgba(14,157,153,.15)!important}
+.uber-hotel-card .uber-top-bar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:0 0 15px;border-bottom:1px solid var(--p12-line);margin-bottom:15px}
+.uber-hotel-card .hotel-title-text{font-size:clamp(1.03rem,1.5vw,1.4rem)!important;line-height:1.3!important}
+.uber-hotel-card .uber-media-grid{display:grid!important;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr) minmax(0,1fr)!important;gap:10px!important;margin:14px 0!important;min-height:215px}
+.uber-hotel-card .uber-media-box,.uber-hotel-card .sv-card{min-width:0;overflow:hidden;border-radius:16px!important}
+.uber-hotel-card .uber-media-box img{width:100%;height:100%;min-height:215px;object-fit:cover}
+.uber-hotel-card .uber-price-badge{border-radius:12px!important;padding:10px 14px!important;font-size:.92rem!important;white-space:normal!important;line-height:1.4}
+.uber-hotel-card .uber-info-panel{border-radius:15px!important;line-height:1.65!important}
+/* dashboard původního kalkulátoru */
+#rozpocet{gap:17px!important}
+#rozpocet .bento-card{border-radius:24px!important;box-shadow:var(--p12-elev);border:1px solid var(--p12-line)}
+#rozpocet .fc-price{font-size:clamp(1.5rem,2.6vw,2.35rem)!important;letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+#rozpocet .bento-card.highlight.full>h2{border-radius:15px!important;box-shadow:none!important;padding:16px 20px!important}
+@media(max-width:1050px){.p12-grid{grid-template-columns:1fr 1fr}.p12-card.p12-feature{grid-row:auto;grid-column:span 2;min-height:320px}.p12-card{min-height:245px}.uber-hotel-card .uber-media-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:680px){#premium2027Overview{margin:16px auto 25px;padding:0 9px}.p12-head{margin-bottom:13px}.p12-grid{grid-template-columns:1fr;gap:11px}.p12-card,.p12-card.p12-feature{grid-column:auto;min-height:210px;padding:19px;border-radius:19px}.p12-card.p12-feature{min-height:260px}.p12-card strong{font-size:1.4rem}.p12-card p{font-size:.81rem;margin:8px 0 10px}.p12-metric{padding:7px 9px}.p12-metric b{font-size:1rem}#osa .lux-spine{padding-left:36px;gap:12px}#osa .lux-spine>.lux-fold:not(.is-transfer)>.lux-fold-h>.lux-fold-btn{min-height:75px;padding:15px 12px!important;border-radius:17px!important}#osa .lux-spine>.lux-fold:not(.is-transfer){border-radius:17px}#osa .lux-spine>.lux-fold:not(.is-transfer) .lux-fold-pad{padding:9px 12px 16px}.uber-hotel-card{padding:13px!important;border-radius:18px!important}.uber-hotel-card .uber-media-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;min-height:unset}.uber-hotel-card .uber-media-box img{min-height:145px}.uber-hotel-card .sv-card{grid-column:1/-1}#premiumStageNavigator .psn-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.p12-card,.p12-card:before{transition:none!important}}
+
+/* assets/css/014-premium2027Stage13Fixes.css */
+
+/* v13: čtyři jasně oddělené cíle, bez duplicit hotelů a rozpočtu */
+#premium2027Overview{width:100%;max-width:none!important;margin:24px auto 36px!important;padding:0!important;box-sizing:border-box}
+#premium2027Overview .p12-head{margin:0 0 20px}
+.p13-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;width:100%}
+.p13-tile{isolation:isolate;position:relative;min-width:0;min-height:265px;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;gap:9px;overflow:hidden;border-radius:22px;color:#fff!important;text-decoration:none!important;background:#10243a;border:1px solid rgba(255,255,255,.2);box-shadow:0 15px 35px rgba(8,23,39,.15);transition:transform .2s,box-shadow .2s}
+.p13-tile::before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--p13-photo);background-size:cover;background-position:center;filter:saturate(.9)}
+.p13-tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,22,36,.05),rgba(5,19,35,.97))}
+.p13-tile:hover{transform:translateY(-3px);box-shadow:0 20px 45px rgba(8,23,39,.22)}
+.p13-tile:focus-visible{outline:3px solid #0fb7af;outline-offset:3px}
+.p13-tile .p13-label{font-size:.7rem;letter-spacing:.1em;font-weight:800;color:#8be9dd}
+.p13-tile strong{font-size:clamp(1.18rem,1.65vw,1.65rem);line-height:1.18;letter-spacing:-.02em}
+.p13-tile>span:not(.p13-label){font-size:.85rem;color:#e6edf4;line-height:1.4}
+.p13-tile em{font-style:normal;font-size:.79rem;font-weight:800;color:#9cf1e4;margin-top:5px}
+/* původní generovaný dlouhý blok etapy se již nepoužívá */
+#premiumStageNavigator{display:none!important}
+/* časová osa využije celou šířku společného obsahu */
+#osa,#osa .lux-part-body,#osa .lux-spine{width:100%!important;max-width:none!important;box-sizing:border-box}
+#osa .lux-spine{margin:0!important;display:flex!important;flex-direction:column!important;gap:20px!important;padding-left:54px!important}
+#osa .lux-spine>.lux-fold{width:100%!important;max-width:none!important}
+/* neprůhledné titulní pruhy etap: žádné prosvítání počasí a obrázků */
+#osa .lux-fold-h,#osa .lux-fold-h .lux-fold-btn{isolation:isolate}
+#osa .lux-fold-h .lux-fold-btn{background-color:#edf5f7!important;background-image:none!important;opacity:1!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-theme="dark"] #osa .lux-fold-h .lux-fold-btn,body.dark #osa .lux-fold-h .lux-fold-btn{background-color:#14293b!important;color:#f7fbff!important}
+#osa .lux-fold-h .lux-fold-btn::before{opacity:0!important}
+#osa .lux-fold-h .lux-fold-t,#osa .lux-fold-h .lux-fold-s{position:relative;z-index:2}
+@media(max-width:1100px){.p13-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.p13-tile{min-height:225px}}
+@media(max-width:650px){#premium2027Overview{margin:14px auto 22px!important}.p13-grid{gap:10px}.p13-tile{padding:14px;min-height:190px;border-radius:16px}.p13-tile strong{font-size:1.03rem}.p13-tile>span:not(.p13-label){font-size:.73rem}.p13-tile em{font-size:.7rem}#osa .lux-spine{padding-left:29px!important}#osa .lux-spine::before{left:10px!important}}
+@media(max-width:390px){.p13-grid{grid-template-columns:1fr}.p13-tile{min-height:165px}}
+
+/* assets/css/015-premium2027Stage15Unified.css */
+
+/* PREMIUM v15 — jediné sjednocující rozložení rozbalovacích sekcí.
+   Každá původní etapa, obsah, fotografie, link a výpočet zůstává zachován. */
+:root {
+  --p15-card:#ffffff; --p15-ink:#172a3e; --p15-muted:#516779;
+  --p15-stroke:#dae7eb; --p15-accent:#118b8c;
+  --p15-shadow:0 10px 28px rgba(19,54,69,.09);
+}
+/* Čisté karty na celé stránce včetně itineráře, rozpočtu a přípravy */
+.lux-part .lux-fold { min-width:0!important; max-width:100%!important; }
+.lux-part .lux-fold>.lux-fold-h {margin:0!important;}
+.lux-part .lux-fold>.lux-fold-h>.lux-fold-btn,
+#osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn,
+#osa .lux-spine>.lux-fold:not(.is-transfer)>.lux-fold-h>.lux-fold-btn,
+#osa .lux-spine>.lux-fold.is-transfer>.lux-fold-h>.lux-fold-btn {
+  box-sizing:border-box!important; isolation:isolate!important; position:relative!important;
+  display:flex!important; flex-wrap:nowrap!important; align-items:center!important;
+  gap:clamp(9px,1.3vw,19px)!important; overflow:hidden!important;
+  width:100%!important; min-height:98px!important; padding:17px clamp(14px,1.5vw,24px)!important;
+  border:1px solid var(--p15-stroke)!important; border-radius:19px!important;
+  background-color:var(--p15-card)!important; background-image:none!important;
+  opacity:1!important; color:var(--p15-ink)!important;
+  backdrop-filter:none!important; -webkit-backdrop-filter:none!important;
+  box-shadow:var(--p15-shadow)!important;
+  transition:box-shadow .18s ease,border-color .18s ease,transform .18s ease!important;
+  cursor:pointer!important;
+}
+.lux-part .lux-fold>.lux-fold-h>.lux-fold-btn:hover,
+#osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn:hover {
+  transform:translateY(-1px)!important; border-color:#8bcfcb!important;
+  box-shadow:0 15px 32px rgba(20,80,95,.13)!important;
+}
+.lux-part .lux-fold.is-open>.lux-fold-h>.lux-fold-btn,
+#osa .lux-spine>.lux-fold.is-open>.lux-fold-h>.lux-fold-btn {
+  border-color:#73bdb7!important; border-bottom-left-radius:13px!important;
+  border-bottom-right-radius:13px!important;
+}
+/* Neztratit kontextové ilustrace: původní SVG z každé sekce zůstává na pravé straně. */
+.lux-part .lux-fold>.lux-fold-h>.lux-fold-btn::before,
+#osa .lux-fold-h .lux-fold-btn::before,
+#osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn::before {
+  content:""!important; display:block!important; position:absolute!important;
+  inset:0 0 0 auto!important; width:min(30%,420px)!important; height:100%!important;
+  background-repeat:no-repeat!important; background-position:right center!important;
+  background-size:cover!important; opacity:1!important; visibility:visible!important;
+  z-index:0!important; pointer-events:none!important;
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.65) 23%,#000 55%)!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.65) 23%,#000 55%)!important;
+}
+.lux-part .lux-fold>.lux-fold-h>.lux-fold-btn::after,
+#osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn::after {
+  content:""!important;display:block!important;position:absolute!important;inset:0!important;
+  border-radius:inherit!important;z-index:0!important;pointer-events:none!important;
+  background:linear-gradient(90deg,rgba(255,255,255,.1),#fff0 68%)!important;
+}
+/* Ikona uvnitř karty, nikoliv mimo levý okraj. */
+.lux-part .lux-fold>.lux-fold-h .lux-fold-node,
+#osa .lux-spine>.lux-fold>.lux-fold-h .lux-fold-node,
+#osa .lux-spine>.lux-fold.is-transfer>.lux-fold-h .lux-fold-node {
+  position:relative!important;left:auto!important;right:auto!important;top:auto!important;
+  transform:none!important; margin:0!important; z-index:2!important;
+  display:grid!important;place-items:center!important; flex:0 0 46px!important;
+  width:46px!important;height:46px!important;
+  border-radius:50%!important; border:1px solid rgba(9,94,102,.18)!important;
+  background:linear-gradient(145deg,#09847e,#147e8f)!important;
+  box-shadow:0 4px 12px rgba(9,107,114,.18)!important;
+  color:white!important;font-size:1.2rem!important;line-height:1!important;
+}
+/* Jednotná hierarchie názvu a termínu. */
+.lux-part .lux-fold .lux-fold-btn>.lux-fold-txt,
+#osa .lux-spine .lux-fold-btn>.lux-fold-txt {
+  position:relative!important;z-index:2!important; display:flex!important;flex-direction:column!important;
+  flex:1 1 0!important;min-width:0!important;max-width:none!important;
+  margin:0!important;padding:0!important;gap:4px!important;
+}
+.lux-part .lux-fold .lux-fold-btn .lux-fold-t,
+#osa .lux-spine .lux-fold-btn .lux-fold-t {
+  color:var(--p15-ink)!important;font-size:clamp(1.04rem,1.45vw,1.43rem)!important;
+  font-weight:800!important;letter-spacing:-.02em!important;line-height:1.22!important;
+  opacity:1!important;text-shadow:none!important;overflow-wrap:anywhere!important;
+}
+.lux-part .lux-fold .lux-fold-btn .lux-fold-s,
+#osa .lux-spine .lux-fold-btn .lux-fold-s {
+  color:var(--p15-muted)!important;font-size:clamp(.72rem,.87vw,.84rem)!important;
+  font-weight:550!important;letter-spacing:0!important;line-height:1.32!important;
+  opacity:1!important;text-shadow:none!important;
+}
+#osa .lux-fold-btn .p14-eyebrow {
+  color:#108988!important;font-size:.64rem!important;font-weight:850!important;
+  letter-spacing:.13em!important;line-height:1.2!important;
+}
+/* Indikátor přečtení je vytvářen existujícím JS; držíme mu stálé místo.
+   Zelené zaškrtnutí viditelné pouze při is-read, jinde prázdný obrys. */
+.lux-part .lux-fold>.lux-fold-h .lux-read,
+#osa .lux-spine .lux-fold-btn .lux-read {
+  display:inline-flex!important; align-items:center!important;justify-content:center!important;
+  position:relative!important;z-index:3!important;flex:0 0 36px!important;
+  width:36px!important;height:36px!important; padding:0!important;margin:0!important;
+  border-radius:50%!important; background:#fff!important; color:transparent!important;
+  border:2px solid #c8d8da!important;box-shadow:0 2px 8px rgba(9,40,51,.08)!important;
+  font-size:1.15rem!important;line-height:1!important;font-weight:900!important;
+}
+.lux-part .lux-fold.is-read>.lux-fold-h .lux-read,
+#osa .lux-spine .lux-fold.is-read>.lux-fold-h .lux-read {
+  color:#fff!important; background:#247f36!important; border:3px solid #fff!important;
+  box-shadow:0 2px 11px rgba(9,55,26,.24),0 0 0 1px rgba(13,75,23,.17)!important;
+}
+/* Cena / výběr hotelu je od okolí oddělený, stále čitelný. */
+.lux-part .lux-fold>.lux-fold-h .lux-fold-meta:not(:empty),
+#osa .lux-spine .lux-fold-btn .lux-fold-meta:not(:empty) {
+  position:relative!important; z-index:3!important;flex:0 1 auto!important;
+  max-width:min(30%,305px)!important;min-width:0!important;
+  padding:7px 11px!important;margin:0!important;
+  background:#fff!important;color:#1b4555!important;
+  border:1px solid #8ac2c6!important;border-radius:999px!important;
+  box-shadow:0 2px 9px rgba(13,66,76,.18)!important;
+  font-size:clamp(.68rem,.76vw,.8rem)!important;font-weight:800!important;
+  line-height:1.28!important;text-align:center!important;white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+.lux-part .lux-fold>.lux-fold-h .lux-fold-meta:empty{display:none!important}
+/* Jasně rozpoznatelné rozbalení vpravo. */
+.lux-part .lux-fold>.lux-fold-h .lux-fold-chev,
+#osa .lux-spine .lux-fold-btn .lux-fold-chev {
+  position:relative!important;z-index:4!important;
+  display:grid!important;place-items:center!important;
+  flex:0 0 35px!important;width:35px!important;height:35px!important;
+  padding:0!important;margin:0!important;
+  border-radius:50%!important; background:#f0f7f9!important;
+  border:1px solid #c3d7dc!important;color:#133b49!important;
+  font-size:1rem!important;font-weight:900!important;opacity:1!important;
+  box-shadow:0 1px 5px rgba(16,58,68,.08)!important;
+}
+.lux-part .lux-fold.is-open>.lux-fold-h .lux-fold-chev{transform:rotate(180deg)!important}
+.lux-part .lux-fold-btn:focus-visible{outline:3px solid #159f9a!important;outline-offset:3px!important}
+/* Ilustrovaná osa stejně široká jako ostatní bloky. */
+#osa .lux-spine{display:flex!important;flex-direction:column!important;gap:13px!important;
+  padding-left:0!important;max-width:none!important;margin:0!important;width:100%!important;}
+#osa .lux-spine::before{display:none!important}
+#osa .lux-spine>.lux-fold{width:100%!important;max-width:none!important;overflow:visible!important;
+  margin:0!important;border:0!important;border-radius:19px!important;background:transparent!important;box-shadow:none!important}
+#osa .lux-spine>.lux-fold.is-transfer>.lux-fold-h>.lux-fold-btn{
+  min-height:83px!important; border-style:solid!important;}
+#osa .lux-spine>.lux-fold.is-transfer .lux-fold-node {flex-basis:43px!important;width:43px!important;height:43px!important;}
+#osa .lux-spine>.lux-fold .lux-fold-body {border-radius:0 0 18px 18px!important;}
+#osa .lux-spine>.lux-fold.is-open .lux-fold-body {background:var(--surface)!important;
+  border:1px solid var(--p15-stroke)!important;border-top:0!important;}
+#osa .lux-spine>.lux-fold .lux-fold-pad{padding:14px clamp(10px,2vw,28px) 24px!important}
+/* Nedat cenu / text / ovládání pod obrázek (pravá třetina je ilustrativní). */
+.lux-part .lux-fold .lux-fold-btn .lux-fold-txt{padding-right:0!important}
+.lux-part .lux-fold>.lux-fold-h>.lux-fold-btn>* {z-index:2!important}
+/* Sjednocení úvodních karet: fotografie jako horní třetina, informace na bílé kartě. */
+#premium2027Overview .p13-grid{gap:16px!important}
+#premium2027Overview .p13-tile{
+  min-height:255px!important;display:flex!important;justify-content:flex-end!important;
+  padding:120px 22px 20px!important;background:#fff!important;
+  border:1px solid var(--p15-stroke)!important;border-radius:20px!important;
+  color:var(--p15-ink)!important;box-shadow:var(--p15-shadow)!important;
+  gap:7px!important;text-align:left!important;
+}
+#premium2027Overview .p13-tile::before{
+  inset:0 0 auto 0!important;height:112px!important;filter:none!important;
+  border-radius:19px 19px 0 0!important;background-position:center!important;
+}
+#premium2027Overview .p13-tile::after{
+  inset:0 0 auto 0!important;height:112px!important;
+  background:linear-gradient(180deg,rgba(6,35,45,.03),rgba(6,35,45,.2))!important;
+}
+#premium2027Overview .p13-tile .p13-label{color:#0b8e88!important}
+#premium2027Overview .p13-tile strong{color:var(--p15-ink)!important;font-size:1.28rem!important}
+#premium2027Overview .p13-tile>span:not(.p13-label){color:var(--p15-muted)!important}
+#premium2027Overview .p13-tile em{color:#087f7b!important}
+/* Vyvážené tabulky a vnitřní bílé karty. Přepisujeme vzhled, nikoli výpočetní styly. */
+.lux-part .tj-card,.lux-part .tj-excl,.lux-part .bento-card,
+.lux-part .flight-summary-card,.lux-part .cash-card {
+  border-radius:17px!important;border-color:var(--p15-stroke)!important;
+}
+/* Tmavý režim: stejná hierarchie a kontrast bez průsvitných karet. */
+html[data-theme="dark"], body.dark, body.dark-mode {
+  --p15-card:#162b3b; --p15-ink:#f2f8fb; --p15-muted:#c4d7df;
+  --p15-stroke:#345365; --p15-shadow:0 12px 29px rgba(0,0,0,.23);
+}
+html[data-theme="dark"] .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn::after,
+body.dark .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn::after{background:linear-gradient(90deg,rgba(22,43,59,.1),transparent 70%)!important;}
+html[data-theme="dark"] #premium2027Overview .p13-tile,
+body.dark #premium2027Overview .p13-tile{background:#162b3b!important;}
+html[data-theme="dark"] .lux-part .lux-fold>.lux-fold-h .lux-fold-meta:not(:empty),
+body.dark .lux-part .lux-fold>.lux-fold-h .lux-fold-meta:not(:empty){background:#21394a!important;color:#e9f7f8!important;border-color:#537d82!important}
+html[data-theme="dark"] .lux-part .lux-fold>.lux-fold-h .lux-fold-chev,
+body.dark .lux-part .lux-fold>.lux-fold-h .lux-fold-chev{background:#254554!important;color:#f2faff!important;border-color:#48707a!important}
+html[data-theme="dark"] .lux-part .lux-fold>.lux-fold-h .lux-read,
+body.dark .lux-part .lux-fold>.lux-fold-h .lux-read{background:#294958!important;}
+html[data-theme="dark"] .lux-part .lux-fold.is-read>.lux-fold-h .lux-read,
+body.dark .lux-part .lux-fold.is-read>.lux-fold-h .lux-read{background:#25883b!important}
+/* Tablet: čitelnost ceny i ikon při nižší šířce. */
+@media(max-width:1020px){
+ .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn,
+ #osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn{padding:15px 16px!important;min-height:83px!important;gap:11px!important;}
+ .lux-part .lux-fold>.lux-fold-h .lux-fold-meta:not(:empty){max-width:31%!important;font-size:.68rem!important}
+ .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn::before{width:33%!important;opacity:.8!important}
+}
+/* Telefon: cena dostane vlastní řádek, indikátor přečtení i rozbalovací tlačítko zůstanou viditelné. */
+@media(max-width:680px){
+ #osa .lux-spine{padding-left:0!important;gap:10px!important}
+ .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn,
+ #osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn,
+ #osa .lux-spine>.lux-fold.is-transfer>.lux-fold-h>.lux-fold-btn {
+   min-height:94px!important;padding:12px 11px!important;gap:8px!important;
+   border-radius:15px!important;flex-wrap:wrap!important;justify-content:flex-start!important;
+ }
+ .lux-part .lux-fold>.lux-fold-h .lux-fold-node,
+ #osa .lux-spine>.lux-fold>.lux-fold-h .lux-fold-node{flex:0 0 34px!important;width:34px!important;height:34px!important;font-size:1rem!important}
+ .lux-part .lux-fold .lux-fold-btn>.lux-fold-txt{flex:1 1 calc(100% - 140px)!important;min-width:0!important;}
+ .lux-part .lux-fold .lux-fold-btn .lux-fold-t{font-size:1.02rem!important;line-height:1.22!important}
+ .lux-part .lux-fold .lux-fold-btn .lux-fold-s{font-size:.72rem!important}
+ #osa .lux-fold-btn .p14-eyebrow{font-size:.53rem!important;letter-spacing:.09em!important}
+ .lux-part .lux-fold>.lux-fold-h .lux-read{width:26px!important;height:26px!important;flex-basis:26px!important;font-size:.87rem!important}
+ .lux-part .lux-fold>.lux-fold-h .lux-fold-chev{width:29px!important;height:29px!important;flex-basis:29px!important;font-size:.82rem!important}
+ .lux-part .lux-fold>.lux-fold-h .lux-fold-meta:not(:empty){
+   order:6!important;flex:0 1 auto!important;max-width:calc(100% - 44px)!important;
+   margin-left:42px!important;padding:5px 9px!important;font-size:.72rem!important;
+ }
+ .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn::before{width:45%!important;opacity:.38!important}
+ #premium2027Overview .p13-tile{min-height:240px!important;padding:120px 18px 18px!important}
+}
+@media(max-width:400px){
+ .lux-part .lux-fold .lux-fold-btn>.lux-fold-txt{flex-basis:calc(100% - 128px)!important}
+ .lux-part .lux-fold>.lux-fold-h .lux-read{flex-basis:24px!important;width:24px!important;height:24px!important}
+ .lux-part .lux-fold>.lux-fold-h .lux-fold-chev{flex-basis:25px!important;width:25px!important;height:25px!important}
+}
+@media(prefers-reduced-motion:reduce){.lux-part .lux-fold>.lux-fold-h>.lux-fold-btn{transition:none!important}}

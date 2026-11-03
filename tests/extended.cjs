@@ -20,6 +20,7 @@ for(const width of [390,1440]){
   const ids=await page.locator('.lux-fold[id]').evaluateAll(ns=>ns.map(n=>n.id));const sections=[];
   for(const id of ids){
    await page.evaluate(id=>{const node=document.getElementById(id);luxPartFor(node);if(!node.classList.contains('is-open'))luxToggle(id);node.scrollIntoView({block:'start'});},id);
+   await page.waitForFunction(id=>document.getElementById(id).classList.contains('is-settled'),id);
    await sleep(150);
    sections.push(await page.evaluate(id=>{
     const node=document.getElementById(id),origin=node.getBoundingClientRect();
@@ -49,7 +50,9 @@ for(const width of [390,1440]){
   const stored=await page.evaluate(()=>localStorage.getItem('cash_plan_v1'));await page.reload();await sleep(3500);assert.equal(await page.evaluate(()=>localStorage.getItem('cash_plan_v1')),stored);
   assert.equal(errors.length,0,JSON.stringify(errors));assert(sections.every(s=>s.open));states[label]={sections,controls};await context.close();
  }
- assert.deepEqual(states.current,states.baseline,`section layout differs at ${width}px`);results.sections.push({width,count:states.current.sections.length,controlScenarios:states.current.controls.length,layoutsEqual:true});
+ fs.writeFileSync(`test-results/layout-${width}.json`,JSON.stringify(states,null,2));
+ for(let i=0;i<states.current.sections.length;i++)assert.deepEqual(states.current.sections[i],states.baseline.sections[i],`section ${states.current.sections[i].id} at ${width}px`);
+ assert.deepEqual(states.current.controls,states.baseline.controls,`section layout differs at ${width}px`);results.sections.push({width,count:states.current.sections.length,controlScenarios:states.current.controls.length,layoutsEqual:true});
 }
 // Controlled cold-cache measurements. External resources are blocked identically.
 // Python serves uncompressed files. These are lab measurements, not production CWV.

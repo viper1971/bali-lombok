@@ -39,10 +39,19 @@ def styles(m):
         urls = re.findall(r"url\(\s*(?:\"([^\"]*)\"|'([^']*)'|([^)]*))\)", c)
         if '@import' in c or any(not next((v for v in u if v), '').strip().startswith(('http:', 'https:', 'data:', '//', '#')) for u in urls):
             raise ValueError(f'Unsafe CSS relocation: {p}')
-    name = emit('css', '\n'.join('/* '+p+' */\n'+c for p,c in zip(paths,contents)), paths)
+    chunks, batch, size = [], [], 0
+    for path, content in zip(paths, contents):
+        if batch and size + len(content.encode()) > 64000:
+            chunks.append(batch); batch, size = [], 0
+        batch.append((path, content)); size += len(content.encode())
+    if batch: chunks.append(batch)
+    links = ''
+    for batch in chunks:
+        name = emit('css', '\n'.join('/* '+p+' */\n'+c for p,c in batch), [p for p,c in batch])
+        links += f'<link rel="stylesheet" href="{name}">'
     anchors = ''.join('<style id="'+i+'"></style>' for t in tags for i in re.findall(r'\bid="([^"]+)"',t))
     comments = '\n'.join(re.findall(r'<!--.*?-->',m[0],re.S))
-    return f'<link rel="stylesheet" href="{name}">'+anchors+'\n'+comments
+    return links+anchors+'\n'+comments
 source = re.sub(pattern, styles, source, flags=re.S)
 # Charset must precede scripts and appear within the first 1024 bytes.
 source = source.replace('    <meta charset="UTF-8">\n','')

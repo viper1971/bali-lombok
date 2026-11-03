@@ -51,6 +51,8 @@ Zkontrolovány snímky úvodního viewportu pro oba rozměry. Rozdíly odpovída
 
 - Devět skriptů bez funkčního těla odstraněno z disku i HTML; zachována ID kotva. Osm obsahovalo pouze komentáře/bílé znaky, devátý jen prázdnou podmínku `typeof loadStreetViewCustom`. Závislosti ověřeny prohledáním zdrojů; přesný seznam je v `removed-scripts.json`.
 - JavaScript minifikován parserem Terser s `compress:false`, `mangle:false`: bez přejmenování a bez odstraňování funkcí. Výstupy zůstávají v samostatných scopech a pořadí.
-- Místní zdroje CSS/JS: 136 → 74 požadavků. Přenášený obsah těchto zdrojů: přibližně 1,41 → 1,27 MB proti první etapě (bez HTTP komprese). Výkonové testy obsahují vlastní počty a přesné velikosti.
+- Místní zdroje CSS/JS: 136 → 78 požadavků. Přenášený obsah těchto zdrojů: přibližně 1,41 → 1,27 MB proti první etapě (bez HTTP komprese). Výkonové testy obsahují vlastní počty a přesné velikosti.
 - CSS audit parserem PostCSS: žádné přesně totožné deklarace v rámci jednoho jednoduchého pravidla ani totožná pravidla ve stejném kontextu bez překročení at-rule hranice. Výsledek v `css-cleanup.json`. Různé override deklarace nejsou automaticky považovány za duplicity.
 - Nová sada `tests/extended.cjs` porovnává rozbalené sekce a laboratorní výkon proti původnímu PR #1. Výsledky a snímky jsou v artefaktu GitHub Actions. Dokud tento běh není zelený, novou etapu nepovažovat za regresně ověřenou.
+
+Velikost slučovaných CSS skupin je omezena na 64 kB (jednotlivé větší původní soubory se nedělí). Důvodem je měření prvního vykreslení; finální časové výsledky uvádí popis PR. Rozbalené sekce se měří až po dokončení jejich časovaného stavu `is-settled`.
