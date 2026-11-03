@@ -12,7 +12,11 @@ for(const width of [390,1440]){
  const states={};
  for(const [label,url] of Object.entries(urls)){
   const context=await browser.newContext({viewport:{width,height:900},serviceWorkers:'block',reducedMotion:'reduce'});
-  await context.route('**/*',r=>r.request().url().startsWith(url)?r.continue():r.abort());
+  await context.route('**/*',r=>{
+   const name=new URL(r.request().url()).pathname.split('/').pop();
+   if(['SINdolar.jpg','USAdolar.jpg','IDRbankovka.jpg'].includes(name))return r.fulfill({contentType:'image/jpeg',body:fs.readFileSync(name)});
+   return r.request().url().startsWith(url)?r.continue():r.abort();
+  });
   const page=await context.newPage();await page.clock.setFixedTime(new Date('2026-11-03T10:00:00Z'));
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(url);await sleep(3500);await page.evaluate(()=>luxSetLock(false));
@@ -53,6 +57,13 @@ for(const width of [390,1440]){
  fs.writeFileSync(`test-results/layout-${width}.json`,JSON.stringify(states,null,2));
  for(let i=0;i<states.current.sections.length;i++)assert.deepEqual(states.current.sections[i],states.baseline.sections[i],`section ${states.current.sections[i].id} at ${width}px`);
  assert.deepEqual(states.current.controls,states.baseline.controls,`section layout differs at ${width}px`);results.sections.push({width,count:states.current.sections.length,controlScenarios:states.current.controls.length,layoutsEqual:true});
+}
+// A failed banknote image must not be reinserted by the mutation observer.
+{
+ const context=await browser.newContext({serviceWorkers:'block'});let attempts=0;
+ await context.route('**/*',r=>{if(/(?:SINdolar|USAdolar|IDRbankovka)\.jpg/.test(r.request().url()))attempts++;return r.request().url().startsWith(urls.current)?r.continue():r.abort();});
+ const page=await context.newPage();await page.goto(urls.current);await sleep(3500);await page.evaluate(()=>{luxSetLock(false);luxPartFor(document.getElementById('f-hotovost'));luxToggle('f-hotovost');document.getElementById('f-hotovost').scrollIntoView();});await sleep(2000);
+ assert(attempts>0&&attempts<=3,`banknote request loop: ${attempts}`);assert.equal(await page.locator('#hotovost .tj-own').count(),0);results.failedImages={attempts,retryLoop:false};await context.close();
 }
 // Controlled cold-cache measurements. External resources are blocked identically.
 // Python serves uncompressed files. These are lab measurements, not production CWV.

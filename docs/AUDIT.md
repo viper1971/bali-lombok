@@ -56,3 +56,6 @@ Zkontrolovány snímky úvodního viewportu pro oba rozměry. Rozdíly odpovída
 - Nová sada `tests/extended.cjs` porovnává rozbalené sekce a laboratorní výkon proti původnímu PR #1. Výsledky a snímky jsou v artefaktu GitHub Actions. Dokud tento běh není zelený, novou etapu nepovažovat za regresně ověřenou.
 
 Velikost slučovaných CSS skupin je omezena na 64 kB (jednotlivé větší původní soubory se nedělí). Důvodem je měření prvního vykreslení; finální časové výsledky uvádí popis PR. Rozbalené sekce se měří až po dokončení jejich časovaného stavu `is-settled`.
+
+### Oprava opakovaných pokusů o obrázky bankovek
+Rozšířená kontrola odhalila původní smyčku `imgScan → vložení obrázku → error → odstranění → MutationObserver → imgScan`. Karta si nyní pamatuje neúspěšnou URL a obnoví pokus při události online. Test ověřuje nejvýše tři pokusy pro tři bankovky při nedostupnosti. Pro vizuální srovnání se použijí skutečné místní kopie těchto tří obrázků v obou verzích, aby síťová chyba původní verze nezpůsobovala náhodné rozměry.

@@ -1385,6 +1385,7 @@ function luxQRSvg(text, px) {
         return next();
     }
     function imgPump() { while (imgBusy < 3 && imgQueue.length) { var id = imgQueue.shift(); imgBusy++; imgPend[id] = 1; (function (id) { imgResolve(id).then(function () { imgBusy--; delete imgPend[id]; imgScan(); imgPump(); }); })(id); } }
+    window.addEventListener('online', function () { [].forEach.call(document.querySelectorAll('#hotovost [data-cash-image-failed]'), function (card) { delete card.dataset.cashImageFailed; }); imgScan(); });
     function imgBox(host, id, title, link) {
         var c = imgCache[id]; if (!c || !c.c) return null; var idx = 0, box = document.createElement('div'); box.className = 'tj-pic'; box.setAttribute('data-img', id);
         var img = document.createElement('img'); img.alt = title; img.loading = 'lazy'; img.decoding = 'async'; img.referrerPolicy = 'no-referrer'; box.appendChild(img);
@@ -1414,8 +1415,8 @@ function luxQRSvg(text, px) {
             for (var i = 0; i < 3; i++) { var id = 'p:' + k + ':' + i; if (st.querySelector('[data-img="' + id + '"]') || !imgWant(id, 'p:' + k)) continue; var box = imgBox(st, id, S[i], true); if (box) st.appendChild(box); }
         });
         [].forEach.call(document.querySelectorAll('#hotovost .cx-e'), function (card, i) {
-            if (card.querySelector(':scope > .tj-pic') || i > 2) return; var f = CASH_IMG[i], box = document.createElement('div'), im = document.createElement('img');
-            box.className = 'tj-pic tj-own'; im.alt = ['Singapurské dolary', 'Americké dolary', 'Indonéské rupie'][i]; im.decoding = 'async'; im.loading = 'lazy'; im.addEventListener('load', function () { im.classList.add('is-ok'); }); im.addEventListener('error', function () { box.remove(); }); im.src = f; box.appendChild(im);
+            if (card.querySelector(':scope > .tj-pic') || i > 2 || card.dataset.cashImageFailed === CASH_IMG[i]) return; var f = CASH_IMG[i], box = document.createElement('div'), im = document.createElement('img');
+            box.className = 'tj-pic tj-own'; im.alt = ['Singapurské dolary', 'Americké dolary', 'Indonéské rupie'][i]; im.decoding = 'async'; im.loading = 'lazy'; im.addEventListener('load', function () { im.classList.add('is-ok'); }); im.addEventListener('error', function () { card.dataset.cashImageFailed = f; box.remove(); }); im.src = f; box.appendChild(im);
             box.addEventListener('click', function () { if (window.openImageInModal) window.openImageInModal(f); }); card.insertBefore(box, card.firstChild);
         });
         [].forEach.call(document.querySelectorAll('#tjFoodTbl .tj-grp'), function (g) {
