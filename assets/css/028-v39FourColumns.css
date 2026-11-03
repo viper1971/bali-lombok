@@ -1,0 +1,51 @@
+
+/* Premium v39 — skutečná mřížka: 4 karty na čtyři stejně široké sloupce PC.
+   Opravuje CSS columns, které rozdělilo karty do dvou sloupců a ponechalo prázdné místo. */
+#f-konfig .p35-cards{
+ display:grid!important;
+ grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ grid-auto-flow:row!important;
+ align-items:start!important;
+ align-content:start!important;
+ gap:12px!important;
+ columns:auto!important;
+ column-count:auto!important;
+ width:100%!important;
+ max-width:100%!important;
+ min-width:0!important;
+}
+#f-konfig .p35-cards>.p35-card{
+ display:flex!important;
+ flex-direction:column!important;
+ width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ max-width:none!important;
+ min-width:0!important;
+ margin:0!important;
+ padding:14px!important;
+ align-self:start!important;
+ break-inside:auto!important;
+ vertical-align:initial!important;
+}
+#f-konfig .p35-card .p35-content{min-width:0!important;overflow-wrap:anywhere!important}
+#f-konfig .p35-card .p35-line{grid-template-columns:minmax(0,1fr) auto!important;gap:5px!important}
+#f-konfig .p35-card .p35-line b{white-space:nowrap!important}
+#f-konfig .p35-card header{min-width:0!important;gap:8px!important}
+#f-konfig .p35-card header>div{min-width:0!important}
+#f-konfig .p35-card h3{font-size:14px!important;line-height:1.25!important}
+#f-konfig .p35-card .p35-kicker{font-size:9px!important}
+#f-konfig .p35-card .p35-content{font-size:11.5px!important;line-height:1.4!important}
+#f-konfig .p35-card .p35-icon{width:30px!important;height:30px!important;flex:0 0 30px!important;font-size:16px!important}
+#f-konfig .p35-card>a{margin-top:7px!important}
+#f-rozpis .p22-metrics{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+#f-rozpis .p22-metrics>*{min-width:0!important;height:auto!important}
+@media(max-width:1150px){
+ #f-konfig .p35-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #f-rozpis .p22-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:680px){
+ #f-konfig .p35-cards{grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+ #f-konfig .p35-cards>.p35-card{padding:12px!important}
+ #f-rozpis .p22-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}

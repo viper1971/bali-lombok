@@ -1,0 +1,148 @@
+
+
+/* ============================================================
+   PREMIUM 2027 — design layer, keeps legacy calculations intact
+   ============================================================ */
+:root { --premium-ink:#0b1627; --premium-teal:#13b6aa; --premium-gold:#e2c58c; --premium-radius:22px; }
+[data-theme="dark"] {
+ --bg-color:#071321; --bg-gradient:radial-gradient(ellipse 90% 55% at 50% -12%,rgba(14,120,126,.22),transparent 72%),linear-gradient(180deg,#071321,#0b1728 58%,#071321);
+ --surface:#101f31;--surface-hover:#192b40;--hotel-surface:#12253a;
+ --primary:#6ce0d2;--primary-light:#b4f3e9;--accent:#28c2b1;
+ --accent-gradient:linear-gradient(135deg,#0c827e,#1cbaae);
+ --gold:#e2c58c;--text-main:#f4f8fc;--text-muted:#b5c5d4;
+ --border:rgba(173,210,231,.17);--shadow:0 16px 48px rgba(0,0,0,.23);
+ --lux-card:#112338;--lux-card-2:#182d43;--lux-card-3:#203951;
+ --lux-deep-a:#123c4b;--lux-deep-b:#176b73;--on-primary:#071321;
+}
+[data-theme="light"] {
+ --bg-color:#f3f7fa;--bg-gradient:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(23,173,167,.1),transparent 70%),linear-gradient(180deg,#f3f7fa,#eaf1f5);
+ --surface:#ffffff;--surface-hover:#edf5f7;--hotel-surface:#ffffff;
+ --primary:#087d79;--primary-light:#087d79;--accent:#087e7b;
+ --accent-gradient:linear-gradient(135deg,#087d79,#10a99d);
+ --gold:#9c6c26;--text-main:#102337;--text-muted:#4e6578;
+ --border:rgba(24,71,98,.17);--shadow:0 12px 38px rgba(24,58,83,.09);
+ --lux-card:#fff;--lux-card-2:#f2f7fa;--lux-card-3:#e7f0f5;
+ --lux-deep-a:#0a5962;--lux-deep-b:#128e8b;--on-primary:#fff;
+}
+html { scroll-padding-top:88px; }
+body {font-family:'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:-.012em; overflow-wrap:break-word;}
+body::selection {background:#2cb5a5;color:#061827;}
+:where(button,a,input,select,textarea,summary):focus-visible {outline:3px solid #24c7b9!important;outline-offset:3px;}
+button,select,input,textarea {font:inherit;}
+button {touch-action:manipulation;}
+.hero {min-height:min(790px,88svh);padding:112px 24px 98px;isolation:isolate;}
+.hero::before {content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(5,17,31,.89),rgba(5,24,37,.64) 50%,rgba(5,17,31,.76)),url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2000&q=82') center/cover no-repeat;}
+.hero::after {content:"";position:absolute;inset:auto 0 0;height:32%;z-index:-1;background:linear-gradient(transparent,var(--bg-color));}
+.hero-inner {max-width:1040px; margin:auto;}
+.hero h1 {font-size:clamp(2.5rem,6.5vw,5.7rem);font-weight:800;letter-spacing:-.065em;line-height:1.08;text-wrap:balance;text-shadow:0 8px 35px rgba(0,0,0,.5);}
+.hero .badge {background:rgba(7,26,42,.68);border:1px solid rgba(173,241,227,.45);color:#d9fff7;backdrop-filter:blur(14px);letter-spacing:.13em;}
+.hero .cd-card {background:rgba(7,25,39,.64);border:1px solid rgba(211,236,243,.28);border-radius:16px;min-width:94px;padding:15px 19px;box-shadow:0 12px 30px rgba(0,0,0,.13);}
+.hero .cd-value {color:#92fff0;font-size:clamp(1.45rem,2.6vw,2.2rem);}
+.hero .cd-key {color:#d5e8ec;}
+/* Hero intentionally stays white in both themes over its photograph */
+[data-theme="light"] .hero h1,[data-theme="light"] .hero p,[data-theme="light"] .hero label,[data-theme="light"] .hero .cd-value,[data-theme="light"] .hero .cd-key {color:#fff!important;}
+[data-theme="light"] .hero .cd-value {color:#92fff0!important;}
+.main-wrapper {max-width:1520px;margin:auto;padding:clamp(18px,3vw,48px);}
+.sec-title {font-size:clamp(1.45rem,2.4vw,2.2rem);letter-spacing:-.04em;line-height:1.25;}
+.sec-sub {line-height:1.7;max-width:80ch;}
+.bento-grid {gap:clamp(12px,1.8vw,24px);}
+.bento-card,.family-card-box,.selected-hotels-deck-wrapper,.active-flight-detail-box,.lux-progress {border-radius:var(--premium-radius)!important;box-shadow:var(--shadow);}
+.bento-card {padding:clamp(18px,2.2vw,32px);border:1px solid var(--border);}
+.bento-card:hover {transform:translateY(-3px);box-shadow:0 20px 54px rgba(0,0,0,.17);}
+.deck-item,.flight-mode-btn,.budget-mode-btn,.nav-item {border-radius:15px!important;transition:transform .18s ease,border-color .18s ease,background .18s ease;}
+.deck-item:hover,.flight-mode-btn:hover,.budget-mode-btn:hover {transform:translateY(-2px);}
+.fc-price {letter-spacing:-.06em;}
+.table-responsive {border:1px solid var(--border);background:var(--surface);}
+.table-responsive table {border-collapse:separate;border-spacing:0;}
+.table-responsive th {position:sticky;top:0;background:var(--lux-card-2);z-index:1;}
+.table-responsive tr:nth-child(even) {background:color-mix(in srgb,var(--surface-hover) 48%,transparent);}
+#floatingMenuBtn,#themeToggleBtn {top:16px;min-height:46px;box-shadow:0 10px 30px rgba(0,0,0,.17);backdrop-filter:blur(18px);}
+#floatingMenuBtn {right:18px;padding:10px 18px;border:1px solid var(--border);}
+#themeToggleBtn {left:18px;width:46px;height:46px;border:1px solid var(--border);}
+#toplistFloat {top:80px;right:18px;opacity:.83;transform:scale(.88);transform-origin:top right;}
+.menu-modal-box {width:min(760px,96vw);max-height:min(86svh,850px);border:1px solid var(--border);border-radius:26px;padding:clamp(18px,3vw,34px);box-shadow:0 35px 90px rgba(0,0,0,.4);}
+.menu-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.nav-item {min-height:58px;}
+.nav-item:hover {border-color:var(--accent);}
+.vip-floating-bar {border:1px solid var(--border);border-radius:18px;box-shadow:0 18px 55px rgba(0,0,0,.25);backdrop-filter:blur(22px);}
+.vfb-btn {min-height:40px;justify-content:center;border-radius:12px;}
+#uxSearchBtn {position:fixed!important;right:18px!important;top:auto!important;bottom:calc(110px + env(safe-area-inset-bottom))!important;z-index:10001!important;border-radius:999px!important;box-shadow:0 14px 38px rgba(0,0,0,.25)!important;}
+#uxSearchOverlay {z-index:11000!important;}
+#uxSearchOverlay .uxSearchDialog {border-radius:22px;}
+.premium-skip {position:fixed;left:50%;top:-100px;transform:translateX(-50%);z-index:12000;background:#fff;color:#102337;padding:12px 20px;border-radius:12px;}
+.premium-skip:focus {top:12px;}
+.premium-dock {position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:4px;z-index:9997;padding:6px;background:color-mix(in srgb,var(--surface) 92%,transparent);border:1px solid var(--border);border-radius:999px;box-shadow:0 14px 40px rgba(0,0,0,.24);backdrop-filter:blur(18px);}
+.premium-dock button {border:0;background:transparent;color:var(--text-main);padding:9px 14px;border-radius:999px;cursor:pointer;font-weight:800;font-size:.76rem;white-space:nowrap;}
+.premium-dock button:hover {background:var(--surface-hover);}
+.premium-dock button:first-child {background:var(--accent-gradient);color:#fff;}
+body {padding-bottom:calc(225px + env(safe-area-inset-bottom));}
+@media(max-width:900px){.selected-hotels-deck {grid-template-columns:repeat(2,minmax(0,1fr));}.hero {min-height:65svh;}.main-wrapper {padding:22px 14px;}}
+@media(max-width:650px){
+ .hero {padding:112px 16px 76px;min-height:70svh;}
+ .hero h1 {font-size:clamp(2.15rem,10vw,3.5rem);}
+ .hero .cd-card {min-width:65px;padding:10px 11px;}
+ .bento-grid {grid-template-columns:minmax(0,1fr);}
+ .bento-card,.bento-card.full {grid-column:1/-1;}
+ .selected-hotels-deck,.menu-grid {grid-template-columns:minmax(0,1fr);}
+ .flight-airline-switch,.budget-mode-switch {grid-template-columns:minmax(0,1fr);}
+ .premium-dock {bottom:calc(10px + env(safe-area-inset-bottom));width:min(96vw,440px);justify-content:space-around;}
+ .premium-dock button {padding:10px 9px;font-size:.72rem;}
+ #uxSearchBtn {bottom:calc(175px + env(safe-area-inset-bottom))!important;right:12px!important;}
+ #toplistFloat {top:76px;right:10px;transform:scale(.72);}
+ .vip-floating-bar {bottom:calc(72px + env(safe-area-inset-bottom));max-width:96vw;}
+ body {padding-bottom:calc(245px + env(safe-area-inset-bottom));}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after {scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important;}}
+
+
+/* PREMIUM 2027 / ETAPA 2: čitelnost, navigace a konzistentní komponenty */
+:root{--p2-space:clamp(16px,2vw,28px);--p2-ease:cubic-bezier(.2,.8,.2,1)}
+html{scroll-padding-top:90px}
+:is(section,[id],h2,h3){scroll-margin-top:92px}
+.premium-dock{max-width:calc(100vw - 24px)}
+.premium-dock button{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.premium-dock button[aria-current="page"]{background:var(--surface-hover);box-shadow:inset 0 0 0 1px var(--border)}
+/* Vyhledávání je dostupné v docku a přes Ctrl+K: žádné druhé plovoucí tlačítko. */
+body.premium-dock-ready #uxSearchBtn{position:absolute!important;left:-10000px!important;right:auto!important;bottom:auto!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}
+.premium-quicknav{display:flex;gap:9px;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;padding:12px 2px 16px;margin:0 auto 22px;max-width:1520px;scroll-snap-type:x proximity}
+.premium-quicknav a{flex:0 0 auto;scroll-snap-align:start;text-decoration:none;border:1px solid var(--border);background:var(--surface);color:var(--text-main);padding:10px 15px;border-radius:999px;font-size:.84rem;font-weight:750;box-shadow:0 5px 16px rgba(0,0,0,.07)}
+.premium-quicknav a:hover,.premium-quicknav a:focus-visible{border-color:var(--accent);background:var(--surface-hover)}
+.premium-quicknav a[aria-current="location"]{background:var(--accent-gradient);color:#fff;border-color:transparent}
+.premium-quicknav-wrap{max-width:1520px;margin:auto;padding:0 clamp(18px,3vw,48px)}
+.premium-quicknav-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800;color:var(--text-muted);margin-top:15px}
+.premium-backtop{display:none;position:fixed;right:18px;bottom:calc(88px + env(safe-area-inset-bottom));z-index:9995;border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--text-main);padding:11px 14px;box-shadow:var(--shadow);font-weight:800;cursor:pointer}
+.premium-backtop.is-visible{display:block}
+.bento-card,.selected-hotels-deck-wrapper,.family-card-box{transition:border-color .2s var(--p2-ease),box-shadow .2s var(--p2-ease),transform .2s var(--p2-ease)}
+.bento-card:focus-within,.deck-item:focus-within{border-color:var(--accent)}
+:where(.bento-card,.menu-modal-box,.selected-hotels-deck-wrapper) :is(p,li){line-height:1.7}
+:where(.bento-card,.menu-modal-box) a:not(.vfb-btn):not(.nav-item){text-underline-offset:3px}
+:where(button,input,select,textarea){accent-color:var(--accent)}
+:where(input,select,textarea){max-width:100%}
+:where(.table-responsive){overscroll-behavior-x:contain}
+:where(.table-responsive) :is(td,th){vertical-align:top}
+@media(max-width:650px){.premium-quicknav-wrap{padding:0 14px}.premium-quicknav{margin-bottom:12px}.premium-backtop{right:12px;bottom:calc(142px + env(safe-area-inset-bottom));padding:9px 12px}.premium-dock button{font-size:.75rem}.premium-dock{z-index:10002}.hero{padding-top:116px}}
+@media(prefers-reduced-motion:reduce){.premium-quicknav{scroll-behavior:auto}}
+/* PREMIUM v3: všechny odkazy rychlého přístupu na PC bez horizontálního posuvníku */
+@media (min-width: 901px) {
+ .premium-quicknav {display:flex;flex-wrap:wrap;overflow:visible;scroll-snap-type:none;justify-content:center;gap:8px;padding:12px 0 18px;max-width:none;}
+ .premium-quicknav a {flex:0 1 auto;white-space:normal;text-align:center;line-height:1.3;padding:10px 13px;}
+ .premium-quicknav-wrap {max-width:1600px;}
+}
+@media (max-width:900px) {
+ .premium-quicknav {display:flex;flex-wrap:wrap;overflow:visible;scroll-snap-type:none;gap:7px;}
+ .premium-quicknav a {flex:1 1 auto;text-align:center;white-space:normal;}
+}
+/* Samostatné viditelné vyhledávání, nezasahuje do TOPlist ani horního menu. */
+#premiumSearchQuick {display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--accent-gradient);color:#fff;border:1px solid transparent;border-radius:999px;padding:11px 18px;font:inherit;font-size:.9rem;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.14);min-height:44px;}
+#premiumSearchQuick:hover {filter:brightness(1.1)}
+#premiumSearchQuick:focus-visible {outline:3px solid var(--accent);outline-offset:3px}
+.premium-quicknav-heading {display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:15px;}
+.premium-quicknav-heading .premium-quicknav-label {margin:0;}
+@media(max-width:650px){#premiumSearchQuick{width:100%;}.premium-quicknav-heading{align-items:stretch;}}
+
+/* PREMIUM v4: jediné ovládání Obsah / Hledat / Nahoru.
+   Dock se umisťuje NAD rozpočtový banner, nikoliv přes něj. */
+#floatingMenuBtn, #bttBtn, .premium-backtop {display:none!important;}
+.premium-dock {bottom:calc(var(--premium-budget-clearance, 105px) + 12px + env(safe-area-inset-bottom))!important;z-index:10003;}
+@media(max-width:650px){.premium-dock{bottom:calc(var(--premium-budget-clearance, 120px) + 10px + env(safe-area-inset-bottom))!important;}}
+body.pres-on .premium-dock {display:none!important;}

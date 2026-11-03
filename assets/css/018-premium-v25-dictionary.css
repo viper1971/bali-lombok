@@ -1,0 +1,23 @@
+
+/* Účetní zdrojová tabulka zůstává v DOM pro výpočty; ovládací prvek už se nezobrazuje. */
+#f-rozpis #p22Source { display:none !important; }
+/* Slovníček – kompaktní desktop; mobilní dvousloupcový vzhled v původním CSS nezměněn. */
+@media (min-width:641px) {
+  #slovnicek { padding:20px 22px !important; }
+  #slovnicek .flip-grid { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px; }
+  #slovnicek .flip-card { height:138px;min-width:0; }
+  #slovnicek .flip-front,#slovnicek .flip-back { padding:12px 10px; }
+  #slovnicek .flip-front .x-fw-700_fs-1-1,
+  #slovnicek .flip-back .x-fw-700_fs-1-1_mb-4 { font-size:.92rem;line-height:1.25;overflow-wrap:anywhere; }
+  #slovnicek .flip-front .x-fs-75_c-text-muted_mt-10,
+  #slovnicek .flip-back .x-fs-75 { font-size:.67rem;line-height:1.3; }
+}
+@media (min-width:900px) {
+  #slovnicek .flip-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+}
+@media (min-width:1180px) {
+  #slovnicek .flip-grid { grid-template-columns:repeat(5,minmax(0,1fr)); }
+}
+@media (min-width:1550px) {
+  #slovnicek .flip-grid { grid-template-columns:repeat(6,minmax(0,1fr)); }
+}

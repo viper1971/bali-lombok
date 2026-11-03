@@ -1,0 +1,29 @@
+
+/* v13: čtyři jasně oddělené cíle, bez duplicit hotelů a rozpočtu */
+#premium2027Overview{width:100%;max-width:none!important;margin:24px auto 36px!important;padding:0!important;box-sizing:border-box}
+#premium2027Overview .p12-head{margin:0 0 20px}
+.p13-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;width:100%}
+.p13-tile{isolation:isolate;position:relative;min-width:0;min-height:265px;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;gap:9px;overflow:hidden;border-radius:22px;color:#fff!important;text-decoration:none!important;background:#10243a;border:1px solid rgba(255,255,255,.2);box-shadow:0 15px 35px rgba(8,23,39,.15);transition:transform .2s,box-shadow .2s}
+.p13-tile::before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--p13-photo);background-size:cover;background-position:center;filter:saturate(.9)}
+.p13-tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(7,22,36,.05),rgba(5,19,35,.97))}
+.p13-tile:hover{transform:translateY(-3px);box-shadow:0 20px 45px rgba(8,23,39,.22)}
+.p13-tile:focus-visible{outline:3px solid #0fb7af;outline-offset:3px}
+.p13-tile .p13-label{font-size:.7rem;letter-spacing:.1em;font-weight:800;color:#8be9dd}
+.p13-tile strong{font-size:clamp(1.18rem,1.65vw,1.65rem);line-height:1.18;letter-spacing:-.02em}
+.p13-tile>span:not(.p13-label){font-size:.85rem;color:#e6edf4;line-height:1.4}
+.p13-tile em{font-style:normal;font-size:.79rem;font-weight:800;color:#9cf1e4;margin-top:5px}
+/* původní generovaný dlouhý blok etapy se již nepoužívá */
+#premiumStageNavigator{display:none!important}
+/* časová osa využije celou šířku společného obsahu */
+#osa,#osa .lux-part-body,#osa .lux-spine{width:100%!important;max-width:none!important;box-sizing:border-box}
+#osa .lux-spine{margin:0!important;display:flex!important;flex-direction:column!important;gap:20px!important;padding-left:54px!important}
+#osa .lux-spine>.lux-fold{width:100%!important;max-width:none!important}
+/* neprůhledné titulní pruhy etap: žádné prosvítání počasí a obrázků */
+#osa .lux-fold-h,#osa .lux-fold-h .lux-fold-btn{isolation:isolate}
+#osa .lux-fold-h .lux-fold-btn{background-color:#edf5f7!important;background-image:none!important;opacity:1!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+html[data-theme="dark"] #osa .lux-fold-h .lux-fold-btn,body.dark #osa .lux-fold-h .lux-fold-btn{background-color:#14293b!important;color:#f7fbff!important}
+#osa .lux-fold-h .lux-fold-btn::before{opacity:0!important}
+#osa .lux-fold-h .lux-fold-t,#osa .lux-fold-h .lux-fold-s{position:relative;z-index:2}
+@media(max-width:1100px){.p13-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.p13-tile{min-height:225px}}
+@media(max-width:650px){#premium2027Overview{margin:14px auto 22px!important}.p13-grid{gap:10px}.p13-tile{padding:14px;min-height:190px;border-radius:16px}.p13-tile strong{font-size:1.03rem}.p13-tile>span:not(.p13-label){font-size:.73rem}.p13-tile em{font-size:.7rem}#osa .lux-spine{padding-left:29px!important}#osa .lux-spine::before{left:10px!important}}
+@media(max-width:390px){.p13-grid{grid-template-columns:1fr}.p13-tile{min-height:165px}}

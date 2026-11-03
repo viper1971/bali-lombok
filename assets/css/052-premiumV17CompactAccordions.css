@@ -1,0 +1,98 @@
+
+/* Desktop: elegantní nízká řádka místo dřívějších 98px karet. */
+.lux-part .lux-fold > .lux-fold-h > .lux-fold-btn,
+#osa .lux-spine > .lux-fold > .lux-fold-h > .lux-fold-btn,
+#osa .lux-spine > .lux-fold.is-transfer > .lux-fold-h > .lux-fold-btn {
+  min-height:66px!important;
+  padding:9px 15px!important;
+  gap:11px!important;
+  border-radius:14px!important;
+}
+#osa .lux-spine > .lux-fold.is-transfer > .lux-fold-h > .lux-fold-btn { min-height:62px!important; }
+#osa .lux-spine { gap:9px!important; }
+.lux-part .lux-fold > .lux-fold-h .lux-fold-node,
+#osa .lux-spine > .lux-fold > .lux-fold-h .lux-fold-node,
+#osa .lux-spine > .lux-fold.is-transfer > .lux-fold-h .lux-fold-node {
+  flex:0 0 34px!important;width:34px!important;height:34px!important;
+  font-size:1rem!important;box-shadow:0 2px 7px rgba(9,107,114,.12)!important;
+}
+.lux-part .lux-fold .lux-fold-btn > .lux-fold-txt,
+#osa .lux-spine .lux-fold-btn > .lux-fold-txt { gap:2px!important; }
+.lux-part .lux-fold .lux-fold-btn .lux-fold-t,
+#osa .lux-spine .lux-fold-btn .lux-fold-t {
+  font-size:clamp(.98rem,1.15vw,1.12rem)!important;
+  line-height:1.17!important;
+}
+.lux-part .lux-fold .lux-fold-btn .lux-fold-s,
+#osa .lux-spine .lux-fold-btn .lux-fold-s {
+  font-size:clamp(.68rem,.8vw,.78rem)!important;line-height:1.22!important;
+}
+#osa .lux-fold-btn .p14-eyebrow {font-size:.57rem!important;line-height:1.1!important;}
+.lux-part .lux-fold > .lux-fold-h .lux-fold-meta:not(:empty),
+#osa .lux-spine .lux-fold-btn .lux-fold-meta:not(:empty) {
+  padding:4px 9px!important; font-size:.71rem!important;
+  max-width:min(31%,290px)!important;
+}
+.lux-part .lux-fold > .lux-fold-h .lux-fold-chev,
+#osa .lux-spine .lux-fold-btn .lux-fold-chev {
+  flex:0 0 27px!important;width:27px!important;height:27px!important;font-size:.83rem!important;
+}
+/* Přečtené sekce zůstávají šedé a zelené označení se neztrácí. */
+.lux-part .lux-fold.is-read > .lux-fold-h .lux-read,
+#osa .lux-spine .lux-fold.is-read > .lux-fold-h .lux-read {
+  min-width:25px!important;height:25px!important;padding:0 7px!important;
+  font-size:.83rem!important;
+}
+.lux-part .lux-fold.is-read > .lux-fold-h .lux-read::after,
+#osa .lux-spine .lux-fold.is-read > .lux-fold-h .lux-read::after {
+  font-size:.67rem!important;margin-left:4px!important;
+}
+/* Tablet: zachovat čitelnost a rozložení bez kolizí. */
+@media (max-width:1020px) {
+  .lux-part .lux-fold > .lux-fold-h > .lux-fold-btn,
+  #osa .lux-spine > .lux-fold > .lux-fold-h > .lux-fold-btn,
+  #osa .lux-spine > .lux-fold.is-transfer > .lux-fold-h > .lux-fold-btn {
+    min-height:64px!important;padding:9px 11px!important;gap:8px!important;
+  }
+}
+/* Mobil: co nejnižší karty, ale nejméně 44px dotykový cíl. */
+@media (max-width:680px) {
+  #osa .lux-spine { gap:8px!important; }
+  .lux-part .lux-fold > .lux-fold-h > .lux-fold-btn,
+  #osa .lux-spine > .lux-fold > .lux-fold-h > .lux-fold-btn,
+  #osa .lux-spine > .lux-fold.is-transfer > .lux-fold-h > .lux-fold-btn {
+    min-height:62px!important;padding:8px 9px!important;gap:7px!important;
+    border-radius:12px!important;align-items:center!important;
+  }
+  .lux-part .lux-fold > .lux-fold-h .lux-fold-node,
+  #osa .lux-spine > .lux-fold > .lux-fold-h .lux-fold-node {
+    flex:0 0 30px!important;width:30px!important;height:30px!important;font-size:.86rem!important;
+  }
+  .lux-part .lux-fold .lux-fold-btn > .lux-fold-txt,
+  #osa .lux-spine .lux-fold-btn > .lux-fold-txt {
+    flex:1 1 calc(100% - 112px)!important;gap:2px!important;
+  }
+  .lux-part .lux-fold .lux-fold-btn .lux-fold-t,
+  #osa .lux-spine .lux-fold-btn .lux-fold-t { font-size:.94rem!important; }
+  .lux-part .lux-fold .lux-fold-btn .lux-fold-s,
+  #osa .lux-spine .lux-fold-btn .lux-fold-s { font-size:.68rem!important; }
+  .lux-part .lux-fold > .lux-fold-h .lux-fold-chev,
+  #osa .lux-spine .lux-fold-btn .lux-fold-chev {
+    flex:0 0 24px!important;width:24px!important;height:24px!important;
+  }
+  .lux-part .lux-fold.is-read > .lux-fold-h .lux-read,
+  #osa .lux-spine .lux-fold.is-read > .lux-fold-h .lux-read {
+    flex:0 0 23px!important;min-width:23px!important;width:23px!important;
+    height:23px!important;padding:0!important;
+  }
+  /* Cenový štítek má stále přirozené zalamování, nic se neořezává. */
+  .lux-part .lux-fold > .lux-fold-h .lux-fold-meta:not(:empty),
+  #osa .lux-spine .lux-fold-btn .lux-fold-meta:not(:empty) {
+    order:6!important;flex:0 1 auto!important;max-width:calc(100% - 37px)!important;
+    margin-left:37px!important;padding:4px 7px!important;font-size:.67rem!important;
+  }
+  .lux-part .lux-fold > .lux-fold-h > .lux-fold-btn::before,
+  #osa .lux-spine > .lux-fold > .lux-fold-h > .lux-fold-btn::before {
+    width:35%!important;opacity:.34!important;
+  }
+}

@@ -1,0 +1,41 @@
+
+/* PREMIUM v9 – čitelnější itinerář, bez zásahu do obsahu a výpočtů */
+#premiumStageNavigator{margin:18px 0 22px;padding:18px;border:1px solid var(--border);border-radius:22px;background:var(--surface);box-shadow:var(--shadow);min-width:0}
+.psn-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.psn-heading strong{font-size:1.03rem;color:var(--text-main)}
+.psn-heading small{color:var(--text-muted);font-weight:600}
+.psn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:9px}
+.psn-link{display:flex;align-items:center;gap:10px;min-width:0;text-decoration:none!important;border:1px solid var(--border);background:var(--surface-hover);color:var(--text-main)!important;padding:11px 12px;border-radius:13px;transition:border-color .2s,background .2s,transform .2s}
+.psn-link:hover,.psn-link:focus-visible{border-color:var(--primary);transform:translateY(-1px);outline-offset:2px}
+.psn-num{display:grid;place-items:center;flex:0 0 31px;width:31px;height:31px;border-radius:10px;background:linear-gradient(135deg,#0d9488,#176b84);color:white;font-size:.78rem;font-weight:800}
+.psn-name{min-width:0;overflow-wrap:anywhere;font-size:.86rem;font-weight:750;line-height:1.3}
+.psn-link.is-current{border-color:#0d9488;box-shadow:inset 0 0 0 1px #0d9488}
+#osa .lux-spine{gap:17px}
+#osa .lux-fold:not(.is-transfer)>.lux-fold-h>.lux-fold-btn{border-radius:19px;border-width:1px;border-left:4px solid #0d9488;padding:19px 21px;min-height:76px}
+#osa .lux-fold.is-open:not(.is-transfer)>.lux-fold-h>.lux-fold-btn{background-image:linear-gradient(110deg,rgba(13,148,136,.12),transparent 55%);border-color:#0d9488}
+#osa .lux-fold.is-transfer>.lux-fold-h>.lux-fold-btn{border-radius:14px}
+#osa .lux-fold-t{line-height:1.28}
+#osa .lux-fold-s{line-height:1.45}
+#osa .lux-fold-btn{min-width:0}
+#osa .lux-fold-txt{min-width:0}
+#osa .lux-fold-pad{min-width:0}
+#osa .timeline-date-container{white-space:normal;line-height:1.4;overflow-wrap:anywhere}
+@media(max-width:720px){
+ #premiumStageNavigator{padding:13px;margin:14px 0 18px;border-radius:17px}
+ .psn-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+ .psn-link{padding:9px 8px;gap:7px;border-radius:11px}
+ .psn-num{width:26px;height:26px;flex-basis:26px;font-size:.72rem}
+ .psn-name{font-size:.76rem}
+ #osa .lux-spine{padding-left:40px;gap:12px}
+ #osa .lux-spine>.lux-fold>.lux-fold-h .lux-fold-node{left:-39px}
+ #osa .lux-spine>.lux-fold.is-transfer>.lux-fold-h .lux-fold-node{left:-37px}
+ #osa .lux-spine::before{left:17px}
+ #osa .lux-fold:not(.is-transfer)>.lux-fold-h>.lux-fold-btn{padding:13px 11px;gap:7px;min-height:66px;border-radius:14px}
+ #osa .lux-fold-t{font-size:.96rem}
+ #osa .lux-fold-s{font-size:.73rem}
+ #osa .lux-fold-meta{max-width:42%;font-size:.65rem;padding:4px 6px}
+ #osa .lux-fold.is-transfer>.lux-fold-h>.lux-fold-btn{padding:10px 9px}
+ #osa .lux-fold-pad{padding-top:11px}
+}
+@media(max-width:370px){.psn-grid{grid-template-columns:1fr 1fr}.psn-link{padding:8px 6px}.psn-name{font-size:.72rem}}
+@media(prefers-reduced-motion:reduce){.psn-link{transition:none}}

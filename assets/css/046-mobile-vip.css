@@ -1,0 +1,190 @@
+
+/* =====================================================================
+   MOBILE VIP – finální vrstva pro telefony (≤ 640 px)
+   Cíl: žádné přetékání, žádné úzké sloupce se zalomením po pár písmenech,
+   jednotné odsazení a čitelná typografie. Desktop se nemění.
+   ===================================================================== */
+
+/* --- Přepínače hotelů: řádek na desktopu zůstává, na mobilu se skládají pod sebe --- */
+.sqs-buttons.sqs-row:not(.sqs-row-scroll) { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; gap: 8px; align-items: center; width: 100%; }
+.sqs-row:not(.sqs-row-scroll) > .sqs-btn { display: inline-block !important; white-space: nowrap !important; flex: 1; }
+
+@media (max-width: 640px) {
+
+    /* ---------- Základní pojistky ---------- */
+    html, body { max-width: 100%; overflow-x: clip; }
+    img, video, canvas, iframe, svg { max-width: 100%; }
+    .main-wrapper { padding-left: 10px; padding-right: 10px; }
+    p, li, dd, dt, td, th, label, summary, h1, h2, h3, h4, h5, h6, span, strong, b, small, a, button, div {
+        overflow-wrap: break-word;
+        word-break: normal;
+        hyphens: manual;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero-inner select, #heroFlightSelect { width: 100% !important; max-width: 100% !important; box-sizing: border-box; }
+    .hero-inner > div { max-width: 100%; }
+
+    /* ---------- Dashboard / postup ---------- */
+    .lux-dash { padding-left: 0; padding-right: 0; }
+    .lp-clocks { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; align-items: center; width: 100%; }
+    .lp-clocks > .lp-clock { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; min-width: 0; white-space: normal; }
+    .lp-clocks > .lp-clock:first-child { grid-column: 1; grid-row: 1; }
+    .lp-clocks > .lp-diff { grid-column: 2; grid-row: 1; white-space: nowrap; flex: 0 0 auto; }
+    .lp-clocks > .lp-clock:last-child { grid-column: 1 / -1; grid-row: 2; }
+    .lux-progress .lp-btns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; width: 100%; flex: 1 1 100%; margin-left: 0; justify-content: stretch; }
+    .lux-progress .lp-btns > .lux-tool { width: 100%; justify-content: center; text-align: center; white-space: normal; line-height: 1.25; padding: 10px 8px; margin: 0; }
+    .lux-progress .lp-btns > .lp-clear { grid-column: 1 / -1; }
+
+    /* ---------- Hlavičky částí a složek ---------- */
+    .lux-part-head { padding: 18px 16px; gap: 12px; }
+    .lux-part-tools { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .lux-part-tools .lux-tool { width: 100%; justify-content: center; text-align: center; white-space: normal; }
+    .lux-spine { padding-left: 34px; }
+    .lux-spine::before { left: 13px; }
+    .lux-spine > .lux-fold > .lux-fold-h .lux-fold-node { left: -34px; width: 28px; height: 28px; font-size: 0.82rem; box-shadow: 0 0 0 4px var(--bg-color), 0 4px 12px rgba(0, 0, 0, .3); }
+    .lux-spine > .lux-fold.is-transfer > .lux-fold-h .lux-fold-node { left: -31px; width: 22px; height: 22px; font-size: 0.7rem; }
+    .lux-fold-btn { gap: 10px; padding-left: 12px; padding-right: 12px; }
+    .lux-fold-txt { min-width: 0; flex: 1 1 auto; }
+    .lux-fold-t { font-size: 1.02rem; overflow-wrap: break-word; }
+    .lux-fold-s { overflow-wrap: break-word; }
+    .lux-fold-meta { flex: 0 0 auto; }
+
+    /* ---------- Karty hotelů ---------- */
+    .uber-hotel-card { padding: 16px 14px; border-radius: 22px; margin-bottom: 18px; }
+    .uber-top-bar { flex-direction: column; align-items: stretch; flex-wrap: nowrap; gap: 10px; margin-bottom: 12px; padding-bottom: 12px; }
+    .uber-top-bar .hotel-radio-label { width: 100%; flex: 0 0 auto; align-items: flex-start; gap: 10px; }
+    .uber-top-bar .hotel-title-text { flex: 1 1 0; min-width: 0; font-size: 1.04rem !important; line-height: 1.3; overflow-wrap: break-word; }
+    .uber-top-bar .custom-checkbox-round { margin-top: 1px; }
+    .uber-top-bar .hotel-status-tag { align-self: flex-start; max-width: 100%; white-space: normal; text-align: center; padding: 6px 14px !important; font-size: 0.76rem !important; }
+    .uber-price-badge { display: flex; flex-wrap: wrap; align-items: baseline; width: 100%; max-width: 100%; box-sizing: border-box; gap: 4px 8px; padding: 10px 14px; border-radius: 16px; line-height: 1.35; font-size: 0.86rem; }
+    .uber-price-badge > span { white-space: normal; }
+    .uber-hotel-card > p { display: block !important; line-height: 1.5; font-size: 0.88rem !important; }
+    .uber-hotel-card > p > strong { display: inline; }
+    .uber-media-grid { gap: 10px; margin: 14px 0; }
+    .uber-info-panel { grid-template-columns: minmax(0, 1fr); gap: 10px; padding: 12px 14px; margin: 12px 0; font-size: 0.86rem; line-height: 1.5; }
+    .uber-info-panel > * { min-width: 0; overflow-wrap: break-word; }
+
+    /* ---------- Rychlá volba hotelu ---------- */
+    .stage-quick-switcher { padding: 12px !important; gap: 8px !important; }
+    .sqs-label { font-size: 0.74rem !important; line-height: 1.35; }
+    .sqs-buttons, .sqs-buttons.sqs-row, .sqs-buttons.sqs-row-scroll {
+        display: grid !important; grid-template-columns: minmax(0, 1fr) !important; gap: 8px !important;
+        overflow: visible !important; width: 100% !important; align-items: stretch !important;
+    }
+    .sqs-buttons > .sqs-btn, .sqs-buttons.sqs-row > .sqs-btn, .sqs-row:not(.sqs-row-scroll) > .sqs-btn {
+        display: flex !important; align-items: center; justify-content: center; text-align: center !important;
+        white-space: normal !important; width: 100% !important; max-width: 100% !important; min-width: 0 !important;
+        min-height: 46px; padding: 10px 14px !important; line-height: 1.3; font-size: 0.86rem !important; flex: 0 0 auto;
+    }
+
+    /* ---------- Záhlaví map / štítky ---------- */
+    .sg-map-header, .ulu-map-header, .ubud-map-header, .ubud-port-map-header, .lombok-header { gap: 8px !important; }
+    .sg-badge-group, .ulu-badge-group, .ubud-badge-group, .ubud-port-badge-group, .lombok-badge-group { flex-wrap: wrap !important; gap: 8px !important; min-width: 0; max-width: 100%; }
+    .sg-tag-badge, .ulu-tag-badge, .ubud-port-tag-badge, .lombok-tag-badge, .sg-time-badge, .ubud-time-badge {
+        flex: 0 1 auto; max-width: 100%; white-space: normal; text-align: left; line-height: 1.3; word-break: normal; overflow-wrap: normal;
+    }
+    .sg-tag-badge > span, .ubud-port-tag-badge > span, .lombok-tag-badge > span { white-space: nowrap; }
+
+    /* ---------- Rozpočtová tabulka ---------- */
+    .vip-budget-table th { padding: 12px 10px; font-size: 0.66rem; letter-spacing: 0.3px; word-break: normal; overflow-wrap: normal; hyphens: none; }
+    .vip-budget-table td { padding: 10px; }
+    .vip-budget-table th:first-child, .vip-budget-table td:first-child { width: 60% !important; }
+    .vip-budget-table.view-pers .col-pers, .vip-budget-table.view-fam .col-fam, .vip-budget-table.view-sing .col-sing { width: 40% !important; white-space: nowrap; }
+    .vip-budget-table th.col-pers, .vip-budget-table th.col-fam, .vip-budget-table th.col-sing { white-space: normal; }
+    .item-cell-title { flex-wrap: wrap; align-items: flex-start; row-gap: 4px; }
+    .item-cell-title > span:not(.item-icon-box) { flex: 1 1 0; min-width: 0; overflow-wrap: break-word; }
+    .item-cell-title > div { flex: 1 0 100%; min-width: 0; margin-top: 2px; }
+    .item-icon-box { margin-right: 8px; }
+
+    /* ---------- Srovnání s CK ---------- */
+    .cmp-v2-card { padding: 18px 14px; }
+    .cmp-v2-card.our { padding-top: 30px; }
+    .feat-pill { display: block; line-height: 1.45; }
+    .feat-pill > strong { display: inline; }
+
+    /* ---------- Upozornění MHD – pevný text místo běžícího řádku ---------- */
+    .marquee-container { overflow: visible !important; }
+    .marquee-text { display: block !important; padding-left: 0 !important; animation: none !important; white-space: normal !important; transform: none !important; }
+
+    /* ---------- Gantt: výběr aerolinky ---------- */
+    .gx-air-pick { width: 100%; box-sizing: border-box; flex-wrap: wrap; }
+    .gx-air-pick > label { white-space: nowrap; flex: 0 0 auto; }
+    .gx-air-pick > select { flex: 1 1 0; min-width: 0; max-width: 100%; }
+}
+
+@media (max-width: 400px) {
+    .main-wrapper { padding-left: 8px; padding-right: 8px; }
+    .uber-hotel-card { padding: 14px 12px; }
+    .lux-part-head { padding: 16px 14px; }
+    .lux-fold-t { font-size: 0.98rem; }
+}
+
+@media (max-width: 640px) {
+    /* ---------- Půjčení motorek / finanční karty ---------- */
+    .scooter-main-card, .cost-chart-card { padding: 16px 14px; border-radius: 20px; font-size: 1rem; margin-bottom: 18px; }
+    .scooter-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .scooter-title-wrap { align-items: flex-start; gap: 12px; width: 100%; }
+    .scooter-title-wrap > div:last-child { min-width: 0; flex: 1 1 0; }
+    .scooter-icon { flex: 0 0 auto; padding: 10px; border-radius: 14px; }
+    .scooter-icon svg { width: 22px; height: 22px; }
+    .scooter-title, .cost-chart-title { font-size: 1.18rem; line-height: 1.3; }
+    .scooter-subtitle { font-size: 0.9rem; }
+    .scooter-text { font-size: 0.98rem; line-height: 1.6; margin-bottom: 1.1rem; }
+    .scooter-badge { font-size: 0.86rem !important; padding: 0.4rem 0.9rem !important; max-width: 100%; text-align: center; }
+    .scooter-btn { font-size: 1rem; padding: 0.9rem 1rem; text-align: center; }
+    .cost-chart-header { gap: 10px; margin-bottom: 1rem; }
+    .financial-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-top: 1rem; }
+    .financial-box { padding: 1rem; border-radius: 1rem; }
+    .fin-price-usd { font-size: 1.3rem; }
+
+    /* ---------- Plovoucí prvky ---------- */
+    #bttBtn { bottom: 150px; }
+
+    /* ---------- Měna ---------- */
+    .cx-card { padding: 16px 14px; border-radius: 20px; }
+    .cx-env { grid-template-columns: minmax(0, 1fr); }
+    .cx-rate { min-width: 0; flex: 1 1 calc(50% - 5px); }
+    .cx-row { grid-template-columns: 38px minmax(0, 1fr) auto; padding: 11px 12px; }
+    .cx-r-amt { white-space: nowrap; text-align: right; }
+    .cx-tip ul { padding-left: 18px; }
+    .cx-tip li > strong { display: inline; }
+    .cv-daycmp { padding: 12px; }
+    .cv-day-row { grid-template-columns: minmax(0, 1fr) auto; }
+    .cv-day-track { grid-area: 2 / 1 / auto / -1; }
+    .cv-day-who small { display: block; }
+}
+
+@media (max-width: 640px) {
+    .spots-grid, .spots-grid-ulu, .spots-grid-ubud, .spots-grid-lombok, .spots-grid-kuta, .spots-grid-singapore { grid-template-columns: minmax(0, 1fr) !important; gap: 12px; }
+    .spot-card-sg, .spot-card, .spot-card-ubud, .spot-card-lombok, .spot-card-kuta, .spot-card-singapore { min-width: 0; padding: 12px; }
+    [class*="spot-title"] { overflow-wrap: break-word; }
+    .sv-play { max-width: calc(100% - 20px); white-space: normal; }
+    .sv-fs { max-width: calc(100% - 20px); }
+    .lux-acc-txt { min-width: 0; }
+    .financial-grid, .bento-grid, .flip-grid { min-width: 0; }
+}
+
+@media (max-width: 400px) {
+    .sg-tag-badge > span, .ubud-port-tag-badge > span, .lombok-tag-badge > span { white-space: normal; }
+    .sv-fs { font-size: 0.66rem; padding: 6px 10px; right: 8px; top: 8px; }
+}
+
+@media (max-width: 640px) {
+    [class*="day-block"] { padding: 14px 12px !important; min-width: 0; }
+    [class*="day-block"] div[style*="grid"] { grid-template-columns: minmax(0, 1fr) !important; }
+    [class*="day-block"] div[style*="grid"] > *, .sv-card { min-width: 0; max-width: 100%; }
+}
+
+@media (max-width: 640px) {
+}
+
+@media (max-width: 640px) {
+    .cx-tip li, .cx-tip ul > li { display: block !important; line-height: 1.5; }
+    .cx-tip li > strong, .cx-tip li > b { display: inline !important; }
+    ul > li:has(> strong:first-child) { min-width: 0; }
+}
+
+@media (max-width: 640px) {
+    .sqs-buttons.sqs-row:not(.sqs-row-scroll) { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; gap: 8px !important; overflow: visible !important; width: 100% !important; align-items: stretch !important; flex-wrap: initial !important; }
+}

@@ -1,0 +1,12 @@
+
+/* PREMIUM v34 – jediný přehled nákladů místo dvou podobných dashboardů.
+   Prvky v18 zůstávají v DOM jako zdroj pro původní JS a přepočty. */
+#f-konfig #rozpocet .pf18-hero,
+#f-konfig #rozpocet .pf18-section-heading,
+#f-konfig #rozpocet .pf18-kpi-slot,
+#f-konfig #rozpocet .pf18-finance-grid {display:none!important;}
+#f-konfig .v31-financial-detail{margin-top:12px!important;padding-top:0!important;border-top:0!important;}
+#f-konfig #rozpocet .pf18-shell{gap:13px!important;}
+#f-konfig #rozpocet .pf18-hotel-panel{margin-bottom:0;}
+#f-konfig #rozpis-nakladu{margin-top:0;}
+#f-konfig .p22-mast-copy h3{max-width:680px;}

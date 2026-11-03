@@ -1,0 +1,47 @@
+
+/* Kontextové ikony v kolečkách všech rozbalovacích sekcí */
+(function () {
+    var P = {
+        sliders: '<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>',
+        scale: '<path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7a3.5 3.5 0 0 0 6 0L5 7zM19 7l-3 7a3.5 3.5 0 0 0 6 0l-3-7z"/>',
+        receipt: '<path d="M6 2h12v20l-3-2-3 2-3-2-3 2V2z"/><path d="M9 7h6M9 11h6M9 15h4"/>',
+        gantt: '<path d="M3 3v18h18"/><rect x="6" y="6" width="7" height="3" rx="1"/><rect x="10" y="11" width="8" height="3" rx="1"/><rect x="8" y="16" width="5" height="3" rx="1"/>',
+        passport: '<rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M9 17h6"/>',
+        sos: '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M12 9v6M9 12h6"/>',
+        sim: '<path d="M7 2h7l5 5v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><rect x="8.5" y="11" width="7" height="7" rx="1"/><path d="M12 11v7M8.5 14.5h7"/>',
+        apps: '<rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M12 15.5s-3-2.6-3-5a3 3 0 0 1 6 0c0 2.4-3 5-3 5z"/><path d="M11 19h2"/>',
+        live: '<circle cx="12" cy="12" r="2.2"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4M16.2 7.8a6 6 0 0 1 0 8.4M4.9 4.9a10 10 0 0 0 0 14.2M19.1 4.9a10 10 0 0 1 0 14.2"/>',
+        backpack: '<path d="M6 9a6 6 0 0 1 12 0v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9z"/><path d="M9 3.5V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v.5M9 22v-6h6v6M6 13h12"/>',
+        city: '<path d="M3 21h18M5 21V10l3-2v13M10 21V5l4-2v18M16 21V9h3v12"/><path d="M2 5h20"/>',
+        plane: '<path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>',
+        cliff: '<path d="M3 8h6l2 4 1 9H3z"/><path d="M14 16c1.5-1 3-1 4.5 0s3 1 4.5 0M14 20c1.5-1 3-1 4.5 0s3 1 4.5 0"/><circle cx="18" cy="6" r="2.5"/>',
+        leaf: '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10z"/><path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12"/>',
+        ship: '<path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.4 17.5L21 11H3l1.6 6.5"/><path d="M12 3v8M8 7h8l1 4H7z"/>',
+        mountain: '<path d="M3 20l6-11 4 6 2-3 6 8z"/><path d="M7.5 12.5l1.5-1 1.5 1.5"/>',
+        palm: '<path d="M13 8c0-2.8-2.2-5-5-5h-.5M13 8c2.8 0 5-2.2 5-5M13 8c-2.8 0-5 2.2-5 5M13 8c2.8 0 5 2.2 5 5"/><path d="M13 8c-.5 5-1 9-2.5 13M6 21h11"/>',
+        sunset: '<path d="M12 10V2M5.6 11.6L4.2 10.2M2 18h2M20 18h2M18.4 11.6l1.4-1.4M22 22H2M16 18a4 4 0 0 0-8 0"/><path d="M9 5l3-3 3 3"/>',
+        transit: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/>',
+        book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><path d="M6.5 17A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5"/><path d="M9 7h7M9 11h5"/>',
+        wallet: '<path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/>',
+        card: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/>',
+        bus: '<rect x="4" y="3" width="16" height="14" rx="2"/><path d="M4 11h16M8 17v3M16 17v3"/><circle cx="8" cy="14" r=".7"/><circle cx="16" cy="14" r=".7"/>',
+        checklist: '<rect x="5" y="4" width="14" height="18" rx="2"/><path d="M9 2h6v4H9z"/><path d="M8.5 13l2 2 4-4.5"/>'
+    };
+    var MAP = {
+        'f-konfig': 'sliders', 'f-srovnani': 'scale', 'f-rozpis': 'receipt', 'f-jidlo': 'receipt', 'f-aktivity': 'palm', 'f-hotovost': 'wallet', 'f-karta-mhd': 'card',
+        'f-viza': 'passport', 'f-sos': 'sos', 'f-esim': 'sim', 'f-apps': 'apps', 'f-live': 'live', 'f-baleni': 'backpack',
+        'f-leg-liberec': 'bus', 'f-leg-odlet': 'plane', 'f-leg-odlet-sin': 'plane', 'f-leg-domu': 'bus', 'f-lety': 'plane', 'f-lety': 'plane', 'f-leg-sg': 'city', 'f-leg-sgdps': 'plane', 'f-leg-uluwatu': 'cliff', 'f-leg-ubud': 'leaf',
+        'f-leg-presun4': 'ship', 'f-leg-lombok-sever': 'mountain', 'f-leg-kuta': 'palm', 'f-leg-back': 'ship',
+        'f-leg-rozlucka': 'sunset', 'f-leg-tranzit': 'transit', 'f-slovnicek': 'book', 'f-checklist': 'checklist'
+    };
+    function apply() {
+        [].forEach.call(document.querySelectorAll('.lux-fold[id]'), function (f) {
+            var node = f.querySelector(':scope > .lux-fold-h .lux-fold-node');
+            var k = MAP[f.id];
+            if (!node || !k || node.querySelector('svg')) return;
+            node.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + P[k] + '</svg>';
+            node.classList.add('has-ico');
+        });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply); else apply();
+})();

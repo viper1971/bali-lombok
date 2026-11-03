@@ -1,0 +1,118 @@
+
+/* PREMIUM V18 — Nové rozložení finančního konfigurátoru, bez změn výpočtů. */
+#rozpocet { display:block!important; width:100%!important; max-width:none!important; }
+#rozpocet > .bento-card.highlight.full {display:block!important;max-width:none!important;width:100%!important; min-width:0!important; border:0!important; background:transparent!important; padding:0!important; box-shadow:none!important; overflow:visible!important; }
+/* Staré duplicitní titulky a popisky nejsou potřeba: jejich informace jsou nově v dashboardu. */
+#rozpocet > .bento-card.highlight.full > h2,
+#rozpocet > .bento-card.highlight.full > p,
+#rozpocet > .bento-card.highlight.full > div:not(.pf18-shell) { display:none!important; }
+#rozpocet .pf18-shell {--pf-ink:#14283b;--pf-muted:#65798b;--pf-teal:#0e8884;--pf-line:#dce7ed;--pf-paper:#fff; color:var(--pf-ink);width:100%;max-width:none;display:grid;gap:22px;font-family:var(--font-ui,system-ui,sans-serif);}
+#rozpocet .pf18-shell * {box-sizing:border-box;}
+#rozpocet .pf18-hero {display:flex;justify-content:space-between;align-items:center;gap:20px;min-width:0;border-radius:23px;padding:clamp(25px,3.6vw,47px);background:radial-gradient(circle at 85% 12%,rgba(32,187,171,.18),transparent 40%),linear-gradient(120deg,#0b2234 2%,#15364a 67%,#0e4b53 100%);box-shadow:0 18px 45px rgba(16,43,59,.14);color:#fff;overflow:hidden;}
+#rozpocet .pf18-hero-copy {flex:1;min-width:0;}
+#rozpocet .pf18-eyebrow {font-size:.71rem;letter-spacing:.14em;font-weight:850;display:inline-flex;align-items:center;gap:9px;color:#94e8db;margin-bottom:14px;}
+#rozpocet .pf18-live-dot{width:8px;height:8px;background:#38d9a9;border-radius:50%;box-shadow:0 0 0 5px rgba(53,216,177,.16)}
+#rozpocet .pf18-hero h2{font-size:clamp(1.7rem,3.3vw,3.05rem)!important;font-weight:850!important;letter-spacing:-.035em;line-height:1.1;margin:0 0 12px!important;padding:0!important;box-shadow:none!important;background:none!important;color:#fff!important;border:0!important;text-align:left!important;display:block!important;}
+#rozpocet .pf18-hero h2 span {color:#72dccb}
+#rozpocet .pf18-hero p {color:#d7e8f0!important;max-width:650px;font-size:clamp(.9rem,1vw,1.05rem);line-height:1.65;margin:0!important;}
+#rozpocet .pf18-hero-badge{flex:0 0 auto;border:1px solid rgba(178,237,228,.3);background:rgba(255,255,255,.075);padding:22px 24px;border-radius:17px;min-width:205px;display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center;}
+#rozpocet .pf18-hero-badge span{font-size:2.6rem;font-weight:850;letter-spacing:-.07em;line-height:1.1;color:white}#rozpocet .pf18-hero-badge small{font-size:.67rem;letter-spacing:.16em;color:#8fe2d7;font-weight:850}#rozpocet .pf18-hero-badge b{font-size:.74rem;color:#e9f5fa;margin-top:6px}
+#rozpocet .pf18-section-heading{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin:8px 1px -7px}
+#rozpocet .pf18-kicker{font-size:.69rem!important;letter-spacing:.12em;font-weight:850;color:#118c86;display:block;margin-bottom:7px}
+#rozpocet .pf18-section-heading h3, #rozpocet .pf18-card-header h3{font-size:clamp(1.2rem,2vw,1.55rem);color:var(--pf-ink);font-weight:850;letter-spacing:-.03em;margin:0;line-height:1.18}
+#rozpocet .pf18-help{font-size:.82rem;color:var(--pf-muted);font-weight:600}
+#rozpocet .pf18-kpi-slot{min-width:0}
+#rozpocet .pf18-kpi-slot .family-card-grid{margin:0!important;width:100%!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important;}
+#rozpocet .pf18-kpi-slot .family-card-box{position:relative;display:flex!important;flex-direction:column!important;min-width:0!important;border-radius:19px!important;padding:23px 22px 20px!important;background:#fff!important;color:var(--pf-ink)!important;border:1px solid var(--pf-line)!important;box-shadow:0 10px 24px rgba(22,52,71,.07)!important;overflow:hidden!important;gap:5px!important;text-align:left!important;}
+#rozpocet .pf18-kpi-slot .family-card-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:#0e8884;}
+#rozpocet .pf18-kpi-slot .family-card-box:nth-child(2){background:#e9f7f4!important;border-color:#91cec3!important;box-shadow:0 13px 25px rgba(20,119,115,.11)!important;}
+#rozpocet .pf18-kpi-slot .family-card-box:nth-child(2)::before{height:5px;background:#0d8c80;}
+#rozpocet .pf18-kpi-slot .family-card-box:nth-child(3)::before{background:#d2a354;}
+#rozpocet .pf18-kpi-slot .fc-tag{font-size:.77rem!important;line-height:1.5!important;font-weight:780!important;letter-spacing:0!important;color:#4b6174!important;margin:0 0 3px!important;}
+#rozpocet .pf18-kpi-slot .fc-price {font-size:clamp(1.75rem,2.75vw,2.5rem)!important;line-height:1.18!important;letter-spacing:-.05em!important;font-weight:900!important;color:#10344a!important;white-space:normal!important;word-break:normal!important;margin:2px 0 5px!important;}
+#rozpocet .pf18-kpi-slot .family-card-box:nth-child(2) .fc-price{color:#06796e!important;}
+#rozpocet .pf18-kpi-slot .fc-desc{font-size:.78rem!important;line-height:1.55!important;color:#697e90!important;font-weight:500!important;margin:0!important;}
+#rozpocet .pf18-kpi-slot .family-card-box div[id^="calcPrice"]{display:none!important;}
+#rozpocet .pf18-finance-grid{display:grid;grid-template-columns:minmax(0,1.38fr) minmax(300px,1fr);gap:18px;min-width:0;align-items:stretch;}
+#rozpocet .pf18-panel{background:#fff;border:1px solid #dfe9ee;border-radius:21px;padding:clamp(19px,2.3vw,28px);box-shadow:0 9px 26px rgba(26,63,81,.055);min-width:0;overflow:hidden;}
+#rozpocet .pf18-card-header{display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap;margin-bottom:19px;}
+#rozpocet .pf18-card-header p{font-size:.83rem;color:#6a7d8b;line-height:1.5;margin:8px 0 0!important;max-width:560px;}
+#rozpocet .pf18-small-pill{font-size:.68rem;font-weight:800;color:#087f76;background:#e5f7f2;border:1px solid #c9e8df;border-radius:99px;padding:6px 9px;white-space:nowrap;}
+#rozpocet .pf18-chart-body{display:flex;gap:clamp(15px,2.5vw,30px);align-items:center;min-width:0;}
+#rozpocet .pf18-donut{flex:0 0 clamp(175px,19vw,245px);width:clamp(175px,19vw,245px);height:clamp(175px,19vw,245px);aspect-ratio:1;border-radius:50%;background:conic-gradient(#dde9ec 0 100%);display:grid;place-items:center;box-shadow:0 3px 18px rgba(2,42,64,.05);}
+#rozpocet .pf18-donut-center{background:#fff;width:68%;height:68%;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;box-shadow:inset 0 0 0 1px #e6eef1;}
+#rozpocet .pf18-donut-center span{font-size:.63rem;letter-spacing:.08em;color:#698091;font-weight:850;}
+#rozpocet .pf18-donut-center strong{font-size:clamp(1.05rem,1.5vw,1.52rem);color:#0b3d4d;line-height:1.2;letter-spacing:-.04em;white-space:nowrap;margin:7px 0;}
+#rozpocet .pf18-donut-center small{font-size:.59rem;line-height:1.3;color:#7c8d99;}
+#rozpocet .pf18-legend{flex:1;display:flex;flex-direction:column;gap:10px;min-width:0;}
+#rozpocet .pf18-legend-item{display:grid;grid-template-columns:10px minmax(0,1fr) auto;align-items:center;column-gap:9px;row-gap:1px;font-size:.8rem;}
+#rozpocet .pf18-legend-dot{height:10px;width:10px;border-radius:3px;}
+#rozpocet .pf18-legend-label{color:#41596b;font-weight:650;min-width:0;line-height:1.25;}
+#rozpocet .pf18-legend-value{color:#15394d;font-weight:850;font-variant-numeric:tabular-nums;white-space:nowrap;}
+#rozpocet .pf18-legend-track{grid-column:2 / -1;height:4px;background:#ecf1f4;border-radius:10px;overflow:hidden;margin-top:3px;}
+#rozpocet .pf18-legend-fill{height:100%;border-radius:10px;}
+#rozpocet .pf18-text-link{font-size:.8rem;font-weight:800;color:#067e7b;text-decoration:none;display:inline-flex;gap:8px;align-items:center;border-top:1px solid #e8eef1;margin-top:20px;padding-top:16px;width:100%;}
+#rozpocet .pf18-text-link:hover{text-decoration:underline;}
+#rozpocet .pf18-overview-number{padding:18px;background:linear-gradient(135deg,#effaf7,#f5f9fb);border:1px solid #d7ebe6;border-radius:16px;display:flex;flex-direction:column;gap:5px;}
+#rozpocet .pf18-overview-number>span{font-size:.71rem;letter-spacing:.08em;color:#5e7c83;font-weight:850;}
+#rozpocet .pf18-overview-number>strong{font-size:clamp(1.6rem,2.6vw,2.28rem);line-height:1.2;color:#0b776e;font-weight:900;letter-spacing:-.05em;overflow-wrap:anywhere}
+#rozpocet .pf18-overview-number>small{font-size:.76rem;color:#68838a;}
+#rozpocet .pf18-choice-status{font-size:.8rem;line-height:1.5;color:#577284;margin:12px 3px 14px;font-weight:650;}
+#rozpocet .pf18-quicklinks{display:grid;gap:8px;}
+#rozpocet .pf18-quicklinks a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1px solid #e3ebee;background:#fbfdfe;text-decoration:none;color:#20394b;transition:background .15s,border-color .15s;}
+#rozpocet .pf18-quicklinks a:hover{background:#eef9f6;border-color:#b8ddd5;}
+#rozpocet .pf18-quick-icon{display:grid;place-items:center;font-size:1.2rem;width:36px;height:36px;flex:0 0 36px;background:#eaf6f4;border-radius:10px;}
+#rozpocet .pf18-quicklinks a>span:nth-child(2){display:flex;flex-direction:column;flex:1;gap:1px;min-width:0;}
+#rozpocet .pf18-quicklinks b{font-size:.85rem;font-weight:800;}
+#rozpocet .pf18-quicklinks small{font-size:.72rem;color:#718495;}
+#rozpocet .pf18-quicklinks a>span:last-child{font-weight:850;color:#0a877c;}
+#rozpocet .pf18-hotel-panel{padding-bottom:26px;}
+#rozpocet .pf18-hotel-panel .budget-mode-switch{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:11px!important;margin:0 0 17px!important;width:100%!important;}
+#rozpocet .pf18-hotel-panel .budget-mode-btn{width:100%!important;max-width:none!important;min-width:0!important;min-height:95px!important;text-align:left!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:stretch!important;padding:13px 14px!important;border-radius:14px!important;border:1px solid #dbe6eb!important;background:#f8fbfc!important;color:#214353!important;box-shadow:none!important;line-height:1.35!important;white-space:normal!important;overflow-wrap:anywhere!important;}
+#rozpocet .pf18-hotel-panel .budget-mode-btn.active{border:2px solid #0b9689!important;background:#e4f6f2!important;color:#064f4c!important;box-shadow:0 6px 17px rgba(13,147,128,.12)!important;}
+#rozpocet .pf18-hotel-panel .budget-mode-btn:hover{border-color:#0b9689!important;}
+#rozpocet .pf18-hotel-panel .selected-hotels-deck-wrapper{background:#f7fafb!important;border:1px solid #e1eaee!important;padding:15px!important;border-radius:17px!important;margin:0!important;box-shadow:none!important;}
+#rozpocet .pf18-hotel-panel .deck-header{display:flex!important;gap:10px!important;justify-content:space-between!important;align-items:center!important;flex-wrap:wrap!important;color:#153549!important;}
+#rozpocet .pf18-hotel-panel #selectedHotelsDeck{width:100%!important;}
+#rozpocet .pf18-hotel-panel .deck-header > span:first-child{color:#173f50!important;font-size:.77rem!important;line-height:1.5!important;letter-spacing:0!important;text-transform:none!important;flex:1 1 270px;}
+#rozpocet .pf18-hotel-panel .deck-header #deckTotalBadge{color:#fff!important;background:#0c817d!important;border-radius:10px!important;padding:7px 11px!important;font-size:.79rem!important;line-height:1.35!important;flex:0 1 auto;overflow-wrap:anywhere;}
+body.dark #rozpocet .pf18-hotel-panel .deck-header > span:first-child,html.dark #rozpocet .pf18-hotel-panel .deck-header > span:first-child{color:#e1f0f5!important;}
+
+#rozpocet .pf18-support-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+#rozpocet .pf18-details{min-width:0;border:1px solid #dbe7ea;border-radius:16px;background:#fff;overflow:hidden;box-shadow:0 7px 20px rgba(26,63,81,.04);}
+#rozpocet .pf18-details summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:11px;padding:16px 18px;color:#16384b;}
+#rozpocet .pf18-details summary::-webkit-details-marker{display:none;}
+#rozpocet .pf18-details-icon{display:grid;place-items:center;background:#e4f5f2;color:#0a7771;border-radius:10px;width:36px;height:36px;flex:0 0 36px;font-size:1.25rem;}
+#rozpocet .pf18-details summary>span:nth-child(2){display:flex;flex-direction:column;gap:2px;min-width:0;flex:1;}
+#rozpocet .pf18-details summary b{font-size:.84rem;line-height:1.2;}
+#rozpocet .pf18-details summary small{font-size:.72rem;color:#728594;line-height:1.25;}
+#rozpocet .pf18-details-arrow{font-size:1.45rem;line-height:1;color:#68818f;transition:transform .2s;}
+#rozpocet .pf18-details[open] .pf18-details-arrow{transform:rotate(180deg);}
+#rozpocet .pf18-details-content{border-top:1px solid #e6edef;padding:18px;min-width:0;}
+#rozpocet .pf18-details-content > div{max-width:100%;}
+#rozpocet .pf18-placeholder{color:#667e8d;font-size:.85rem;}
+/* V tmavém režimu je dashboard stále vysoce kontrastní, nikoli průhledný. */
+body.dark #rozpocet .pf18-panel,html.dark #rozpocet .pf18-panel,body.dark-mode #rozpocet .pf18-panel,
+body.dark #rozpocet .pf18-details,html.dark #rozpocet .pf18-details {background:#142b3c!important;border-color:#355061!important;}
+body.dark #rozpocet .pf18-section-heading h3, body.dark #rozpocet .pf18-card-header h3,html.dark #rozpocet .pf18-section-heading h3,html.dark #rozpocet .pf18-card-header h3{color:#f1f7fa!important;}
+body.dark #rozpocet .pf18-card-header p,html.dark #rozpocet .pf18-card-header p{color:#b5cbd8!important;}
+body.dark #rozpocet .pf18-legend-label,html.dark #rozpocet .pf18-legend-label{color:#d9e7ed!important;}
+body.dark #rozpocet .pf18-legend-value,html.dark #rozpocet .pf18-legend-value{color:#fff!important;}
+body.dark #rozpocet .pf18-donut-center,html.dark #rozpocet .pf18-donut-center{background:#142b3c!important;}
+body.dark #rozpocet .pf18-donut-center strong,html.dark #rozpocet .pf18-donut-center strong{color:#fff!important;}
+body.dark #rozpocet .pf18-kpi-slot .family-card-box,html.dark #rozpocet .pf18-kpi-slot .family-card-box{background:#203d4d!important;border-color:#375466!important;}
+body.dark #rozpocet .pf18-kpi-slot .family-card-box:nth-child(2),html.dark #rozpocet .pf18-kpi-slot .family-card-box:nth-child(2){background:#123e40!important;}
+body.dark #rozpocet .pf18-kpi-slot .fc-price,html.dark #rozpocet .pf18-kpi-slot .fc-price{color:#f5fafc!important;}
+body.dark #rozpocet .pf18-kpi-slot .fc-tag,body.dark #rozpocet .pf18-kpi-slot .fc-desc,html.dark #rozpocet .pf18-kpi-slot .fc-tag,html.dark #rozpocet .pf18-kpi-slot .fc-desc{color:#c2d2dc!important;}
+body.dark #rozpocet .pf18-overview-number,html.dark #rozpocet .pf18-overview-number{background:#21464c!important;border-color:#357476!important;}
+body.dark #rozpocet .pf18-overview-number strong,html.dark #rozpocet .pf18-overview-number strong{color:#81ebd6!important;}
+body.dark #rozpocet .pf18-overview-number span,body.dark #rozpocet .pf18-overview-number small,html.dark #rozpocet .pf18-overview-number span,html.dark #rozpocet .pf18-overview-number small{color:#c5d9de!important;}
+body.dark #rozpocet .pf18-quicklinks a,html.dark #rozpocet .pf18-quicklinks a{background:#1e3b4b!important;border-color:#35586b!important;color:#f5f9fa!important;}
+body.dark #rozpocet .pf18-quicklinks small,html.dark #rozpocet .pf18-quicklinks small{color:#c2d1db!important;}
+body.dark #rozpocet .pf18-choice-status,html.dark #rozpocet .pf18-choice-status{color:#bed4df!important;}
+body.dark #rozpocet .pf18-details summary,html.dark #rozpocet .pf18-details summary{color:#eef7fa!important;}
+body.dark #rozpocet .pf18-details summary small,html.dark #rozpocet .pf18-details summary small{color:#b4cbd7!important;}
+@media(max-width:1120px){#rozpocet .pf18-finance-grid{grid-template-columns:1fr 1fr;}#rozpocet .pf18-chart-body{flex-direction:column;align-items:stretch;}#rozpocet .pf18-donut{align-self:center;flex-basis:auto;}#rozpocet .pf18-hotel-panel .budget-mode-switch{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:790px){#rozpocet .pf18-hero-badge{display:none;}#rozpocet .pf18-finance-grid{grid-template-columns:1fr;}#rozpocet .pf18-chart-body{flex-direction:row;align-items:center;}#rozpocet .pf18-support-grid{grid-template-columns:1fr;}#rozpocet .pf18-kpi-slot .family-card-grid{gap:9px!important;}}
+@media(max-width:590px){#rozpocet .pf18-shell{gap:14px;}#rozpocet .pf18-hero{padding:23px 19px;border-radius:17px;}#rozpocet .pf18-hero h2{font-size:1.85rem!important;}#rozpocet .pf18-hero p{font-size:.84rem!important;}#rozpocet .pf18-kpi-slot .family-card-grid{grid-template-columns:1fr!important;gap:9px!important;}#rozpocet .pf18-kpi-slot .family-card-box{padding:15px 17px!important;min-height:0!important;}#rozpocet .pf18-kpi-slot .fc-price{font-size:1.78rem!important;}#rozpocet .pf18-kpi-slot .fc-desc{font-size:.72rem!important;}#rozpocet .pf18-chart-body{flex-direction:column;align-items:stretch;}#rozpocet .pf18-panel{padding:17px 15px;border-radius:15px;}#rozpocet .pf18-donut{width:190px;height:190px;flex-basis:auto;align-self:center;}#rozpocet .pf18-hotel-panel .budget-mode-switch{grid-template-columns:1fr 1fr!important;gap:7px!important;}#rozpocet .pf18-hotel-panel .budget-mode-btn{padding:10px!important;min-height:88px!important;font-size:.77rem!important;}#rozpocet .pf18-section-heading{align-items:start;}#rozpocet .pf18-help{font-size:.74rem;}}
+@media(max-width:380px){#rozpocet .pf18-hotel-panel .budget-mode-switch{grid-template-columns:1fr!important;}#rozpocet .pf18-hotel-panel .budget-mode-btn{min-height:62px!important;}}

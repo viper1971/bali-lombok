@@ -1,0 +1,114 @@
+
+/* Čtyři původní akce jsou samostatně ukotvené na vnějším pravém boku MENU. */
+html body > #premiumMergedNav.bali-menu-edge-actions {
+  position:fixed!important;
+  top:8px!important;
+  left:min(370px,calc(100vw - 48px))!important;
+  right:auto!important;
+  bottom:auto!important;
+  transform:none!important;
+  margin:0!important;
+  padding:0!important;
+  width:46px!important;
+  min-width:46px!important;
+  max-width:46px!important;
+  height:auto!important;
+  max-height:calc(100dvh - 238px)!important;
+  overflow:visible!important;
+  display:none!important;
+  flex-flow:column nowrap!important;
+  align-items:stretch!important;
+  gap:5px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  z-index:2147483005!important;
+  pointer-events:auto!important;
+}
+html body.v29-bottom-open:not(.bali-content-mode):not(.pres-on) > #premiumMergedNav.bali-menu-edge-actions {
+  display:flex!important;
+}
+html body > #premiumMergedNav.bali-menu-edge-actions > .pm-nav-btn {
+  position:relative!important;
+  display:flex!important;
+  flex:0 0 auto!important;
+  flex-flow:column nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  width:46px!important;
+  min-width:46px!important;
+  max-width:46px!important;
+  height:clamp(55px,calc((100dvh - 260px) / 4),84px)!important;
+  min-height:0!important;
+  padding:7px 3px!important;
+  margin:0!important;
+  border:1px solid var(--border)!important;
+  border-left:0!important;
+  border-radius:0 11px 11px 0!important;
+  background:var(--surface)!important;
+  color:var(--text-main)!important;
+  box-shadow:4px 5px 14px rgba(0,0,0,.18)!important;
+  cursor:pointer!important;
+  touch-action:manipulation!important;
+  writing-mode:vertical-rl!important;
+  text-orientation:mixed!important;
+  font:800 11px/1.05 var(--font-ui,system-ui)!important;
+  white-space:nowrap!important;
+}
+html body > #premiumMergedNav.bali-menu-edge-actions > .pm-nav-btn:hover,
+html body > #premiumMergedNav.bali-menu-edge-actions > .pm-nav-btn:focus-visible {
+  background:var(--surface-hover)!important;
+}
+html body > #premiumMergedNav.bali-menu-edge-actions .pm-nav-icon {
+  display:inline-block!important;
+  writing-mode:horizontal-tb!important;
+  font-size:17px!important;
+  line-height:1!important;
+}
+html body > #premiumMergedNav.bali-menu-edge-actions .pm-nav-text {
+  display:inline-block!important;
+  writing-mode:vertical-rl!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  line-height:1!important;
+}
+/* Ouška MENU/OBSAH při otevření zůstávají viditelná dole, mimo pevnou lištu. */
+html body.v29-bottom-open:not(.pres-on) #v29BottomTab {
+  top:auto!important;
+  bottom:calc(128px + env(safe-area-inset-bottom,0px))!important;
+  transform:none!important;
+}
+html body.v29-bottom-open:not(.pres-on) #floatingMenuBtn {
+  top:auto!important;
+  bottom:calc(8px + env(safe-area-inset-bottom,0px))!important;
+  transform:none!important;
+}
+@media(max-width:600px) {
+  html body > #premiumMergedNav.bali-menu-edge-actions {
+    top:6px!important;
+    left:min(340px,calc(100vw - 42px))!important;
+    width:40px!important;
+    min-width:40px!important;
+    max-width:40px!important;
+    gap:4px!important;
+  }
+  html body > #premiumMergedNav.bali-menu-edge-actions > .pm-nav-btn {
+    width:40px!important;
+    min-width:40px!important;
+    max-width:40px!important;
+    height:clamp(51px,calc((100dvh - 232px) / 4),70px)!important;
+    font-size:10px!important;
+    padding:5px 2px!important;
+  }
+  html body > #premiumMergedNav.bali-menu-edge-actions .pm-nav-icon {font-size:14px!important}
+  html body > #premiumMergedNav.bali-menu-edge-actions .pm-nav-text {font-size:10px!important}
+  html body.v29-bottom-open:not(.pres-on) #v29BottomTab {
+    bottom:calc(110px + env(safe-area-inset-bottom,0px))!important;
+  }
+  html body.v29-bottom-open:not(.pres-on) #floatingMenuBtn {
+    bottom:calc(8px + env(safe-area-inset-bottom,0px))!important;
+  }
+}
+@media print {
+  html body > #premiumMergedNav.bali-menu-edge-actions {display:none!important}
+}

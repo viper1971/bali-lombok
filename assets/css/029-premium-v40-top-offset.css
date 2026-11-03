@@ -1,0 +1,11 @@
+
+/* Trvale odstranit horní indikátor i jeho záložku; data o přečtení zůstávají pro accordiony. */
+#pbar,#v29TopTab{display:none!important;visibility:hidden!important;pointer-events:none!important;}
+body.v29-top-open #pbar{display:none!important;visibility:hidden!important;}
+/* Otevřené accordiony se přichytí k horní hraně bez někdejší 56–64px mezery. */
+html body .lux-fold{--stick-top:5px!important;}
+html body .lux-fold.is-open > .lux-fold-h{
+  top:calc(5px + env(safe-area-inset-top,0px))!important;
+}
+/* Při skoku z navigace respektuj stejný úzký horní odstup. */
+html body .lux-fold{scroll-margin-top:8px;}

@@ -1,0 +1,93 @@
+
+/* v36 — kompaktní finální dashboard */
+#f-konfig .p35-final{gap:12px!important;margin:6px 0 14px!important;}
+#f-konfig .p35-intro{padding:14px 18px!important;border-radius:16px!important;gap:14px!important;align-items:center!important;box-shadow:0 8px 18px rgba(20,60,75,.10)!important;}
+#f-konfig .p35-intro h2{font-size:clamp(23px,2.2vw,34px)!important;line-height:1.08!important;margin:6px 0 4px!important;}
+#f-konfig .p35-intro p{font-size:12.5px!important;line-height:1.45!important;max-width:58ch!important;}
+#f-konfig .p35-kicker{font-size:10px!important;letter-spacing:.11em!important;}
+#f-konfig .p35-stamp{padding:10px 14px!important;min-width:160px!important;border-radius:12px!important;gap:3px!important;}
+#f-konfig .p35-stamp span{font-size:16px!important;line-height:1.15!important;}
+#f-konfig .p35-stamp b{font-size:11px!important;}
+#f-konfig .p35-cards{gap:10px!important;}
+#f-konfig .p35-card{padding:14px 15px!important;border-radius:14px!important;gap:10px!important;box-shadow:0 6px 14px rgba(24,62,78,.06)!important;}
+#f-konfig .p35-card header{gap:10px!important;padding:0 0 9px!important;}
+#f-konfig .p35-icon{width:34px!important;height:34px!important;flex-basis:34px!important;border-radius:10px!important;font-size:17px!important;}
+#f-konfig .p35-card h3{font-size:16px!important;line-height:1.22!important;margin:1px 0 0!important;}
+#f-konfig .p35-content{font-size:12.5px!important;line-height:1.42!important;gap:6px!important;}
+#f-konfig .p35-flight-name{font-size:15px!important;}
+#f-konfig .p35-flight-meta{font-size:11.5px!important;line-height:1.4!important;}
+#f-konfig .p35-pill{padding:5px 9px!important;border-radius:8px!important;font-size:12px!important;}
+#f-konfig .p35-line{gap:9px!important;padding:5px 0!important;}
+#f-konfig .p35-line small{font-size:10.5px!important;margin-top:2px!important;line-height:1.35!important;}
+#f-konfig .p35-line b{font-size:12.5px!important;}
+#f-konfig .p35-sum{padding:9px 11px!important;border-radius:10px!important;font-size:12.5px!important;}
+#f-konfig .p35-activity-list{gap:0!important;max-height:220px!important;}
+#f-konfig .p35-activity-list li{padding:4px 0!important;font-size:11.5px!important;line-height:1.35!important;}
+#f-konfig .p35-card>a,#f-konfig .p35-footer a{font-size:11px!important;padding-bottom:2px!important;}
+#f-konfig .p35-footer{padding:12px 15px!important;border-radius:14px!important;gap:10px!important;}
+#f-konfig .p35-footer strong{font-size:13px!important;}
+#f-konfig .p35-footer p{font-size:11.5px!important;line-height:1.4!important;}
+
+#f-rozpis .p22{gap:12px!important;}
+#f-rozpis .p22-mast{padding:16px 18px!important;border-radius:18px!important;box-shadow:0 10px 24px -18px rgba(11,35,51,.42)!important;}
+#f-rozpis .p22-mast::after{right:-130px!important;bottom:-250px!important;width:330px!important;height:330px!important;border-width:42px!important;}
+#f-rozpis .p22-mast-top{gap:8px!important;}
+#f-rozpis .p22-mast-grid{gap:16px!important;margin:14px 0 14px!important;align-items:center!important;}
+#f-rozpis .p22-mast h3{font-size:clamp(22px,2.4vw,34px)!important;line-height:1.05!important;margin:0 0 8px!important;}
+#f-rozpis .p22-mast-copy p{font-size:12.5px!important;line-height:1.45!important;max-width:52ch!important;}
+#f-rozpis .p22-mast-price{padding:12px 14px!important;border-radius:14px!important;gap:4px!important;}
+#f-rozpis .p22-mast-price>span{font-size:11px!important;}
+#f-rozpis .p22-mast-price strong{font-size:clamp(24px,2.3vw,32px)!important;}
+#f-rozpis .p22-mast-perday{font-size:11.5px!important;}
+#f-rozpis .p22-switch{padding:4px!important;gap:4px!important;}
+#f-rozpis .p22-switch button{min-height:38px!important;padding:8px 12px!important;font-size:12px!important;border-radius:10px!important;}
+#f-rozpis .p22-metrics{gap:9px!important;}
+#f-rozpis .p22-metric{padding:10px 12px!important;border-radius:13px!important;gap:5px!important;}
+#f-rozpis .p22-metric>span{font-size:10px!important;line-height:1.3!important;}
+#f-rozpis .p22-metric strong{font-size:clamp(17px,1.7vw,24px)!important;line-height:1.1!important;}
+#f-rozpis .p22-metric small{font-size:10px!important;line-height:1.3!important;}
+#f-rozpis .p22-insights{gap:10px!important;}
+#f-rozpis .p22-card{padding:14px 15px!important;border-radius:16px!important;box-shadow:0 8px 18px -20px rgba(16,41,56,.3)!important;}
+#f-rozpis .p22-card-header{margin-bottom:12px!important;gap:10px!important;}
+#f-rozpis .p22-card h4,#f-rozpis .p22-ledger h4{font-size:18px!important;margin:4px 0 0!important;}
+#f-rozpis .p22-subtle,#f-rozpis .p22-caption,#f-rozpis .p22-difference span,#f-rozpis .p22-reconcile{font-size:11px!important;line-height:1.4!important;}
+#f-rozpis .p22-visual{gap:14px!important;}
+#f-rozpis .p22-donut{width:min(220px,100%)!important;}
+#f-rozpis .p22-legend{gap:8px 12px!important;}
+#f-rozpis .p22-legend-row{font-size:11px!important;}
+#f-rozpis .p22-compare-rows{gap:8px!important;}
+#f-rozpis .p22-ledger{padding:14px 15px!important;border-radius:16px!important;}
+#f-rozpis .p22-ledger-top{margin-bottom:12px!important;gap:10px!important;}
+#f-rozpis .p22-ledger-top p{font-size:11px!important;line-height:1.4!important;margin:5px 0 0!important;}
+#f-rozpis .p22-copy{padding:8px 11px!important;font-size:11px!important;border-radius:10px!important;}
+#f-rozpis .p22-groups{gap:9px!important;}
+#f-rozpis .p22-group{border-radius:13px!important;}
+#f-rozpis .p22-group>summary{padding:11px 12px!important;min-height:58px!important;gap:9px!important;}
+#f-rozpis .p22-group-icon{width:34px!important;height:34px!important;flex-basis:34px!important;border-radius:10px!important;font-size:16px!important;}
+#f-rozpis .p22-group-name{gap:3px!important;}
+#f-rozpis .p22-group-name b{font-size:12.5px!important;line-height:1.25!important;}
+#f-rozpis .p22-group-name small{font-size:10px!important;line-height:1.25!important;}
+#f-rozpis .p22-group-amount{gap:3px!important;}
+#f-rozpis .p22-group-amount b{font-size:13px!important;}
+#f-rozpis .p22-group-amount small{font-size:10px!important;}
+#f-rozpis .p22-group-bar{margin:0 12px 9px!important;height:3px!important;}
+#f-rozpis .p22-group-lines{padding:3px 12px 9px!important;}
+#f-rozpis .p22-line{padding:6px 0!important;gap:8px!important;}
+#f-rozpis .p22-line b{font-size:12px!important;}
+#f-rozpis .p22-line small{font-size:10px!important;}
+#f-rozpis .p22-footnotes{gap:10px!important;}
+#f-rozpis .p22-footnotes > div{padding:11px 12px!important;border-radius:13px!important;}
+#f-rozpis .p22-footnotes b{font-size:12px!important;}
+#f-rozpis .p22-footnotes span{font-size:11px!important;line-height:1.45!important;}
+#ck-sen-compare .sen-box,#ck-sen-compare .lux-card{padding:14px 15px!important;border-radius:16px!important;}
+#ck-sen-compare h3,#ck-sen-compare h4{margin-bottom:8px!important;}
+
+@media (min-width:1101px){
+  #f-konfig .p35-cards{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+}
+@media (max-width:760px){
+  #f-konfig .p35-intro{padding:13px 14px!important;}
+  #f-konfig .p35-intro h2{font-size:24px!important;}
+  #f-konfig .p35-card{padding:13px!important;}
+  #f-rozpis .p22-mast{padding:15px 14px!important;}
+}

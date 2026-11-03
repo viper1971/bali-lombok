@@ -1,0 +1,1574 @@
+
+    // Skript pro obsluhu prezenčního checklistu
+    function updatePresProgress() {
+        const total = document.querySelectorAll('.pres-check').length;
+        const checked = document.querySelectorAll('.pres-check:checked').length;
+        const pct = total === 0 ? 0 : Math.round((checked / total) * 100);
+        document.getElementById('presPercentage').innerText = pct + ' %';
+        document.getElementById('presProgressBar').style.width = pct + '%';
+        document.getElementById('presMessage').innerText = pct === 100 ? "🎉 Všechny body prezentace byly úspěšně probrány!" : `Probráno ${checked} z ${total} bodů schůzky.`;
+    }
+
+    document.querySelectorAll('.pres-check').forEach(cb => {
+        cb.checked = localStorage.getItem(cb.id) === 'true';
+        cb.addEventListener('change', e => {
+            localStorage.setItem(e.target.id, e.target.checked);
+            updatePresProgress();
+        });
+    });
+
+    // Spuštění po načtení
+    document.addEventListener('DOMContentLoaded', updatePresProgress);
+    updatePresProgress();
+
+// --- 1. KOMPLETNÍ DATABÁZE HOTELŮ, CEN A VŠECH 5 LETOVÝCH VARIANT ---
+        const stageOrder = ['singapore', 'uluwatu', 'ubud', 'lombokNorth', 'lombokSouth', 'kutaLast'];
+
+  const hotelCatalog = {
+            singapore: {
+                stageTitle: "1. Singapur (2 noci)",
+                targetId: "etapa-singapur",
+                options: {
+                    A: { name: "Fragrance Hotel - Lavender", price: 4564, img: "https://viper1971.github.io/bali-lombok/1.jpg", mapQuery: "Fragrance+Hotel+Lavender+Singapore", note: "MRT Lavender (cca 35 min z letiště)", coords: [1.3134, 103.8615] },
+                    B: { name: "Hotel 81 Premier Princess", price: 3569, img: "https://viper1971.github.io/bali-lombok/9.jpg", mapQuery: "Hotel+81+Premier+Princess+Singapore", note: "MRT Aljunied 850m (cca 32 min z letiště)", coords: [1.3112, 103.8786] },
+                    C: { name: "Hotel 81 Gold", price: 3577, img: "https://viper1971.github.io/bali-lombok/14.jpg", mapQuery: "Hotel+81+Gold+Singapore", note: "MRT Aljunied jen 500m (cca 30 min z letiště)", coords: [1.3120, 103.8813] }
+                }
+            },
+            uluwatu: {
+                stageTitle: "2. Uluwatu (2 noci)",
+                targetId: "etapa-uluwatu",
+                options: {
+                    A: { name: "Uluwatu Jungle Villa", price: 2583, img: "https://viper1971.github.io/bali-lombok/2.jpg", coords: [-8.8149, 115.1167] },
+                    B: { name: "The Ululani Deluxe", price: 1924, img: "https://viper1971.github.io/bali-lombok/12.jpg", coords: [-8.7978, 115.1228] }
+                }
+            },
+            ubud: {
+                stageTitle: "3. Ubud (4 noci)",
+                targetId: "etapa-ubud",
+                options: {
+                    A: { name: "The Village Guest House", price: 3275, img: "https://viper1971.github.io/bali-lombok/3.jpg", coords: [-8.5069, 115.2625] },
+                    B: { name: "Gandatera Ubud", price: 2422, img: "https://viper1971.github.io/bali-lombok/11.jpg", coords: [-8.5042, 115.2786] },
+                    C: { name: "Bije Suite Villa Ubud", price: 3626, img: "https://viper1971.github.io/bali-lombok/15.jpg", coords: [-8.4888, 115.2650] }
+                }
+            },
+            lombokNorth: {
+                stageTitle: "4. Lombok Z/S (4 noci)",
+                targetId: "etapa-lombok-zapad",
+                options: {
+                    A: { name: "Starsand Resort (Sekotong)", price: 4548, img: "https://viper1971.github.io/bali-lombok/4a.jpg", coords: [-8.7650, 115.9850] },
+                    B: { name: "Mina Tanjung Hotel (Sever)", price: 2395, img: "https://viper1971.github.io/bali-lombok/8.jpg", coords: [-8.3471, 116.1498] }
+                }
+            },
+            lombokSouth: {
+                stageTitle: "5. Kuta Lombok (4 noci)",
+                targetId: "etapa-lombok-jih",
+                options: {
+                    A: { name: "El Tropico Boutique Hotel", price: 5284, img: "https://viper1971.github.io/bali-lombok/5.jpg", coords: [-8.8920, 116.2810] },
+                    B: { name: "TheLocal AreGuling Villas", price: 3830, img: "https://viper1971.github.io/bali-lombok/10.jpg", coords: [-8.8925, 116.2400] }
+                }
+            },
+            kutaLast: {
+                stageTitle: "6. Bali Letiště (1 noc)",
+                targetId: "etapa-navrat",
+                options: {
+                    A: { name: "Grand Ixora Kuta Resort", price: 950, img: "https://viper1971.github.io/bali-lombok/6.jpg", coords: [-8.7390, 115.1680] },
+                    B: { name: "Bakung Beach Resort", price: 471, img: "https://viper1971.github.io/bali-lombok/13.jpg", coords: [-8.7347, 115.1657] },
+                    C: { name: "Bali Sandy Resort", price: 542, img: "https://viper1971.github.io/bali-lombok/hotel3.jpg", coords: [-8.717811626663684, 115.1714249405744] }
+                }
+            }
+        };
+
+        const transportPrices = {
+            A: { room: 4480, person: 2240, note: "Přelet TransNusa ( A)" },
+            B: { room: 2686, person: 1343, note: "Rychloloď Starfish/Wahana (  B)" }
+        };
+
+        const flightOptions = {
+            emirates: {
+                name: "Emirates (16:10 přes Dubaj)",
+                logo: "https://viper1971.github.io/bali-lombok/emirates.png",
+                pricePerson: 22000,
+                priceRoom: 44000,
+                hub: "Dubaj (DXB)",
+                hubCoords: [25.2532, 55.3657],
+                outDate: "pá 6. 8. 2027",
+                outDep: "16:10",
+                outArr: "14:05+1 (so 7. 8.)",
+                outDuration: "15 hod. 55 min.",
+                outFlights: "Emirates EK140 (16:10 PRG ➔ 23:55 DXB, 5h 45m) + Emirates EK348 (02:20+1 DXB ➔ 14:05 SIN, 7h 45m)",
+                outLayover: "2 hod. 25 min. v Dubaji (DXB)",
+                retDate: "st 25. 8. 2027",
+                retDep: "01:40",
+                retArr: "13:00 (st 25. 8.)",
+                retDuration: "17 hod. 20 min.",
+                retFlights: "Emirates EK349 (01:40 SIN ➔ 04:50 DXB, 7h 10m) + Emirates EK139 (08:35 DXB ➔ 13:00 PRG, 6h 25m)",
+                retLayover: "3 hod. 45 min. v Dubaji (DXB)",
+                sinLayover: "11 hod. 30 min. (přílet z Bali v 14:10, odlet dálkovým letem v 01:40)"
+            },
+            emirates_flydubai: {
+                name: "Emirates + flydubai (21:15 přes Dubaj)",
+                logo: "https://viper1971.github.io/bali-lombok/emirates.png",
+                pricePerson: 22000,
+                priceRoom: 44000,
+                hub: "Dubaj (DXB)",
+                hubCoords: [25.2532, 55.3657],
+                outDate: "pá 6. 8. 2027",
+                outDep: "21:15",
+                outArr: "21:45+1 (so 7. 8.)",
+                outDuration: "18 hod. 30 min.",
+                outFlights: "Emirates/flydubai EK2239 (21:15 PRG ➔ 05:25+1 DXB, 6h 10m) + Emirates EK352 (10:00 DXB ➔ 21:45 SIN, 7h 45m)",
+                outLayover: "4 hod. 35 min. v Dubaji (DXB)",
+                retDate: "st 25. 8. 2027",
+                retDep: "00:50",
+                retArr: "13:00 (st 25. 8.)",
+                retDuration: "18 hod. 10 min.",
+                retFlights: "Emirates EK353 (00:50 SIN ➔ 04:05 DXB, 7h 15m) + Emirates EK139 (08:35 DXB ➔ 13:00 PRG, 6h 25m)",
+                retLayover: "4 hod. 30 min. v Dubaji (DXB)",
+                sinLayover: "10 hod. 40 min. (přílet z Bali v 14:10, odlet dálkovým letem v 00:50)"
+            },
+            finnair: {
+                name: "Finnair (19:30 přes Helsinky)",
+                logo: "https://viper1971.github.io/bali-lombok/finair.jpg",
+                pricePerson: 24900,
+                priceRoom: 49800,
+                hub: "Helsinky (HEL)",
+                hubCoords: [60.3172, 24.9633],
+                outDate: "pá 6. 8. 2027",
+                outDep: "19:30",
+                outArr: "18:30+1 (so 7. 8.)",
+                outDuration: "17 hod. 00 min.",
+                outFlights: "Finnair AY1226 (19:30 PRG ➔ 22:40 HEL, 2h 10m) + Finnair AY131 (00:30+1 HEL ➔ 18:30 SIN, 13h 00m)",
+                outLayover: "1 hod. 50 min. v Helsinkách (HEL)",
+                retDate: "út 24. 8. 2027",
+                retDep: "21:35",
+                retArr: "10:50+1 (st 25. 8.)",
+                retDuration: "19 hod. 15 min.",
+                retFlights: "Finnair AY132 (21:35 SIN ➔ 06:00+1 HEL, 13h 25m) + Finnair AY1223 (09:40 HEL ➔ 10:50 PRG, 2h 10m)",
+                retLayover: "3 hod. 40 min. v Helsinkách (HEL)",
+                sinLayover: "7 hod. 25 min. (přílet z Bali v 14:10, odlet dálkovým letem ve 21:35)"
+            },
+            swiss: {
+                name: "SWISS (19:30 přes Curych)",
+                logo: "https://viper1971.github.io/bali-lombok/swiss.png",
+                pricePerson: 23909,
+                priceRoom: 51000,
+                hub: "Curych (ZRH)",
+                hubCoords: [47.4647, 8.5492],
+                outDate: "pá 6. 8. 2027",
+                outDep: "19:30",
+                outArr: "17:10+1 (so 7. 8.)",
+                outDuration: "15 hod. 40 min.",
+                outFlights: "SWISS LX1489 (19:30 PRG ➔ 20:50 ZRH, 1h 20m) + SWISS LX176 (22:40 ZRH ➔ 17:10+1 SIN, 12h 30m)",
+                outLayover: "1 hod. 50 min. v Curychu (ZRH)",
+                retDate: "út 24. 8. 2027",
+                retDep: "23:25",
+                retArr: "08:40+1 (st 25. 8.)",
+                retDuration: "15 hod. 15 min.",
+                retFlights: "SWISS LX177 (23:25 SIN ➔ 06:15+1 ZRH, 12h 50m) + SWISS/Helvetic LX1484 (07:25 ZRH ➔ 08:40 PRG, 1h 15m)",
+                retLayover: "1 hod. 10 min. v Curychu (ZRH)",
+                sinLayover: "9 hod. 15 min. (přílet z Bali v 14:10, odlet dálkovým letem ve 23:25)"
+            },
+            turkish: {
+                name: "Turkish Airlines (19:15 přes Istanbul)",
+                logo: "https://viper1971.github.io/bali-lombok/turkish.png",
+                pricePerson: 26505,
+                priceRoom: 53800,
+                hub: "Istanbul (IST)",
+                hubCoords: [41.2753, 28.7519],
+                outDate: "pá 6. 8. 2027",
+                outDep: "19:15",
+                outArr: "17:55+1 (so 7. 8.)",
+                outDuration: "16 hod. 40 min.",
+                outFlights: "Turkish TK1770 (19:15 PRG ➔ 22:55 IST, 2h 40m) + Turkish TK54 (02:00+1 IST ➔ 17:55 SIN, 10h 55m)",
+                outLayover: "3 hod. 05 min. v Istanbulu (IST)",
+                retDate: "út 24. 8. 2027",
+                retDep: "23:05",
+                retArr: "08:35+1 (st 25. 8.)",
+                retDuration: "15 hod. 30 min.",
+                retFlights: "Turkish TK55 (23:05 SIN ➔ 05:20+1 IST, 11h 15m) + Turkish TK1767 (07:05 IST ➔ 08:35 PRG, 2h 30m)",
+                retLayover: "1 hod. 45 min. v Istanbulu (IST)",
+                sinLayover: "8 hod. 55 min. (přílet z Bali v 14:10, odlet dálkovým letem ve 23:05)"
+            }
+        };
+
+        const OTHER_FIXED_PER_PERSON = 16441;
+        const defaultCustomChoices = { singapore: 'B', uluwatu: 'B', ubud: 'B', lombokNorth: 'B', lombokSouth: 'B', kutaLast: 'B' };
+
+        let userCustomSelection = {};
+        try {
+            const stored = localStorage.getItem('user_custom_selection');
+            userCustomSelection = stored ? JSON.parse(stored) : Object.assign({}, defaultCustomChoices);
+        } catch(e) {
+            userCustomSelection = Object.assign({}, defaultCustomChoices);
+        }
+
+        let currentMode = localStorage.getItem('user_budget_mode') || 'planB';
+        let currentAirline = localStorage.getItem('user_flight_airline') || 'emirates';
+        if (!flightOptions[currentAirline]) currentAirline = 'emirates';
+        let selectedHotels = Object.assign({}, defaultCustomChoices);
+
+        function formatKz(num) {
+            return new Intl.NumberFormat('cs-CZ').format(Math.round(num));
+        }
+
+        let toastTimer = null;
+        function showToast(msg) {
+            const t = document.getElementById('vipToast');
+            if (!t) return;
+            t.innerText = msg;
+            t.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => t.classList.remove('show'), 3200);
+        }
+
+        function buildShareableUrl() {
+            const baseUrl = window.location.origin + window.location.pathname;
+            const hotelsCode = stageOrder.map(s => selectedHotels[s] || 'B').join(',');
+            const params = new URLSearchParams();
+            params.set('let', currentAirline);
+            params.set('rezim', currentMode);
+            params.set('hotely', hotelsCode);
+            return `${baseUrl}?${params.toString()}`;
+        }
+
+        function updateBrowserUrlSilently() {
+            try {
+                const newUrl = buildShareableUrl();
+                window.history.replaceState({ path: newUrl }, '', newUrl);
+            } catch (e) {}
+        }
+
+        const VALID_MODES = ['planA', 'planB', 'planC', 'planSandy', 'custom'];
+        function loadConfigFromUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            let loadedFromUrl = false;
+
+            const urlAirline = params.get('let');
+            if (urlAirline && flightOptions[urlAirline]) {
+                currentAirline = urlAirline;
+                localStorage.setItem('user_flight_airline', currentAirline);
+                loadedFromUrl = true;
+            }
+
+            const urlMode = params.get('rezim');
+            const urlHotels = params.get('hotely');
+
+            if (urlHotels) {
+                const parts = urlHotels.split(',');
+                if (parts.length === stageOrder.length) {
+                    stageOrder.forEach((stage, idx) => {
+                        const v = parts[idx].toUpperCase();
+                        if (hotelCatalog[stage] && hotelCatalog[stage].options[v]) {
+                            selectedHotels[stage] = v;
+                            userCustomSelection[stage] = v;
+                        }
+                    });
+                    localStorage.setItem('user_custom_selection', JSON.stringify(userCustomSelection));
+                    currentMode = (urlMode && VALID_MODES.includes(urlMode)) ? urlMode : 'custom';
+                    localStorage.setItem('user_budget_mode', currentMode);
+                    loadedFromUrl = true;
+                }
+            } else if (urlMode && VALID_MODES.includes(urlMode)) {
+                currentMode = urlMode;
+                localStorage.setItem('user_budget_mode', currentMode);
+                loadedFromUrl = true;
+            }
+
+            return loadedFromUrl;
+        }
+
+        function shareToWhatsAppDirect() {
+            const flight = flightOptions[currentAirline];
+            const shareUrl = buildShareableUrl();
+
+            let lines = [
+                `🌴 *NAŠE VOLBA – EXPEDICE SINGAPUR • BALI • LOMBOK 2027*`,
+                `✈️ *Dálkový let:* ${flight.name} (${formatKz(flight.pricePerson)} Kč/os.)`,
+                `🛫 *Tam (${flight.outDate}):* ${flight.outDep} PRG ➔ ${flight.outArr} SIN (${flight.outDuration}, přestup ${flight.outLayover})`,
+                `🛬 *Zpět (${flight.retDate}):* ${flight.retDep} SIN ➔ ${flight.retArr} PRG (${flight.retDuration}, přestup ${flight.retLayover})`,
+                ``,
+                `🏨 *VYBRANÉ HOTELY (17 nocí):*`
+            ];
+
+            stageOrder.forEach(s => {
+                const v = selectedHotels[s];
+                const h = hotelCatalog[s].options[v];
+                lines.push(`• ${hotelCatalog[s].stageTitle}: *${h.name}* (Var. ${v} –${formatKz(h.price)} Kč/pokoj)`);
+            });
+
+            lines.push(``);
+            const tot = id => { const e = document.getElementById(id); return e ? e.innerText : ''; };
+            lines.push(`💰 *Cena dovolené na 1 osobu (se vším):* ${tot('floatPricePerson')}`);
+            lines.push(`👨‍👩‍👧 *Cena dovolené pro pár / pokoj:* ${tot('floatPriceFamily')}`);
+            if (tot('floatPriceSingle')) lines.push(`🏍️ *Cena dovolené sólo (sám pokoj i skútr):* ${tot('floatPriceSingle')}`);
+            if (window.TRIP) { const f = TRIP.food(), a = TRIP.sums({ solo: false }); lines.push(`✅ _Zahrnuje letenky, hotely, skútry, víza, 🍜 jídlo (${f.name}) a 🎟️ vstupné a aktivity._`); }
+            lines.push(`ℹ️ _Nezahrnuje jízdné v Singapuru, taxi, drobné výdaje, úschovnu batohů, loď na Gili, suvenýry a poslední hotel na místě._`);
+            lines.push(``);
+            lines.push(`🔗 *Klikni sem a otevře se ti přesně tahle naše vybraná kombinace:*`);
+            lines.push(shareUrl);
+
+            const fullText = lines.join('\n');
+            const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(fullText)}`;
+            window.open(waUrl, '_blank');
+        }
+
+        function copyShareLinkOnly() {
+            const shareUrl = buildShareableUrl();
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                showToast("🔗 Odkaz na tuto kombinaci zkopírován do schránky!");
+            });
+        }
+
+        function injectWhatsAppButtonsUI() {
+            const statusLabel = document.getElementById('budgetStatusLabel');
+            if (statusLabel && statusLabel.parentElement && !document.getElementById('waConfiguratorBar')) {
+                const bar = document.createElement('div');
+                bar.id = 'waConfiguratorBar';
+                bar.style.cssText = 'display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:16px; padding-top:14px; border-top:1px solid rgba(10,51,58,0.15);';
+                bar.innerHTML = `
+                    <button onclick="shareToWhatsAppDirect()" style="background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); color: #fff; border: 2px solid #25d366; padding: 12px 20px; border-radius: 12px; font-size: 0.92rem; font-weight: 900; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3); flex: 1; min-width: 240px;">
+                        📲 Poslat naši vybranou kombinaci přes WhatsApp
+                    </button>
+                    <button onclick="copyShareLinkOnly()" style="background: rgba(0, 0, 0, 0.05); color: var(--text-main); border: 1.5px solid rgba(169, 187, 208, 0.25); padding: 12px 16px; border-radius: 12px; font-size: 0.85rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                        🔗 Zkopírovat jen URL odkaz
+                    </button>
+                `;
+                statusLabel.parentElement.after(bar);
+            }
+
+            const floatActions = document.querySelector('.vfb-actions');
+            if (floatActions) {
+                floatActions.innerHTML = `
+                    <button class="vfb-btn" onclick="shareToWhatsAppDirect()" style="background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); border: 1px solid #25d366; color: #fff;">
+                        📲 WhatsApp
+                    </button>
+                `;
+            }
+        }
+
+        function setFlightAirline(airlineKey) {
+            if (!flightOptions[airlineKey]) return;
+            currentAirline = airlineKey;
+            localStorage.setItem('user_flight_airline', airlineKey);
+            updateFlightButtonsUI();
+            recalculateAll();
+            refreshFlightMapRoutes();
+            updateBrowserUrlSilently();
+            showToast(`✈️ Vybrán let: ${flightOptions[airlineKey].name}`);
+        }
+
+  function updateFlightButtonsUI() {
+            Object.keys(flightOptions).forEach(k => {
+                const btn = document.getElementById('btnFlight_' + k);
+                if (btn) btn.classList.toggle('active', currentAirline === k);
+            });
+            const f = flightOptions[currentAirline];
+            const lbl = document.getElementById('lblActiveAirlineName');
+            if (lbl && f) lbl.innerText = f.name;
+
+            const detailBox = document.getElementById('activeFlightDetailBox');
+            if (detailBox) {
+                detailBox.innerHTML = '';
+                detailBox.hidden = true;
+                detailBox.style.display = 'none';
+            }
+
+            // AKTUALIZACE ROZEVÍRACÍHO SEZNAMU NAD MAPOU
+            const heroSelect = document.getElementById('heroFlightSelect');
+            if (heroSelect) {
+                let opts = '';
+                Object.keys(flightOptions).forEach(k => {
+                    const opt = flightOptions[k];
+                    opts += `<option value="${k}" ${k === currentAirline ? 'selected' : ''}>✈️ ${opt.name} (${formatKz(opt.pricePerson)} Kč)</option>`;
+                });
+                heroSelect.innerHTML = opts;
+            }
+
+            if (f) {
+                const elOutDate = document.getElementById('tblOutDate');
+                const elOutRoute = document.getElementById('tblOutRoute');
+                const elOutCarrier = document.getElementById('tblOutCarrier');
+                const elOutDep = document.getElementById('tblOutDep');
+                const elOutArr = document.getElementById('tblOutArr');
+                const elOutNote = document.getElementById('tblOutNote');
+
+                if (elOutDate) elOutDate.innerText = f.outDate;
+                if (elOutRoute) elOutRoute.innerText = `Praha (PRG) ➔ ${f.hub} ➔ Singapur (SIN)`;
+                if (elOutCarrier) elOutCarrier.innerHTML = `<strong>${f.name}</strong><br><small style="color: var(--text-muted);">${f.outFlights}</small>`;
+                if (elOutDep) elOutDep.innerHTML = `<strong>${f.outDep}</strong> (PRG)`;
+                if (elOutArr) elOutArr.innerHTML = `<strong>${f.outArr}</strong> (SIN)`;
+                if (elOutNote) elOutNote.innerText = `Doba: ${f.outDuration} • Přestup ${f.hub}: ${f.outLayover}`;
+
+                const elRetDate = document.getElementById('tblRetDate');
+                const elRetRoute = document.getElementById('tblRetRoute');
+                const elRetCarrier = document.getElementById('tblRetCarrier');
+                const elRetDep = document.getElementById('tblRetDep');
+                const elRetArr = document.getElementById('tblRetArr');
+                const elRetNote = document.getElementById('tblRetNote');
+
+                if (elRetDate) elRetDate.innerText = f.retDate;
+                if (elRetRoute) elRetRoute.innerText = `Singapur (SIN) ➔ ${f.hub} ➔ Praha (PRG)`;
+                if (elRetCarrier) elRetCarrier.innerHTML = `<strong>${f.name}</strong><br><small style="color: var(--text-muted);">${f.retFlights}</small>`;
+                if (elRetDep) elRetDep.innerHTML = `<strong>${f.retDep}</strong> (SIN)`;
+                if (elRetArr) elRetArr.innerHTML = `<strong>${f.retArr}</strong> (PRG)`;
+                if (elRetNote) elRetNote.innerText = `Doba: ${f.retDuration} • Přestup ${f.hub}: ${f.retLayover}`;
+
+                const s0Title = document.getElementById('stage0Title');
+                const s0Desc = document.getElementById('stage0Desc');
+                if (s0Title) s0Title.innerText = `✈️ Odlet z Prahy (PRG) v ${f.outDep} — ${f.name}`;
+                if (s0Desc) {
+                    s0Desc.innerHTML = `Sraz na letišti v Praze před odletem v <strong>${f.outDep}</strong>. Odbavíme příruční batohy (max 7 kg) a vyrazíme spojem <strong>${f.outFlights}</strong> (přestup v ${f.hub}: ${f.outLayover}). Přílet na letiště Changi v Singapuru je <strong>${f.outArr}</strong> (celková doba letu ${f.outDuration}).`;
+                }
+
+                const s6Desc = document.getElementById('stage6ReturnDesc');
+                if (s6Desc) {
+                    s6Desc.innerHTML = `Závěrečné rozloučení s Asií. Ubytujeme se těsně u letiště v Denpasaru. Dne 24. 8. v 11:15 přeletíme se Scoot (TR281) do Singapuru (přílet 14:10) a následně <strong>${f.retDate} v ${f.retDep}</strong> odlétáme spojem <strong>${f.retFlights}</strong> (přestup v ${f.hub}: ${f.retLayover}) zpět do Prahy, kde přistaneme v <strong>${f.retArr}</strong>.`;
+                }
+            }
+        }
+        function toggleAltHotels(stage) {
+            const collapseEl = document.getElementById(`collapse-${stage}`);
+            const btnEl = document.getElementById(`btn-toggle-${stage}`);
+            if (!collapseEl || !btnEl) return;
+            const isOpen = collapseEl.classList.toggle('open');
+            const arrow = btnEl.querySelector('.arrow-indicator');
+            if (arrow) arrow.innerText = isOpen ? '▲' : '▼';
+        }
+
+        function userSelectHotel(stage, variant, stopEvent) {
+            if (stopEvent) stopEvent.stopPropagation();
+            if (!hotelCatalog[stage] || !hotelCatalog[stage].options[variant]) return;
+
+            userCustomSelection[stage] = variant;
+            localStorage.setItem('user_custom_selection', JSON.stringify(userCustomSelection));
+
+            currentMode = 'custom';
+            localStorage.setItem('user_budget_mode', 'custom');
+            selectedHotels = Object.assign({}, userCustomSelection);
+
+            updateAllHotelsVisuals(stage);
+            updateModeButtonsUI();
+            recalculateAll();
+            updateBrowserUrlSilently();
+
+            const chosen = hotelCatalog[stage].options[variant];
+            showToast(`🏨 Vybráno: ${chosen.name} (${formatKz(chosen.price)} Kč/pokoj)`);
+        }
+
+ function setBudgetMode(mode, silent) {
+            currentMode = mode;
+            localStorage.setItem('user_budget_mode', mode);
+
+            if (mode === 'planA') {
+                Object.keys(selectedHotels).forEach(s => selectedHotels[s] = 'A');
+            } else if (mode === 'planB') {
+                Object.keys(selectedHotels).forEach(s => selectedHotels[s] = 'B');
+            } else if (mode === 'planC') {
+                selectedHotels = { singapore: 'C', uluwatu: 'B', ubud: 'C', lombokNorth: 'B', lombokSouth: 'B', kutaLast: 'B' };
+                userCustomSelection = Object.assign({}, selectedHotels);
+                localStorage.setItem('user_custom_selection', JSON.stringify(userCustomSelection));
+            } else if (mode === 'planSandy') {
+                selectedHotels = { singapore: 'B', uluwatu: 'B', ubud: 'B', lombokNorth: 'B', lombokSouth: 'B', kutaLast: 'C' };
+                userCustomSelection = Object.assign({}, selectedHotels);
+                localStorage.setItem('user_custom_selection', JSON.stringify(userCustomSelection));
+            } else {
+                selectedHotels = Object.assign({}, userCustomSelection);
+            }
+
+            updateAllHotelsVisuals();
+            updateModeButtonsUI();
+            recalculateAll();
+            updateBrowserUrlSilently();
+
+            if (!silent) {
+                const labels = { planA: "📋 Aktivován A", planB: "⭐ Aktivována B", planC: "💎 Aktivována C (81 Gold + Bije Suite)", planSandy: "🏖️ Aktivován Bali Sandy Resort", custom: "🎛️ Aktivován Vlastní mix hotelů" };
+                showToast(labels[mode] || "Konfigurace změněna");
+            }
+        }
+     function updateModeButtonsUI() {
+            const mapBtns = { planA: 'btnModePlanA', planB: 'btnModePlanB', planC: 'btnModePlanC', custom: 'btnModeCustom' };
+            Object.keys(mapBtns).forEach(m => {
+                const el = document.getElementById(mapBtns[m]);
+                if (el) el.classList.toggle('active', currentMode === m);
+
+                // Zvýraznění tlačítek přímo nad mapou akčního rádiusu
+                const mapBtn = document.getElementById('mapModeBtn_' + m);
+                if (mapBtn) mapBtn.classList.toggle('active', currentMode === m);
+            });
+        }
+
+        function updateAllHotelsVisuals(animatedStage) {
+            Object.keys(selectedHotels).forEach(stage => {
+                const selectedVariant = selectedHotels[stage];
+                const variants = ['A', 'B', 'C'];
+                const slot = document.getElementById(`selected-hotel-slot-${stage}`);
+                const collapse = document.getElementById(`collapse-${stage}`);
+                const toggleBtn = document.getElementById(`btn-toggle-${stage}`);
+                const sqsBox = document.getElementById(`sqs-${stage}`);
+
+                if (sqsBox) {
+                    sqsBox.querySelectorAll('.sqs-btn').forEach(b => {
+                        b.classList.toggle('active', b.getAttribute('data-variant') === selectedVariant);
+                    });
+                }
+
+                let altCount = 0;
+                variants.forEach(v => {
+                    const card = document.getElementById(`card-${stage}-${v}`);
+                    const tag  = document.getElementById(`tag-${stage}-${v}`);
+                    if (!card) return;
+
+                    card.classList.remove('variant-A', 'variant-B', 'variant-C');
+
+                    if (v === selectedVariant) {
+                        card.classList.remove('hotel-inactive');
+                        card.classList.add('hotel-active', `variant-${v}`);
+
+                        if (animatedStage === stage) {
+                            card.classList.remove('just-selected-anim');
+                            void card.offsetWidth;
+                            card.classList.add('just-selected-anim');
+                        }
+                        if (tag) {
+                            tag.className = 'hotel-status-tag tag-active';
+                            tag.innerText = v === 'A' ? '📋 Vybráno ( A)' : (v === 'C' ? '💎 Vybráno (  C)' : '⭐ Vybráno (  B)');
+                        }
+                        if (slot && card.parentElement !== slot) {
+                            slot.appendChild(card);
+                        }
+                    } else {
+                        card.classList.remove('hotel-active', 'just-selected-anim');
+                        card.classList.add('hotel-inactive');
+                        if (tag) {
+                            tag.className = 'hotel-status-tag tag-inactive';
+                            tag.innerText = 'Klikni pro výběr';
+                        }
+                        if (collapse && card.parentElement !== collapse) {
+                            collapse.appendChild(card);
+                        }
+                        altCount++;
+                    }
+                });
+
+                if (toggleBtn) {
+                    const spanText = toggleBtn.querySelector('span:first-child');
+                    if (spanText) {
+                        spanText.innerText = `🏨 Porovnat další varianty pro tuto etapu (${altCount} ${altCount === 1 ? 'další možnost' : 'další možnosti'})`;
+                    }
+                }
+            });
+
+            const sgChoice = hotelCatalog.singapore.options[selectedHotels.singapore];
+            if (sgChoice) {
+                const sgTitle = document.getElementById('sgTransferTitle');
+                const sgFrame = document.getElementById('sgTransferMapFrame');
+                const sgNote  = document.getElementById('sgTransferNote');
+                const mapUrl  = `https://maps.google.com/maps?saddr=Changi+Airport+Singapore&daddr=${sgChoice.mapQuery}&dirflg=r&output=embed`;
+                if (sgTitle) sgTitle.innerText = `Changi Airport ➔ ${sgChoice.name}`;
+                if (sgFrame && sgFrame.src !== mapUrl) sgFrame.src = mapUrl;
+                if (sgNote) sgNote.innerText = `📍 ${sgChoice.note}`;
+            }
+
+            renderSelectedHotelsDeck();
+            refreshIslandMapMarkers();
+        }
+
+        function renderSelectedHotelsDeck() {
+            const deck = document.getElementById('selectedHotelsDeck');
+            if (!deck) return;
+
+            let html = '';
+            stageOrder.forEach(stage => {
+                const info = hotelCatalog[stage];
+                const activeVar = selectedHotels[stage];
+                const chosen = info.options[activeVar];
+                if (!chosen) return;
+
+                let pillsHtml = '';
+                Object.keys(info.options).forEach(vKey => {
+                    const isAct = vKey === activeVar;
+                    const activeClass = isAct ? `active-${vKey}` : '';
+                    pillsHtml += `<button class="deck-pill ${activeClass}" onclick="userSelectHotel('${stage}', '${vKey}', event)" title="Přepnout na Variantu ${vKey}">${vKey}</button>`;
+                });
+
+                html += `
+                    <div class="deck-item" onclick="document.getElementById('${info.targetId}').scrollIntoView({behavior:'smooth'})">
+                        <img decoding="async" loading="lazy" src="${chosen.img}" alt="${chosen.name}" class="deck-thumb" onerror="this.onerror=null;this.style.display='none'">
+                        <div class="deck-meta">
+                            <div class="deck-stage">${info.stageTitle}</div>
+                            <div class="deck-hotel-name">${chosen.name}</div>
+                            <div class="deck-price-row">
+                                <span>${formatKz(chosen.price)} Kč / pokoj</span>
+                                <div class="deck-quick-pills">${pillsHtml}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            deck.innerHTML = html;
+        }
+
+function renderGanttAndAudit() {
+    /* PREMIUM V19 – logistický přehled. Respektuje současné hodnoty letů a hotelů.
+       Návrh trasy není potvrzením rezervace, dostupnosti ani letového řádu. */
+    const f = flightOptions[currentAirline];
+    const root = document.getElementById('ganttAuditCard');
+    const routeEl = document.getElementById('pf19-route');
+    const checksEl = document.getElementById('pf19-checks');
+    const statsEl = document.getElementById('pf19-stats');
+    if (!f || !root || !routeEl || !checksEl || !statsEl) return;
+
+    const safe = value => String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+    const chosen = stage => {
+        const cat = hotelCatalog[stage];
+        return cat && cat.options ? (cat.options[selectedHotels[stage]] || null) : null;
+    };
+    const hotel = (stage, label, when, days, number) => {
+        const item = chosen(stage);
+        const target = hotelCatalog[stage].targetId;
+        const name = item ? item.name : 'Hotel dosud nevybrán';
+        const variant = item ? selectedHotels[stage] : '–';
+        const thumb = item && item.img ? `<img loading="lazy" decoding="async" src="${safe(item.img)}" alt="" class="pf19-photo" onerror="this.onerror=null;this.style.display='none'">` : '';
+        return `<article class="pf19-stop pf19-stop-hotel">
+            <div class="pf19-stop-head"><span class="pf19-index">${number}</span><span class="pf19-date">${when}</span><span class="pf19-type">${days} ${days === 1 ? 'noc' : (days < 5 ? 'noci' : 'nocí')}</span></div>
+            <div class="pf19-stop-content">${thumb}<div class="pf19-copy"><div class="pf19-location">${safe(label)}</div><h5>${safe(name)}</h5><span class="pf19-variant">Vybraná varianta ${safe(variant)} · ${item ? formatKz(item.price) + ' Kč / pokoj' : 'bez ceny'}</span></div></div>
+            <a href="#${safe(target)}" class="pf19-stage-link">Zobrazit etapu a hotel <span aria-hidden="true">↗</span></a>
+        </article>`;
+    };
+    const transfer = (label, when, desc, icon, number, tone) => `<article class="pf19-stop pf19-stop-transfer ${tone || ''}">
+        <div class="pf19-stop-head"><span class="pf19-index">${number}</span><span class="pf19-date">${when}</span><span class="pf19-type">Přesun</span></div>
+        <div class="pf19-transfer-body"><span class="pf19-transfer-icon" aria-hidden="true">${icon}</span><div class="pf19-copy"><div class="pf19-location">${safe(label)}</div><h5>${safe(desc)}</h5></div></div>
+    </article>`;
+
+    const select = document.getElementById('pf19-flight-select');
+    if (select) {
+        const opts = Object.entries(flightOptions).map(([key, opt]) => `<option value="${safe(key)}"${key === currentAirline ? ' selected' : ''}>${safe(opt.name)} · ${formatKz(opt.pricePerson)} Kč/os.</option>`).join('');
+        if (select.innerHTML !== opts) select.innerHTML = opts;
+        select.value = currentAirline;
+    }
+
+    const stages = [
+        transfer('Odlet z Prahy', '6.–7. 8.', `Přes ${f.hub} · přílet do Singapuru ${f.outArr}`, '✈', '01', 'pf19-flight'),
+        hotel('singapore', 'Singapur', '7.–9. 8.', 2, '02'),
+        transfer('Singapur → Bali', '9. 8.', 'Přelet na Bali (DPS) · v itineráři cca 2 h 50 min', '✈', '03', 'pf19-flight'),
+        hotel('uluwatu', 'Bali · Uluwatu', '9.–11. 8.', 2, '04'),
+        hotel('ubud', 'Bali · Ubud', '11.–15. 8.', 4, '05'),
+        transfer('Bali → Lombok', '15. 8.', 'Loď ze Sanuru · plán Starfish 13:00–15:00', '⛴', '06', 'pf19-boat'),
+        hotel('lombokNorth', 'Lombok · západ/sever', '15.–19. 8.', 4, '07'),
+        hotel('lombokSouth', 'Lombok · Kuta', '19.–23. 8.', 4, '08'),
+        transfer('Lombok → Bali', '23. 8.', 'Loď do Sanuru · plán Wahana 13:30–17:00', '⛴', '09', 'pf19-boat'),
+        hotel('kutaLast', 'Bali · u letiště', '23.–24. 8.', 1, '10'),
+        transfer('Bali → Singapur → Praha', '24.–25. 8.', `Přelet DPS–SIN; odlet ze SIN ${f.retDate} ${f.retDep}, přes ${f.hub}`, '✈', '11', 'pf19-flight')
+    ];
+    routeEl.innerHTML = stages.join('');
+
+    const totalNights = [2,2,4,4,4,1].reduce((a,b)=>a+b,0);
+    const selectedCount = stageOrder.filter(k => !!chosen(k)).length;
+    const items = [
+        ['11', 'navazujících úseků'],
+        [String(selectedCount) + '/6', 'zvolených hotelů'],
+        [String(totalNights), 'nocí v plánu'],
+        [f.hub.split(' (')[0], 'letecký přestup']
+    ];
+    statsEl.innerHTML = items.map(([value,label])=>`<div class="pf19-stat"><strong>${safe(value)}</strong><span>${safe(label)}</span></div>`).join('');
+
+    const minutes = str => {
+        const h = String(str || '').match(/(\d+)\s*hod(?:\.|in(?:y|a)?)?/i);
+        const m = String(str || '').match(/(\d+)\s*min/i);
+        return (h ? Number(h[1]) * 60 : 0) + (m ? Number(m[1]) : 0);
+    };
+    const layoverCheck = (title, val, key) => {
+        const mins = minutes(val);
+        const cls = mins > 0 && mins < 90 ? 'attention' : 'normal';
+        const msg = !mins ? 'Čas přestupu není uveden' : mins < 90 ? 'Krátká časová rezerva' : mins < 120 ? 'Těsnější časová rezerva' : 'Rezerva dle zadaného plánu';
+        return `<div class="pf19-check ${cls}"><span class="pf19-check-icon">${cls === 'attention' ? '!' : '◷'}</span><div><strong>${safe(title)}</strong><span>${safe(val || 'Údaj není k dispozici')}</span><small>${msg} · ověřit terminál a podmínky přestupu</small></div></div>`;
+    };
+    checksEl.innerHTML = [
+        layoverCheck('Přestup při odletu', f.outLayover, 'out'),
+        layoverCheck('Přestup při návratu', f.retLayover, 'ret'),
+        `<div class="pf19-check"><span class="pf19-check-icon">◷</span><div><strong>Čekání v Singapuru před návratem</strong><span>${safe(f.sinLayover || 'Bez údaje')}</span><small>Čas vychází z plánovaného příletu DPS–SIN v 14:10</small></div></div>`,
+        `<div class="pf19-check pf19-check-warn"><span class="pf19-check-icon">!</span><div><strong>Lodě mezi Bali a Lombokem</strong><span>15. 8. a 23. 8. · podle cestovního plánu</span><small>Plavby a následné pozemní přesuny ověřit před rezervací</small></div></div>`,
+        `<div class="pf19-check ${selectedCount === 6 ? '' : 'pf19-check-warn'}"><span class="pf19-check-icon">⌂</span><div><strong>Návaznost ubytování</strong><span>${selectedCount} ze 6 etap vybráno · ${totalNights} nocí</span><small>Volba v konfigurátoru není potvrzením dostupnosti hotelu</small></div></div>`
+    ].join('');
+}
+
+function toggleGanttCardFullscreen() {
+    const card = document.getElementById('ganttAuditCard');
+    if (!card) return;
+    if (!document.fullscreenElement) {
+        card.requestFullscreen().catch(err => {
+            showToast(`⚠️ Chyba při otevírání fullscreenu: ${err.message}`);
+        });
+    } else {
+        document.exitFullscreen();
+    }
+}
+
+
+        /* Jídlo a Vstupné a aktivity se přičítají NAD základní rozpočet (viz window.TRIP) */
+        function renderBudgetExtras() {
+            const b = window.__tripBase, T = window.TRIP;
+            if (!b || !T) return;
+            const f = T.food().kc, aP = T.sums({ solo: false }).kc, aS = T.sums({ solo: true }).kc;
+            const set = (id, v) => { const el = document.getElementById(id); if (el) el.innerText = formatKz(v) + ' Kč'; };
+            set('bxFood_pers', f); set('bxFood_fam', f * 2); set('bxFood_sing', f);
+            set('bxAct_pers', aP); set('bxAct_fam', aP * 2); set('bxAct_sing', aS);
+            const grandP = b.pers + f + aP;
+            set('bxGrand_pers', grandP); set('bxGrand_fam', b.fam + 2 * f + 2 * aP); set('bxGrand_sing', b.sing + f + aS);
+            const fl = document.getElementById('bxFoodLbl'); if (fl) fl.innerText = '+ Jídlo, úroveň „' + T.levelName() + '“';
+            const al = document.getElementById('bxActLbl'); if (al) al.innerText = '+ Vstupné a aktivity, zaškrtnuté položky';
+            const txt = 'cca ' + formatKz(grandP) + ' Kč';
+            const fset = (id, v) => { const el = document.getElementById(id); if (el) el.innerText = formatKz(v) + ' Kč'; };
+            const bset = (id, v) => { const el = document.getElementById(id); if (el) { el.innerText = ''; el.style.display = 'none'; } };
+            bset('floatBasePerson', b.pers); bset('floatBaseFamily', b.fam); bset('floatBaseSingle', b.sing);
+            fset('floatPricePerson', grandP); fset('floatPriceFamily', b.fam + 2 * f + 2 * aP); fset('floatPriceSingle', b.sing + f + aS);
+            set('calcTotalPerson', grandP); set('calcTotalFamily', b.fam + 2 * f + 2 * aP); set('calcTotalSingle', b.sing + f + aS);
+            ['comparisonOurPricePC', 'comparisonOurPriceMob'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = txt; });
+            ['comparisonOurFinalPC', 'comparisonOurFinalMob'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = txt; });
+            const sav = document.getElementById('dynamicSavingsHighlight');
+            if (sav) { const d = 94500 - grandP; sav.innerText = d > 0 ? 'přes ' + formatKz(d) + ' Kč' : 'výraznou částku'; }
+        }
+        if (window.TRIP) window.TRIP.onChange(renderBudgetExtras);
+        window.addEventListener('lux:fx', function () { try { recalculateAll(); } catch (e) {} });
+
+function recalculateAll() {
+            const flight = flightOptions[currentAirline];
+            renderGanttAndAudit();
+
+            let currentHotelsRoom = 0;
+            Object.keys(selectedHotels).forEach(stage => {
+                const v = selectedHotels[stage];
+                if (hotelCatalog[stage] && hotelCatalog[stage].options[v]) {
+                    currentHotelsRoom += hotelCatalog[stage].options[v].price;
+                }
+            });
+            const currentHotelsPerson = Math.round(currentHotelsRoom / 2);
+
+            const countSavingsOptions = Object.values(selectedHotels).filter(v => v === 'B' || v === 'C').length;
+            const transportKey = countSavingsOptions >= 3 ? 'B' : 'A';
+            const currentTransport = transportPrices[transportKey];
+
+            /* ZÁKLADNÍ ROZPOČET NEZAHRNUJE: jídlo, výlety, vstupy, jízdné v Singapuru a suvenýry
+               (ani taxi, drobné výdaje, úschovnu, loď na Gili a poslední hotel na místě).
+               Jídlo a aktivity se počítají zvlášť v window.TRIP (sekce Jídlo a Vstupné a aktivity). */
+            /* Poplatky se počítají z řádků 6-9 v tabulce: víza 500 000 IDR, daň Bali 150 000 IDR, eSIM, parkování */
+            const _rt = (window.TRIP && TRIP.rates) ? TRIP.rates() : { IDR: 24.347 / 20225 };
+            const FEE_VISA = Math.round(500000 * _rt.IDR), FEE_TAX = Math.round(150000 * _rt.IDR), FEE_ESIM = 250, FEE_PARK = 250;
+            const FIXED_OTHER_FEES = FEE_VISA + FEE_TAX + FEE_ESIM + FEE_PARK;
+            const FIXED_ASIA_FLIGHT = 5206; /* Scoot Singapur ⇄ Bali, řádek 2 (dřív se do součtu nepočítal) */
+
+            /* Skútry: 1 motorka = Bali GFS-Bike 7 dní (střed $41,65-$62,65) + pojištění $20,65, Lombok 8 dní × 60 000 Rp,
+               benzín 2 l denně × 15 dní × 12 000 Rp a mýtná karta 25 000 Rp. Osoba = půl motorky (2 lidé na stroj), solo celá. */
+            const _r2 = (window.TRIP && TRIP.rates) ? TRIP.rates() : { USD: 24.347 / 1.115, IDR: 24.347 / 20225 };
+            const BK_BALI = Math.round(((41.65 + 62.65) / 2 + 20.65) * _r2.USD), BK_LOM = Math.round(8 * 60000 * _r2.IDR), BK_FUEL = Math.round(2 * 15 * 12000 * _r2.IDR), BK_TOLL = Math.round(25000 * _r2.IDR);
+            const BIKE_TOTAL = BK_BALI + BK_LOM + BK_FUEL + BK_TOLL;
+            const sharedScooterPerPerson = Math.round(BIKE_TOTAL / 2);
+            const soloScooterTotal = BIKE_TOTAL;
+            const _d5 = document.getElementById('b5_detail');
+            if (_d5) _d5.innerText = '1 motorka celkem ' + formatKz(BIKE_TOTAL) + ' Kč: Bali 7 dní vč. pojištění ' + formatKz(BK_BALI) + ' Kč + Lombok 8 dní ' + formatKz(BK_LOM) + ' Kč + benzín 30 l ' + formatKz(BK_FUEL) + ' Kč + mýto ' + formatKz(BK_TOLL) + ' Kč. Osoba platí půl motorky (2 lidé na stroj), solo celou. Vratné kauce nejsou v ceně.';
+
+            const otherFixedShared = FIXED_OTHER_FEES + FIXED_ASIA_FLIGHT;
+
+            const planAHotelsPerson = 10602;
+            const planAHotelsRoom = planAHotelsPerson * 2;
+            const totalPlanAPerson = flight.pricePerson + otherFixedShared + sharedScooterPerPerson + transportPrices.A.person + planAHotelsPerson;
+            const totalPlanAFamily = totalPlanAPerson * 2;
+            const totalPlanASingle = flight.pricePerson + otherFixedShared + soloScooterTotal + transportPrices.A.person + planAHotelsRoom;
+
+            const planBHotelsPerson = 7306;
+            const planBHotelsRoom = planBHotelsPerson * 2;
+            const totalPlanBPerson = flight.pricePerson + otherFixedShared + sharedScooterPerPerson + transportPrices.B.person + planBHotelsPerson;
+            const totalPlanBFamily = totalPlanBPerson * 2;
+            const totalPlanBSingle = flight.pricePerson + otherFixedShared + soloScooterTotal + transportPrices.B.person + planBHotelsRoom;
+
+            const totalCurrentPerson = flight.pricePerson + otherFixedShared + sharedScooterPerPerson + currentTransport.person + currentHotelsPerson;
+            const totalCurrentFamily = totalCurrentPerson * 2;
+            const totalCurrentSingle = flight.pricePerson + otherFixedShared + soloScooterTotal + currentTransport.person + currentHotelsRoom;
+
+            const totalSavings = totalPlanAFamily - totalCurrentFamily;
+            const totalSavingsSingle = totalPlanASingle - totalCurrentSingle;
+
+            if (document.getElementById('b1_pers')) document.getElementById('b1_pers').innerText = formatKz(flight.pricePerson) + ' Kč';
+            if (document.getElementById('b1_fam')) document.getElementById('b1_fam').innerText = formatKz(flight.pricePerson * 2) + ' Kč';
+            if (document.getElementById('b1_sing')) document.getElementById('b1_sing').innerText = formatKz(flight.pricePerson) + ' Kč';
+
+            if (document.getElementById('b2_pers')) document.getElementById('b2_pers').innerText = '5 206 Kč';
+            if (document.getElementById('b2_fam')) document.getElementById('b2_fam').innerText = '10 412 Kč';
+            if (document.getElementById('b2_sing')) document.getElementById('b2_sing').innerText = '5 206 Kč';
+
+            if (document.getElementById('b3_pers')) document.getElementById('b3_pers').innerText = formatKz(currentTransport.person) + ' Kč';
+            if (document.getElementById('b3_fam')) document.getElementById('b3_fam').innerText = formatKz(currentTransport.room) + ' Kč';
+            if (document.getElementById('b3_sing')) document.getElementById('b3_sing').innerText = formatKz(currentTransport.person) + ' Kč';
+
+            if (document.getElementById('b4_pers')) document.getElementById('b4_pers').innerText = formatKz(currentHotelsPerson) + ' Kč';
+            if (document.getElementById('b4_fam')) document.getElementById('b4_fam').innerText = formatKz(currentHotelsRoom) + ' Kč';
+            if (document.getElementById('b4_sing')) document.getElementById('b4_sing').innerText = formatKz(currentHotelsRoom) + ' Kč';
+
+            if (document.getElementById('b5_pers')) document.getElementById('b5_pers').innerText = formatKz(sharedScooterPerPerson) + ' Kč';
+            if (document.getElementById('b5_fam')) document.getElementById('b5_fam').innerText = formatKz(BIKE_TOTAL) + ' Kč';
+            if (document.getElementById('b5_sing')) document.getElementById('b5_sing').innerText = formatKz(soloScooterTotal) + ' Kč';
+
+
+
+
+
+
+            const _setRow = (n, v, solo) => { const e = (s) => document.getElementById('b' + n + '_' + s); if (e('pers')) e('pers').innerText = formatKz(v) + ' Kč'; if (e('fam')) e('fam').innerText = formatKz(v * 2) + ' Kč'; if (e('sing')) e('sing').innerText = formatKz(v) + ' Kč'; };
+            _setRow(11, FEE_VISA); _setRow(12, FEE_TAX); _setRow(13, FEE_ESIM); _setRow(14, FEE_PARK);
+            { const fl = flight.pricePerson + FIXED_ASIA_FLIGHT; ['pers','fam','sing'].forEach(s => { const el = document.getElementById('bxFl_' + s); if (el) el.innerText = formatKz(s === 'fam' ? fl * 2 : fl) + ' Kč'; }); }
+            { const bl = document.getElementById('b3_label'); if (bl) bl.innerText = currentTransport === transportPrices.A ? '3. Přelet Bali ⇄ Lombok (TransNusa, tam a zpět)' : '3. Loď Bali ⇄ Lombok (rychloloď, tam a zpět)'; }
+
+            if (document.getElementById('breakdownTotalPers')) document.getElementById('breakdownTotalPers').innerText = formatKz(totalCurrentPerson) + ' Kč';
+            if (document.getElementById('breakdownTotalFam')) document.getElementById('breakdownTotalFam').innerText = formatKz(totalCurrentFamily) + ' Kč';
+            if (document.getElementById('breakdownTotalSing')) document.getElementById('breakdownTotalSing').innerText = formatKz(totalCurrentSingle) + ' Kč';
+
+            const deckBadge = document.getElementById('deckTotalBadge');
+            if (deckBadge) deckBadge.innerText = `Celkem za hotely: ${formatKz(currentHotelsRoom)} Kč / pokoj (${formatKz(currentHotelsPerson)} Kč / os.)`;
+
+            document.getElementById('calcPricePerson').innerText = `${formatKz(totalCurrentPerson)} Kč`;
+            document.getElementById('calcPriceFamily').innerText = `${formatKz(totalCurrentFamily)} Kč`;
+
+            const singlePriceEl = document.getElementById('calcPriceSingle');
+            if (singlePriceEl) singlePriceEl.innerText = `${formatKz(totalCurrentSingle)} Kč`;
+
+            document.getElementById('calcDescPerson').innerText = `Dálkový let: ${flight.name}, vybrané hotely, skútry, víza a poplatky, jídlo a vstupy podle tvého výběru`;
+            window.__tripBase = { pers: totalCurrentPerson, fam: totalCurrentFamily, sing: totalCurrentSingle };
+
+            document.getElementById('floatPricePerson').innerText = `${formatKz(totalCurrentPerson)} Kč`;
+            document.getElementById('floatPriceFamily').innerText = `${formatKz(totalCurrentFamily)} Kč`;
+
+            const floatSingleEl = document.getElementById('floatPriceSingle');
+            if (floatSingleEl) floatSingleEl.innerText = `${formatKz(totalCurrentSingle)} Kč`;
+
+            const floatSav = document.getElementById('floatSavings');
+            if (floatSav) {
+                let famStr = totalSavings >= 0 ? `${formatKz(totalSavings)} Kč` : `+${formatKz(Math.abs(totalSavings))} Kč`;
+                let solStr = totalSavingsSingle >= 0 ? `${formatKz(totalSavingsSingle)} Kč` : `+${formatKz(Math.abs(totalSavingsSingle))} Kč`;
+                floatSav.innerHTML = `<span>Osoba: ${totalSavings >= 0 ? formatKz(totalSavings / 2) + ' Kč' : '+' + formatKz(Math.abs(totalSavings) / 2) + ' Kč'}</span> <span>Rodina: ${famStr}</span> <span style="font-size: 0.85em; opacity: 0.9;">Sólo: ${solStr}</span>`;
+                floatSav.style.color = totalSavings >= 0 ? 'var(--lux-ok)' : 'var(--lux-bad)';
+            }
+
+            const statusLabel = document.getElementById('budgetStatusLabel');
+            if (statusLabel) {
+                statusLabel.innerText = `Let: ${flight.name} • Hotely: ${formatKz(currentHotelsRoom)} Kč/pokoj • Celkem pár: ${formatKz(totalCurrentFamily)} Kč (Úspora ${formatKz(totalSavings)} Kč)`;
+            }
+
+            const dynamicPriceText = `${formatKz(totalCurrentPerson)} Kč`;
+            const compPC = document.getElementById('comparisonOurPricePC');
+            const compFinalPC = document.getElementById('comparisonOurFinalPC');
+            const compMob = document.getElementById('comparisonOurPriceMob');
+            const compFinalMob = document.getElementById('comparisonOurFinalMob');
+
+            if (compPC) compPC.innerText = `od cca ${dynamicPriceText}`;
+            if (compFinalPC) compFinalPC.innerText = `cca ${dynamicPriceText}`;
+            if (compMob) compMob.innerText = `cca ${dynamicPriceText}`;
+            if (compFinalMob) compFinalMob.innerText = `cca ${dynamicPriceText}`;
+
+            const ckSenAvgRealPrice = 94500;
+            const calculatedSavings = ckSenAvgRealPrice - totalCurrentPerson;
+            const savingsHighlightEl = document.getElementById('dynamicSavingsHighlight');
+            if (savingsHighlightEl) {
+                if (calculatedSavings > 0) {
+                    savingsHighlightEl.innerText = `přes ${formatKz(calculatedSavings)} Kč`;
+                } else {
+                    savingsHighlightEl.innerText = `výraznou částku`;
+                }
+            }
+
+    renderBudgetExtras();
+    renderSettingsModalContent();
+        }
+
+        function copyTripSummary() {
+            shareToWhatsAppDirect();
+        }
+
+        const htmlRoot = document.documentElement;
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        htmlRoot.setAttribute('data-theme', savedTheme);
+        if (themeToggleBtn) {
+            themeToggleBtn.innerText = savedTheme === 'light' ? '🌙' : '☀️';
+        }
+
+        function toggleTheme() {
+            const currentTheme = htmlRoot.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            htmlRoot.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+
+            if (themeToggleBtn) {
+                themeToggleBtn.innerText = newTheme === 'light' ? '🌙' : '☀️';
+            }
+        }
+
+        function filterTimeline(btn, region) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            document.querySelectorAll('.t-row').forEach(row => {
+                row.style.display = (region === 'all' || row.classList.contains('filter-' + region)) ? 'block' : 'none';
+            });
+        }
+
+        function toggleAcc(triggerEl) {
+            const acc = triggerEl.parentElement;
+            const content = acc.querySelector('.acc-content');
+            acc.classList.toggle('open');
+            content.style.maxHeight = acc.classList.contains('open') ? content.scrollHeight + 'px' : '0px';
+        }
+
+        function openIframeInModal(url, title) {
+            document.getElementById('mapFsTitle').innerText = title;
+            document.getElementById('mapFsContainer').innerHTML = `<iframe loading="lazy" title="Mapa / Street View" src="${url}" style="width: 100%; height: 100%; border: none;" allowfullscreen></iframe>`;
+            document.getElementById('mapFsModal').style.display = 'flex';
+        }
+
+        function openImageInModal(src) {
+            document.getElementById('fsImage').src = src;
+            document.getElementById('fsModal').style.display = 'flex';
+        }
+        document.getElementById('fsModal').addEventListener('click', function() { this.style.display = 'none'; });
+
+
+        function updateLiveClock() {
+            const now = new Date();
+            const prg = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+            const asia = new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + (8 * 3600000));
+            const asiaStr = String(asia.getHours()).padStart(2, '0') + ':' + String(asia.getMinutes()).padStart(2, '0');
+            document.querySelectorAll('.time-prg').forEach(el => el.innerText = prg);
+            document.querySelectorAll('.time-asia').forEach(el => el.innerText = asiaStr);
+        }
+        setInterval(updateLiveClock, 1000); updateLiveClock();
+
+        function updateCountdown() {
+            const depTime = (typeof window.getDepartureDate === 'function' ? window.getDepartureDate() : new Date('2027-08-06T00:00:00+02:00')).getTime();
+            const dist = depTime - Date.now();
+            if (dist < 0) return;
+            const days = Math.floor(dist / 86400000);
+            document.getElementById('cd-days').innerText = days;
+            document.getElementById('cd-hours').innerText = String(Math.floor((dist % 86400000) / 3600000)).padStart(2, '0');
+            document.getElementById('cd-mins').innerText = String(Math.floor((dist % 3600000) / 60000)).padStart(2, '0');
+            document.getElementById('cd-secs').innerText = String(Math.floor((dist % 60000) / 1000)).padStart(2, '0');
+            document.getElementById('sgStatus').innerText = `💡 Vyplnit za ${Math.max(0, days - 3)} dní (3 dny před příletem)`;
+            document.getElementById('voaStatus').innerText = `💡 Podat žádost cca 14 dní před odletem`;
+            document.getElementById('levyStatus').innerText = `🟢 Turistickou daň lze uhradit online před odletem`;
+            document.getElementById('ecdStatus').innerText = `💡 Formulář e-CD vyplnit 2 dny před příletem na Bali`;
+        }
+        setInterval(updateCountdown, 1000); updateCountdown();
+
+        let leafletIslandMap = null, islandMarkersLayer = null, leafletFlightMap = null, flightLayerGroup = null, fsMap = null;
+
+        let currentMapRegion = 'all';
+
+        function setMapZoomRegion(region, btnEl) {
+            currentMapRegion = region;
+            if (btnEl && btnEl.parentElement) {
+                btnEl.parentElement.querySelectorAll('.sqs-btn').forEach(b => b.classList.remove('active'));
+                btnEl.classList.add('active');
+            }
+            if (leafletIslandMap) {
+                refreshIslandMapMarkers(leafletIslandMap, islandMarkersLayer);
+            }
+        }
+
+        function refreshIslandMapMarkers(targetMap, targetLayer) {
+            const mapObj = targetMap || leafletIslandMap;
+            if (!mapObj || typeof L === 'undefined') return;
+            if (!targetMap) {
+                if (islandMarkersLayer) islandMarkersLayer.clearLayers();
+                else islandMarkersLayer = L.layerGroup().addTo(mapObj);
+            }
+            const layer = targetLayer || islandMarkersLayer;
+
+            const allPointsForBounds = [];
+            const sgCoordsMap = {
+                A: [1.3134, 103.8615],
+                B: [1.3112, 103.8786],
+                C: [1.3120, 103.8813]
+            };
+
+            const activeSgVar = selectedHotels['singapore'] || 'B';
+            ['A', 'B', 'C'].forEach(vKey => {
+                const coord = sgCoordsMap[vKey];
+                const hObj = hotelCatalog.singapore.options[vKey];
+                const isAct = (vKey === activeSgVar);
+
+                if (isAct) {
+                    L.circle(coord, { radius: 15000, color: '#22d3ee', weight: 2, dashArray: '4, 4', fillColor: '#22d3ee', fillOpacity: 0.18 }).addTo(layer);
+                }
+                const marker = L.circleMarker(coord, {
+                    radius: isAct ? 9 : 6,
+                    fillColor: isAct ? '#22d3ee' : '#9ca3af',
+                    color: '#071113',
+                    weight: isAct ? 2 : 1,
+                    fillOpacity: isAct ? 1 : 0.6
+                }).bindPopup(`<strong>${hObj.name}</strong><br>1. Singapur (2 noci) [Var. ${vKey}]<br>${formatKz(hObj.price)} Kč / pokoj ${isAct ? '⭐ (Aktivní)' : ''}`);
+
+                marker.addTo(layer);
+                allPointsForBounds.push(coord);
+            });
+
+            ['uluwatu', 'ubud', 'lombokNorth', 'lombokSouth', 'kutaLast'].forEach(stage => {
+                const activeVar = selectedHotels[stage];
+                const stageInfo = hotelCatalog[stage];
+
+                Object.keys(stageInfo.options).forEach(vKey => {
+                    const h = stageInfo.options[vKey];
+                    const isAct = (vKey === activeVar);
+
+                    if (h && h.coords) {
+                        if (isAct) {
+                            L.circle(h.coords, { radius: 20000, color: '#ff6b4a', weight: 2, dashArray: '4, 4', fillColor: '#ff6b4a', fillOpacity: 0.16 }).addTo(layer);
+                        }
+                        const marker = L.circleMarker(h.coords, {
+                            radius: isAct ? 9 : 6,
+                            fillColor: isAct ? '#7ee2f2' : '#9ca3af',
+                            color: '#071113',
+                            weight: isAct ? 2 : 1,
+                            fillOpacity: isAct ? 1 : 0.6
+                        }).bindPopup(`<strong>${h.name}</strong><br>${stageInfo.stageTitle} [Var. ${vKey}]<br>${formatKz(h.price)} Kč / pokoj ${isAct ? '⭐ (Aktivní)' : ''}`);
+
+                        marker.addTo(layer);
+                        allPointsForBounds.push(h.coords);
+                    }
+                });
+            });
+
+            try {
+                if (currentMapRegion === 'singapore') {
+                    mapObj.setView(sgCoordsMap[activeSgVar], 12);
+                } else if (currentMapRegion === 'islands') {
+                    const islandCoords = [];
+                    ['uluwatu', 'ubud', 'lombokNorth', 'lombokSouth', 'kutaLast'].forEach(stage => {
+                        const v = selectedHotels[stage];
+                        const h = hotelCatalog[stage].options[v];
+                        if (h && h.coords) islandCoords.push(h.coords);
+                    });
+                    mapObj.fitBounds(L.latLngBounds(islandCoords), { padding: [50, 50], maxZoom: 9 });
+                } else {
+                    mapObj.fitBounds(L.latLngBounds(allPointsForBounds), { padding: [40, 40], maxZoom: 8 });
+                }
+            } catch (e) {}
+
+            setTimeout(() => { mapObj.invalidateSize(); }, 150);
+        }
+
+        /* Animované letadlo (a loď) na mapě tras: letí po vybrané trase Praha → přestup → Singapur → Bali → Lombok dokola */
+        const PLANE_SVG = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>';
+        function startPlaneAnim(mapObj, layer, f, pts) {
+            if (typeof L === 'undefined' || !L.Projection || !L.Projection.SphericalMercator || !layer) return;
+            if (mapObj.__planeStop) { try { mapObj.__planeStop(); } catch (e) {} }
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const SM = L.Projection.SphericalMercator;
+            const air = String(f.name || 'Let').split(' (')[0];
+            const hubName = String(f.hub || 'přestup').split(' (')[0];
+            /* celá trasa i s pobytem: Praha → přestup → Singapur (hotel) → Bali (Uluwatu, Ubud, Sanur) → Lombok (západ/sever, Kuta)
+               → zpět přes Sanur k hotelu u letiště → Singapur (tranzit) → přestup → Praha. pause = jak dlouho se na zastávce stojí */
+            const P = pts, SLOW = 2, AF = 0.22;   /* AF = podíl času na pozvolný vzlet / dosednutí letadla */
+            /* termín etapy se čte přímo z hlavičky sekce itineráře, takže se mění spolu s ní */
+            const lab = function (txt, foldId) {
+                const s = document.querySelector('#' + foldId + ' > .lux-fold-h .lux-fold-s');
+                const d = s ? s.textContent.replace(/\s*\(.*?\)/g, '').replace(/\s*2027/g, '').replace(/\s*–\s*/g, '–').trim() : '';
+                return d ? txt + ' · ' + d : txt;
+            };
+            const mk = function (a, b, k, t, pause, pt, z, extra) { return Object.assign({ a: a, b: b, k: k, t: t, pause: pause, pt: pt, z: z }, extra || {}); };
+            const legs = [
+                mk(P.prg,  P.hub,  'air',     air + ': Praha → ' + hubName, 2200, 'Přestup: ' + hubName + ' ✈️', 6),
+                mk(P.hub,  P.sgh,  'air',     air + ': ' + hubName + ' → Singapur', 2800, lab('Singapur: 2 noci 🏙️', 'f-leg-sg'), 11),
+                mk(P.sgh,  P.bali, 'air',     'Scoot: Singapur → Bali', 1800, 'Bali: přistání ✈️', 10),
+                mk(P.bali, P.ulu,  'scooter', 'Skútr: letiště → Uluwatu', 2600, lab('Uluwatu: 2 noci 🌊', 'f-leg-uluwatu'), 11),
+                mk(P.ulu,  P.ubud, 'scooter', 'Skútr: Uluwatu → Ubud', 2800, lab('Ubud: 4 noci 🌿', 'f-leg-ubud'), 11),
+                mk(P.ubud, P.sanur,'car',     'Transfer: Ubud → přístav Sanur', 1600, 'Sanur: nalodění na rychloloď 🚤', 11, { pk: 'boat' }),
+                mk(P.sanur,P.port, 'boat',    'Rychloloď: Sanur → přístav Bangsal (Lombok)', 2000, 'Přístav Bangsal (Lombok): přesedáme na skútr 🛵', 10, { pk: 'scooter' }),
+                mk(P.port, P.lomN, 'scooter', 'Skútr: Bangsal → Lombok západ / sever', 2600, lab('Lombok · západ & sever: 4 noci 🏝️', 'f-leg-lombok-sever'), 10),
+                mk(P.lomN, P.lomS, 'scooter', 'Skútr: Lombok → Kuta', 3000, lab('Kuta Lombok: 4 noci 🌴', 'f-leg-kuta'), 10),
+                mk(P.lomS, P.port, 'car',     'Transfer: Kuta → přístav Bangsal', 1600, 'Přístav Bangsal: odplouváme zpět 🚤', 10, { pk: 'boat' }),
+                mk(P.port, P.sanur,'boat',    'Loď: Bangsal (Lombok) → Sanur (Bali)', 1800, 'Sanur: zpátky na Bali', 10, { pk: 'taxi' }),
+                mk(P.sanur,P.baliH,'taxi',    'Taxi: Sanur → hotel u letiště', 2600, lab('Bali u letiště: rozlučka 🌅', 'f-leg-rozlucka'), 11),
+                mk(P.baliH,P.sin,  'air',     'Scoot: Bali → Singapur', 2000, 'Singapur: tranzit ☕', 9),
+                mk(P.sin,  P.hub,  'air',     air + ': Singapur → ' + hubName, 2000, 'Přestup: ' + hubName + ' ✈️', 6),
+                mk(P.hub,  P.prg,  'air',     air + ': ' + hubName + ' → Praha', 3600, 'Praha: jsme doma 🏡', 6)
+            ];
+            let T = 0;
+            legs.forEach(function (g, i) {
+                g.p = SM.project(L.latLng(g.a)); g.q = SM.project(L.latLng(g.b));
+                g.len = Math.hypot(g.q.x - g.p.x, g.q.y - g.p.y);
+                g.dur = (g.k === 'air' ? Math.max(1.4, g.len / 1.9e6) / (2 * (1 - AF)) : g.k === 'boat' ? Math.max(1.4, g.len / 0.1e6) : Math.max(2.0, g.len / 0.08e6)) * 1000 * SLOW;   /* pohyb 3× pomaleji než původně, pak o třetinu zrychleno (SLOW = 2) */
+                g.dir = Math.atan2(g.q.x - g.p.x, g.q.y - g.p.y) * 180 / Math.PI;
+                g.cam = 's' + i;
+                if (g.k !== 'air') g.mv = 'm' + i;
+                g.s = T; T += g.dur; g.e = T; T += g.pause; g.pe = T;
+            });
+            const TOTAL = T;
+
+            /* kamera: celek trasy při letu, přiblížení na každou zastávku a pohled na úsek při jízdě / plavbě */
+            const ovBounds = L.latLngBounds([P.prg, P.hub, P.sgh, P.bali, P.ulu, P.ubud, P.sanur, P.port, P.lomN, P.lomS, P.baliH]);
+            const CAM = { ov: function () { mapObj.flyToBounds(ovBounds, { padding: [30, 30], maxZoom: 5, duration: 1.5 }); } };
+            legs.forEach(function (g, i) {
+                CAM['s' + i] = function () { mapObj.flyTo(g.b, g.z, { duration: 1.4 }); };
+                if (g.mv) CAM[g.mv] = function () { mapObj.flyToBounds(L.latLngBounds([g.a, g.b]), { padding: [80, 80], maxZoom: 10, duration: 1.2 }); };
+            });
+
+            const icon = L.divIcon({ className: 'lux-plane', html: '<div class="lux-plane-ico">' + PLANE_SVG + '</div>', iconSize: [36, 36], iconAnchor: [18, 18] });
+            const marker = L.marker(legs[0].a, { icon: icon, interactive: false, keyboard: false, zIndexOffset: 2000 }).addTo(layer);
+            marker.bindTooltip(legs[0].t, { permanent: true, direction: 'top', offset: [0, -20], className: 'lux-plane-tip', opacity: 1 });
+            const trail = L.polyline([legs[0].a], { color: '#ffffff', weight: 3.5, opacity: 0.95, interactive: false }).addTo(layer);
+
+            /* tlačítko pauza / pustit (jedno na mapu) */
+            if (!mapObj.__planeCtl && L.Control && L.DomUtil) {
+                const Ctl = L.Control.extend({
+                    onAdd: function () {
+                        const wrap = L.DomUtil.create('div', 'lux-plane-ctl');
+                        const b = L.DomUtil.create('button', 'lux-plane-btn'); b.type = 'button';
+                        const sync = function () { b.textContent = mapObj.__planePaused ? '▶ Pustit letadlo' : '⏸ Pozastavit letadlo'; };
+                        sync();
+                        b.addEventListener('click', function () { mapObj.__planePaused = !mapObj.__planePaused; sync(); });
+                        const sp = L.DomUtil.create('button', 'lux-plane-btn'); sp.type = 'button';
+                        const syncSp = function () { sp.textContent = '⏩ ' + (mapObj.__planeSpeed || 1) + '×'; sp.title = 'Rychlost animace'; };
+                        syncSp();
+                        sp.addEventListener('click', function () { mapObj.__planeSpeed = (mapObj.__planeSpeed || 1) === 1 ? 2 : (mapObj.__planeSpeed === 2 ? 4 : 1); syncSp(); });
+                        wrap.appendChild(b); wrap.appendChild(sp);
+                        L.DomEvent.disableClickPropagation(wrap);
+                        return wrap;
+                    }
+                });
+                try { mapObj.__planeCtl = new Ctl({ position: 'bottomleft' }).addTo(mapObj); } catch (e) {}
+            }
+
+            let stopped = false, raf = 0, elapsed = 0, last = 0, visible = true, curKey = '', curCam = 'ov', userUntil = 0, io = null;
+            const container = mapObj.getContainer();
+            /* když si uživatel s mapou začne hrát sám, kamera se na pár vteřin přestane hýbat */
+            const hold = function () { userUntil = performance.now() + 7000; };
+            ['pointerdown', 'wheel', 'touchstart'].forEach(function (ev) { try { container.addEventListener(ev, hold, { passive: true }); } catch (e) {} });
+            try { if ('IntersectionObserver' in window) { io = new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }); io.observe(container); } } catch (e) {}
+            function stop() {
+                stopped = true; cancelAnimationFrame(raf);
+                [].forEach.call(document.querySelectorAll('.is-anim'), function (x) { x.classList.remove('is-anim'); }); if (io) { try { io.disconnect(); } catch (e) {} }
+                ['pointerdown', 'wheel', 'touchstart'].forEach(function (ev) { try { container.removeEventListener(ev, hold); } catch (e) {} });
+                try { layer.removeLayer(marker); layer.removeLayer(trail); } catch (e) {}
+                if (mapObj.__planeStop === stop) mapObj.__planeStop = null;
+            }
+            mapObj.__planeStop = stop;
+            /* aktuální etapa animace se zvýrazní v itineráři (sekce i pruh nocí) */
+            const LEG_FOLD = [null, 'f-leg-sg', 'f-leg-sgdps', 'f-leg-uluwatu', 'f-leg-ubud', 'f-leg-presun4', 'f-leg-presun4', 'f-leg-lombok-sever', 'f-leg-kuta', 'f-leg-back', 'f-leg-back', 'f-leg-rozlucka', 'f-leg-tranzit', 'f-leg-tranzit', null];
+            let hlId = null;
+            function hl(idx) {
+                const id = LEG_FOLD[idx] || null; if (id === hlId) return; hlId = id;
+                [].forEach.call(document.querySelectorAll('.is-anim'), function (x) { x.classList.remove('is-anim'); });
+                if (!id) return;
+                const f = document.getElementById(id); if (f) f.classList.add('is-anim');
+                [].forEach.call(document.querySelectorAll('.nb-seg[href="#' + id + '"]'), function (x) { x.classList.add('is-anim'); });
+            }
+            const ease = function (u) { return u < 0.5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2; };
+            /* let: pozvolný rozjezd (vzlet), rychlý cestovní let a pozvolné dosednutí; 22 % času na každý konec, uprostřed 2× rychleji než dřív */
+            const airEase = function (u) {
+                const v = 1 / (1 - AF);
+                if (u < AF) return v * u * u / (2 * AF);
+                if (u > 1 - AF) { const r = 1 - u; return 1 - v * r * r / (2 * AF); }
+                return v * AF / 2 + v * (u - AF);
+            };
+
+            function frame(now) {
+                if (stopped) return;
+                try { if (!mapObj.hasLayer(marker)) { stop(); return; } } catch (e) { stop(); return; }
+                const dt = last ? Math.min(100, now - last) : 0; last = now;
+                if (!mapObj.__planePaused && visible && !document.hidden) elapsed += dt * (mapObj.__planeSpeed || 1);
+                const tt = elapsed % TOTAL;
+                let i = legs.length - 1, moving = false;
+                for (let k = 0; k < legs.length; k++) { if (tt < legs[k].pe) { i = k; moving = tt < legs[k].e; break; } }
+                const g = legs[i];
+                hl(i);
+                const u = moving ? Math.min(1, Math.max(0, (tt - g.s) / g.dur)) : 1, e = g.k === 'air' ? airEase(u) : ease(u);
+                const ll = SM.unproject(L.point(g.p.x + (g.q.x - g.p.x) * e, g.p.y + (g.q.y - g.p.y) * e));
+                marker.setLatLng(ll);
+                const pts2 = [legs[0].a];
+                for (let k = 0; k < i; k++) pts2.push(legs[k].b);
+                pts2.push(ll);
+                trail.setLatLngs(pts2);
+
+                /* popisek a ikona podle fáze (let / zastávka) */
+                const key = (moving ? 'm' : 'p') + i;
+                if (key !== curKey) {
+                    curKey = key;
+                    const kind = (!moving && g.pk) ? g.pk : g.k, ground = kind !== 'air';
+                    const el = marker.getElement(), ico = el && el.querySelector('.lux-plane-ico');
+                    if (ico) { ico.innerHTML = ground ? '<span class="lux-boat">' + (kind === 'scooter' ? '🛵' : kind === 'car' ? '🏍️' : kind === 'taxi' ? '🚕' : '🚤') + '</span>' : PLANE_SVG; ico.classList.toggle('is-boat', ground); }
+                    try { marker.setTooltipContent(moving || !g.pt ? g.t : g.pt); } catch (er) {}
+                }
+                const el2 = marker.getElement(), ico2 = el2 && el2.querySelector('.lux-plane-ico');
+                if (ico2 && g.k === 'air') ico2.style.transform = 'rotate(' + g.dir.toFixed(1) + 'deg)';
+
+                /* kamera: na zastávce přiblížit, při letu oddálit, při plavbě mezi ostrovy ukázat oba ostrovy */
+                const want = moving ? (g.mv || 'ov') : (g.pause ? g.cam : (g.mv || 'ov'));
+                if (want !== curCam && performance.now() > userUntil) {
+                    curCam = want;
+                    try { CAM[want](); } catch (er) {}
+                }
+                raf = requestAnimationFrame(frame);
+            }
+            raf = requestAnimationFrame(frame);
+        }
+
+        function refreshFlightMapRoutes(targetMap, targetLayer) {
+            const mapObj = targetMap || leafletFlightMap;
+            if (!mapObj || typeof L === 'undefined') return;
+            const layer = targetLayer || flightLayerGroup;
+            if (!targetMap && layer) layer.clearLayers();
+
+            const f = flightOptions[currentAirline];
+            const prgCoord = [50.1008, 14.2600];
+            const hubCoord = f.hubCoords || [25.2532, 55.3657];
+            const sinCoord = [1.3644, 103.9915];
+            const baliCoord = [-8.7482, 115.1672];
+            const bangsalCoord = [-8.3946, 116.0998];   /* přístav Bangsal Baru (Pemenang) na Lomboku */
+            const sanurPortCoord = [-8.6783, 115.2619];
+            const lombokCoord = [-8.8925, 116.2400];
+
+            L.circleMarker(prgCoord, { radius: 7, fillColor: '#ff6b4a', color: '#fff', weight: 2, fillOpacity: 1 })
+                .bindPopup(`<strong>Praha (PRG)</strong><br>Odlet: ${f.outDate}`)
+                .addTo(layer);
+
+            L.circleMarker(hubCoord, { radius: 9, fillColor: '#fbbf24', color: '#000', weight: 2, fillOpacity: 1 })
+                .bindPopup(`<strong>Mezipřistání: ${f.hub}</strong><br>Přestupní letiště`)
+                .addTo(layer);
+
+            L.circleMarker(sinCoord, { radius: 8, fillColor: '#7ee2f2', color: '#071113', weight: 2, fillOpacity: 1 })
+                .bindPopup(`<strong>Singapur (SIN)</strong><br>Changi Airport`)
+                .addTo(layer);
+
+            L.circleMarker(baliCoord, { radius: 8, fillColor: '#10b981', color: '#fff', weight: 2, fillOpacity: 1 })
+                .bindPopup(`<strong>Bali (DPS / Sanur)</strong><br>Mezinárodní letiště & přístav`)
+                .addTo(layer);
+
+            L.circleMarker(lombokCoord, { radius: 8, fillColor: '#d97706', color: '#fff', weight: 2, fillOpacity: 1 })
+                .bindPopup(`<strong>Lombok / Kuta</strong><br>Cílová pobřežní etapa`)
+                .addTo(layer);
+
+            L.polyline([prgCoord, hubCoord, sinCoord], { color: '#ff6b4a', weight: 3, dashArray: '6, 6' })
+                .bindPopup(`<strong>Dálkový let: ${f.name}</strong><br>Přestup: ${f.hub}`)
+                .addTo(layer);
+
+            L.polyline([sinCoord, baliCoord], { color: '#7ee2f2', weight: 3 })
+                .bindPopup(`<strong>Přelet SIN ➔ Bali</strong><br>Scoot TR288`)
+                .addTo(layer);
+
+            L.polyline([sanurPortCoord, bangsalCoord], { color: '#ea580c', weight: 4, dashArray: '4, 8' })
+                .bindPopup(`<strong>Rychloloď mezi ostrovy</strong><br>Sanur (Bali) ⇄ přístav Bangsal (Lombok)`)
+                .addTo(layer);
+
+            L.polyline([baliCoord, sinCoord], { color: '#10b981', weight: 2, dashArray: '3, 3' })
+                .bindPopup(`<strong>Přelet Bali ➔ Singapur</strong><br>Scoot TR281`)
+                .addTo(layer);
+
+            const sanurCoord = [-8.6783, 115.2619];
+            const hc = function (stage, fb) { try { const h = hotelCatalog[stage].options[selectedHotels[stage]]; return (h && h.coords) || fb; } catch (e) { return fb; } };
+            const animPts = { prg: prgCoord, hub: hubCoord, sin: sinCoord, bali: baliCoord, port: bangsalCoord, lombok: lombokCoord, sanur: sanurCoord,
+                sgh: hc('singapore', sinCoord), ulu: hc('uluwatu', baliCoord), ubud: hc('ubud', baliCoord),
+                lomN: hc('lombokNorth', bangsalCoord), lomS: hc('lombokSouth', lombokCoord), baliH: hc('kutaLast', baliCoord) };
+            try { startPlaneAnim(mapObj, layer, f, animPts); } catch (e) { console.warn('Letadlo na mapě:', e); }
+
+            try {
+                const allCoords = [prgCoord, hubCoord, sinCoord, baliCoord, sanurPortCoord, bangsalCoord, lombokCoord];
+                mapObj.fitBounds(L.latLngBounds(allCoords), { padding: [30, 30], maxZoom: 5 });
+            } catch (e) {}
+
+            setTimeout(() => { mapObj.invalidateSize(); }, 150);
+        }
+
+        function initLeafletMaps() {
+            if (typeof L === 'undefined') return;
+
+            leafletIslandMap = L.map('islandMap', { scrollWheelZoom: false }).setView([-8.65, 115.75], 9);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(leafletIslandMap);
+            refreshIslandMapMarkers();
+
+            /* mapa v hlavičce je jen k okoukání: žádné tahání, zoomování ani dotyky, aby nepřekážela při scrollování stránky (posouvat a zoomovat se dá v režimu na celou obrazovku) */
+            leafletFlightMap = L.map('flightMap', { scrollWheelZoom: false, dragging: false, touchZoom: false, doubleClickZoom: false, boxZoom: false, keyboard: false, zoomControl: false, tap: false }).setView([22.0, 60.0], 3);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(leafletFlightMap);
+            flightLayerGroup = L.layerGroup().addTo(leafletFlightMap);
+            refreshFlightMapRoutes();
+
+            setTimeout(() => {
+                if (leafletIslandMap) {
+                    leafletIslandMap.invalidateSize();
+                    refreshIslandMapMarkers();
+                }
+            }, 300);
+        }
+
+        function openMapFullscreen(type) {
+            document.getElementById('mapFsModal').style.display = 'flex';
+            document.getElementById('mapFsContainer').innerHTML = '<div id="activeFsMap" style="width: 100%; height: 100%;"></div>';
+            if (type === 'island') {
+                document.getElementById('mapFsTitle').innerText = 'Dynamická mapa vybraných hotelů (Full screen)';
+                fsMap = L.map('activeFsMap').setView([-8.65, 115.75], 9);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(fsMap);
+                refreshIslandMapMarkers(fsMap, L.layerGroup().addTo(fsMap));
+            } else {
+                document.getElementById('mapFsTitle').innerText = 'Letové a lodní trasy (Full screen)';
+                fsMap = L.map('activeFsMap').setView([22.0, 60.0], 3);
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(fsMap);
+                flightLayerGroup = L.layerGroup().addTo(fsMap);
+                refreshFlightMapRoutes(fsMap, flightLayerGroup);
+            }
+            setTimeout(() => { if (fsMap) fsMap.invalidateSize(); }, 150);
+        }
+
+        function closeMapFullscreen() {
+            document.getElementById('mapFsModal').style.display = 'none';
+            if (fsMap) { fsMap.remove(); fsMap = null; }
+        }
+
+        function toggleSettingsModal() {
+            const modal = document.getElementById('settingsModalOverlay');
+            if (!modal) return;
+            const isOpen = modal.classList.toggle('open');
+            if (isOpen) renderSettingsModalContent();
+        }
+
+        function closeSettingsModal(e) {
+            if (e.target.id === 'settingsModalOverlay') {
+                e.target.classList.remove('open');
+            }
+        }
+
+        function renderSettingsModalContent() {
+            const flightsBox = document.getElementById('settingsFlightsContainer');
+            if (flightsBox) {
+                let fHtml = '';
+                Object.keys(flightOptions).forEach(k => {
+                    const f = flightOptions[k];
+                    const isAct = (k === currentAirline);
+                    fHtml += `
+                        <button type="button" class="nav-item ${isAct ? 'active' : ''}" onclick="setFlightAirline('${k}')" style="width: 100%; justify-content: space-between; text-align: left; cursor: pointer;">
+                            <span style="display: flex; align-items: center; gap: 8px; min-width: 0;">
+                                <img decoding="async" loading="lazy" src="${f.logo}" alt="" style="width: 26px; height: 18px; object-fit: contain; background: var(--lux-card); border-radius: 4px; padding: 1px; flex-shrink: 0;">
+                                <span style="font-size: 0.8rem; line-height: 1.2;">${f.name}</span>
+                            </span>
+                            <span style="color: var(--primary); font-weight: 900; font-size: 0.78rem; white-space: nowrap;">${formatKz(f.pricePerson)} Kč</span>
+                        </button>
+                    `;
+                });
+                flightsBox.innerHTML = fHtml;
+            }
+
+            ['planA', 'planB', 'planC', 'custom'].forEach(m => {
+                const btn = document.getElementById('setBtnMode_' + m);
+                if (btn) btn.classList.toggle('active', currentMode === m);
+            });
+
+            const hotelsBox = document.getElementById('settingsHotelsContainer');
+            if (hotelsBox) {
+                let hHtml = '';
+                stageOrder.forEach(stage => {
+                    const info = hotelCatalog[stage];
+                    const activeVar = selectedHotels[stage];
+                    const chosen = info.options[activeVar];
+
+                    let pills = '';
+                    Object.keys(info.options).forEach(vKey => {
+                        const isAct = (vKey === activeVar);
+                        const opt = info.options[vKey];
+                        pills += `
+                            <button type="button" class="deck-pill ${isAct ? 'active-' + vKey : ''}"
+                                    onclick="userSelectHotel('${stage}', '${vKey}', event)"
+                                    style="padding: 4px 9px; font-size: 0.74rem;"
+                                    title="${opt.name} (${formatKz(opt.price)} Kč)">
+                                ${vKey}
+                            </button>
+                        `;
+                    });
+
+                    hHtml += `
+                        <div class="nav-item" style="flex-direction: column; align-items: stretch; gap: 6px;">
+                            <div style="font-size: 0.68rem; color: var(--primary); font-weight: 800; text-transform: uppercase;">${info.stageTitle}</div>
+                            <div style="font-size: 0.82rem; font-weight: 800; color: var(--text-main); line-height: 1.2;">${chosen.name}</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2px;">
+                                <span style="color: var(--accent); font-size: 0.78rem; font-weight: 900;">${formatKz(chosen.price)} Kč</span>
+                                <div style="display: flex; gap: 4px;">${pills}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                hotelsBox.innerHTML = hHtml;
+            }
+        }
+
+        function setMenuModalOpen(open) {
+            const modal = document.getElementById('menuModalOverlay');
+            const button = document.getElementById('floatingMenuBtn');
+            if (!modal) return;
+            modal.classList.toggle('open', open);
+            modal.setAttribute('aria-hidden', String(!open));
+            if (button) button.setAttribute('aria-expanded', String(open));
+        }
+        function toggleMenuModal() {
+            const modal = document.getElementById('menuModalOverlay');
+            if (modal) setMenuModalOpen(!modal.classList.contains('open'));
+        }
+        function closeMenuModal(e) {
+            if (e.target.id === 'menuModalOverlay') setMenuModalOpen(false);
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') setMenuModalOpen(false);
+        });
+
+        function initAppCalculation() {
+            try { injectWhatsAppButtonsUI(); } catch (e) { console.error(e); }
+            const fromSharedLink = loadConfigFromUrlParams();
+            try { updateFlightButtonsUI(); } catch (e) { console.error(e); }
+            try { setBudgetMode(currentMode, true); } catch (e) { console.error(e); }
+            try { recalculateAll(); } catch (e) { console.error(e); }
+            try { luxLazyMaps(); } catch (e) { console.error(e); }
+            try { updatePackProgress(); } catch (e) { console.error(e); }
+
+            if (fromSharedLink) {
+                setTimeout(() => {
+                    showToast("🔗 Načtena sdílená kombinace letu a hotelů z odkazu!");
+                }, 400);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initAppCalculation);
+        } else {
+            initAppCalculation();
+        }
+
+        const bttBtn = document.getElementById('bttBtn');
+        const navLinks = document.querySelectorAll('#bottomNav .nav-item');
+        const scrollSections = Array.from(navLinks).map(link => {
+            const id = (link.getAttribute('href') || '').substring(1);
+            return id ? document.getElementById(id) : null;
+        }).filter(sec => sec !== null);
+
+        // Jediný scroll listener (passive + requestAnimationFrame) místo dvou nezávislých
+        let scrollTicking = false;
+        function onScrollFrame() {
+            scrollTicking = false;
+            const y = window.scrollY;
+
+            if (bttBtn) bttBtn.style.display = y > 600 ? 'flex' : 'none';
+
+            let current = '';
+            let bestTop = -Infinity;
+            scrollSections.forEach(section => {
+                if (section.closest('.lux-fold:not(.is-open)')) return;   // cíl je ve sbalené složce
+                const top = section.getBoundingClientRect().top + y;   // skutečná poloha v dokumentu (offsetTop selhával u vnořených prvků)
+                if (y >= top - 150 && top > bestTop) { bestTop = top; current = section.id; }
+            });
+            navLinks.forEach(link => {
+                // dříve includes('') vracelo true pro všechny odkazy, když nebyla aktivní žádná sekce
+                link.classList.toggle('active', current !== '' && link.getAttribute('href') === '#' + current);
+            });
+        }
+        window.addEventListener('scroll', () => {
+            if (!scrollTicking) {
+                scrollTicking = true;
+                requestAnimationFrame(onScrollFrame);
+            }
+        }, { passive: true });
+
+        if (bttBtn) {
+            bttBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .catch(err => console.warn('Chyba registrace offline režimu:', err));
+            });
+        }
+
+        const PACK_LIMIT_KG = 7;   // limit příručního batohu
+        const PACK_WARN_KG = 6;    // od této váhy varování
+
+        function updatePackProgress() {
+            const checkboxes = document.querySelectorAll('.pack-check');
+            const total = checkboxes.length;
+            const checked = document.querySelectorAll('.pack-check:checked').length;
+            const pct = total === 0 ? 0 : Math.round((checked / total) * 100);
+
+            let totalWeightGrams = 0;
+            checkboxes.forEach(cb => {
+                if (cb.checked) {
+                    const weightPerItem = parseInt(cb.getAttribute('data-weight'), 10) || 0;
+                    const itemCount = parseInt(cb.getAttribute('data-count'), 10) || 1;
+                    totalWeightGrams += (weightPerItem * itemCount);
+                }
+            });
+
+            const weightKgNum = totalWeightGrams / 1000;      // číslo (dříve řetězec z toFixed)
+            const weightKg = weightKgNum.toFixed(2);
+            const limitKg = PACK_LIMIT_KG;
+            const remainingKg = Math.max(0, limitKg - weightKgNum).toFixed(2);
+            const weightPct = Math.min(100, Math.round((weightKgNum / limitKg) * 100));
+
+            // prvky panelu v HTML nemusí existovat – bez kontroly skript při načtení spadl a nedoběhl
+            const elPct = document.getElementById('packPercentage');
+            const elBar = document.getElementById('packProgressBar');
+            const elMsg = document.getElementById('packMessage');
+            if (elPct) elPct.innerText = pct + ' %';
+            if (elBar) elBar.style.width = pct + '%';
+            if (elMsg) elMsg.innerText = pct === 100 ? "Všechny položky zaškrtnuty." : `Zabaleno ${checked} z ${total} položek.`;
+
+            const weightDisplay = document.getElementById('packWeightDisplay');
+            const weightBar = document.getElementById('packWeightBar');
+            const weightMsg = document.getElementById('packWeightMessage');
+            const over = weightKgNum > PACK_LIMIT_KG;
+            const near = !over && weightKgNum >= PACK_WARN_KG;
+
+            if (weightDisplay) weightDisplay.innerText = `${weightKg} kg / ${PACK_LIMIT_KG.toFixed(1)} kg`;
+            if (weightBar) {
+                weightBar.style.width = weightPct + '%';
+                weightBar.style.backgroundColor = over ? 'var(--lux-bad)' : near ? 'var(--lux-warn)' : 'var(--lux-ok)';
+            }
+
+            if (weightMsg) {
+                if (over) {
+                    weightMsg.innerHTML = `<span style="color: var(--lux-bad);">Překročil jsi limit ${PACK_LIMIT_KG} kg o ${(weightKgNum - PACK_LIMIT_KG).toFixed(2)} kg. Musíš něco vyřadit.</span>`;
+                } else if (near) {
+                    weightMsg.innerHTML = `<span style="color: var(--lux-warn);">Jsi těsně pod limitem, zbývá ${remainingKg} kg.</span>`;
+                } else {
+                    weightMsg.innerHTML = `Batoh je v bezpečné zóně. Do limitu ${PACK_LIMIT_KG} kg zbývá ${remainingKg} kg.`;
+                }
+            }
+        }
+
+        document.querySelectorAll('.pack-check').forEach(cb => {
+            cb.checked = localStorage.getItem(cb.id) === 'true';
+            cb.addEventListener('change', e => {
+                localStorage.setItem(e.target.id, e.target.checked);
+                updatePackProgress();
+            });
+        });
+
+        updatePackProgress();
+
+        function setIslandZoomRegion(region, btn) {
+            if (btn && btn.parentElement) {
+                const parentContainer = btn.parentElement;
+                parentContainer.querySelectorAll('.sqs-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+
+            let targetMap = window.leafletIslandMap || (typeof leafletIslandMap !== 'undefined' ? leafletIslandMap : null);
+
+            if (!targetMap) return;
+
+            if (region === 'all') {
+                targetMap.setView([0.5, 110.0], 5);
+            } else if (region === 'singapore') {
+                targetMap.setView([1.3521, 103.8198], 12);
+            } else if (region === 'bali') {
+                targetMap.setView([-8.4095, 115.1889], 10);
+            } else if (region === 'lombok') {
+                targetMap.setView([-8.5658, 116.3513], 10);
+            }
+        }
+
+        // (odstraněno: duplicitní ukládání voleb pod jinými klíči localStorage – nikde se nevolalo a po načtení přepisovalo aktuální volbu)

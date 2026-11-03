@@ -1,0 +1,92 @@
+
+/* V21: PC QR a návštěvnost vedle sebe. Ponecháváme původní počítací skript. */
+@media (min-width:769px) {
+  .hero #heroUtilityRow {display:flex!important;align-items:stretch!important;justify-content:center!important;flex-wrap:wrap!important;gap:14px!important;width:min(670px,100%)!important;max-width:100%!important;margin:18px auto 4px!important;position:relative;z-index:3}
+  .hero #heroUtilityRow #heroQr {margin:0!important;max-width:none!important;flex:1 1 330px!important;min-width:280px!important;width:auto!important;box-sizing:border-box}
+  .hero #heroVisitCard {flex:0 1 198px!important;min-width:160px;min-height:130px;padding:12px 12px 10px;display:grid;grid-template-columns:26px 1fr;align-content:center;align-items:center;gap:4px 8px;border:1px solid color-mix(in srgb,var(--primary) 35%,var(--border));border-radius:18px;background:color-mix(in srgb,var(--surface) 88%,transparent);box-shadow:0 16px 34px -20px rgba(0,0,0,.5);box-sizing:border-box}
+  .hero #heroVisitCard .p21-visit-icon {width:24px;height:24px;display:grid;place-items:center;color:var(--primary);background:color-mix(in srgb,var(--primary) 14%,transparent);border-radius:9px;font-size:1rem}
+  .hero #heroVisitCard .p21-visit-content {display:grid;gap:2px;min-width:0}
+  .hero #heroVisitCard strong {color:var(--text-main);font-size:.79rem;line-height:1.15}
+  .hero #heroVisitCard small {font-size:.63rem;line-height:1.25;color:var(--text-muted)}
+  .hero #heroVisitCard #toplistFloat {grid-column:1/-1;justify-self:center!important;position:static!important;inset:auto!important;transform:none!important;width:auto!important;height:auto!important;margin:2px auto 0!important;padding:0!important;display:block!important;background:none!important;border:0!important;box-shadow:none!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;overflow:visible!important}
+  .hero #heroVisitCard #toplistFloat img {display:block;max-width:100%;height:auto}
+}
+@media(max-width:768px) {#heroVisitCard{display:none!important} #heroUtilityRow{display:contents!important}}
+/* Finanční dashboard: silnější hierarchie, kompaktní obsah, stejný design jako ostatní části. */
+#hotovost {--p21-navy:#142b3c;--p21-teal:#0c8686;gap:16px;margin:14px 0 24px;min-width:0}
+#hotovost .p21-cash-masthead {display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:18px;padding:21px 25px 23px;border-radius:22px;color:#fff;background:linear-gradient(112deg,#112c3d 0%,#194354 64%,#0d6e74 100%);box-shadow:0 16px 30px -24px #071b29}
+#hotovost .p21-kicker {color:#8ce4d9;font-size:.7rem;font-weight:900;letter-spacing:.14em}
+#hotovost .p21-cash-masthead h4 {font:850 clamp(1.5rem,2.7vw,2.2rem)/1.13 var(--font-display);color:#fff;margin:9px 0 7px;letter-spacing:-.03em}
+#hotovost .p21-cash-masthead p {color:#d2e8eb;margin:0;font-size:.84rem;line-height:1.55;max-width:65ch}
+#hotovost .p21-cash-nav {display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+#hotovost .p21-cash-nav a {text-decoration:none;color:#f2ffff;border:1px solid #ffffff45;background:#ffffff16;border-radius:999px;font-size:.74rem;font-weight:800;padding:9px 12px;white-space:nowrap}
+#hotovost .p21-cash-nav a:hover,#hotovost .p21-cash-nav a:focus-visible {background:#ffffff31;outline-color:#fff}
+#hotovost .cx-card {margin:0;box-shadow:0 10px 29px -24px rgba(11,34,50,.5);border-radius:20px;padding:21px 23px}
+#hotovost .cx-hero {display:grid;grid-template-columns:minmax(265px,.81fr) minmax(0,2fr);grid-template-areas:'head head' 'note note' 'sum env' 'rates rates' 'fx fx';align-items:stretch;gap:13px 18px;background:var(--surface)}
+#hotovost .cx-hero>.cx-top {grid-area:head;gap:10px;align-items:center}
+#hotovost .cx-hero>#cxViewNote {grid-area:note;margin:0!important}
+#hotovost .cx-hero>.cx-sum {grid-area:sum;min-width:0;display:grid;grid-template-columns:minmax(0,1fr);align-content:space-between;gap:16px;padding:20px 19px;border:1px solid #2d5d6e;border-radius:17px;background:linear-gradient(150deg,#112d40,#194c59);color:#fff}
+#hotovost .cx-hero>.cx-sum .cx-lbl {color:#a7ced7}
+#hotovost .cx-hero>.cx-sum .cx-sum-main b {font-size:clamp(1.45rem,2.25vw,2.1rem);color:#fff;overflow-wrap:anywhere}
+#hotovost .cx-hero>.cx-sum .cx-sum-main span:last-child {color:#d3e8ec}
+#hotovost .cx-hero>.cx-sum .cx-cmp small,#hotovost .cx-hero>.cx-sum .cx-cmp small b {color:#d2e5e9}
+#hotovost .cx-hero>.cx-sum .cx-cmp-bar {background:#ffffff35}
+#hotovost .cx-hero>.cx-sum .cx-cmp-mark {background:#fff}
+#hotovost .cx-hero>.cx-env {grid-area:env;gap:11px}
+#hotovost .cx-hero>.cx-rates {grid-area:rates;display:flex;gap:8px}
+#hotovost .cx-hero>.cx-fxbox {grid-area:fx}
+#hotovost .cx-e {padding:14px 15px;gap:7px;border-radius:16px;box-shadow:none!important}
+#hotovost .cx-flag {width:32px;height:32px;border-radius:9px}
+#hotovost .cx-e-top {gap:8px}
+#hotovost .cx-e-top b {font-size:.85rem}
+#hotovost .cx-e-top small {font-size:.68rem}
+#hotovost .cx-big {font-size:clamp(1.4rem,2.4vw,2.08rem)}
+#hotovost .cx-e ul {font-size:.75rem;gap:4px}
+#hotovost .cx-e li {line-height:1.43}
+#hotovost .cx-two {grid-template-columns:minmax(0,1.35fr) minmax(260px,.85fr);gap:22px}
+#hotovost .p21-cash-details {border-left:4px solid #0c8686}
+#hotovost .p21-cash-exchange {border-left:4px solid #d5a052}
+#hotovost .cx-card.p21-cash-details .cx-tbl {gap:12px}
+#hotovost .cx-row {padding:9px 12px;border-radius:13px}
+#hotovost .cx-ctl .cx-f {gap:6px}
+#hotovost .cx-e:hover {transform:none;box-shadow:none}
+#hotovost :is(.cx-h2,.cx-h){letter-spacing:-.02em}
+#hotovost .cx-tl {grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+#hotovost :is(#p21CashOverview,#p21CashSettings,#p21CashDetails,#p21CashExchange){scroll-margin-top:125px}
+@media(max-width:1160px) {
+  #hotovost .cx-hero {grid-template-columns:minmax(0,1fr);grid-template-areas:'head' 'note' 'sum' 'env' 'rates' 'fx'}
+  #hotovost .cx-hero>.cx-sum {grid-template-columns:minmax(0,1fr) minmax(0,.9fr);align-items:center}
+}
+@media(max-width:760px) {
+  #hotovost {gap:12px}
+  #hotovost .p21-cash-masthead {padding:18px 16px;border-radius:17px}
+  #hotovost .p21-cash-nav {width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+  #hotovost .p21-cash-nav a {padding:8px 3px;font-size:.66rem;text-align:center}
+  #hotovost .cx-card {padding:15px 13px;border-radius:16px}
+  #hotovost .cx-hero>.cx-sum {grid-template-columns:minmax(0,1fr);gap:14px;padding:18px}
+  #hotovost .cx-hero>.cx-env {grid-template-columns:repeat(1,minmax(0,1fr));gap:9px}
+  #hotovost .cx-e {grid-template-columns:1fr auto;align-items:start;gap:4px 8px}
+  #hotovost .cx-e-top {grid-column:1/-1}
+  #hotovost .cx-e .cx-big {grid-column:1;grid-row:auto}
+  #hotovost .cx-e .cx-kc {grid-column:2;align-self:end;text-align:right}
+  #hotovost .cx-e ul {grid-column:1/-1}
+  #hotovost .cx-e .cx-cta {grid-column:1/-1}
+  #hotovost .cx-two {grid-template-columns:1fr}
+  #hotovost .cx-rates .cx-rate {min-width:0;flex:1 1 45%}
+  #hotovost .cx-row {gap:6px;padding:10px}
+  #hotovost .cx-r-amt b {font-size:.88rem}
+}
+@media(max-width:360px){#hotovost .cx-seg button{padding:6px 8px;font-size:.7rem} #hotovost .p21-cash-nav a{font-size:.62rem}}
+@media print{#hotovost .p21-cash-nav{display:none}}
+
+/* V21: podrobný rozpis měn na telefonu až po rozkliknutí. */
+#hotovost .p21-cash-breakdown {grid-column:1/-1;min-width:0}
+#hotovost .p21-cash-breakdown summary {display:none;cursor:pointer;color:var(--primary);font-size:.75rem;font-weight:800}
+#hotovost .p21-cash-breakdown ul {margin:0}
+@media(max-width:760px){
+ #hotovost .p21-cash-breakdown summary {display:flex;align-items:center;gap:6px;padding:6px 0;list-style:none}
+ #hotovost .p21-cash-breakdown summary::-webkit-details-marker {display:none}
+ #hotovost .p21-cash-breakdown summary::before {content:'+';display:grid;place-items:center;width:17px;height:17px;border:1px solid var(--border);border-radius:50%}
+ #hotovost .p21-cash-breakdown[open] summary::before {content:'−'}
+ #hotovost .p21-cash-breakdown ul {margin:7px 0}
+}

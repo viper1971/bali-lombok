@@ -1,0 +1,459 @@
+
+/* =====================================================================
+   ÚPRAVY 10/2026
+   ===================================================================== */
+
+/* sticky hlavičky potřebují, aby html/body nebyly scrollovací kontejner:
+   overflow-x: clip ořízne stejně jako hidden, ale sticky nerozbije */
+html, body { overflow-x: clip !important; }
+@media (max-width: 768px) { .main-wrapper { overflow-x: clip !important; } }
+
+/* ---------- 1) HERO: světlý režim vypadá stejně jako noční ---------- */
+.hero { --page-bg: #11201d; }
+[data-theme="light"] .hero {
+    --page-bg: #eef2ea;
+    /* uvnitř hlavičky platí barvy nočního režimu */
+    --bg-color: #11201d;
+    --surface: rgba(24, 42, 38, 0.92);
+    --surface-hover: #1f3631;
+    --primary: #7fd1c6;
+    --primary-light: #c3ece5;
+    --accent: #3fb3a6;
+    --gold: #e6cf9f;
+    --text-main: #eef4ef;
+    --text-muted: #a9bdb4;
+    --border: rgba(127, 209, 198, 0.22);
+    --shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+    --lux-line: linear-gradient(90deg, transparent, rgba(127, 209, 198, 0.6), transparent);
+    color: #eef4ef !important;
+}
+.hero,
+[data-theme="light"] .hero {
+    background:
+        linear-gradient(180deg,
+            rgba(17, 32, 29, 0.42) 0%,
+            rgba(17, 32, 29, 0.62) 45%,
+            rgba(17, 32, 29, 0.86) 82%,
+            var(--page-bg) 100%),
+        url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2000&q=85') center/cover no-repeat !important;
+}
+[data-theme="light"] .hero .cd-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0)), #1f3631 !important;
+    border-color: rgba(127, 209, 198, 0.22) !important;
+}
+
+/* ---------- 2) HERO: mapa letů se rozpouští do fotky ---------- */
+.hero .map-box {
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    opacity: 0.5;
+    transition: opacity 0.4s ease;
+    -webkit-mask-image:
+        linear-gradient(90deg, transparent 0%, #000 16%, #000 84%, transparent 100%),
+        linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    -webkit-mask-composite: source-in;
+            mask-image:
+        linear-gradient(90deg, transparent 0%, #000 16%, #000 84%, transparent 100%),
+        linear-gradient(180deg, transparent 0%, #000 18%, #000 82%, transparent 100%);
+            mask-composite: intersect;
+}
+/* při práci s mapou (najetí myší / dotyk) se zostří, aby šla číst */
+.hero .map-box:hover, .hero .map-box:focus-within { opacity: 0.92; }
+
+/* ---------- 3) Fotky v hlavičkách částí I–V: světlý režim ---------- */
+[data-theme="light"] .lux-part-head,
+[data-theme="light"] #cast-plan .lux-part-head,
+[data-theme="light"] #cast-priprava .lux-part-head,
+[data-theme="light"] #osa .lux-part-head,
+[data-theme="light"] #cast-misto .lux-part-head,
+[data-theme="light"] #cast-kontrola .lux-part-head {
+    background-image:
+        linear-gradient(100deg, rgba(242, 245, 238, 0.66) 0%, rgba(242, 245, 238, 0.52) 50%, rgba(242, 245, 238, 0.46) 100%),
+        var(--part-img, none),
+        linear-gradient(135deg, #dfe8de 0%, #f1f5ef 100%) !important;
+    background-size: auto, cover, auto !important;
+    background-position: center, var(--part-pos, center), center !important;
+    color: #12211d;
+    border-color: rgba(19, 97, 95, 0.22);
+}
+/* Texty v hlavičkách částí: světlé písmo s tmavým okrajem a stínem (oba režimy) */
+.lux-part-title, .lux-part-sub, .lux-part-eyebrow,
+[data-theme="light"] .lux-part-title,
+[data-theme="light"] .lux-part-sub,
+[data-theme="light"] .lux-part-eyebrow {
+    color: #fdfcf8 !important;
+    opacity: 1 !important;
+    paint-order: stroke fill;
+    -webkit-text-stroke: 3px rgba(10, 22, 20, 0.85);
+    text-shadow:
+        0 1px 0 rgba(10, 22, 20, 0.9),
+        0 2px 4px rgba(0, 0, 0, 0.55),
+        0 4px 16px rgba(0, 0, 0, 0.45) !important;
+}
+.lux-part-sub, .lux-part-eyebrow,
+[data-theme="light"] .lux-part-sub,
+[data-theme="light"] .lux-part-eyebrow {
+    -webkit-text-stroke-width: 2.5px;
+    font-weight: 600;
+}
+[data-theme="light"] .lux-part-no {
+    color: #13615f; border-color: rgba(19, 97, 95, 0.4); background: rgba(255, 255, 255, 0.55);
+}
+[data-theme="light"] .lux-part-head .lux-tool {
+    color: #12211d; border-color: rgba(19, 97, 95, 0.35); background: rgba(255, 255, 255, 0.6);
+}
+[data-theme="light"] .lux-part-head .lux-tool:hover { background: #fff; }
+
+/* ---------- 4) Otevřená sekce: ukotvená hlavička + ukazatel dočtení ---------- */
+.lux-fold { --stick-top: 10px; }
+@media (max-width: 1919px) { .lux-fold { --stick-top: 64px; } }   /* pod plovoucími tlačítky */
+@media (max-width: 768px)  { .lux-fold { --stick-top: 56px; } }
+.lux-fold.is-open > .lux-fold-h {
+    position: sticky;
+    top: calc(var(--stick-top) + env(safe-area-inset-top, 0px));
+    z-index: 80;
+}
+.lux-fold.is-open > .lux-fold-h > .lux-fold-btn {
+    position: relative;
+    background-color: var(--lux-card, var(--surface));
+}
+.lux-fold.is-stuck > .lux-fold-h > .lux-fold-btn {
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary) 30%, transparent), 0 14px 30px rgba(0, 0, 0, 0.28);
+}
+.lux-fold-prog {
+    position: absolute; left: 18px; right: 18px; bottom: 5px; height: 4px;
+    border-radius: 4px; overflow: hidden; pointer-events: none;
+    background: color-mix(in srgb, var(--text-main) 10%, transparent);
+    opacity: 0; transition: opacity 0.3s ease;
+}
+.lux-fold-prog > i {
+    display: block; height: 100%; width: 100%; border-radius: inherit;
+    background: linear-gradient(90deg, var(--node, var(--accent)), var(--primary));
+    transform-origin: left center; transform: scaleX(var(--p, 0));
+    transition: transform 0.12s linear;
+}
+.lux-fold.is-open > .lux-fold-h .lux-fold-prog { opacity: 1; }
+.lux-fold-pct {
+    display: none; flex: 0 0 auto; min-width: 3.4em; text-align: right;
+    font: 700 0.74rem/1 var(--font-ui); color: var(--text-muted); font-variant-numeric: tabular-nums;
+}
+.lux-fold.is-open > .lux-fold-h .lux-fold-pct { display: inline-block; }
+@media (max-width: 640px) { .lux-fold-prog { left: 12px; right: 12px; bottom: 4px; } }
+
+body.has-stuck #toplistFloat { top: 150px !important; transition: top 0.25s ease; }
+
+/* ---------- 5) Širší stránka na PC, lety v jedné řadě ---------- */
+@media (min-width: 1200px) {
+    .main-wrapper { max-width: min(97vw, 1760px) !important; }
+    .flight-airline-switch { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; }
+    .airline-review-section > div[style*="grid-template-columns"] {
+        grid-template-columns: repeat(5, minmax(0, 1fr)) !important; gap: 14px !important;
+    }
+    .airline-review-section > div[style*="grid-template-columns"] > div { padding: 16px !important; }
+    .airline-review-section [style*="justify-content: space-between"] { flex-wrap: wrap; gap: 6px; }
+    .airline-review-section [style*="justify-content: space-between"] > span { white-space: nowrap; }
+}
+@media (min-width: 1200px) and (max-width: 1599px) {
+    .flight-airline-switch .fc-header { flex-direction: column; align-items: flex-start; }
+    .flight-airline-switch .fc-times { font-size: 0.82rem; }
+}
+
+/* ---------- 6) Gantt: dvojitá časová osa + mřížka ---------- */
+.gx-head { display: flex; flex-direction: column; justify-content: flex-start; gap: 6px; }
+.gx-head span { display: block; text-transform: none; letter-spacing: 0; font-size: 0.68rem; line-height: 14px; height: 14px; white-space: nowrap; }
+.gx-head .gx-main { color: var(--text-main); }
+.gx-head .gx-alt { color: var(--gold); font-weight: 900; }
+.gx-axis { position: relative; flex-direction: column !important; gap: 6px; }
+.gx-axis-row { position: relative; height: 14px; }
+.gx-axis-row.gx-alt-row { background: color-mix(in srgb, var(--gold) 12%, transparent); border-radius: 4px; }
+.gx-axis-row > span {
+    position: absolute; top: 0; padding-left: 4px; white-space: nowrap;
+    border-left: 1px solid color-mix(in srgb, var(--text-main) 35%, transparent); line-height: 14px;
+}
+.gx-axis-row.gx-alt-row > span { color: var(--gold); border-left-color: color-mix(in srgb, var(--gold) 45%, transparent); }
+.gx-axis-row.gx-main-row > span { color: color-mix(in srgb, var(--text-main) 80%, transparent); }
+.gx-grid {
+    background-image: repeating-linear-gradient(90deg, color-mix(in srgb, var(--text-main) 9%, transparent) 0 1px, transparent 1px 40px);
+}
+
+/* ---------- 7) Kam jdou peníze (náhrada koláčových grafů) ---------- */
+.costviz {
+    --c-flights: var(--st-uluwatu); --c-hotels: var(--st-kutaLast); --c-food: var(--st-ubud); --c-fees: var(--st-transit);
+    background: var(--surface-hover); border: 1px solid var(--border); border-radius: 18px;
+    padding: clamp(16px, 2.4vw, 26px); margin-bottom: 24px;
+}
+.cv-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px; margin-bottom: 18px; }
+.cv-title { font: 800 1.35rem/1.15 var(--font-display); color: var(--text-main); letter-spacing: -0.01em; }
+.cv-sub { font-size: 0.84rem; color: var(--text-muted); margin-top: 4px; }
+.cv-switch { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); }
+.cv-switch button {
+    all: unset; cursor: pointer; padding: 8px 16px; border-radius: 999px; font: 700 0.82rem/1 var(--font-ui);
+    color: var(--text-muted); min-height: 20px; display: inline-flex; align-items: center;
+}
+.cv-switch button[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); }
+.cv-switch button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.cv-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 20px; }
+.cv-kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 12px 14px; min-width: 0; }
+.cv-kpi b { display: block; font: 800 clamp(1.1rem, 2vw, 1.5rem)/1.1 var(--font-display); color: var(--text-main); font-variant-numeric: tabular-nums; }
+.cv-kpi span { display: block; margin-top: 4px; font-size: 0.74rem; font-weight: 600; color: var(--text-muted); }
+.cv-kpi.is-warn b { color: var(--lux-warn); }
+
+.cv-bars { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.cv-bar-row { display: grid; grid-template-columns: 128px minmax(0, 1fr) 110px; align-items: center; gap: 12px; }
+.cv-bar-row .cv-who { font-size: 0.82rem; font-weight: 700; color: var(--text-main); }
+.cv-bar-row .cv-sum { text-align: right; font-weight: 800; font-size: 0.92rem; color: var(--text-main); font-variant-numeric: tabular-nums; }
+.cv-track { position: relative; height: 34px; border-radius: 10px; background: color-mix(in srgb, var(--text-main) 6%, transparent); overflow: hidden; }
+.cv-stack { display: flex; height: 100%; transition: width 0.6s var(--lux-ease, ease); }
+.cv-seg {
+    height: 100%; min-width: 0; display: flex; align-items: center; justify-content: center; overflow: hidden;
+    color: #fff; font-size: 0.72rem; font-weight: 800; white-space: nowrap; cursor: default;
+    transition: flex-basis 0.6s var(--lux-ease, ease), filter 0.2s, opacity 0.2s;
+    box-shadow: inset -2px 0 0 rgba(0, 0, 0, 0.18);
+}
+.cv-seg:last-child { box-shadow: none; }
+.costviz.has-focus .cv-seg:not(.is-focus), .costviz.has-focus .cv-cat:not(.is-focus) { opacity: 0.38; }
+.cv-bar-row.is-dim { opacity: 0.55; }
+
+.cv-cats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.cv-cat {
+    position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 14px 14px 18px; min-width: 0; transition: opacity 0.2s, transform 0.2s;
+    border-top: 4px solid var(--c);
+}
+.cv-cat:hover { transform: translateY(-2px); }
+.cv-cat .cv-n { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); }
+.cv-cat .cv-pct { font: 800 2rem/1 var(--font-display); color: var(--c); margin: 8px 0 2px; font-variant-numeric: tabular-nums; }
+.cv-cat .cv-kc { font-weight: 800; font-size: 1rem; color: var(--text-main); font-variant-numeric: tabular-nums; }
+.cv-cat .cv-day { font-size: 0.76rem; color: var(--text-muted); margin-top: 2px; }
+.cv-cat .cv-delta { display: inline-block; margin-top: 8px; padding: 3px 8px; border-radius: 999px; font-size: 0.72rem; font-weight: 700;
+    background: color-mix(in srgb, var(--c) 14%, transparent); color: var(--text-main); }
+.cv-cat .cv-fill { position: absolute; left: 0; bottom: 0; height: 5px; background: var(--c); transition: width 0.6s var(--lux-ease, ease); }
+@media (max-width: 900px) {
+    .cv-kpis, .cv-cats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cv-bar-row { grid-template-columns: 1fr auto; }
+    .cv-bar-row .cv-track { grid-column: 1 / -1; grid-row: 2; }
+}
+
+
+/* cena za den: my vs. CK SEN */
+.cv-daycmp { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; }
+.cv-day-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 14px; margin-bottom: 2px; }
+.cv-day-head b { font: 800 1rem/1.2 var(--font-display); color: var(--text-main); }
+.cv-day-head span { font-size: 0.82rem; font-weight: 700; color: var(--lux-ok); }
+.cv-day-row { display: grid; grid-template-columns: 170px minmax(0, 1fr) 190px; align-items: center; gap: 12px; }
+.cv-day-who { font-size: 0.84rem; font-weight: 700; color: var(--text-main); }
+.cv-day-who small, .cv-day-val small { display: block; font-size: 0.7rem; font-weight: 600; color: var(--text-muted); }
+.cv-day-val { text-align: right; font-weight: 800; font-size: 0.92rem; color: var(--text-main); font-variant-numeric: tabular-nums; }
+.cv-day-track { position: relative; height: 22px; border-radius: 8px; background: color-mix(in srgb, var(--text-main) 6%, transparent); overflow: hidden; }
+.cv-day-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 8px 0 0 8px; background: color-mix(in srgb, var(--lux-bad) 70%, transparent); transition: width 0.6s var(--lux-ease, ease); }
+.cv-day-range { position: absolute; top: 0; bottom: 0; border-radius: 0 8px 8px 0;
+    background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--lux-bad) 45%, transparent) 0 6px, color-mix(in srgb, var(--lux-bad) 20%, transparent) 6px 12px); }
+.cv-day-row.is-our .cv-day-fill { background: var(--accent); border-radius: 8px; }
+.cv-day-row.is-our .cv-day-val { color: var(--accent); }
+@media (max-width: 900px) {
+    .cv-day-row { grid-template-columns: 1fr auto; }
+    .cv-day-track { grid-column: 1 / -1; grid-row: 2; }
+}
+
+
+/* ---------- Kontextové ikony v kolečkách sekcí ---------- */
+.lux-fold-node.has-ico { font-size: 0 !important; color: #fff; background: var(--node, linear-gradient(135deg, var(--lux-deep-a) 0%, var(--lux-deep-b) 100%)); }
+.lux-fold-node.has-ico::after { display: none !important; }
+.lux-fold-node.has-ico svg { width: 22px; height: 22px; display: block; }
+.lux-fold.is-transfer .lux-fold-node.has-ico { background: var(--surface) !important; color: var(--st-transit); border: 2px dashed var(--st-transit); }
+.lux-fold.is-transfer .lux-fold-node.has-ico svg { width: 17px; height: 17px; }
+@media (max-width: 640px) { .lux-fold-node.has-ico svg { width: 18px; height: 18px; } .lux-fold.is-transfer .lux-fold-node.has-ico svg { width: 15px; height: 15px; } }
+
+/* ---------- 8) Street View: stav načítání při automatickém spuštění ---------- */
+.sv-stage.is-queued .sv-play { opacity: 0.85; pointer-events: auto; }
+.sv-stage.is-queued .sv-play-ico { animation: svPulse 1s ease-in-out infinite; }
+@keyframes svPulse { 50% { transform: scale(0.85); opacity: 0.6; } }
+
+/* ---------- 9) Slovníček: čitelná výslovnost na zadní straně karty ---------- */
+.flip-back span[style*="--primary"] { color: #bfeee6 !important; font-weight: 600; }
+    
+/* ===== Ukazatel přečtených sekcí ===== */
+.lux-progress { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 18px 22px 20px; display: grid; gap: 14px; }
+.lp-top { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.lp-score { display: flex; align-items: baseline; gap: 6px; font-family: var(--font-display); line-height: 1; }
+.lp-done { font-size: 2.3rem; font-weight: 800; color: var(--primary); font-variant-numeric: tabular-nums; }
+.lp-of { font-size: 1.05rem; font-weight: 700; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.lp-meta { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.lp-title { font-weight: 700; font-size: 0.95rem; color: var(--text-main); }
+.lp-sub { font-size: 0.8rem; color: var(--text-muted); }
+.lp-btns { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+.lux-progress .lux-tool { color: var(--text-main); background: transparent; border-color: var(--border); }
+.lux-progress .lux-tool:hover { border-color: var(--primary); background: var(--surface-hover); }
+.lux-progress .lux-tool:focus-visible { outline: 2px solid var(--primary); }
+.lux-progress .lp-clear { color: var(--text-muted); }
+.lp-track { height: 8px; border-radius: 99px; background: var(--border); overflow: hidden; }
+.lp-fill { height: 100%; width: 0; border-radius: inherit; background: var(--primary); transition: width .6s cubic-bezier(.2,.8,.2,1); }
+.lp-parts { display: flex; gap: 20px; }
+.lp-part { min-width: 0; display: grid; gap: 7px; }
+@media (max-width: 760px) {
+  .lp-btns { margin-left: 0; width: 100%; }
+  .lp-parts { flex-direction: column; gap: 10px; }
+  .lp-part { flex: none !important; }
+}
+@media (prefers-reduced-motion: reduce) { .lp-fill, .lp-seg { transition: none; } }
+@media print { .lux-progress { display: none !important; } }
+/* ===== Mapa v hlavičce: zavřená pro dotyk, stránka se přes ni normálně scrolluje ===== */
+#flightMap { pointer-events: none; touch-action: pan-y !important; -webkit-user-select: none; user-select: none; }
+#flightMap .leaflet-control, #flightMap .lux-plane-btn { pointer-events: auto; }
+
+/* ===== Letadlo na mapě tras ===== */
+.lux-plane { background: none !important; border: 0 !important; }
+.lux-plane-ico { width: 36px; height: 36px; color: #fff; transition: transform .3s ease-out; filter: drop-shadow(0 0 7px rgba(255, 107, 74, .95)) drop-shadow(0 2px 3px rgba(0, 0, 0, .55)); }
+.lux-plane-ico svg { width: 100%; height: 100%; display: block; }
+.lux-plane-ico.is-boat { transform: none !important; display: grid; place-items: center; font-size: 26px; line-height: 1; }
+.lux-plane-btn { font: 800 0.78rem var(--font-ui); color: #fff; background: rgba(11, 24, 28, .88); border: 1px solid var(--primary); border-radius: 99px; padding: 6px 12px; cursor: pointer; margin: 0 0 10px 10px; }
+.lux-plane-btn:hover { background: rgba(11, 24, 28, 1); }
+@media print { .lux-plane-btn { display: none; } }
+
+/* ===== Postupné odemykání sekcí ===== */
+.lux-locked { display: none !important; }
+.lux-locknote { display: flex; align-items: center; gap: 14px; margin: 14px 0; padding: 14px 18px; border: 1.5px dashed color-mix(in srgb, var(--primary) 50%, var(--border)); border-radius: 16px; background: color-mix(in srgb, var(--primary) 7%, var(--surface)); }
+.lux-locknote-ic { font-size: 1.6rem; flex: 0 0 auto; }
+.lux-locknote-t { display: grid; gap: 2px; min-width: 0; flex: 1 1 auto; font-size: 0.84rem; color: var(--text-muted); line-height: 1.45; }
+.lux-locknote-t b { color: var(--text-main); font: 800 0.95rem var(--font-display); }
+.lux-locknote .lux-tool { flex: 0 0 auto; color: var(--text-main); background: var(--surface); border-color: var(--border); }
+.lux-reveal { animation: luxReveal .8s cubic-bezier(.2,.8,.2,1); }
+@keyframes luxReveal { 0% { opacity: 0; transform: translateY(22px) scale(.98); } 100% { opacity: 1; transform: none; } }
+a.is-locked.nav-item { opacity: .45; }
+a.is-locked.nav-item::after { content: "🔒"; margin-left: auto; font-size: 0.85rem; }
+@media (max-width: 700px) { .lux-locknote { flex-wrap: wrap; } .lux-locknote .lux-tool { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .lux-reveal { animation: none; } }
+
+/* ===== Ukazatel postupu: hra ===== */
+.lux-progress { position: relative; overflow: hidden; }
+@keyframes lpRankUp { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 70%, transparent); transform: scale(1); } 30% { transform: scale(1.07); } 100% { box-shadow: 0 0 0 16px transparent; transform: scale(1); } }
+.lux-progress .lp-meta { max-width: 300px; }
+.lux-progress .lp-btns { flex: 1 1 340px; justify-content: flex-end; }
+@keyframes lpBump { 0% { transform: scale(1); } 40% { transform: scale(1.35) rotate(-4deg); } 100% { transform: scale(1); } }
+@keyframes lpBob { 50% { transform: translateY(-3px) rotate(-3deg); } }
+@keyframes lpLoop { 0% { transform: rotate(0); } 50% { transform: translateY(-14px) rotate(-180deg); } 100% { transform: rotate(-360deg); } }
+@keyframes lpPop { 0% { transform: scale(.4); } 60% { transform: scale(1.5, 1.8); } 100% { transform: none; } }
+@keyframes lpMedal { 0% { transform: scale(.3) rotate(-40deg); } 60% { transform: scale(1.6) rotate(12deg); } 100% { transform: none; } }
+.lp-c { position: absolute; font-size: 1.15rem; line-height: 1; will-change: transform, opacity; animation: lpConf var(--t, 1.8s) cubic-bezier(.2,.7,.4,1) forwards; }
+@keyframes lpConf { 0% { transform: translate(0, 0) scale(.3) rotate(0); opacity: 1; } 35% { transform: translate(var(--dx), var(--dy)) scale(1) rotate(calc(var(--r) * .4)); opacity: 1; } 100% { transform: translate(calc(var(--dx) * 1.35), calc(var(--dy) + 240px)) scale(.9) rotate(var(--r)); opacity: 0; } }
+@media (max-width: 760px) { .lux-progress .lp-meta { max-width: none; } }
+@media (max-width: 760px) { }
+@media (prefers-reduced-motion: reduce) { }
+
+
+/* ===== Cesta: stav, hodiny, mapa trasy, noclehy, klima, dnešní etapa ===== */
+:root, [data-theme="dark"] { --rt-sg: #f0b48a; --rt-bali: #7fd1c6; --rt-lombok: #b9d98c; --rt-sea: rgba(127, 209, 198, 0.06); --rt-land: rgba(238, 244, 239, 0.07); }
+[data-theme="light"] { --rt-sg: #b5622d; --rt-bali: #13615f; --rt-lombok: #57782a; --rt-sea: rgba(19, 97, 95, 0.05); --rt-land: rgba(18, 33, 29, 0.06); }
+
+.lp-trip { display: flex; justify-content: space-between; align-items: center; gap: 10px 20px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.lp-status { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 0.9rem; color: var(--text-main); }
+.lp-status b { font-family: var(--font-display); font-size: 1.05rem; }
+.lp-status .lp-dim { color: var(--text-muted); }
+.lp-status .lp-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--primary); flex: 0 0 auto; }
+.lp-status.is-live .lp-dot { box-shadow: 0 0 0 0 var(--primary); animation: lpPulse 2s infinite; }
+@keyframes lpPulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 60%, transparent); } 100% { box-shadow: 0 0 0 10px transparent; } }
+.lp-status a { color: var(--primary); font-weight: 700; text-decoration: none; border-bottom: 1px solid currentColor; }
+.lp-clocks { display: flex; align-items: center; gap: 14px; font-size: 0.82rem; color: var(--text-muted); }
+.lp-clock { display: flex; align-items: baseline; gap: 6px; }
+.lp-clock b { font-size: 1.05rem; color: var(--text-main); font-variant-numeric: tabular-nums; font-family: var(--font-display); }
+.lp-diff { font-weight: 700; color: var(--primary); font-size: 0.78rem; padding: 2px 8px; border: 1px solid var(--border); border-radius: 99px; }
+
+.trip-overview { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; margin: 0 0 28px; }
+.to-map, .to-nights { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 16px 18px; }
+.to-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.to-head b { font-family: var(--font-display); font-size: 1.02rem; color: var(--text-main); }
+.to-head span { font-size: 0.78rem; color: var(--text-muted); }
+#routeMap svg { display: block; width: 100%; height: auto; }
+@media (max-width: 760px) { #routeMap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -6px; } #routeMap svg { width: 760px; max-width: none; } }
+.rt-sea { fill: var(--rt-sea); }
+.rt-land { fill: var(--rt-land); stroke: var(--border); stroke-width: 1; }
+.rt-land-name { font: 700 11px var(--font-ui); fill: var(--text-muted); letter-spacing: 0.08em; }
+.rt-gap { font: 600 10px var(--font-ui); fill: var(--text-muted); }
+.rt-path { fill: none; stroke-width: 2.2; stroke-linecap: round; }
+.rt-fly { stroke: var(--text-muted); stroke-dasharray: 1 6; stroke-width: 2.6; }
+.rt-boat { stroke: var(--rt-bali); stroke-dasharray: 7 6; opacity: .85; }
+.rt-car { stroke: var(--text-main); opacity: .55; }
+.rt-stop { cursor: pointer; }
+.rt-stop circle.rt-c { stroke: var(--surface); stroke-width: 3; transition: r .2s; }
+.rt-stop text.rt-n { font: 800 11px var(--font-ui); fill: var(--surface); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+[data-theme="light"] .rt-stop text.rt-n { fill: #fff; }
+.rt-stop text.rt-l { font: 700 11.5px var(--font-ui); fill: var(--text-main); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+.rt-stop text.rt-d { font: 600 10px var(--font-ui); fill: var(--text-muted); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }
+.rt-stop:hover circle.rt-c, .rt-stop:focus-visible circle.rt-c { r: 13; }
+.rt-stop:focus { outline: none; }
+.rt-stop:focus-visible circle.rt-c { stroke: var(--primary); }
+.rt-stop.is-read circle.rt-c { stroke: var(--primary); }
+.rt-today { fill: none; stroke: var(--primary); stroke-width: 2; animation: rtRing 1.8s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes rtRing { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
+.to-legend { display: flex; gap: 16px; font-size: 0.76rem; color: var(--text-muted); margin-top: 6px; flex-wrap: wrap; }
+.to-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.lg { display: inline-block; width: 26px; height: 0; border-top: 2.4px solid var(--text-main); opacity: .6; }
+.lg-fly { border-top: 2.6px dotted var(--text-muted); opacity: 1; }
+.lg-boat { border-top: 2.2px dashed var(--rt-bali); opacity: 1; }
+
+.nb-row { display: flex; gap: 3px; position: relative; }
+.nb-seg { min-width: 0; text-decoration: none; display: flex; flex-direction: column; gap: 6px; color: inherit; }
+.nb-bar { height: 34px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font: 800 0.82rem var(--font-ui); color: var(--surface); transition: transform .15s, filter .2s; position: relative; }
+[data-theme="light"] .nb-bar { color: #fff; }
+.nb-seg:hover .nb-bar { transform: translateY(-2px); filter: brightness(1.08); }
+.nb-seg:focus-visible { outline: none; } .nb-seg:focus-visible .nb-bar { outline: 2px solid var(--primary); outline-offset: 2px; }
+.nb-plane .nb-bar { background: repeating-linear-gradient(135deg, var(--border) 0 6px, transparent 6px 12px); color: var(--text-muted); border: 1px solid var(--border); }
+.nb-txt { display: flex; flex-direction: column; gap: 1px; font-size: 0.72rem; line-height: 1.25; color: var(--text-muted); min-width: 0; }
+.nb-txt b { color: var(--text-main); font-size: 0.78rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nb-txt span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nb-now { position: absolute; top: -6px; height: 46px; width: 2px; background: var(--primary); border-radius: 2px; pointer-events: none; }
+.nb-now::after { content: "dnes"; position: absolute; top: -16px; left: 50%; transform: translateX(-50%); font: 800 0.66rem var(--font-ui); color: var(--primary); }
+.nb-ticks { position: relative; height: 14px; font-size: 0.68rem; color: var(--text-muted); margin-top: 10px; font-variant-numeric: tabular-nums; border-top: 1px solid var(--border); }
+.nb-ticks span { position: absolute; top: 3px; transform: translateX(-50%); white-space: nowrap; }
+.nb-ticks span:first-child { transform: none; } .nb-ticks span:last-child { transform: translateX(-100%); }
+@media (max-width: 760px) { .nb-ticks { display: none; } }
+.nb-sum { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; font-size: 0.78rem; color: var(--text-muted); }
+.nb-sum i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.nb-sum b { color: var(--text-main); }
+
+.clim { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 4px 0 18px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface); }
+.clim-cap { grid-column: 1 / -1; font-size: 0.74rem; color: var(--text-muted); }
+.clim-cap b { color: var(--text-main); }
+.clim-i { display: grid; gap: 6px; min-width: 0; }
+.clim-k { font-size: 0.72rem; color: var(--text-muted); }
+.clim-v { font: 800 1rem var(--font-display); color: var(--text-main); font-variant-numeric: tabular-nums; }
+.clim-v small { font-weight: 600; font-size: 0.74rem; color: var(--text-muted); }
+.clim-t { height: 6px; border-radius: 99px; background: var(--border); position: relative; overflow: hidden; }
+.clim-t i { position: absolute; top: 0; bottom: 0; border-radius: inherit; }
+.clim-temp i { background: linear-gradient(90deg, var(--rt-bali), var(--rt-sg)); }
+.clim-rain i { background: var(--primary); opacity: .75; }
+.clim-sea i { background: var(--rt-bali); }
+@media (max-width: 560px) { .clim { grid-template-columns: 1fr; } }
+
+.lux-fold.is-today > .lux-fold-h .lux-fold-btn { box-shadow: inset 0 0 0 2px var(--primary); border-radius: 14px; }
+.today-badge { font: 800 0.66rem/1 var(--font-ui); letter-spacing: 0.04em; color: var(--surface); background: var(--primary); padding: 5px 9px; border-radius: 99px; margin-left: 8px; flex: 0 0 auto; }
+[data-theme="light"] .today-badge { color: #fff; }
+
+.pack-count { display: flex; justify-content: space-between; gap: 10px; font-size: 0.85rem; color: var(--text-muted); margin-top: 10px; }
+.pack-count b { color: var(--text-main); }
+.pack-count-bar { height: 5px; border-radius: 99px; background: var(--border); overflow: hidden; margin-top: 6px; }
+.pack-count-bar i { display: block; height: 100%; width: 0; background: var(--primary); transition: width .4s; }
+
+@media (max-width: 760px) {
+  .lp-clocks { width: 100%; justify-content: space-between; }
+  .nb-row { flex-wrap: wrap; row-gap: 12px; }
+  .nb-seg { flex-basis: calc(25% - 3px) !important; }
+  .nb-now { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .rt-today, .lp-status.is-live .lp-dot { animation: none; } }
+@media print { .trip-overview, .clim { break-inside: avoid; } .lp-trip { display: none; } }
+
+/* Běžící upozornění na MHD: čitelné zvýraznění v obou režimech */
+.mhd-marquee-alert .marquee-text {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) !important;
+}
+.mhd-marquee-alert .marquee-text span,
+[data-theme="light"] .mhd-marquee-alert .marquee-text span {
+    color: #ffe066 !important;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}

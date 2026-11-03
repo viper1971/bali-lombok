@@ -1,0 +1,45 @@
+
+    let viewedCardsCount = 0;
+
+    function flipCard(card) {
+      if (card.classList.contains('flipped')) {
+        card.classList.remove('flipped');
+        if (card.timer) {
+          clearTimeout(card.timer);
+          card.timer = null;
+        }
+      } else {
+        card.classList.add('flipped');
+
+        // Označení, že karta byla už alespoň jednou otočena
+        if (!card.classList.contains('viewed')) {
+          card.classList.add('viewed');
+          viewedCardsCount++;
+          const totalCards = document.getElementsByClassName('flip-card').length;
+          document.getElementById('statsCounter').innerText = `Otočeno karet: ${viewedCardsCount} / ${totalCards}`;
+        }
+
+        if (card.timer) {
+          clearTimeout(card.timer);
+        }
+        card.timer = setTimeout(() => {
+          card.classList.remove('flipped');
+          card.timer = null;
+        }, 5000);
+      }
+    }
+
+    function filterCards() {
+      const input = document.getElementById('dictSearch');
+      const filter = input.value.toLowerCase();
+      const cards = document.getElementsByClassName('flip-card');
+      for (let i = 0; i < cards.length; i++) {
+        let text = cards[i].innerText.toLowerCase();
+        if (text.includes(filter)) {
+          cards[i].style.display = "";
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    }
+  

@@ -1,0 +1,17 @@
+
+/* MENU zobrazuje finance a ovládání; OBSAH samostatnou navigaci v témže výsuvném panelu. */
+html body.bali-content-mode #vipFloatingBar.pm-merged > #baliLeftBudgetHeader,
+html body.bali-content-mode #vipFloatingBar.pm-merged > #premiumBudgetDetails,
+html body.bali-content-mode #vipFloatingBar.pm-merged > #premiumBudgetSummary,
+html body.bali-content-mode #vipFloatingBar.pm-merged > #premiumMergedNav{
+ display:none!important;
+}
+html body.bali-content-mode #vipFloatingBar.pm-merged > #baliLeftNavSection{
+ display:block!important;visibility:visible!important;
+ order:0!important;border-top:0!important;padding:0!important;margin:0!important;
+}
+html body:not(.bali-content-mode) #vipFloatingBar.pm-merged > #baliLeftNavSection{
+ display:none!important;
+}
+html body:not(.pres-on) #v29BottomTab,
+html body:not(.pres-on) #floatingMenuBtn{touch-action:manipulation!important;cursor:pointer!important;}

@@ -1,0 +1,231 @@
+
+/* PREMIUM v15 — jediné sjednocující rozložení rozbalovacích sekcí.
+   Každá původní etapa, obsah, fotografie, link a výpočet zůstává zachován. */
+:root {
+  --p15-card:#ffffff; --p15-ink:#172a3e; --p15-muted:#516779;
+  --p15-stroke:#dae7eb; --p15-accent:#118b8c;
+  --p15-shadow:0 10px 28px rgba(19,54,69,.09);
+}
+/* Čisté karty na celé stránce včetně itineráře, rozpočtu a přípravy */
+.lux-part .lux-fold { min-width:0!important; max-width:100%!important; }
+.lux-part .lux-fold>.lux-fold-h {margin:0!important;}
+.lux-part .lux-fold>.lux-fold-h>.lux-fold-btn,
+#osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn,
+#osa .lux-spine>.lux-fold:not(.is-transfer)>.lux-fold-h>.lux-fold-btn,
+#osa .lux-spine>.lux-fold.is-transfer>.lux-fold-h>.lux-fold-btn {
+  box-sizing:border-box!important; isolation:isolate!important; position:relative!important;
+  display:flex!important; flex-wrap:nowrap!important; align-items:center!important;
+  gap:clamp(9px,1.3vw,19px)!important; overflow:hidden!important;
+  width:100%!important; min-height:98px!important; padding:17px clamp(14px,1.5vw,24px)!important;
+  border:1px solid var(--p15-stroke)!important; border-radius:19px!important;
+  background-color:var(--p15-card)!important; background-image:none!important;
+  opacity:1!important; color:var(--p15-ink)!important;
+  backdrop-filter:none!important; -webkit-backdrop-filter:none!important;
+  box-shadow:var(--p15-shadow)!important;
+  transition:box-shadow .18s ease,border-color .18s ease,transform .18s ease!important;
+  cursor:pointer!important;
+}
+.lux-part .lux-fold>.lux-fold-h>.lux-fold-btn:hover,
+#osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn:hover {
+  transform:translateY(-1px)!important; border-color:#8bcfcb!important;
+  box-shadow:0 15px 32px rgba(20,80,95,.13)!important;
+}
+.lux-part .lux-fold.is-open>.lux-fold-h>.lux-fold-btn,
+#osa .lux-spine>.lux-fold.is-open>.lux-fold-h>.lux-fold-btn {
+  border-color:#73bdb7!important; border-bottom-left-radius:13px!important;
+  border-bottom-right-radius:13px!important;
+}
+/* Neztratit kontextové ilustrace: původní SVG z každé sekce zůstává na pravé straně. */
+.lux-part .lux-fold>.lux-fold-h>.lux-fold-btn::before,
+#osa .lux-fold-h .lux-fold-btn::before,
+#osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn::before {
+  content:""!important; display:block!important; position:absolute!important;
+  inset:0 0 0 auto!important; width:min(30%,420px)!important; height:100%!important;
+  background-repeat:no-repeat!important; background-position:right center!important;
+  background-size:cover!important; opacity:1!important; visibility:visible!important;
+  z-index:0!important; pointer-events:none!important;
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.65) 23%,#000 55%)!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.65) 23%,#000 55%)!important;
+}
+.lux-part .lux-fold>.lux-fold-h>.lux-fold-btn::after,
+#osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn::after {
+  content:""!important;display:block!important;position:absolute!important;inset:0!important;
+  border-radius:inherit!important;z-index:0!important;pointer-events:none!important;
+  background:linear-gradient(90deg,rgba(255,255,255,.1),#fff0 68%)!important;
+}
+/* Ikona uvnitř karty, nikoliv mimo levý okraj. */
+.lux-part .lux-fold>.lux-fold-h .lux-fold-node,
+#osa .lux-spine>.lux-fold>.lux-fold-h .lux-fold-node,
+#osa .lux-spine>.lux-fold.is-transfer>.lux-fold-h .lux-fold-node {
+  position:relative!important;left:auto!important;right:auto!important;top:auto!important;
+  transform:none!important; margin:0!important; z-index:2!important;
+  display:grid!important;place-items:center!important; flex:0 0 46px!important;
+  width:46px!important;height:46px!important;
+  border-radius:50%!important; border:1px solid rgba(9,94,102,.18)!important;
+  background:linear-gradient(145deg,#09847e,#147e8f)!important;
+  box-shadow:0 4px 12px rgba(9,107,114,.18)!important;
+  color:white!important;font-size:1.2rem!important;line-height:1!important;
+}
+/* Jednotná hierarchie názvu a termínu. */
+.lux-part .lux-fold .lux-fold-btn>.lux-fold-txt,
+#osa .lux-spine .lux-fold-btn>.lux-fold-txt {
+  position:relative!important;z-index:2!important; display:flex!important;flex-direction:column!important;
+  flex:1 1 0!important;min-width:0!important;max-width:none!important;
+  margin:0!important;padding:0!important;gap:4px!important;
+}
+.lux-part .lux-fold .lux-fold-btn .lux-fold-t,
+#osa .lux-spine .lux-fold-btn .lux-fold-t {
+  color:var(--p15-ink)!important;font-size:clamp(1.04rem,1.45vw,1.43rem)!important;
+  font-weight:800!important;letter-spacing:-.02em!important;line-height:1.22!important;
+  opacity:1!important;text-shadow:none!important;overflow-wrap:anywhere!important;
+}
+.lux-part .lux-fold .lux-fold-btn .lux-fold-s,
+#osa .lux-spine .lux-fold-btn .lux-fold-s {
+  color:var(--p15-muted)!important;font-size:clamp(.72rem,.87vw,.84rem)!important;
+  font-weight:550!important;letter-spacing:0!important;line-height:1.32!important;
+  opacity:1!important;text-shadow:none!important;
+}
+#osa .lux-fold-btn .p14-eyebrow {
+  color:#108988!important;font-size:.64rem!important;font-weight:850!important;
+  letter-spacing:.13em!important;line-height:1.2!important;
+}
+/* Indikátor přečtení je vytvářen existujícím JS; držíme mu stálé místo.
+   Zelené zaškrtnutí viditelné pouze při is-read, jinde prázdný obrys. */
+.lux-part .lux-fold>.lux-fold-h .lux-read,
+#osa .lux-spine .lux-fold-btn .lux-read {
+  display:inline-flex!important; align-items:center!important;justify-content:center!important;
+  position:relative!important;z-index:3!important;flex:0 0 36px!important;
+  width:36px!important;height:36px!important; padding:0!important;margin:0!important;
+  border-radius:50%!important; background:#fff!important; color:transparent!important;
+  border:2px solid #c8d8da!important;box-shadow:0 2px 8px rgba(9,40,51,.08)!important;
+  font-size:1.15rem!important;line-height:1!important;font-weight:900!important;
+}
+.lux-part .lux-fold.is-read>.lux-fold-h .lux-read,
+#osa .lux-spine .lux-fold.is-read>.lux-fold-h .lux-read {
+  color:#fff!important; background:#247f36!important; border:3px solid #fff!important;
+  box-shadow:0 2px 11px rgba(9,55,26,.24),0 0 0 1px rgba(13,75,23,.17)!important;
+}
+/* Cena / výběr hotelu je od okolí oddělený, stále čitelný. */
+.lux-part .lux-fold>.lux-fold-h .lux-fold-meta:not(:empty),
+#osa .lux-spine .lux-fold-btn .lux-fold-meta:not(:empty) {
+  position:relative!important; z-index:3!important;flex:0 1 auto!important;
+  max-width:min(30%,305px)!important;min-width:0!important;
+  padding:7px 11px!important;margin:0!important;
+  background:#fff!important;color:#1b4555!important;
+  border:1px solid #8ac2c6!important;border-radius:999px!important;
+  box-shadow:0 2px 9px rgba(13,66,76,.18)!important;
+  font-size:clamp(.68rem,.76vw,.8rem)!important;font-weight:800!important;
+  line-height:1.28!important;text-align:center!important;white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+.lux-part .lux-fold>.lux-fold-h .lux-fold-meta:empty{display:none!important}
+/* Jasně rozpoznatelné rozbalení vpravo. */
+.lux-part .lux-fold>.lux-fold-h .lux-fold-chev,
+#osa .lux-spine .lux-fold-btn .lux-fold-chev {
+  position:relative!important;z-index:4!important;
+  display:grid!important;place-items:center!important;
+  flex:0 0 35px!important;width:35px!important;height:35px!important;
+  padding:0!important;margin:0!important;
+  border-radius:50%!important; background:#f0f7f9!important;
+  border:1px solid #c3d7dc!important;color:#133b49!important;
+  font-size:1rem!important;font-weight:900!important;opacity:1!important;
+  box-shadow:0 1px 5px rgba(16,58,68,.08)!important;
+}
+.lux-part .lux-fold.is-open>.lux-fold-h .lux-fold-chev{transform:rotate(180deg)!important}
+.lux-part .lux-fold-btn:focus-visible{outline:3px solid #159f9a!important;outline-offset:3px!important}
+/* Ilustrovaná osa stejně široká jako ostatní bloky. */
+#osa .lux-spine{display:flex!important;flex-direction:column!important;gap:13px!important;
+  padding-left:0!important;max-width:none!important;margin:0!important;width:100%!important;}
+#osa .lux-spine::before{display:none!important}
+#osa .lux-spine>.lux-fold{width:100%!important;max-width:none!important;overflow:visible!important;
+  margin:0!important;border:0!important;border-radius:19px!important;background:transparent!important;box-shadow:none!important}
+#osa .lux-spine>.lux-fold.is-transfer>.lux-fold-h>.lux-fold-btn{
+  min-height:83px!important; border-style:solid!important;}
+#osa .lux-spine>.lux-fold.is-transfer .lux-fold-node {flex-basis:43px!important;width:43px!important;height:43px!important;}
+#osa .lux-spine>.lux-fold .lux-fold-body {border-radius:0 0 18px 18px!important;}
+#osa .lux-spine>.lux-fold.is-open .lux-fold-body {background:var(--surface)!important;
+  border:1px solid var(--p15-stroke)!important;border-top:0!important;}
+#osa .lux-spine>.lux-fold .lux-fold-pad{padding:14px clamp(10px,2vw,28px) 24px!important}
+/* Nedat cenu / text / ovládání pod obrázek (pravá třetina je ilustrativní). */
+.lux-part .lux-fold .lux-fold-btn .lux-fold-txt{padding-right:0!important}
+.lux-part .lux-fold>.lux-fold-h>.lux-fold-btn>* {z-index:2!important}
+/* Sjednocení úvodních karet: fotografie jako horní třetina, informace na bílé kartě. */
+#premium2027Overview .p13-grid{gap:16px!important}
+#premium2027Overview .p13-tile{
+  min-height:255px!important;display:flex!important;justify-content:flex-end!important;
+  padding:120px 22px 20px!important;background:#fff!important;
+  border:1px solid var(--p15-stroke)!important;border-radius:20px!important;
+  color:var(--p15-ink)!important;box-shadow:var(--p15-shadow)!important;
+  gap:7px!important;text-align:left!important;
+}
+#premium2027Overview .p13-tile::before{
+  inset:0 0 auto 0!important;height:112px!important;filter:none!important;
+  border-radius:19px 19px 0 0!important;background-position:center!important;
+}
+#premium2027Overview .p13-tile::after{
+  inset:0 0 auto 0!important;height:112px!important;
+  background:linear-gradient(180deg,rgba(6,35,45,.03),rgba(6,35,45,.2))!important;
+}
+#premium2027Overview .p13-tile .p13-label{color:#0b8e88!important}
+#premium2027Overview .p13-tile strong{color:var(--p15-ink)!important;font-size:1.28rem!important}
+#premium2027Overview .p13-tile>span:not(.p13-label){color:var(--p15-muted)!important}
+#premium2027Overview .p13-tile em{color:#087f7b!important}
+/* Vyvážené tabulky a vnitřní bílé karty. Přepisujeme vzhled, nikoli výpočetní styly. */
+.lux-part .tj-card,.lux-part .tj-excl,.lux-part .bento-card,
+.lux-part .flight-summary-card,.lux-part .cash-card {
+  border-radius:17px!important;border-color:var(--p15-stroke)!important;
+}
+/* Tmavý režim: stejná hierarchie a kontrast bez průsvitných karet. */
+html[data-theme="dark"], body.dark, body.dark-mode {
+  --p15-card:#162b3b; --p15-ink:#f2f8fb; --p15-muted:#c4d7df;
+  --p15-stroke:#345365; --p15-shadow:0 12px 29px rgba(0,0,0,.23);
+}
+html[data-theme="dark"] .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn::after,
+body.dark .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn::after{background:linear-gradient(90deg,rgba(22,43,59,.1),transparent 70%)!important;}
+html[data-theme="dark"] #premium2027Overview .p13-tile,
+body.dark #premium2027Overview .p13-tile{background:#162b3b!important;}
+html[data-theme="dark"] .lux-part .lux-fold>.lux-fold-h .lux-fold-meta:not(:empty),
+body.dark .lux-part .lux-fold>.lux-fold-h .lux-fold-meta:not(:empty){background:#21394a!important;color:#e9f7f8!important;border-color:#537d82!important}
+html[data-theme="dark"] .lux-part .lux-fold>.lux-fold-h .lux-fold-chev,
+body.dark .lux-part .lux-fold>.lux-fold-h .lux-fold-chev{background:#254554!important;color:#f2faff!important;border-color:#48707a!important}
+html[data-theme="dark"] .lux-part .lux-fold>.lux-fold-h .lux-read,
+body.dark .lux-part .lux-fold>.lux-fold-h .lux-read{background:#294958!important;}
+html[data-theme="dark"] .lux-part .lux-fold.is-read>.lux-fold-h .lux-read,
+body.dark .lux-part .lux-fold.is-read>.lux-fold-h .lux-read{background:#25883b!important}
+/* Tablet: čitelnost ceny i ikon při nižší šířce. */
+@media(max-width:1020px){
+ .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn,
+ #osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn{padding:15px 16px!important;min-height:83px!important;gap:11px!important;}
+ .lux-part .lux-fold>.lux-fold-h .lux-fold-meta:not(:empty){max-width:31%!important;font-size:.68rem!important}
+ .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn::before{width:33%!important;opacity:.8!important}
+}
+/* Telefon: cena dostane vlastní řádek, indikátor přečtení i rozbalovací tlačítko zůstanou viditelné. */
+@media(max-width:680px){
+ #osa .lux-spine{padding-left:0!important;gap:10px!important}
+ .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn,
+ #osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn,
+ #osa .lux-spine>.lux-fold.is-transfer>.lux-fold-h>.lux-fold-btn {
+   min-height:94px!important;padding:12px 11px!important;gap:8px!important;
+   border-radius:15px!important;flex-wrap:wrap!important;justify-content:flex-start!important;
+ }
+ .lux-part .lux-fold>.lux-fold-h .lux-fold-node,
+ #osa .lux-spine>.lux-fold>.lux-fold-h .lux-fold-node{flex:0 0 34px!important;width:34px!important;height:34px!important;font-size:1rem!important}
+ .lux-part .lux-fold .lux-fold-btn>.lux-fold-txt{flex:1 1 calc(100% - 140px)!important;min-width:0!important;}
+ .lux-part .lux-fold .lux-fold-btn .lux-fold-t{font-size:1.02rem!important;line-height:1.22!important}
+ .lux-part .lux-fold .lux-fold-btn .lux-fold-s{font-size:.72rem!important}
+ #osa .lux-fold-btn .p14-eyebrow{font-size:.53rem!important;letter-spacing:.09em!important}
+ .lux-part .lux-fold>.lux-fold-h .lux-read{width:26px!important;height:26px!important;flex-basis:26px!important;font-size:.87rem!important}
+ .lux-part .lux-fold>.lux-fold-h .lux-fold-chev{width:29px!important;height:29px!important;flex-basis:29px!important;font-size:.82rem!important}
+ .lux-part .lux-fold>.lux-fold-h .lux-fold-meta:not(:empty){
+   order:6!important;flex:0 1 auto!important;max-width:calc(100% - 44px)!important;
+   margin-left:42px!important;padding:5px 9px!important;font-size:.72rem!important;
+ }
+ .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn::before{width:45%!important;opacity:.38!important}
+ #premium2027Overview .p13-tile{min-height:240px!important;padding:120px 18px 18px!important}
+}
+@media(max-width:400px){
+ .lux-part .lux-fold .lux-fold-btn>.lux-fold-txt{flex-basis:calc(100% - 128px)!important}
+ .lux-part .lux-fold>.lux-fold-h .lux-read{flex-basis:24px!important;width:24px!important;height:24px!important}
+ .lux-part .lux-fold>.lux-fold-h .lux-fold-chev{flex-basis:25px!important;width:25px!important;height:25px!important}
+}
+@media(prefers-reduced-motion:reduce){.lux-part .lux-fold>.lux-fold-h>.lux-fold-btn{transition:none!important}}

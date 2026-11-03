@@ -1,0 +1,12 @@
+
+/* V59: jediný přehled aerolinek na všech šířkách; starý seznam byl odstraněn i z HTML.
+   Záměrně vyšší specificita a !important kvůli starému mobilnímu přepisu display:flex. */
+#flightPick .flight-airline-switch,
+#flightPick #activeFlightDetailBox,
+#flightPick #rvLegend {display:none!important;visibility:hidden!important;}
+#flightPick #airlineImpact {display:block!important;width:100%;max-width:100%;min-width:0;}
+#flightPick .fp-card,#flightPick .x-mb-16 {min-width:0;}
+@media(max-width:730px){
+  #flightPick #airlineImpact .ai-v52-table {display:grid!important;grid-template-columns:minmax(0,1fr)!important;}
+  #flightPick #airlineImpact .ai-v52-row {min-width:0!important;max-width:100%;}
+}
