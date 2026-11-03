@@ -3,7 +3,7 @@
    - kurzy a API: nejdřív síť, při výpadku poslední uložená hodnota
    - obrázky, písma, skripty, dlaždice map: z uložené kopie hned, na pozadí se obnoví
    Tlačítko „Uložit pro offline“ v menu pošle seznam souborů zprávou 'precache'. */
-const CACHE = 'cesta-offline-v56';
+const CACHE = 'cesta-offline-v57';
 const TILES = 'cesta-tiles-v1';
 const MAX_TILES = 600;
 
