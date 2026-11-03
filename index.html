@@ -2,7 +2,7 @@
 <html lang="cs" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="bali-build" content="632ddc5607b157af">
+    <meta name="bali-build" content="ce4e92a5a7b6e5d4">
 <script src="assets/build/js-a8fb75dcd6534736.js"></script>
 <script src="assets/build/js-27a5af24ef09ab15.js"></script>
 
@@ -133,38 +133,45 @@
             <button class="menu-modal-close" onclick="toggleMenuModal()" aria-label="Zavřít menu">✕</button>
         </div>
         <nav class="menu-grid" id="bottomNav">
-            <a href="#hero" class="nav-item active" onclick="toggleMenuModal()"><span class="icon">🏠</span><span>Domů &amp; Mapa letů</span></a>
-            <div class="nav-group-title">I · Před odletem</div>
-            <a href="#viza" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛂</span><span>Víza &amp; Portály</span></a>
-            <a href="#bezpecnost" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛡️</span><span>SOS &amp; Zdraví</span></a>
-            <a href="#esim" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📱</span><span>eSIM Singtel</span></a>
-            <a href="#transport-apps" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📲</span><span>Dopravní aplikace</span></a>
-            <a href="#live360" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📍</span><span>LIVE 360 poloha</span></a>
-            <a href="#baleni" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🎒</span><span>Balení (Limit 7 kg)</span></a>
+            <a href="#hero" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🏠</span><span>Domů &amp; Mapa letů</span></a>
+            <a href="#flightPick" class="nav-item" onclick="toggleMenuModal()"><span class="icon">✈️</span><span>Výběr letenek</span></a>
+            <div class="nav-group-title">I · Příprava před odletem</div>
+            <a href="#f-viza" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛂</span><span>Víza &amp; portály</span></a>
+            <a href="#f-sos" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛡️</span><span>SOS kontakty &amp; zdraví</span></a>
+            <a href="#f-esim" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📱</span><span>eSIM</span></a>
+            <a href="#f-apps" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📲</span><span>Dopravní aplikace</span></a>
+            <a href="#f-live" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📍</span><span>Live 360</span></a>
+            <a href="#f-baleni" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🎒</span><span>Balení</span></a>
             <div class="nav-group-title">II · Itinerář krok za krokem</div>
-            <a href="#osa" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🗺️</span><span>Itinerář (Osa)</span></a>
-            <a href="#etapa-singapur" class="nav-item" onclick="toggleMenuModal()"><span class="icon"><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur"></span></span><span>1. Singapur</span></a>
+            <a href="#f-leg-liberec" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🚌</span><span>Odjezd Liberec ➔ Praha</span></a>
+            <a href="#f-leg-odlet" class="nav-item" onclick="toggleMenuModal()"><span class="icon">✈️</span><span>Odlet z Prahy a přestup</span></a>
+            <a href="#f-leg-sg" class="nav-item" onclick="toggleMenuModal()"><span class="icon">1</span><span>Singapur</span></a>
+            <a href="#f-leg-sgdps" class="nav-item" onclick="toggleMenuModal()"><span class="icon">✈️</span><span>Přelet Singapur ➔ Bali</span></a>
+            <a href="#f-leg-uluwatu" class="nav-item" onclick="toggleMenuModal()"><span class="icon">2</span><span>Bali · Uluwatu</span></a>
             <a href="#motorky-bali" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛵</span><span>Půjčení motorek BALI</span></a>
-            <a href="#etapa-uluwatu" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🌴</span><span>2. Bali – Uluwatu</span></a>
-            <a href="#etapa-ubud" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🍃</span><span>3. Bali – Ubud</span></a>
-            <a href="#etapa-lombok-zapad" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🐚</span><span>4. Lombok Z/S</span></a>
-            <a href="#motorky-lombok" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🏍️</span><span>Půjčení motorek LOMBOK</span></a>
-            <a href="#etapa-lombok-jih" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🌊</span><span>5. Kuta Lombok</span></a>
-            <a href="#etapa-navrat" class="nav-item" onclick="toggleMenuModal()"><span class="icon">✈️</span><span>6. Návrat domů</span></a>
-            <a href="#singapore-layover-program" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛄</span><span>7. Tranzit Singapur</span></a>
+            <a href="#f-leg-ubud" class="nav-item" onclick="toggleMenuModal()"><span class="icon">3</span><span>Bali · Ubud</span></a>
+            <a href="#f-leg-presun4" class="nav-item" onclick="toggleMenuModal()"><span class="icon">⛴️</span><span>Přesun Bali ➔ Lombok</span></a>
+            <a href="#f-leg-lombok-sever" class="nav-item" onclick="toggleMenuModal()"><span class="icon">4</span><span>Lombok · západ &amp; sever</span></a>
+            <a href="#motorky-lombok" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🛵</span><span>Půjčení motorek LOMBOK</span></a>
+            <a href="#f-leg-kuta" class="nav-item" onclick="toggleMenuModal()"><span class="icon">5</span><span>Lombok · Kuta &amp; Are Guling</span></a>
+            <a href="#f-leg-back" class="nav-item" onclick="toggleMenuModal()"><span class="icon">⛴️</span><span>Přesun Lombok ➔ Bali</span></a>
+            <a href="#f-leg-rozlucka" class="nav-item" onclick="toggleMenuModal()"><span class="icon">6</span><span>Bali · Rozlučka u letiště</span></a>
+            <a href="#f-leg-tranzit" class="nav-item" onclick="toggleMenuModal()"><span class="icon">7</span><span>Singapur · Tranzit</span></a>
+            <a href="#f-leg-odlet-sin" class="nav-item" onclick="toggleMenuModal()"><span class="icon">✈️</span><span>Odlet ze Singapuru a mezipřistání</span></a>
+            <a href="#f-leg-domu" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🚌</span><span>Odjezd domů do Liberce</span></a>
             <div class="nav-group-title">III · Konfigurátor cesty &amp; rozpočet</div>
-            <a href="#rozpocet" class="nav-item" onclick="toggleMenuModal()"><span class="icon">💰</span><span>Konfigurátor rozpočtu</span></a>
-            <a href="#ganttAuditCard" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📊</span><span>Trasa &amp; Návaznosti</span></a>
-            <a href="#jidlo" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🍜</span><span>Jídlo</span></a>
-            <a href="#aktivity" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🎟️</span><span>Vstupné a aktivity</span></a>
-            <a href="#hotovost" class="nav-item" onclick="toggleMenuModal()"><span class="icon">💵</span><span>Plán hotovosti</span></a>
-            <a href="#rozpis-nakladu" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📋</span><span>Rozpis nákladů</span></a>
-            <a href="#srovnani" class="nav-item" onclick="toggleMenuModal()"><span class="icon">⚖️</span><span>Srovnání s CK SEN</span></a>
-            <a href="#karta-mhd" class="nav-item" onclick="toggleMenuModal()"><span class="icon">💳</span><span>Karta do MHD (Revolut)</span></a>
-            <div class="nav-group-title">IV · Na místě</div>
-            <a href="#slovnicek" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📖</span><span>Slovníček</span></a>
-            <div class="nav-group-title">V · Závěr</div>
-            <a href="#ukolyTerminy" class="nav-item" onclick="toggleMenuModal()"><span class="icon">✅</span><span>Checklist: úkoly &amp; schůzka</span></a>
+            <a href="#f-jidlo" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🍜</span><span>Jídlo</span></a>
+            <a href="#f-aktivity" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🎟️</span><span>Vstupné a aktivity</span></a>
+            <a href="#f-karta-mhd" class="nav-item" onclick="toggleMenuModal()"><span class="icon">💳</span><span>Karta do MHD v Singapuru</span></a>
+            <a href="#f-hotovost" class="nav-item" onclick="toggleMenuModal()"><span class="icon">💵</span><span>Plán hotovosti</span></a>
+            <a href="#f-konfig" class="nav-item" onclick="toggleMenuModal()"><span class="icon">💰</span><span>Finální finanční dashboard</span></a>
+            <a href="#p35Final" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📌</span><span>↳ Finální shrnutí vybraných letů a hotelů</span></a>
+            <a href="#rozpis-nakladu" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📋</span><span>↳ Úplný rozpis ceny a co je zahrnuto</span></a>
+            <a href="#srovnani" class="nav-item" onclick="toggleMenuModal()"><span class="icon">⚖️</span><span>↳ Srovnání s CK SEN</span></a>
+            <div class="nav-group-title">IV · Slovníček</div>
+            <a href="#f-slovnicek" class="nav-item" onclick="toggleMenuModal()"><span class="icon">📖</span><span>Slovníček</span></a>
+            <div class="nav-group-title">V · Finální kontrola</div>
+            <a href="#f-checklist" class="nav-item" onclick="toggleMenuModal()"><span class="icon">🎤</span><span>Kontrola, jestli jsme si všechno řekli</span></a>
         </nav>
     </div>
 </div>
