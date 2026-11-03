@@ -106,4 +106,71 @@ html body.simple-on #bttBtn { display: none !important; }
 @media(max-width:700px){#simplePage.sj-page .sj-brand span{display:none}#simplePage.sj-page .sj-nav{gap:14px;top:73px}#simplePage.sj-page .sj-nav button{font-size:12px}#simplePage.sj-page .sj-hero{min-height:460px;padding:50px 23px}#simplePage.sj-page .sj-container{padding:0 17px}#simplePage.sj-page .sj-route-stops{grid-template-columns:repeat(2,minmax(0,1fr))}#simplePage.sj-page .sj-route-stops button{padding:16px}#simplePage.sj-page .sj-stages{padding-left:20px}#simplePage.sj-page .sj-stages:before{left:3px}#simplePage.sj-page .sj-stage:before{left:-23px;top:33px}#simplePage.sj-page .sj-stage{padding:20px 17px}#simplePage.sj-page .sj-stage-top{gap:12px}#simplePage.sj-page .sj-stage-number{font-size:16px}#simplePage.sj-page .sj-hotel{grid-template-columns:1fr;gap:18px}#simplePage.sj-page .sj-hotel-photo{aspect-ratio:1.5}#simplePage.sj-page .sj-budget-layout{grid-template-columns:1fr;gap:18px}#simplePage.sj-page .sj-practical-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#simplePage.sj-page .sj-practical-item{padding:17px}#simplePage.sj-page .sj-flights{grid-template-columns:1fr}#simplePage.sj-page .sj-days li{grid-template-columns:1fr;gap:4px}#simplePage.sj-page .sj-transfer{font-size:13px}#simplePage.sj-page .sj-route,#simplePage.sj-page .sj-journey,#simplePage.sj-page .sj-budget,#simplePage.sj-page .sj-practical{padding-top:45px}}
 @media(max-width:380px){#simplePage.sj-page .sj-nav{gap:9px}#simplePage.sj-page .sj-nav button{font-size:11px}#simplePage.sj-page .sj-practical-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){#simplePage.sj-page{scroll-behavior:auto}}
-@media print{#simplePage.sj-page .sj-top,#simplePage.sj-page .sj-nav,#simplePage.sj-page .sj-button,#simplePage.sj-page .sj-unit{display:none!important}#simplePage.sj-page{background:#fff;color:#173d35}#simplePage.sj-page .sj-hero{min-height:230px}#simplePage.sj-page .sj-stage{break-inside:avoid}#simplePage.sj-page .sj-container{max-width:none}#simplePage.sj-page details:not([open]){display:none}}
+/* A calm, read-only journal: all itinerary text is visible, including on paper. */
+#simplePage.sj-page .sj-program,#simplePage.sj-page .sj-flight-details,#simplePage.sj-page .sj-cash{border-top:1px solid var(--sj-line);padding-top:18px;margin-top:24px}
+#simplePage.sj-page .sj-program>h3,#simplePage.sj-page .sj-flight-details>h3{font-size:16px;letter-spacing:0}
+#simplePage.sj-page .sj-program>h3 span{font-size:12px;color:var(--sj-muted);font-weight:400;margin-left:8px}
+#simplePage.sj-page .sj-hotel-photo{aspect-ratio:1.65}
+#simplePage.sj-page h1:focus{outline:none}
+@page sj-journal{size:A4 portrait;margin:12mm 13mm 14mm}
+@media print{
+ html:has(body.simple-on),body.simple-on{height:auto!important;overflow:visible!important;background:#fff!important;margin:0!important;padding:0!important}
+ body.simple-on>*:not(#simplePage){display:none!important}
+ body.simple-on #simplePage.sj-page{page:sj-journal;position:static!important;inset:auto!important;width:auto!important;height:auto!important;max-height:none!important;overflow:visible!important;display:block!important;background:#fff!important;color:#173d35!important;font-size:10pt;line-height:1.4;--sj-bg:#fff;--sj-paper:#fff;--sj-ink:#173d35;--sj-muted:#465b53;--sj-line:#ccd6ce;--sj-soft:#f1f4ef;--sj-accent:#126b59}
+ #simplePage.sj-page *{box-shadow:none!important;text-shadow:none!important;animation:none!important;transition:none!important}
+ #simplePage.sj-page .sj-top,#simplePage.sj-page .sj-nav,#simplePage.sj-page .sj-button,#simplePage.sj-page .sj-unit,#simplePage.sj-page .sj-footer{display:none!important}
+ #simplePage.sj-page .sj-main,#simplePage.sj-page .sj-container{display:block!important;padding:0!important;max-width:none!important;margin:0!important}
+ #simplePage.sj-page .sj-hero{display:block;min-height:0!important;padding:0 0 5mm!important;background:none!important;color:#173d35!important;border-bottom:1pt solid #ccd6ce}
+ #simplePage.sj-page .sj-hero h1{font-size:25pt;line-height:1.05;color:#173d35!important;margin:2mm 0 3mm;max-width:none}
+ #simplePage.sj-page .sj-hero h1 br{display:none}
+ #simplePage.sj-page .sj-hero p{color:#465b53!important;font-size:10pt;max-width:none;margin:0 0 2mm}
+ #simplePage.sj-page .sj-photo-credit{display:none}
+ #simplePage.sj-page .sj-route,#simplePage.sj-page .sj-journey,#simplePage.sj-page .sj-budget{padding:5mm 0 0!important;break-inside:auto!important}
+ #simplePage.sj-page .sj-section-title{margin-bottom:3mm;max-width:none;break-inside:avoid;break-after:avoid}
+ #simplePage.sj-page h2{font-size:18pt;margin:1mm 0 2mm}
+ #simplePage.sj-page h3,#simplePage.sj-page h4{break-after:avoid}
+ #simplePage.sj-page p{orphans:3;widows:3}
+ #simplePage.sj-page .sj-eyebrow{font-size:7pt;letter-spacing:.1em}
+ #simplePage.sj-page .sj-muted,#simplePage.sj-page .sj-section-title>p,#simplePage.sj-page .sj-stage-intro{font-size:9pt;line-height:1.4}
+ #simplePage.sj-page .sj-route-stops{grid-template-columns:repeat(3,minmax(0,1fr));border-radius:0;break-inside:avoid}
+ #simplePage.sj-page .sj-route-stops button{padding:2.5mm;gap:1mm;min-height:0;cursor:default}
+ #simplePage.sj-page .sj-route-stops button strong{font-size:9pt}
+ #simplePage.sj-page .sj-route-stops button small,#simplePage.sj-page .sj-route-stops button>span{font-size:8pt}
+ #simplePage.sj-page .sj-flight-details,#simplePage.sj-page .sj-program,#simplePage.sj-page .sj-cash{padding-top:2mm;margin-top:3mm}
+ #simplePage.sj-page .sj-flights{grid-template-columns:1fr 1fr;gap:5mm;margin:2mm 0;break-inside:avoid}
+ #simplePage.sj-page .sj-flights h3{font-size:11pt;margin:1mm 0}
+ #simplePage.sj-page .sj-flights p,#simplePage.sj-page .sj-flights small{font-size:9pt}
+ #simplePage.sj-page .sj-stages{display:block;padding:0}
+ #simplePage.sj-page .sj-stages:before,#simplePage.sj-page .sj-stage:before{display:none}
+ #simplePage.sj-page .sj-stage{display:block;border:0;border-top:1pt solid #ccd6ce;border-radius:0;padding:4mm 0 0;break-inside:auto!important}
+ #simplePage.sj-page .sj-stage-top{gap:3mm;break-inside:avoid;break-after:avoid}
+ #simplePage.sj-page .sj-stage-top h2{font-size:17pt;margin:1mm 0}
+ #simplePage.sj-page .sj-stage-number{font-size:12pt;padding-top:1mm}
+ #simplePage.sj-page .sj-stage-intro{margin:2mm 0;break-after:avoid}
+ #simplePage.sj-page .sj-hotel{display:grid;grid-template-columns:57mm minmax(0,1fr);gap:5mm;margin:3mm 0;break-inside:avoid}
+ #simplePage.sj-page .sj-hotel-photo{width:57mm;height:36mm;aspect-ratio:auto;border-radius:2mm;object-fit:cover}
+ #simplePage.sj-page .sj-hotel-copy h3{font-size:13pt;margin:1mm 0}
+ #simplePage.sj-page .sj-hotel-price{font-size:16pt;margin:1mm 0}
+ #simplePage.sj-page .sj-hotel-copy .sj-muted,#simplePage.sj-page .sj-breakfast{font-size:8pt;margin:1mm 0}
+ #simplePage.sj-page .sj-program>h3,#simplePage.sj-page .sj-flight-details>h3{font-size:11pt;margin:1mm 0 2mm}
+ #simplePage.sj-page .sj-days{display:block;margin:2mm 0;padding:0}
+ #simplePage.sj-page .sj-days li{display:grid;grid-template-columns:16mm minmax(0,1fr);gap:3mm;padding:2mm 0;margin:0;break-inside:avoid}
+ #simplePage.sj-page .sj-days h4{font-size:9pt;line-height:1.35;margin:0 0 1mm}
+ #simplePage.sj-page .sj-days p,#simplePage.sj-page .sj-day-date{font-size:8.5pt;line-height:1.4;margin:0}
+ #simplePage.sj-page .sj-transfer{gap:3mm;margin:2mm 0 4mm;font-size:9pt;break-inside:avoid;break-after:avoid}
+ #simplePage.sj-page .sj-transfer small{font-size:7pt}
+ #simplePage.sj-page .sj-budget-layout{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-bottom:3mm;break-inside:avoid}
+ #simplePage.sj-page .sj-budget-total{padding:4mm;border:1pt solid #ccd6ce;border-radius:2mm}
+ #simplePage.sj-page .sj-budget-total>strong{font-size:25pt}
+ #simplePage.sj-page .sj-budget-total>p,#simplePage.sj-page .sj-budget-total small{font-size:8.5pt;margin:2mm 0}
+ #simplePage.sj-page .sj-cost{padding:2mm 0;font-size:9pt}
+ #simplePage.sj-page .sj-cash>section{margin:0}
+ #simplePage.sj-page .sj-cash h2{font-size:15pt;margin:2mm 0}
+ #simplePage.sj-page .sp-money{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2mm;break-inside:avoid}
+ #simplePage.sj-page .sp-money>div{padding:2mm;border-radius:1mm}
+ #simplePage.sj-page .sp-money b{font-size:11pt}
+ #simplePage.sj-page .sp-money small,#simplePage.sj-page .sp-money span{font-size:8pt}
+ #simplePage.sj-page .sp-tl{display:block;margin:2mm 0;padding:0}
+ #simplePage.sj-page .sp-tl li{grid-template-columns:20mm minmax(0,1fr);gap:3mm;padding:2mm 0;break-inside:avoid}
+ #simplePage.sj-page .sp-tl time,#simplePage.sj-page .sp-tl div>b,#simplePage.sj-page .sp-tl div>span,#simplePage.sj-page .sp-note{font-size:8.5pt;line-height:1.4}
+}
