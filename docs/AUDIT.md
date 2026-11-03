@@ -9,7 +9,7 @@ Základ: PR #1, commit `457040d35ca72436f02a7a03b524cdb7fb6c5b50`. Práce v `aud
 | Načítání | 71 CSS + 65 JS požadavků nahrazeno 18 CSS + 57 JS = 75 požadavků (−44,9 %). Počet zahrnuje pouze místní CSS/JS, nikoli obrázky a CDN. |
 | Kaskáda | Spojují se pouze sousední CSS; pořadí deklarací je shodné. Nepoužívá se odhad „nepoužitých“ selektorů. |
 | JS | Osm bloků s pouhými komentáři/bílými znaky se již nestahuje. Ostatní skripty zůstávají oddělené kvůli scope, strict mode a okamžiku vykonání. |
-| Cache | Hashované názvy zdrojů brání smíchání verzí; worker před aktivací uloží kompletní místní shell. |
+| Cache | Hashované názvy zdrojů brání smíchání verzí; worker před aktivací uloží kompletní místní shell. Již uložené hashované soubory čte přímo z cache bez dalšího stahování. |
 | Worker | Mazání omezeno na vlastní scope, zápisy na pozadí mají waitUntil, HTTP chyby navigace vrací uloženou kopii, precache počítá úspěch až po zápisu a neomezuje seznam na prvních 400 položek. |
 | Vyhledávání | Sbalený `.lux-fold-body[inert]` již není považovaný za zámek; zamčená `.lux-fold` i `.lux-part` zůstávají chráněné. |
 | Offline UI | MessageChannel se uzavře a timeout se zruší po odpovědi. |

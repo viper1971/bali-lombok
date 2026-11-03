@@ -54,6 +54,15 @@ self.addEventListener('fetch', event => {
     const url = new URL(request.url);
     if (request.mode === 'navigate' || /kurzy\.cz|frankfurter|api\.|wikimedia\.org\/w\/api/.test(url.hostname + url.pathname)) {
         event.respondWith(networkFirst(request));
+    } else if (url.origin === self.location.origin && /\/assets\/build\/(?:css|js)-[a-f0-9]{16}\.(?:css|js)$/.test(url.pathname)) {
+        // Immutable content hash: a cache hit never needs a background download.
+        event.respondWith(caches.open(CACHE).then(async cache => {
+            const hit = await cache.match(request);
+            if (hit) return hit;
+            const response = await fetch(request);
+            await save(cache, request, response).catch(() => {});
+            return response;
+        }));
     } else if (url.hostname.endsWith('.tile.openstreetmap.org')) {
         event.respondWith(staleWhileRevalidate(event, TILES, MAX_TILES));
     } else {
