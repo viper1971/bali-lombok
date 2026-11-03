@@ -24144,10 +24144,14 @@ html body.pres-on #v29BottomTab{display:none!important}
     tab.innerHTML='<span class="v29-chevron" aria-hidden="true">▸</span><span>MENU</span>';
     document.body.appendChild(tab);
   }
+  // Odstranit historické posluchače kliknutí, které se u obou oušek střetávaly.
+  var cleanTab=tab.cloneNode(true);tab.replaceWith(cleanTab);tab=cleanTab;
   tab.setAttribute('aria-controls','vipFloatingBar');
   // Druhé samostatné ouško OBSAH, bez sdílení pozice s tlačítkem MENU.
   var contentTab=document.getElementById('floatingMenuBtn');
   if(contentTab){
+    var cleanContentTab=contentTab.cloneNode(true);
+    contentTab.replaceWith(cleanContentTab);contentTab=cleanContentTab;
     contentTab.innerHTML='<span aria-hidden="true">☰</span><span>OBSAH</span>';
     contentTab.setAttribute('aria-label','Otevřít obsah cesty');
     contentTab.setAttribute('aria-controls','baliLeftNavSection');
@@ -24187,7 +24191,7 @@ html body.pres-on #v29BottomTab{display:none!important}
       if(!document.body.classList.contains('v29-bottom-open'))setOpen(true);
       sub.hidden=false;
       bar.classList.add('bali-nav-open');
-      sub.scrollIntoView({block:'nearest',behavior:'smooth'});
+      // Nevynucovat posun celé stránky při otevření navigace.
     }else{
       sub.hidden=true;
       bar.classList.remove('bali-nav-open');
@@ -24211,8 +24215,16 @@ html body.pres-on #v29BottomTab{display:none!important}
       cloned.setAttribute('aria-expanded','true');
     });
   }
+  // Zavírat oba panely po aktivaci jakékoliv navigační položky.
   original.addEventListener('click',function(ev){
-    if(ev.target.closest('a[href^="#"]')){setContents(false);setOpen(false);}
+    if(ev.target.closest('a,button,[role="button"]')){setOpen(false);}
+  });
+  // Ovládací akce: provést původní click handler a následně panel zavřít.
+  nav.addEventListener('click',function(ev){
+    var action=ev.target.closest('button,a,[role="button"]');
+    if(!action)return;
+    if(action.getAttribute('aria-controls')==='baliLeftNavSection')return;
+    setOpen(false);
   });
   document.addEventListener('keydown',function(ev){if(ev.key==='Escape'){setContents(false);setOpen(false);}});
   document.addEventListener('pointerdown',function(ev){
@@ -24319,11 +24331,14 @@ html body:not(.pres-on) #floatingMenuBtn{
  z-index:2147483001!important;
 }
 html body:not(.pres-on) #v29BottomTab{
- transform:translateY(-50%)!important;
+ top:calc(50% - 120px)!important;
+ transform:none!important;
+ z-index:2147483003!important;
 }
 html body:not(.pres-on) #floatingMenuBtn{
- top:calc(50% + 64px)!important; /* výška 112/2 + mezera 8 px; bez nepodporovaného dělení v calc() */
+ top:calc(50% + 8px)!important;
  transform:none!important;
+ z-index:2147483002!important;
 }
 html body:not(.pres-on) #floatingMenuBtn:hover{transform:none!important}
 html body:not(.pres-on) #floatingMenuBtn span:first-child{
@@ -24338,7 +24353,8 @@ html body #baliLeftNavSection:not([hidden]){display:block!important}
 html body.pres-on #floatingMenuBtn{display:none!important}
 @media(max-width:600px){
  :root{--bali-tab-height:96px;--bali-tab-gap:6px}
- html body:not(.pres-on) #floatingMenuBtn{top:calc(50% + 54px)!important;} /* 96/2 + 6 */
+ html body:not(.pres-on) #v29BottomTab{top:calc(50% - 102px)!important;}
+ html body:not(.pres-on) #floatingMenuBtn{top:calc(50% + 6px)!important;}
  html body:not(.pres-on) #v29BottomTab,
  html body:not(.pres-on) #floatingMenuBtn{
   width:38px!important;min-width:38px!important;max-width:38px!important;
