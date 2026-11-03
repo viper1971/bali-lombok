@@ -70,3 +70,15 @@ Stejná ochrana byla rozšířena na fotografické náhledy s více kandidáty: 
 - Nově 7 statických testů; prohlížečová regrese má běžet také ve Firefoxu a WebKitu. Mobilní WebKit má zapnuté isMobile/hasTouch.
 - Přidán skutečný síťový smoke test Leaflet, Google Fonts, ECB/Frankfurter, Wikimedia a základních výpočtů při živém připojení. Odděleně testuje lokální funkčnost při úplném výpadku externích CDN.
 - Výsledek těchto nových běhů je uveden v PR; do úspěšného běhu nejde o potvrzenou kompatibilitu.
+
+
+## Přechod mezi verzemi a obnova map
+
+- Regresní test nejprve selhal na `upgrade lost offline photo`: stará verze cache obsahovala i média a při aktivaci nové verze se ztratila. Nově je stabilní runtime cache oddělená od kódu/HTML; starý kód se nekopíruje.
+- Migrace z předchozích verzí vlastního scope a ze způsobilých položek původní cache. Mazání následuje až po úspěšném kopírování. Testované zachování novějšího runtime záznamu, vynechání HTML/JS, zachování vnořeného scope a původní sdílené cache, zachování starých dat při chybě kvóty.
+- Opraveno rozpoznání `tile.openstreetmap.org` bez subdomény; test 603 importovaných dlaždic potvrzuje limit 600.
+- Skutečná výměna starého a nového service workeru v prohlížeči, následně reload bez sítě/serveru a čtení uložené fotografie, původní legacy fotografie a API odpovědi. Spouští se ve všech třech enginech.
+- Načítání Leaflet musí počkat i na CSS. Jednotkové testy potvrzují souběžné volání, výpadek JS, výpadek CSS po úspěšném JS, opakovaný pokus bez druhého stahování JS a zotavení po timeoutu. Živý test při dostupné CDN ověřuje skutečné otevření mapy po předchozím výpadku, bez duplikovaných tagů.
+- Aktuální výsledky těchto kontrol a případná omezení jsou uvedené v PR #2.
+
+Druhý reprodukovaný problém: síťově načtené HTML nové verze přepisovalo offline fallback staršího kompletního buildu. Jednotkový test nejprve selhal na `a new HTML release replaced the complete installed shell`. Builder nyní vkládá marker verze; worker při instalaci kontroluje shodu HTML s verzí a při běžné navigaci neukládá cizí build přes kompletní fallback. Test potvrzuje zachování fallbacku i odmítnutí a úklid neodpovídající instalace bez smazání aktivní verze.

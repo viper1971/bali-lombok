@@ -66,3 +66,6 @@ worker = (ROOT / 'src/sw.js').read_text()
 shell = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'transportData.js'] + [m['output'] for m in manifest]
 version = hashlib.sha256((source + worker + ''.join((ROOT / p).read_text() for p in shell if p.endswith(('.js','.json')))).encode()).hexdigest()[:16]
 (ROOT / 'sw.js').write_text('const VERSION = '+json.dumps(version)+';\nconst SHELL = '+json.dumps(shell)+';\n'+worker)
+
+# Version marker prevents mixing cached HTML with a different release's assets.
+(ROOT / 'index.html').write_text(source.replace('<meta charset="UTF-8">', '<meta charset="UTF-8">\n    <meta name="bali-build" content="' + version + '">', 1))

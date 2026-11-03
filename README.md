@@ -43,3 +43,13 @@ CSS výstupy odstraňují pouze formátovací bílé znaky a samostatné koment�
 Kompatibilita: `BROWSER_ENGINE=firefox npm run test:browser` nebo `BROWSER_ENGINE=webkit npm run test:browser`. CI instaluje příslušné prohlížeče a používá stejný výchozí checkout. Mobilní WebKit zapíná dotykový mobilní režim. Nejde o fyzický iPhone/Safari.
 
 `node tests/live.cjs` kontroluje živé veřejné CDN/API a základní provoz webu. Neukládá ani neodesílá formuláře. Výpadky jednotlivých cizích služeb jsou v reportu oddělené od funkčnosti místní aplikace; navíc se ověřuje deterministický výpadek všech externích zdrojů.
+
+### Offline obsah při aktualizaci
+
+Kód a HTML jsou v cache s verzí buildu, fotografie, písma a veřejná data v oddělené stabilní runtime cache. Aktivace nejdřív převede způsobilý obsah předchozí verze a teprve potom smaže její kód. Umí načíst odpovídající obsah také z původních `cesta-offline-v*` a `cesta-tiles-v1`; sdílené původní cache nemaže. Cache vnořeného webu se nemaže. Při selhání kopírování zůstanou původní data zachovaná. Mapové dlaždice mají limit 600 včetně základního hostu `tile.openstreetmap.org`.
+
+`node tests/upgrade.cjs` ověřuje skutečnou výměnu workeru, zachování médií a API dat, oddělení starého HTML/JS a reload bez dostupného serveru. Lze přidat `BROWSER_ENGINE=firefox` nebo `webkit`.
+
+Načítání Leaflet čeká na skript i stylesheet. Selhání odstraní dočasné elementy, uvolní společný promise a dovolí další pokus; existuje časový limit 12 s. Návrat připojení obnoví sledování viditelnosti map.
+
+HTML má generovaný marker `bali-build`. Worker při instalaci vyžaduje shodu markeru s verzí; nověji načtené HTML se může zobrazit online, ale nepřepíše offline fallback jiné kompletní verze. Proto upravovat `src/index.html` a spouštět build, neupravovat generovaný marker ručně.
