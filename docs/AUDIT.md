@@ -26,6 +26,7 @@ Původní CSS i JavaScript kromě dvou cílených oprav zůstávají obsahově z
 
 - 6/6 statických testů: opakovatelnost buildu, zachování ID/obsahu, pořadí zdrojů, existence souborů, syntaxe všech 65 původních JS + workeru + transportních dat, úplnost offline shellu.
 - Test service workeru: shell, izolované mazání cache, síť/offline/HTTP 503, zápisy na pozadí a validace precache – prošel. Jde o simulaci Cache API, nikoli důkaz chování konkrétního prohlížeče.
+- Syntaxe inline JavaScriptu vedlejších stránek: `Index2.html` 45 bloků, `test.html` 32 bloků, `skola.html` 0 bloků; vše prošlo.
 - Vstupní HTML nemá duplicitní ID ani chybějící místní statické zdroje.
 - 47/49 obrázků má lazy loading; zbývající jsou měřicí pixel a prázdný fullscreen náhled. Nezměněno.
 
@@ -33,7 +34,9 @@ Původní CSS i JavaScript kromě dvou cílených oprav zůstávají obsahově z
 
 Lokální Chrome nelze spustit: systém odmítá socket pro process singleton (`Operation not permitted`). Připraven workflow pro skutečný Chromium v GitHub Actions: desktop/mobil, počáteční rozpočet a všechny úrovně jídla proti výchozímu PR, ukládání volby, menu/obsah/přehled, hamburger, zámky, hledání a offline reload. Snímky slouží k vizuální kontrole; automatická pixelová shoda se netvrdí.
 
-**Dokud není workflow úspěšný, není celková regrese potvrzená a PR má zůstat draft.** Testy pokrývají vyjmenované scénáře, nikoli všechny kombinace každé volby. Fyzický Android, iOS/Safari, externí mapy/API a ruční kontrola snímků zůstávají samostatným ověřením.
+**První prohlížečová sada prošla v GitHub Actions:** https://github.com/viper1971/bali-lombok/actions/runs/41608914479 (commit `3d0acaf`). Mobil i desktop: shodný výchozí rozpočet 47 612 Kč, shoda všech úrovní jídla proti PR #1, žádné pageerror v žádné ze čtyř stránek. Navigace, zámky, hledání, persistence a offline reload prošly. Následující rozšíření testů navíc pokrývá všechny aerolinky, všechny hotelové varianty, pět rozpočtových režimů, téma a prezentaci.
+
+Zkontrolovány snímky úvodního viewportu pro oba rozměry. Rozdíly odpovídají odpočtu času a QR kódu jiné testovací adresy; rozložení je zachované. Toto není vizuální kontrola všech rozbalených sekcí. Snímky: https://github.com/viper1971/bali-lombok/actions/runs/41608914479/artifacts/13218346267 Testy pokrývají vyjmenované scénáře, nikoli všechny kombinace každé volby. Fyzický Android, iOS/Safari, externí mapy/API a ruční kontrola snímků zůstávají samostatným ověřením.
 
 ## Omezení a další práce
 

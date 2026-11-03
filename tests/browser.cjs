@@ -37,6 +37,15 @@ function serve(dir,port){const p=spawn('python3',['-m','http.server',String(port
    const budgets=[];
    for(const level of levels){await page.evaluate(l=>TRIP.setLevel(l),level);await page.waitForTimeout(250);budgets.push(await state());}
    assert(new Set(budgets.map(s=>s.budget)).size>1,'food changes budget');
+   const variants=[];
+   const airlines=await page.locator('#heroFlightSelect option').evaluateAll(nodes=>nodes.map(n=>n.value));
+   for(const airline of airlines){await page.evaluate(v=>setFlightAirline(v),airline);await page.waitForTimeout(150);variants.push({airline,state:await state()});}
+   assert(new Set(variants.map(v=>v.state.budget)).size>1,'airline changes budget');
+   const hotels=await page.evaluate(()=>Object.entries(hotelCatalog).flatMap(([stage,data])=>Object.keys(data.options).map(variant=>({stage,variant}))));
+   for(const hotel of hotels){await page.evaluate(h=>userSelectHotel(h.stage,h.variant),hotel);await page.waitForTimeout(150);variants.push({hotel,state:await state()});}
+   for(const mode of ['planA','planB','planC','planSandy','custom']){await page.evaluate(m=>setBudgetMode(m,true),mode);await page.waitForTimeout(150);variants.push({mode,state:await state()});}
+   const oldTheme=await page.evaluate(()=>document.documentElement.dataset.theme);await page.evaluate(()=>toggleTheme());assert.notEqual(await page.evaluate(()=>document.documentElement.dataset.theme),oldTheme);await page.evaluate(()=>toggleTheme());
+   await page.evaluate(()=>luxPresent());assert(await page.locator('body').evaluate(n=>n.classList.contains('pres-on')));await page.evaluate(()=>luxPresentStop());assert(!(await page.locator('body').evaluate(n=>n.classList.contains('pres-on'))));
    const chosen=levels.at(-1);await page.reload();await page.waitForTimeout(3500);assert.equal(await page.evaluate(()=>TRIP.level()),chosen,'food choice persists');
    await page.locator('#uxSearchBtn').evaluate(n=>n.click());await page.locator('#uxSearchInput').fill('Ubud');await page.waitForTimeout(500);
    assert(await page.locator('.uxResult').count()>0,'search results');
@@ -46,15 +55,15 @@ function serve(dir,port){const p=spawn('python3',['-m','http.server',String(port
     await page.locator('#uxSearchInput').fill('AuditUniqueSearchTarget');await page.waitForTimeout(500);
     assert.equal(await page.locator('.uxResultLocked').count(),0);await page.locator('.uxResult').first().click();assert.equal(await page.locator('mark.uxFoundMark').textContent(),'AuditUniqueSearchTarget');
    }
-   snapshots.push({label,initial,budgets,errors});await ctx.close();
+   snapshots.push({label,initial,budgets,variants,errors});await ctx.close();
   }
-  if(snapshots.length===2){assert.deepEqual(snapshots[1].initial,snapshots[0].initial);assert.deepEqual(snapshots[1].budgets,snapshots[0].budgets);assert.deepEqual(snapshots[1].errors,snapshots[0].errors);}
+  if(snapshots.length===2){assert.deepEqual(snapshots[1].initial,snapshots[0].initial);assert.deepEqual(snapshots[1].budgets,snapshots[0].budgets);assert.deepEqual(snapshots[1].variants,snapshots[0].variants);assert.deepEqual(snapshots[1].errors,snapshots[0].errors);}
   report.push({viewport,snapshots});
  }
  // Offline first load, full shell, and reload without network.
  const context=await browser.newContext();await context.route('**/*',r=>r.request().url().startsWith(current)?r.continue():r.abort());const p=await context.newPage();await p.goto(current,{waitUntil:'domcontentloaded'});await p.evaluate(()=>navigator.serviceWorker.ready);await p.reload();await p.waitForTimeout(3500);
  const before=await p.locator('#bxGrand_pers').textContent();await context.setOffline(true);await p.reload();await p.waitForTimeout(3500);assert.equal(await p.locator('#bxGrand_pers').textContent(),before);assert(await p.evaluate(()=>!!window.TRIP));await context.close();
  fs.writeFileSync('test-results/browser.json',JSON.stringify({passed:true,report},null,2));
- console.log('PASS: desktop/mobile regression, navigation, locking, food calculations, persistence, search and offline reload');
+ console.log('PASS: desktop/mobile regression, navigation, locking, food/flight/hotel calculations, budget modes, theme, presentation, persistence, search and offline reload');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1}).finally(()=>servers.forEach(p=>p.kill()));
