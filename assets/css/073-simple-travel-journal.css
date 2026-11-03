@@ -1,4 +1,10 @@
 /* Isolated travel journal: no selector changes the detailed page. */
+html body.simple-on #baliUnifiedRail,
+html body.simple-on #baliMobileHamburger,
+html body.simple-on #vipFloatingBar,
+html body.simple-on #uxSearchBtn,
+html body.simple-on #fsAsk,
+html body.simple-on #bttBtn { display: none !important; }
 #simplePage.sj-page{--sj-bg:#f4f7f1;--sj-paper:#fff;--sj-ink:#173d35;--sj-muted:#587066;--sj-line:#dbe5dc;--sj-accent:#126b59;--sj-soft:#e9f0e5;background:var(--sj-bg);color:var(--sj-ink);font:400 16px/1.65 'Plus Jakarta Sans',system-ui,sans-serif;scroll-behavior:smooth;overscroll-behavior:contain}
 [data-theme="dark"] #simplePage.sj-page{--sj-bg:#112620;--sj-paper:#19332b;--sj-ink:#eff5ec;--sj-muted:#b8cdbd;--sj-line:#385147;--sj-accent:#a5debd;--sj-soft:#243f33}
 #simplePage.sj-page *{box-sizing:border-box}

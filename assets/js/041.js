@@ -233,8 +233,9 @@
 
         function updateBrowserUrlSilently() {
             try {
-                const newUrl = buildShareableUrl();
-                window.history.replaceState({ path: newUrl }, '', newUrl);
+                const newUrl = new URL(buildShareableUrl());
+                if (window.__wantSimple || document.body.classList.contains('simple-on')) newUrl.searchParams.set('jednoduse', '1');
+                window.history.replaceState({ path: newUrl.href }, '', newUrl.href);
             } catch (e) {}
         }
 

@@ -224,11 +224,11 @@
     "bytes": 926
   },
   {
-    "output": "assets/build/js-305cbd44ec4cb5b1.js",
+    "output": "assets/build/js-45fb1d77e9fbaa91.js",
     "sources": [
       "assets/js/041.js"
     ],
-    "bytes": 67862
+    "bytes": 67992
   },
   {
     "output": "assets/build/js-fcd994c179247e9e.js",
@@ -280,11 +280,11 @@
     "bytes": 20034
   },
   {
-    "output": "assets/build/js-3a3cbf88ed12480d.js",
+    "output": "assets/build/js-89cac0ee9affba59.js",
     "sources": [
       "assets/js/049.js"
     ],
-    "bytes": 140673
+    "bytes": 140888
   },
   {
     "output": "assets/build/js-d597c7bc58059231.js",
@@ -616,10 +616,10 @@
     "bytes": 1776
   },
   {
-    "output": "assets/build/css-deb90e3f8e24a2ec.css",
+    "output": "assets/build/css-92b6cafa3d3dac39.css",
     "sources": [
       "assets/css/073-simple-travel-journal.css"
     ],
-    "bytes": 12830
+    "bytes": 13062
   }
 ]

@@ -1211,6 +1211,8 @@ function luxQRSvg(text, px) {
         var v = typeof on === 'boolean' ? on : !el.classList.contains('is-open');
         if (v) { try { el.innerHTML = spBuild(); } catch (err) { el.innerHTML = '<div class="sp-wrap"><h1>Jednoduchá stránka se nepodařila sestavit</h1><button type="button" class="sp-btn2 primary" data-sp="close">← Celá stránka</button></div>'; try { console.error(err); } catch (e) {} } el.scrollTop = 0; }
         el.classList.toggle('is-open', v); document.body.classList.toggle('simple-on', v);
+        window.__wantSimple = v;
+        try { var simpleUrl = new URL(location.href); if (v) simpleUrl.searchParams.set('jednoduse', '1'); else simpleUrl.searchParams.delete('jednoduse'); history.replaceState(null, '', simpleUrl.href); } catch (e) {}
         if (v) { if (typeof window.toggleMenuModal === 'function' && $('menuModalOverlay') && $('menuModalOverlay').classList.contains('open')) window.toggleMenuModal(); var h = el.querySelector('h1'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
     };
     function addSimpleButtons() {
