@@ -23,9 +23,18 @@ jobs:
         with:
           ref: 457040d35ca72436f02a7a03b524cdb7fb6c5b50
           path: baseline
+      - uses: actions/checkout@v4
+        with:
+          ref: f0f18d02666bcc80708fc9ba3cc20d1c8825fe3f
+          path: scroll-baseline
+      - run: node tests/section-scroll.cjs
+        env:
+          SCROLL_BASELINE: "1"
+          SCROLL_TARGET_DIR: scroll-baseline
       - run: npm run test:browser
         env:
           BASELINE_DIR: baseline
+      - run: node tests/section-scroll.cjs
       - run: node tests/extended.cjs
         env:
           BASELINE_DIR: baseline
@@ -59,6 +68,9 @@ jobs:
       - run: npm run test:browser
         env:
           BASELINE_DIR: baseline
+          BROWSER_ENGINE: ${{ matrix.engine }}
+      - run: node tests/section-scroll.cjs
+        env:
           BROWSER_ENGINE: ${{ matrix.engine }}
       - run: node tests/upgrade.cjs
         env:

@@ -202,10 +202,10 @@
         c.querySelector('.pc-bar i').style.width = (len ? Math.round(n / len * 100) : 0) + '%';
         c.classList.toggle('is-done', !!len && n >= len);
     };
-    function setPart(p, open) {
+    function setPart(p, open, preserveScroll) {
         if (!p) return;
         if (!open) {   /* zavírání části zavře i otevřenou sekci uvnitř, ať nezůstane „přilepená“ hlavička skryté sekce */
-            [].forEach.call(p.querySelectorAll('.lux-fold.is-open'), function (f) { if (typeof window.luxToggle === 'function') window.luxToggle(f.id); });
+            [].forEach.call(p.querySelectorAll('.lux-fold.is-open'), function (f) { if (typeof window.luxToggle === 'function') window.luxToggle(f.id, { preserveScroll: !!preserveScroll }); });
         }
         p.classList.toggle('is-open', open);
         var h = p.querySelector(':scope > .lux-part-head'); if (h) h.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -215,13 +215,13 @@
         if (!p || p.classList.contains('is-open')) return;
         var flightPick = document.getElementById('flightPick');
         if (flightPick && flightPick.open) flightPick.open = false;
-        var h = p.querySelector(':scope > .lux-part-head'), before = h ? h.getBoundingClientRect().top : 0, closed = false;
-        allParts().forEach(function (o) { if (o !== p && o.classList.contains('is-open')) { setPart(o, false); closed = true; } });
-        if (closed && keepPos && h) {   /* zavřená část nad námi posunula obsah: hlavička otevírané části zůstane na místě */
-            var shift = h.getBoundingClientRect().top - before;
-            if (Math.abs(shift) > 1) window.scrollTo({ top: Math.max(0, window.scrollY + shift), behavior: 'instant' });
+        var h = p.querySelector(':scope > .lux-part-head');
+        function change() {
+            allParts().forEach(function (o) { if (o !== p && o.classList.contains('is-open')) setPart(o, false, true); });
+            setPart(p, true);
         }
-        setPart(p, true);
+        if (keepPos && h) window.luxPreserveHeader(h, change);
+        else change();
         try { localStorage.setItem(PKEY, p.id); } catch (e) {}
     }
     window.luxPartFor = function (el) { var p = el && el.closest ? el.closest('.lux-part') : null; if (p) openPart(p, false); };

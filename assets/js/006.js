@@ -15,33 +15,58 @@
                 maps.forEach(function (m) { try { m.invalidateSize(); } catch (e) {} });
                 try { window.dispatchEvent(new Event('resize')); } catch (e) {}
             }
+            // Keep a clicked header fixed while the old and new content change.
+            // Native scroll anchoring must not compensate for the same change.
+            var anchorTimer = null, anchorStyle = null;
+            window.luxPreserveHeader = function (header, change) {
+                var root = document.documentElement;
+                var before = header.getBoundingClientRect().top;
+                if (!anchorStyle) anchorStyle = {
+                    value: root.style.getPropertyValue('overflow-anchor'),
+                    priority: root.style.getPropertyPriority('overflow-anchor')
+                };
+                clearTimeout(anchorTimer);
+                root.style.setProperty('overflow-anchor', 'none', 'important');
+                try {
+                    change();
+                    // Measure after both mutations, including collapse scroll clamping.
+                    var shift = header.getBoundingClientRect().top - before;
+                    if (Math.abs(shift) > 0.5) window.scrollTo({
+                        top: Math.max(0, window.scrollY + shift), behavior: 'instant'
+                    });
+                } finally {
+                    anchorTimer = setTimeout(function () {
+                        if (anchorStyle.value) root.style.setProperty('overflow-anchor', anchorStyle.value, anchorStyle.priority);
+                        else root.style.removeProperty('overflow-anchor');
+                        anchorStyle = null; anchorTimer = null;
+                    }, 600);
+                }
+            };
             function setState(f, open, instant) {
                 if (!f) return;
-                /* vždy jen jedna otevřená sekce; ostatní se zavřou samy (vnořené podrobnosti uvnitř otevřené sekce se netýkají) */
-                if (open) {
-                    var flightPick = document.getElementById('flightPick');
-                    if (flightPick && flightPick.open) flightPick.open = false;
-                    if (window.luxPartFor) window.luxPartFor(f);
-                    var before = f.getBoundingClientRect().top, closedAny = false;
-                    [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (o) {
-                        if (o !== f && !o.contains(f) && !f.contains(o)) { setState(o, false, true); closedAny = true; }
-                    });
-                    if (closedAny && !instant) {
-                        /* zavřená sekce nad námi posunula obsah: vrátíme stránku tak, aby otevíraná hlavička zůstala pod prstem */
-                        var shift = f.getBoundingClientRect().top - before;
-                        if (Math.abs(shift) > 1) window.scrollTo({ top: Math.max(0, window.scrollY + shift), behavior: 'instant' });
+                function change() {
+                    /* vždy jen jedna otevřená sekce; ostatní se zavřou samy (vnořené podrobnosti uvnitř otevřené sekce se netýkají) */
+                    if (open) {
+                        var flightPick = document.getElementById('flightPick');
+                        if (flightPick && flightPick.open) flightPick.open = false;
+                        if (window.luxPartFor) window.luxPartFor(f);
+                        [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (o) {
+                            if (o !== f && !o.contains(f) && !f.contains(o)) { setState(o, false, true); }
+                        });
                     }
+                    var body = f.querySelector(':scope > .lux-fold-body');
+                    var btn = f.querySelector(':scope > .lux-fold-h .lux-fold-btn');
+                    if (instant) f.classList.add('no-anim');
+                    f.classList.toggle('is-open', open);
+                    if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    if (body) { if (open) body.removeAttribute('inert'); else body.setAttribute('inert', ''); }
+                    clearTimeout(f._t);
+                    if (open) { f._t = setTimeout(function () { f.classList.add('is-settled'); refresh(); }, instant ? 30 : 480); }
+                    else { f.classList.remove('is-settled'); }
+                    if (instant) requestAnimationFrame(function () { requestAnimationFrame(function () { f.classList.remove('no-anim'); }); });
                 }
-                var body = f.querySelector(':scope > .lux-fold-body');
-                var btn = f.querySelector(':scope > .lux-fold-h .lux-fold-btn');
-                if (instant) f.classList.add('no-anim');
-                f.classList.toggle('is-open', open);
-                if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-                if (body) { if (open) body.removeAttribute('inert'); else body.setAttribute('inert', ''); }
-                clearTimeout(f._t);
-                if (open) { f._t = setTimeout(function () { f.classList.add('is-settled'); refresh(); }, instant ? 30 : 480); }
-                else { f.classList.remove('is-settled'); }
-                if (instant) requestAnimationFrame(function () { requestAnimationFrame(function () { f.classList.remove('no-anim'); }); });
+                if (open && !instant) window.luxPreserveHeader(f, change);
+                else change();
             }
             window.luxToggle = function (id) {
                 var f = document.getElementById(id);
@@ -139,4 +164,4 @@
             if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
             window.addEventListener('load', function () { syncMeta(); refresh(); });
         })();
-    
+
