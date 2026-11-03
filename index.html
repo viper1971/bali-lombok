@@ -24862,11 +24862,11 @@ html body:not(.pres-on) #baliProgressTab{
 }
 html body:not(.pres-on) #floatingMenuBtn{top:calc(var(--bali-edge-top) + var(--bali-edge-step))!important}
 html body:not(.pres-on) #baliProgressTab{top:calc(var(--bali-edge-top) + 2 * var(--bali-edge-step))!important}
-/* Právě otevřenou záložku není třeba ukazovat: zůstává ovladač zavření v panelu. */
-html body.v29-bottom-open:not(.bali-content-mode):not(.bali-progress-mode) #v29BottomTab,
-html body.v29-bottom-open.bali-content-mode #floatingMenuBtn,
-html body.v29-bottom-open.bali-progress-mode #baliProgressTab{
- display:none!important;visibility:hidden!important;pointer-events:none!important;
+/* Každá ze sedmi akcí je dostupná v každém otevřeném panelu, včetně jeho vlastní záložky. */
+html body.v29-bottom-open:not(.pres-on) #v29BottomTab,
+html body.v29-bottom-open:not(.pres-on) #floatingMenuBtn,
+html body.v29-bottom-open:not(.pres-on) #baliProgressTab{
+ display:flex!important;visibility:visible!important;pointer-events:auto!important;
 }
 /* Zbylé záložky musejí zůstat dostupné i při otevření libovolného panelu. */
 html body.v29-bottom-open:not(.pres-on) #v29BottomTab:not(.unused),
