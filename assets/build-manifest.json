@@ -399,11 +399,11 @@
     "bytes": 661
   },
   {
-    "output": "assets/build/js-62ca2312dc839ddf.js",
+    "output": "assets/build/js-9e8b096b87954574.js",
     "sources": [
       "assets/js/067-simple-travel-journal.js"
     ],
-    "bytes": 10359
+    "bytes": 8533
   },
   {
     "output": "assets/build/css-613ec9680ad29884.css",
@@ -616,10 +616,10 @@
     "bytes": 1776
   },
   {
-    "output": "assets/build/css-2a03fd70e31cef26.css",
+    "output": "assets/build/css-945d8987ec546301.css",
     "sources": [
       "assets/css/073-simple-travel-journal.css"
     ],
-    "bytes": 19062
+    "bytes": 18502
   }
 ]
