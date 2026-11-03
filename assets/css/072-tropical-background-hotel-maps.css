@@ -66,3 +66,34 @@ html[data-theme="light"] .hero .cd-card .cd-key { color: #edf7f0 !important; }
 @media (max-width: 600px) {
   .hotel-location-map iframe { height: 230px; }
 }
+.has-google-frame { position: relative; }
+.google-frame-recovery {
+  position: absolute;
+  left: 8px;
+  bottom: 42px;
+  z-index: 4;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: calc(100% - 16px);
+  padding: 5px;
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--text-main);
+}
+.google-frame-recovery button,
+.google-frame-recovery a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--primary);
+  font: inherit;
+  font-size: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.hotel-location-map > .google-frame-recovery { position: static; margin: 6px; }

@@ -21,11 +21,11 @@
     "bytes": 375
   },
   {
-    "output": "assets/build/js-607b62c35a5f4f9a.js",
+    "output": "assets/build/js-562a77ebd1e2ed4a.js",
     "sources": [
       "assets/js/004.js"
     ],
-    "bytes": 672
+    "bytes": 671
   },
   {
     "output": "assets/build/js-53abd70116987b5e.js",
@@ -224,11 +224,11 @@
     "bytes": 926
   },
   {
-    "output": "assets/build/js-f3deaf036a6b855c.js",
+    "output": "assets/build/js-305cbd44ec4cb5b1.js",
     "sources": [
       "assets/js/041.js"
     ],
-    "bytes": 67734
+    "bytes": 67862
   },
   {
     "output": "assets/build/js-fcd994c179247e9e.js",
@@ -390,6 +390,13 @@
       "assets/js/065-bali-v66-mobile-hamburger-logic.js"
     ],
     "bytes": 1661
+  },
+  {
+    "output": "assets/build/js-6720e4f9281ee337.js",
+    "sources": [
+      "assets/js/066-google-frame-recovery.js"
+    ],
+    "bytes": 2041
   },
   {
     "output": "assets/build/css-613ec9680ad29884.css",
@@ -595,10 +602,10 @@
     "bytes": 2938
   },
   {
-    "output": "assets/build/css-3660ecbde60823a2.css",
+    "output": "assets/build/css-7d3b19357b760902.css",
     "sources": [
       "assets/css/072-tropical-background-hotel-maps.css"
     ],
-    "bytes": 1776
+    "bytes": 2390
   }
 ]
