@@ -1,0 +1,71 @@
+
+/* PREMIUM v45: kompaktní hlavičky hlavních částí I–V */
+.lux-part { margin-top: 22px !important; }
+.lux-part > .lux-part-head,
+.lux-part:not(.is-open) > .lux-part-head {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  min-height: 94px !important;
+  height: auto !important;
+  padding: 12px 17px !important;
+  gap: 13px !important;
+  margin-bottom: 12px !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+.lux-part:not(.is-open) > .lux-part-head { margin-bottom: 0 !important; }
+.lux-part-head > .lux-part-no {
+  width: 48px !important; height: 48px !important;
+  min-width: 48px !important; flex: 0 0 48px !important;
+  font-size: 1.33rem !important;
+  line-height: 1 !important;
+  border-radius: 50% !important;
+}
+.lux-part-head > div:not(.lux-part-meta) { flex: 1 1 auto !important; min-width: 0 !important; }
+.lux-part-head .lux-part-eyebrow { font-size: 10px !important; line-height: 1.25 !important; margin: 0 0 3px !important; letter-spacing: .015em !important; }
+.lux-part-head .lux-part-title { font-size: clamp(18px,1.7vw,25px) !important; line-height: 1.16 !important; margin: 0 !important; letter-spacing: -.025em !important; }
+.lux-part-head .lux-part-sub { font-size: 11.5px !important; line-height: 1.35 !important; margin: 4px 0 0 !important; max-width: 100ch !important; }
+.lux-part-head .lux-part-meta { width: auto !important; flex: 0 0 auto !important; margin-left: auto !important; gap: 9px !important; align-items: center !important; }
+.lux-part-head .lux-part-count { min-width: 104px !important; padding: 7px 10px !important; gap: 2px !important; border-radius: 11px !important; border-width: 1px !important; }
+.lux-part-head .lux-part-count .pc-a { font-size: 10px !important; }
+.lux-part-head .lux-part-count .pc-a b { font-size: 12px !important; }
+.lux-part-head .lux-part-count .pc-b { font-size: 10px !important; }
+.lux-part-head .lux-part-count .pc-b b { font-size: 15px !important; }
+.lux-part-head .lux-part-count .pc-bar { height: 3px !important; }
+.lux-part-head .lux-part-chev { width: 30px !important; height: 30px !important; flex: 0 0 30px !important; font-size: 12px !important; border-width: 1px !important; }
+@media (max-width: 800px) {
+  .lux-part { margin-top: 16px !important; }
+  .lux-part > .lux-part-head,
+  .lux-part:not(.is-open) > .lux-part-head {
+    min-height: 0 !important;
+    padding: 10px 11px !important;
+    gap: 9px !important;
+    border-radius: 14px !important;
+    margin-bottom: 10px !important;
+  }
+  .lux-part:not(.is-open) > .lux-part-head { margin-bottom: 0 !important; }
+  .lux-part-head > .lux-part-no { width: 35px !important; height: 35px !important; min-width: 35px !important; flex-basis: 35px !important; font-size: 1rem !important; }
+  .lux-part-head .lux-part-title { font-size: clamp(15px,4vw,18px) !important; line-height: 1.18 !important; text-shadow: 0 1px 4px #000,0 0 3px #000 !important; }
+  .lux-part-head .lux-part-eyebrow { font-size: 9px !important; line-height: 1.2 !important; margin-bottom: 2px !important; text-shadow: 0 1px 3px #000 !important; }
+  .lux-part-head .lux-part-sub { font-size: 10px !important; line-height: 1.3 !important; margin-top: 3px !important; display: -webkit-box !important; -webkit-box-orient: vertical !important; -webkit-line-clamp: 2 !important; overflow: hidden !important; text-shadow: 0 1px 3px #000 !important; }
+  .lux-part-head .lux-part-meta { flex: 0 0 auto !important; width: auto !important; margin-left: 0 !important; display: flex !important; flex-wrap: nowrap !important; justify-content: flex-end !important; gap: 5px !important; }
+  .lux-part-head .lux-part-count { min-width: 0 !important; width: 60px !important; padding: 5px 6px !important; display: grid !important; grid-template-columns: 1fr !important; gap: 2px !important; text-align: center !important; }
+  .lux-part-head .lux-part-count .pc-a { font-size: 9px !important; }
+  .lux-part-head .lux-part-count .pc-a b { font-size: 10px !important; }
+  .lux-part-head .lux-part-count .pc-b { font-size: 9px !important; text-align: center !important; }
+  .lux-part-head .lux-part-count .pc-b b { font-size: 12px !important; }
+  .lux-part-head .lux-part-count .pc-bar { grid-column: 1 !important; height: 2px !important; }
+  .lux-part-head .lux-part-chev { width: 26px !important; height: 26px !important; flex-basis: 26px !important; font-size: 10px !important; }
+}
+@media (max-width: 390px) {
+  .lux-part-head > .lux-part-no { width: 30px !important; height: 30px !important; min-width: 30px !important; flex-basis: 30px !important; font-size: .88rem !important; }
+  .lux-part-head .lux-part-title { font-size: 14px !important; }
+  .lux-part-head .lux-part-count { width: 51px !important; }
+  .lux-part-head .lux-part-chev { width: 23px !important; height: 23px !important; flex-basis: 23px !important; }
+}
+

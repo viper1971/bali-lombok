@@ -1,0 +1,35 @@
+
+/* V7: pevná mřížka cen, jednotná výška tlačítek, žádné oříznutí textů. */
+@media (min-width: 701px) {
+ #vipFloatingBar.pm-merged { width:min(1510px,calc(100vw - 32px))!important;max-width:calc(100vw - 32px)!important;gap:clamp(10px,1.2vw,22px)!important;padding:12px 16px!important;box-sizing:border-box!important; }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails {display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center!important;gap:14px!important;flex:1 1 auto!important;min-width:0!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-info {display:grid!important;grid-template-columns:repeat(3,minmax(92px,1fr)) minmax(160px,1.45fr)!important;align-items:center!important;gap:0!important;width:100%!important;min-width:0!important;overflow:visible!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-price-block {display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;min-width:0!important;padding:0 12px!important;box-sizing:border-box!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-price-block:first-child {padding-left:0!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-label {white-space:normal!important;font-size:.65rem!important;line-height:1.3!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-val {font-size:clamp(.88rem,1.05vw,1.1rem)!important;line-height:1.3!important;white-space:normal!important;overflow-wrap:anywhere!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-sub {white-space:normal!important;overflow:visible!important;text-overflow:clip!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-price-block:nth-child(4) .vfb-val {font-size:clamp(.78rem,.95vw,1rem)!important;white-space:normal!important;overflow-wrap:break-word!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions {display:flex!important;align-items:center!important;gap:6px!important;}
+ #vipFloatingBar.pm-merged #premiumMergedNav {display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;flex-wrap:wrap!important;}
+ #vipFloatingBar.pm-merged .pm-nav-btn {height:44px!important;min-height:44px!important;box-sizing:border-box!important;line-height:1.2!important;}
+}
+@media (min-width:701px) and (max-width:1390px) {
+ #vipFloatingBar.pm-merged {flex-wrap:wrap!important;justify-content:center!important;row-gap:9px!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails {order:1!important;flex:1 1 100%!important;width:100%!important;grid-template-columns:minmax(0,1fr) auto!important;}
+ #vipFloatingBar.pm-merged #premiumMergedNav {order:2!important;flex:1 1 100%!important;justify-content:center!important;}
+}
+@media (min-width:701px) and (max-width:1050px) {
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-info {grid-template-columns:repeat(3,minmax(0,1fr)) minmax(130px,1.35fr)!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions {display:none!important;}
+}
+@media (max-width:700px) {
+ #vipFloatingBar.pm-merged {box-sizing:border-box!important;display:grid!important;grid-template-columns:minmax(74px,1fr) auto!important;align-items:center!important;column-gap:4px!important;row-gap:5px!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetSummary {grid-column:1!important;grid-row:1!important;min-width:0!important;}
+ #vipFloatingBar.pm-merged #premiumMergedNav {grid-column:2!important;grid-row:1!important;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:2px!important;min-width:0!important;}
+ #vipFloatingBar.pm-merged .pm-nav-btn {width:clamp(29px,8.1vw,38px)!important;min-width:0!important;min-height:42px!important;padding:3px 0!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails {grid-column:1/-1!important;grid-row:2!important;min-width:0!important;}
+ #vipFloatingBar.pm-merged.pm-expanded #premiumBudgetDetails .vfb-info {grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+ #vipFloatingBar.pm-merged.pm-expanded #premiumBudgetDetails .vfb-val,
+ #vipFloatingBar.pm-merged.pm-expanded #premiumBudgetDetails .vfb-sub {white-space:normal!important;overflow-wrap:anywhere!important;}
+}

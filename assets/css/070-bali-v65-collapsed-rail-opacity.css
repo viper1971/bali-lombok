@@ -1,0 +1,11 @@
+
+/* V zavřeném stavu zůstává sedm tlačítek funkčních, ale 80 % průhledných. */
+html body:not(.pres-on):not(.v29-bottom-open) #baliUnifiedRail {
+  opacity:.2!important;
+  transition:left .25s ease,opacity .2s ease!important;
+}
+html body:not(.pres-on):not(.v29-bottom-open) #baliUnifiedRail:hover,
+html body:not(.pres-on):not(.v29-bottom-open) #baliUnifiedRail:focus-within {
+  opacity:1!important;
+}
+html body.v29-bottom-open:not(.pres-on) #baliUnifiedRail {opacity:1!important}

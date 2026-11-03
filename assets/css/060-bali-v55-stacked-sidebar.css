@@ -1,0 +1,37 @@
+
+/* V55: skutečně svislý obsah v jediném levém panelu, bez absolutních překryvů. */
+html body:not(.pres-on) #vipFloatingBar.pm-merged {
+ display:flex!important;flex-flow:column nowrap!important;align-items:stretch!important;
+ justify-content:flex-start!important;gap:0!important;
+ overflow-x:hidden!important;overflow-y:auto!important;
+}
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #baliLeftBudgetHeader,
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #premiumBudgetDetails,
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #premiumMergedNav,
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #baliLeftNavSection{
+ position:relative!important;inset:auto!important;float:none!important;
+ transform:none!important;flex:0 0 auto!important;
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ overflow:visible!important;
+}
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #baliLeftBudgetHeader{order:0!important;margin:0 0 14px!important}
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #premiumBudgetDetails{order:1!important;margin:0 0 18px!important}
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #premiumMergedNav{order:2!important;margin:0 0 18px!important}
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #baliLeftNavSection{
+ order:3!important;display:block!important;visibility:visible!important;
+ padding:18px 0 0!important;margin:0!important;
+ border-top:2px solid var(--border)!important;
+}
+html body:not(.pres-on) #vipFloatingBar.pm-merged.v29-bottom-open > #baliLeftNavSection,
+html body.v29-bottom-open #vipFloatingBar.pm-merged > #baliLeftNavSection{display:block!important}
+html body #baliLeftNavSection #bottomNav,
+html body #baliLeftNavSection .bali-left-nav-heading{
+ position:relative!important;inset:auto!important;transform:none!important;
+ z-index:auto!important;
+}
+html body #baliLeftNavSection #bottomNav{
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+ width:100%!important;max-width:100%!important;gap:8px!important;
+}
+html body #menuModalOverlay{display:none!important;pointer-events:none!important}

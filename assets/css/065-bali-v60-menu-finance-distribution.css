@@ -1,0 +1,35 @@
+
+/* Živý graf nákladů v bočním MENU, bez duplicitních výpočtů. */
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #baliMenuFinanceChart{
+  display:block!important;position:relative!important;inset:auto!important;transform:none!important;
+ order:2!important;flex:0 0 auto!important;width:100%!important;min-width:0!important;
+ padding:14px 0!important;margin:0 0 14px!important;border-top:1px solid var(--border)!important;
+}
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #premiumMergedNav{order:3!important}
+html body:not(.pres-on) #vipFloatingBar.pm-merged > #baliLeftNavSection{order:4!important}
+html body.bali-content-mode #vipFloatingBar.pm-merged > #baliMenuFinanceChart{display:none!important}
+#baliMenuFinanceChart h3{margin:0 0 13px;font-size:1rem;color:var(--text-main);font-weight:800}
+#baliMenuFinanceChart .bali-menu-finance-body{min-width:0}
+#baliMenuFinanceChart .pf18-chart-body{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:14px!important;min-width:0!important}
+#baliMenuFinanceChart .pf18-donut{
+  flex:none!important;position:relative!important;align-self:center!important;
+ width:180px!important;height:180px!important;aspect-ratio:1!important;
+ border-radius:50%!important;display:grid!important;place-items:center!important;
+ background:var(--surface-hover);
+}
+#baliMenuFinanceChart .pf18-donut-center{
+ position:absolute;inset:18%;background:var(--surface)!important;
+ border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+ text-align:center;padding:5px;min-width:0;
+}
+#baliMenuFinanceChart .pf18-donut-center span{font-size:.57rem;font-weight:800;color:var(--text-muted)}
+#baliMenuFinanceChart .pf18-donut-center strong{font-size:1.05rem;color:var(--text-main);margin:6px 0;white-space:nowrap}
+#baliMenuFinanceChart .pf18-donut-center small{font-size:.55rem;color:var(--text-muted);line-height:1.25}
+#baliMenuFinanceChart .pf18-legend{display:flex!important;flex-direction:column;gap:9px;min-width:0}
+#baliMenuFinanceChart .pf18-legend-item{display:grid;grid-template-columns:10px minmax(0,1fr) auto;gap:5px 8px;align-items:center;font-size:.73rem}
+#baliMenuFinanceChart .pf18-legend-dot{width:10px;height:10px;border-radius:50%;display:block}
+#baliMenuFinanceChart .pf18-legend-label{min-width:0;color:var(--text-main);overflow-wrap:anywhere}
+#baliMenuFinanceChart .pf18-legend-value{font-weight:800;color:var(--text-main);white-space:nowrap}
+#baliMenuFinanceChart .pf18-legend-track{grid-column:2/4;height:5px;background:var(--surface-hover);border-radius:10px;overflow:hidden}
+#baliMenuFinanceChart .pf18-legend-fill{height:100%;border-radius:10px}
+@media print{#baliMenuFinanceChart{display:none!important}}

@@ -1,0 +1,9 @@
+
+.page-fs-holder{display:flex;justify-content:center;align-items:center;margin:12px auto;position:relative;z-index:20}
+.page-fs-hero{margin:4px auto 14px}
+.page-fs-content{margin:0 auto 16px}
+.page-fullscreen-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:10px 19px;border:1px solid rgba(255,255,255,.38);border-radius:12px;background:linear-gradient(135deg,#176b78,#124b61);color:#fff;font:800 .9rem/1.2 system-ui,sans-serif;letter-spacing:.2px;cursor:pointer;box-shadow:0 5px 16px rgba(0,0,0,.2);transition:transform .18s ease,filter .18s ease,box-shadow .18s ease}
+.page-fullscreen-btn:hover{filter:brightness(1.12);transform:translateY(-1px);box-shadow:0 7px 20px rgba(0,0,0,.25)}
+.page-fullscreen-btn:focus-visible{outline:3px solid #facc15;outline-offset:3px}
+.page-fs-content .page-fullscreen-btn{background:linear-gradient(135deg,#243449,#142235);border-color:var(--border,rgba(255,255,255,.25))}
+@media(max-width:600px){.page-fullscreen-btn{width:min(100%,320px);min-height:44px}.page-fs-holder{padding:0 12px}}

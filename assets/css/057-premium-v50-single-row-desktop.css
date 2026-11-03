@@ -1,0 +1,65 @@
+
+/* Desktop: a single horizontal row, overriding historic two-row rules. */
+@media (min-width: 701px) {
+ html body.v29-bottom-open #vipFloatingBar.pm-merged {
+  display:flex!important;flex-flow:row nowrap!important;align-items:center!important;
+  justify-content:space-between!important;gap:clamp(6px,.8vw,14px)!important;
+  width:min(1580px,calc(100vw - 28px))!important;max-width:calc(100vw - 28px)!important;
+  padding:9px 13px!important;min-height:0!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails {
+  display:flex!important;flex:1 1 auto!important;flex-flow:row nowrap!important;
+  align-items:center!important;justify-content:flex-start!important;gap:clamp(6px,.7vw,12px)!important;
+  width:auto!important;min-width:0!important;max-width:none!important;
+  order:1!important;grid-column:auto!important;grid-row:auto!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-info {
+  display:flex!important;flex:1 1 auto!important;flex-flow:row nowrap!important;
+  align-items:center!important;justify-content:space-between!important;
+  gap:clamp(5px,.7vw,12px)!important;min-width:0!important;width:auto!important;
+  grid-template-columns:none!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-price-block {
+  flex:1 1 0!important;min-width:0!important;padding-left:clamp(4px,.6vw,12px)!important;
+  margin:0!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-label {
+  white-space:nowrap!important;font-size:clamp(.57rem,.68vw,.72rem)!important;line-height:1.2!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-val {
+  white-space:nowrap!important;font-size:clamp(.78rem,.96vw,1.1rem)!important;line-height:1.2!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions {
+  display:flex!important;flex:0 0 auto!important;align-items:center!important;
+  flex-flow:row nowrap!important;gap:5px!important;min-width:0!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions .vfb-btn {
+  min-height:36px!important;padding:7px clamp(6px,.7vw,12px)!important;
+  white-space:nowrap!important;font-size:clamp(.63rem,.72vw,.78rem)!important;
+ }
+ #vipFloatingBar.pm-merged #premiumMergedNav {
+  display:flex!important;flex:0 0 auto!important;flex-flow:row nowrap!important;
+  align-items:center!important;justify-content:flex-end!important;
+  order:2!important;gap:clamp(3px,.35vw,7px)!important;
+  width:auto!important;min-width:0!important;grid-column:auto!important;grid-row:auto!important;
+ }
+ #vipFloatingBar.pm-merged .pm-nav-btn {
+  display:inline-flex!important;flex-flow:row nowrap!important;flex:0 0 auto!important;
+  align-items:center!important;justify-content:center!important;gap:4px!important;
+  width:auto!important;min-width:0!important;max-width:none!important;
+  min-height:36px!important;height:36px!important;
+  padding:6px clamp(5px,.58vw,11px)!important;
+  font-size:clamp(.61rem,.7vw,.76rem)!important;white-space:nowrap!important;
+ }
+ #vipFloatingBar.pm-merged #premiumBudgetSummary{display:none!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetToggle{display:none!important;}
+}
+@media (min-width:701px) and (max-width:1099px) {
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-price-block:nth-child(4){display:none!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions .vfb-btn.secondary{display:none!important;}
+ #vipFloatingBar.pm-merged .pm-nav-btn{padding:5px!important;font-size:.61rem!important;}
+ #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-val{font-size:.76rem!important;}
+}
+/* V52 definitive disable of obsolete bottom menu trigger */
+html body #v29BottomTab { display:none!important;visibility:hidden!important;pointer-events:none!important; }
+html body:not(.pres-on) #floatingMenuBtn { display:flex!important;visibility:visible!important;pointer-events:auto!important; }

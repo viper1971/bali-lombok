@@ -1,0 +1,15 @@
+
+
+/* BALI: LEVÉ VÝSUVNÉ SVISLÉ MENU */
+#floatingMenuBtn{position:fixed!important;top:50%!important;left:0!important;right:auto!important;bottom:auto!important;transform:translateY(-50%)!important;z-index:10010!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:8px!important;width:44px!important;min-height:105px!important;height:auto!important;padding:12px 6px!important;border-left:0!important;border-radius:0 14px 14px 0!important;writing-mode:vertical-rl;text-orientation:mixed}
+#floatingMenuBtn:hover{transform:translateY(-50%)!important}
+#floatingMenuBtn span:first-child{writing-mode:horizontal-tb;font-size:1.2rem}
+#menuModalOverlay{position:fixed!important;inset:0!important;display:flex!important;justify-content:flex-start!important;align-items:stretch!important;padding:0!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;background:rgba(0,0,0,.65)!important;transition:opacity .28s ease,visibility .28s ease!important;z-index:10030!important}
+#menuModalOverlay.open{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+#menuModalOverlay .menu-modal-box{box-sizing:border-box!important;flex:0 0 auto!important;width:min(390px,calc(100vw - 42px))!important;max-width:calc(100vw - 42px)!important;height:100dvh!important;max-height:100dvh!important;margin:0!important;overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior:contain;padding:24px 18px calc(20px + env(safe-area-inset-bottom))!important;border-radius:0 20px 20px 0!important;border-left:0!important;transform:translateX(-105%)!important;transition:transform .3s cubic-bezier(.2,.8,.2,1)!important}
+#menuModalOverlay.open .menu-modal-box{transform:translateX(0)!important}
+#menuModalOverlay #bottomNav.menu-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+#menuModalOverlay #bottomNav .nav-group-title{grid-column:1/-1!important}
+#menuModalOverlay #bottomNav .nav-item{min-height:46px!important}
+@media(max-width:600px){#floatingMenuBtn{width:38px!important;min-height:94px!important;padding:10px 5px!important}#menuModalOverlay .menu-modal-box{width:min(350px,calc(100vw - 42px))!important;max-width:calc(100vw - 42px)!important;padding:18px 14px calc(16px + env(safe-area-inset-bottom))!important}}
+@media(prefers-reduced-motion:reduce){#menuModalOverlay,#menuModalOverlay .menu-modal-box{transition:none!important}}

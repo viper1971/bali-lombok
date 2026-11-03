@@ -1,0 +1,8 @@
+
+#f-konfig .v31-financial-detail{margin-top:26px;padding-top:24px;border-top:1px solid var(--border,#d4dfe3);min-width:0;}
+#f-konfig .v31-section-label{margin:0 0 16px;color:var(--text-main,#203546);}
+#f-konfig .v31-section-label>span{font-size:.68rem;font-weight:850;color:var(--primary,#0c8580);letter-spacing:.13em;}
+#f-konfig .v31-section-label h3{font-size:clamp(1.3rem,2.2vw,1.8rem);margin:6px 0;font-weight:850;}
+#f-konfig .v31-section-label p{margin:0;font-size:.86rem;color:var(--text-muted,#647484);}
+#f-konfig #f-rozpis .p22{width:100%;max-width:100%;min-width:0;}
+@media(max-width:640px){#f-konfig .v31-financial-detail{margin-top:16px;padding-top:16px;}#f-konfig .v31-section-label{padding:0 4px;}}

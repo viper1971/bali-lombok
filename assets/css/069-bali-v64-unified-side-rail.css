@@ -1,0 +1,71 @@
+
+/* Jediný ukotvený sloupec: přesně MENU, OBSAH, PŘEHLED, HLEDAT, NAHORU, REŽIM, NASTAVENÍ. */
+html body:not(.pres-on) #baliUnifiedRail{
+ position:fixed!important;top:8px!important;left:0!important;right:auto!important;bottom:auto!important;
+ width:46px!important;max-width:46px!important;height:auto!important;max-height:calc(100dvh - 16px)!important;
+ padding:0!important;margin:0!important;display:flex!important;flex-direction:column!important;
+ align-items:stretch!important;justify-content:flex-start!important;gap:5px!important;
+ overflow-x:visible!important;overflow-y:auto!important;overscroll-behavior:contain!important;
+ background:transparent!important;z-index:2147483110!important;pointer-events:auto!important;
+ transition:left .25s ease!important;scrollbar-width:none!important;
+}
+#baliUnifiedRail::-webkit-scrollbar{display:none}
+html body.v29-bottom-open:not(.pres-on) #baliUnifiedRail{
+ left:min(370px,calc(100vw - 48px))!important;
+}
+html body:not(.pres-on) #baliUnifiedRail > #v29BottomTab,
+html body:not(.pres-on) #baliUnifiedRail > #floatingMenuBtn,
+html body:not(.pres-on) #baliUnifiedRail > #baliProgressTab,
+html body:not(.pres-on) #baliUnifiedRail > #premiumMergedNav.bali-menu-edge-actions > .pm-nav-btn{
+ position:relative!important;inset:auto!important;top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;
+ transform:none!important;display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+ box-sizing:border-box!important;flex:0 0 auto!important;
+ width:44px!important;min-width:44px!important;max-width:44px!important;
+ height:clamp(44px,calc((100dvh - 58px) / 7),78px)!important;
+ min-height:44px!important;max-height:78px!important;
+ margin:0!important;padding:5px 3px!important;gap:4px!important;
+ flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ text-align:center!important;writing-mode:vertical-rl!important;text-orientation:mixed!important;
+ background:var(--surface)!important;color:var(--text-main)!important;
+ border:1px solid var(--border)!important;border-left:0!important;border-radius:0 10px 10px 0!important;
+ font:800 10px/1.05 var(--font-ui,system-ui)!important;
+ box-shadow:3px 4px 12px rgba(0,0,0,.16)!important;
+ cursor:pointer!important;touch-action:manipulation!important;
+}
+html body:not(.pres-on) #baliUnifiedRail > #premiumMergedNav.bali-menu-edge-actions{
+ position:relative!important;top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;
+ transform:none!important;display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+ box-sizing:border-box!important;flex:0 0 auto!important;flex-direction:column!important;align-items:stretch!important;gap:5px!important;
+ width:44px!important;min-width:44px!important;max-width:44px!important;height:auto!important;min-height:0!important;max-height:none!important;
+ padding:0!important;margin:0!important;overflow:visible!important;background:transparent!important;
+ border:0!important;box-shadow:none!important;z-index:auto!important;
+}
+html body:not(.pres-on) #baliUnifiedRail > #premiumMergedNav.bali-menu-edge-actions > .pm-nav-btn{
+ flex:0 0 auto!important;white-space:nowrap!important;
+}
+#baliUnifiedRail .pm-nav-icon,
+#baliUnifiedRail #floatingMenuBtn span:first-child,
+#baliUnifiedRail .bali-progress-tab-icon{
+ display:inline-block!important;writing-mode:horizontal-tb!important;font-size:15px!important;line-height:1!important;
+}
+#baliUnifiedRail .pm-nav-text{display:inline-block!important;writing-mode:vertical-rl!important;font-size:10px!important;font-weight:800!important}
+html body:not(.pres-on) #baliUnifiedRail > button[aria-pressed="true"]{
+ background:var(--surface-hover)!important;box-shadow:inset 3px 0 0 var(--primary),3px 4px 12px rgba(0,0,0,.16)!important;
+}
+html body.pres-on #baliUnifiedRail{display:none!important}
+@media(max-width:600px){
+ html body:not(.pres-on) #baliUnifiedRail{top:6px!important;width:42px!important;max-width:42px!important;max-height:calc(100dvh - 12px)!important;gap:4px!important}
+ html body.v29-bottom-open:not(.pres-on) #baliUnifiedRail{left:min(340px,calc(100vw - 42px))!important}
+ html body:not(.pres-on) #baliUnifiedRail > #v29BottomTab,
+ html body:not(.pres-on) #baliUnifiedRail > #floatingMenuBtn,
+ html body:not(.pres-on) #baliUnifiedRail > #baliProgressTab,
+ html body:not(.pres-on) #baliUnifiedRail > #premiumMergedNav.bali-menu-edge-actions > .pm-nav-btn{
+ width:40px!important;min-width:40px!important;max-width:40px!important;
+ height:clamp(40px,calc((100dvh - 48px) / 7),70px)!important;min-height:40px!important;max-height:70px!important;
+ font-size:9px!important;gap:2px!important;
+ }
+ html body:not(.pres-on) #baliUnifiedRail > #premiumMergedNav.bali-menu-edge-actions{width:40px!important;min-width:40px!important;max-width:40px!important;gap:4px!important}
+ #baliUnifiedRail .pm-nav-icon,#baliUnifiedRail .bali-progress-tab-icon{font-size:13px!important}
+ #baliUnifiedRail .pm-nav-text{font-size:9px!important}
+}
+@media print{html body #baliUnifiedRail{display:none!important}}

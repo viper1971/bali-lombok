@@ -1,0 +1,66 @@
+
+/* Celá první obrazovka PC: obsahu ponechán vlastní bezpečný prostor. */
+@media (min-width:1100px) {
+  body > header.hero, header.hero {
+    height:100vh!important;height:100dvh!important;
+    min-height:100vh!important;min-height:100dvh!important;
+    max-height:100dvh!important;
+    padding:clamp(22px,3vh,40px) clamp(20px,3vw,52px)!important;
+    box-sizing:border-box!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    overflow:hidden!important;
+  }
+  header.hero > .hero-inner {
+    width:min(100%,1530px)!important;max-width:1530px!important;
+    max-height:none!important;overflow:visible!important;
+    scrollbar-width:none;overscroll-behavior:auto;
+    padding:6px 10px!important;box-sizing:border-box!important;
+    grid-auto-rows:auto!important;align-content:center!important;
+  }
+  header.hero .hero-inner > .map-box{min-height:clamp(220px,43dvh,460px)!important}
+  header.hero .hero-inner > h1{font-size:clamp(2rem,2.8vw,3.5rem)!important}
+}
+/* Dvě vyjížděcí lišty: v zavřeném stavu zůstává jen malá záložka. */
+#v29TopTab,#v29BottomTab{
+  position:fixed!important;left:50%!important;
+  transform:translateX(-50%)!important;z-index:10020!important;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  padding:6px 17px!important;margin:0!important;min-height:30px!important;
+  border:1px solid color-mix(in srgb,var(--primary) 32%,var(--border))!important;
+  background:var(--surface)!important;color:var(--text-main)!important;
+  box-shadow:0 4px 20px rgba(13,37,53,.18)!important;
+  font:800 12px/1.3 var(--font-ui,inherit)!important;cursor:pointer;
+  max-width:calc(100vw - 24px);white-space:nowrap;transition:background .2s,box-shadow .2s;
+}
+#v29TopTab{top:0!important;border-radius:0 0 14px 14px!important;border-top:0!important}
+#v29BottomTab{bottom:0!important;border-radius:14px 14px 0 0!important;border-bottom:0!important}
+#v29TopTab:hover,#v29BottomTab:hover{background:var(--surface-hover)!important}
+#v29TopTab:focus-visible,#v29BottomTab:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+#v29TopTab .v29-chevron,#v29BottomTab .v29-chevron{font-size:14px;color:var(--primary)}
+body:not(.v29-top-open) #pbar{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translate(-50%,-155%)!important}
+body.v29-top-open #pbar{
+  opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+  top:38px!important;left:50%!important;right:auto!important;
+  width:min(680px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;
+  transform:translateX(-50%)!important;z-index:10019!important;
+}
+body:not(.v29-bottom-open) #vipFloatingBar.pm-merged{opacity:0!important;visibility:hidden!important;pointer-events:none!important;transform:translate(-50%,150%)!important}
+body.v29-bottom-open #vipFloatingBar.pm-merged{
+  opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+  bottom:calc(38px + env(safe-area-inset-bottom))!important;
+  transform:translateX(-50%)!important;z-index:10019!important;
+}
+/* Staré pravidlo pro skrytí lišt na hero nesmí skrýt ručně otevřené panely. */
+body.v29-top-open.on-hero:not(.pres-on) #pbar,
+body.v29-top-open.in-plan:not(.pres-on) #pbar{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+body.v29-bottom-open.on-hero:not(.pres-on) #vipFloatingBar.pm-merged,
+body.v29-bottom-open.in-plan:not(.pres-on) #vipFloatingBar.pm-merged{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+body.pm-merged-ready{padding-bottom:0!important}
+@media(max-width:700px){
+ #v29TopTab,#v29BottomTab{font-size:11px!important;min-height:29px!important;padding:5px 12px!important}
+ body.v29-top-open #pbar{top:34px!important}
+ body.v29-bottom-open #vipFloatingBar.pm-merged{bottom:calc(34px + env(safe-area-inset-bottom))!important}
+ body.pm-merged-ready{padding-bottom:0!important}
+}
+body.pres-on #v29TopTab,body.pres-on #v29BottomTab{display:none!important}
+@media print{#v29TopTab,#v29BottomTab{display:none!important}}

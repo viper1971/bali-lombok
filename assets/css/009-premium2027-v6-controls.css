@@ -1,0 +1,32 @@
+
+/* Jediné ovládání režimu a nastavení je součástí spodní lišty. Původní
+   tlačítka zůstávají v DOM jako funkční spouštěče původních skriptů. */
+#themeToggleBtn, #floatingSettingsBtn {display:none!important}
+/* TOPlist je běžný obsah hero na PC, ne plovoucí překryv. */
+@media(min-width:769px){
+ .hero #toplistFloat {position:relative!important;inset:auto!important;top:auto!important;right:auto!important;left:auto!important;bottom:auto!important;display:flex!important;width:max-content;max-width:100%;margin:18px auto 0!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important;z-index:1!important}
+ #statsFoot{display:none!important}
+ body.on-hero:not(.pres-on) .hero #toplistFloat,body.in-plan:not(.pres-on) .hero #toplistFloat{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+}
+@media(max-width:768px){
+ #statsFoot{display:grid!important;justify-items:center;gap:6px;padding:24px 12px calc(86px + env(safe-area-inset-bottom))!important;text-align:center}
+ #statsFoot #toplistFloat{position:static!important;inset:auto!important;transform:none!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;margin:0!important;display:flex!important}
+ body.on-hero:not(.pres-on) #statsFoot #toplistFloat,body.in-plan:not(.pres-on) #statsFoot #toplistFloat{opacity:1!important;visibility:visible!important;pointer-events:auto!important}
+}
+/* Šest akcí v jediné nízké liště: na telefonu ikony s přístupnými názvy. */
+@media(max-width:700px){
+ #vipFloatingBar.pm-merged{gap:3px!important;padding:5px!important;flex-wrap:wrap!important}
+ #vipFloatingBar.pm-merged #premiumBudgetSummary{padding:0 1px!important;min-width:72px!important}
+ #vipFloatingBar.pm-merged .pm-sum-caption{font-size:.52rem!important}
+ #vipFloatingBar.pm-merged #premiumBudgetAmount{font-size:clamp(.73rem,3vw,.94rem)!important}
+ #vipFloatingBar.pm-merged #premiumMergedNav{gap:2px!important}
+ #vipFloatingBar.pm-merged .pm-nav-btn{min-width:36px!important;width:36px!important;min-height:43px!important;padding:4px 1px!important}
+ #vipFloatingBar.pm-merged .pm-nav-icon{font-size:1.15rem!important}
+ #vipFloatingBar.pm-merged .pm-nav-text{display:none!important}
+}
+@media(max-width:370px){
+ #vipFloatingBar.pm-merged .pm-nav-btn{min-width:32px!important;width:32px!important}
+ #vipFloatingBar.pm-merged #premiumMergedNav{gap:1px!important}
+ #vipFloatingBar.pm-merged #premiumBudgetAmount{font-size:.75rem!important}
+}
+body.pres-on #statsFoot,body.pres-on .hero #toplistFloat{display:none!important}

@@ -1,0 +1,22 @@
+
+/* Upozornění musí zůstat nad vyhledávacím dialogem i ostatními panely. */
+html body #vipToast,
+html body .lux-toast {
+  position:fixed!important;
+  z-index:2147483647!important;
+  pointer-events:none!important;
+}
+html body #vipToast {
+  top:calc(18px + env(safe-area-inset-top, 0px))!important;
+  bottom:auto!important;
+  max-width:min(92vw,650px)!important;
+}
+html body .lux-toast {
+  top:calc(18px + env(safe-area-inset-top, 0px))!important;
+  bottom:auto!important;
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  max-width:min(92vw,650px)!important;
+  text-align:center!important;
+}
+@media print{html body #vipToast,html body .lux-toast{display:none!important}}

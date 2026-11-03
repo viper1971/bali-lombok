@@ -1,0 +1,26 @@
+
+/* Hero vyplňuje obrazovku, ale nesmí ořezat obsah při nízkém okně.
+   Výška se zvětší podle obsahu a posouvá se hlavní dokument. */
+@media (min-width:1100px) {
+  body > header.hero, header.hero {
+    height:auto!important;
+    min-height:100vh!important;
+    min-height:100dvh!important;
+    max-height:none!important;
+    overflow:visible!important;
+    align-items:center!important;
+    justify-content:center!important;
+    padding-top:clamp(22px,3vh,40px)!important;
+    padding-bottom:clamp(22px,3vh,40px)!important;
+  }
+  header.hero > .hero-inner {
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+    align-content:center!important;
+  }
+  /* Mapa je grafická komponenta, ne příčina růstu celé stránky. */
+  header.hero .hero-inner > .map-box {
+    min-height:clamp(230px,37dvh,430px)!important;
+  }
+}

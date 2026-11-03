@@ -1,0 +1,125 @@
+
+/* =====================================================================
+   NOVÝ VZHLED – barvy z cíle cesty
+   tmavý režim = noc v pralese, světlý = ranní mlha nad rýžovými terasami
+   každá etapa má vlastní barvu, která se táhne celou stránkou
+   ===================================================================== */
+:root, [data-theme="dark"] {
+    --bg-color: #11201d;
+    --bg-gradient: radial-gradient(900px 480px at 85% -10%, rgba(30, 167, 160, 0.13), transparent 65%), linear-gradient(180deg, #11201d 0%, #0e1a18 100%);
+    --surface: rgba(24, 42, 38, 0.95);
+    --surface-hover: #1f3631;
+    --hotel-surface: #182b27;
+    --primary: #7fd1c6;
+    --primary-light: #c3ece5;
+    --accent: #3fb3a6;
+    --accent-gradient: linear-gradient(135deg, #1d6f6a 0%, #3fb3a6 100%);
+    --gold: #e6cf9f;
+    --success: #7cc46a;
+    --success-glow: rgba(124, 196, 106, 0.2);
+    --text-main: #eef4ef;
+    --text-muted: #a9bdb4;
+    --border: rgba(127, 209, 198, 0.18);
+    --shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+    --lux-card: #182b27;
+    --lux-card-2: #1f3631;
+    --lux-card-3: #2a453f;
+    --lux-deep-a: #1d4a45;
+    --lux-deep-b: #2d6a62;
+    --on-primary: #0e1a18;
+    --lux-ok: #8fd47c;
+    --lux-bad: #ff8a7a;
+    --lux-warn: #f0c96a;
+    --lux-line: linear-gradient(90deg, transparent, rgba(127, 209, 198, 0.6), transparent);
+}
+[data-theme="light"] {
+    --bg-color: #eef2ea;
+    --bg-gradient: radial-gradient(900px 460px at 85% -10%, rgba(30, 140, 130, 0.09), transparent 65%), linear-gradient(180deg, #f2f5ee 0%, #e7ede4 100%);
+    --surface: rgba(255, 255, 255, 0.97);
+    --surface-hover: #f1f5ef;
+    --hotel-surface: #ffffff;
+    --primary: #13615f;
+    --primary-light: #2b7d78;
+    --accent: #17736d;
+    --accent-gradient: linear-gradient(135deg, #10504e 0%, #1f8a82 100%);
+    --gold: #7a5a22;
+    --success: #2f7a2a;
+    --text-main: #12211d;
+    --text-muted: #48605a;
+    --border: rgba(19, 97, 95, 0.2);
+    --shadow: 0 10px 26px rgba(18, 52, 46, 0.1);
+    --lux-card: #ffffff;
+    --lux-card-2: #f1f5ef;
+    --lux-card-3: #dfe8de;
+    --lux-deep-a: #134a46;
+    --lux-deep-b: #1f6e66;
+    --on-primary: #ffffff;
+    --lux-ok: #2c6e26;
+    --lux-bad: #b42318;
+    --lux-warn: #8a5a00;
+    --lux-line: linear-gradient(90deg, transparent, rgba(19, 97, 95, 0.5), transparent);
+}
+:root {
+    --st-singapore: #d24a5f;   /* Singapur – červená vlajky */
+    --st-uluwatu: #2f8fc2;     /* útesy a oceán */
+    --st-ubud: #5f9e3f;        /* rýžové terasy */
+    --st-lombokNorth: #2f8a74; /* severní pobřeží */
+    --st-lombokSouth: #1aa9a0; /* tyrkysové zátoky Kuty */
+    --st-kutaLast: #d9822f;    /* západ slunce */
+    --st-transit: #8d84b8;     /* letiště a přesuny */
+    --tabbar-h: 62px;
+    --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+::selection { background: rgba(63, 179, 166, 0.35); }
+
+/* typografie: jedna rodina (Plus Jakarta Sans – písmo navržené pro Jakartu), hierarchie vahou a velikostí */
+h1, h2, .stage-title, .hero h1, .hotel-title-text, .lux-part-title { font-family: var(--font-display) !important; letter-spacing: -0.015em; }
+.hero h1 { font-weight: 800; letter-spacing: -0.03em; }
+.lux-part-eyebrow, .rm-no, .lux-part-no { text-transform: none !important; letter-spacing: 0 !important; }
+/* čísla s pevnou šířkou – ceny v tabulkách lícují */
+.vfb-val, .cd-value, [id^="calcPrice"], [id^="float"], table, .fc-price, .uber-price-badge, .lux-fold-meta { font-variant-numeric: tabular-nums; }
+
+/* hlavička: fotka zůstává, překryv bere barvu z motivu */
+.hero {
+    background:
+        linear-gradient(180deg, color-mix(in srgb, var(--bg-color) 45%, transparent) 0%, var(--bg-color) 100%),
+        url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2000&q=85') center/cover no-repeat !important;
+}
+.hero .badge { background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; font-weight: 600; color: var(--text-muted) !important; }
+
+/* méně emoji: ikony v obsahu nahrazuje barva etapy */
+#bottomNav .nav-item .icon { display: none; }
+.lux-fold-node { font-size: 0 !important; }
+.lux-fold-node::after { content: ''; display: block; width: 12px; height: 12px; border-radius: 50%; background: var(--node, var(--primary)); box-shadow: 0 0 0 4px color-mix(in srgb, var(--node, var(--primary)) 22%, transparent); }
+.lux-fold.is-transfer .lux-fold-node::after { background: transparent; border: 2px dashed var(--st-transit); box-shadow: none; }
+#f-leg-sg { --node: var(--st-singapore); }
+#f-leg-uluwatu { --node: var(--st-uluwatu); }
+#f-leg-ubud { --node: var(--st-ubud); }
+#f-leg-lombok-sever { --node: var(--st-lombokNorth); }
+#f-leg-kuta { --node: var(--st-lombokSouth); }
+#f-leg-rozlucka { --node: var(--st-kutaLast); }
+#f-leg-tranzit { --node: var(--st-transit); }
+.lux-fold.is-leg > .lux-fold-h .lux-fold-t { color: var(--text-main); }
+.lux-fold.is-leg > .lux-fold-h { border-left: 3px solid var(--node, transparent); }
+
+/* ---------- přístupnost ---------- */
+:focus-visible { outline: 3px solid var(--accent) !important; outline-offset: 2px; }
+.lux-tool, .sqs-btn, .nav-item, .vfb-btn, .flight-mode-btn, button.lux-fold-btn { min-height: 44px; }
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    html { scroll-behavior: auto !important; }
+}
+
+/* nadpisy bez verzálek – čtou se rychleji */
+.main-wrapper h2, .main-wrapper h3, .sec-title { text-transform: none !important; letter-spacing: -0.01em !important; }
+
+/* tlačítko pro zavření sekce na jejím konci */
+
+/* fajfka u přečtené sekce */
+.lux-read { display: none; flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 800; background: var(--lux-ok); color: var(--on-primary); margin-left: 6px; }
+.lux-fold.is-read > .lux-fold-h .lux-read { display: inline-flex; }
+.lux-fold.is-read:not(.is-open) > .lux-fold-h .lux-fold-t { opacity: 0.75; }
+.lux-read-count { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); align-self: center; margin-right: 4px; }
+.lux-dash-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+    

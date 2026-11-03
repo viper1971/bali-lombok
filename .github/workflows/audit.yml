@@ -1,0 +1,70 @@
+name: BALI audit
+on:
+  push:
+    branches: [audit/bali-2027]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm audit --audit-level=high
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - uses: actions/checkout@v4
+        with:
+          ref: 457040d35ca72436f02a7a03b524cdb7fb6c5b50
+          path: baseline
+      - run: npm run test:browser
+        env:
+          BASELINE_DIR: baseline
+      - run: node tests/extended.cjs
+        env:
+          BASELINE_DIR: baseline
+      - run: node tests/upgrade.cjs
+      - run: node tests/live.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browser-regression
+          path: test-results/
+
+  compatibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps ${{ matrix.engine }}
+      - uses: actions/checkout@v4
+        with:
+          ref: 457040d35ca72436f02a7a03b524cdb7fb6c5b50
+          path: baseline
+      - run: npm run test:browser
+        env:
+          BASELINE_DIR: baseline
+          BROWSER_ENGINE: ${{ matrix.engine }}
+      - run: node tests/upgrade.cjs
+        env:
+          BROWSER_ENGINE: ${{ matrix.engine }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: compatibility-${{ matrix.engine }}
+          path: test-results/

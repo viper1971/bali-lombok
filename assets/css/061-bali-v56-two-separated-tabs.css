@@ -1,0 +1,55 @@
+
+/* Dvě nezávislá levá ouška, vždy nad sebou, nikdy na sobě. */
+:root{--bali-tab-height:112px;--bali-tab-gap:8px}
+html body:not(.pres-on) #v29BottomTab,
+html body:not(.pres-on) #floatingMenuBtn{
+ position:fixed!important;display:flex!important;visibility:visible!important;pointer-events:auto!important;
+ top:50%!important;right:auto!important;bottom:auto!important;left:0!important;
+ margin:0!important;box-sizing:border-box!important;
+ width:44px!important;min-width:44px!important;max-width:44px!important;
+ height:var(--bali-tab-height)!important;min-height:var(--bali-tab-height)!important;max-height:var(--bali-tab-height)!important;
+ padding:10px 5px!important;
+ flex-flow:column nowrap!important;align-items:center!important;justify-content:center!important;gap:7px!important;
+ writing-mode:vertical-rl!important;text-orientation:mixed!important;
+ border:1px solid var(--border)!important;border-left:0!important;border-radius:0 12px 12px 0!important;
+ background:var(--surface)!important;color:var(--text-main)!important;
+ font:800 12px/1.1 var(--font-ui,system-ui)!important;
+ box-shadow:0 6px 20px rgba(0,0,0,.2)!important;
+ z-index:2147483001!important;
+}
+html body:not(.pres-on) #v29BottomTab{
+ top:calc(50% - 120px)!important;
+ transform:none!important;
+ z-index:2147483003!important;
+}
+html body:not(.pres-on) #floatingMenuBtn{
+ top:calc(50% + 8px)!important;
+ transform:none!important;
+ z-index:2147483002!important;
+}
+html body:not(.pres-on) #floatingMenuBtn:hover{transform:none!important}
+html body:not(.pres-on) #floatingMenuBtn span:first-child{
+ writing-mode:horizontal-tb!important;line-height:1!important;
+}
+html body:not(.pres-on).v29-bottom-open #v29BottomTab,
+html body:not(.pres-on).v29-bottom-open #floatingMenuBtn{
+ left:min(370px,calc(100vw - 48px))!important;
+}
+html body #baliLeftNavSection[hidden]{display:none!important}
+html body #baliLeftNavSection:not([hidden]){display:block!important}
+html body.pres-on #floatingMenuBtn{display:none!important}
+@media(max-width:600px){
+ :root{--bali-tab-height:96px;--bali-tab-gap:6px}
+ html body:not(.pres-on) #v29BottomTab{top:calc(50% - 102px)!important;}
+ html body:not(.pres-on) #floatingMenuBtn{top:calc(50% + 6px)!important;}
+ html body:not(.pres-on) #v29BottomTab,
+ html body:not(.pres-on) #floatingMenuBtn{
+  width:38px!important;min-width:38px!important;max-width:38px!important;
+  padding:8px 4px!important;font-size:11px!important;
+ }
+ html body:not(.pres-on).v29-bottom-open #v29BottomTab,
+ html body:not(.pres-on).v29-bottom-open #floatingMenuBtn{
+  left:min(340px,calc(100vw - 42px))!important;
+ }
+}
+@media print{html body #floatingMenuBtn,html body #v29BottomTab{display:none!important}}

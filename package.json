@@ -1,0 +1,14 @@
+{
+  "name": "bali-lombok-2027",
+  "private": true,
+  "scripts": {
+    "build": "python3 tools/build.py",
+    "test": "python3 tests/static.py && node tests/service-worker.cjs && node tests/map-loader.cjs",
+    "test:browser": "node tests/browser.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "postcss": "8.5.32",
+    "terser": "5.44.1"
+  }
+}

@@ -1,0 +1,54 @@
+
+/* Část I: mobilní geometrie přesně zarovnaná, bez bočního přetékání */
+@media (max-width: 800px) {
+  #cast-priprava > .lux-part-head,
+  #cast-priprava:not(.is-open) > .lux-part-head {
+    display: grid !important;
+    grid-template-columns: 36px minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    align-items: center !important;
+    justify-content: stretch !important;
+    column-gap: 10px !important;
+    row-gap: 7px !important;
+    padding: 12px !important;
+    min-width: 0 !important;
+    text-align: left !important;
+  }
+  #cast-priprava > .lux-part-head > .lux-part-no {
+    grid-column: 1 !important;grid-row: 1 !important;
+    width: 36px !important;height: 36px !important;
+    min-width: 0 !important;flex: none !important;
+    justify-self: center !important;margin: 0 !important;
+  }
+  #cast-priprava > .lux-part-head > div:not(.lux-part-meta) {
+    grid-column: 2 !important;grid-row: 1 !important;
+    display: block !important;min-width: 0 !important;
+    margin: 0 !important;padding: 0 !important;
+  }
+  #cast-priprava > .lux-part-head .lux-part-title {
+    margin: 1px 0 !important;line-height: 1.22 !important;
+    overflow-wrap: normal !important;word-break: normal !important;
+  }
+  #cast-priprava > .lux-part-head .lux-part-sub {
+    max-width: 100% !important;overflow-wrap: break-word !important;
+  }
+  #cast-priprava > .lux-part-head .lux-part-meta {
+    grid-column: 2 !important;grid-row: 2 !important;
+    display: flex !important;align-items: center !important;
+    justify-content: flex-end !important;gap: 8px !important;
+    min-width: 0 !important;width: 100% !important;
+    max-width: 100% !important;margin: 0 !important;
+  }
+  #cast-priprava > .lux-part-head .lux-part-count {
+    width: auto !important;min-width: 104px !important;
+    max-width: calc(100% - 38px) !important;
+    display: grid !important;grid-template-columns: 1fr !important;
+    padding: 5px 9px !important;
+  }
+  #cast-priprava > .lux-part-head .lux-part-chev {
+    width: 28px !important;height: 28px !important;
+    flex: 0 0 28px !important;margin: 0 !important;
+  }
+}
+/* Během postupného odemykání zůstávají nedostupné části bez klikatelné hlavičky. */
+#flightPick > summary:focus-visible {outline: 3px solid var(--primary) !important;outline-offset: -3px !important;}

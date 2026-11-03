@@ -1,0 +1,30 @@
+
+/* Rozpočtový panel je jediné menu. Bývalý překryv Obsah se nevykresluje. */
+html body #menuModalOverlay{display:none!important;visibility:hidden!important;pointer-events:none!important}
+html body #floatingMenuBtn{display:none!important;visibility:hidden!important;pointer-events:none!important}
+html body #v29BottomTab{display:flex!important;visibility:visible!important;pointer-events:auto!important}
+html body:not(.pres-on) #vipFloatingBar.pm-merged{display:flex!important;flex-direction:column!important;align-items:stretch!important}
+html body:not(.pres-on) #vipFloatingBar.pm-merged #baliLeftBudgetHeader{
+ display:flex!important;flex:0 0 auto!important;align-items:center!important;justify-content:space-between!important;
+ order:0!important;width:100%!important;padding:0 0 13px!important;margin:0!important;
+ border-bottom:1px solid var(--border)!important;font-size:1rem!important;
+}
+#baliLeftBudgetClose,#baliLeftNavClose{
+ cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
+ width:34px;height:34px;border-radius:50%;border:1px solid var(--border);
+ background:var(--surface-hover);color:var(--text-main);font-size:1.45rem;line-height:1;
+}
+html body:not(.pres-on) #vipFloatingBar.pm-merged #baliLeftNavSection{
+ display:block!important;order:3!important;flex:0 0 auto!important;width:100%!important;
+ border-top:1px solid var(--border)!important;padding-top:12px!important;
+}
+html body:not(.pres-on) #vipFloatingBar.pm-merged #baliLeftNavSection[hidden]{display:none!important}
+html body #baliLeftNavSection .bali-left-nav-heading{
+ display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;
+}
+html body #baliLeftNavSection #bottomNav.menu-grid{
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:7px!important;
+}
+html body #baliLeftNavSection #bottomNav .nav-group-title{grid-column:1/-1!important}
+html body #baliLeftNavSection #bottomNav .nav-item{min-height:43px!important}
+html body #baliLeftNavSection #bottomNav button.nav-item{width:100%;text-align:left;cursor:pointer}

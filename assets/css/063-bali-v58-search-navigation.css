@@ -1,0 +1,11 @@
+
+#uxSearchNavigator[hidden]{display:none!important}
+#uxSearchNavigator{position:fixed;z-index:11015;bottom:calc(18px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:7px;padding:9px;border:1px solid var(--border,#888);border-radius:16px;background:var(--surface,#fff);color:var(--text-main,#111);box-shadow:0 8px 35px #0007;max-width:calc(100vw - 16px)}
+#uxSearchNavigator button{border:1px solid var(--border,#aaa);background:var(--surface-hover,#eee);color:inherit;border-radius:9px;min-height:40px;padding:6px 10px;font:700 .85rem system-ui;cursor:pointer;white-space:nowrap}
+#uxSearchPosition{font:800 .85rem system-ui;min-width:55px;text-align:center;white-space:nowrap}
+#uxSearchResults .uxResult{display:flex;flex-direction:column;gap:6px;line-height:1.4}
+#uxSearchResults .uxResultLocked{opacity:.7}
+#uxSearchResults .uxResultStatus{display:block;font-size:.73rem;font-weight:800;color:var(--text-muted,#777)}
+#uxSearchResults .uxResult:not(.uxResultLocked) .uxResultStatus{color:var(--accent,#13949d)}
+@media(max-width:540px){#uxSearchNavigator{gap:3px;padding:6px;width:calc(100vw - 12px)}#uxSearchNavigator button{min-height:42px;padding:5px 7px;font-size:.72rem}#uxSearchPosition{min-width:40px;font-size:.73rem}}
+@media print{#uxSearchNavigator{display:none!important}}

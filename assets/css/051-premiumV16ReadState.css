@@ -1,0 +1,104 @@
+
+/* Úprava platí pro všech 28 sekcí, včetně přesunů i konfigurátoru. */
+.lux-part .lux-fold.is-read > .lux-fold-h > .lux-fold-btn,
+#osa .lux-spine > .lux-fold.is-read > .lux-fold-h > .lux-fold-btn,
+#osa .lux-spine > .lux-fold.is-read:not(.is-transfer) > .lux-fold-h > .lux-fold-btn,
+#osa .lux-spine > .lux-fold.is-read.is-transfer > .lux-fold-h > .lux-fold-btn {
+  background:#e5eaf0!important;
+  background-image:none!important;
+  color:#536578!important;
+  border:1px solid #bfcbd5!important;
+  box-shadow:0 3px 11px rgba(28,48,64,.075)!important;
+  opacity:1!important;
+}
+.lux-part .lux-fold.is-read > .lux-fold-h > .lux-fold-btn:hover,
+#osa .lux-spine > .lux-fold.is-read > .lux-fold-h > .lux-fold-btn:hover {
+  background:#dbe3ea!important;
+  border-color:#92a5b4!important;
+  box-shadow:0 7px 20px rgba(28,48,64,.12)!important;
+}
+/* Názvy a data zůstávají dobře čitelné, i když je sekce vizuálně vyřízená. */
+.lux-part .lux-fold.is-read > .lux-fold-h .lux-fold-t,
+#osa .lux-spine .lux-fold.is-read > .lux-fold-h .lux-fold-t {
+  color:#526477!important;
+  text-shadow:none!important;
+}
+.lux-part .lux-fold.is-read > .lux-fold-h .lux-fold-s,
+#osa .lux-spine .lux-fold.is-read > .lux-fold-h .lux-fold-s,
+#osa .lux-spine .lux-fold.is-read > .lux-fold-h .p14-eyebrow {
+  color:#647589!important;
+  text-shadow:none!important;
+}
+/* Kontextové ilustrace zůstávají, jen jsou tlumené u přečtených sekcí. */
+.lux-part .lux-fold.is-read > .lux-fold-h > .lux-fold-btn::before,
+#osa .lux-spine > .lux-fold.is-read > .lux-fold-h > .lux-fold-btn::before {
+  filter:grayscale(1)!important;
+  opacity:.30!important;
+}
+/* Nepřečtené sekce nemají fajfku. Vytváří ji původní skript a aktivuje .is-read. */
+.lux-part .lux-fold:not(.is-read) > .lux-fold-h .lux-read,
+#osa .lux-spine .lux-fold:not(.is-read) > .lux-fold-h .lux-read {
+  display:none!important;
+}
+/* Čitelný stav místo malého nejasného kolečka. */
+.lux-part .lux-fold.is-read > .lux-fold-h .lux-read,
+#osa .lux-spine .lux-fold.is-read > .lux-fold-h .lux-read {
+  display:inline-flex!important;
+  position:relative!important;
+  left:auto!important; top:auto!important; transform:none!important;
+  align-items:center!important;justify-content:center!important;
+  flex:0 0 auto!important;
+  width:auto!important;min-width:31px!important;height:32px!important;
+  padding:0 10px!important;margin:0!important;
+  border:1px solid #92b8a2!important;
+  border-radius:999px!important;
+  background:#edf8f0!important;color:#19703d!important;
+  font-size:1rem!important;font-weight:900!important;line-height:1!important;
+  box-shadow:0 1px 5px rgba(18,72,47,.09)!important;
+  white-space:nowrap!important;z-index:5!important;
+}
+.lux-part .lux-fold.is-read > .lux-fold-h .lux-read::after,
+#osa .lux-spine .lux-fold.is-read > .lux-fold-h .lux-read::after {
+  content:'Přečteno';
+  font-size:.74rem;line-height:1!important;font-weight:800!important;
+  margin-left:6px!important;
+}
+.lux-part .lux-fold.is-read > .lux-fold-h .lux-fold-node {
+  background:linear-gradient(145deg,#8395a1,#718392)!important;
+  border-color:#a9b5c0!important;box-shadow:none!important;
+}
+.lux-part .lux-fold.is-read > .lux-fold-h .lux-fold-chev {
+  background:#f6f8fa!important;color:#4c6372!important;border-color:#bdcbd4!important;
+}
+/* Tmavý režim: šedá je čitelná i na tmavém pozadí. */
+html[data-theme="dark"] .lux-part .lux-fold.is-read > .lux-fold-h > .lux-fold-btn,
+body.dark .lux-part .lux-fold.is-read > .lux-fold-h > .lux-fold-btn,
+body.dark-mode .lux-part .lux-fold.is-read > .lux-fold-h > .lux-fold-btn,
+html[data-theme="dark"] #osa .lux-spine > .lux-fold.is-read > .lux-fold-h > .lux-fold-btn,
+body.dark #osa .lux-spine > .lux-fold.is-read > .lux-fold-h > .lux-fold-btn {
+  background:#334351!important;background-image:none!important;
+  border-color:#566a7c!important;box-shadow:0 4px 15px rgba(0,0,0,.14)!important;
+}
+html[data-theme="dark"] .lux-part .lux-fold.is-read > .lux-fold-h .lux-fold-t,
+body.dark .lux-part .lux-fold.is-read > .lux-fold-h .lux-fold-t,
+html[data-theme="dark"] .lux-part .lux-fold.is-read > .lux-fold-h .lux-fold-s,
+body.dark .lux-part .lux-fold.is-read > .lux-fold-h .lux-fold-s {
+  color:#dce3e9!important;
+}
+html[data-theme="dark"] .lux-part .lux-fold.is-read > .lux-fold-h .lux-read,
+body.dark .lux-part .lux-fold.is-read > .lux-fold-h .lux-read {
+  background:#234633!important;border-color:#578767!important;color:#c8f5d4!important;
+}
+@media(max-width:760px){
+  /* Na mobilu jen zelená fajfka; šedá hlavička zůstává rozpoznatelná. */
+  .lux-part .lux-fold.is-read > .lux-fold-h .lux-read,
+  #osa .lux-spine .lux-fold.is-read > .lux-fold-h .lux-read {
+    padding:0!important;min-width:27px!important;width:27px!important;height:27px!important;
+    flex:0 0 27px!important;font-size:.92rem!important;
+  }
+  .lux-part .lux-fold.is-read > .lux-fold-h .lux-read::after,
+  #osa .lux-spine .lux-fold.is-read > .lux-fold-h .lux-read::after {content:none!important;display:none!important;}
+}
+@media(prefers-reduced-motion:reduce){
+ .lux-part .lux-fold.is-read > .lux-fold-h > .lux-fold-btn{transition:none!important;}
+}

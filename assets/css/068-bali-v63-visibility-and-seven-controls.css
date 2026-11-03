@@ -1,0 +1,77 @@
+
+/* Jeden aktivní panel, dvě dostupné přepínací záložky a čtyři akce. */
+:root{--bali-edge-tab-h:clamp(58px,10.5dvh,94px);--bali-edge-step:calc(var(--bali-edge-tab-h) + 7px);--bali-edge-top:8px;--bali-edge-dock-top:calc(var(--bali-edge-top) + 3 * var(--bali-edge-step) + 7px)}
+html body:not(.pres-on) #v29BottomTab,
+html body:not(.pres-on) #floatingMenuBtn,
+html body:not(.pres-on) #baliProgressTab{
+ top:var(--bali-edge-top)!important;bottom:auto!important;
+ height:var(--bali-edge-tab-h)!important;min-height:var(--bali-edge-tab-h)!important;max-height:var(--bali-edge-tab-h)!important;
+ width:44px!important;min-width:44px!important;max-width:44px!important;
+ transition:left .3s ease,background .2s ease!important;
+}
+html body:not(.pres-on) #floatingMenuBtn{top:calc(var(--bali-edge-top) + var(--bali-edge-step))!important}
+html body:not(.pres-on) #baliProgressTab{top:calc(var(--bali-edge-top) + 2 * var(--bali-edge-step))!important}
+/* Každá ze sedmi akcí je dostupná v každém otevřeném panelu, včetně jeho vlastní záložky. */
+html body.v29-bottom-open:not(.pres-on) #v29BottomTab,
+html body.v29-bottom-open:not(.pres-on) #floatingMenuBtn,
+html body.v29-bottom-open:not(.pres-on) #baliProgressTab{
+ display:flex!important;visibility:visible!important;pointer-events:auto!important;
+}
+/* Zbylé záložky musejí zůstat dostupné i při otevření libovolného panelu. */
+html body.v29-bottom-open:not(.pres-on) #v29BottomTab:not(.unused),
+html body.v29-bottom-open:not(.pres-on) #floatingMenuBtn:not(.unused),
+html body.v29-bottom-open:not(.pres-on) #baliProgressTab:not(.unused){
+ left:min(370px,calc(100vw - 48px))!important;z-index:2147483010!important;
+}
+/* Přesunout všechny čtyři původní funkční akce vedle panelu bez překryvu se záložkami. */
+html body.v29-bottom-open:not(.pres-on) > #premiumMergedNav.bali-menu-edge-actions,
+html body.v29-bottom-open.bali-progress-mode:not(.pres-on) > #premiumMergedNav.bali-menu-edge-actions{
+ position:fixed!important;display:flex!important;visibility:visible!important;
+ top:var(--bali-edge-dock-top)!important;
+ bottom:auto!important;left:min(370px,calc(100vw - 48px))!important;right:auto!important;
+ width:44px!important;min-width:44px!important;max-width:44px!important;
+ height:auto!important;max-height:calc(100dvh - var(--bali-edge-dock-top) - 8px)!important;
+ overflow:visible!important;flex-direction:column!important;gap:5px!important;
+ z-index:2147483008!important;pointer-events:auto!important;
+}
+html body.v29-bottom-open:not(.pres-on) > #premiumMergedNav.bali-menu-edge-actions > .pm-nav-btn{
+ display:flex!important;flex:0 0 auto!important;
+ width:44px!important;min-width:44px!important;max-width:44px!important;
+ height:clamp(42px,calc((100dvh - var(--bali-edge-dock-top) - 28px) / 4),76px)!important;
+ min-height:42px!important;max-height:76px!important;
+}
+html body:not(.v29-bottom-open) > #premiumMergedNav.bali-menu-edge-actions{display:none!important}
+@media(max-width:600px){
+ :root{--bali-edge-tab-h:clamp(55px,10.2dvh,82px);--bali-edge-step:calc(var(--bali-edge-tab-h) + 5px);--bali-edge-top:6px;--bali-edge-dock-top:calc(var(--bali-edge-top) + 3 * var(--bali-edge-step) + 5px)}
+ html body:not(.pres-on) #v29BottomTab,
+ html body:not(.pres-on) #floatingMenuBtn,
+ html body:not(.pres-on) #baliProgressTab{
+ width:40px!important;min-width:40px!important;max-width:40px!important;
+ }
+ html body.v29-bottom-open:not(.pres-on) #v29BottomTab:not(.unused),
+ html body.v29-bottom-open:not(.pres-on) #floatingMenuBtn:not(.unused),
+ html body.v29-bottom-open:not(.pres-on) #baliProgressTab:not(.unused),
+ html body.v29-bottom-open:not(.pres-on) > #premiumMergedNav.bali-menu-edge-actions{
+ left:min(340px,calc(100vw - 42px))!important;
+ }
+ html body.v29-bottom-open:not(.pres-on) > #premiumMergedNav.bali-menu-edge-actions{
+ width:40px!important;min-width:40px!important;max-width:40px!important;gap:4px!important;
+ }
+ html body.v29-bottom-open:not(.pres-on) > #premiumMergedNav.bali-menu-edge-actions > .pm-nav-btn{
+ width:40px!important;min-width:40px!important;max-width:40px!important;
+ height:clamp(40px,calc((100dvh - var(--bali-edge-dock-top) - 23px) / 4),66px)!important;
+ min-height:40px!important;max-height:66px!important;
+ }
+}
+@media(max-height:530px){
+ :root{--bali-edge-tab-h:51px;--bali-edge-step:55px}
+ html body:not(.pres-on) #v29BottomTab,
+ html body:not(.pres-on) #floatingMenuBtn,
+ html body:not(.pres-on) #baliProgressTab{font-size:10px!important;gap:2px!important}
+ html body.v29-bottom-open:not(.pres-on) > #premiumMergedNav.bali-menu-edge-actions > .pm-nav-btn{
+ height:clamp(34px,calc((100dvh - var(--bali-edge-dock-top) - 22px) / 4),52px)!important;min-height:34px!important;
+ }
+}
+@media print{
+ html body #baliProgressTab,html body > #premiumMergedNav.bali-menu-edge-actions{display:none!important}
+}
