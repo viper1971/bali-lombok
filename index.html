@@ -23888,7 +23888,6 @@ body.dark #rozpocet .pf18-details summary small,html.dark #rozpocet .pf18-detail
    Jejich funkce zůstávají dostupné z vysouvacího MENU. */
 html body #pbar,
 html body #v29TopTab,
-html body #floatingMenuBtn,
 html body #floatingSettingsBtn,
 html body #themeToggleBtn {
   display:none!important;
@@ -23901,7 +23900,7 @@ html body #v29BottomTab{
   bottom:0!important;top:auto!important;
   transform:translateX(-50%)!important;
   z-index:2147483000!important;
-  display:flex!important;
+  display:none!important;
   align-items:center!important;justify-content:center!important;
   gap:7px!important;
   min-height:34px!important;
@@ -23944,6 +23943,20 @@ html body .lux-fold.is-open>.lux-fold-h{top:calc(5px + env(safe-area-inset-top,0
  html body.v29-bottom-open #vipFloatingBar{bottom:calc(37px + env(safe-area-inset-bottom))!important;}
 }
 @media print{html body #v29BottomTab,html body #vipFloatingBar{display:none!important;}}
+
+/* Levé ouško je primární navigace; spodní ovladač není součástí UI. */
+html body #floatingMenuBtn{
+ display:flex!important;visibility:visible!important;pointer-events:auto!important;
+ position:fixed!important;left:0!important;right:auto!important;top:50%!important;bottom:auto!important;
+ transform:translateY(-50%)!important;z-index:2147483001!important;
+ flex-direction:column!important;align-items:center!important;
+ width:44px!important;height:auto!important;min-height:106px!important;
+ padding:12px 6px!important;border-radius:0 14px 14px 0!important;
+ writing-mode:vertical-rl!important;
+}
+html body #floatingMenuBtn:hover{transform:translateY(-50%)!important}
+html body #v29BottomTab{display:none!important;visibility:hidden!important;pointer-events:none!important}
+@media(max-width:600px){html body #floatingMenuBtn{width:38px!important;min-height:94px!important;padding:10px 5px!important}}
 </style>
 <script id="premium-v48-menu-guard">
 (function(){
@@ -23969,8 +23982,22 @@ html body .lux-fold.is-open>.lux-fold-h{top:calc(5px + env(safe-area-inset-top,0
     var chev=tab.querySelector('.v29-chevron');
     if(chev)chev.textContent=shown?'▾':'▴';
   }
-  /* V případě návratu ze staré verze nebo obnovení stránky začínáme se skrytým panelem. */
+  /* Spodní panel se otevírá pouze z položky levého menu. */
   document.body.classList.remove('v29-top-open','v29-bottom-open');
+  var nav=document.getElementById('bottomNav');
+  if(nav&&!document.getElementById('menuOpenBudgetPanel')){
+    var budget=document.createElement('button');
+    budget.type='button';budget.id='menuOpenBudgetPanel';budget.className='nav-item';
+    budget.innerHTML='<span class="icon" aria-hidden="true">▤</span><span>Rozpočet a ovládací panel</span>';
+    budget.style.cssText='width:100%;text-align:left;cursor:pointer;font-family:inherit';
+    budget.addEventListener('click',function(){
+      if(typeof window.setMenuModalOpen==='function')window.setMenuModalOpen(false);
+      else document.getElementById('menuModalOverlay')?.classList.remove('open');
+      document.body.classList.add('v29-bottom-open');
+      sync();
+    });
+    nav.appendChild(budget);
+  }
   sync();
   document.addEventListener('keydown',function(ev){
     if(ev.key==='Escape'){document.body.classList.remove('v29-bottom-open');sync();}
