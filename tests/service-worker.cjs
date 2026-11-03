@@ -35,6 +35,12 @@ const online='<meta name="bali-build" content="'+version+'">online';
  rejectPutUrl=null;handlers.activate({waitUntil:p=>pending=p});await pending;assert(!stores.has(failedOld));
  const request={method:'GET',url:scope,mode:'navigate'};
  async function get(req=request){let response;const waits=[];handlers.fetch({request:req,respondWith:p=>response=p,waitUntil:p=>waits.push(p)});const r=await response;await Promise.all(waits);return r;}
+ // Embedded Google documents must be fetched by the browser, never the app cache.
+ for (const url of ['https://www.google.com/maps/embed?pb=test', 'https://maps.google.com/maps?q=Ubud&output=embed']) {
+  let intercepted=false;
+  handlers.fetch({request:{method:'GET',url,mode:'navigate',destination:'iframe'},respondWith:()=>{intercepted=true},waitUntil:()=>{}});
+  assert.equal(intercepted,false,'service worker intercepted an embedded Google map');
+ }
  assert.equal(await (await get()).text(),online);
  network=async()=>{throw Error('offline')};assert.equal(await (await get()).text(),online);
  network=async()=>new Response('<meta name="bali-build" content="ffffffffffffffff">new-release');assert((await(await get()).text()).includes('new-release'));
