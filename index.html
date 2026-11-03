@@ -23043,7 +23043,46 @@ function init(){
  function searchNodes(q){var found=[],root=document.body,walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var el=n.parentElement;if(!el||!n.nodeValue.trim()||el.closest('script,style,noscript,svg,template,#uxSearchOverlay,#uxSearchBtn,#menuModalOverlay,nav,button,select,textarea,[aria-hidden="true"]'))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT}});while(walker.nextNode()){var node=walker.currentNode,raw=node.nodeValue,normalized=norm(raw),at=0,idx;while((idx=normalized.indexOf(q,at))!==-1){found.push({node:node,start:idx,end:idx+q.length,text:raw});if(found.length>=500)return found;at=idx+Math.max(q.length,1)}}return found}
  function context(hit){var s=hit.text,a=Math.max(0,hit.start-65),b=Math.min(s.length,hit.end+85);return (a?'…':'')+s.slice(a,b).replace(/\s+/g,' ').trim()+(b<s.length?'…':'')}
  function highlight(hit){clearMarks();var n=hit.node;if(!n.isConnected)return n.parentElement;var text=n.nodeValue,span=document.createElement('mark');span.className='uxFoundMark';span.textContent=text.slice(hit.start,hit.end);var after=n.splitText(hit.end);var middle=n.splitText(hit.start);middle.replaceWith(span);marks.push(span);return span}
- function go(hit){close(false);var el=highlight(hit);if(!el)return;var parent=el.parentElement;var details=parent&&parent.closest('details');if(details)details.open=true;var hidden=parent&&parent.closest('.alt-hotels-collapse');if(hidden){hidden.classList.add('open')}el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}
+ function notifyLocked(){
+  var message='Tento výsledek je v uzamčené sekci. Nejdříve dokonči předchozí sekce, případně vypni postupné odemykání.';
+  if(typeof window.showToast==='function'){window.showToast(message);return;}
+  var toast=document.createElement('div');toast.className='lux-toast';toast.setAttribute('role','alert');toast.textContent=message;
+  document.body.appendChild(toast);setTimeout(function(){toast.remove()},4500);
+ }
+ function go(hit){
+  if(!hit.node||!hit.node.isConnected)return;
+  var target=hit.node.parentElement;
+  if(!target)return;
+  // Přímý výsledek nesmí obcházet režim postupného odemykání.
+  var locked=target.closest('.lux-fold.lux-locked,.lux-part.lux-locked,[inert]');
+  if(locked){notifyLocked();return;}
+  close(false);
+  // Otevřít příslušnou část a sekce, nejen scrollovat do sbaleného textu.
+  var part=target.closest('.lux-part');
+  if(part&&!part.classList.contains('is-open')){
+    if(typeof window.luxPartFor==='function')window.luxPartFor(target);
+    else{var partHead=part.querySelector(':scope > .lux-part-head');if(partHead)partHead.click();}
+  }
+  var folds=[],ancestor=target.closest('.lux-fold');
+  while(ancestor){folds.unshift(ancestor);ancestor=ancestor.parentElement&&ancestor.parentElement.closest('.lux-fold');}
+  for(var i=0;i<folds.length;i++){
+    var fold=folds[i];
+    if(fold.classList.contains('lux-locked')||fold.inert){notifyLocked();return;}
+    if(!fold.classList.contains('is-open')){
+      if(typeof window.luxToggle==='function'&&fold.id)window.luxToggle(fold.id);
+      else{var foldBtn=fold.querySelector(':scope > .lux-fold-h .lux-fold-btn');if(foldBtn)foldBtn.click();}
+    }
+  }
+  // Nativní details a rozbalené doplňkové bloky.
+  var details=target.closest('details');while(details){details.open=true;details=details.parentElement&&details.parentElement.closest('details');}
+  var collapsed=target.closest('.alt-hotels-collapse');if(collapsed)collapsed.classList.add('open');
+  var el=highlight(hit);if(!el||!el.isConnected)return;
+  var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Po přechodu rozbalení je výsledná pozice stabilní, proto posun zopakujeme.
+  function move(){if(el.isConnected)el.scrollIntoView({behavior:reduced?'auto':'smooth',block:'center'});}
+  requestAnimationFrame(function(){requestAnimationFrame(move)});
+  setTimeout(move,550);
+ }
  var timer;function render(){clearMarks();results.replaceChildren();var q=norm(input.value.trim());if(!q){count.textContent='Zadejte hledané slovo nebo frázi.';return}var found=searchNodes(q);count.textContent=found.length+(found.length===500?' a více':'')+' nalezených výskytů';found.slice(0,100).forEach(function(hit,i){var b=document.createElement('button');b.type='button';b.className='uxResult';var strong=document.createElement('strong');strong.textContent=(i+1)+'. ';b.appendChild(strong);b.appendChild(document.createTextNode(context(hit)));b.addEventListener('click',function(){go(hit)});results.appendChild(b)});if(found.length>100){var more=document.createElement('p');more.textContent='Zobrazeno prvních 100 výsledků. Upřesněte hledaný výraz.';results.appendChild(more)}if(!found.length){var msg=document.createElement('p');msg.textContent='Nic nenalezeno. Zkuste jiné slovo.';msg.style.padding='14px';results.appendChild(msg)}}
  function open(){clearMarks();previous=document.activeElement;overlay.hidden=false;input.value='';render();input.focus()}
  function close(restore){overlay.hidden=true;if(restore!==false&&previous&&previous.focus)previous.focus()}
