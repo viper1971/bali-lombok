@@ -1,4 +1,5 @@
-const {chromium}=require('playwright');
+const engines=require('playwright');
+const engine=process.env.BROWSER_ENGINE||'chromium';
 const {spawn}=require('node:child_process');
 const fs=require('node:fs');
 const assert=require('node:assert/strict');
@@ -9,14 +10,14 @@ function serve(dir,port){const p=spawn('python3',['-m','http.server',String(port
 (async()=>{
  const current=serve(process.cwd(),8765),original=baseline?serve(baseline,8766):null;
  fs.mkdirSync('test-results',{recursive:true});await sleep(1000);
- const browser=await chromium.launch(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{});
+ const browser=await engines[engine].launch(process.env.CHROME_PATH&&engine==='chromium'?{executablePath:process.env.CHROME_PATH}:{});
  const report=[];
  try{
  for(const viewport of [{width:390,height:844},{width:1440,height:1000}]){
   const snapshots=[];
   for(const [label,url] of [['baseline',original],['current',current]]){
    if(!url)continue;
-   const ctx=await browser.newContext({viewport,serviceWorkers:'block',reducedMotion:'reduce'});
+   const ctx=await browser.newContext({viewport,serviceWorkers:'block',reducedMotion:'reduce',...(viewport.width===390&&engine==='webkit'?{isMobile:true,hasTouch:true}:{})});
    await ctx.route('**/*',r=>r.request().url().startsWith(url)?r.continue():r.abort());
    const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
    await page.goto(url);await page.waitForTimeout(3500);
@@ -55,7 +56,7 @@ function serve(dir,port){const p=spawn('python3',['-m','http.server',String(port
     await page.locator('#uxSearchInput').fill('AuditUniqueSearchTarget');await page.waitForTimeout(500);
     assert.equal(await page.locator('.uxResultLocked').count(),0);await page.locator('.uxResult').first().click();assert.equal(await page.locator('mark.uxFoundMark').textContent(),'AuditUniqueSearchTarget');
    }
-   snapshots.push({label,initial,budgets,variants,errors});await ctx.close();
+   assert.equal(errors.length,0,`${engine} ${label}: ${JSON.stringify(errors)}`);snapshots.push({label,initial,budgets,variants,errors});await ctx.close();
   }
   if(snapshots.length===2){assert.deepEqual(snapshots[1].initial,snapshots[0].initial);assert.deepEqual(snapshots[1].budgets,snapshots[0].budgets);assert.deepEqual(snapshots[1].variants,snapshots[0].variants);assert.deepEqual(snapshots[1].errors,snapshots[0].errors);}
   report.push({viewport,snapshots});
@@ -63,7 +64,7 @@ function serve(dir,port){const p=spawn('python3',['-m','http.server',String(port
  // Offline first load, full shell, and reload without network.
  const context=await browser.newContext();await context.route('**/*',r=>r.request().url().startsWith(current)?r.continue():r.abort());const p=await context.newPage();await p.goto(current,{waitUntil:'domcontentloaded'});await p.evaluate(()=>navigator.serviceWorker.ready);await p.reload();await p.waitForTimeout(3500);
  const before=await p.locator('#bxGrand_pers').textContent();await context.setOffline(true);await p.reload();await p.waitForTimeout(3500);assert.equal(await p.locator('#bxGrand_pers').textContent(),before);assert(await p.evaluate(()=>!!window.TRIP));await context.close();
- fs.writeFileSync('test-results/browser.json',JSON.stringify({passed:true,report},null,2));
+ fs.writeFileSync('test-results/browser.json',JSON.stringify({passed:true,engine,report},null,2));
  console.log('PASS: desktop/mobile regression, navigation, locking, food/flight/hotel calculations, budget modes, theme, presentation, persistence, search and offline reload');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1}).finally(()=>servers.forEach(p=>p.kill()));

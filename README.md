@@ -37,3 +37,9 @@ Obrázky, externí písma a mapové dlaždice se ukládají při použití, př�
 Po nasazení ponechat soubory předchozí verze `assets/build/` po dobu přechodu existujících klientů. Novou verzi nejdřív ověřit na testovacím hostingu. Tento PR se neslučuje automaticky.
 
 Rozšířená kontrola: `BASELINE_DIR=baseline node tests/extended.cjs`. Porovnává geometrii a vybrané computed styles všech rozbalených sekcí na dvou šířkách, ukládá snímky a měří tři studené návštěvy pro desktop a simulovaný mobil. Externí služby jsou zablokované shodně, soubory se přenášejí bez komprese. Výsledky nejsou produkční Core Web Vitals.
+
+CSS výstupy odstraňují pouze formátovací bílé znaky a samostatné komentáře. Selektory, hodnoty, podmínky, pořadí i vlastní CSS proměnné kontroluje `tests/css-semantics.cjs` porovnáním stromu parseru. Zdrojové CSS zůstává čitelné.
+
+Kompatibilita: `BROWSER_ENGINE=firefox npm run test:browser` nebo `BROWSER_ENGINE=webkit npm run test:browser`. CI instaluje příslušné prohlížeče a používá stejný výchozí checkout. Mobilní WebKit zapíná dotykový mobilní režim. Nejde o fyzický iPhone/Safari.
+
+`node tests/live.cjs` kontroluje živé veřejné CDN/API a základní provoz webu. Neukládá ani neodesílá formuláře. Výpadky jednotlivých cizích služeb jsou v reportu oddělené od funkčnosti místní aplikace; navíc se ověřuje deterministický výpadek všech externích zdrojů.

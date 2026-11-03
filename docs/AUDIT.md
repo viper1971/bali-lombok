@@ -61,3 +61,12 @@ Velikost slučovaných CSS skupin je omezena na 64 kB (jednotlivé větší pův
 Rozšířená kontrola odhalila původní smyčku `imgScan → vložení obrázku → error → odstranění → MutationObserver → imgScan`. Karta si nyní pamatuje neúspěšnou URL a obnoví pokus při události online. Test ověřuje nejvýše tři pokusy pro tři bankovky při nedostupnosti. Pro vizuální srovnání se použijí skutečné místní kopie těchto tří obrázků v obou verzích, aby síťová chyba původní verze nezpůsobovala náhodné rozměry.
 
 Stejná ochrana byla rozšířena na fotografické náhledy s více kandidáty: po vyčerpání kandidátů se další pokus omezí na nejvýše jednou za minutu, při návratu připojení se ochrana resetuje. Přechod na náhradní kandidát už nezůstane blokovaný lazy loadingem po chybě. Regrese používá uložené tři neplatné kandidáty a ověřuje omezený počet požadavků.
+
+
+## Kompatibilita a CSS – další kontrola
+
+- CSS minifikace odstraněním samotného formátování a samostatných komentářů: výstupy CSS/JS celkem 1 151 030 bajtů (před touto etapou 1 269 382). Zdrojové CSS zůstalo beze změny.
+- Nový strukturální test parseru porovnává selektory, deklarace, jejich hodnoty, podmínky a pořadí před/po buildu. Vlastní CSS proměnné mají ponechané významové bílé znaky.
+- Nově 7 statických testů; prohlížečová regrese má běžet také ve Firefoxu a WebKitu. Mobilní WebKit má zapnuté isMobile/hasTouch.
+- Přidán skutečný síťový smoke test Leaflet, Google Fonts, ECB/Frankfurter, Wikimedia a základních výpočtů při živém připojení. Odděleně testuje lokální funkčnost při úplném výpadku externích CDN.
+- Výsledek těchto nových běhů je uveden v PR; do úspěšného běhu nejde o potvrzenou kompatibilitu.

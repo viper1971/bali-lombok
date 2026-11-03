@@ -10,6 +10,8 @@ for old in out.glob('*'):
 manifest = []
 js_sources = {p: (ROOT / p).read_text() for p in re.findall(r'<script\b[^>]*src="(assets/js/[^\"]+)"', source)}
 minified = json.loads(subprocess.run(['node', 'tools/minify-js.cjs'], cwd=ROOT, input=json.dumps(js_sources), text=True, capture_output=True, check=True).stdout)
+css_sources = {p: (ROOT / p).read_text() for p in re.findall(r'href="(assets/css/[^\"]+)"', source)}
+minified_css = json.loads(subprocess.run(['node', 'tools/minify-css.cjs'], cwd=ROOT, input=json.dumps(css_sources), text=True, capture_output=True, check=True).stdout)
 def emit(kind, content, sources):
     digest = hashlib.sha256(content.encode()).hexdigest()[:16]
     name = f'assets/build/{kind}-{digest}.{kind}'
@@ -33,7 +35,7 @@ pattern = css + r'(?:(?:\s|<!--.*?-->)*' + css + r')*'
 def styles(m):
     tags = re.findall(css, m[0])
     paths = [re.search(r'href="([^"]+)"', t)[1] for t in tags]
-    contents = [(ROOT / p).read_text() for p in paths]
+    contents = [minified_css[p] for p in paths]
     # CSS relative URLs and @imports would change meaning after relocating.
     for p, c in zip(paths, contents):
         urls = re.findall(r"url\(\s*(?:\"([^\"]*)\"|'([^']*)'|([^)]*))\)", c)
@@ -47,7 +49,7 @@ def styles(m):
     if batch: chunks.append(batch)
     links = ''
     for batch in chunks:
-        name = emit('css', '\n'.join('/* '+p+' */\n'+c for p,c in batch), [p for p,c in batch])
+        name = emit('css', '\n'.join(c for p,c in batch), [p for p,c in batch])
         links += f'<link rel="stylesheet" href="{name}">'
     anchors = ''.join('<style id="'+i+'"></style>' for t in tags for i in re.findall(r'\bid="([^"]+)"',t))
     comments = '\n'.join(re.findall(r'<!--.*?-->',m[0],re.S))

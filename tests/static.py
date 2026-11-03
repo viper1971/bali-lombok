@@ -23,12 +23,14 @@ class BuildTests(unittest.TestCase):
    content=(ROOT/m['output']).read_text()
    if m['output'].endswith('.js'):
     self.assertTrue(content.strip());subprocess.run(['node','--check',str(ROOT/m['output'])],check=True,capture_output=True)
-   else:self.assertEqual(content,'\n'.join('/* '+p+' */\n'+(ROOT/p).read_text() for p in m['sources']))
+   else:self.assertTrue(content.strip())
   for ext,attr in [('js','src'),('css','href')]:
    src=re.findall(attr+r'="(assets/'+ext+r'/[^"]+)"',(ROOT/'src/index.html').read_text())
    flattened=[p for m in manifest if m['output'].endswith('.'+ext) for p in m['sources']]
    if ext=='js':src=[p for p in src if re.sub(r'/\*.*?\*/|//[^\n]*','',(ROOT/p).read_text(),flags=re.S).strip()]
    self.assertEqual(src,flattened)
+ def test_css_semantics(self):
+  subprocess.run(['node','tests/css-semantics.cjs'],cwd=ROOT,check=True,capture_output=True)
  def test_local_resources_and_charset(self):
   text=(ROOT/'index.html').read_text();self.assertLess(text.index('<meta charset='),1024)
   for tag,a in Page(text).tags:
