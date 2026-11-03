@@ -886,7 +886,7 @@ function recalculateAll() {
         const htmlRoot = document.documentElement;
         const themeToggleBtn = document.getElementById('themeToggleBtn');
 
-        const savedTheme = localStorage.getItem('theme') || 'light';
+        const savedTheme = localStorage.getItem('theme') || 'dark';
         htmlRoot.setAttribute('data-theme', savedTheme);
         if (themeToggleBtn) {
             themeToggleBtn.innerText = savedTheme === 'light' ? '🌙' : '☀️';
@@ -1478,13 +1478,10 @@ function recalculateAll() {
         }
 
         if ('serviceWorker' in navigator) {
-            // Do not wait for external iframes: a hanging map must not block its fix.
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                window.dispatchEvent(new Event('bali:maps-retry'));
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .catch(err => console.warn('Chyba registrace offline režimu:', err));
             });
-            navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' })
-                .then(reg => reg.update())
-                .catch(err => console.warn('Chyba registrace offline režimu:', err));
         }
 
         const PACK_LIMIT_KG = 7;   // limit příručního batohu

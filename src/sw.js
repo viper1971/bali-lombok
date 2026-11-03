@@ -129,10 +129,6 @@ self.addEventListener('fetch', event => {
     const request = event.request;
     if (request.method !== 'GET' || !/^https?:/.test(request.url)) return;
     const url = new URL(request.url);
-    // Google embeds manage their own redirects, cookies and document responses.
-    // Never replace them with cached opaque responses or an app offline fallback.
-    if ((url.origin !== self.location.origin && request.mode === 'navigate') ||
-        ((url.hostname === 'maps.google.com' || url.hostname === 'www.google.com' || url.hostname === 'google.com') && /^\/maps(?:\/|$)/.test(url.pathname))) return;
     if (request.mode === 'navigate') {
         event.respondWith(networkFirst(request));
     } else if (/kurzy\.cz|frankfurter|api\.|wikimedia\.org\/w\/api/.test(url.hostname + url.pathname)) {
