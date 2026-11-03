@@ -6,8 +6,8 @@ html body.simple-on #baliUnifiedRail,html body.simple-on #baliMobileHamburger,ht
 #simplePage.sj-page .sj-book:before,#simplePage.sj-page .sj-book:after{content:'';position:absolute;pointer-events:none;top:0;bottom:0;width:9px;z-index:-1;background:linear-gradient(90deg,#55321f99,#a2733060,transparent);opacity:.7}
 #simplePage.sj-page .sj-book:before{left:0}#simplePage.sj-page .sj-book:after{right:0;transform:scaleX(-1)}
 #simplePage.sj-page section{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
-#simplePage.sj-page h1,#simplePage.sj-page h2,#simplePage.sj-page h3,#simplePage.sj-page h4{font-family:Georgia,'Times New Roman',serif;color:var(--sj-ink);font-weight:400;text-transform:none;letter-spacing:-.025em}
-#simplePage.sj-page h1:focus{outline:none}
+#simplePage.sj-page h1,#simplePage.sj-page h2,#simplePage.sj-page h3,#simplePage.sj-page h4{font-family:Georgia,'Times New Roman',serif!important;color:var(--sj-ink);font-weight:400;text-transform:none;letter-spacing:-.025em}
+#simplePage.sj-page h1:focus,#simplePage.sj-page h1:focus-visible{outline:none!important;box-shadow:none!important;border:0!important}
 #simplePage.sj-page h2{font-size:clamp(30px,4.3vw,47px);line-height:1.16;margin:12px 0 22px}
 #simplePage.sj-page h3{font-size:24px;line-height:1.25;margin:10px 0}
 #simplePage.sj-page h4{font-size:17px;line-height:1.4;letter-spacing:0;margin:0 0 7px;font-weight:600}
