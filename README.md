@@ -53,3 +53,5 @@ Kód a HTML jsou v cache s verzí buildu, fotografie, písma a veřejná data v 
 Načítání Leaflet čeká na skript i stylesheet. Selhání odstraní dočasné elementy, uvolní společný promise a dovolí další pokus; existuje časový limit 12 s. Návrat připojení obnoví sledování viditelnosti map.
 
 HTML má generovaný marker `bali-build`. Worker při instalaci vyžaduje shodu markeru s verzí; nověji načtené HTML se může zobrazit online, ale nepřepíše offline fallback jiné kompletní verze. Proto upravovat `src/index.html` a spouštět build, neupravovat generovaný marker ručně.
+
+Síťové čekání přes worker je omezené: 5 s pro kód, HTML, CSS a API, 30 s pro média. Časovač se ukončuje až po zpracování těla a zápisu do cache; při chybě zůstává použitelná uložená odpověď, pokud existuje.

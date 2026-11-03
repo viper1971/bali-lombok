@@ -4,14 +4,14 @@ const assert=require('node:assert/strict');
 const source=readFileSync('sw.js','utf8'),version=JSON.parse(source.match(/const VERSION = (.*);/)[1]);
 const online='<meta name="bali-build" content="'+version+'">online';
 (async()=>{
- const handlers={}, stores=new Map();let network=async()=>new Response(online);let added=[],rejectPutUrl=null;
+ const handlers={}, stores=new Map();let network=async()=>new Response(online);let added=[],rejectPutUrl=null,forceTimeout=false,deferTimeout=false,stallPutUrl=null,activeSignal=null,stalledPut=false;const deadlines=[];const timers=new Map();let timerId=0;
  const key=r=>typeof r==='string'?r:r.url;
  const caches={keys:async()=>[...stores.keys()],delete:async n=>stores.delete(n),open:async n=>{
   if(!stores.has(n))stores.set(n,new Map());const s=stores.get(n);
-  return {match:async(r,opts)=>(s.get(key(r))||(opts?.ignoreSearch?[...s].find(([k])=>k.split('?')[0]===key(r).split('?')[0])?.[1]:undefined))?.clone(),put:async(r,v)=>{if(key(r)===rejectPutUrl)throw Error('quota');return s.set(key(r),v)},keys:async()=>[...s.keys()],delete:async r=>s.delete(key(r)),addAll:async urls=>{added=urls;for(const url of urls)s.set(new URL(url,scope).href,new Response(online));}};
+  return {match:async(r,opts)=>(s.get(key(r))||(opts?.ignoreSearch?[...s].find(([k])=>k.split('?')[0]===key(r).split('?')[0])?.[1]:undefined))?.clone(),put:async(r,v)=>{if(key(r)===stallPutUrl){stalledPut=true;return new Promise((resolve,reject)=>{if(activeSignal.aborted)reject(Error('aborted body'));else activeSignal.addEventListener('abort',()=>reject(Error('aborted body')));});}if(key(r)===rejectPutUrl)throw Error('quota');return s.set(key(r),v)},keys:async()=>[...s.keys()],delete:async r=>s.delete(key(r)),addAll:async urls=>{added=urls;for(const url of urls)s.set(new URL(url,scope).href,new Response(online));}};
  }};
  const scope='https://example.test/bali/';
- const context={self:{registration:{scope},location:{origin:'https://example.test'},clients:{claim:async()=>{}},skipWaiting:async()=>{},addEventListener:(n,f)=>handlers[n]=f},caches,fetch:(...a)=>network(...a),Response,URL,console};
+ const context={self:{registration:{scope},location:{origin:'https://example.test'},clients:{claim:async()=>{}},skipWaiting:async()=>{},addEventListener:(n,f)=>handlers[n]=f},caches,fetch:(...a)=>network(...a),Response,URL,console,AbortController,setTimeout:(fn,ms)=>{deadlines.push(ms);const id=++timerId;timers.set(id,fn);if(forceTimeout)(deferTimeout?setImmediate:queueMicrotask)(()=>{if(timers.has(id))fn()});return id},clearTimeout:id=>timers.delete(id)};
  vm.runInNewContext(source,context);
  let pending;handlers.install({waitUntil:p=>pending=p});await pending;assert(added.includes('index.html'));assert(added.some(x=>x.endsWith('.css')));
  const badHandlers={},badScope='bali2027-'+scope+'::ffffffffffffffff';
@@ -48,6 +48,15 @@ const online='<meta name="bali-build" content="'+version+'">online';
  network=async()=>new Response('tile');await get({method:'GET',url:'https://tile.openstreetmap.org/1/0/0.png',mode:'cors'});
  assert([...stores].some(([name,entries])=>name.endsWith('::tiles-v1')&&entries.has('https://tile.openstreetmap.org/1/0/0.png')),'base tile hostname not cached as a tile');
  network=async()=>{throw Error('offline')};assert.equal(await(await get({method:'GET',url:scope+'saved-photo.jpg',mode:'cors'})).text(),'saved-photo');
+ forceTimeout=true;network=(req,options)=>new Promise((resolve,reject)=>options.signal.addEventListener('abort',()=>reject(Error('aborted'))));
+ assert.equal(await(await get()).text(),online,'hanging navigation did not fall back');
+ const missing=await get({method:'GET',url:'https://fonts.googleapis.com/css2?unavailable',mode:'cors'});assert.equal(missing.type,'error');
+ assert.equal(timers.size,0,'network timeout leaked');forceTimeout=false;
+ forceTimeout=true;deferTimeout=true;stallPutUrl='https://fonts.googleapis.com/timeout-body.css';
+ network=async(req,options)=>{activeSignal=options.signal;return new Response('css body')};
+ const stalled=await get({method:'GET',url:stallPutUrl,mode:'cors',destination:'style'});
+ assert(stalledPut,'body-write timeout was not exercised');assert.equal(stalled.type,'error');assert.equal(timers.size,0);
+ forceTimeout=false;deferTimeout=false;stallPutUrl=null;assert(deadlines.includes(5000));assert(deadlines.includes(30000));
  let result;network=async request=>new Response([scope,scope+'index.html'].includes(String(request))?online:'saved');handlers.message({data:{type:'precache',urls:[scope+'photo.png','javascript:bad']},ports:[{postMessage:r=>result=r}],waitUntil:p=>pending=p});await pending;assert.equal(result.fail,1);assert(result.ok>added.length);
  // The offline-save button must enforce the same build guard as navigation.
  network=async request=>new Response(new URL(typeof request==='string'?request:request.url).pathname.endsWith('.html')||new URL(request).pathname===new URL(scope).pathname?'<meta name="bali-build" content="ffffffffffffffff">new-release':'saved');

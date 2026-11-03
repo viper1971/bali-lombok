@@ -103,3 +103,6 @@ Stav a výsledky dalších běhů: https://github.com/viper1971/bali-lombok/pull
 ### Vývojové závislosti
 
 `npm audit` při navázání hlásil jednu zranitelnou přímou závislost `postcss@8.5.6`, se čtyřmi advisories včetně vysoké závažnosti. PostCSS je použitý při buildu a testu CSS, není načítaný do produkčního prohlížeče. Aktualizován na přesně připnuté `8.5.32` v `package.json` i lockfile. Odkazy z registru: https://github.com/advisories/GHSA-qx2v-qp2m-jg93 , https://github.com/advisories/GHSA-6g55-p6wh-862q , https://github.com/advisories/GHSA-fxqj-rqcc-2cmp , https://github.com/advisories/GHSA-r28c-9q8g-f849 . Po aktualizaci je povinné ověřit opakovatelnost buildu a sémantiku CSS; samotná instalace není důkazem kompatibility. CI nyní kontroluje také `npm audit --audit-level=high`.
+
+### Ohraničené síťové čekání
+Service worker má limit 5 s pro HTML, CSS, skripty a API a 30 s pro média. AbortController zůstává aktivní i při čtení těla a ukládání odpovědi. Jednotkové testy simulují visící přenos i visící zápis těla vyvolaný sítí, ověřují offline fallback a nulový počet zbylých časovačů. Změna navazuje na commit `e4366bc` a zachovává jeho ochranu ručního offline ukládání i úpravy závislostí.

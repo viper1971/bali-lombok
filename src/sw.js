@@ -94,17 +94,38 @@ async function save(cache, request, response, max) {
         await Promise.all(keys.slice(0, Math.max(0, keys.length - max)).map(key => cache.delete(key)));
     }
 }
+function networkDeadline(request) {
+    const url = new URL(typeof request === 'string' ? request : request.url);
+    const destination = typeof request === 'string' ? '' : request.destination;
+    const critical = ['document', 'style', 'script'].includes(destination) ||
+        (typeof request !== 'string' && request.mode === 'navigate') || isAppHTML(url) ||
+        /\.(?:html?|css|js)$/i.test(url.pathname) || url.hostname === 'fonts.googleapis.com' ||
+        /kurzy\.cz|frankfurter|api\.|wikimedia\.org\/w\/api/.test(url.hostname + url.pathname);
+    return critical ? 5000 : 30000;
+}
+async function timedFetch(request, options = {}, consume = response => response) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), networkDeadline(request));
+    try {
+        const response = await fetch(request, {...options, signal: controller.signal});
+        const result = await consume(response);
+        if (controller.signal.aborted) throw new Error('Síťový požadavek překročil časový limit');
+        return result;
+    }
+    finally { clearTimeout(timer); }
+}
 async function networkFirst(request, name = CACHE) {
     const cache = await caches.open(name);
     const cached = () => cache.match(request, {ignoreSearch: request.mode === 'navigate'});
     try {
-        const response = await fetch(request);
+        const response = await timedFetch(request, {}, async response => {
+            // Keep the deadline active through body reads and cache writes.
+            if (response.ok && (!isAppNavigation(request) || await sameBuild(response))) {
+                await save(cache, request, response).catch(() => {});
+            }
+            return response;
+        });
         if (!response.ok) return await cached() || response;
-        // Online HTML may belong to a newer deployment. Keep the complete
-        // installed fallback until that deployment's worker installs its shell.
-        if (!isAppNavigation(request) || await sameBuild(response)) {
-            await save(cache, request, response).catch(() => {});
-        }
         return response;
     } catch (_) {
         return await cached() || new Response('Jsi offline a tahle stránka ještě není uložená.', {
@@ -115,7 +136,7 @@ async function networkFirst(request, name = CACHE) {
 function staleWhileRevalidate(event, name, max) {
     const task = caches.open(name).then(async cache => {
         const hit = await cache.match(event.request);
-        const network = fetch(event.request).then(async response => {
+        const network = timedFetch(event.request, {}, async response => {
             await save(cache, event.request, response, max).catch(() => {});
             return response;
         }).catch(() => hit || Response.error());
@@ -138,9 +159,10 @@ self.addEventListener('fetch', event => {
         event.respondWith(caches.open(CACHE).then(async cache => {
             const hit = await cache.match(request);
             if (hit) return hit;
-            const response = await fetch(request);
-            await save(cache, request, response).catch(() => {});
-            return response;
+            return timedFetch(request, {}, async response => {
+                await save(cache, request, response).catch(() => {});
+                return response;
+            });
         }));
     } else if (isTile(url)) {
         event.respondWith(staleWhileRevalidate(event, TILES, MAX_TILES));
@@ -161,13 +183,12 @@ self.addEventListener('message', event => {
                 try {
                     const url = new URL(raw);
                     if (!/^https?:$/.test(url.protocol)) throw new Error('protocol');
-                    const response = await fetch(url.href, url.origin === self.location.origin ? {} : {mode: 'no-cors'});
-                    if (!valid(response)) throw new Error('response');
-                    // Manual offline saving can race a deployment just like navigation.
-                    // Never replace this worker's complete shell with another build.
-                    if (isAppHTML(url) && !await sameBuild(response)) throw new Error('HTML build mismatch');
-                    const cache = await caches.open(cacheFor(url));
-                    await save(cache, url.href, response, isTile(url) ? MAX_TILES : 0);
+                    await timedFetch(url.href, url.origin === self.location.origin ? {} : {mode: 'no-cors'}, async response => {
+                        if (!valid(response)) throw new Error('response');
+                        if (isAppHTML(url) && !await sameBuild(response)) throw new Error('HTML build mismatch');
+                        const cache = await caches.open(cacheFor(url));
+                        await save(cache, url.href, response, isTile(url) ? MAX_TILES : 0);
+                    });
                     ok++;
                 } catch (_) { fail++; }
             }
