@@ -18,7 +18,13 @@ function serve(dir,port){const p=spawn('python3',['-m','http.server',String(port
   for(const [label,url] of [['baseline',original],['current',current]]){
    if(!url)continue;
    const ctx=await browser.newContext({viewport,serviceWorkers:'block',reducedMotion:'reduce',...(viewport.width===390&&engine==='webkit'?{isMobile:true,hasTouch:true}:{})});
-   await ctx.route('**/*',r=>r.request().url().startsWith(url)?r.continue():r.abort());
+   await ctx.route('**/*',r=>{
+    if(r.request().url().startsWith(url))return r.continue();
+    // WebKit emits access-control page errors for artificially aborted fetches.
+    // Model an HTTP outage with valid CORS instead; retain real exception checks.
+    if(['fetch','xhr'].includes(r.request().resourceType()))return r.fulfill({status:503,contentType:'application/json',headers:{'Access-Control-Allow-Origin':'*'},body:'{}'});
+    return r.abort();
+   });
    const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
    await page.goto(url);await page.waitForTimeout(3500);
    await page.screenshot({path:`test-results/${label}-${viewport.width}.png`});
@@ -63,8 +69,12 @@ function serve(dir,port){const p=spawn('python3',['-m','http.server',String(port
  }
  // Offline first load, full shell, and reload without network.
  const context=await browser.newContext();await context.route('**/*',r=>r.request().url().startsWith(current)?r.continue():r.abort());const p=await context.newPage();await p.goto(current,{waitUntil:'domcontentloaded'});await p.evaluate(()=>navigator.serviceWorker.ready);await p.reload();await p.waitForTimeout(3500);
- const before=await p.locator('#bxGrand_pers').textContent();await context.setOffline(true);await p.reload();await p.waitForTimeout(3500);assert.equal(await p.locator('#bxGrand_pers').textContent(),before);assert(await p.evaluate(()=>!!window.TRIP));await context.close();
- fs.writeFileSync('test-results/browser.json',JSON.stringify({passed:true,engine,report},null,2));
+ const before=await p.locator('#bxGrand_pers').textContent();await p.waitForFunction(()=>!!navigator.serviceWorker.controller);
+ fs.writeFileSync('test-results/offline-diagnostics.json',JSON.stringify(await p.evaluate(async()=>({controlled:!!navigator.serviceWorker.controller,caches:await caches.keys()})),null,2));
+ if(engine==='chromium')await context.setOffline(true);
+ else {servers[0].kill();await sleep(500);}
+ await p.reload();await p.waitForTimeout(3500);assert.equal(await p.locator('#bxGrand_pers').textContent(),before);assert(await p.evaluate(()=>!!window.TRIP));await context.close();
+ fs.writeFileSync('test-results/browser.json',JSON.stringify({passed:true,engine,offlineMode:engine==='chromium'?'browser-offline':'origin-unavailable',report},null,2));
  console.log('PASS: desktop/mobile regression, navigation, locking, food/flight/hotel calculations, budget modes, theme, presentation, persistence, search and offline reload');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1}).finally(()=>servers.forEach(p=>p.kill()));
