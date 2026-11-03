@@ -8121,6 +8121,7 @@ body.dark-mode #f-konfig .p35-footer a{color:#80e0d4!important;}
 @media(max-width:600px){#floatingMenuBtn{width:38px!important;min-height:94px!important;padding:10px 5px!important}#menuModalOverlay .menu-modal-box{width:min(350px,calc(100vw - 42px))!important;max-width:calc(100vw - 42px)!important;padding:18px 14px calc(16px + env(safe-area-inset-bottom))!important}}
 @media(prefers-reduced-motion:reduce){#menuModalOverlay,#menuModalOverlay .menu-modal-box{transition:none!important}}
 </style>
+<meta name="bali-menu-revision" content="left-nav-v52">
 </head>
 <body id="hero">
 <a class="premium-skip" href="#hlavni-obsah">Přeskočit na obsah</a>
@@ -23959,56 +23960,38 @@ html body #v29BottomTab{display:none!important;visibility:hidden!important;point
 @media(max-width:600px){html body #floatingMenuBtn{width:38px!important;min-height:94px!important;padding:10px 5px!important}}
 </style>
 <script id="premium-v48-menu-guard">
-(function(){
- 'use strict';
- function ensure(){
-  var panel=document.getElementById('vipFloatingBar');
-  if(!panel)return;
-  var tab=document.getElementById('v29BottomTab');
-  if(!tab){
-    tab=document.createElement('button');
-    tab.type='button';tab.id='v29BottomTab';
-    tab.setAttribute('aria-controls','vipFloatingBar');
-    tab.innerHTML='<span class="v29-chevron" aria-hidden="true">▴</span><span>MENU</span>';
-    document.body.appendChild(tab);
-    tab.addEventListener('click',function(){
-      document.body.classList.toggle('v29-bottom-open');
-      sync();
-    });
-  }
-  function sync(){
-    var shown=document.body.classList.contains('v29-bottom-open');
-    tab.setAttribute('aria-expanded',String(shown));
-    var chev=tab.querySelector('.v29-chevron');
-    if(chev)chev.textContent=shown?'▾':'▴';
-  }
-  /* Spodní panel se otevírá pouze z položky levého menu. */
-  document.body.classList.remove('v29-top-open','v29-bottom-open');
-  var nav=document.getElementById('bottomNav');
-  if(nav&&!document.getElementById('menuOpenBudgetPanel')){
-    var budget=document.createElement('button');
-    budget.type='button';budget.id='menuOpenBudgetPanel';budget.className='nav-item';
-    budget.innerHTML='<span class="icon" aria-hidden="true">▤</span><span>Rozpočet a ovládací panel</span>';
-    budget.style.cssText='width:100%;text-align:left;cursor:pointer;font-family:inherit';
-    budget.addEventListener('click',function(){
-      if(typeof window.setMenuModalOpen==='function')window.setMenuModalOpen(false);
+/* V52: Nevytvářet žádné spodní ouško. Navigace je pouze na levém okraji. */
+(function () {
+  'use strict';
+  function init() {
+    var old = document.getElementById('v29BottomTab');
+    if (old) old.remove();
+    var nav = document.getElementById('bottomNav');
+    if (!nav || document.getElementById('menuOpenBudgetPanel')) return;
+    var budget = document.createElement('button');
+    budget.type = 'button';
+    budget.id = 'menuOpenBudgetPanel';
+    budget.className = 'nav-item';
+    budget.innerHTML = '<span class="icon" aria-hidden="true">▤</span><span>Rozpočet a ovládací panel</span>';
+    budget.style.cssText = 'width:100%;text-align:left;cursor:pointer;font-family:inherit';
+    budget.addEventListener('click', function () {
+      if (typeof window.setMenuModalOpen === 'function') window.setMenuModalOpen(false);
       else document.getElementById('menuModalOverlay')?.classList.remove('open');
-      document.body.classList.add('v29-bottom-open');
-      sync();
+      document.body.classList.toggle('v29-bottom-open');
     });
     nav.appendChild(budget);
+    document.addEventListener('keydown', function(ev){
+      if(ev.key === 'Escape') document.body.classList.remove('v29-bottom-open');
+    });
+    document.addEventListener('click', function(ev) {
+      if (!document.body.classList.contains('v29-bottom-open')) return;
+      if(ev.target.closest('#vipFloatingBar,#menuOpenBudgetPanel')) return;
+      if(ev.target.closest('#floatingMenuBtn')) return;
+      document.body.classList.remove('v29-bottom-open');
+    });
   }
-  sync();
-  document.addEventListener('keydown',function(ev){
-    if(ev.key==='Escape'){document.body.classList.remove('v29-bottom-open');sync();}
-  });
-  document.addEventListener('click',function(ev){
-    var button=ev.target.closest('#v29BottomTab');
-    if(button){requestAnimationFrame(sync);}
-  });
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ensure);
- else ensure();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 
@@ -24075,6 +24058,9 @@ html body #v29BottomTab{display:none!important;visibility:hidden!important;point
  #vipFloatingBar.pm-merged .pm-nav-btn{padding:5px!important;font-size:.61rem!important;}
  #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-val{font-size:.76rem!important;}
 }
+/* V52 definitive disable of obsolete bottom menu trigger */
+html body #v29BottomTab { display:none!important;visibility:hidden!important;pointer-events:none!important; }
+html body:not(.pres-on) #floatingMenuBtn { display:flex!important;visibility:visible!important;pointer-events:auto!important; }
 </style>
 </body>
 </html>
