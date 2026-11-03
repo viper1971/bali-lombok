@@ -48,6 +48,12 @@ const online='<meta name="bali-build" content="'+version+'">online';
  network=async()=>new Response('tile');await get({method:'GET',url:'https://tile.openstreetmap.org/1/0/0.png',mode:'cors'});
  assert([...stores].some(([name,entries])=>name.endsWith('::tiles-v1')&&entries.has('https://tile.openstreetmap.org/1/0/0.png')),'base tile hostname not cached as a tile');
  network=async()=>{throw Error('offline')};assert.equal(await(await get({method:'GET',url:scope+'saved-photo.jpg',mode:'cors'})).text(),'saved-photo');
- let result;network=async()=>new Response('saved');handlers.message({data:{type:'precache',urls:[scope+'photo.png','javascript:bad']},ports:[{postMessage:r=>result=r}],waitUntil:p=>pending=p});await pending;assert.equal(result.fail,1);assert(result.ok>added.length);
+ let result;network=async request=>new Response([scope,scope+'index.html'].includes(String(request))?online:'saved');handlers.message({data:{type:'precache',urls:[scope+'photo.png','javascript:bad']},ports:[{postMessage:r=>result=r}],waitUntil:p=>pending=p});await pending;assert.equal(result.fail,1);assert(result.ok>added.length);
+ // The offline-save button must enforce the same build guard as navigation.
+ network=async request=>new Response(new URL(typeof request==='string'?request:request.url).pathname.endsWith('.html')||new URL(request).pathname===new URL(scope).pathname?'<meta name="bali-build" content="ffffffffffffffff">new-release':'saved');
+ handlers.message({data:{type:'precache',urls:[scope+'?let=emirates',scope+'index.html?let=emirates']},ports:[{postMessage:r=>result=r}],waitUntil:p=>pending=p});await pending;
+ assert.equal(result.fail,4,'precache accepted HTML from another release');
+ network=async()=>{throw Error('offline')};assert.equal(await(await get()).text(),online,'offline-save replaced the installed root shell');
+ assert.equal(await(await get({method:'GET',url:scope+'index.html',mode:'navigate'})).text(),online,'offline-save replaced the installed index shell');
  console.log('PASS: atomic shell version, runtime/legacy migration, scope/quota guards, tile limit, network/offline/503, precache');
 })().catch(e=>{console.error(e);process.exitCode=1});

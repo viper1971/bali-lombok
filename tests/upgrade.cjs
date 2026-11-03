@@ -37,7 +37,7 @@ const engine=process.env.BROWSER_ENGINE||'chromium',sleep=ms=>new Promise(r=>set
    navigator.serviceWorker.addEventListener('controllerchange',()=>{clearTimeout(timer);resolve();},{once:true});
    try{const reg=await navigator.serviceWorker.getRegistration();await reg.update();}catch(e){clearTimeout(timer);reject(e);}
   }));
-  await p.goto(origin);await p.waitForFunction(()=>!!window.TRIP);await sleep(3500);
+  await p.goto(origin,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!!window.TRIP);await sleep(3500);
   report.cacheKeys=await p.evaluate(()=>caches.keys());
   assert(report.cacheKeys.includes('bali2027-'+scope+'::runtime-v1'));assert(report.cacheKeys.includes('bali2027-'+scope+'nested/0123456789abcdef'));
   assert(!report.cacheKeys.includes('bali2027-'+scope+'0123456789abcdef'));
@@ -48,7 +48,7 @@ const engine=process.env.BROWSER_ENGINE||'chromium',sleep=ms=>new Promise(r=>set
   const before=await p.locator('#bxGrand_pers').textContent();
   if(engine==='chromium')await context.setOffline(true);
   else await new Promise(r=>server.close(r));
-  await p.reload();await p.waitForFunction(()=>!!window.TRIP);await sleep(3500);
+  await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>!!window.TRIP);await sleep(3500);
   assert.equal(await p.locator('#bxGrand_pers').textContent(),before);
   const saved=await p.evaluate(async scope=>({photo:await(await fetch(scope+'saved-photo.jpg')).text(),legacy:await(await fetch(scope+'legacy-photo.png')).text(),api:await(await fetch('https://api.frankfurter.dev/v1/audit-upgrade?base=EUR')).json()}),scope);
   assert.equal(saved.photo,'saved-photo');assert.equal(saved.legacy,'legacy-photo');assert.equal(saved.api.saved,true);

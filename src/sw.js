@@ -29,8 +29,10 @@ async function sameBuild(response) {
 }
 function isAppNavigation(request) {
     if (request.mode !== 'navigate') return false;
-    const url = new URL(request.url);
-    return url.href.split('?')[0] === self.registration.scope ||
+    return isAppHTML(new URL(request.url));
+}
+function isAppHTML(url) {
+    return url.origin + url.pathname === self.registration.scope ||
         url.origin + url.pathname === new URL('index.html', self.registration.scope).href;
 }
 function ownedVersion(name) {
@@ -161,6 +163,9 @@ self.addEventListener('message', event => {
                     if (!/^https?:$/.test(url.protocol)) throw new Error('protocol');
                     const response = await fetch(url.href, url.origin === self.location.origin ? {} : {mode: 'no-cors'});
                     if (!valid(response)) throw new Error('response');
+                    // Manual offline saving can race a deployment just like navigation.
+                    // Never replace this worker's complete shell with another build.
+                    if (isAppHTML(url) && !await sameBuild(response)) throw new Error('HTML build mismatch');
                     const cache = await caches.open(cacheFor(url));
                     await save(cache, url.href, response, isTile(url) ? MAX_TILES : 0);
                     ok++;

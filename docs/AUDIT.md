@@ -1,5 +1,7 @@
 # Audit BALI 2027 – 3. 11. 2026
 
+> Jednotlivé etapy níže jsou historický záznam. Aktuální stav shrnuje poslední oddíl; starší počty a omezení nejsou výsledkem nejnovějšího buildu.
+
 Základ: PR #1, commit `457040d35ca72436f02a7a03b524cdb7fb6c5b50`. Práce v `audit/bali-2027`; `main` beze změny.
 
 ## Provedené změny
@@ -82,3 +84,22 @@ Stejná ochrana byla rozšířena na fotografické náhledy s více kandidáty: 
 - Aktuální výsledky těchto kontrol a případná omezení jsou uvedené v PR #2.
 
 Druhý reprodukovaný problém: síťově načtené HTML nové verze přepisovalo offline fallback staršího kompletního buildu. Jednotkový test nejprve selhal na `a new HTML release replaced the complete installed shell`. Builder nyní vkládá marker verze; worker při instalaci kontroluje shodu HTML s verzí a při běžné navigaci neukládá cizí build přes kompletní fallback. Test potvrzuje zachování fallbacku i odmítnutí a úklid neodpovídající instalace bez smazání aktivní verze.
+
+
+## Kontrola skutečně uloženého stavu a navazující oprava
+
+Ověřeno přímo přes GitHub a `git ls-remote`: PR #1 zůstává na počátečním rozdělení `457040d`; navazující práce je v PR #2 a větvi `audit/bali-2027`. Při navázání odpovídal místní checkout vzdálenému commitu `d98298d06e06305f17bd17dde72aaac68e305777`, bez neuložených změn. `main` zůstává `07b74cbd02ae11282634624384de2bbe675d20f0`.
+
+- Poslední známý úspěšný běh všech tří enginů před navázáním: commit `e35d353`, https://github.com/viper1971/bali-lombok/actions/runs/41615798760 .
+- Následující běh `d98298d`: https://github.com/viper1971/bali-lombok/actions/runs/41620598633 . Firefox včetně skutečné výměny workeru prošel; WebKit skončil na `page.reload` čekajícím na `load` ještě před odpojením origin serveru. To není úspěšný finální běh nejnovější verze. Chromium následně úspěšně dokončil funkční i rozšířenou regresi, výměnu workeru a živý síťový test.
+- Offline test nově čeká na DOM, spuštění `TRIP`, neprázdný rozpočet a všechny místní stylesheety. Nečeká na globální `load`, který může zadržet externí zdroj obsluhovaný workerem mimo Playwright routing. Stejná strategie DOM je v testu výměny workeru. Srovnání rozpočtu a čtení uložených médií/API zůstává povinné. Průběžný report výpočtů se ukládá i před offline částí.
+- Další reprodukovaná chyba: `precache` zpráva tlačítka Uložit pro offline obcházela kontrolu verze zavedenou pro navigaci. Nový regresní test nejprve selhal (`precache accepted HTML from another release`); po opravě odmítá rozdílné HTML pro kořen i `index.html`, včetně parametrů, a ověřuje zachování obou offline fallbacků. Správná verze se stále ukládá a počítají se skutečně uložené položky.
+- Lokálně: 7 statických kontrol, test service workeru a test obnovy Leaflet. Prohlížečové výsledky této opravy se ověřují v novém běhu GitHub Actions a shrnují přímo v PR #2. Lokální úspěch těchto kontrol není tvrzením o úspěchu prohlížečů.
+- Aktuální manifest: 78 místních CSS/JS požadavků, 1 151 816 bajtů; proti původním 136 požadavkům a 1 408 845 bajtům jde o pokles 42,6 % požadavků a 18,2 % bajtů bez HTTP komprese. Starší časová měření v PR se vztahují k označenému dřívějšímu commitu; po opravě workeru nebyla vydávána za nová měření.
+
+Stav a výsledky dalších běhů: https://github.com/viper1971/bali-lombok/pull/2 a https://github.com/viper1971/bali-lombok/actions . Fyzické telefony, všechny kombinace externích služeb a ruční kontrola každého pixelu nejsou automatickými testy pokryty.
+
+
+### Vývojové závislosti
+
+`npm audit` při navázání hlásil jednu zranitelnou přímou závislost `postcss@8.5.6`, se čtyřmi advisories včetně vysoké závažnosti. PostCSS je použitý při buildu a testu CSS, není načítaný do produkčního prohlížeče. Aktualizován na přesně připnuté `8.5.32` v `package.json` i lockfile. Odkazy z registru: https://github.com/advisories/GHSA-qx2v-qp2m-jg93 , https://github.com/advisories/GHSA-6g55-p6wh-862q , https://github.com/advisories/GHSA-fxqj-rqcc-2cmp , https://github.com/advisories/GHSA-r28c-9q8g-f849 . Po aktualizaci je povinné ověřit opakovatelnost buildu a sémantiku CSS; samotná instalace není důkazem kompatibility. CI nyní kontroluje také `npm audit --audit-level=high`.
