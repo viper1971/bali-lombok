@@ -132,9 +132,10 @@
             performance.getEntriesByType('resource').forEach(function (e) { if (/^https?:/.test(e.name) && !skip.test(e.name) && e.initiatorType !== 'iframe') urls[e.name] = 1; });
             [].forEach.call(document.querySelectorAll('img[src],script[src],link[rel~="stylesheet"][href],link[rel~="manifest"][href],link[rel~="apple-touch-icon"][href]'), function (el) { var s = el.src || el.href; if (/^https?:/.test(s) && !skip.test(s)) urls[s] = 1; });
             var res = await new Promise(function (resolve, reject) {
-                var ch = new MessageChannel(); ch.port1.onmessage = function (e) { resolve(e.data); };
+                var ch = new MessageChannel();
+                var timeout = setTimeout(function () { ch.port1.close(); reject(new Error('časový limit')); }, 40000);
+                ch.port1.onmessage = function (e) { clearTimeout(timeout); ch.port1.close(); resolve(e.data); };
                 sw.postMessage({ type: 'precache', urls: Object.keys(urls) }, [ch.port2]);
-                setTimeout(function () { reject(new Error('časový limit')); }, 40000);
             });
             try { localStorage.setItem('lux_offline_saved', String(Date.now())); } catch (e) {}
             offlineLabel();

@@ -16,7 +16,7 @@ function init(){
  navigator.innerHTML='<button type="button" id="uxSearchPrev" aria-label="Předchozí výsledek">‹ Předchozí</button><span id="uxSearchPosition" aria-live="polite">0 / 0</span><button type="button" id="uxSearchNext" aria-label="Další výsledek">Další ›</button><button type="button" id="uxSearchBack" aria-label="Zobrazit výsledky hledání">Výsledky</button><button type="button" id="uxSearchDone" aria-label="Ukončit vyhledávání">✕</button>';
  document.body.appendChild(navigator);
  var position=document.getElementById('uxSearchPosition');
- function isLocked(hit){return !!(hit&&hit.node&&hit.node.parentElement&&hit.node.parentElement.closest('.lux-fold.lux-locked,.lux-part.lux-locked,[inert]'));}
+ function isLocked(hit){return !!(hit&&hit.node&&hit.node.parentElement&&hit.node.parentElement.closest('.lux-fold.lux-locked,.lux-part.lux-locked,.lux-fold[inert]'));}
  function updateNavigator(){navigator.hidden=!searchTerm||activeIndex<0;position.textContent=(activeIndex+1)+' / '+totalHits;}
 
  function norm(t){return String(t).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
@@ -35,7 +35,7 @@ function init(){
   var target=hit.node.parentElement;
   if(!target)return;
   // Přímý výsledek nesmí obcházet režim postupného odemykání.
-  var locked=target.closest('.lux-fold.lux-locked,.lux-part.lux-locked,[inert]');
+  var locked=target.closest('.lux-fold.lux-locked,.lux-part.lux-locked,.lux-fold[inert]');
   if(locked){notifyLocked();return false;}
   close(false);
   // Otevřít příslušnou část a sekce, nejen scrollovat do sbaleného textu.

@@ -1,5 +1,12 @@
+# HTML and the worker must revalidate; content-hashed assets are immutable.
 <IfModule mod_headers.c>
-    Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
-    Header set Pragma "no-cache"
-    Header set Expires "0"
+    <FilesMatch "\.(html|json)$|^sw\.js$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+    <FilesMatch "^(css|js)-[a-f0-9]{16}\.(css|js)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+</IfModule>
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
 </IfModule>

@@ -1,0 +1,61 @@
+
+(function(){
+ 'use strict';
+ function init(){
+  var body=document.body,bar=document.getElementById('vipFloatingBar'),
+      menu=document.getElementById('v29BottomTab'),contents=document.getElementById('floatingMenuBtn'),
+      progress=document.querySelector('.lux-dash > .lux-progress');
+  if(!bar||!menu||!contents||!progress||document.getElementById('baliProgressTab'))return;
+  var placeholder=document.createComment('Puvodni umisteni prehledu cesty');
+  progress.parentNode.insertBefore(placeholder,progress);
+  var section=document.createElement('section');
+  section.id='baliProgressSection';section.setAttribute('aria-label','Přehled cesty a přečtených sekcí');
+  section.innerHTML='<div class="bali-progress-heading"><strong>Přehled cesty</strong><button type="button" id="baliProgressClose" aria-label="Zavřít přehled">✕</button></div>';
+  bar.appendChild(section);
+  var tab=document.createElement('button');
+  tab.type='button';tab.id='baliProgressTab';
+  tab.innerHTML='<span class="bali-progress-tab-icon" aria-hidden="true">◷</span><span>PŘEHLED</span>';
+  tab.setAttribute('aria-controls','baliProgressSection');
+  tab.setAttribute('aria-label','Otevřít přehled cesty');
+  tab.setAttribute('aria-expanded','false');
+  document.body.appendChild(tab);
+  function restore(){
+   if(progress.parentNode===section&&placeholder.parentNode)placeholder.parentNode.insertBefore(progress,placeholder.nextSibling);
+   body.classList.remove('bali-progress-mode');
+   tab.setAttribute('aria-expanded','false');
+  }
+  function show(){
+   if(typeof window.setMenuModalOpen==='function')window.setMenuModalOpen(true);
+   if(progress.parentNode!==section)section.appendChild(progress);
+   body.classList.remove('bali-content-mode');
+   body.classList.add('bali-progress-mode');
+   var contentSection=document.getElementById('baliLeftNavSection');
+   if(contentSection)contentSection.hidden=true;
+   tab.setAttribute('aria-expanded','true');
+   bar.scrollTop=0;
+  }
+  tab.addEventListener('click',function(ev){
+   ev.preventDefault();ev.stopPropagation();
+   if(body.classList.contains('bali-progress-mode')){
+    restore();if(typeof window.setMenuModalOpen==='function')window.setMenuModalOpen(false);
+    body.classList.remove('v29-bottom-open');
+   }else show();
+  });
+  contents.addEventListener('click',function(){restore();},true);
+  menu.addEventListener('click',function(ev){
+   if(!body.classList.contains('bali-progress-mode'))return;
+   ev.preventDefault();ev.stopImmediatePropagation();restore();
+   if(typeof window.setMenuModalOpen==='function')window.setMenuModalOpen(false);
+   body.classList.add('v29-bottom-open');
+   menu.setAttribute('aria-expanded','true');bar.scrollTop=0;
+  },true);
+  document.getElementById('baliProgressClose').addEventListener('click',function(){
+   restore();body.classList.remove('v29-bottom-open');
+  });
+  document.addEventListener('keydown',function(ev){if(ev.key==='Escape')restore();});
+  new MutationObserver(function(){
+    if(body.classList.contains('bali-progress-mode')&&!body.classList.contains('v29-bottom-open'))restore();
+  }).observe(body,{attributes:true,attributeFilter:['class']});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();

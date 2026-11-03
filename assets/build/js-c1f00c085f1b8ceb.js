@@ -1,0 +1,56 @@
+
+/* Leaflet (interaktivní mapy) se stahuje až ve chvíli, kdy je mapa skoro na obrazovce
+   nebo když uživatel otevře mapu přes celou obrazovku – stránka se díky tomu načte rychleji. */
+(function () {
+    var p = null;
+    window.ensureLeaflet = function () {
+        if (window.L && window.L.map) return Promise.resolve(window.L);
+        if (p) return p;
+        p = new Promise(function (ok, fail) {
+            var css = document.createElement('link');
+            css.rel = 'stylesheet'; css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+            css.integrity = 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='; css.crossOrigin = '';
+            document.head.appendChild(css);
+            var js = document.createElement('script');
+            js.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+            js.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='; js.crossOrigin = '';
+            js.onload = function () {
+                try { if (!L.__luxHooked && L.Map.addInitHook) { L.Map.addInitHook(function () { (window.__luxMaps = window.__luxMaps || []).push(this); }); L.__luxHooked = true; } } catch (e) {}
+                ok(window.L);
+            };
+            js.onerror = function () { p = null; fail(new Error('Leaflet se nepodařilo načíst')); };
+            document.head.appendChild(js);
+        });
+        return p;
+    };
+    var started = false;
+    function start() {
+        if (started) return; started = true;
+        ensureLeaflet().then(function () { if (typeof initLeafletMaps === 'function') initLeafletMaps(); }).catch(function () { started = false; });
+    }
+    window.luxLazyMaps = function () {
+        var els = ['islandMap', 'flightMap'].map(function (id) { return document.getElementById(id); }).filter(Boolean);
+        if (!els.length) return;
+        if (!('IntersectionObserver' in window)) { start(); return; }
+        var io = new IntersectionObserver(function (en) {
+            if (en.some(function (e) { return e.isIntersecting; })) { io.disconnect(); start(); }
+        }, { rootMargin: '600px 0px' });
+        els.forEach(function (el) { io.observe(el); });
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof window.openMapFullscreen === 'function' && !window.openMapFullscreen.__lazy) {
+            var orig = window.openMapFullscreen;
+            window.openMapFullscreen = function (type) {
+                var m = document.getElementById('mapFsModal'), c = document.getElementById('mapFsContainer');
+                if (m && c) { m.style.display = 'flex'; c.innerHTML = '<div style="color:#fff;display:grid;place-items:center;height:100%;font-weight:700">Načítám mapu…</div>'; }
+                return ensureLeaflet().then(function () { start(); orig(type); })
+                    .catch(function (err) {
+                        try { console.error('Mapa na celou obrazovku:', err); } catch (e) {}
+                        if (c) c.innerHTML = '<div style="color:#fff;display:grid;place-items:center;height:100%;font-weight:700;text-align:center;padding:20px">Mapu se nepodařilo načíst.<br>Zkontroluj připojení a zkus to znovu.</div>';
+                        if (window.showToast) showToast('Mapu se nepodařilo načíst – zkontroluj připojení.');
+                    });
+            };
+            window.openMapFullscreen.__lazy = true;
+        }
+    });
+})();

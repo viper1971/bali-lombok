@@ -1,0 +1,22 @@
+/* assets/css/050-ux2026-style.css */
+
+:root{scroll-padding-top:85px}
+#uxProgress{position:fixed;top:0;left:0;width:0;height:3px;background:var(--accent,#36a6b5);z-index:11000;pointer-events:none;transition:width .1s linear}
+#uxSkip{position:fixed;top:-90px;left:12px;z-index:11010;background:var(--surface,#fff);color:var(--text-main,#111);padding:12px 18px;border-radius:12px;border:2px solid currentColor}
+#uxSkip:focus{top:8px}
+#uxSearchBtn{position:fixed;right:16px;bottom:calc(88px + env(safe-area-inset-bottom));top:auto;z-index:10008;border:2px solid var(--border,#aaa);background:var(--surface,#fff);color:var(--text-main,#111);border-radius:30px;padding:8px 13px;min-height:40px;font-weight:800;cursor:pointer;box-shadow:var(--shadow,0 3px 14px #0003)}
+#uxSearchOverlay[hidden]{display:none!important}
+#uxSearchOverlay{position:fixed;inset:0;z-index:11020;background:#000b;display:flex;align-items:flex-start;justify-content:center;padding:clamp(20px,12vh,100px) 12px 20px}
+#uxSearchPanel{background:var(--surface,#fff);color:var(--text-main,#111);border:1px solid var(--border,#888);border-radius:18px;width:min(640px,100%);padding:18px;box-shadow:0 22px 60px #0007;max-height:80vh;display:flex;flex-direction:column;gap:12px}
+#uxSearchInput{width:100%;min-height:48px;border-radius:10px;border:2px solid var(--border,#aaa);background:var(--surface-hover,#eee);color:var(--text-main,#111);padding:12px;font:inherit}
+.uxFoundMark{background:#ffdc58!important;color:#171717!important;border-radius:3px;padding:1px 2px;box-shadow:0 0 0 3px #ffdc5840}
+#uxSearchCount{font-size:.82rem;color:var(--text-muted);font-weight:700}
+#uxSearchResults{overflow-y:auto;min-height:70px;overscroll-behavior:contain}
+.uxResult{display:block;width:100%;text-align:left;background:transparent;color:inherit;border:0;border-bottom:1px solid var(--border,#ddd);padding:13px 10px;cursor:pointer;font:inherit;border-radius:6px}
+.uxResult:hover,.uxResult:focus-visible{background:var(--surface-hover,#eee)}
+.uxSearchTop{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.uxClose{border:1px solid var(--border,#aaa);background:var(--surface-hover,#eee);color:inherit;border-radius:8px;padding:7px 12px;cursor:pointer}
+:where(button,a,input,select,textarea,[tabindex]):focus-visible{outline:3px solid var(--accent,#31a6bc)!important;outline-offset:3px}
+@media(max-width:768px){#uxSearchBtn{right:12px;bottom:calc(96px + env(safe-area-inset-bottom));top:auto;font-size:.8rem;padding:7px 10px}#uxSearchOverlay{padding-top:60px}#uxSearchPanel{max-height:85vh}}
+@media(prefers-reduced-motion:reduce){html,body{scroll-behavior:auto!important}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media print{#uxProgress,#uxSkip,#uxSearchBtn,#uxSearchOverlay{display:none!important}}

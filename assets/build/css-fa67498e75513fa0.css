@@ -1,0 +1,65 @@
+/* assets/css/070-bali-v65-collapsed-rail-opacity.css */
+
+/* V zavřeném stavu zůstává sedm tlačítek funkčních, ale 80 % průhledných. */
+html body:not(.pres-on):not(.v29-bottom-open) #baliUnifiedRail {
+  opacity:.2!important;
+  transition:left .25s ease,opacity .2s ease!important;
+}
+html body:not(.pres-on):not(.v29-bottom-open) #baliUnifiedRail:hover,
+html body:not(.pres-on):not(.v29-bottom-open) #baliUnifiedRail:focus-within {
+  opacity:1!important;
+}
+html body.v29-bottom-open:not(.pres-on) #baliUnifiedRail {opacity:1!important}
+
+/* assets/css/071-bali-v66-mobile-hamburger.css */
+
+/* Na mobilu sedm plovoucích oušek nahrazuje jediný hamburger nahoře. */
+#baliMobileHamburger{display:none}
+@media(max-width:700px){
+ html body:not(.pres-on) #baliMobileHamburger{
+  position:fixed!important;
+  top:calc(10px + env(safe-area-inset-top,0px))!important;
+  left:8px!important;right:auto!important;bottom:auto!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:46px!important;height:46px!important;min-width:46px!important;min-height:46px!important;
+  margin:0!important;padding:0!important;
+  border:1px solid var(--border)!important;border-radius:12px!important;
+  color:var(--text-main)!important;background:var(--surface)!important;
+  box-shadow:0 4px 16px rgba(0,0,0,.23)!important;
+  z-index:2147483200!important;opacity:.85!important;cursor:pointer!important;
+  touch-action:manipulation!important;
+ }
+ html body:not(.pres-on) #baliMobileHamburger[aria-expanded="true"]{
+  opacity:1!important;background:var(--surface-hover)!important;
+ }
+ html body:not(.pres-on) #baliMobileHamburger .bali-hamburger-mark{
+  font:800 25px/1 system-ui,sans-serif!important;
+ }
+ html body:not(.pres-on) #baliUnifiedRail,
+ html body:not(.pres-on):not(.v29-bottom-open) #baliUnifiedRail,
+ html body.v29-bottom-open:not(.pres-on) #baliUnifiedRail{
+  position:fixed!important;
+  top:calc(64px + env(safe-area-inset-top,0px))!important;
+  bottom:auto!important;left:10px!important;right:auto!important;
+  width:42px!important;max-width:42px!important;
+  height:auto!important;max-height:calc(100dvh - 74px - env(safe-area-inset-top,0px))!important;
+  padding:0!important;margin:0!important;gap:4px!important;
+  transform:none!important;transition:none!important;
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+  display:none!important;z-index:2147483199!important;
+ }
+ html body:not(.pres-on).bali-mobile-rail-open #baliUnifiedRail,
+ html body:not(.pres-on):not(.v29-bottom-open).bali-mobile-rail-open #baliUnifiedRail,
+ html body.v29-bottom-open:not(.pres-on).bali-mobile-rail-open #baliUnifiedRail{
+  display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+ }
+ html body:not(.pres-on) #baliUnifiedRail > #v29BottomTab,
+ html body:not(.pres-on) #baliUnifiedRail > #floatingMenuBtn,
+ html body:not(.pres-on) #baliUnifiedRail > #baliProgressTab,
+ html body:not(.pres-on) #baliUnifiedRail > #premiumMergedNav.bali-menu-edge-actions > .pm-nav-btn{
+  width:40px!important;min-width:40px!important;max-width:40px!important;
+  height:clamp(42px,calc((100dvh - 110px) / 7),70px)!important;
+  min-height:42px!important;max-height:70px!important;
+ }
+}
+@media print{#baliMobileHamburger{display:none!important}}

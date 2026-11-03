@@ -1,0 +1,26 @@
+
+/* Rozbalovací itineráře: jedna společná funkce pro všechna tlačítka .lux-acc-btn[aria-controls] */
+(function () {
+    function luxAccToggle(id, force) {
+        var content = document.getElementById(id); if (!content) return;
+        var btn = document.querySelector('.lux-acc-btn[aria-controls="' + id + '"]');
+        var open = typeof force === 'boolean' ? force : !content.classList.contains('open');
+        content.classList.toggle('open', open);
+        if (btn) {
+            btn.setAttribute('aria-expanded', String(open));
+            var icon = btn.querySelector('.lux-acc-chev'); if (icon) icon.classList.toggle('rotate', open);
+        }
+    }
+    window.luxAccToggle = luxAccToggle;
+    window.toggleSingapurAcc = function () { luxAccToggle('singapurAccContent'); };
+    window.toggleUluwatuAcc = function () { luxAccToggle('uluwatuAccContent'); };
+    window.toggleUbudAcc = function () { luxAccToggle('ubudAccContent'); };
+    window.toggleLombokAcc = function () { luxAccToggle('lombokAccContent'); };
+    window.toggleKutaAcc = function () { luxAccToggle('kutaAccContent'); };
+    window.toggleFarewellAcc = function () { luxAccToggle('farewellAccContent'); };
+    window.toggleSingaporeAcc = function () { luxAccToggle('singaporeAccContent'); };
+    document.addEventListener('click', function (e) {
+        var b = e.target.closest && e.target.closest('.lux-acc-btn[aria-controls]');
+        if (b && !b.hasAttribute('onclick')) luxAccToggle(b.getAttribute('aria-controls'));
+    });
+})();
