@@ -8121,7 +8121,7 @@ body.dark-mode #f-konfig .p35-footer a{color:#80e0d4!important;}
 @media(max-width:600px){#floatingMenuBtn{width:38px!important;min-height:94px!important;padding:10px 5px!important}#menuModalOverlay .menu-modal-box{width:min(350px,calc(100vw - 42px))!important;max-width:calc(100vw - 42px)!important;padding:18px 14px calc(16px + env(safe-area-inset-bottom))!important}}
 @media(prefers-reduced-motion:reduce){#menuModalOverlay,#menuModalOverlay .menu-modal-box{transition:none!important}}
 </style>
-<meta name="bali-menu-revision" content="left-budget-v55">
+<meta name="bali-menu-revision" content="two-tabs-v56">
 </head>
 <body id="hero">
 <a class="premium-skip" href="#hlavni-obsah">Přeskočit na obsah</a>
@@ -24155,6 +24155,18 @@ html body.pres-on #v29BottomTab{display:none!important}
     document.body.appendChild(tab);
   }
   tab.setAttribute('aria-controls','vipFloatingBar');
+  // Druhé samostatné ouško OBSAH, bez sdílení pozice s tlačítkem MENU.
+  var contentTab=document.getElementById('floatingMenuBtn');
+  if(contentTab){
+    contentTab.innerHTML='<span aria-hidden="true">☰</span><span>OBSAH</span>';
+    contentTab.setAttribute('aria-label','Otevřít obsah cesty');
+    contentTab.setAttribute('aria-controls','baliLeftNavSection');
+    contentTab.onclick=null;
+    contentTab.addEventListener('click',function(ev){
+      ev.preventDefault();ev.stopPropagation();
+      setContents(sub.hidden);
+    });
+  }
   var header=document.createElement('div');
   header.id='baliLeftBudgetHeader';
   header.innerHTML='<strong>Rozpočet a ovládání</strong><button type="button" id="baliLeftBudgetClose" aria-label="Zavřít panel">×</button>';
@@ -24177,9 +24189,8 @@ html body.pres-on #v29BottomTab{display:none!important}
     tab.setAttribute('aria-expanded',String(on));
     tab.setAttribute('aria-label',on?'Zavřít rozpočet a ovládání':'Otevřít rozpočet a ovládání');
     var arrow=tab.querySelector('.v29-chevron');if(arrow)arrow.textContent=on?'◂':'▸';
-    // Rozpočet, ovládání i Obsah zůstávají v jednom sloupci pod sebou.
-    sub.hidden=!on;
-    bar.classList.toggle('bali-nav-open',on);
+    // Záložka MENU otevře rozpočet; záložka OBSAH zobrazí seznam pod ním.
+    if(!on){sub.hidden=true;bar.classList.remove('bali-nav-open');}
   }
   function setContents(on){
     if(on){
@@ -24188,8 +24199,8 @@ html body.pres-on #v29BottomTab{display:none!important}
       bar.classList.add('bali-nav-open');
       sub.scrollIntoView({block:'nearest',behavior:'smooth'});
     }else{
-      // Bez překrývání: Obsah pouze zůstává pod tlačítky.
-      if(document.body.classList.contains('v29-bottom-open'))sub.hidden=false;
+      sub.hidden=true;
+      bar.classList.remove('bali-nav-open');
     }
   }
   setOpen(false);
@@ -24216,7 +24227,7 @@ html body.pres-on #v29BottomTab{display:none!important}
   document.addEventListener('keydown',function(ev){if(ev.key==='Escape'){setContents(false);setOpen(false);}});
   document.addEventListener('pointerdown',function(ev){
     if(!document.body.classList.contains('v29-bottom-open'))return;
-    if(ev.target.closest('#vipFloatingBar,#v29BottomTab'))return;
+    if(ev.target.closest('#vipFloatingBar,#v29BottomTab,#floatingMenuBtn'))return;
     setOpen(false);
   });
   // Ošetření případných starých skriptů nastavujících .open na nepoužívaném překryvu.
@@ -24297,6 +24308,57 @@ html body #baliLeftNavSection #bottomNav{
  width:100%!important;max-width:100%!important;gap:8px!important;
 }
 html body #menuModalOverlay{display:none!important;pointer-events:none!important}
+</style>
+<style id="bali-v56-two-separated-tabs">
+/* Dvě nezávislá levá ouška, vždy nad sebou, nikdy na sobě. */
+:root{--bali-tab-height:112px;--bali-tab-gap:8px}
+html body:not(.pres-on) #v29BottomTab,
+html body:not(.pres-on) #floatingMenuBtn{
+ position:fixed!important;display:flex!important;visibility:visible!important;pointer-events:auto!important;
+ top:50%!important;right:auto!important;bottom:auto!important;left:0!important;
+ margin:0!important;box-sizing:border-box!important;
+ width:44px!important;min-width:44px!important;max-width:44px!important;
+ height:var(--bali-tab-height)!important;min-height:var(--bali-tab-height)!important;max-height:var(--bali-tab-height)!important;
+ padding:10px 5px!important;
+ flex-flow:column nowrap!important;align-items:center!important;justify-content:center!important;gap:7px!important;
+ writing-mode:vertical-rl!important;text-orientation:mixed!important;
+ border:1px solid var(--border)!important;border-left:0!important;border-radius:0 12px 12px 0!important;
+ background:var(--surface)!important;color:var(--text-main)!important;
+ font:800 12px/1.1 var(--font-ui,system-ui)!important;
+ box-shadow:0 6px 20px rgba(0,0,0,.2)!important;
+ z-index:2147483001!important;
+}
+html body:not(.pres-on) #v29BottomTab{
+ transform:translateY(-50%)!important;
+}
+html body:not(.pres-on) #floatingMenuBtn{
+ top:calc(50% + var(--bali-tab-height) / 2 + var(--bali-tab-gap))!important;
+ transform:none!important;
+}
+html body:not(.pres-on) #floatingMenuBtn:hover{transform:none!important}
+html body:not(.pres-on) #floatingMenuBtn span:first-child{
+ writing-mode:horizontal-tb!important;line-height:1!important;
+}
+html body:not(.pres-on).v29-bottom-open #v29BottomTab,
+html body:not(.pres-on).v29-bottom-open #floatingMenuBtn{
+ left:min(370px,calc(100vw - 48px))!important;
+}
+html body #baliLeftNavSection[hidden]{display:none!important}
+html body #baliLeftNavSection:not([hidden]){display:block!important}
+html body.pres-on #floatingMenuBtn{display:none!important}
+@media(max-width:600px){
+ :root{--bali-tab-height:96px;--bali-tab-gap:6px}
+ html body:not(.pres-on) #v29BottomTab,
+ html body:not(.pres-on) #floatingMenuBtn{
+  width:38px!important;min-width:38px!important;max-width:38px!important;
+  padding:8px 4px!important;font-size:11px!important;
+ }
+ html body:not(.pres-on).v29-bottom-open #v29BottomTab,
+ html body:not(.pres-on).v29-bottom-open #floatingMenuBtn{
+  left:min(340px,calc(100vw - 42px))!important;
+ }
+}
+@media print{html body #floatingMenuBtn,html body #v29BottomTab{display:none!important}}
 </style>
 </body>
 </html>
