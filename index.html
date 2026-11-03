@@ -24523,5 +24523,29 @@ html body:not(.pres-on) #floatingMenuBtn{touch-action:manipulation!important;cur
 @media(max-width:540px){#uxSearchNavigator{gap:3px;padding:6px;width:calc(100vw - 12px)}#uxSearchNavigator button{min-height:42px;padding:5px 7px;font-size:.72rem}#uxSearchPosition{min-width:40px;font-size:.73rem}}
 @media print{#uxSearchNavigator{display:none!important}}
 </style>
+
+<style id="bali-v59-toast-above-search">
+/* Upozornění musí zůstat nad vyhledávacím dialogem i ostatními panely. */
+html body #vipToast,
+html body .lux-toast {
+  position:fixed!important;
+  z-index:2147483647!important;
+  pointer-events:none!important;
+}
+html body #vipToast {
+  top:calc(18px + env(safe-area-inset-top, 0px))!important;
+  bottom:auto!important;
+  max-width:min(92vw,650px)!important;
+}
+html body .lux-toast {
+  top:calc(18px + env(safe-area-inset-top, 0px))!important;
+  bottom:auto!important;
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  max-width:min(92vw,650px)!important;
+  text-align:center!important;
+}
+@media print{html body #vipToast,html body .lux-toast{display:none!important}}
+</style>
 </body>
 </html>
