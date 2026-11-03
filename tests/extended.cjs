@@ -60,10 +60,13 @@ for(const width of [390,1440]){
 }
 // A failed banknote image must not be reinserted by the mutation observer.
 {
- const context=await browser.newContext({serviceWorkers:'block'});let attempts=0;
- await context.route('**/*',r=>{if(/(?:SINdolar|USAdolar|IDRbankovka)\.jpg/.test(r.request().url()))attempts++;return r.request().url().startsWith(urls.current)?r.continue():r.abort();});
+ const context=await browser.newContext({serviceWorkers:'block'});let attempts=0,photoAttempts=0;
+ await context.addInitScript(()=>localStorage.setItem('lux_img_v2',JSON.stringify({f_lvl0:{c:[1,2,3].map(n=>({u:'https://example.invalid/audit-photo-'+n+'.jpg',d:'',a:'',l:''})),t:Date.now()}})));
+ await context.route('**/*',r=>{if(/audit-photo-/.test(r.request().url()))photoAttempts++;if(/(?:SINdolar|USAdolar|IDRbankovka)\.jpg/.test(r.request().url()))attempts++;return r.request().url().startsWith(urls.current)?r.continue():r.abort();});
  const page=await context.newPage();await page.goto(urls.current);await sleep(3500);await page.evaluate(()=>{luxSetLock(false);luxPartFor(document.getElementById('f-hotovost'));luxToggle('f-hotovost');document.getElementById('f-hotovost').scrollIntoView();});await sleep(2000);
- assert(attempts>0&&attempts<=3,`banknote request loop: ${attempts}`);assert.equal(await page.locator('#hotovost .tj-own').count(),0);results.failedImages={attempts,retryLoop:false};await context.close();
+ assert(attempts>0&&attempts<=3,`banknote request loop: ${attempts}`);assert.equal(await page.locator('#hotovost .tj-own').count(),0);await page.evaluate(()=>{luxPartFor(document.getElementById('f-jidlo'));luxToggle('f-jidlo');document.getElementById('f-jidlo').scrollIntoView();});await sleep(2000);
+ assert(photoAttempts>0&&photoAttempts<=3,`photo retry loop: ${photoAttempts}`);assert.equal(await page.locator('[data-img="f_lvl0"]').count(),0);
+ results.failedImages={attempts,photoAttempts,retryLoop:false};await context.close();
 }
 // Controlled cold-cache measurements. External resources are blocked identically.
 // Python serves uncompressed files. These are lab measurements, not production CWV.

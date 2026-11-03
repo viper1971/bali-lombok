@@ -59,3 +59,5 @@ Velikost slučovaných CSS skupin je omezena na 64 kB (jednotlivé větší pův
 
 ### Oprava opakovaných pokusů o obrázky bankovek
 Rozšířená kontrola odhalila původní smyčku `imgScan → vložení obrázku → error → odstranění → MutationObserver → imgScan`. Karta si nyní pamatuje neúspěšnou URL a obnoví pokus při události online. Test ověřuje nejvýše tři pokusy pro tři bankovky při nedostupnosti. Pro vizuální srovnání se použijí skutečné místní kopie těchto tří obrázků v obou verzích, aby síťová chyba původní verze nezpůsobovala náhodné rozměry.
+
+Stejná ochrana byla rozšířena na fotografické náhledy s více kandidáty: po vyčerpání kandidátů se další pokus omezí na nejvýše jednou za minutu, při návratu připojení se ochrana resetuje. Přechod na náhradní kandidát už nezůstane blokovaný lazy loadingem po chybě. Regrese používá uložené tři neplatné kandidáty a ověřuje omezený počet požadavků.

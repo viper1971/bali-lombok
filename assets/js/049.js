@@ -1385,16 +1385,17 @@ function luxQRSvg(text, px) {
         return next();
     }
     function imgPump() { while (imgBusy < 3 && imgQueue.length) { var id = imgQueue.shift(); imgBusy++; imgPend[id] = 1; (function (id) { imgResolve(id).then(function () { imgBusy--; delete imgPend[id]; imgScan(); imgPump(); }); })(id); } }
-    window.addEventListener('online', function () { [].forEach.call(document.querySelectorAll('#hotovost [data-cash-image-failed]'), function (card) { delete card.dataset.cashImageFailed; }); imgScan(); });
+    window.addEventListener('online', function () { imgFail = {}; [].forEach.call(document.querySelectorAll('#hotovost [data-cash-image-failed]'), function (card) { delete card.dataset.cashImageFailed; }); imgScan(); });
     function imgBox(host, id, title, link) {
         var c = imgCache[id]; if (!c || !c.c) return null; var idx = 0, box = document.createElement('div'); box.className = 'tj-pic'; box.setAttribute('data-img', id);
         var img = document.createElement('img'); img.alt = title; img.loading = 'lazy'; img.decoding = 'async'; img.referrerPolicy = 'no-referrer'; box.appendChild(img);
         var cr = document.createElement(link ? 'a' : 'span'); cr.className = 'tj-credit'; box.appendChild(cr);
-        function show() { var x = c.c[idx]; if (!x) { box.remove(); return; } img.classList.remove('is-ok'); img.src = x.u; cr.textContent = '📷 ' + (x.a ? x.a + ' · ' : '') + (x.l || 'Wikimedia Commons'); cr.title = 'Autor a licence fotky (Wikimedia Commons)' + (x.d ? ': ' + x.d : ''); if (link) { cr.href = x.d || 'https://commons.wikimedia.org/'; cr.target = '_blank'; cr.rel = 'noopener noreferrer'; cr.addEventListener('click', function (e) { e.stopPropagation(); }); } }
-        img.addEventListener('load', function () { img.classList.add('is-ok'); }); img.addEventListener('error', function () { idx++; show(); });
+        function show() { var x = c.c[idx]; if (!x) { imgFail[id] = Date.now(); box.remove(); return; } img.classList.remove('is-ok'); img.src = x.u; cr.textContent = '📷 ' + (x.a ? x.a + ' · ' : '') + (x.l || 'Wikimedia Commons'); cr.title = 'Autor a licence fotky (Wikimedia Commons)' + (x.d ? ': ' + x.d : ''); if (link) { cr.href = x.d || 'https://commons.wikimedia.org/'; cr.target = '_blank'; cr.rel = 'noopener noreferrer'; cr.addEventListener('click', function (e) { e.stopPropagation(); }); } }
+        img.addEventListener('load', function () { img.classList.add('is-ok'); }); img.addEventListener('error', function () { idx++; img.loading = 'eager'; show(); });
         show(); return box;
     }
     function imgWant(id, el) {
+        if (imgFail[id] && Date.now() - imgFail[id] < 60000) return false;
         var c = imgCache[id]; if (c && c.c) return true; if (c && c.none && Date.now() - c.t < 7 * 86400000) return false;
         var sd = navigator.connection && navigator.connection.saveData; if (imgStarted[el] && !sd && imgQueue.indexOf(id) < 0) imgQueue.push(id); return false;
     }
