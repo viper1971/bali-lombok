@@ -413,11 +413,11 @@
     "bytes": 9263
   },
   {
-    "output": "assets/build/js-2553837adf838ac1.js",
+    "output": "assets/build/js-b6b57e06dd8cd29a.js",
     "sources": [
       "assets/js/070-hotel-side-tabs.js"
     ],
-    "bytes": 2361
+    "bytes": 2593
   },
   {
     "output": "assets/build/js-6983b6b9afe77950.js",
@@ -644,12 +644,12 @@
     "bytes": 19381
   },
   {
-    "output": "assets/build/css-228437bbd98565fa.css",
+    "output": "assets/build/css-21e5f8017c9c11fe.css",
     "sources": [
       "assets/css/074-travel-magazine.css",
       "assets/css/075-editorial-flow.css",
       "assets/css/076-hotel-side-tabs.css"
     ],
-    "bytes": 54810
+    "bytes": 55319
   }
 ]

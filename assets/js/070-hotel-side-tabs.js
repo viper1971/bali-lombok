@@ -2,6 +2,7 @@
 (function () {
     'use strict';
     function init() {
+        var mobile = window.matchMedia('(max-width:700px)');
         document.querySelectorAll('.stage-quick-switcher[id^="sqs-"]').forEach(function (switcher) {
             var stage = switcher.id.slice(4);
             var slot = document.getElementById('selected-hotel-slot-' + stage);
@@ -18,7 +19,9 @@
             slot.setAttribute('role', 'tabpanel');
             slot.tabIndex = 0;
             list.setAttribute('role', 'tablist');
-            list.setAttribute('aria-orientation', 'vertical');
+            function syncOrientation() { list.setAttribute('aria-orientation', mobile.matches ? 'horizontal' : 'vertical'); }
+            syncOrientation();
+            mobile.addEventListener('change', syncOrientation);
             var label = switcher.querySelector('.sqs-label');
             list.setAttribute('aria-label', label ? label.textContent.trim() : 'Výběr hotelu');
             var buttons = Array.from(list.querySelectorAll('.sqs-btn'));
@@ -48,8 +51,8 @@
                 var index = buttons.indexOf(event.target.closest('.sqs-btn'));
                 if (index < 0) return;
                 var next;
-                if (event.key === 'ArrowDown') next = (index + 1) % buttons.length;
-                else if (event.key === 'ArrowUp') next = (index + buttons.length - 1) % buttons.length;
+                if (event.key === (mobile.matches ? 'ArrowRight' : 'ArrowDown')) next = (index + 1) % buttons.length;
+                else if (event.key === (mobile.matches ? 'ArrowLeft' : 'ArrowUp')) next = (index + buttons.length - 1) % buttons.length;
                 else if (event.key === 'Home') next = 0;
                 else if (event.key === 'End') next = buttons.length - 1;
                 else return;
