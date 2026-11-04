@@ -323,3 +323,7 @@ html[data-magazine="on"] #cast-priprava {--chapter-image:url('https://images.pex
  #hlavni-obsah .clim .clim-k {font-size:10px!important}
  #hlavni-obsah .clim .clim-badge {font-size:9px!important;padding:2px 4px!important}
 }
+
+.mg-navigation .mg-search {appearance:none;background:transparent;border:0;border-bottom:2px solid transparent;color:#fff;font:inherit;font-size:12px;font-weight:700;padding:9px 0;cursor:pointer}
+.mg-navigation .mg-search:hover {border-bottom-color:#f6cf35}
+@media(max-width:760px){.mg-navigation .mg-search{font-size:11px;padding:7px 1px}}
