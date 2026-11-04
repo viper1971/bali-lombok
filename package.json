@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "python3 tools/build.py",
-    "test": "python3 tests/static.py && node tests/service-worker.cjs && node tests/map-loader.cjs",
+    "test": "python3 tests/static.py && node tests/service-worker.cjs && node tests/map-loader.cjs && node tests/appearance.cjs",
     "test:browser": "node tests/browser.cjs"
   },
   "devDependencies": {
