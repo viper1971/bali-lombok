@@ -227,15 +227,17 @@
     function openPart(p, keepPos) {
         if (!p || p.classList.contains('is-open')) return;
         var h = p.querySelector(':scope > .lux-part-head');
-        function change() {
+        function prepare() {
             var flightPick = document.getElementById('flightPick');
             if (flightPick && flightPick.open) flightPick.open = false;
             allParts().forEach(function (o) { if (o !== p && o.classList.contains('is-open')) setPart(o, false, true); });
-            setPart(p, true);
         }
-        if (keepPos && h) window.luxPreserveHeader(h, change);
-        else change();
-        try { localStorage.setItem(PKEY, p.id); } catch (e) {}
+        function change() {
+            setPart(p, true);
+            try { localStorage.setItem(PKEY, p.id); } catch (e) {}
+        }
+        if (keepPos && h) window.luxPreserveHeader(p, change, prepare);
+        else { prepare(); change(); }
     }
     window.luxPartFor = function (el) { var p = el && el.closest ? el.closest('.lux-part') : null; if (p) openPart(p, false); };
     function initParts() {

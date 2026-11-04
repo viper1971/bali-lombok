@@ -15,17 +15,54 @@
                 maps.forEach(function (m) { try { m.invalidateSize(); } catch (e) {} });
                 try { window.dispatchEvent(new Event('resize')); } catch (e) {}
             }
-            // Align once on opening. Later image loads and scrolling never pin the page.
-            window.luxPreserveHeader = function (header, change) {
-                change();
+            // Scroll the closed section first; reveal only once the journey finishes.
+            var cancelHeaderScroll = null;
+            function stopHeaderPin() {
+                if (cancelHeaderScroll) cancelHeaderScroll();
+            }
+            window.luxPreserveHeader = function (header, change, prepare) {
+                stopHeaderPin();
+                if (prepare) prepare();
                 if (!header.isConnected) return;
-                var top = header.getBoundingClientRect().top + window.scrollY - 8;
-                window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+                var frame = 0, stopped = false;
+                var start = window.scrollY;
+                var top = Math.max(0, Math.min(header.getBoundingClientRect().top + start - 8,
+                    Math.max(0, document.documentElement.scrollHeight - window.innerHeight)));
+                var distance = top - start;
+                var duration = Math.min(650, Math.max(280, Math.abs(distance) * 0.35));
+                var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var events = ['wheel', 'touchstart', 'pointerdown', 'keydown'];
+                function cleanup() {
+                    stopped = true;
+                    cancelAnimationFrame(frame);
+                    events.forEach(function (type) { window.removeEventListener(type, cancel, true); });
+                    if (cancelHeaderScroll === cancel) cancelHeaderScroll = null;
+                }
+                function cancel() { cleanup(); }
+                function finish() { cleanup(); if (header.isConnected) change(); }
+                cancelHeaderScroll = cancel;
+                if (reduced || Math.abs(distance) < 2) {
+                    window.scrollTo({ top: top, behavior: 'instant' });
+                    finish();
+                    return;
+                }
+                events.forEach(function (type) { window.addEventListener(type, cancel, { capture: true, passive: true }); });
+                var began = null;
+                function step(now) {
+                    if (stopped || !header.isConnected) { cleanup(); return; }
+                    if (began === null) began = now;
+                    var progress = Math.min(1, (now - began) / duration);
+                    var eased = progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+                    window.scrollTo({ top: start + distance * eased, behavior: 'instant' });
+                    if (progress < 1) frame = requestAnimationFrame(step);
+                    else finish();
+                }
+                frame = requestAnimationFrame(step);
             };
             function setState(f, open, instant) {
                 if (!f) return;
-                function change() {
-                    /* vždy jen jedna otevřená sekce; ostatní se zavřou samy (vnořené podrobnosti uvnitř otevřené sekce se netýkají) */
+                function prepare() {
+                    /* Close other sections before measuring the closed target. */
                     if (open) {
                         var flightPick = document.getElementById('flightPick');
                         if (flightPick && flightPick.open) flightPick.open = false;
@@ -34,6 +71,8 @@
                             if (o !== f && !o.contains(f) && !f.contains(o)) { setState(o, false, true); }
                         });
                     }
+                }
+                function change() {
                     var body = f.querySelector(':scope > .lux-fold-body');
                     var btn = f.querySelector(':scope > .lux-fold-h .lux-fold-btn');
                     if (instant) f.classList.add('no-anim');
@@ -45,8 +84,9 @@
                     else { f.classList.remove('is-settled'); }
                     if (instant) requestAnimationFrame(function () { requestAnimationFrame(function () { f.classList.remove('no-anim'); }); });
                 }
-                if (open && !instant) window.luxPreserveHeader(f, change);
-                else change();
+                function commit() { change(); save(); }
+                if (open && !instant) window.luxPreserveHeader(f, commit, prepare);
+                else { prepare(); change(); }
             }
             window.luxToggle = function (id) {
                 var f = document.getElementById(id);
