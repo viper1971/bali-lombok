@@ -443,3 +443,7 @@ html[data-magazine="on"] #hlavni-obsah .mg-feature figcaption {position:absolute
  html[data-magazine="on"] body #hlavni-obsah .mg-feature>div {width:auto;margin:70px 12px 12px!important;padding:15px!important}
  #hlavni-obsah .mg-media-pair>*+* {margin-top:12px!important}
 }
+@media(min-width:1000px) {
+ #hlavni-obsah [class*="day-block"]:has(>.sv-card~.sv-card)>:not(.sv-card) {grid-column:1/-1}
+ #hlavni-obsah [class*="day-block"]:has(>.sv-card~.sv-card)>.sv-card {grid-column:auto;grid-row:auto}
+}
