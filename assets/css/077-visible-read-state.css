@@ -1,0 +1,49 @@
+/* Read status overrides the magazine skin: a green header plus a persistent tick. */
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h>.lux-fold-btn {
+ background:#dceee1!important;background-image:none!important;border-color:#79a98b!important;
+ box-shadow:inset 5px 0 0 #237346!important;opacity:1!important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h>.lux-fold-btn:hover {background:#cfe7d6!important}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h .lux-fold-t {color:#164a2f!important}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h :is(.lux-fold-s,.p14-eyebrow) {color:#365d45!important}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h .lux-fold-node {
+ background:#216b43!important;color:#fff!important;border-color:#216b43!important;
+}
+/* The tick is drawn with borders, so font scaling cannot make it disappear. */
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h .lux-read {
+ display:inline-flex!important;position:relative!important;inset:auto!important;transform:none!important;
+ flex:0 0 auto!important;align-items:center!important;justify-content:center!important;
+ width:auto!important;min-width:106px!important;max-width:none!important;height:30px!important;
+ box-sizing:border-box!important;margin:0!important;padding:0 10px 0 30px!important;
+ background:#216b43!important;color:#fff!important;border:1px solid #185734!important;
+ border-radius:999px!important;box-shadow:none!important;opacity:1!important;visibility:visible!important;
+ font-size:0!important;line-height:1!important;overflow:visible!important;z-index:1!important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h .lux-read::before {
+ content:''!important;display:block!important;position:absolute!important;left:11px!important;top:50%!important;
+ width:10px!important;height:6px!important;border:0!important;border-left:2px solid #fff!important;
+ border-bottom:2px solid #fff!important;transform:translateY(-65%) rotate(-45deg)!important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h .lux-read::after {
+ content:'Přečteno'!important;display:block!important;margin:0!important;
+ font:800 12px/1 system-ui,sans-serif!important;color:#fff!important;
+}
+html[data-magazine="on"][data-theme="dark"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h>.lux-fold-btn {
+ background:#244d36!important;border-color:#649b75!important;box-shadow:inset 5px 0 0 #87d3a1!important;
+}
+html[data-magazine="on"][data-theme="dark"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h>.lux-fold-btn:hover {background:#2c5a3f!important}
+html[data-magazine="on"][data-theme="dark"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h :is(.lux-fold-t,.lux-fold-s,.p14-eyebrow) {color:#e4f4e7!important}
+/* A completed chapter retains its own photo and gains a green edge and counter. */
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part>.lux-part-head:has(.lux-part-count.is-done) {
+ border-top-color:#72c78e!important;box-shadow:inset 5px 0 0 #72c78e!important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part>.lux-part-head .lux-part-count.is-done {
+ background:#216b43!important;border:1px solid #a4ddb5!important;color:#fff!important;
+}
+@media(max-width:700px) {
+ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h .lux-read {
+  flex:0 0 30px!important;width:30px!important;min-width:30px!important;height:30px!important;padding:0!important;
+ }
+ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h .lux-read::before {left:9px!important}
+ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part .lux-fold.is-read>.lux-fold-h .lux-read::after {display:none!important}
+}

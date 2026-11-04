@@ -644,12 +644,13 @@
     "bytes": 19381
   },
   {
-    "output": "assets/build/css-21e5f8017c9c11fe.css",
+    "output": "assets/build/css-62dd2b36d423eeba.css",
     "sources": [
       "assets/css/074-travel-magazine.css",
       "assets/css/075-editorial-flow.css",
-      "assets/css/076-hotel-side-tabs.css"
+      "assets/css/076-hotel-side-tabs.css",
+      "assets/css/077-visible-read-state.css"
     ],
-    "bytes": 55319
+    "bytes": 59121
   }
 ]
