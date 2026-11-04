@@ -34,6 +34,50 @@
       card.appendChild(link);
     });
 
+
+    // Pair adjacent transfer maps while retaining their original titles and links.
+    document.querySelectorAll('.lux-fold-pad .map-container-wrapper').forEach(function (map) {
+      if (map.closest('.mg-media-pair')) return;
+      var next = map.nextElementSibling;
+      var previous = map.previousElementSibling;
+      var companion = next && next.matches('.map-container-wrapper') ? next :
+        previous && previous.matches('.fl-deck') ? previous : null;
+      if (!companion) return;
+      var pair = document.createElement('div');
+      pair.className = 'mg-media-pair';
+      var first = companion === previous ? companion : map;
+      first.before(pair);
+      pair.appendChild(first);
+      pair.appendChild(companion === previous ? map : companion);
+    });
+
+    // Slideshows are inserted by a later DOMContentLoaded listener.
+    setTimeout(function () {
+    document.querySelectorAll('[id$="AccContent"]').forEach(function (content) {
+      var show = content.querySelector(':scope > .trip-show');
+      if (!show) return;
+      var pair = document.createElement('div');
+      pair.className = 'mg-media-pair mg-show-pair';
+      var notes = document.createElement('section');
+      notes.className = 'mg-show-notes';
+      var title = document.createElement('h3');
+      title.textContent = 'Co v okolí objevit';
+      notes.appendChild(title);
+      var list = document.createElement('ul');
+      content.querySelectorAll('[class*="day-block"] > h4').forEach(function (heading) {
+        var item = document.createElement('li');
+        item.textContent = heading.textContent.replace(/🔗/g, '').trim();
+        list.appendChild(item);
+      });
+      notes.appendChild(list);
+      var note = content.querySelector(':scope > .mg-visit-note');
+      if (note) notes.appendChild(note);
+      show.before(pair);
+      pair.appendChild(show);
+      pair.appendChild(notes);
+    });
+    }, 0);
+
     var cover = document.querySelector('.mg-cover');
     if (cover && window.matchMedia && window.HTMLDialogElement) {
       var desktop = window.matchMedia('(min-width: 901px)');
