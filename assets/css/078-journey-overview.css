@@ -1,0 +1,87 @@
+/* The second screen is a compact expedition overview, not another cover. */
+html[data-magazine="on"] body header.hero.hero--trip-overview {padding:30px 34px!important}
+html[data-magazine="on"] body .hero.hero--trip-overview .hero-inner {
+ display:grid!important;grid-template-columns:minmax(360px,.9fr) minmax(0,1.25fr)!important;
+ grid-template-areas:"title version" "count map" "meta map" "actions map" "tools map" "meeting meeting" "journal journal";
+ grid-template-rows:auto auto auto auto auto auto auto!important;
+ gap:14px 26px!important;align-items:start!important;align-content:start!important;
+ width:100%!important;max-width:1440px!important;margin:0 auto!important;text-align:left;
+}
+html[data-magazine="on"] body .hero.hero--trip-overview .hero-inner>* {min-width:0;justify-self:stretch!important;margin:0!important;box-sizing:border-box}
+html[data-magazine="on"] body .hero.hero--trip-overview .hero-inner>.badge {
+ grid-area:title!important;justify-self:start!important;align-self:center;
+ font:400 clamp(24px,2.3vw,34px)/1.2 Georgia,serif!important;letter-spacing:.035em;
+ padding:0 0 12px!important;text-align:left;border-bottom:3px solid var(--mg-yellow)!important;
+}
+html[data-magazine="on"] body .hero.hero--trip-overview #heroVer {
+ grid-area:version!important;align-self:center;justify-self:end!important;
+ background:none!important;border:0!important;padding:0!important;box-shadow:none!important;
+ font-size:11px!important;color:var(--mg-muted)!important;
+}
+html[data-magazine="on"] body .hero.hero--trip-overview #countdown {
+ grid-area:count!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+ gap:8px!important;justify-content:stretch!important;width:100%!important;padding-top:6px;
+}
+html[data-magazine="on"] body .hero.hero--trip-overview .cd-card {min-width:0!important;width:auto!important;padding:16px 8px!important;box-shadow:none!important}
+html[data-magazine="on"] body .hero.hero--trip-overview .cd-value {font-size:40px!important;line-height:1.1!important}
+html[data-magazine="on"] body .hero.hero--trip-overview .cd-key {margin-top:5px;font-size:10px!important}
+html[data-magazine="on"] body .hero.hero--trip-overview .hero-trip-meta {grid-area:meta!important;font-size:13px!important;line-height:1.65;text-align:left}
+html[data-magazine="on"] body .hero.hero--trip-overview .page-fs-hero {grid-area:actions!important;text-align:left;justify-content:flex-start!important}
+html[data-magazine="on"] body .hero.hero--trip-overview .page-fullscreen-btn {min-height:38px;padding:8px 12px!important;border-radius:3px!important;box-shadow:none!important}
+html[data-magazine="on"] body .hero.hero--trip-overview .hero-inner>.map-box {
+ grid-area:map!important;align-self:stretch!important;width:100%!important;height:auto!important;min-height:390px!important;
+ margin:0!important;border:1px solid var(--mg-line)!important;border-radius:4px!important;overflow:hidden!important;
+ opacity:1!important;filter:none!important;mask:none!important;-webkit-mask:none!important;
+ background:var(--mg-card)!important;box-shadow:none!important;
+}
+html[data-magazine="on"] body .hero.hero--trip-overview #flightMap {width:100%!important;height:100%!important;min-height:390px}
+html[data-magazine="on"] body .hero.hero--trip-overview #heroUtilityRow {
+ grid-area:tools!important;display:grid!important;grid-template-columns:minmax(0,1fr) 146px!important;
+ gap:12px!important;width:100%!important;max-width:none!important;margin:0!important;align-items:stretch!important;
+}
+html[data-magazine="on"] body .hero.hero--trip-overview .hero-inner>#heroQr {grid-area:tools!important}
+html[data-magazine="on"] body .hero.hero--trip-overview #heroQr {
+ width:100%!important;min-width:0!important;max-width:none!important;margin:0!important;padding:12px!important;
+ display:flex!important;gap:12px!important;align-items:center;box-shadow:none!important;
+ border:1px solid var(--mg-line)!important;border-radius:4px!important;background:var(--mg-card)!important;
+}
+html[data-magazine="on"] body .hero.hero--trip-overview #heroQr .hq-code {width:86px!important;height:86px!important;padding:4px;border-radius:2px!important}
+html[data-magazine="on"] body .hero.hero--trip-overview #heroQr>div:last-child {min-width:0}
+html[data-magazine="on"] body .hero.hero--trip-overview #heroQr small {font-size:11px!important;line-height:1.5}
+html[data-magazine="on"] body .hero.hero--trip-overview #heroQr button {padding:7px 9px!important;min-height:32px;border-radius:3px!important}
+html[data-magazine="on"] body .hero.hero--trip-overview #heroVisitCard {
+ min-width:0!important;width:100%!important;margin:0!important;padding:10px!important;
+ border:1px solid var(--mg-line)!important;border-radius:4px!important;box-shadow:none!important;background:var(--mg-card)!important;
+}
+html[data-magazine="on"] body .hero.hero--trip-overview .hero-meeting {
+ grid-area:meeting!important;display:grid!important;grid-template-columns:220px minmax(0,1fr);gap:24px;
+ padding:20px 0!important;margin:6px 0 0!important;border:0!important;border-top:1px solid var(--mg-line)!important;
+ background:none!important;backdrop-filter:none!important;box-shadow:none!important;border-radius:0!important;
+}
+html[data-magazine="on"] body .hero.hero--trip-overview .hero-meeting h3 {font:400 28px/1.2 Georgia,serif!important;margin:0!important}
+html[data-magazine="on"] body .hero.hero--trip-overview .hero-meeting p {font-size:14px!important;line-height:1.7!important;columns:2 38ch;column-gap:28px}
+html[data-magazine="on"] body .hero.hero--trip-overview #heroSimpleBtn {
+ grid-area:journal!important;justify-self:stretch!important;width:100%!important;max-width:none!important;
+ min-height:82px!important;margin:0!important;padding:16px 20px!important;border-radius:4px!important;box-shadow:none!important;
+}
+@media(max-width:1000px) {
+ html[data-magazine="on"] body header.hero.hero--trip-overview {padding:24px 22px!important}
+ html[data-magazine="on"] body .hero.hero--trip-overview .hero-inner {
+  grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"title" "version" "count" "meta" "actions" "map" "tools" "meeting" "journal";
+  grid-template-rows:none!important;gap:14px!important;
+ }
+ html[data-magazine="on"] body .hero.hero--trip-overview #heroVer {justify-self:start!important}
+ html[data-magazine="on"] body .hero.hero--trip-overview .hero-inner>.map-box {height:350px!important;min-height:0!important}
+ html[data-magazine="on"] body .hero.hero--trip-overview #flightMap {min-height:0}
+ html[data-magazine="on"] body .hero.hero--trip-overview .hero-meeting {grid-template-columns:minmax(0,1fr);gap:10px}
+}
+@media(max-width:768px) {
+ html[data-magazine="on"] body header.hero.hero--trip-overview {padding:22px 16px!important}
+ html[data-magazine="on"] body .hero.hero--trip-overview #heroUtilityRow {grid-template-columns:minmax(0,1fr)!important}
+ html[data-magazine="on"] body .hero.hero--trip-overview #heroVisitCard {display:none!important}
+ html[data-magazine="on"] body .hero.hero--trip-overview .hero-meeting p {columns:auto;font-size:13px!important}
+ html[data-magazine="on"] body .hero.hero--trip-overview .hero-meeting h3 {font-size:25px!important}
+ html[data-magazine="on"] body .hero.hero--trip-overview .cd-value {font-size:32px!important}
+ html[data-magazine="on"] body .hero.hero--trip-overview .cd-card {padding:13px 5px!important}
+ html[data-magazine="on"] body .hero.hero--trip-overview #heroSimpleBtn {padding:14px!important}
+}
