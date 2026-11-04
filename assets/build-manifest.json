@@ -14,11 +14,11 @@
     "bytes": 1500
   },
   {
-    "output": "assets/build/js-1800377c1dbeea39.js",
+    "output": "assets/build/js-04d5fc90aae90ace.js",
     "sources": [
       "assets/js/068-magazine-layout.js"
     ],
-    "bytes": 2328
+    "bytes": 3145
   },
   {
     "output": "assets/build/js-9431cbfa982987ad.js",
@@ -630,10 +630,10 @@
     "bytes": 19381
   },
   {
-    "output": "assets/build/css-f7b31d7f0714c23d.css",
+    "output": "assets/build/css-9227ff05a8628fc6.css",
     "sources": [
       "assets/css/074-travel-magazine.css"
     ],
-    "bytes": 28182
+    "bytes": 33252
   }
 ]

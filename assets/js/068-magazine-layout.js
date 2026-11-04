@@ -39,6 +39,28 @@
   setMode(mode, false);
   window.baliMagazine = { setMode: function (next) { return setMode(next, true); } };
   function init() {
+    var cover = document.querySelector('.mg-cover');
+    if (cover && window.matchMedia && window.HTMLDialogElement) {
+      var desktop = window.matchMedia('(min-width: 901px)');
+      if (desktop.matches && mode === 'magazine' && !location.hash && !new URL(location.href).searchParams.has('jednoduse')) {
+        var gate = document.createElement('dialog');
+        gate.className = 'mg-entry';
+        gate.setAttribute('aria-labelledby', 'magazineCoverTitle');
+        cover.before(gate);
+        gate.appendChild(cover);
+        gate.showModal();
+        root.classList.add('mg-entry-open');
+        function enter() {
+          gate.close();
+          root.classList.remove('mg-entry-open');
+          gate.replaceWith(cover);
+          desktop.removeEventListener('change', enter);
+        }
+        gate.addEventListener('cancel', function (event) { event.preventDefault(); });
+        cover.querySelector('.mg-cover-cta').addEventListener('click', enter, { once: true });
+        desktop.addEventListener('change', enter);
+      }
+    }
     labels();
     document.addEventListener('click', function (event) {
       var button = event.target.closest && event.target.closest('[data-magazine-switch]');

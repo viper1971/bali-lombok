@@ -243,3 +243,53 @@ html[data-magazine="on"] #hlavni-obsah #bxGrand_pers {font:600 clamp(19px,2vw,32
  html[data-magazine="on"] #hlavni-obsah .lux-fold-pad:has(>.mg-feature)>.st-deck {grid-column:2;border-top:4px solid var(--mg-yellow);margin-top:0}
 }
 @media print {html[data-magazine="on"] body #hlavni-obsah .mg-department {display:none!important}}
+
+/* The landing cover occupies the viewport until the reader enters the trip. */
+html.mg-entry-open,html.mg-entry-open body {overflow:hidden!important}
+dialog.mg-entry[open] {position:fixed;inset:0;width:100%;height:100dvh;max-width:none;max-height:none;margin:0;padding:0;border:0;overflow:hidden;background:#092b25}
+html[data-magazine="on"] dialog.mg-entry .mg-cover {box-sizing:border-box;width:100%;height:100%;min-height:0;padding:clamp(20px,5vh,64px) 6vw}
+@media(min-width:901px) {
+ html[data-magazine="on"] .mg-cover {height:100dvh;min-height:0;box-sizing:border-box}
+ html[data-magazine="on"] body #hlavni-obsah.main-wrapper {width:100%!important;max-width:none!important;box-sizing:border-box;padding-inline:clamp(22px,2.7vw,54px)!important}
+ html[data-magazine="on"] #bikesStack {display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+}
+#premiumQuickNav,.lux-dash>.lux-progress {display:none!important}
+#hlavni-obsah #bikesStack .giant-bike-card {padding:8px!important;min-width:0;margin:0!important}
+#bikesStack .giant-image-wrapper {padding:0!important;height:auto!important}
+#bikesStack .giant-bike-img {width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important}
+html[data-magazine="on"] #hlavni-obsah .lux-part {--chapter-image:url('https://viper1971.github.io/bali-lombok/assets/images/magazine-singapore.webp')}
+html[data-magazine="on"] #osa {--chapter-image:url('https://viper1971.github.io/bali-lombok/assets/images/magazine-cover.webp')!important}
+html[data-magazine="on"] #cast-plan {--chapter-image:url('https://viper1971.github.io/bali-lombok/IDRbankovka.jpg')!important}
+html[data-magazine="on"] #cast-misto {--chapter-image:url('https://viper1971.github.io/bali-lombok/assets/images/magazine-bali.webp')!important}
+html[data-magazine="on"] #cast-kontrola {--chapter-image:url('https://viper1971.github.io/bali-lombok/assets/images/magazine-lombok.webp')!important}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part>.lux-part-head {background-image:linear-gradient(90deg,#082a25ec,#092c2580),var(--chapter-image)!important}
+#hlavni-obsah .lux-acc-btn[aria-controls$="AccContent"] {display:none!important}
+#hlavni-obsah [id$="AccContent"]:has(>[class*="day-block"]) {display:flex!important;flex-wrap:wrap;align-items:flex-start;gap:12px;height:auto!important;max-height:none!important;visibility:visible!important;opacity:1!important;overflow:visible!important}
+#hlavni-obsah [id$="AccContent"]>* {min-width:0;box-sizing:border-box;flex:1 1 100%}
+#hlavni-obsah [id$="AccContent"]>[class*="day-block"] {flex:1 1 min(100%,530px);margin:0!important}
+#hlavni-obsah .spots-grid {grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))!important}
+#hlavni-obsah .uber-media-grid {display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))!important;gap:10px}
+#hlavni-obsah .uber-media-grid .uber-media-box,#hlavni-obsah .sv-card .sv-stage:not(:fullscreen) {width:100%!important;height:clamp(270px,24vw,480px)!important;aspect-ratio:auto!important;min-width:0}
+#hlavni-obsah .uber-media-box img {width:100%!important;height:100%!important;object-fit:cover}
+#hlavni-obsah .uber-media-overlay,#hlavni-obsah .sv-badge,#hlavni-obsah .sv-fs {font-size:11px!important;line-height:1.35!important;padding:5px 8px!important}
+#hlavni-obsah .clim {display:flex!important;align-items:center;flex-wrap:wrap;gap:8px 14px!important;padding:9px!important}
+#hlavni-obsah .clim-scene {flex:0 1 135px;height:52px!important;min-height:0!important;margin:0!important}
+#hlavni-obsah .clim-cap {flex:1 1 180px}
+#hlavni-obsah .clim-i {flex:1 1 115px;min-width:0}
+@media(max-width:900px) {
+ html[data-magazine="on"] {font-size:14px!important}
+ html[data-magazine="on"] body #hlavni-obsah.main-wrapper {padding-inline:8px!important}
+ html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad,html[data-magazine="on"] body #hlavni-obsah .t-bubble,html[data-magazine="on"] body #hlavni-obsah .bento-card {padding:9px!important}
+ html[data-magazine="on"] body #hlavni-obsah .lux-part .lux-fold .lux-fold-btn .lux-fold-t {font-size:19px!important}
+ #hlavni-obsah .uber-media-grid,#hlavni-obsah .spots-grid {grid-template-columns:minmax(0,1fr)!important}
+ #hlavni-obsah .uber-media-grid .uber-media-box {height:clamp(210px,65vw,370px)!important}
+ #hlavni-obsah .sv-card .sv-stage:not(:fullscreen) {height:clamp(290px,85vw,430px)!important}
+ #hlavni-obsah .cx-env .cx-e {display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:6px}
+ #hlavni-obsah .cx-big,#hlavni-obsah .cx-kc {white-space:normal!important;word-break:normal!important;overflow-wrap:normal!important;max-width:none!important;width:auto!important;font-variant-numeric:tabular-nums}
+ #hlavni-obsah .cx-big {white-space:nowrap!important;font-size:clamp(20px,6vw,28px)!important}
+ #hlavni-obsah .cx-env {grid-template-columns:1fr!important}
+ #hlavni-obsah .clim-cap {font-size:11px!important}
+ #hlavni-obsah .clim-i {flex:1 1 83px;font-size:12px}
+ #hlavni-obsah .clim-scene {height:38px!important;flex-basis:105px}
+ #hlavni-obsah .lux-fold-pad [class*="x-gri-1-1"] {grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))!important}
+}
