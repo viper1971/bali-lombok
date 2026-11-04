@@ -5,7 +5,11 @@
     var original = new Map();
     var pending;
     var observer;
-    var unscaled = 'svg,script,style,iframe,.store-btn,.transport-store-btn,#vipFloatingBar,#baliUnifiedRail,#waConfiguratorBar';
+    var unscaled = 'svg,script,style,iframe';
+    var utilityControls = '.store-btn,.transport-store-btn,#vipFloatingBar,#baliUnifiedRail,#waConfiguratorBar';
+    // Increase the existing desktop presentation by 20%: 0.8 × 1.2 = 0.96.
+    // Utility controls previously bypassed the 0.8 reduction, so use 1.2 there.
+    var contentScale = 0.96, utilityScale = 1.2;
 
     function restore() {
         original.forEach(function (saved, element) {
@@ -18,7 +22,7 @@
     function apply() {
         observer.disconnect();
         // Measuring a font while its previous size is still transitioning causes
-        // repeated 80% reductions. Freeze transitions before restoring base sizes.
+        // compounding font-size changes. Freeze transitions before restoring base sizes.
         var transitions = [];
         var elements = Array.from(document.querySelectorAll('body *')).filter(function (element) {
             if (element.closest(unscaled)) return false;
@@ -44,7 +48,7 @@
             });
             // Read all sizes before writing, so nested text is scaled only once.
             sizes.forEach(function (entry) {
-                entry[0].style.setProperty('font-size', (entry[1] * 0.8) + 'px', 'important');
+                entry[0].style.setProperty('font-size', (entry[1] * (entry[0].closest(utilityControls) ? utilityScale : contentScale)) + 'px', 'important');
             });
         }
         // Flush the final sizes before allowing hover/colour transitions again.
