@@ -1,0 +1,70 @@
+/* Editorial reading flow: static guides, fluid columns and stable controls. */
+#f-viza .mg-document-grid {display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+#f-viza .mg-document-card {
+ display:grid;grid-template-columns:minmax(220px,.75fr) minmax(0,2fr);gap:8px 24px;
+ align-items:start;padding:20px;border:1px solid var(--mg-line,var(--border));
+ border-top:3px solid var(--mg-forest,var(--primary));background:var(--mg-card,var(--surface));
+ border-radius:3px;min-width:0;
+}
+#f-viza .mg-document-card>div:first-child {display:contents}
+#f-viza .mg-document-card>div:first-child>:not(.mg-document-guide) {grid-column:1;min-width:0;margin:0 0 8px}
+#f-viza .mg-document-card h3 {font-family:Georgia,serif;font-size:24px;line-height:1.2}
+#f-viza .mg-document-card>div:last-child {grid-column:1;min-width:0}
+#f-viza .mg-document-card>div:last-child a {min-height:44px;box-sizing:border-box}
+#f-viza .mg-document-guide {grid-column:2;grid-row:1/span 5;min-width:0;background:transparent}
+#f-viza .mg-guide-title {font:700 14px/1.45 var(--font-ui,system-ui);margin:0 0 12px;color:var(--text-main)}
+#f-viza .mg-document-guide>div {padding:0!important}
+#f-viza .mg-document-guide ol {display:block!important;columns:2 30ch;column-gap:28px;padding-left:20px!important}
+#f-viza .mg-document-guide li {break-inside:avoid;margin:0 0 12px;padding-left:2px;line-height:1.6}
+#f-viza .mg-document-guide li:last-child {margin-bottom:0}
+#f-karta-mhd .mg-faq-answer {padding:12px 0;border-top:1px solid var(--border);min-width:0}
+#f-karta-mhd .mg-faq-answer h4 {font:800 15px/1.45 var(--font-ui,system-ui);margin:0 0 6px;color:var(--text-main)}
+#f-karta-mhd .mg-faq-answer p {margin:0;font-size:14px;line-height:1.65;color:var(--text-muted)}
+/* Utility controls must not participate in animated/repeated font scaling. */
+html body #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions .vfb-whatsapp {
+ display:flex!important;flex:1 0 100%!important;width:100%!important;min-width:0!important;
+ min-height:46px!important;height:auto!important;max-height:none!important;
+ justify-content:center!important;padding:11px 16px!important;box-sizing:border-box!important;
+ font:800 14px/1.4 system-ui,sans-serif!important;color:#fff!important;
+ border-radius:8px!important;white-space:normal!important;word-break:normal!important;
+ writing-mode:horizontal-tb!important;overflow:visible!important;transform:none!important;
+ transition:background-color .18s ease,box-shadow .18s ease!important;
+}
+/* A photo is part of the prose; interactive Google frames stay in stable grids. */
+@media(min-width:1000px) {
+ html[data-magazine="on"] #hlavni-obsah .mg-show-pair {display:flow-root!important}
+ #hlavni-obsah .mg-show-pair>.trip-show {
+  float:inline-start;width:48%!important;height:clamp(260px,25vw,360px)!important;
+  margin:0 22px 12px 0!important;
+ }
+ #hlavni-obsah .mg-show-pair>.mg-show-notes {display:contents;padding:0!important;border:0}
+ #hlavni-obsah .mg-show-notes>h3 {padding-top:8px;font-family:Georgia,serif}
+ #hlavni-obsah .mg-show-notes>ul {list-style-position:inside;padding-left:0}
+ #hlavni-obsah .mg-show-notes>ul>li {margin-bottom:8px;line-height:1.55}
+ #hlavni-obsah .mg-show-notes>.mg-visit-note {border:0;padding:8px 0;margin:0;line-height:1.6}
+}
+/* Intrinsic columns expand before text starts breaking into a narrow strip. */
+html[data-magazine="on"] #hlavni-obsah :is([class*="spots-grid"],.mg-media-pair,.uber-media-grid)>* {min-width:0}
+html[data-magazine="on"] #hlavni-obsah :is(p,li,h3,h4,.uber-info-panel) {word-break:normal;overflow-wrap:break-word}
+html[data-magazine="on"] #hlavni-obsah :is(.spot-card-sg,.spot-card-ulu,.spot-card-ubud,.spot-card-lombok,.spot-card-kuta,.spot-card-singapore) {
+ border-radius:4px;box-shadow:none;gap:8px;padding:12px;
+}
+@media(max-width:800px) {
+ #f-viza .mg-document-card {grid-template-columns:minmax(0,1fr);padding:14px;gap:8px}
+ #f-viza .mg-document-card>div:first-child>:not(.mg-document-guide),
+ #f-viza .mg-document-guide,#f-viza .mg-document-card>div:last-child {grid-column:1;grid-row:auto}
+ #f-viza .mg-document-card h3 {font-size:21px}
+ #f-viza .mg-document-guide ol {columns:auto}
+ #f-viza .mg-document-guide li {margin-bottom:12px}
+ #f-karta-mhd .mh23-lower {grid-template-columns:minmax(0,1fr)}
+ #f-karta-mhd .mg-faq-answer h4 {font-size:14px}
+ #f-karta-mhd .mg-faq-answer p {font-size:13px}
+}
+@media print {
+ #f-viza .mg-document-card {display:block;break-inside:auto;padding:10px;border:0;border-top:1px solid #777}
+ #f-viza .mg-document-card>div:first-child {display:block}
+ #f-viza .mg-document-guide {margin:10px 0}
+ #f-viza .mg-document-guide ol {columns:auto}
+ #f-viza .mg-document-guide li,.mg-faq-answer {break-inside:avoid}
+ #f-viza .mg-document-card h3,#f-viza .mg-guide-title,.mg-faq-answer h4 {break-after:avoid}
+}

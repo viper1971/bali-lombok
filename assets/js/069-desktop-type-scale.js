@@ -5,6 +5,7 @@
     var original = new Map();
     var pending;
     var observer;
+    var unscaled = 'svg,script,style,iframe,.store-btn,.transport-store-btn,#vipFloatingBar,#baliUnifiedRail,#waConfiguratorBar';
 
     function restore() {
         original.forEach(function (saved, element) {
@@ -16,16 +17,23 @@
 
     function apply() {
         observer.disconnect();
+        // Measuring a font while its previous size is still transitioning causes
+        // repeated 80% reductions. Freeze transitions before restoring base sizes.
+        var transitions = [];
+        var elements = Array.from(document.querySelectorAll('body *')).filter(function (element) {
+            if (element.closest(unscaled)) return false;
+            return Array.from(element.childNodes).some(function (node) {
+                return node.nodeType === 3 && node.textContent.trim();
+            }) || element.matches('input,textarea,select');
+        });
+        elements.forEach(function (element) {
+            transitions.push([element, element.style.getPropertyValue('transition'), element.style.getPropertyPriority('transition')]);
+            element.style.setProperty('transition', 'none', 'important');
+        });
         restore();
         if (desktop.matches) {
             var sizes = [];
-            document.querySelectorAll('body *').forEach(function (element) {
-                if (element.closest('svg,script,style,iframe,.store-btn,.transport-store-btn')) return;
-                // Only text-bearing elements need an override. Parent sizes stay unchanged.
-                var hasText = Array.from(element.childNodes).some(function (node) {
-                    return node.nodeType === 3 && node.textContent.trim();
-                });
-                if (!hasText && !element.matches('input,textarea,select')) return;
+            elements.forEach(function (element) {
                 var size = parseFloat(getComputedStyle(element).fontSize);
                 if (!Number.isFinite(size)) return;
                 original.set(element, {
@@ -39,6 +47,12 @@
                 entry[0].style.setProperty('font-size', (entry[1] * 0.8) + 'px', 'important');
             });
         }
+        // Flush the final sizes before allowing hover/colour transitions again.
+        if (elements.length) getComputedStyle(elements[0]).fontSize;
+        transitions.forEach(function (entry) {
+            if (entry[1]) entry[0].style.setProperty('transition', entry[1], entry[2]);
+            else entry[0].style.removeProperty('transition');
+        });
         observer.observe(document.body, { childList: true, subtree: true });
     }
 

@@ -340,7 +340,7 @@
             const floatActions = document.querySelector('.vfb-actions');
             if (floatActions) {
                 floatActions.innerHTML = `
-                    <button class="vfb-btn" onclick="shareToWhatsAppDirect()" style="background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); border: 1px solid #25d366; color: #fff;">
+                    <button type="button" class="vfb-btn vfb-whatsapp" aria-label="Sdílet cestu přes WhatsApp" onclick="shareToWhatsAppDirect()" style="background: linear-gradient(135deg, #25d366 0%, #128c7e 100%); border: 1px solid #25d366; color: #fff;">
                         📲 WhatsApp
                     </button>
                 `;
