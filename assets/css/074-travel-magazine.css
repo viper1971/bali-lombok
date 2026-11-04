@@ -464,3 +464,20 @@ html[data-magazine="on"] #hlavni-obsah .mg-feature .fl-tip {background:#ffffff0d
  html[data-magazine="on"] body #hlavni-obsah .mg-feature>div {width:calc(100% - 24px)}
  html[data-magazine="on"] #hlavni-obsah .mg-feature .stage-desc {font-size:13px!important}
 }
+
+/* Text rests directly on the photograph, without panel or badge backgrounds. */
+html[data-magazine="on"] body #hlavni-obsah .mg-feature>div,
+html[data-magazine="on"] body #hlavni-obsah .mg-feature :is(.mg-stage-metadata,.timeline-date-container,.ticket-badge,.st-deck,.st-move,.fl-tip,figcaption) {
+ background:transparent!important;
+ background-image:none!important;
+ border:0!important;
+ box-shadow:none!important;
+ backdrop-filter:none!important;
+}
+html[data-magazine="on"] body #hlavni-obsah .mg-feature :is(h3,p,small,b,strong,span,div,figcaption) {
+ color:#fff!important;
+ text-shadow:0 1px 3px #000,0 2px 7px #000b;
+}
+html[data-magazine="on"] body #hlavni-obsah .mg-feature .stage-desc {
+ border:0!important;
+}
