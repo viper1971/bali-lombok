@@ -327,3 +327,22 @@ html[data-magazine="on"] #cast-priprava {--chapter-image:url('https://images.pex
 .mg-navigation .mg-search {appearance:none;background:transparent;border:0;border-bottom:2px solid transparent;color:#fff;font:inherit;font-size:12px;font-weight:700;padding:9px 0;cursor:pointer}
 .mg-navigation .mg-search:hover {border-bottom-color:#f6cf35}
 @media(max-width:760px){.mg-navigation .mg-search{font-size:11px;padding:7px 1px}}
+
+/* Two photographs fill the card, with the panorama spanning the next row. */
+#hlavni-obsah .uber-media-grid {grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:start}
+#hlavni-obsah .uber-media-grid>.uber-media-box {grid-column:auto;min-width:0;max-width:none!important}
+#hlavni-obsah .uber-media-grid>.sv-card {grid-column:1/-1!important;width:100%}
+.mg-open-maps {display:block;text-align:right;font-size:12px;padding:6px 2px;color:var(--primary)}
+@media(min-width:1000px) {
+ /* Newspaper flow lets a long day continue in the next column at a stop boundary. */
+ #hlavni-obsah [id$="AccContent"]:has(>[class*="day-block"]) {display:block!important;column-width:530px;column-gap:18px}
+ #hlavni-obsah [id$="AccContent"]>[class*="day-block"] {display:block;break-inside:auto;width:auto!important;margin:0 0 16px!important}
+ #hlavni-obsah [id$="AccContent"]>:not([class*="day-block"]) {column-span:all}
+ #hlavni-obsah [id$="AccContent"] [class*="spots-grid"] {display:block!important}
+ #hlavni-obsah [id$="AccContent"] [class*="spots-grid"]>* {break-inside:avoid;margin-block:0 12px!important}
+ #hlavni-obsah [id$="AccContent"] :is(h4,h5) {break-after:avoid}
+ #hlavni-obsah [id$="AccContent"] :is(p,li) {orphans:3;widows:3}
+}
+@media(max-width:900px) {
+ #hlavni-obsah .uber-media-grid {grid-template-columns:minmax(0,1fr)!important}
+}

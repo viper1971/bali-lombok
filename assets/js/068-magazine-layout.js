@@ -6,6 +6,27 @@
   root.setAttribute('data-magazine', 'on');
   try { localStorage.removeItem('bali_magazine_appearance_v1'); } catch (_) {}
   function init() {
+    document.querySelectorAll('.sv-stage[data-sv-url]').forEach(function (stage) {
+      var card = stage.closest('.sv-card');
+      if (!card) return;
+      var latitude = /!1d(-?[\d.]+)/.exec(stage.dataset.svUrl);
+      var longitude = /!2d(-?[\d.]+)/.exec(stage.dataset.svUrl);
+      var pano = /!1s([^!]+)/.exec(stage.dataset.svUrl);
+      var destination = new URL('https://www.google.com/maps/@');
+      destination.searchParams.set('api', '1');
+      destination.searchParams.set('map_action', 'pano');
+      if (latitude && longitude) destination.searchParams.set('viewpoint', latitude[1] + ',' + longitude[1]);
+      else if (pano) destination.searchParams.set('pano', pano[1]);
+      else return;
+      var link = document.createElement('a');
+      link.className = 'mg-open-maps';
+      link.href = destination.href;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = 'Otevřít v Mapách ↗';
+      card.appendChild(link);
+    });
+
     var cover = document.querySelector('.mg-cover');
     if (cover && window.matchMedia && window.HTMLDialogElement) {
       var desktop = window.matchMedia('(min-width: 901px)');
