@@ -481,3 +481,25 @@ html[data-magazine="on"] body #hlavni-obsah .mg-feature :is(h3,p,small,b,strong,
 html[data-magazine="on"] body #hlavni-obsah .mg-feature .stage-desc {
  border:0!important;
 }
+
+/* Store links keep readable labels and usable click targets, independent of text scaling. */
+html body #hlavni-obsah :is(.store-buttons,.transport-store-buttons) {
+ display:flex!important;flex-wrap:wrap!important;gap:10px!important;align-items:stretch!important;
+}
+html body #hlavni-obsah :is(a.store-btn,a.transport-store-btn) {
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ flex:0 1 auto!important;min-width:180px!important;max-width:100%!important;
+ min-height:48px!important;height:auto!important;width:auto!important;padding:12px 18px!important;
+ font:700 16px/1.35 system-ui,sans-serif!important;letter-spacing:0!important;
+ color:#fff!important;-webkit-text-fill-color:#fff!important;background:#112b24!important;
+ border:1px solid #315b4c!important;border-radius:7px!important;
+ opacity:1!important;visibility:visible!important;overflow:visible!important;
+ white-space:normal!important;text-indent:0!important;text-decoration:none!important;
+ box-sizing:border-box!important;box-shadow:none!important;
+}
+html body #hlavni-obsah :is(a.store-btn,a.transport-store-btn):hover {background:#1b4e3c!important}
+@media(max-width:600px) {
+ html body #hlavni-obsah :is(a.store-btn,a.transport-store-btn) {
+  flex:1 1 160px!important;min-width:min(160px,100%)!important;font-size:14px!important;
+ }
+}

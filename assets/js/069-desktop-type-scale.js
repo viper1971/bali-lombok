@@ -20,7 +20,7 @@
         if (desktop.matches) {
             var sizes = [];
             document.querySelectorAll('body *').forEach(function (element) {
-                if (element.closest('svg,script,style,iframe')) return;
+                if (element.closest('svg,script,style,iframe,.store-btn,.transport-store-btn')) return;
                 // Only text-bearing elements need an override. Parent sizes stay unchanged.
                 var hasText = Array.from(element.childNodes).some(function (node) {
                     return node.nodeType === 3 && node.textContent.trim();

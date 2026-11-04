@@ -413,11 +413,11 @@
     "bytes": 9263
   },
   {
-    "output": "assets/build/js-079b63a692fc4cee.js",
+    "output": "assets/build/js-b48390eed059daac.js",
     "sources": [
       "assets/js/069-desktop-type-scale.js"
     ],
-    "bytes": 1774
+    "bytes": 1806
   },
   {
     "output": "assets/build/css-613ec9680ad29884.css",
@@ -637,10 +637,10 @@
     "bytes": 19381
   },
   {
-    "output": "assets/build/css-e2087d9c7d27a41f.css",
+    "output": "assets/build/css-abff3517f3c874d1.css",
     "sources": [
       "assets/css/074-travel-magazine.css"
     ],
-    "bytes": 46153
+    "bytes": 47368
   }
 ]
