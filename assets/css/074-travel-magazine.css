@@ -215,3 +215,31 @@ html[data-magazine="on"] #hlavni-obsah.main-wrapper :is(.giant-bike-card,.t-bubb
 html[data-magazine="on"] #hlavni-obsah.main-wrapper .lux-fold-pad table {font-variant-numeric:tabular-nums;border-collapse:collapse}
 html[data-magazine="on"] #hlavni-obsah.main-wrapper .lux-fold-pad th {background:var(--mg-forest)!important;color:white!important}
 html[data-magazine="on"] #hlavni-obsah.main-wrapper .lux-fold-pad td {border-bottom:1px solid var(--mg-line)!important}
+
+/* Feature, timetable, handbook and ledger layouts share the existing trip data. */
+html[data-magazine="on"] body #hlavni-obsah .mg-feature,
+html[data-magazine="on"] body #hlavni-obsah .mg-department {
+  margin:0 0 1.6rem; background:var(--mg-card); color:var(--mg-ink);
+}
+html[data-magazine="on"] #hlavni-obsah .mg-feature figure {margin:0;position:relative}
+html[data-magazine="on"] #hlavni-obsah .mg-feature img {display:block;width:100%;height:clamp(200px,31vw,410px);object-fit:cover}
+html[data-magazine="on"] #hlavni-obsah .mg-feature figcaption {padding:6px 12px;text-align:right;color:var(--mg-muted);font:italic 12px/1.45 Georgia,serif}
+html[data-magazine="on"] #hlavni-obsah .mg-feature>div {padding:clamp(18px,3vw,40px);border-left:5px solid var(--mg-yellow)}
+html[data-magazine="on"] #hlavni-obsah :is(.mg-feature,.mg-department) small {font:700 10px/1.5 system-ui,sans-serif;text-transform:uppercase;letter-spacing:.18em}
+html[data-magazine="on"] #hlavni-obsah :is(.mg-feature,.mg-department) h3 {font:400 clamp(30px,4vw,58px)/1.07 Georgia,serif!important;color:inherit!important;margin:.2em 0!important;letter-spacing:-.04em}
+html[data-magazine="on"] #hlavni-obsah .mg-feature p {font:400 clamp(17px,1.6vw,22px)/1.6 Georgia,serif;color:var(--mg-ink);max-width:55ch;margin:12px 0 0}
+html[data-magazine="on"] body #hlavni-obsah .mg-department {display:flex;align-items:center;gap:clamp(14px,3vw,38px);border-block:1px solid var(--mg-line);padding:20px 0}
+html[data-magazine="on"] #hlavni-obsah .mg-department>span {font:italic 36px/1 Georgia,serif;padding-inline:16px;color:var(--mg-muted)}
+html[data-magazine="on"] #hlavni-obsah .mg-department h3 {font-size:clamp(23px,3vw,39px)!important}
+html[data-magazine="on"] body #hlavni-obsah .mg-transit {border-block:2px dashed var(--mg-line);background:var(--mg-paper)}
+html[data-magazine="on"] #hlavni-obsah .mg-transit>span {border-inline-end:1px dashed var(--mg-line);font:600 22px/1.5 monospace}
+html[data-magazine="on"] body #hlavni-obsah .mg-ledger {background:var(--mg-forest);color:white;border-top:5px solid var(--mg-yellow)}
+html[data-magazine="on"] #hlavni-obsah .mg-ledger>span {color:var(--mg-yellow)}
+html[data-magazine="on"] #hlavni-obsah #bxGrand_pers {font:600 clamp(19px,2vw,32px)/1.15 Georgia,serif!important;font-variant-numeric:tabular-nums!important}
+@media screen and (min-width:1000px) {
+ html[data-magazine="on"] #hlavni-obsah .lux-fold-pad:has(>.mg-feature):has(>.st-deck) {display:grid;grid-template-columns:minmax(0,2fr) minmax(245px,1fr);gap:20px;align-items:start}
+ html[data-magazine="on"] #hlavni-obsah .lux-fold-pad:has(>.mg-feature):has(>.st-deck)>* {grid-column:1/-1;min-width:0}
+ html[data-magazine="on"] #hlavni-obsah .lux-fold-pad:has(>.st-deck)>.mg-feature {grid-column:1}
+ html[data-magazine="on"] #hlavni-obsah .lux-fold-pad:has(>.mg-feature)>.st-deck {grid-column:2;border-top:4px solid var(--mg-yellow);margin-top:0}
+}
+@media print {html[data-magazine="on"] body #hlavni-obsah .mg-department {display:none!important}}
