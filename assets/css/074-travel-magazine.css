@@ -186,3 +186,32 @@ html[data-magazine="on"] #hlavni-obsah :is(.p35-stamp,.p35-pill,.p35-icon) { bor
 @media(prefers-reduced-motion:reduce) { .mg-story img { transition:none; } .mg-story:hover img { transform:none; } }
 @media(max-width:700px) { .mg-mast-inner { padding-left:70px; } .mg-navigation { margin-left:-48px; width:calc(100% + 48px); flex-shrink:0; } }
 @media print { .mg-masthead,.mg-cover-cta { display:none!important; } html[data-magazine="on"] body .mg-only { display:none!important; } }
+
+/* Chapter openers sit inside the existing folds so their controls and data stay shared. */
+html[data-magazine="on"] #hlavni-obsah .mg-spread {
+  padding:clamp(24px,5vw,64px); margin:0 0 clamp(22px,3vw,42px);
+  min-height:clamp(155px,17vw,245px); box-sizing:border-box; align-content:end;
+  color:white; background-color:#10342c; background-size:cover; background-position:center;
+  border-bottom:5px solid var(--mg-yellow);
+}
+.mg-spread-bali {background-image:linear-gradient(90deg,#092b25ed,#092b252b),url('https://viper1971.github.io/bali-lombok/assets/images/magazine-bali.webp')}
+.mg-spread-lombok {background-image:linear-gradient(90deg,#092b25ed,#092b252b),url('https://viper1971.github.io/bali-lombok/assets/images/magazine-lombok.webp')}
+.mg-spread-singapore {background-image:linear-gradient(90deg,#092b25ed,#092b252b),url('https://viper1971.github.io/bali-lombok/assets/images/magazine-singapore.webp')}
+html[data-magazine="on"] #hlavni-obsah .mg-spread small {font:700 11px/1.6 system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#ffe379}
+html[data-magazine="on"] #hlavni-obsah .mg-spread p {font:400 clamp(32px,4.8vw,65px)/1.05 Georgia,serif!important;color:white!important;margin:12px 0 0!important;max-width:22ch;letter-spacing:-.04em}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part>.lux-part-head {
+  background:linear-gradient(95deg,#072d27f5 10%,#072d2790),url('https://viper1971.github.io/bali-lombok/assets/images/magazine-cover.webp') center 56%/cover!important;
+  min-height:clamp(115px,13vw,190px)!important;
+}
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .lux-fold-pad {padding:clamp(14px,3.2vw,48px)!important}
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .lux-fold-pad :is(.stage-title,.giant-bike-title,.hotel-title-text,h4) {
+  font-family:Georgia,serif!important;letter-spacing:-.02em;line-height:1.23!important
+}
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .stage-desc {font:400 clamp(17px,1.5vw,22px)/1.65 Georgia,serif!important;border-inline-start:3px solid var(--mg-yellow);padding-inline-start:1em;max-width:72ch}
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .uber-top-bar {padding:clamp(16px,2vw,32px)!important;background:var(--mg-card)!important;border-top:4px solid var(--mg-forest);border-bottom:1px solid var(--mg-line)}
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .hotel-title-text {font-size:clamp(22px,2.4vw,34px)!important;color:var(--mg-ink)!important}
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .uber-info-panel {background:var(--mg-paper)!important;border-radius:0!important;padding:18px!important}
+html[data-magazine="on"] #hlavni-obsah.main-wrapper :is(.giant-bike-card,.t-bubble,.cx-card,.p35-card,.p22-card,.pf19-card) {border:0!important;border-top:3px solid var(--mg-forest)!important;border-radius:0!important;padding:clamp(15px,2vw,28px)!important;box-shadow:none!important}
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .lux-fold-pad table {font-variant-numeric:tabular-nums;border-collapse:collapse}
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .lux-fold-pad th {background:var(--mg-forest)!important;color:white!important}
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .lux-fold-pad td {border-bottom:1px solid var(--mg-line)!important}
