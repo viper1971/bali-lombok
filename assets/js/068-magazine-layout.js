@@ -2,42 +2,9 @@
 (function () {
   'use strict';
   var root = document.documentElement;
-  var key = 'bali_magazine_appearance_v1';
   var mode = 'magazine';
-  try { if (localStorage.getItem(key) === 'classic') mode = 'classic'; } catch (_) {}
-  try {
-    var requested = new URL(location.href).searchParams.get('vzhled');
-    if (requested === 'puvodni') mode = 'classic';
-    if (requested === 'casopis') mode = 'magazine';
-  } catch (_) {}
-  function labels() {
-    var active = root.getAttribute('data-magazine') === 'on';
-    document.querySelectorAll('[data-magazine-switch]').forEach(function (button) {
-      button.textContent = active ? 'Původní vzhled' : 'Časopisový vzhled';
-      button.setAttribute('aria-label', active ? 'Přepnout na původní vzhled webu' : 'Přepnout na časopisový vzhled webu');
-    });
-  }
-  function setMode(next, remember) {
-    mode = next === 'classic' ? 'classic' : 'magazine';
-    root.setAttribute('data-magazine', mode === 'magazine' ? 'on' : 'off');
-    if (remember) {
-      try { localStorage.setItem(key, mode); } catch (_) {}
-      try {
-        var u = new URL(location.href);
-        u.searchParams.delete('vzhled');
-        history.replaceState(null, '', u.href);
-      } catch (_) {}
-    }
-    labels();
-    // Existing maps must remeasure after a change of layout.
-    if (remember) window.requestAnimationFrame(function () {
-      window.dispatchEvent(new Event('resize'));
-      (window.__luxMaps || []).forEach(function (map) { if (map.invalidateSize) map.invalidateSize(); });
-    });
-    return mode;
-  }
-  setMode(mode, false);
-  window.baliMagazine = { setMode: function (next) { return setMode(next, true); } };
+  root.setAttribute('data-magazine', 'on');
+  try { localStorage.removeItem('bali_magazine_appearance_v1'); } catch (_) {}
   function init() {
     var cover = document.querySelector('.mg-cover');
     if (cover && window.matchMedia && window.HTMLDialogElement) {
@@ -61,10 +28,7 @@
         desktop.addEventListener('change', enter);
       }
     }
-    labels();
     document.addEventListener('click', function (event) {
-      var button = event.target.closest && event.target.closest('[data-magazine-switch]');
-      if (button) { setMode(mode === 'magazine' ? 'classic' : 'magazine', true); return; }
       var link = event.target.closest && event.target.closest('a[data-magazine-target]');
       if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button > 0) return;
       var id = link.getAttribute('href').slice(1), target = document.getElementById(id);

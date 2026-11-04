@@ -17,6 +17,8 @@
     function luxShowVersion() {
         var node = document.getElementById('heroVer');
         if (node) node.textContent = 'Aktualizováno ' + LUX_VERSION;
+        var magazine = document.getElementById('magazineVersion');
+        if (magazine) magazine.textContent = 'Aktualizováno ' + LUX_VERSION;
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', luxShowVersion, {once:true});
     else luxShowVersion();

@@ -194,13 +194,13 @@ html[data-magazine="on"] #hlavni-obsah .mg-spread {
   color:white; background-color:#10342c; background-size:cover; background-position:center;
   border-bottom:5px solid var(--mg-yellow);
 }
-.mg-spread-bali {background-image:linear-gradient(90deg,#092b25ed,#092b252b),url('https://viper1971.github.io/bali-lombok/assets/images/magazine-bali.webp')}
-.mg-spread-lombok {background-image:linear-gradient(90deg,#092b25ed,#092b252b),url('https://viper1971.github.io/bali-lombok/assets/images/magazine-lombok.webp')}
-.mg-spread-singapore {background-image:linear-gradient(90deg,#092b25ed,#092b252b),url('https://viper1971.github.io/bali-lombok/assets/images/magazine-singapore.webp')}
+.mg-spread-bali {background-image:linear-gradient(90deg,#092b25ed,#092b252b),url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1600&q=85')}
+.mg-spread-lombok {background-image:linear-gradient(90deg,#092b25ed,#092b252b),url('https://images.pexels.com/photos/36956259/pexels-photo-36956259.jpeg?auto=compress&cs=tinysrgb&w=1600')}
+.mg-spread-singapore {background-image:linear-gradient(90deg,#092b25ed,#092b252b),url('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1600&q=85')}
 html[data-magazine="on"] #hlavni-obsah .mg-spread small {font:700 11px/1.6 system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#ffe379}
 html[data-magazine="on"] #hlavni-obsah .mg-spread p {font:400 clamp(32px,4.8vw,65px)/1.05 Georgia,serif!important;color:white!important;margin:12px 0 0!important;max-width:22ch;letter-spacing:-.04em}
 html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part>.lux-part-head {
-  background:linear-gradient(95deg,#072d27f5 10%,#072d2790),url('https://viper1971.github.io/bali-lombok/assets/images/magazine-cover.webp') center 56%/cover!important;
+  background:linear-gradient(95deg,#072d27f5 10%,#072d2790),url('https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8?auto=format&fit=crop&w=1800&q=85') center 56%/cover!important;
   min-height:clamp(115px,13vw,190px)!important;
 }
 html[data-magazine="on"] #hlavni-obsah.main-wrapper .lux-fold-pad {padding:clamp(14px,3.2vw,48px)!important}
@@ -257,11 +257,11 @@ html[data-magazine="on"] dialog.mg-entry .mg-cover {box-sizing:border-box;width:
 #hlavni-obsah #bikesStack .giant-bike-card {padding:8px!important;min-width:0;margin:0!important}
 #bikesStack .giant-image-wrapper {padding:0!important;height:auto!important}
 #bikesStack .giant-bike-img {width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important}
-html[data-magazine="on"] #hlavni-obsah .lux-part {--chapter-image:url('https://viper1971.github.io/bali-lombok/assets/images/magazine-singapore.webp')}
-html[data-magazine="on"] #osa {--chapter-image:url('https://viper1971.github.io/bali-lombok/assets/images/magazine-cover.webp')!important}
-html[data-magazine="on"] #cast-plan {--chapter-image:url('https://viper1971.github.io/bali-lombok/IDRbankovka.jpg')!important}
-html[data-magazine="on"] #cast-misto {--chapter-image:url('https://viper1971.github.io/bali-lombok/assets/images/magazine-bali.webp')!important}
-html[data-magazine="on"] #cast-kontrola {--chapter-image:url('https://viper1971.github.io/bali-lombok/assets/images/magazine-lombok.webp')!important}
+html[data-magazine="on"] #hlavni-obsah .lux-part {--chapter-image:url('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1600&q=85')}
+html[data-magazine="on"] #osa {--chapter-image:url('https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8?auto=format&fit=crop&w=1800&q=85')!important}
+html[data-magazine="on"] #cast-plan {--chapter-image:url('https://images.pexels.com/photos/7010170/pexels-photo-7010170.jpeg?auto=compress&cs=tinysrgb&w=1600')!important}
+html[data-magazine="on"] #cast-misto {--chapter-image:url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1600&q=85')!important}
+html[data-magazine="on"] #cast-kontrola {--chapter-image:url('https://images.pexels.com/photos/36956259/pexels-photo-36956259.jpeg?auto=compress&cs=tinysrgb&w=1600')!important}
 html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part>.lux-part-head {background-image:linear-gradient(90deg,#082a25ec,#092c2580),var(--chapter-image)!important}
 #hlavni-obsah .lux-acc-btn[aria-controls$="AccContent"] {display:none!important}
 #hlavni-obsah [id$="AccContent"]:has(>[class*="day-block"]) {display:flex!important;flex-wrap:wrap;align-items:flex-start;gap:12px;height:auto!important;max-height:none!important;visibility:visible!important;opacity:1!important;overflow:visible!important}
@@ -293,3 +293,6 @@ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part>.lux-part-hea
  #hlavni-obsah .clim-scene {height:38px!important;flex-basis:105px}
  #hlavni-obsah .lux-fold-pad [class*="x-gri-1-1"] {grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))!important}
 }
+
+html[data-magazine="on"] #cast-priprava {--chapter-image:url('https://images.pexels.com/photos/13987298/pexels-photo-13987298.jpeg?auto=compress&cs=tinysrgb&w=1600')!important}
+.mg-version {color:#fff!important;font:500 12px/1.5 system-ui,sans-serif!important;margin:9px 0!important}
