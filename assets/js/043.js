@@ -188,26 +188,18 @@
                 say('🔒 Tahle sekce se odemkne, až přečteš ty před ní.');
             }
         }, true);
-        // tlačítko v hlavičce sekce
-        var orig = window.luxToggle;
-        if (typeof orig === 'function') {
-            window.luxToggle = function (id) {
-                var r = orig.apply(this, arguments);
-                var f = document.getElementById(id);
-                if (f && f.classList.contains('is-open')) mark(f);
-                return r;
-            };
-        }
-        // odkaz z menu nebo z obsahu, který sekci otevře
-        document.addEventListener('click', function (e) {
-            var a = e.target.closest && e.target.closest('a[href^="#"]');
-            if (!a) return;
-            var t = document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1)));
-            if (!t) return;
-            setTimeout(function () {
-                var f = t.closest('.lux-fold');
-                while (f) { if (f.classList.contains('is-open')) mark(f); f = f.parentElement && f.parentElement.closest('.lux-fold'); }
-            }, 100);
+        // Opening is asynchronous: the closed header scrolls first, then its
+        // class changes. Observe the actual disclosure, not the initial click.
+        // This also covers menu links and the directly opened chapter contents.
+        var readObserver = new MutationObserver(function (records) {
+            records.forEach(function (record) {
+                var fold = record.target;
+                if (fold.classList.contains('is-open')) mark(fold);
+            });
+        });
+        folds().forEach(function (fold) {
+            readObserver.observe(fold, { attributes: true, attributeFilter: ['class'] });
+            if (fold.classList.contains('is-open')) mark(fold);
         });
         // počítadlo a vymazání v horní liště nástrojů
         var tools = document.querySelector('.lux-dash-tools');
