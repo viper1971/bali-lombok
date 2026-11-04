@@ -447,3 +447,20 @@ html[data-magazine="on"] #hlavni-obsah .mg-feature figcaption {position:absolute
  #hlavni-obsah [class*="day-block"]:has(>.sv-card~.sv-card)>:not(.sv-card) {grid-column:1/-1}
  #hlavni-obsah [class*="day-block"]:has(>.sv-card~.sv-card)>.sv-card {grid-column:auto;grid-row:auto}
 }
+
+/* Stage dates, live clocks, descriptions and selected-hotel tips share the photo panel. */
+html[data-magazine="on"] body #hlavni-obsah .mg-feature>div {width:min(1120px,calc(100% - 48px));background:rgba(5,27,23,.94)}
+html[data-magazine="on"] #hlavni-obsah .mg-feature .mg-stage-metadata {display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:16px;padding-top:14px;border-top:1px solid #ffffff40}
+html[data-magazine="on"] #hlavni-obsah .mg-feature .timeline-date-container {position:static!important;margin:0!important;max-width:100%;padding:7px 10px!important;box-shadow:none!important;font-size:13px!important}
+html[data-magazine="on"] #hlavni-obsah .mg-feature .ticket-badge {position:static!important;display:inline-flex;gap:8px;margin:0!important;box-shadow:none!important;padding:7px 10px!important}
+html[data-magazine="on"] #hlavni-obsah .mg-feature .stage-title {flex-basis:100%;font-size:19px!important;color:white!important;margin:0!important}
+html[data-magazine="on"] #hlavni-obsah .mg-feature .stage-desc {flex-basis:100%;font-size:16px!important;color:white!important;margin:0!important;max-width:80ch;padding:0!important;border:0!important}
+html[data-magazine="on"] #hlavni-obsah .mg-feature .st-deck {background:transparent!important;color:white!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:16px 0 0!important;padding:0!important}
+html[data-magazine="on"] #hlavni-obsah .mg-feature :is(.st-move,.fl-h,.fl-tip,.fl-tip b) {color:white!important}
+html[data-magazine="on"] #hlavni-obsah .mg-feature .st-move {background:transparent!important;border:1px solid #ffffff40!important;padding:8px 10px!important;margin:0 0 12px!important}
+html[data-magazine="on"] #hlavni-obsah .mg-feature .fl-tips {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:10px}
+html[data-magazine="on"] #hlavni-obsah .mg-feature .fl-tip {background:#ffffff0d!important;border:1px solid #ffffff35!important;padding:10px!important;border-radius:3px!important;font-size:13px!important}
+@media(max-width:900px) {
+ html[data-magazine="on"] body #hlavni-obsah .mg-feature>div {width:calc(100% - 24px)}
+ html[data-magazine="on"] #hlavni-obsah .mg-feature .stage-desc {font-size:13px!important}
+}

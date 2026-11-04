@@ -35,6 +35,27 @@
     });
 
 
+    // Move the live stage metadata into its own feature, without copying values.
+    document.querySelectorAll('.lux-fold .mg-feature').forEach(function (feature) {
+      var fold = feature.closest('.lux-fold');
+      var overlay = feature.querySelector(':scope > div');
+      if (!fold || !overlay) return;
+      var metadata = document.createElement('div');
+      metadata.className = 'mg-stage-metadata';
+      var date = fold.querySelector('.timeline-date-container');
+      var clock = fold.querySelector('.ticket-badge');
+      var title = fold.querySelector('.t-bubble > .stage-title');
+      var description = fold.querySelector('.t-bubble > .stage-desc');
+      var previousPanel = title && title.parentElement;
+      [date, clock, title, description].forEach(function (element) {
+        if (element) metadata.appendChild(element);
+      });
+      if (metadata.childNodes.length) overlay.appendChild(metadata);
+      if (previousPanel && !previousPanel.children.length && !previousPanel.textContent.trim()) previousPanel.remove();
+      var tips = fold.querySelector('[id^="stDeck-"]');
+      if (tips) overlay.appendChild(tips);
+    });
+
     // Pair adjacent transfer maps while retaining their original titles and links.
     document.querySelectorAll('.lux-fold-pad .map-container-wrapper').forEach(function (map) {
       if (map.closest('.mg-media-pair')) return;
