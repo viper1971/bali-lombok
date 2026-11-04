@@ -14,11 +14,11 @@
     "bytes": 1500
   },
   {
-    "output": "assets/build/js-7fc4aef17accedf2.js",
+    "output": "assets/build/js-34fc7ee100cc651f.js",
     "sources": [
       "assets/js/068-magazine-layout.js"
     ],
-    "bytes": 2694
+    "bytes": 3101
   },
   {
     "output": "assets/build/js-9431cbfa982987ad.js",
@@ -266,11 +266,11 @@
     "bytes": 4498
   },
   {
-    "output": "assets/build/js-4d37941f9887ddd0.js",
+    "output": "assets/build/js-9500f38732daf21c.js",
     "sources": [
       "assets/js/046.js"
     ],
-    "bytes": 24401
+    "bytes": 24402
   },
   {
     "output": "assets/build/js-2a84e1c14c764d64.js",
@@ -287,11 +287,11 @@
     "bytes": 20034
   },
   {
-    "output": "assets/build/js-b05812848ad5c76f.js",
+    "output": "assets/build/js-1e7b97d5c44b1ea2.js",
     "sources": [
       "assets/js/049.js"
     ],
-    "bytes": 141336
+    "bytes": 141723
   },
   {
     "output": "assets/build/js-d597c7bc58059231.js",
@@ -406,11 +406,11 @@
     "bytes": 661
   },
   {
-    "output": "assets/build/js-369b5d326726236f.js",
+    "output": "assets/build/js-ac6b1306f2a6c46d.js",
     "sources": [
       "assets/js/067-simple-travel-journal.js"
     ],
-    "bytes": 9293
+    "bytes": 9263
   },
   {
     "output": "assets/build/css-613ec9680ad29884.css",
@@ -630,10 +630,10 @@
     "bytes": 19381
   },
   {
-    "output": "assets/build/css-e3c0b73de77d95d9.css",
+    "output": "assets/build/css-a51144ba25ef68fb.css",
     "sources": [
       "assets/css/074-travel-magazine.css"
     ],
-    "bytes": 36719
+    "bytes": 38079
   }
 ]

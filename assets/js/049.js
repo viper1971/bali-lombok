@@ -210,6 +210,17 @@
             [].forEach.call(p.querySelectorAll('.lux-fold.is-open'), function (f) { if (typeof window.luxToggle === 'function') window.luxToggle(f.id, { preserveScroll: !!preserveScroll }); });
         }
         p.classList.toggle('is-open', open);
+        if (open && (p.id === 'cast-misto' || p.id === 'cast-kontrola')) {
+            var innerFold = p.querySelector('.lux-fold');
+            if (innerFold) {
+                innerFold.classList.add('is-open', 'is-settled');
+                var innerBody = innerFold.querySelector('.lux-fold-body');
+                if (innerBody) innerBody.removeAttribute('inert');
+                var innerButton = innerFold.querySelector('.lux-fold-btn');
+                if (innerButton) innerButton.setAttribute('aria-expanded', 'true');
+            }
+        }
+
         var h = p.querySelector(':scope > .lux-part-head'); if (h) h.setAttribute('aria-expanded', open ? 'true' : 'false');
         if (open) { try { window.dispatchEvent(new Event('resize')); (window.__luxMaps || []).forEach(function (m) { try { m.invalidateSize(); } catch (e) {} }); } catch (e) {} }
     }

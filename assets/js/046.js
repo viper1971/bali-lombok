@@ -277,7 +277,7 @@
     function climScene(c) {
         var uid = ++climUid, wet = (c.rain >= 100 || c.days >= 10) ? 2 : (c.rain >= 40 ? 1 : 0);
         var top = wet === 2 ? '#3b4a5f' : wet === 1 ? '#0ea5e9' : '#0369a1', bot = wet === 2 ? '#94a3b8' : wet === 1 ? '#bae6fd' : '#fde68a';
-        var s = '<svg viewBox="0 0 1200 110" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">' +
+        var s = '<svg viewBox="470 0 400 110" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">' +
             '<defs><linearGradient id="cs' + uid + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="' + top + '"/><stop offset="1" stop-color="' + bot + '"/></linearGradient>' +
             '<radialGradient id="cg' + uid + '"><stop offset="0" stop-color="#fff7c2" stop-opacity=".95"/><stop offset="1" stop-color="#fde68a" stop-opacity="0"/></radialGradient></defs>' +
             '<rect width="1200" height="110" fill="url(#cs' + uid + ')"/>';

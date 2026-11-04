@@ -6,6 +6,13 @@
   root.setAttribute('data-magazine', 'on');
   try { localStorage.removeItem('bali_magazine_appearance_v1'); } catch (_) {}
   function init() {
+    document.querySelectorAll('[id$="AccContent"]:has(>[class*="day-block"])').forEach(function (content) {
+      var note = document.createElement('p');
+      note.className = 'mg-visit-note';
+      note.textContent = 'Náměty k návštěvě — pořadí i den si vybereme podle nálady, počasí a času. Uvedené okruhy a časy návštěv jsou orientační, termíny letů a přesunů platí podle itineráře.';
+      content.prepend(note);
+    });
+
     document.querySelectorAll('.sv-stage[data-sv-url]').forEach(function (stage) {
       var card = stage.closest('.sv-card');
       if (!card) return;

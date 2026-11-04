@@ -24,7 +24,7 @@
   function program(stage) {
     var fold = el(stage[1]);
     if (!fold) return '';
-    var days = Array.from(fold.querySelectorAll('h4')).filter(function (h) { return /\d+\.\s*DEN\s*:/i.test(h.textContent); });
+    var days = Array.from(fold.querySelectorAll('[class*="day-block"] > h4'));
     var rows = days.map(function (h) {
       var label = cleanHeading(h).replace(/^[^\p{L}\d]+/u, '');
       var para = h.nextElementSibling;
@@ -32,7 +32,7 @@
       var day = h.querySelector('.st-date');
       return '<li><span class="sj-day-date">' + esc(day ? day.textContent : '') + '</span><div><h4>' + esc(label) + '</h4>' + (detail ? '<p>' + esc(detail) + '</p>' : '') + '</div></li>';
     }).join('');
-    return '<div class="sj-program"><h3>Program pobytu <span>' + (days.length ? days.length + ' ' + (days.length === 1 ? 'den' : days.length < 5 ? 'dny' : 'dní') : 'podle itineráře') + '</span></h3>' + (rows ? '<ol class="sj-days">' + rows + '</ol>' : '') + '</div>';
+    return '<div class="sj-program"><h3>Tipy k návštěvě <span>' + (days.length ? days.length + ' ' + (days.length === 1 ? 'okruh' : days.length < 5 ? 'okruhy' : 'okruhů') : 'podle itineráře') + '</span></h3>' + (rows ? '<ol class="sj-days">' + rows + '</ol>' : '') + '</div>';
   }
   function stageHtml(stage, index) {
     var h = hotel(stage), choice = typeof selectedHotels !== 'undefined' ? selectedHotels[stage[0]] : '';

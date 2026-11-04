@@ -333,16 +333,43 @@ html[data-magazine="on"] #cast-priprava {--chapter-image:url('https://images.pex
 #hlavni-obsah .uber-media-grid>.uber-media-box {grid-column:auto;min-width:0;max-width:none!important}
 #hlavni-obsah .uber-media-grid>.sv-card {grid-column:1/-1!important;width:100%}
 .mg-open-maps {display:block;text-align:right;font-size:12px;padding:6px 2px;color:var(--primary)}
-@media(min-width:1000px) {
- /* Newspaper flow lets a long day continue in the next column at a stop boundary. */
- #hlavni-obsah [id$="AccContent"]:has(>[class*="day-block"]) {display:block!important;column-width:530px;column-gap:18px}
- #hlavni-obsah [id$="AccContent"]>[class*="day-block"] {display:block;break-inside:auto;width:auto!important;margin:0 0 16px!important}
- #hlavni-obsah [id$="AccContent"]>:not([class*="day-block"]) {column-span:all}
- #hlavni-obsah [id$="AccContent"] [class*="spots-grid"] {display:block!important}
- #hlavni-obsah [id$="AccContent"] [class*="spots-grid"]>* {break-inside:avoid;margin-block:0 12px!important}
- #hlavni-obsah [id$="AccContent"] :is(h4,h5) {break-after:avoid}
- #hlavni-obsah [id$="AccContent"] :is(p,li) {orphans:3;widows:3}
-}
 @media(max-width:900px) {
  #hlavni-obsah .uber-media-grid {grid-template-columns:minmax(0,1fr)!important}
+}
+
+/* Embedded Google panoramas must not be fragmented across newspaper columns. */
+#hlavni-obsah [id$="AccContent"]:has(>[class*="day-block"]) {
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+ columns:auto!important;gap:16px;align-items:start;
+}
+#hlavni-obsah [id$="AccContent"]>[class*="day-block"] {
+ min-width:0;width:100%;break-inside:auto;transform:none!important;
+}
+#hlavni-obsah [id$="AccContent"] [class*="spots-grid"] {
+ display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))!important;gap:12px!important;
+}
+#hlavni-obsah .sv-card,#hlavni-obsah .sv-stage {break-inside:avoid;transform:none!important;transition:none!important}
+#hlavni-obsah .btn-toggle-alt-hotels {display:none!important}
+#f-slovnicek>.lux-fold-h,#f-checklist>.lux-fold-h {display:none!important}
+#hlavni-obsah .mg-visit-note {font-size:14px;color:var(--mg-muted);border-left:3px solid var(--mg-yellow);padding:10px 14px;margin:0}
+#hlavni-obsah .clim {
+ display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+ grid-template-rows:auto repeat(3,minmax(48px,auto));gap:8px 20px!important;padding:14px!important;
+}
+#hlavni-obsah .clim .clim-cap {grid-column:1/-1;grid-row:1}
+#hlavni-obsah .clim .clim-scene {
+ grid-column:1;grid-row:2/5;align-self:stretch;min-width:0;
+ height:auto!important;min-height:160px!important;max-height:none!important;
+}
+#hlavni-obsah .clim .clim-scene svg {width:100%;height:100%;position:absolute;inset:0}
+#hlavni-obsah .clim .clim-i {grid-column:2;min-width:0;display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-content:center}
+#hlavni-obsah .clim .clim-i .clim-t {grid-column:1/-1}
+#hlavni-obsah .clim .clim-badge {font-size:12px!important;padding:5px 8px!important}
+@media(max-width:600px) {
+ #hlavni-obsah .clim {gap:6px 10px!important;padding:10px!important}
+ #hlavni-obsah .clim .clim-i {grid-template-columns:1fr}
+ #hlavni-obsah .clim .clim-k {font-size:11px!important}
+ #hlavni-obsah .clim .clim-v {font-size:14px!important;white-space:normal}
+ #hlavni-obsah .clim .clim-scene {min-height:200px!important}
+ #hlavni-obsah .clim .clim-badge {font-size:10px!important}
 }
