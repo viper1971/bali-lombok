@@ -46,7 +46,7 @@ html[data-magazine="on"] .mg-cover h1 { font:400 clamp(58px,7.8vw,110px)/.98 Geo
 .mg-photo-credit { position:absolute; right:18px; bottom:14px; font:9px/1.3 'Plus Jakarta Sans',sans-serif; color:#fff9; }
 html[data-magazine="on"] .mg-prologue { max-width:1240px; padding:64px 30px 56px; margin:auto; box-sizing:border-box; }
 .mg-intro-head { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:65px; align-items:center; margin:0 0 32px; }
-html[data-magazine="on"] .mg-intro-head h2 { color:var(--mg-ink); font:400 clamp(37px,4vw,57px)/1.08 Georgia,serif; margin:12px 0 16px; letter-spacing:-.045em; }
+html[data-magazine="on"] .mg-intro-head h2 { color:var(--mg-ink); font:400 clamp(37px,4vw,57px)/1.08 Georgia,serif!important; margin:12px 0 16px; letter-spacing:-.045em; }
 .mg-intro-head p { color:var(--mg-muted); max-width:56ch; font:400 15px/1.85 'Plus Jakarta Sans',sans-serif; margin:0; }
 .mg-intro-head blockquote { margin:0; padding:10px 0 10px 28px; border-left:3px solid var(--mg-yellow); font:italic 23px/1.55 Georgia,serif; color:var(--mg-ink); }
 .mg-stories { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
@@ -74,7 +74,7 @@ html[data-magazine="on"] .hero .cd-card { background:var(--mg-forest)!important;
 html[data-magazine="on"] .hero .cd-card .cd-value { color:#ffe079!important; font-family:Georgia,serif!important; font-weight:400!important; }
 html[data-magazine="on"] .hero .cd-card .cd-key { color:#f6f0d8!important; font-size:10px!important; }
 html[data-magazine="on"] .hero .hero-simple-btn { border-radius:4px!important; border-color:#d3b151!important; box-shadow:none!important; }
-html[data-magazine="on"] .main-wrapper { max-width:1240px!important; padding-left:30px!important; padding-right:30px!important; margin-left:auto!important; margin-right:auto!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper { max-width:1240px!important; padding-left:30px!important; padding-right:30px!important; margin-left:auto!important; margin-right:auto!important; }
 html[data-magazine="on"] #premium2027Overview { padding:40px 0!important; border:0!important; background:transparent!important; box-shadow:none!important; }
 html[data-magazine="on"] #premium2027Overview #p12Title { color:var(--mg-ink)!important; font:400 clamp(34px,4vw,49px)/1.1 Georgia,serif!important; letter-spacing:-.04em!important; }
 html[data-magazine="on"] #premium2027Overview .p12-kicker { color:var(--mg-muted)!important; font-size:10px!important; letter-spacing:.17em!important; }
@@ -83,44 +83,44 @@ html[data-magazine="on"] #premium2027Overview .p13-tile strong { font:400 26px/1
 html[data-magazine="on"] #premium2027Overview .p13-label,html[data-magazine="on"] #premium2027Overview .p13-tile em { color:#ffe079!important; }
 
 /* Editorial chapter heads and content cards throughout the comprehensive page. */
-html[data-magazine="on"] body .main-wrapper .lux-part { margin-top:48px!important; }
-html[data-magazine="on"] body .main-wrapper .lux-part>.lux-part-head { border-radius:2px!important; background:var(--mg-forest)!important; color:#fff!important; box-shadow:none!important; border:0!important; border-top:4px solid var(--mg-yellow)!important; padding:25px 24px!important; min-height:125px!important; gap:20px!important; }
-html[data-magazine="on"] body .main-wrapper .lux-part-head:before,html[data-magazine="on"] body .main-wrapper .lux-part-head:after { display:none!important; }
-html[data-magazine="on"] body .main-wrapper .lux-part-head .lux-part-title { font:400 clamp(28px,3vw,40px)/1.12 Georgia,serif!important; letter-spacing:-.025em!important; color:#fff!important; text-shadow:none!important; }
-html[data-magazine="on"] body .main-wrapper .lux-part-head .lux-part-eyebrow { color:#ffe079!important; font-size:9px!important; letter-spacing:.12em!important; text-shadow:none!important; margin-bottom:8px!important; }
-html[data-magazine="on"] body .main-wrapper .lux-part-head .lux-part-sub { color:#dce7dc!important; font:400 12px/1.6 'Plus Jakarta Sans',sans-serif!important; text-shadow:none!important; margin-top:9px!important; }
-html[data-magazine="on"] body .main-wrapper .lux-part-head .lux-part-no { border:1px solid #c8d3b95c!important; border-radius:0!important; background:none!important; box-shadow:none!important; color:#ffe079!important; font:400 27px/1 Georgia,serif!important; }
-html[data-magazine="on"] body .main-wrapper .lux-part-head .lux-part-count { background:#ffffff0c!important; border:1px solid #ffffff35!important; border-radius:2px!important; color:#fff!important; }
-html[data-magazine="on"] body .main-wrapper .lux-part-head .lux-part-count * { color:inherit!important; }
-html[data-magazine="on"] body .main-wrapper .lux-part-head .lux-part-chev { color:#fff!important; background:#ffffff15!important; border-radius:2px!important; }
-html[data-magazine="on"] body .main-wrapper .lux-fold { border-radius:3px!important; }
-html[data-magazine="on"] body .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn,
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part { margin-top:48px!important; }
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part>.lux-part-head { border-radius:2px!important; background:var(--mg-forest)!important; color:#fff!important; box-shadow:none!important; border:0!important; border-top:4px solid var(--mg-yellow)!important; padding:25px 24px!important; min-height:125px!important; gap:20px!important; }
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head:before,html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head:after { display:none!important; }
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head .lux-part-title { font:400 clamp(28px,3vw,40px)/1.12 Georgia,serif!important; letter-spacing:-.025em!important; color:#fff!important; text-shadow:none!important; }
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head .lux-part-eyebrow { color:#ffe079!important; font-size:9px!important; letter-spacing:.12em!important; text-shadow:none!important; margin-bottom:8px!important; }
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head .lux-part-sub { color:#dce7dc!important; font:400 12px/1.6 'Plus Jakarta Sans',sans-serif!important; text-shadow:none!important; margin-top:9px!important; }
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head .lux-part-no { border:1px solid #c8d3b95c!important; border-radius:0!important; background:none!important; box-shadow:none!important; color:#ffe079!important; font:400 27px/1 Georgia,serif!important; }
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head .lux-part-count { background:#ffffff0c!important; border:1px solid #ffffff35!important; border-radius:2px!important; color:#fff!important; }
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head .lux-part-count * { color:inherit!important; }
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head .lux-part-chev { color:#fff!important; background:#ffffff15!important; border-radius:2px!important; }
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-fold { border-radius:3px!important; }
+html[data-magazine="on"] body #hlavni-obsah .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn,
 html[data-magazine="on"] body #osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn { background:var(--mg-card)!important; border:1px solid var(--mg-line)!important; border-radius:3px!important; box-shadow:none!important; padding:22px!important; min-height:100px!important; }
 html[data-magazine="on"] body #osa .lux-spine>.lux-fold.is-transfer>.lux-fold-h>.lux-fold-btn { min-height:76px!important; background:var(--mg-paper)!important; }
-html[data-magazine="on"] body .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn:before,
+html[data-magazine="on"] body #hlavni-obsah .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn:before,
 html[data-magazine="on"] body #osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn:before,
-html[data-magazine="on"] body .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn:after,
+html[data-magazine="on"] body #hlavni-obsah .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn:after,
 html[data-magazine="on"] body #osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn:after { display:none!important; }
-html[data-magazine="on"] body .lux-part .lux-fold .lux-fold-btn .lux-fold-t { font:400 clamp(22px,2.4vw,29px)/1.2 Georgia,serif!important; color:var(--mg-ink)!important; letter-spacing:-.025em!important; }
-html[data-magazine="on"] body .lux-part .lux-fold .lux-fold-btn .lux-fold-s { color:var(--mg-muted)!important; font-weight:500!important; line-height:1.5!important; }
-html[data-magazine="on"] body .lux-part .lux-fold .lux-fold-btn .lux-fold-node,
+html[data-magazine="on"] body #hlavni-obsah .lux-part .lux-fold .lux-fold-btn .lux-fold-t { font:400 clamp(22px,2.4vw,29px)/1.2 Georgia,serif!important; color:var(--mg-ink)!important; letter-spacing:-.025em!important; }
+html[data-magazine="on"] body #hlavni-obsah .lux-part .lux-fold .lux-fold-btn .lux-fold-s { color:var(--mg-muted)!important; font-weight:500!important; line-height:1.5!important; }
+html[data-magazine="on"] body #hlavni-obsah .lux-part .lux-fold .lux-fold-btn .lux-fold-node,
 html[data-magazine="on"] body #osa .lux-spine>.lux-fold>.lux-fold-h .lux-fold-node,
 html[data-magazine="on"] body #osa .lux-spine>.lux-fold.is-transfer>.lux-fold-h .lux-fold-node { background:#f6cf35!important; color:#173b2e!important; border:0!important; border-radius:2px!important; box-shadow:none!important; font-family:Georgia,serif!important; }
-html[data-magazine="on"] body .lux-part .lux-fold .p14-eyebrow { color:var(--mg-muted)!important; letter-spacing:.12em!important; }
+html[data-magazine="on"] body #hlavni-obsah .lux-part .lux-fold .p14-eyebrow { color:var(--mg-muted)!important; letter-spacing:.12em!important; }
 html[data-magazine="on"] .lux-fold-pad { background:var(--mg-paper)!important; }
-html[data-magazine="on"] .main-wrapper :is(.bento-card,.hotel-card,.hotel-deck-card,.selected-hotel-card,.financial-box,.cx-card,.tj-card,.scooter-main-card,.t-bubble,.p35-final,.p22,.pf19-card,.pf19-audit) { background:var(--mg-card)!important; border-color:var(--mg-line)!important; border-radius:4px!important; box-shadow:none!important; }
-html[data-magazine="on"] .main-wrapper :is(.sec-title,.stage-title,.hotel-name,.fc-price,.cx-h,.cx-h2,.tj-title) { font-family:Georgia,'Times New Roman',serif!important; letter-spacing:-.025em!important; }
-html[data-magazine="on"] .main-wrapper .stage-desc { color:var(--mg-muted)!important; font-size:15px!important; line-height:1.85!important; font-weight:400!important; max-width:80ch; }
-html[data-magazine="on"] .main-wrapper :is(.hotel-card img,.selected-hotels-deck img,.deck-photo,.tj-pic) { border-radius:2px!important; }
-html[data-magazine="on"] .main-wrapper .deck-item { background:var(--mg-card)!important; border:1px solid var(--mg-line)!important; border-radius:3px!important; box-shadow:none!important; }
-html[data-magazine="on"] .main-wrapper .deck-hotel-name { font:400 22px/1.25 Georgia,serif!important; color:var(--mg-ink)!important; }
-html[data-magazine="on"] .main-wrapper .deck-stage { color:var(--mg-muted)!important; font-size:9px!important; letter-spacing:.1em!important; }
-html[data-magazine="on"] .main-wrapper .deck-thumb { border-radius:2px!important; }
-html[data-magazine="on"] .main-wrapper .uber-hotel-card { border-radius:3px!important; background:var(--mg-card)!important; border-color:var(--mg-line)!important; box-shadow:none!important; }
-html[data-magazine="on"] .main-wrapper .uber-hotel-card.hotel-active { border:2px solid #a18b2e!important; }
-html[data-magazine="on"] .main-wrapper .uber-hotel-card .hotel-title-text { font:400 clamp(22px,2.3vw,30px)/1.2 Georgia,serif!important; color:var(--mg-ink)!important; }
-html[data-magazine="on"] .main-wrapper .uber-hotel-card :is(.uber-media-box,.sv-card,.uber-info-panel,.uber-price-badge) { border-radius:3px!important; }
-html[data-magazine="on"] .main-wrapper :is(.timeline-date-container,.ticket-badge) { border-radius:2px!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper :is(.bento-card,.hotel-card,.hotel-deck-card,.selected-hotel-card,.financial-box,.cx-card,.tj-card,.scooter-main-card,.t-bubble,.p35-final,.p22,.pf19-card,.pf19-audit) { background:var(--mg-card)!important; border-color:var(--mg-line)!important; border-radius:4px!important; box-shadow:none!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper :is(.sec-title,.stage-title,.hotel-name,.fc-price,.cx-h,.cx-h2,.tj-title) { font-family:Georgia,'Times New Roman',serif!important; letter-spacing:-.025em!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .stage-desc { color:var(--mg-muted)!important; font-size:15px!important; line-height:1.85!important; font-weight:400!important; max-width:80ch; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper :is(.hotel-card img,.selected-hotels-deck img,.deck-photo,.tj-pic) { border-radius:2px!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .deck-item { background:var(--mg-card)!important; border:1px solid var(--mg-line)!important; border-radius:3px!important; box-shadow:none!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .deck-hotel-name { font:400 22px/1.25 Georgia,serif!important; color:var(--mg-ink)!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .deck-stage { color:var(--mg-muted)!important; font-size:9px!important; letter-spacing:.1em!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .deck-thumb { border-radius:2px!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .uber-hotel-card { border-radius:3px!important; background:var(--mg-card)!important; border-color:var(--mg-line)!important; box-shadow:none!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .uber-hotel-card.hotel-active { border:2px solid #a18b2e!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .uber-hotel-card .hotel-title-text { font:400 clamp(22px,2.3vw,30px)/1.2 Georgia,serif!important; color:var(--mg-ink)!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper .uber-hotel-card :is(.uber-media-box,.sv-card,.uber-info-panel,.uber-price-badge) { border-radius:3px!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper :is(.timeline-date-container,.ticket-badge) { border-radius:2px!important; }
 html[data-magazine="on"] #rozpocet :is(.pf18-shell,.pf18-panel,.pf18-details,.pf18-overview-number,.family-card-box),
 html[data-magazine="on"] #rozpis-nakladu :is(.p22-ledger,.p22-card,.p22-summary) { border-radius:3px!important; background:var(--mg-card)!important; border-color:var(--mg-line)!important; color:var(--mg-ink)!important; box-shadow:none!important; }
 html[data-magazine="on"] #rozpocet .pf18-hero { background:var(--mg-forest)!important; border-radius:3px!important; border-top:4px solid #f6cf35!important; }
@@ -128,11 +128,20 @@ html[data-magazine="on"] #rozpocet :is(.fc-price,.pf18-section-heading h3,.pf18-
 html[data-magazine="on"] #rozpocet .family-card-box:before { background:#f6cf35!important; }
 html[data-magazine="on"] #rozpocet :is(.fc-tag,.fc-desc) { color:var(--mg-muted)!important; }
 html[data-magazine="on"] #refundableDepositNote { border-left:4px solid #d8ad28!important; background:var(--mg-card)!important; border-radius:2px!important; }
-html[data-magazine="on"] .main-wrapper :is(input,select,textarea) { border-radius:3px!important; }
-html[data-magazine="on"] .main-wrapper :is(.page-fullscreen-btn,.map-fullscreen-btn,.lux-tool) { border-radius:3px!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper :is(input,select,textarea) { border-radius:3px!important; }
+html[data-magazine="on"] #hlavni-obsah.main-wrapper :is(.page-fullscreen-btn,.map-fullscreen-btn,.lux-tool) { border-radius:3px!important; }
 html[data-magazine="on"] :is(#baliMobileHamburger,#baliUnifiedRail) { --primary:#0d5c45; }
 html[data-magazine="on"] body:not(.pres-on) #baliMobileHamburger { border-radius:3px!important; background:#f6cf35!important; color:#173b2e!important; border:1px solid #c5a026!important; }
 html[data-magazine="on"] :where(a,button,input,select,summary):focus-visible { outline:3px solid #b38b00!important; outline-offset:4px; }
+/* Financial summaries share the same editorial palette as the chapters. */
+html[data-magazine="on"] #hlavni-obsah :is(.p35-intro,.p22-mast,.pf19-hero) { background:var(--mg-forest)!important; color:#fff!important; border-radius:3px!important; box-shadow:none!important; border-top:4px solid var(--mg-yellow)!important; }
+html[data-magazine="on"] #hlavni-obsah .p35-intro h2 { font:400 clamp(28px,3.5vw,44px)/1.12 Georgia,serif!important; background:transparent!important; color:#fff!important; border:0!important; border-radius:0!important; box-shadow:none!important; text-shadow:none!important; padding:0!important; margin:12px 0!important; text-transform:none!important; letter-spacing:-.035em!important; }
+html[data-magazine="on"] #hlavni-obsah :is(.p35-card,.p35-footer,.p35-sum,.p22-metric,.p22-card) { background:var(--mg-card)!important; border-color:var(--mg-line)!important; border-radius:3px!important; box-shadow:none!important; color:var(--mg-ink)!important; }
+html[data-magazine="on"] #hlavni-obsah :is(.p35-card h3,.p22-mast h3) { font-family:Georgia,serif!important; font-weight:400!important; }
+html[data-magazine="on"] #hlavni-obsah :is(.p35-card h3,.p35-content,.p35-content strong,.p35-flight-name) { color:var(--mg-ink)!important; }
+html[data-magazine="on"] #hlavni-obsah .p35-line small { color:var(--mg-muted)!important; }
+html[data-magazine="on"] #hlavni-obsah .p35-intro .p35-kicker { color:#ffe079!important; }
+html[data-magazine="on"] #hlavni-obsah :is(.p35-stamp,.p35-pill,.p35-icon) { border-radius:2px!important; }
 @media(min-width:1101px) {
  html[data-magazine="on"] .hero .hero-inner>.map-box { grid-row:1 / span 6!important; min-height:420px!important; }
 }
@@ -161,17 +170,17 @@ html[data-magazine="on"] :where(a,button,input,select,summary):focus-visible { o
  .mg-story { min-height:215px; padding:23px; }
  .mg-story strong { font-size:32px; }
  html[data-magazine="on"] body header.hero { padding:30px 22px!important; }
- html[data-magazine="on"] .main-wrapper { padding-left:16px!important; padding-right:16px!important; }
+ html[data-magazine="on"] #hlavni-obsah.main-wrapper { padding-left:16px!important; padding-right:16px!important; }
  html[data-magazine="on"] #premium2027Overview { padding-top:25px!important; }
- html[data-magazine="on"] body .main-wrapper .lux-part>.lux-part-head { padding:20px 15px!important; gap:11px!important; flex-wrap:wrap!important; }
- html[data-magazine="on"] body .main-wrapper .lux-part-head>div:not(.lux-part-meta) { flex-basis:calc(100% - 60px)!important; }
- html[data-magazine="on"] body .main-wrapper .lux-part-head .lux-part-meta { margin-left:auto!important; }
- html[data-magazine="on"] body .main-wrapper .lux-part-head .lux-part-title { font-size:29px!important; }
- html[data-magazine="on"] body .main-wrapper .lux-part-head .lux-part-sub { display:block!important; -webkit-line-clamp:unset!important; font-size:11px!important; }
- html[data-magazine="on"] body .main-wrapper .lux-part-head .lux-part-no { width:36px!important; height:42px!important; min-width:36px!important; flex-basis:36px!important; font-size:22px!important; }
- html[data-magazine="on"] body .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn,
+ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part>.lux-part-head { padding:20px 15px!important; gap:11px!important; flex-wrap:wrap!important; }
+ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head>div:not(.lux-part-meta) { flex-basis:calc(100% - 60px)!important; }
+ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head .lux-part-meta { margin-left:auto!important; }
+ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head .lux-part-title { font-size:29px!important; }
+ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head .lux-part-sub { display:block!important; -webkit-line-clamp:unset!important; font-size:11px!important; }
+ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part-head .lux-part-no { width:36px!important; height:42px!important; min-width:36px!important; flex-basis:36px!important; font-size:22px!important; }
+ html[data-magazine="on"] body #hlavni-obsah .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn,
  html[data-magazine="on"] body #osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn { padding:17px 13px!important; gap:11px!important; }
- html[data-magazine="on"] body .lux-part .lux-fold .lux-fold-btn .lux-fold-t { font-size:22px!important; }
+ html[data-magazine="on"] body #hlavni-obsah .lux-part .lux-fold .lux-fold-btn .lux-fold-t { font-size:22px!important; }
  html[data-magazine="on"] #premium2027Overview .p13-tile strong { font-size:23px!important; }
 }
 @media(prefers-reduced-motion:reduce) { .mg-story img { transition:none; } .mg-story:hover img { transform:none; } }
