@@ -231,11 +231,11 @@
     "bytes": 926
   },
   {
-    "output": "assets/build/js-13c3a5e2d51352bd.js",
+    "output": "assets/build/js-095422cfffd33819.js",
     "sources": [
       "assets/js/041.js"
     ],
-    "bytes": 67943
+    "bytes": 68127
   },
   {
     "output": "assets/build/js-fcd994c179247e9e.js",
@@ -411,6 +411,13 @@
       "assets/js/067-simple-travel-journal.js"
     ],
     "bytes": 9263
+  },
+  {
+    "output": "assets/build/js-2553837adf838ac1.js",
+    "sources": [
+      "assets/js/070-hotel-side-tabs.js"
+    ],
+    "bytes": 2361
   },
   {
     "output": "assets/build/js-6983b6b9afe77950.js",
@@ -637,11 +644,12 @@
     "bytes": 19381
   },
   {
-    "output": "assets/build/css-a62be2f5835838fa.css",
+    "output": "assets/build/css-228437bbd98565fa.css",
     "sources": [
       "assets/css/074-travel-magazine.css",
-      "assets/css/075-editorial-flow.css"
+      "assets/css/075-editorial-flow.css",
+      "assets/css/076-hotel-side-tabs.css"
     ],
-    "bytes": 51746
+    "bytes": 54810
   }
 ]

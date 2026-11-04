@@ -509,7 +509,13 @@
 
                 if (sqsBox) {
                     sqsBox.querySelectorAll('.sqs-btn').forEach(b => {
-                        b.classList.toggle('active', b.getAttribute('data-variant') === selectedVariant);
+                        const active = b.getAttribute('data-variant') === selectedVariant;
+                        b.classList.toggle('active', active);
+                        if (b.getAttribute('role') === 'tab') {
+                            b.setAttribute('aria-selected', String(active));
+                            b.tabIndex = active ? 0 : -1;
+                            if (active && slot) slot.setAttribute('aria-labelledby', b.id);
+                        }
                     });
                 }
 
