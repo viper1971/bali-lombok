@@ -319,16 +319,7 @@
                 h.appendChild(b);
             });
         });
-        // každá rozbalovací část (víza, etapy…) má dole tlačítko na sdílení
-        [].forEach.call(document.querySelectorAll('.lux-fold[id] > [id$="-b"] .lux-fold-pad'), function (pad) {
-            if (pad.querySelector(':scope > .share-row')) return;
-            var fold = pad.closest('.lux-fold'), t = fold.querySelector('.lux-fold-t');
-            var row = document.createElement('div'); row.className = 'share-row';
-            var b = document.createElement('button'); b.type = 'button'; b.className = 'share-link';
-            b.textContent = '🔗 Sdílet odkaz na tuto část';
-            b.addEventListener('click', function () { share(fold.id, t ? t.textContent.trim() : document.title); });
-            row.appendChild(b); pad.appendChild(row);
-        });
+
     }
     // odkaz s #kotvou vedoucí do zavřeného itineráře: itinerář rozbalit a doscrollovat
     var initialHash = location.hash;   // zapamatovat hned – jiný skript kotvu po načtení z adresy odstraní
@@ -339,22 +330,8 @@
         var acc = t.closest('[class*="accordion-content"]');
         if (acc && !acc.classList.contains('open') && window.luxAccToggle) {
             luxAccToggle(acc.id, true);
-            // obsah se ještě rozbaluje a dočítají se fotky – pozici chvíli hlídat, dokud uživatel sám nescrolluje
-            var userMoved = false, stop = function () { userMoved = true; };
-            ['wheel', 'touchstart', 'keydown'].forEach(function (ev) { window.addEventListener(ev, stop, { once: true, passive: true }); });
-            function offset() {   // nad cílem nesmí zůstat přilepená hlavička otevřené etapy
-                var f = t.closest('.lux-fold.is-open'), fh = f && f.querySelector(':scope > .lux-fold-h');
-                if (!fh || getComputedStyle(fh).position !== 'sticky') return 84;
-                return (parseFloat(getComputedStyle(fh).top) || 0) + fh.offsetHeight + 16;
-            }
-            [650, 1100, 1700, 2500].forEach(function (ms, k) {
-                setTimeout(function () {
-                    if (userMoved) return;
-                    var top = t.getBoundingClientRect().top, off = offset();
-                    if (k === 0 || Math.abs(top - off) > 30) window.scrollTo({ top: Math.max(0, top + window.scrollY - off), behavior: k === 0 ? 'smooth' : 'auto' });
-                    if (k === 0) { t.classList.add('is-target-flash'); setTimeout(function () { t.classList.remove('is-target-flash'); }, 2000); }
-                }, ms);
-            });
+            if (window.luxPreserveHeader) window.luxPreserveHeader(t, function () {});
+
         }
     }
 

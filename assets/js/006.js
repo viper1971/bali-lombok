@@ -15,49 +15,12 @@
                 maps.forEach(function (m) { try { m.invalidateSize(); } catch (e) {} });
                 try { window.dispatchEvent(new Event('resize')); } catch (e) {}
             }
-            // Align the opened header 8px below the viewport top throughout the animation.
-            // Stop immediately when the reader scrolls, touches or uses the keyboard.
-            var headerPin = null;
-            function stopHeaderPin() {
-                if (!headerPin) return;
-                cancelAnimationFrame(headerPin.frame);
-                clearTimeout(headerPin.timer);
-                var style = headerPin.style, root = document.documentElement;
-                if (style.value) root.style.setProperty('overflow-anchor', style.value, style.priority);
-                else root.style.removeProperty('overflow-anchor');
-                headerPin = null;
-            }
-            ['wheel', 'touchstart', 'pointerdown', 'keydown'].forEach(function (name) {
-                window.addEventListener(name, stopHeaderPin, { capture: true, passive: true });
-            });
-            window.addEventListener('pagehide', stopHeaderPin);
+            // Align once on opening. Later image loads and scrolling never pin the page.
             window.luxPreserveHeader = function (header, change) {
-                stopHeaderPin();
-                var root = document.documentElement;
-                var pin = headerPin = {
-                    top: 8, frame: 0, timer: 0,
-                    style: { value: root.style.getPropertyValue('overflow-anchor'), priority: root.style.getPropertyPriority('overflow-anchor') }
-                };
-                root.style.setProperty('overflow-anchor', 'none', 'important');
-                function correct() {
-                    if (headerPin !== pin) return;
-                    if (!header.isConnected) { stopHeaderPin(); return; }
-                    var shift = header.getBoundingClientRect().top - pin.top;
-                    if (Math.abs(shift) > 0.5) window.scrollTo({
-                        top: Math.max(0, window.scrollY + shift), behavior: 'instant'
-                    });
-                }
-                function frame() {
-                    if (headerPin !== pin) return;
-                    correct();
-                    if (headerPin === pin) pin.frame = requestAnimationFrame(frame);
-                }
-                try {
-                    change();
-                    correct();
-                    pin.frame = requestAnimationFrame(frame);
-                    pin.timer = setTimeout(stopHeaderPin, 600);
-                } catch (error) { stopHeaderPin(); throw error; }
+                change();
+                if (!header.isConnected) return;
+                var top = header.getBoundingClientRect().top + window.scrollY - 8;
+                window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
             };
             function setState(f, open, instant) {
                 if (!f) return;

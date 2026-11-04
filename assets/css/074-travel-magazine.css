@@ -393,3 +393,24 @@ html[data-magazine="on"] #cast-priprava {--chapter-image:url('https://images.pex
 .sv-stage.is-failed .sv-play {opacity:1;pointer-events:auto}
 .sv-stage.is-loading iframe {opacity:0}
 .sv-stage.is-loaded iframe {opacity:1}
+
+/* Compact chapter headers and content spacing, with no scroll anchoring feedback. */
+html,body {overflow-anchor:none!important}
+.lux-fold-body,.lux-fold-inner,.lux-part-body {transition:none!important}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part {margin-top:22px!important}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part>.lux-part-head {
+ min-height:88px!important;padding:15px 20px!important;gap:14px!important;
+}
+html[data-magazine="on"] body #hlavni-obsah .lux-part .lux-fold>.lux-fold-h>.lux-fold-btn,
+html[data-magazine="on"] body #osa .lux-spine>.lux-fold>.lux-fold-h>.lux-fold-btn {
+ min-height:68px!important;padding:12px 16px!important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-fold-pad {padding:14px!important}
+html[data-magazine="on"] body #hlavni-obsah .mg-feature>div {padding:18px 22px!important}
+html[data-magazine="on"] body #hlavni-obsah .mg-department {padding:12px 0!important;margin-bottom:14px}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper :is(.bento-card,.t-bubble,.cx-card,.p35-card,.p22-card,.pf19-card) {padding:14px!important}
+#hlavni-obsah .share-row {display:none!important}
+@media(max-width:900px){
+ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part>.lux-part-head {padding:12px!important;min-height:72px!important}
+ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-fold-pad {padding:8px!important}
+}

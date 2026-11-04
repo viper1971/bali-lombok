@@ -21,21 +21,6 @@
             btn.appendChild(bar);
         });
 
-        // zavření ukotvené sekce: nejdřív se vrátíme na její začátek, ať stránka neuskočí
-        var origToggle = window.luxToggle;
-        if (typeof origToggle === 'function') {
-            window.luxToggle = function (id, options) {
-                var f = document.getElementById(id);
-                if (f && f.classList.contains('is-open') && !(options && options.preserveScroll)) {
-                    var h = f.querySelector(':scope > .lux-fold-h');
-                    var stick = h ? parseFloat(getComputedStyle(h).top) || 0 : 0;
-                    var top = f.getBoundingClientRect().top;
-                    if (top < stick - 2) window.scrollTo({ top: window.scrollY + top - stick, behavior: 'instant' });
-                }
-                return origToggle.apply(this, arguments);
-            };
-        }
-
         var ticking = false;
         function update() {
             ticking = false;

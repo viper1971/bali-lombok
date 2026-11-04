@@ -1579,37 +1579,15 @@ function luxQRSvg(text, px) {
     };
 
 
-    /* ---------- po rozbalení akordeonu se stránka srovná: tlačítko nahoře, obsah pod ním, a drží to i když se obsah načítá ---------- */
-    (function accAlign() {
-        var pin = null;
-        function topOffset(el) {
-            var off = 8, pb = $('pbar'); if (pb) { var r = pb.getBoundingClientRect(); if (r.height && r.bottom > 0 && r.bottom < 160) off = Math.max(off, r.bottom); }
-            var fold = el.closest('.lux-fold.is-open'), head = fold && (fold.querySelector(':scope > .lux-fold-h') || fold.querySelector(':scope > .lux-fold-head'));
-            if (head && getComputedStyle(head).position === 'sticky') off = Math.max(off, (parseFloat(getComputedStyle(head).top) || 0) + head.offsetHeight);
-            return off + 10;
-        }
-        function stop() { if (pin) { cancelAnimationFrame(pin.raf); pin = null; } }
-        ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) { window.addEventListener(ev, function (e) { if (pin && !(ev === 'mousedown' && pin.t0 > performance.now() - 150)) stop(); }, { passive: true }); });
-        function align(el) {
-            stop(); var t0 = performance.now(), first = true;
-            pin = { t0: t0, raf: 0 };
-            (function loop() {
-                if (!pin) return; var y = el.getBoundingClientRect().top - topOffset(el);
-                if (Math.abs(y) > 3) window.scrollTo({ top: window.scrollY + y, behavior: first ? 'smooth' : 'auto' });
-                if (first) { first = false; pin.raf = setTimeout(function () { pin && (pin.raf = requestAnimationFrame(loop)); }, 420); return; }
-                if (performance.now() - t0 < 1800) pin.raf = requestAnimationFrame(loop); else pin = null;
-            })();
-        }
-        document.addEventListener('click', function (e) {
-            var tg = e.target; if (!tg || !tg.closest || (window.pres && window.pres.on) || document.body.classList.contains('pres-on')) return;
-            var btn = tg.closest('.lux-acc-btn, .acc-header, .acc-trigger, details > summary'); if (!btn || btn.matches('#flightPick > summary') || !btn.closest('.lux-fold-pad, #flightPick')) return;
-            setTimeout(function () {
-                var open = btn.matches('summary') ? btn.parentElement.open : (btn.getAttribute('aria-expanded') === 'true' || (btn.parentElement && btn.parentElement.classList.contains('open')));
-                if (open) align(btn);
-            }, 30);
-        }, true);
-    })();
-
+    /* Inner disclosures align once after opening, with no scroll-following loop. */
+    document.addEventListener('click', function (event) {
+        var button = event.target.closest && event.target.closest('.lux-acc-btn, .acc-header, .acc-trigger, details > summary');
+        if (!button || button.matches('#flightPick > summary') || !button.closest('.lux-fold-pad, #flightPick')) return;
+        requestAnimationFrame(function () {
+            var open = button.matches('summary') ? button.parentElement.open : button.getAttribute('aria-expanded') === 'true';
+            if (open && window.luxPreserveHeader) window.luxPreserveHeader(button, function () {});
+        });
+    }, true);
 
     /* úvod: po přeskládání do sloupců ať si mapa přepočítá rozměr */
     setTimeout(function () { try { window.dispatchEvent(new Event('resize')); (window.__luxMaps || []).forEach(function (m) { m.invalidateSize && m.invalidateSize(); }); } catch (e) {} }, 700);
