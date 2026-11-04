@@ -503,3 +503,6 @@ html body #hlavni-obsah :is(a.store-btn,a.transport-store-btn):hover {background
   flex:1 1 160px!important;min-width:min(160px,100%)!important;font-size:14px!important;
  }
 }
+
+/* Hidden loading controls must never cover an interactive Google panorama. */
+.sv-stage .sv-play[hidden] {display:none!important}

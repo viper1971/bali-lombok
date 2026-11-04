@@ -6,7 +6,7 @@ function svLoad(id, retry) {
     if (previous && !retry) return false;
     var source = stage.getAttribute('data-sv-url');
     if (!source) return false;
-    if (previous) previous.remove();
+    if (previous) svUnload(id);
 
     var frame = document.createElement('iframe');
     frame.title = 'Google Street View';
@@ -17,6 +17,7 @@ function svLoad(id, retry) {
     stage.classList.remove('is-loaded', 'is-failed');
     stage.classList.add('is-loading');
     var button = stage.querySelector('.sv-play');
+    if (button && !stage._svButtonLabel) stage._svButtonLabel = button.innerHTML;
     var timer;
     var settled = false;
 
@@ -30,21 +31,31 @@ function svLoad(id, retry) {
         stage.classList.toggle('is-loaded', loaded);
         stage.classList.toggle('is-failed', !loaded);
         if (loaded) {
-            if (button) button.remove();
+            if (button) button.hidden = true;
         } else {
             frame.remove();
             if (button) {
+                button.hidden = false;
                 button.disabled = false;
                 button.textContent = 'Zkusit znovu načíst Street View';
             }
         }
+        stage._svCancel = null;
         stage.dispatchEvent(new Event('sv:request-finished'));
     }
     function onLoad() { finish(true); }
     function onError() { finish(false); }
+    stage._svCancel = function () {
+        settled = true;
+        clearTimeout(timer);
+        frame.removeEventListener('load', onLoad);
+        frame.removeEventListener('error', onError);
+        stage._svCancel = null;
+    };
     frame.addEventListener('load', onLoad);
     frame.addEventListener('error', onError);
     if (button) {
+        button.hidden = false;
         button.disabled = true;
         button.textContent = 'Načítání Street View…';
     }
@@ -52,6 +63,21 @@ function svLoad(id, retry) {
     frame.src = source;
     stage.appendChild(frame);
     return true;
+}
+/* Release the browsing context (and its GPU resources), not just its paint layer. */
+function svUnload(id) {
+    var stage = document.getElementById(id);
+    if (!stage) return;
+    if (stage._svCancel) stage._svCancel();
+    var frame = stage.querySelector('iframe');
+    if (frame) frame.remove();
+    stage.classList.remove('is-loading', 'is-loaded', 'is-failed', 'is-queued');
+    var button = stage.querySelector('.sv-play');
+    if (button) {
+        button.hidden = false;
+        button.disabled = false;
+        if (stage._svButtonLabel) button.innerHTML = stage._svButtonLabel;
+    }
 }
 function svFullscreen(id) {
     var stage = document.getElementById(id);

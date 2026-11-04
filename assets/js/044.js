@@ -106,50 +106,70 @@
             '⏱️ Horní osa je singapurský čas odletu, žlutá osa pod ní je čas v Praze. Konec pruhu = přílet podle žluté osy.', 'v Praze');
     });
 
-    /* ---------- Street View: načte se samo, až k němu dojedeš ---------- */
+    /* Keep only nearby panoramas alive; retaining every visited Google renderer
+       eventually exhausts graphics resources and leaves previously loaded frames black. */
     ready(function () {
-        if (typeof window.svLoad !== 'function') return;
+        if (typeof window.svLoad !== 'function' || typeof window.svUnload !== 'function') return;
         var stages = [].slice.call(document.querySelectorAll('.sv-stage[data-sv-url]'));
         if (!stages.length) return;
-        var queue = [], busy = false;
-        function next() {
-            if (busy) return;
-            var stage = queue.shift();
-            if (!stage) return;
-            stage.classList.remove('is-queued');
-            if (stage.closest('[inert]') || !stage.getBoundingClientRect().height) {
-                io.observe(stage);
-                next();
-                return;
-            }
-            busy = true;
-            var settled = false;
-            var timer;
-            function finish() {
-                if (settled) return;
-                settled = true;
-                clearTimeout(timer);
-                stage.removeEventListener('sv:request-finished', finish);
-                busy = false;
-                next();
-            }
-            stage.addEventListener('sv:request-finished', finish);
-            // A slow external server must not block all subsequent panoramas.
-            timer = setTimeout(finish, 4000);
-            if (!window.svLoad(stage.id)) finish();
-        }
-        if (!('IntersectionObserver' in window)) return; // starý prohlížeč: zůstává tlačítko
-        var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-                var el = e.target;
-                if (el.querySelector('iframe')) { io.unobserve(el); return; }
-                if (e.isIntersecting) {
-                    if (queue.indexOf(el) < 0) { queue.push(el); el.classList.add('is-queued'); }
-                    io.unobserve(el);
-                    next();
+        var limit = 6, pending = 0;
+        function update() {
+            pending = 0;
+            var height = window.innerHeight;
+            var candidates = [];
+            stages.forEach(function (stage) {
+                var rect = stage.getBoundingClientRect();
+                var active = !!stage.querySelector('iframe');
+                var visible = rect.height > 0 && rect.width > 0 && !stage.closest('[inert]');
+                var onscreen = visible && rect.bottom > 0 && rect.top < height;
+                var nearby = visible && rect.bottom > -120 && rect.top < height + 120;
+                var retain = active && visible && rect.bottom > -400 && rect.top < height + 400;
+                if (nearby || retain) {
+                    candidates.push({ stage: stage, active: active, onscreen: onscreen,
+                        distance: Math.abs((rect.top + rect.bottom) / 2 - height / 2) });
+                } else {
+                    if (active) window.svUnload(stage.id);
+                    // Failed remote requests retry on the next visit, not in a loop.
+                    stage._svAutoFailed = false;
                 }
             });
-        }, { rootMargin: '150px 0px 150px 0px', threshold: 0.01 });
-        stages.forEach(function (el) { if (el.id) io.observe(el); });
+            candidates.sort(function (a, b) {
+                return Number(b.onscreen) - Number(a.onscreen) ||
+                    Number(b.active) - Number(a.active) || a.distance - b.distance;
+            });
+            var selected = candidates.slice(0, limit);
+            candidates.slice(limit).forEach(function (item) {
+                if (item.active) window.svUnload(item.stage.id);
+            });
+            // One unfinished request at a time, including manual retries.
+            if (stages.some(function (stage) { return stage.classList.contains('is-loading'); })) return;
+            var next = selected.filter(function (item) {
+                return !item.stage.querySelector('iframe') && !item.stage._svAutoFailed;
+            })[0];
+            if (next) window.svLoad(next.stage.id);
+        }
+        function schedule() {
+            if (!pending) pending = window.setTimeout(update, 100);
+        }
+        stages.forEach(function (stage) {
+            stage.addEventListener('sv:request-finished', function () {
+                stage._svAutoFailed = stage.classList.contains('is-failed');
+                schedule();
+            });
+        });
+        // Keep observing on exit AND re-entry, unlike the former one-shot loader.
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(schedule, { rootMargin: '120px 0px', threshold: 0.01 });
+            stages.forEach(function (stage) { io.observe(stage); });
+        }
+        window.addEventListener('scroll', schedule, { passive: true });
+        window.addEventListener('resize', schedule);
+        document.addEventListener('visibilitychange', schedule);
+        // A collapsed ancestor can hide a frame without changing the scroll position.
+        var observer = new MutationObserver(schedule);
+        document.querySelectorAll('.lux-fold, .lux-part').forEach(function (section) {
+            observer.observe(section, { attributes: true, attributeFilter: ['class'] });
+        });
+        schedule();
     });
 })();
