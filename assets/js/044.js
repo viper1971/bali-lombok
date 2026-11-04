@@ -120,7 +120,10 @@
             stages.forEach(function (stage) {
                 var rect = stage.getBoundingClientRect();
                 var active = !!stage.querySelector('iframe');
-                var visible = rect.height > 0 && rect.width > 0 && !stage.closest('[inert]');
+                var inactiveHotel = stage.closest('.hotel-inactive');
+                var alternatives = stage.closest('.alt-hotels-collapse');
+                var visible = rect.height > 0 && rect.width > 0 && !stage.closest('[inert]') &&
+                    !inactiveHotel && (!alternatives || alternatives.classList.contains('open'));
                 var onscreen = visible && rect.bottom > 0 && rect.top < height;
                 var nearby = visible && rect.bottom > -120 && rect.top < height + 120;
                 var retain = active && visible && rect.bottom > -400 && rect.top < height + 400;
@@ -141,12 +144,13 @@
             candidates.slice(limit).forEach(function (item) {
                 if (item.active) window.svUnload(item.stage.id);
             });
-            // One unfinished request at a time, including manual retries.
-            if (stages.some(function (stage) { return stage.classList.contains('is-loading'); })) return;
+            // At most two requests: one slow Google frame must not block all visible places.
+            var loading = stages.filter(function (stage) { return stage.classList.contains('is-loading'); }).length;
+            if (loading >= 2) return;
             var next = selected.filter(function (item) {
                 return !item.stage.querySelector('iframe') && !item.stage._svAutoFailed;
             })[0];
-            if (next) window.svLoad(next.stage.id);
+            if (next) { window.svLoad(next.stage.id); if (loading === 0) schedule(); }
         }
         function schedule() {
             if (!pending) pending = window.setTimeout(update, 100);
@@ -167,7 +171,7 @@
         document.addEventListener('visibilitychange', schedule);
         // A collapsed ancestor can hide a frame without changing the scroll position.
         var observer = new MutationObserver(schedule);
-        document.querySelectorAll('.lux-fold, .lux-part').forEach(function (section) {
+        document.querySelectorAll('.lux-fold, .lux-part, .uber-hotel-card').forEach(function (section) {
             observer.observe(section, { attributes: true, attributeFilter: ['class'] });
         });
         schedule();

@@ -1,6 +1,6 @@
 # Rozložení a struktura cestovatelského magazínu
 
-Stav kontroly: 4. 11. 2026. Kontrola zdrojové struktury celé stránky a cílených interakcí; nejde o potvrzení dostupnosti každého vzdáleného panoramatu Google.
+Stav kontroly: 4. 11. 2026. Kontrola zdrojové struktury celé stránky, veřejného desktopového náhledu a cílených interakcí; nejde o potvrzení dostupnosti každého vzdáleného panoramatu Google.
 
 ## Co bylo ověřeno
 
@@ -8,9 +8,9 @@ Stav kontroly: 4. 11. 2026. Kontrola zdrojové struktury celé stránky a cílen
 - Před a po této úpravě zůstaly zachovány všechny texty, odkazy a ID. Zmizely pouze čtyři dekorativní šipky rozbalovacích návodů.
 - Návody SG Arrival Card, e-VoA, Bali Tourist Levy a e-CD jsou nyní běžné sekce místo `details/summary`. Karty jsou pod sebou, na PC je uvnitř vedle stručného popisu kompletní návod. Na mobilu je vše v jednom sloupci. Oficiální portály i živé termínové štítky zůstaly.
 - Pět odpovědí v části „Než poprvé ťukneš na bráně“ je rovnou viditelných. Výpočty Revolutu, doporučovací odkaz a podmínky nabídky zůstaly.
-- Ve veřejném desktopovém náhledu bylo u WhatsAppu naměřeno písmo 0,356133 px a šířka tlačítka 23,36 px. Opakovaný přepočet 80% velikosti se potkával s `transition: all`. Přepočet nyní během měření vypíná přechody a vynechává boční ovladače. WhatsApp má vlastní stabilní velikost a popisek pro asistivní technologie.
+- Ve veřejném desktopovém náhledu bylo u WhatsAppu naměřeno písmo 0,356133 px a šířka tlačítka 23,36 px. Opakovaný přepočet 80% velikosti se potkával s `transition: all`. Přepočet nyní během měření vypíná přechody a vynechává boční ovladače. WhatsApp má vlastní stabilní velikost a popisek pro asistivní technologie. V nově zveřejněném desktopovém náhledu bylo ověřeno 14px písmo a tlačítko 339 × 46 px. Čtyři dokumentové návody byly viditelné bez dalších rozbalovacích prvků, pod sebou a bez vodorovného přetečení.
 - Fotografie slideshow na široké obrazovce nově obtéká okolní redakční text. Na menších obrazovkách se použije původní mřížka / jeden sloupec. Iframy Google se nefragmentují do novinových sloupců ani se nepřesouvají mezi rodiči při scrollování.
-- Správa Street View udržuje nejvýše šest blízkých panoramat. Vzdálená a skrytá se uvolňují, při návratu se vytváří nové iframe. Krátká simulace ověřila návrat scrollováním, znovuotevření, limit, chybové stavy a zrušení zastaralých callbacků.
+- Správa Street View udržuje nejvýše šest blízkých panoramat. Vzdálená a skrytá se uvolňují, při návratu se vytváří nové iframe. Krátká simulace ověřila návrat scrollováním, znovuotevření, limit, chybové stavy a zrušení zastaralých callbacků. Při kontrole se ukázalo, že i uvnitř zavřených alternativ hotelů vracejí vnořené prvky nenulové rozměry. Načítání je proto nově výslovně vylučuje a sleduje změnu aktivní hotelové karty. Nejvýše dva souběžné požadavky brání tomu, aby jeden pomalý náhled blokoval všechny ostatní. Vzdálené vykreslení všech panoramat ani jejich stabilita na uživatelově PC nebyly potvrzeny; kontrolní cloudový prohlížeč při procházení Google náhledů přestal odpovídat a vyžadoval obnovení stránky.
 
 ## Doporučený další směr
 
