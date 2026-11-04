@@ -1393,7 +1393,7 @@ function luxQRSvg(text, px) {
         });
         [].forEach.call(document.querySelectorAll('.ph-strip'), function (st) {
             var k = st.getAttribute('data-k'), S = STRIPS[k]; if (!S) return;
-            for (var i = 0; i < 3; i++) { var id = 'p:' + k + ':' + i; if (st.querySelector('[data-img="' + id + '"]') || !imgWant(id, 'p:' + k)) continue; var box = imgBox(st, id, S[i], true); if (box) st.appendChild(box); }
+            for (var i = 0; i < 3; i++) { if (k === 'f-leg-kuta' && i === 2) continue; var id = 'p:' + k + ':' + i; if (st.querySelector('[data-img="' + id + '"]') || !imgWant(id, 'p:' + k)) continue; var box = imgBox(st, id, S[i], true); if (box) st.appendChild(box); }
         });
         [].forEach.call(document.querySelectorAll('#hotovost .cx-e'), function (card, i) {
             if (card.querySelector(':scope > .tj-pic') || i > 2 || card.dataset.cashImageFailed === CASH_IMG[i]) return; var f = CASH_IMG[i], box = document.createElement('div'), im = document.createElement('img');
@@ -1456,6 +1456,13 @@ function luxQRSvg(text, px) {
         Object.keys(STRIPS).forEach(function (k) {
             var pad = document.querySelector('#' + k + ' .lux-fold-pad'), body = $(k + '-b'); if (!pad || pad.querySelector(':scope > .ph-strip')) return;
             var st = document.createElement('div'); st.className = 'ph-strip'; st.setAttribute('data-k', k); st.setAttribute('aria-label', 'Fotografie k tomuto místu (Wikimedia Commons)'); pad.insertBefore(st, pad.firstChild);
+            if (k === 'f-leg-kuta') {
+                var photo = document.createElement('figure');
+                photo.className = 'mg-strip-photo';
+                photo.innerHTML = '<img src="https://images.pexels.com/photos/36956259/pexels-photo-36956259.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="Tropické pobřeží Lomboku" loading="lazy" decoding="async"><figcaption><a href="https://www.pexels.com/photo/tropical-beach-scene-with-palm-trees-in-lombok-36956259/" target="_blank" rel="noopener noreferrer">Maria Burnay · Pexels</a></figcaption>';
+                st.appendChild(photo);
+            }
+
             function go() { if (imgStarted['p:' + k] || !body || body.offsetHeight < 20) return; imgStarted['p:' + k] = true; imgScan(); }
             if (window.ResizeObserver && body) new ResizeObserver(go).observe(body);
         });
