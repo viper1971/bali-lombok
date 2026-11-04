@@ -1,11 +1,11 @@
 /* The second screen is a compact expedition overview, not another cover. */
-html[data-magazine="on"] body header.hero.hero--trip-overview {padding:30px 34px!important}
+html[data-magazine="on"] body header.hero.hero--trip-overview {padding:30px 34px!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;display:block!important}
 html[data-magazine="on"] body .hero.hero--trip-overview .hero-inner {
  display:grid!important;grid-template-columns:minmax(360px,.9fr) minmax(0,1.25fr)!important;
  grid-template-areas:"title version" "count map" "meta map" "actions map" "tools map" "meeting meeting" "journal journal";
  grid-template-rows:auto auto auto auto auto auto auto!important;
  gap:14px 26px!important;align-items:start!important;align-content:start!important;
- width:100%!important;max-width:1440px!important;margin:0 auto!important;text-align:left;
+ width:100%!important;max-width:1440px!important;margin:0 auto!important;padding:0!important;text-align:left;
 }
 html[data-magazine="on"] body .hero.hero--trip-overview .hero-inner>* {min-width:0;justify-self:stretch!important;margin:0!important;box-sizing:border-box}
 html[data-magazine="on"] body .hero.hero--trip-overview .hero-inner>.badge {
@@ -40,7 +40,8 @@ html[data-magazine="on"] body .hero.hero--trip-overview #heroUtilityRow {
  gap:12px!important;width:100%!important;max-width:none!important;margin:0!important;align-items:stretch!important;
 }
 html[data-magazine="on"] body .hero.hero--trip-overview .hero-inner>#heroQr {grid-area:tools!important}
-html[data-magazine="on"] body .hero.hero--trip-overview #heroQr {
+html[data-magazine="on"] body .hero.hero--trip-overview #heroQr,
+html[data-magazine="on"] body .hero.hero--trip-overview #heroUtilityRow #heroQr {
  width:100%!important;min-width:0!important;max-width:none!important;margin:0!important;padding:12px!important;
  display:flex!important;gap:12px!important;align-items:center;box-shadow:none!important;
  border:1px solid var(--mg-line)!important;border-radius:4px!important;background:var(--mg-card)!important;
