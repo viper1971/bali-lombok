@@ -389,3 +389,7 @@ html[data-magazine="on"] #cast-priprava {--chapter-image:url('https://images.pex
 .ph-strip .mg-strip-photo {height:clamp(130px,13vw,210px);min-height:0}
 .ph-strip .mg-strip-photo img {min-height:0}
 @media(max-width:700px){.ph-strip .mg-strip-photo{height:110px}}
+.sv-stage.is-loading .sv-play {cursor:progress}
+.sv-stage.is-failed .sv-play {opacity:1;pointer-events:auto}
+.sv-stage.is-loading iframe {opacity:0}
+.sv-stage.is-loaded iframe {opacity:1}

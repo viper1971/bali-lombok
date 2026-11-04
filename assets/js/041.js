@@ -1479,10 +1479,6 @@ function recalculateAll() {
         }
 
         if ('serviceWorker' in navigator) {
-            // Do not wait for external iframes: a hanging map must not block its fix.
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                window.dispatchEvent(new Event('bali:maps-retry'));
-            });
             navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' })
                 .then(reg => reg.update())
                 .catch(err => console.warn('Chyba registrace offline režimu:', err));

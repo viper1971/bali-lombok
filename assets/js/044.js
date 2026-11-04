@@ -129,17 +129,29 @@
         var queue = [], busy = false;
         function next() {
             if (busy) return;
-            var el = queue.shift();
-            if (!el) return;
+            var stage = queue.shift();
+            if (!stage) return;
+            stage.classList.remove('is-queued');
+            if (stage.closest('[inert]') || !stage.getBoundingClientRect().height) {
+                io.observe(stage);
+                next();
+                return;
+            }
             busy = true;
-            el.classList.remove('is-queued');
-            if (!el.querySelector('iframe')) {
-                window.svLoad(el.id);
-                var f = el.querySelector('iframe');
-                var done = function () { setTimeout(function () { busy = false; next(); }, 350); };
-                if (f) { f.addEventListener('load', done, { once: true }); setTimeout(function () { if (busy) done(); }, 2500); }
-                else done();
-            } else { busy = false; next(); }
+            var settled = false;
+            var timer;
+            function finish() {
+                if (settled) return;
+                settled = true;
+                clearTimeout(timer);
+                stage.removeEventListener('sv:request-finished', finish);
+                busy = false;
+                next();
+            }
+            stage.addEventListener('sv:request-finished', finish);
+            // A slow external server must not block all subsequent panoramas.
+            timer = setTimeout(finish, 4000);
+            if (!window.svLoad(stage.id)) finish();
         }
         if (!('IntersectionObserver' in window)) return; // starý prohlížeč: zůstává tlačítko
         var io = new IntersectionObserver(function (entries) {
@@ -152,7 +164,7 @@
                     next();
                 }
             });
-        }, { rootMargin: '150px 0px 150px 0px', threshold: 0.2 });
+        }, { rootMargin: '150px 0px 150px 0px', threshold: 0.01 });
         stages.forEach(function (el) { if (el.id) io.observe(el); });
     });
 })();
