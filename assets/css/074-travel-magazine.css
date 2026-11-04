@@ -236,12 +236,6 @@ html[data-magazine="on"] #hlavni-obsah .mg-transit>span {border-inline-end:1px d
 html[data-magazine="on"] body #hlavni-obsah .mg-ledger {background:var(--mg-forest);color:white;border-top:5px solid var(--mg-yellow)}
 html[data-magazine="on"] #hlavni-obsah .mg-ledger>span {color:var(--mg-yellow)}
 html[data-magazine="on"] #hlavni-obsah #bxGrand_pers {font:600 clamp(19px,2vw,32px)/1.15 Georgia,serif!important;font-variant-numeric:tabular-nums!important}
-@media screen and (min-width:1000px) {
- html[data-magazine="on"] #hlavni-obsah .lux-fold-pad:has(>.mg-feature):has(>.st-deck) {display:grid;grid-template-columns:minmax(0,2fr) minmax(245px,1fr);gap:20px;align-items:start}
- html[data-magazine="on"] #hlavni-obsah .lux-fold-pad:has(>.mg-feature):has(>.st-deck)>* {grid-column:1/-1;min-width:0}
- html[data-magazine="on"] #hlavni-obsah .lux-fold-pad:has(>.st-deck)>.mg-feature {grid-column:1}
- html[data-magazine="on"] #hlavni-obsah .lux-fold-pad:has(>.mg-feature)>.st-deck {grid-column:2;border-top:4px solid var(--mg-yellow);margin-top:0}
-}
 @media print {html[data-magazine="on"] body #hlavni-obsah .mg-department {display:none!important}}
 
 /* The landing cover occupies the viewport until the reader enters the trip. */
@@ -296,3 +290,36 @@ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part>.lux-part-hea
 
 html[data-magazine="on"] #cast-priprava {--chapter-image:url('https://images.pexels.com/photos/13987298/pexels-photo-13987298.jpeg?auto=compress&cs=tinysrgb&w=1600')!important}
 .mg-version {color:#fff!important;font:500 12px/1.5 system-ui,sans-serif!important;margin:9px 0!important}
+
+/* Keep media out of nested narrow columns. All destination grids use the same minimum. */
+#hlavni-obsah .lux-fold-pad,
+#hlavni-obsah .lux-fold-pad :is(.fl-deck,.fl-read,.uber-info-panel,.cx-e-top,.pf18-panel,.p22-card) {min-width:0}
+#hlavni-obsah [class*="spots-grid"] {
+ display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))!important;gap:12px!important;
+}
+#hlavni-obsah [class*="spots-grid"]>* {min-width:0}
+#hlavni-obsah .fl-read {
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))!important;
+ gap:12px!important;
+}
+#hlavni-obsah .uber-media-grid>.sv-card {min-width:0;grid-column:1/-1}
+#hlavni-obsah .uber-media-grid>.sv-card .sv-stage {height:clamp(320px,35vw,520px)!important}
+#hlavni-obsah .cx-big {white-space:nowrap!important;overflow-wrap:normal!important;word-break:normal!important}
+#hlavni-obsah [id$="AccContent"]>[class*="day-block"] {padding:14px!important}
+#hlavni-obsah .clim {margin-block:8px!important}
+#hlavni-obsah .clim .clim-i {margin:0!important;padding:0!important}
+@media(max-width:900px) {
+ html[data-magazine="on"] body #hlavni-obsah :is(p,li,td,th,summary,label,.stage-desc,.uber-info-panel) {
+  font-size:13px!important;line-height:1.55!important;
+ }
+ html[data-magazine="on"] body #hlavni-obsah :is(h3,.hotel-title-text,.lux-part-title) {font-size:21px!important}
+ html[data-magazine="on"] body #hlavni-obsah :is(h4,h5,.spot-title-sg,.giant-bike-title) {font-size:16px!important}
+ #hlavni-obsah [class*="spots-grid"],#hlavni-obsah .uber-info-panel,#hlavni-obsah .fl-read {grid-template-columns:minmax(0,1fr)!important}
+ #hlavni-obsah .uber-media-grid>.sv-card .sv-stage {height:clamp(310px,90vw,420px)!important}
+ #hlavni-obsah .fl-read>*,#hlavni-obsah .st-deck .fl-read>div:last-child {grid-column:auto!important}
+ #hlavni-obsah .lux-fold-pad :is(.cx-e-top,.giant-bike-header,.uber-top-bar) {flex-wrap:wrap!important;gap:8px!important}
+ #hlavni-obsah .uber-media-overlay {font-size:10px!important;min-height:0!important}
+ #hlavni-obsah .clim .clim-v {font-size:14px!important;white-space:nowrap}
+ #hlavni-obsah .clim .clim-k {font-size:10px!important}
+ #hlavni-obsah .clim .clim-badge {font-size:9px!important;padding:2px 4px!important}
+}
