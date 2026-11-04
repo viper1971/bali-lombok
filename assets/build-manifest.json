@@ -413,6 +413,13 @@
     "bytes": 9263
   },
   {
+    "output": "assets/build/js-079b63a692fc4cee.js",
+    "sources": [
+      "assets/js/069-desktop-type-scale.js"
+    ],
+    "bytes": 1774
+  },
+  {
     "output": "assets/build/css-613ec9680ad29884.css",
     "sources": [
       "assets/css/001.css"
