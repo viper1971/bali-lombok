@@ -1,6 +1,6 @@
 {
   "caveat": "Synthetic local HTTP test; not production RUM or PageSpeed. Third-party services intentionally disabled. Timings depend on CI runner.",
-  "timestamp": "2026-11-05T17:00:31.640Z",
+  "timestamp": "2026-11-05T17:04:19.216Z",
   "snapshots": [
     {
       "profile": "mobile",
@@ -11,9 +11,9 @@
       "synthetic": true,
       "thirdPartyNetwork": "blocked",
       "serviceWorkers": "blocked",
-      "domContentLoadedWallMs": 963,
+      "domContentLoadedWallMs": 929,
       "requests": 104,
-      "transferredBytesFromContentLength": 4657726,
+      "transferredBytesFromContentLength": 4658553,
       "imageRequests": 9,
       "imageBytesFromContentLength": 2794976,
       "thirdPartyRequests": 40,
@@ -38,10 +38,10 @@
       "wikimediaSamples": [],
       "errors": [],
       "failedLocal": [],
-      "domContentLoadedMs": 960,
-      "loadMs": 1020,
-      "firstContentfulPaintMs": 392,
-      "lcpCandidateMs": 392,
+      "domContentLoadedMs": 925,
+      "loadMs": 984,
+      "firstContentfulPaintMs": 360,
+      "lcpCandidateMs": 360,
       "cumulativeLayoutShift": 0.041,
       "biggestShifts": [
         {
@@ -148,7 +148,7 @@
         }
       ],
       "longTasks": 1,
-      "totalLongTaskDurationMs": 171,
+      "totalLongTaskDurationMs": 168,
       "heroImage": "http://127.0.0.1:8789/assets/images/external/c9c99d25f3e25d16-w960.webp",
       "heroComplete": true,
       "heroNaturalWidth": 389
@@ -162,11 +162,11 @@
       "synthetic": true,
       "thirdPartyNetwork": "blocked",
       "serviceWorkers": "blocked",
-      "domContentLoadedWallMs": 1132,
-      "requests": 105,
-      "transferredBytesFromContentLength": 5271005,
-      "imageRequests": 10,
-      "imageBytesFromContentLength": 3408255,
+      "domContentLoadedWallMs": 1119,
+      "requests": 106,
+      "transferredBytesFromContentLength": 5416899,
+      "imageRequests": 11,
+      "imageBytesFromContentLength": 3553322,
       "thirdPartyRequests": 55,
       "wikimediaApiOnStartup": 0,
       "thirdPartySamples": [
@@ -189,11 +189,11 @@
       "wikimediaSamples": [],
       "errors": [],
       "failedLocal": [],
-      "domContentLoadedMs": 1130,
-      "loadMs": 1239,
-      "firstContentfulPaintMs": 272,
-      "lcpCandidateMs": 272,
-      "cumulativeLayoutShift": 0.0078,
+      "domContentLoadedMs": 1117,
+      "loadMs": 1231,
+      "firstContentfulPaintMs": 324,
+      "lcpCandidateMs": 324,
+      "cumulativeLayoutShift": 0.0079,
       "biggestShifts": [
         {
           "value": 0.0045,
@@ -298,6 +298,34 @@
           ]
         },
         {
+          "value": 0.0002,
+          "sources": [
+            {
+              "node": "div#toplistFloat.",
+              "previousRect": {
+                "x": 1307.62060546875,
+                "y": 58.880001068115234,
+                "width": 132.37939453125,
+                "height": 167.1999969482422,
+                "top": 58.880001068115234,
+                "right": 1440,
+                "bottom": 226.07999801635742,
+                "left": 1307.62060546875
+              },
+              "currentRect": {
+                "x": 1323.4605712890625,
+                "y": 58.880001068115234,
+                "width": 116.5394287109375,
+                "height": 85.88249206542969,
+                "top": 58.880001068115234,
+                "right": 1440,
+                "bottom": 144.76249313354492,
+                "left": 1323.4605712890625
+              }
+            }
+          ]
+        },
+        {
           "value": 0.0001,
           "sources": [
             {
@@ -349,8 +377,8 @@
           ]
         }
       ],
-      "longTasks": 15,
-      "totalLongTaskDurationMs": 2655,
+      "longTasks": 16,
+      "totalLongTaskDurationMs": 2853,
       "heroImage": "http://127.0.0.1:8789/assets/images/external/c9c99d25f3e25d16-w1280.webp",
       "heroComplete": true,
       "heroNaturalWidth": 1440
