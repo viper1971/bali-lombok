@@ -27,3 +27,10 @@
 - Zatím nebyly staženy ani nahrány binární fotografie z Unsplash/Pexels či jiných externích serverů.
 - Nebyly spuštěny lokální build, automatizované browser testy ani produkční Lighthouse měření.
 - Předchozí obrázky dostupné přímo na GitHub Pages nyní používají relativní cesty, neznamená to automaticky optimalizaci jejich velikosti.
+
+## Nález při pokračování – kritická divergence produkce a manifestu
+- Publikovaný `index.html` obsahuje 61 JavaScriptových odkazů; 5 z nich míří na ručně udržované produkční soubory `assets/build/js-1650a0000000000*.js`, zatímco `assets/build-manifest.json` eviduje odlišné hashe.
+- Prosté spuštění `tools/build.py` by mohlo tyto produkční výjimky přepsat a ztratit funkční opravy. Migrace obrázků proto do vyřešení rozporu nemá automaticky rebuildovat web.
+- V produkčním JavaScriptu pro položky 041 a 049 odstraněna aktivní registrace offline workeru a tlačítko offline; předchozí úprava samotného manifestového výstupu nestačila.
+- Produkční manifest eviduje 88 výstupních souborů (61 JS + 27 CSS), dohromady přibližně 1,28 MB bez přenosové komprese; samotné CSS tvoří přibližně 771 kB. To jsou velikosti souborů, nikoli naměřená síťová data.
+- Upravený nástroj `tools/vendor_images.py` prochází také opravdu nasazené `index.html` a `assets/build`, aniž by při migraci měnil strukturu skriptů; změněným assetům v publikované HTML přidá verzi kvůli cache.
