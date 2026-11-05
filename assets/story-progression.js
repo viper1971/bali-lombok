@@ -27,9 +27,36 @@
     return first ? (first.querySelector(":scope > .lux-fold-h") || first)
                  : (part.querySelector(":scope > .lux-part-head") || part);
   }
+  // The last chapters are shorter than the viewport. Without a temporary tail
+  // Chrome clamps scrollY before their first accordion reaches the top.
+  var tail=null, activeChapter=null;
+  function ensureTail(){
+    if(!tail){
+      tail=document.createElement("div");
+      tail.id="bali-chapter-scroll-tail";
+      tail.setAttribute("aria-hidden","true");
+      tail.style.cssText="height:0;min-height:0;pointer-events:none;flex:none;overflow:hidden";
+      document.body.appendChild(tail);
+    }
+    return tail;
+  }
+  function clearTail(){
+    if(tail)tail.style.height="0px";
+    activeChapter=null;
+  }
   function position(el) {
     if (!el || !el.getClientRects().length) return;
+    var part=el.closest(".lux-part");
     var y=Math.max(0,window.scrollY+el.getBoundingClientRect().top-offset());
+    var gap=offset();
+    y=Math.max(0,y-gap);
+    var extension=ensureTail();
+    extension.style.height="0px";
+    var maxY=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
+    // Add exactly the missing scrollable space, not a permanent blank page.
+    var missing=Math.ceil(y-maxY);
+    if(missing>0)extension.style.height=(missing+20)+"px";
+    activeChapter=part;
     window.scrollTo({top:y,behavior:prefersReduced && prefersReduced.matches ? "instant" : "smooth"});
   }
   function afterChapterOpen(part) {
@@ -45,6 +72,7 @@
   function clicked(e){
     var target=e.target;
     if(!target || !target.closest)return;
+    if(target.closest(".lux-part > .lux-part-head")) clearTail();
     var foldButton=target.closest(".lux-fold-btn");
     if(foldButton){
       var fold=foldButton.closest(".lux-fold[id]");
@@ -72,6 +100,13 @@
   }
   document.addEventListener("click",clicked,true);
   document.addEventListener("keydown",keyboard,true);
+  // Remove temporary page extension when the original system closes a chapter.
+  document.addEventListener("click",function(){
+    if(!activeChapter)return;
+    window.setTimeout(function(){
+      if(activeChapter && !activeChapter.classList.contains("is-open"))clearTail();
+    },600);
+  },true);
   function init(){
     document.documentElement.classList.remove("bali-story-progressive");
     document.querySelectorAll(".lux-part.bali-story-concealed").forEach(function(p){p.classList.remove("bali-story-concealed")});
