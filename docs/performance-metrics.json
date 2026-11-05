@@ -1,6 +1,6 @@
 {
   "caveat": "Synthetic local HTTP test; not production RUM or PageSpeed. Third-party services intentionally disabled. Timings depend on CI runner.",
-  "timestamp": "2026-11-05T17:04:19.216Z",
+  "timestamp": "2026-11-05T17:06:11.425Z",
   "snapshots": [
     {
       "profile": "mobile",
@@ -11,9 +11,9 @@
       "synthetic": true,
       "thirdPartyNetwork": "blocked",
       "serviceWorkers": "blocked",
-      "domContentLoadedWallMs": 929,
+      "domContentLoadedWallMs": 556,
       "requests": 104,
-      "transferredBytesFromContentLength": 4658553,
+      "transferredBytesFromContentLength": 4658652,
       "imageRequests": 9,
       "imageBytesFromContentLength": 2794976,
       "thirdPartyRequests": 40,
@@ -38,117 +38,14 @@
       "wikimediaSamples": [],
       "errors": [],
       "failedLocal": [],
-      "domContentLoadedMs": 925,
-      "loadMs": 984,
-      "firstContentfulPaintMs": 360,
-      "lcpCandidateMs": 360,
-      "cumulativeLayoutShift": 0.041,
-      "biggestShifts": [
-        {
-          "value": 0.0248,
-          "sources": [
-            {
-              "node": "(unavailable)",
-              "previousRect": {
-                "x": 0,
-                "y": 340,
-                "width": 83,
-                "height": 184,
-                "top": 340,
-                "right": 83,
-                "bottom": 524,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 0,
-                "y": 71,
-                "width": 67,
-                "height": 136,
-                "top": 71,
-                "right": 67,
-                "bottom": 207,
-                "left": 0
-              }
-            },
-            {
-              "node": "(unavailable)",
-              "previousRect": {
-                "x": 0,
-                "y": 119.640625,
-                "width": 16.15625,
-                "height": 40.703125,
-                "top": 119.640625,
-                "right": 16.15625,
-                "bottom": 160.34375,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 3.484375,
-                "y": 116.25,
-                "width": 11,
-                "height": 35.484375,
-                "top": 116.25,
-                "right": 14.484375,
-                "bottom": 151.734375,
-                "left": 3.484375
-              }
-            },
-            {
-              "node": "(unavailable)",
-              "previousRect": {
-                "x": 24.15625,
-                "y": 126.5625,
-                "width": 15.046875,
-                "height": 26.875,
-                "top": 126.5625,
-                "right": 39.203125,
-                "bottom": 153.4375,
-                "left": 24.15625
-              },
-              "currentRect": {
-                "x": 20.484375,
-                "y": 123.59375,
-                "width": 15.046875,
-                "height": 20,
-                "top": 123.59375,
-                "right": 35.53125,
-                "bottom": 143.59375,
-                "left": 20.484375
-              }
-            }
-          ]
-        },
-        {
-          "value": 0.0162,
-          "sources": [
-            {
-              "node": "div#.mg-cover-copy",
-              "previousRect": {
-                "x": 24,
-                "y": 259.546875,
-                "width": 343.21875,
-                "height": 459.359375,
-                "top": 259.546875,
-                "right": 367.21875,
-                "bottom": 718.90625,
-                "left": 24
-              },
-              "currentRect": {
-                "x": 24,
-                "y": 232.546875,
-                "width": 343.21875,
-                "height": 486.359375,
-                "top": 232.546875,
-                "right": 367.21875,
-                "bottom": 718.90625,
-                "left": 24
-              }
-            }
-          ]
-        }
-      ],
-      "longTasks": 1,
-      "totalLongTaskDurationMs": 168,
+      "domContentLoadedMs": 554,
+      "loadMs": 592,
+      "firstContentfulPaintMs": 192,
+      "lcpCandidateMs": 192,
+      "cumulativeLayoutShift": 0,
+      "biggestShifts": [],
+      "longTasks": 2,
+      "totalLongTaskDurationMs": 205,
       "heroImage": "http://127.0.0.1:8789/assets/images/external/c9c99d25f3e25d16-w960.webp",
       "heroComplete": true,
       "heroNaturalWidth": 389
@@ -162,9 +59,9 @@
       "synthetic": true,
       "thirdPartyNetwork": "blocked",
       "serviceWorkers": "blocked",
-      "domContentLoadedWallMs": 1119,
+      "domContentLoadedWallMs": 658,
       "requests": 106,
-      "transferredBytesFromContentLength": 5416899,
+      "transferredBytesFromContentLength": 5416998,
       "imageRequests": 11,
       "imageBytesFromContentLength": 3553322,
       "thirdPartyRequests": 55,
@@ -189,10 +86,10 @@
       "wikimediaSamples": [],
       "errors": [],
       "failedLocal": [],
-      "domContentLoadedMs": 1117,
-      "loadMs": 1231,
-      "firstContentfulPaintMs": 324,
-      "lcpCandidateMs": 324,
+      "domContentLoadedMs": 657,
+      "loadMs": 728,
+      "firstContentfulPaintMs": 200,
+      "lcpCandidateMs": 200,
       "cumulativeLayoutShift": 0.0079,
       "biggestShifts": [
         {
@@ -377,8 +274,8 @@
           ]
         }
       ],
-      "longTasks": 16,
-      "totalLongTaskDurationMs": 2853,
+      "longTasks": 18,
+      "totalLongTaskDurationMs": 1728,
       "heroImage": "http://127.0.0.1:8789/assets/images/external/c9c99d25f3e25d16-w1280.webp",
       "heroComplete": true,
       "heroNaturalWidth": 1440
