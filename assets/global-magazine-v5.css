@@ -904,3 +904,54 @@ html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-h
     padding:10px 12px !important;
   }
 }
+
+
+/* Readable chapter accordion chevrons, desktop and mobile.
+   Draw the arrow with CSS rather than the tiny font glyph; preserve
+   the existing parent rotation when its chapter is open. */
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-part > .lux-part-head .lux-part-chev {
+  display:grid !important;
+  place-items:center !important;
+  position:relative !important;
+  font-size:0 !important;
+  line-height:0 !important;
+  color:transparent !important;
+  background:rgba(5,30,26,.82) !important;
+  border:2px solid rgba(255,255,255,.87) !important;
+  box-shadow:0 3px 12px rgba(0,0,0,.45) !important;
+  border-radius:10px !important;
+  width:clamp(50px,4.2vw,64px) !important;
+  min-width:clamp(50px,4.2vw,64px) !important;
+  height:clamp(50px,4.2vw,64px) !important;
+  min-height:clamp(50px,4.2vw,64px) !important;
+  flex:0 0 clamp(50px,4.2vw,64px) !important;
+  align-self:center !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-part > .lux-part-head .lux-part-chev::before {
+  content:"" !important;
+  display:block !important;
+  width:20px !important;
+  height:20px !important;
+  border-right:5px solid #fff !important;
+  border-bottom:5px solid #fff !important;
+  border-top:0 !important;
+  border-left:0 !important;
+  transform:translateY(-5px) rotate(45deg) !important;
+  filter:drop-shadow(0 2px 2px #000) !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-part.is-open > .lux-part-head .lux-part-chev {
+  background:rgba(16,92,70,.92) !important;
+}
+@media (max-width:700px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    .lux-part > .lux-part-head .lux-part-chev {
+    width:52px !important;
+    min-width:52px !important;
+    height:52px !important;
+    min-height:52px !important;
+    flex-basis:52px !important;
+  }
+}
