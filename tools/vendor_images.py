@@ -7,7 +7,7 @@ from PIL import Image, ImageOps
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / 'assets/images/external'
 OUT.mkdir(parents=True, exist_ok=True)
-PAT = re.compile(r'https?://(?:images\\.unsplash\\.com|images\\.pexels\\.com)/[^\\s"\\\'\x60<>\\\\)]+', re.I)
+PAT = re.compile(r"https?://(?:images[.]unsplash[.]com|images[.]pexels[.]com)/[^\s\x22\x27\x60<>\\)]+", re.I)
 FILES = [ROOT/'src/index.html', *sorted((ROOT/'assets/js').glob('*.js')), *sorted((ROOT/'assets/css').glob('*.css'))]
 report = {'migrated': [], 'failed': []}
 cache = {}
