@@ -107,3 +107,12 @@ Předchozí syntetické měření evidovalo **19 Wikimedia API požadavků na mo
 - Zbývající třetí strany jsou zejména Google Maps iframe, fonty a TOPlist. Jsou důležité pro obsah / měření, nesmí se bez testů mechanicky odstranit.
 
 Syntetický test blokuje externí služby, používá místní HTTP server bez běžné produkční přenosové komprese, a ve výpisu zaznamenává i požadavky, které by reálný prohlížeč mohl vyhodnotit jinak. Nevyhodnocovat výsledky jako PageSpeed skóre ani procentuální změnu rychlosti veřejného webu.
+
+## Stabilita úvodního rozložení – ověřeno v Chromiu (5. 11. 2026, 16:53 UTC)
+- Diagnostika `tests/cls-experiments.cjs` prokázala dvě příčiny: pozdě aplikované styly časopisu / druhé obrazovky a přesunutí celé titulní sekce do modal dialogu při DOMContentLoaded.
+- Obě verze HTML proto nyní načítají existující `assets/css/074-travel-magazine.css` a `assets/css/078-journey-overview.css` ještě v `<head>` (publikovaný web používá odpovídající build CSS). Původní odkazy jsou záměrně ponechané na konci kvůli zachování jejich kaskády a vzhledu. Prohlížeč může použít cachovaný soubor, ale CSS se v dokumentu vyhodnotí dvakrát; je to dočasné řešení do bezpečného sjednocení celého build procesu.
+- `assets/js/068-magazine-layout.js` a příslušný publikovaný `js-036fff53752dca28.js` při otevření dialogu ponechávají na původním místě stejně vysoký prostorový prvek. Po kliknutí na „Prozkoumat cestu“ je dialog uzavřen, titulní stránka vrácena do dokumentu a rezervace místa odstraněna.
+- Regresní kontrola `tests/magazine-cls.cjs` ověřuje včasné načtení obou CSS i zachování funkce dialogu; `tests/magazine-presentation.cjs` prochází otevření a uzavření prezentace v Chromiu na mobilu i PC.
+- **Výsledek posledního syntetického měření** (`docs/performance-metrics.json`, 2026-11-05T16:53:08Z): mobil 390×844 **CLS 0,0162**, PC 1440×1000 **CLS 0,0034**. Původní naměřené hodnoty byly **1,0162** a **1,5692**. V novém běhu současně 0 lokálních HTTP 404, 0 chyb běhu JS a 0 Wikimedia API požadavků při načtení.
+- **Mobil:** FCP 288 ms, LCP kandidát 288 ms, DOMContentLoaded 760 ms. **PC:** FCP 108 ms, LCP kandidát 256 ms, DOMContentLoaded 909 ms. Hodnoty jsou měření lokálního serveru v CI, s blokovanými službami třetích stran, nikoliv skutečné produkční Core Web Vitals ani potvrzené procento rychlosti u návštěvníků.
+- Benchmark `tests/performance.cjs` nyní vyhodnotí jako chybu návrat CLS nad 0,1, nedostupné lokální soubory, chyby JavaScriptu nebo nečekané požadavky na Wikimedia API během startu.
