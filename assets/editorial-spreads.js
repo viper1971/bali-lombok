@@ -158,6 +158,52 @@
     [/lau pa sat|satay street/i,["Lau Pa Sat je výrazná historická tržnice v centru Singapuru, známá pestrou gastronomií a večerní atmosférou. Satay Street přidává k městskému výletu vůni grilovaných špízů a živý ruch kolem stolů.","Místo je vhodné pro společnou večeři a ochutnávku několika různých jídel. Kontrast starší tržní budovy a moderních mrakodrapů v okolí patří k jeho největšímu kouzlu.","Provoz stánků a organizace venkovního sezení se mohou měnit; na místě si ověř aktuální nabídku a ceny."]],
     [/trasa mrt|changi.*lau pa sat/i,["Cesta metrem MRT z letiště Changi do centra je zároveň jednoduchou ukázkou fungování singapurské veřejné dopravy. Pohodlný přestup na městské linky umožňuje zařadit gastronomickou zastávku i do kratšího pobytu.","Při jízdě se vyplatí sledovat směry linek, názvy konečných stanic a návaznosti na pěší trasu. Systém je přehledný, ale u větších přestupních stanic je dobré počítat s delší chůzí.","Před cestou ověř poslední spoje a ponech bezpečnou rezervu na návrat k letišti."]
   );
+
+  // Fact-checked place descriptions; more specific than any generic regional wording.
+  var verified = [
+    [/kulturní park gwk|garuda wisnu kencana/i,
+      ["Garuda Wisnu Kencana Cultural Park leží v Ungasanu na poloostrově Bukit. Jeho dominantou je 121 metrů vysoký monument (včetně podstavce), který zachycuje hinduistického boha Višnua na mytickém ptáku Garudovi. Autorem sochy je indonéský sochař I Nyoman Nuarta.",
+       "Park zabírá přibližně 60 hektarů. Vedle hlavního monumentu zde najdeme rozsáhlý prostor Lotus Pond mezi vápencovými stěnami, samostatné sochy Višnua a Garudy, amfiteátr i místa pro kulturní představení. Nejde tedy o vyhlídku na moře, ale o rozsáhlý areál věnovaný balijskému umění a hinduistické mytologii.",
+       "Prakticky: Park je v oblasti Ungasan v jižním Bali. Přístupné části monumentu, vstupné a čas vystoupení je vhodné ověřit před návštěvou."],
+      "https://sita.badungkab.go.id/en/destinations/gwk-garuda-wisnu-kencana-an-iconic-park-in-badung-bali"],
+    [/jeskyně a pláž suluban|suluban beach/i,
+      ["Suluban, označovaná také jako Blue Point, je malá zátoka pod vápencovými útesy v oblasti Pecatu. Název souvisí s balijským slovem „mesulub“, tedy sklonit se či podlézt: na pláž se sestupuje po schodech a úzkými průchody mezi skalami.",
+       "Zátoka je vstupním místem k proslulým surfařským vlnám Uluwatu. Při odlivu se objeví písek a skalní tůně, zatímco při přílivu může být většina spodní části zatopená. Nad útesy jsou podniky s pohledem na oceán a surfařská místa.",
+       "Prakticky: Pro průchod jeskyní sleduj příliv a odliv. Vlny nad útesovým dnem jsou vhodné pro zkušené surfaře, nikoli jako běžná pláž ke koupání."],
+      "https://www.indonesia.travel/my/en/destination/bali-nusa-tenggara/bali/bali---suluban-beach"],
+    [/útes karang boma|karang boma/i,
+      ["Karang Boma je vyhlídkový útes u Pecatu na západní straně poloostrova Bukit. Vápencová hrana tu prudce padá k Indickému oceánu a poskytuje široký pohled na přerušovanou linii skalnatého pobřeží.",
+       "Jde o otevřenou přírodní vyhlídku, nikoli o pláž nebo vybudovanou vyhlídkovou plošinu. Na pevninské straně jsou nízké porosty a pěšiny; na mořské straně odkryté skalní hrany a pohled na příboj hluboko pod nimi.",
+       "Prakticky: Přístup je od Jalan Batu Lesung. Okraje útesu nemají souvislé jištění; fotografuj z bezpečné vzdálenosti."],
+      "https://smartbali.com/en/places/karang-boma-cliff"],
+    [/skalní silnice tanah barak|tanah barak.*melasti/i,
+      ["Tanah Barak je známý silniční průřez mezi vysokými světlými vápencovými stěnami v jižním Bali. Je součástí oblasti Kutuh, zatímco nedaleká pláž Melasti leží v Ungasanu; obě místa se často spojují do jednoho výletu, ale nejsou totožná.",
+       "Na Tanah Barak je zajímavá samotná cesta vytesaná mezi skalami. Melasti nabízí silniční sjezd pod vápencovými útesy, světlý písek a pobřeží spojené s tradičním očistným obřadem Melasti, který se koná před balijským Novým rokem Nyepi.",
+       "Prakticky: Nezastavuj kvůli fotografování uprostřed vozovky. V Melasti respektuj případné náboženské obřady; koupání závisí na mořských podmínkách."],
+      "https://www.indonesia.travel/uk/en/travel-ideas/heritage/tanah-barak-a-hidden-treasure-in-bali-you-must-visit"],
+    [/chrám uluwatu.*kecak|pura luhur uluwatu/i,
+      ["Pura Luhur Uluwatu je hinduistický mořský chrám na jihozápadním okraji poloostrova Bukit. Stojí nad přibližně 70 metrů vysokým útesem a patří k významným posvátným místům Bali.",
+       "Večerní představení Kecak se koná v amfiteátru poblíž chrámu. Skupina mužů vytváří rytmický zpěv „cak-cak-cak“ bez běžného instrumentálního doprovodu, zatímco tanečníci ztvárňují výjevy z indického eposu Rámájana.",
+       "Prakticky: V chrámu je nutné respektovat pravidla oblékání. Volně žijící makakové mohou brát návštěvníkům brýle a telefony; vstupenky na Kecak a čas vystoupení ověř předem."],
+      "https://www.indonesia.travel/id/id/travel-ideas/culture/cultural-experience-in-bali-uluwatu-kecak-dance"],
+    [/sacred monkey forest|opičí prales/i,
+      ["Sacred Monkey Forest Sanctuary, balijsky Mandala Suci Wenara Wana, leží v centrální části Ubudu. Jde o lesní svatyni obývanou makaky jávskými (Macaca fascicularis), nikoli o zoologickou zahradu.",
+       "V areálu se nacházejí tři hinduistické chrámy: Dalem Agung Padangtegal, Holy Spring a Prajapati. Pěší cesty vedou mezi tropickými stromy, mosty a tradičními kamennými sochami.",
+       "Prakticky: Opice nekrm a nedotýkej se jich. Jídlo, brýle a volné předměty měj zabezpečené; posvátná místa mohou mít zvláštní pravidla vstupu."],
+      "https://www.indonesia.travel/my/en/travel-ideas/adventure/5-interesting-places-to-visit-where-you-can-meet-the-monkeys-in-bali"],
+    [/chrám tirta empul|tirta empul/i,
+      ["Pura Tirta Empul je chrám posvátných pramenů v Manukayi u Tampaksiringu, severovýchodně od Ubudu. Místo je doložené starobalijským nápisem z 10. století a dodnes slouží hinduistickým obřadům.",
+       "Voda z pramene napájí očistné bazény s řadou kamenných chrličů. Věřící zde provádějí rituál melukat; součástí areálu jsou také vnitřní chrámová nádvoří a svatyně. Nedaleko stojí prezidentský palác Tampaksiring.",
+       "Prakticky: Při návštěvě se používá sarong a platí pravidla pro účast v rituálních bazénech. Ne všechny vodní výtoky jsou určeny pro návštěvníky."],
+      "https://diparda.gianyarkab.go.id/destinasi/tirta-empul-temple"],
+    [/gardens by the bay|supertree/i,
+      ["Gardens by the Bay je rozsáhlý zahradní komplex u Marina Bay. V části Supertree Grove stojí konstrukce vysokých umělých „stromů“ osázených rostlinami, které se večer proměňují díky světelným efektům.",
+       "Večerní představení Garden Rhapsody kombinuje hudbu a osvětlení jednotlivých Supertrees. Vedle venkovního areálu patří ke známým atrakcím kryté zahradní skleníky, které však mají vlastní vstupní režim.",
+       "Prakticky: Oficiální běžné časy Garden Rhapsody jsou 19:45 a 20:45, nikoli 21:00 uvedených ve starším názvu karty. Před cestou v srpnu 2027 ověř aktuální program."],
+      "https://www.gardensbythebay.com.sg/en/things-to-do/calendar-of-events/garden-rhapsody.html"]
+  ];
+  // Verified entries take precedence; remaining entries must match an exact attraction.
+  guides.unshift.apply(guides,verified);
   var regional = {
     singapore:["Singapur stojí za objevování v pomalém tempu: moderní čtvrti se tu během krátké procházky střídají s historickými ulicemi, chrámy a místy místní gastronomie.","Při cestě mezi jednotlivými zastávkami se vyplatí sledovat architekturu, život ulic a dostupnost stanic MRT. Pro fotografování bývá zajímavé měnící se denní světlo i večerní osvětlení.","Nech si prostor na neplánovanou zastávku a před přesunem ověř aktuální provoz a otevírací dobu."],
     uluwatu:["Poloostrov Bukit je charakteristický vápencovými útesy, pobřežními cestami a vyhlídkami na otevřený oceán. Každá zastávka nabízí jiný úhel pohledu na dramatickou krajinu jižního Bali.","Vedle hlavní atrakce stojí za pozornost i okolní cesta, drobné výhledy a kontrast světlých skal s modrou vodou. Fotografie bývají nejpůsobivější při měkčím ranním či pozdním odpoledním světle.","Na skalnatém pobřeží dej přednost bezpečnému přístupu a počítej s větrem, vlnami a změnami počasí."],
@@ -188,7 +234,8 @@
       var existing=(textBox.textContent||"").trim();
       if(existing.length>1100)return;
       var entry=guides.find(function(g){return g[0].test(title);});
-      var paras=entry?entry[1]:regional[regionOf(card)];
+      if(!entry)return; // Never substitute generic regional filler for an unknown attraction.
+      var paras=entry[1];
       var section=document.createElement("div");
       section.className="mg-place-essay";
       section.setAttribute("aria-label","Cestopisné informace a tipy k místu");
@@ -202,6 +249,14 @@
         p.appendChild(document.createTextNode(str));
         section.appendChild(p);
       });
+      if(entry[2]) {
+        var source=document.createElement("a");
+        source.className="mg-place-source";
+        source.href=entry[2];
+        source.target="_blank";source.rel="noopener noreferrer";
+        source.textContent="Ověřený zdroj k místu";
+        section.appendChild(source);
+      }
       textBox.appendChild(section);
       card.classList.add("mg-enriched-spot");
     });
