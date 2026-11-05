@@ -8,7 +8,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / 'assets/images/external'
 OUT.mkdir(parents=True, exist_ok=True)
 PAT = re.compile(r"https?://(?:images[.]unsplash[.]com|images[.]pexels[.]com)/[^\s\x22\x27\x60<>\\)]+", re.I)
-FILES = [ROOT/'src/index.html', *sorted((ROOT/'assets/js').glob('*.js')), *sorted((ROOT/'assets/css').glob('*.css'))]
+FILES = [ROOT/'src/index.html', ROOT/'index.html', *sorted((ROOT/'assets/js').glob('*.js')), *sorted((ROOT/'assets/css').glob('*.css')), *sorted((ROOT/'assets/build').glob('*.js')), *sorted((ROOT/'assets/build').glob('*.css'))]
 report = {'migrated': [], 'failed': []}
 cache = {}
 for file in FILES:
@@ -42,7 +42,7 @@ for file in FILES:
                 cache[url] = None
                 report['failed'].append({'url':url,'path':str(file.relative_to(ROOT)),'error':str(e)})
         if cache[url]:
-            replacement = ('https://viper1971.github.io/bali-lombok/' if file.suffix=='.css' else '') + cache[url]
+            replacement = ('/bali-lombok/' if file.suffix=='.css' else '') + cache[url]
             updated = updated.replace(raw,replacement)
     if updated!=source:
         file.write_text(updated,encoding='utf8')
