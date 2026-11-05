@@ -20,6 +20,28 @@
     clearTimeout(timer);
     timer=setTimeout(function(){moveTo(fold)},ms);
   }
+  function scrollTarget(part) {
+    // A chapter can contain ordinary content without any accordion.
+    // Only direct chapter content counts, not nested accordions from other components.
+    var first = part.querySelector(":scope > .lux-part-body .lux-fold[id]");
+    return first ? (first.querySelector(":scope > .lux-fold-h") || first)
+                 : (part.querySelector(":scope > .lux-part-head") || part);
+  }
+  function position(el) {
+    if (!el || !el.getClientRects().length) return;
+    var y=Math.max(0,window.scrollY+el.getBoundingClientRect().top-offset());
+    window.scrollTo({top:y,behavior:prefersReduced && prefersReduced.matches ? "instant" : "smooth"});
+  }
+  function afterChapterOpen(part) {
+    // Existing accordion code preserves header position during the opening animation.
+    // Scroll afterwards, when the part has settled and layout is measurable.
+    clearTimeout(timer);
+    timer=setTimeout(function(){
+      if(part.isConnected && part.classList.contains("is-open")) {
+        position(scrollTarget(part));
+      }
+    },470);
+  }
   function clicked(e){
     var target=e.target;
     if(!target || !target.closest)return;
@@ -37,31 +59,16 @@
     if(nested && nested!==heading)return;
     var part=heading.closest(".lux-part");
     if(!part || part.classList.contains("is-open"))return;
-    setTimeout(function(){
-      if(part.classList.contains("is-open")){
-        var first=part.querySelector(".lux-fold[id]");
-        if(first){
-          // Initial fold can be collapsed; align its header without opening it.
-          var h=first.querySelector(":scope > .lux-fold-h")||first;
-          var y=Math.max(0,window.scrollY+h.getBoundingClientRect().top-offset());
-          window.scrollTo({top:y,behavior:prefersReduced && prefersReduced.matches ? "instant":"smooth"});
-        }
-      }
-    },440);
+    afterChapterOpen(part);
   }
   function keyboard(e){
     if(e.key!=="Enter" && e.key!==" ")return;
-    var heading=e.target && e.target.matches && e.target.matches(".lux-part > .lux-part-head") ? e.target:null;
+    var heading=e.target && e.target.matches &&
+      e.target.matches(".lux-part > .lux-part-head") ? e.target:null;
     if(!heading)return;
     var part=heading.closest(".lux-part");
     if(!part || part.classList.contains("is-open"))return;
-    setTimeout(function(){
-      if(!part.classList.contains("is-open"))return;
-      var first=part.querySelector(".lux-fold[id]");
-      if(!first)return;
-      var y=Math.max(0,window.scrollY+first.getBoundingClientRect().top-offset());
-      window.scrollTo({top:y,behavior:prefersReduced && prefersReduced.matches ? "instant":"smooth"});
-    },440);
+    afterChapterOpen(part);
   }
   document.addEventListener("click",clicked,true);
   document.addEventListener("keydown",keyboard,true);
