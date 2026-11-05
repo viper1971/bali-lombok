@@ -955,3 +955,34 @@ html[data-magazine="on"] body #hlavni-obsah.main-wrapper
     flex-basis:52px !important;
   }
 }
+
+
+/* Chapter II: make the itinerary banner identical in structure to other
+   chapters. The interactive journey graphic lives below, inside its body. */
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper #osa > .lux-part-head {
+  width:100% !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper #osa > .lux-part-body > #tripOverview {
+  display:block !important;
+  position:relative !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+  margin:0 0 clamp(18px,2.5vw,34px) !important;
+  padding:clamp(12px,2vw,26px) !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper #osa > .lux-part-body > #tripOverview > .to-map {
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+}
+@media (max-width:700px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #osa > .lux-part-body > #tripOverview {
+    padding:12px 8px !important;
+    margin-bottom:16px !important;
+  }
+}
