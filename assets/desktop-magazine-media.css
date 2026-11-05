@@ -1,0 +1,119 @@
+/* BALI 2027 — desktop travel-magazine media edition.
+   Presentation only. Mobile, print, full-screen, map events and lightboxes untouched. */
+@media screen and (min-width: 1024px) {
+  /* Stop the old magazine rule stretching every hotel gallery across large cards. */
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 15px 17px !important;
+    margin: 12px 0 18px !important;
+    min-height: 0 !important;
+    align-items: stretch !important;
+    overflow: visible !important;
+  }
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid > :is(.uber-media-box, .sv-card, .hotel-location-map) {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    align-self: stretch !important;
+  }
+  /* A photograph stays clickable; its full-size preview is not resized. */
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid > .uber-media-box {
+    height: clamp(165px, 14vw, 235px) !important;
+    aspect-ratio: auto !important;
+    border-radius: 4px !important;
+    overflow: hidden !important;
+    border: 5px solid #fdfbf4 !important;
+    box-shadow: 0 5px 13px rgba(24, 39, 35, .20), 0 0 0 1px rgba(20, 42, 36, .10) !important;
+    transform: rotate(-.65deg);
+    transform-origin: center center;
+    transition: transform .2s ease, box-shadow .2s ease !important;
+    position: relative !important;
+  }
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid > .uber-media-box:nth-child(even) {
+    transform: rotate(.65deg);
+  }
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid > .uber-media-box:hover,
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid > .uber-media-box:focus-within {
+    transform: rotate(0deg) translateY(-2px) !important;
+    box-shadow: 0 9px 20px rgba(24, 39, 35, .22) !important;
+    z-index: 2;
+  }
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid > .uber-media-box img,
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid > .uber-media-box a {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    object-fit: cover !important;
+  }
+  /* Street View and hotel maps take the same compact editorial-sized tile. */
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid > .sv-card {
+    height: clamp(165px, 14vw, 235px) !important;
+    overflow: visible !important;
+    border-radius: 5px !important;
+  }
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid > .sv-card .sv-stage:not(:fullscreen) {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    aspect-ratio: auto !important;
+    border-radius: 5px !important;
+  }
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid > .hotel-location-map {
+    display: flex !important;
+    flex-direction: column !important;
+    height: clamp(165px, 14vw, 235px) !important;
+    border-radius: 5px !important;
+    overflow: hidden !important;
+  }
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid > .hotel-location-map .hotel-location-map-head {
+    flex: 0 0 auto;
+    min-height: 0 !important;
+    padding: 6px 9px !important;
+    font-size: 12px !important;
+  }
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid > .hotel-location-map iframe:not(:fullscreen) {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    flex: 1 1 0 !important;
+    border: 0 !important;
+  }
+  /* Standalone Street Views in destination cards are no longer giant panels. */
+  html body #hlavni-obsah .lux-fold-pad .sv-card:not(.uber-media-grid > .sv-card) .sv-stage:not(:fullscreen) {
+    width: 100% !important;
+    height: clamp(175px, 16vw, 250px) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+    border-radius: 5px !important;
+  }
+  /* Standalone embedded hotel maps and Google maps within travel writeups. */
+  html body #hlavni-obsah .lux-fold-pad .hotel-location-map:not(.uber-media-grid > .hotel-location-map) iframe:not(:fullscreen),
+  html body #hlavni-obsah .lux-fold-pad .map-container-wrapper iframe[src*="maps.google.com"]:not(:fullscreen),
+  html body #hlavni-obsah .lux-fold-pad .map-container-wrapper iframe[src*="google.com/maps"]:not(:fullscreen) {
+    width: 100% !important;
+    height: clamp(185px, 17vw, 265px) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    border-radius: 5px !important;
+  }
+  /* Shorter media in editorial place cards; other content remains readable. */
+  html body #hlavni-obsah .spot-card-sg .sv-card .sv-stage:not(:fullscreen),
+  html body #hlavni-obsah .spot-card .sv-card .sv-stage:not(:fullscreen) {
+    height: clamp(170px, 14vw, 225px) !important;
+  }
+}
+@media screen and (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+  html body #hlavni-obsah .uber-hotel-card .uber-media-grid > .uber-media-box {
+    transition: none !important;
+    transform: none !important;
+  }
+}
