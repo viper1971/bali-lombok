@@ -22,3 +22,8 @@
 .bali-static-form button { cursor:pointer; border:0; border-radius:8px; background:#126053; color:white; padding:10px 15px; font-weight:700; }
 .bali-static-feedback { flex-basis:100%; color:#a33c2c; }
 @media print { #bali-static-api-bar { display:none!important; } }
+
+/* Once an interactive panorama is requested, remove the static visual layer. */
+.sv-stage.is-loading > img.bali-static-street,
+.sv-stage.is-loaded > img.bali-static-street { display:none!important; }
+.sv-stage:not(.is-loaded):not(.is-loading) > .sv-play { z-index:3; }
