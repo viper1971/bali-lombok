@@ -91,7 +91,7 @@
       resetTail();
       return;
     }
-    start(part, firstHeading(part), 480);
+    // Main chapter scrolling is handled by openPart after the previous chapter closes.
   }
   function chapterKey(event) {
     if (event.key !== "Enter" && event.key !== " ") return;
@@ -106,7 +106,7 @@
     if (part.classList.contains("is-open")) {
       generation++; clearTimers(); resetTail();
     } else {
-      start(part, firstHeading(part), 480);
+      // Main chapter scrolling is handled by openPart after the previous chapter closes.
     }
   }
   document.addEventListener("click", chapterClick, true);
