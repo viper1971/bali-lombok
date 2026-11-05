@@ -70,8 +70,30 @@
   // their heading at the top even if the chapter is shorter than the viewport.
   window.baliAlignOpenedChapter = function (part) {
     if (!part) return;
+    generation++;
+    clearTimers();
+    var token = generation;
     var heading = part.querySelector(":scope > .lux-part-head") || part;
-    start(part, heading, 35);
+    function position() {
+      if (token !== generation || !heading.isConnected ||
+          !part.classList.contains("is-open")) return;
+      // For the final short chapter, create only the additional scroll room
+      // actually needed to reach its heading. Never scroll to its last card.
+      extendFor(heading);
+      // Browser-native element alignment is safer than retaining stale scrollY
+      // while the preceding long chapter disappears.
+      heading.scrollIntoView({ behavior: "instant", block: "start", inline: "nearest" });
+      var delta = heading.getBoundingClientRect().top - offset();
+      if (Math.abs(delta) > 3) {
+        window.scrollBy({ top: delta, behavior: "instant" });
+      }
+    }
+    requestAnimationFrame(function () {
+      position();
+      requestAnimationFrame(position);
+    });
+    // One correction after the opening animation, without a long scrolling loop.
+    timers.push(setTimeout(position, 480));
   };
   function chapterClick(event) {
     var node = event.target;
