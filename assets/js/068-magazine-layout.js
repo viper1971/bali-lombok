@@ -96,7 +96,13 @@
         var gate = document.createElement('dialog');
         gate.className = 'mg-entry';
         gate.setAttribute('aria-labelledby', 'magazineCoverTitle');
-        cover.before(gate);
+        // Keep the article below the cover at its original position while
+        // the cover is displayed in a modal. Prevents layout shifting on PC.
+        var spacer = document.createElement('div');
+        spacer.className = 'mg-entry-spacer';
+        spacer.style.height = cover.getBoundingClientRect().height + 'px';
+        cover.before(spacer);
+        spacer.after(gate);
         gate.appendChild(cover);
         gate.showModal();
         root.classList.add('mg-entry-open');
@@ -104,6 +110,7 @@
           gate.close();
           root.classList.remove('mg-entry-open');
           gate.replaceWith(cover);
+          spacer.remove();
           desktop.removeEventListener('change', enter);
         }
         gate.addEventListener('cancel', function (event) { event.preventDefault(); });
