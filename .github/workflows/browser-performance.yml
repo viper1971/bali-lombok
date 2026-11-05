@@ -27,6 +27,8 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Verify lazy images and stable magazine presentation
         run: node tests/editorial-lazy.cjs && node tests/gallery-lazy.cjs && node tests/gallery-local.cjs && node tests/magazine-cls.cjs
+      - name: Verify magazine entry on desktop and mobile
+        run: node tests/magazine-presentation.cjs
       - name: Measure desktop and mobile page load
         run: node tests/performance.cjs
       - name: Archive performance metrics
