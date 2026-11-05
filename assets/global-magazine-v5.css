@@ -1028,3 +1028,15 @@ html[data-magazine="on"] body #hlavni-obsah.main-wrapper #osa > .lux-part-body >
     min-width:0 !important;
   }
 }
+
+
+/* Fullscreen Street View: hide our close button only while fullscreen is active.
+   Keep the open-fullscreen control visible in ordinary hotel/attraction cards.
+   Browser Escape / system fullscreen exit remains available. */
+html body #hlavni-obsah .sv-card .sv-stage:fullscreen > .bali-sv-fullscreen,
+html body #hlavni-obsah .sv-card .sv-stage:-webkit-full-screen > .bali-sv-fullscreen,
+html body #hlavni-obsah .sv-card .sv-stage > .bali-sv-fullscreen[hidden] {
+  display:none !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
