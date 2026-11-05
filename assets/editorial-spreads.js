@@ -170,7 +170,7 @@
       if(card.classList.contains("uber-hotel-card")||card.querySelector(".mg-place-essay"))return;
       var media=card.querySelector(".sv-card,.hotel-location-map,.map-container-wrapper,iframe,.trip-show");
       if(!media)return;
-      var heading=card.querySelector(".spot-title,.spot-name,h4,h3");
+      var heading=card.querySelector('[class*="spot-title"],.spot-name,h4,h3');
       if(!heading)return;
       var title=heading.textContent.replace(/^\s*\d+[.)]\s*/,"").trim();
       var textBox=heading.parentElement;
