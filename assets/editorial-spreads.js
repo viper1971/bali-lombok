@@ -316,8 +316,10 @@
     var button = stage.querySelector(":scope > .bali-sv-fullscreen");
     if (!button) return;
     var active = (document.fullscreenElement || document.webkitFullscreenElement) === stage;
-    button.textContent = active ? "✕ Ukončit fullscreen" : "⛶ Celá obrazovka";
-    button.setAttribute("aria-label", active ? "Ukončit zobrazení Street View na celou obrazovku" : "Zobrazit Street View na celou obrazovku");
+    // In fullscreen rely on Esc / browser controls: no close button over the panorama.
+    button.hidden = active;
+    button.textContent = "⛶ Celá obrazovka";
+    button.setAttribute("aria-label", "Zobrazit Street View na celou obrazovku");
   }
   function scan(root) {
     if (!root) return;
