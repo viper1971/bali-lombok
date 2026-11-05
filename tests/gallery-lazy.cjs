@@ -14,6 +14,6 @@ for (const [label, code] of [['source', source], ['production', production]]) {
   assert(!/window\.addEventListener\(\s*['"]load['"]\s*,\s*function\s*\(\)\s*\{[\s\S]*?s\._prepare/.test(code), label + ' warms hidden galleries after load');
   assert(!/idle\(function\s*\(\)\s*\{\s*s\._prepare/.test(code), label + ' includes background bulk preloading');
 }
-assert(html.includes('assets/build/js-2a84e1c14c764d64.js?v=visible-gallery-timers-20261105'),
+assert(html.includes('assets/build/js-2a84e1c14c764d64.js?v=local-gallery-catalog-20261105'),
   'Published HTML is not pointing to the optimized gallery script');
 console.log('Gallery lazy-loading regression checks passed.');
