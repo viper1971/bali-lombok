@@ -246,3 +246,86 @@
     try { render(); } catch (e) { console.error('BPX', e); }
     try { if (window.renderRouteMap) window.renderRouteMap(); } catch (e) {}
 })();
+
+
+/* Interactive ticket tear-off: shared by all dynamically generated air and boat tickets.
+   This is a visual itinerary effect, not verification of a real booking. */
+(function () {
+    'use strict';
+    var KEY = 'bpx_teared_ticket_v1:';
+    var pending = false;
+
+    function ticketKey(card) {
+        return KEY + (card.getAttribute('aria-label') || '') + '|' +
+            ((card.querySelector('.bpx-pax .bpx-name') || {}).textContent || '');
+    }
+    function isBoat(card) {
+        var label = card.querySelector('.bpx-st-top span');
+        return !!label && label.textContent.trim().toLowerCase() === 'boat';
+    }
+    function valid(card) {
+        var stub = card.querySelector(':scope > .bpx-stub');
+        card.classList.remove('is-tearing');
+        card.classList.add('is-validated');
+        card.setAttribute('data-ticket-effect', 'complete');
+        var main = card.querySelector(':scope > .bpx-main');
+        if (main) main.setAttribute('data-ticket-stamp', isBoat(card) ? 'PLATNÝ LODNÍ LÍSTEK' : 'PLATNÁ LETENKA');
+        if (stub) {
+            stub.setAttribute('aria-hidden', 'true');
+            stub.setAttribute('tabindex', '-1');
+        }
+    }
+    function scan() {
+        document.querySelectorAll('.bpx-wrap .bpx').forEach(function (card) {
+            var stub = card.querySelector(':scope > .bpx-stub');
+            if (!stub) return;
+            if (card.classList.contains('is-validated') || card.classList.contains('is-tearing')) return;
+            stub.setAttribute('role', 'button');
+            stub.setAttribute('tabindex', '0');
+            stub.setAttribute('title', 'Kliknutím animovat odtržení ústřižku');
+            stub.setAttribute('aria-label', 'Odtrhnout ústřižek – ' +
+                (isBoat(card) ? 'PLATNÝ LODNÍ LÍSTEK' : 'PLATNÁ LETENKA'));
+            try { if (sessionStorage.getItem(ticketKey(card)) === '1') valid(card); } catch (e) {}
+        });
+    }
+    function tear(stub) {
+        var card = stub && stub.closest('.bpx');
+        if (!card || card.classList.contains('is-tearing') || card.classList.contains('is-validated')) return;
+        var key = ticketKey(card);
+        card.classList.add('is-tearing');
+        stub.setAttribute('aria-disabled', 'true');
+        try { sessionStorage.setItem(key, '1'); } catch (e) {}
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            valid(card);
+        } else {
+            setTimeout(function () { if (card.isConnected) valid(card); }, 820);
+        }
+    }
+    document.addEventListener('click', function (e) {
+        var stub = e.target.closest && e.target.closest('.bpx-wrap .bpx-stub');
+        if (!stub) return;
+        e.preventDefault();
+        e.stopPropagation();
+        tear(stub);
+    });
+    document.addEventListener('keydown', function (e) {
+        var stub = e.target.closest && e.target.closest('.bpx-wrap .bpx-stub');
+        if (!stub || (e.key !== 'Enter' && e.key !== ' ')) return;
+        e.preventDefault();
+        tear(stub);
+    });
+    if (window.MutationObserver) {
+        new MutationObserver(function (records) {
+            if (pending || !records.some(function (record) {
+                return Array.prototype.some.call(record.addedNodes, function (node) {
+                    return node.nodeType === 1 && ((node.matches && node.matches('.bpx,.bpx-wrap,.bpx-host')) ||
+                        (node.querySelector && node.querySelector('.bpx')));
+                });
+            })) return;
+            pending = true;
+            requestAnimationFrame(function () { pending = false; scan(); });
+        }).observe(document.body, { childList: true, subtree: true });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', scan, { once: true });
+    else scan();
+})();
