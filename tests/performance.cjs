@@ -122,8 +122,11 @@ async function main() {
     timestamp:new Date().toISOString(), snapshots
   },null,2)+'\n');
   console.log(JSON.stringify(snapshots,null,2));
-  if (snapshots.some(s=>s.failedLocal.length || !s.heroNaturalWidth || s.wikimediaApiOnStartup))
+  const clsLimit = Number(process.env.CLS_MAX || 0.1);
+  if (snapshots.some(s=>s.failedLocal.length || !s.heroNaturalWidth || s.wikimediaApiOnStartup || s.cumulativeLayoutShift > clsLimit || s.errors.length)) {
+    console.error('Browser regression failed: local errors, unexpected Wikimedia requests, JS errors, or CLS above '+clsLimit);
     process.exitCode = 1;
+  }
 }
 main().catch(e=>{console.error(e);process.exitCode=1}).finally(async()=>{
   if (browser) await browser.close().catch(()=>{});
