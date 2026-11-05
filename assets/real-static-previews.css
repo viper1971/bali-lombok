@@ -1,0 +1,24 @@
+/* True Google Static API preview layers (the fallback is the existing local SVG). */
+.bali-map-preview > .bali-preview-image,
+.sv-stage > .bali-preview-image {
+  display:block; position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; border:0; margin:0; padding:0; pointer-events:none; z-index:0;
+}
+.bali-map-preview::before { z-index:1; }
+.bali-map-preview > .bali-map-preview-label,
+.bali-map-preview > .bali-map-preview-title { z-index:2; }
+.sv-stage > .sv-play, .sv-stage > .sv-badge { position:relative; z-index:2; }
+#bali-static-api-bar {
+  display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px;
+  padding:16px 20px; margin:16px 0; border-radius:14px;
+  color:#153a32; background:#e3f1e8; border:1px solid #b4d4c6;
+  font: 500 14px/1.5 system-ui,sans-serif;
+}
+#bali-static-api-bar[hidden] { display:none!important; }
+.bali-static-info { flex:1 1 250px; display:grid; gap:4px; }
+.bali-static-info strong { font-size:16px; }
+.bali-static-form { flex:1 1 260px; display:flex; flex-wrap:wrap; gap:7px; }
+.bali-static-form input { flex:1 1 165px; min-width:120px; padding:10px; border:1px solid #b0c6bf; border-radius:8px; }
+.bali-static-form button { cursor:pointer; border:0; border-radius:8px; background:#126053; color:white; padding:10px 15px; font-weight:700; }
+.bali-static-feedback { flex-basis:100%; color:#a33c2c; }
+@media print { #bali-static-api-bar { display:none!important; } }
