@@ -5,6 +5,11 @@ on:
     paths:
       - '.github/workflows/browser-performance.yml'
       - 'tests/performance.cjs'
+      - 'index.html'
+      - 'assets/build/js-1650a00000000004.js'
+      - 'assets/build/js-2a84e1c14c764d64.js'
+      - 'assets/data/gallery-catalog.js'
+      - 'tests/editorial-lazy.cjs'
   workflow_dispatch:
 permissions:
   contents: write
@@ -20,6 +25,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      - name: Verify lazy photo loading
+        run: node tests/editorial-lazy.cjs && node tests/gallery-lazy.cjs && node tests/gallery-local.cjs
       - name: Measure desktop and mobile page load
         run: node tests/performance.cjs
       - name: Archive performance metrics
