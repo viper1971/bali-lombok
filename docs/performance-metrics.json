@@ -1,6 +1,6 @@
 {
   "caveat": "Synthetic local HTTP test; not production RUM or PageSpeed. Third-party services intentionally disabled. Timings depend on CI runner.",
-  "timestamp": "2026-11-05T16:33:48.257Z",
+  "timestamp": "2026-11-05T16:44:14.442Z",
   "snapshots": [
     {
       "profile": "mobile",
@@ -11,11 +11,11 @@
       "synthetic": true,
       "thirdPartyNetwork": "blocked",
       "serviceWorkers": "blocked",
-      "domContentLoadedWallMs": 1218,
-      "requests": 108,
-      "transferredBytesFromContentLength": 5227922,
-      "imageRequests": 13,
-      "imageBytesFromContentLength": 3365790,
+      "domContentLoadedWallMs": 946,
+      "requests": 104,
+      "transferredBytesFromContentLength": 4657307,
+      "imageRequests": 9,
+      "imageBytesFromContentLength": 2794976,
       "thirdPartyRequests": 40,
       "wikimediaApiOnStartup": 0,
       "thirdPartySamples": [
@@ -38,140 +38,14 @@
       "wikimediaSamples": [],
       "errors": [],
       "failedLocal": [],
-      "domContentLoadedMs": 1214,
-      "loadMs": 1277,
-      "firstContentfulPaintMs": 184,
-      "lcpCandidateMs": 1100,
-      "cumulativeLayoutShift": 1.0162,
-      "biggestShifts": [
-        {
-          "value": 1,
-          "sources": [
-            {
-              "node": "section#.mg-cover mg-only",
-              "previousRect": {
-                "x": 0,
-                "y": 55.1875,
-                "width": 390,
-                "height": 788.8125,
-                "top": 55.1875,
-                "right": 390,
-                "bottom": 844,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 0,
-                "y": 100.59375,
-                "width": 390,
-                "height": 658.3125,
-                "top": 100.59375,
-                "right": 390,
-                "bottom": 758.90625,
-                "left": 0
-              }
-            },
-            {
-              "node": "div#.hero-meeting",
-              "previousRect": {
-                "x": 0,
-                "y": 0,
-                "width": 390,
-                "height": 378.265625,
-                "top": 0,
-                "right": 390,
-                "bottom": 378.265625,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 0,
-                "y": 0,
-                "width": 0,
-                "height": 0,
-                "top": 0,
-                "right": 0,
-                "bottom": 0,
-                "left": 0
-              }
-            },
-            {
-              "node": "div#vipFloatingBar.vip-floating-bar pm-merged",
-              "previousRect": {
-                "x": 0,
-                "y": 653.7578125,
-                "width": 390,
-                "height": 190.2421875,
-                "top": 653.7578125,
-                "right": 390,
-                "bottom": 844,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 0,
-                "y": 827.1171875,
-                "width": 390,
-                "height": 16.8828125,
-                "top": 827.1171875,
-                "right": 390,
-                "bottom": 844,
-                "left": 0
-              }
-            },
-            {
-              "node": "section#magazineStory.mg-prologue mg-only",
-              "previousRect": {
-                "x": 0,
-                "y": 0,
-                "width": 0,
-                "height": 0,
-                "top": 0,
-                "right": 0,
-                "bottom": 0,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 0,
-                "y": 758.90625,
-                "width": 390,
-                "height": 85.09375,
-                "top": 758.90625,
-                "right": 390,
-                "bottom": 844,
-                "left": 0
-              }
-            }
-          ]
-        },
-        {
-          "value": 0.0162,
-          "sources": [
-            {
-              "node": "div#.mg-cover-copy",
-              "previousRect": {
-                "x": 24,
-                "y": 259.546875,
-                "width": 343.21875,
-                "height": 459.359375,
-                "top": 259.546875,
-                "right": 367.21875,
-                "bottom": 718.90625,
-                "left": 24
-              },
-              "currentRect": {
-                "x": 24,
-                "y": 232.546875,
-                "width": 343.21875,
-                "height": 486.359375,
-                "top": 232.546875,
-                "right": 367.21875,
-                "bottom": 718.90625,
-                "left": 24
-              }
-            }
-          ]
-        }
-      ],
-      "longTasks": 3,
-      "totalLongTaskDurationMs": 314,
+      "domContentLoadedMs": 942,
+      "loadMs": 1014,
+      "firstContentfulPaintMs": 292,
+      "lcpCandidateMs": 292,
+      "cumulativeLayoutShift": 0,
+      "biggestShifts": [],
+      "longTasks": 2,
+      "totalLongTaskDurationMs": 313,
       "heroImage": "http://127.0.0.1:8789/assets/images/external/c9c99d25f3e25d16-w960.webp",
       "heroComplete": true,
       "heroNaturalWidth": 389
@@ -185,11 +59,11 @@
       "synthetic": true,
       "thirdPartyNetwork": "blocked",
       "serviceWorkers": "blocked",
-      "domContentLoadedWallMs": 1130,
-      "requests": 108,
-      "transferredBytesFromContentLength": 5878860,
-      "imageRequests": 13,
-      "imageBytesFromContentLength": 4016728,
+      "domContentLoadedWallMs": 1209,
+      "requests": 104,
+      "transferredBytesFromContentLength": 4805895,
+      "imageRequests": 9,
+      "imageBytesFromContentLength": 2943564,
       "thirdPartyRequests": 57,
       "wikimediaApiOnStartup": 0,
       "thirdPartySamples": [
@@ -212,109 +86,12 @@
       "wikimediaSamples": [],
       "errors": [],
       "failedLocal": [],
-      "domContentLoadedMs": 1129,
-      "loadMs": 1274,
-      "firstContentfulPaintMs": 320,
-      "lcpCandidateMs": 320,
-      "cumulativeLayoutShift": 1.5692,
+      "domContentLoadedMs": 1207,
+      "loadMs": 1342,
+      "firstContentfulPaintMs": 144,
+      "lcpCandidateMs": 316,
+      "cumulativeLayoutShift": 0.6861,
       "biggestShifts": [
-        {
-          "value": 1,
-          "sources": [
-            {
-              "node": "section#.mg-cover mg-only",
-              "previousRect": {
-                "x": 0,
-                "y": 55.1875,
-                "width": 1440,
-                "height": 944.8125,
-                "top": 55.1875,
-                "right": 1440,
-                "bottom": 1000,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 0,
-                "y": 68,
-                "width": 1440,
-                "height": 932,
-                "top": 68,
-                "right": 1440,
-                "bottom": 1000,
-                "left": 0
-              }
-            },
-            {
-              "node": "div#.hero-meeting",
-              "previousRect": {
-                "x": 0,
-                "y": 0,
-                "width": 661.375,
-                "height": 269.921875,
-                "top": 0,
-                "right": 661.375,
-                "bottom": 269.921875,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 0,
-                "y": 0,
-                "width": 0,
-                "height": 0,
-                "top": 0,
-                "right": 0,
-                "bottom": 0,
-                "left": 0
-              }
-            },
-            {
-              "node": "div#.mg-mast-inner",
-              "previousRect": {
-                "x": 0,
-                "y": 0,
-                "width": 1440,
-                "height": 55.1875,
-                "top": 0,
-                "right": 1440,
-                "bottom": 55.1875,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 60,
-                "y": 0,
-                "width": 1320,
-                "height": 68,
-                "top": 0,
-                "right": 1380,
-                "bottom": 68,
-                "left": 60
-              }
-            },
-            {
-              "node": "(unavailable)",
-              "previousRect": {
-                "x": 0,
-                "y": 135.96875,
-                "width": 20.421875,
-                "height": 51.0625,
-                "top": 135.96875,
-                "right": 20.421875,
-                "bottom": 187.03125,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 3.84375,
-                "y": 136.484375,
-                "width": 13.09375,
-                "height": 39.03125,
-                "top": 136.484375,
-                "right": 16.9375,
-                "bottom": 175.515625,
-                "left": 3.84375
-              }
-            }
-          ]
-        },
         {
           "value": 0.5658,
           "sources": [
@@ -413,6 +190,34 @@
           ]
         },
         {
+          "value": 0.117,
+          "sources": [
+            {
+              "node": "div#.hero-meeting",
+              "previousRect": {
+                "x": 0,
+                "y": 0,
+                "width": 579.296875,
+                "height": 291.296875,
+                "top": 0,
+                "right": 579.296875,
+                "bottom": 291.296875,
+                "left": 0
+              },
+              "currentRect": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0,
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              }
+            }
+          ]
+        },
+        {
           "value": 0.0032,
           "sources": [
             {
@@ -441,36 +246,36 @@
           ]
         },
         {
-          "value": 0.0003,
+          "value": 0.0002,
           "sources": [
             {
               "node": "div#toplistFloat.",
               "previousRect": {
-                "x": 1283.860595703125,
-                "y": 40.400001525878906,
-                "width": 156.139404296875,
-                "height": 214.72000122070312,
-                "top": 40.400001525878906,
+                "x": 1307.62060546875,
+                "y": 58.880001068115234,
+                "width": 132.37939453125,
+                "height": 167.1999969482422,
+                "top": 58.880001068115234,
                 "right": 1440,
-                "bottom": 255.12000274658203,
-                "left": 1283.860595703125
+                "bottom": 226.07999801635742,
+                "left": 1307.62060546875
               },
               "currentRect": {
-                "x": 1299.7005615234375,
-                "y": 40.400001525878906,
-                "width": 140.2994384765625,
-                "height": 133.40249633789062,
-                "top": 40.400001525878906,
+                "x": 1323.4605712890625,
+                "y": 58.880001068115234,
+                "width": 116.5394287109375,
+                "height": 85.88249206542969,
+                "top": 58.880001068115234,
                 "right": 1440,
-                "bottom": 173.80249786376953,
-                "left": 1299.7005615234375
+                "bottom": 144.76249313354492,
+                "left": 1323.4605712890625
               }
             }
           ]
         }
       ],
       "longTasks": 15,
-      "totalLongTaskDurationMs": 2689,
+      "totalLongTaskDurationMs": 2632,
       "heroImage": "http://127.0.0.1:8789/assets/images/external/c9c99d25f3e25d16-w1280.webp",
       "heroComplete": true,
       "heroNaturalWidth": 1440
