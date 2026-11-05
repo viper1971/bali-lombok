@@ -4,25 +4,51 @@ import hashlib, json, pathlib, re, subprocess
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 source = (ROOT / 'src/index.html').read_text()
 
-# The published page contains performance bundles and editorial patches which have
-# not yet been backported into src/index.html. Never delete their assets or replace
-# the published HTML during an ordinary build. Explicit --rebuild-from-source is
-# intentionally required to accept dropping these deployed optimizations.
+# Default mode validates the deployed optimized site without modifying it.
+# Historical source regeneration must be explicitly requested because src/index.html
+# has not yet been synchronized with the deployed editorial and bundle changes.
 published = ROOT / 'index.html'
-if published.exists():
-    deployed = published.read_text()
-    deployed_optimized = (
-        'js-head-critical-a-20261105.js' in deployed
-        or 'js-gallery-runtime-batch-20261105.js' in deployed
-        or 'js-footer-ui-controls-20261105.js' in deployed
-    )
-    if deployed_optimized and '--rebuild-from-source' not in __import__('sys').argv:
-        raise SystemExit(
-            'Build blocked: src/index.html is not synchronized with the optimized '
-            'published index.html. No files were changed. First migrate the active '
-            'bundles and editorial patches into src/, or explicitly pass '
-            '--rebuild-from-source to discard the deployed optimizations.'
-        )
+import sys
+if '--rebuild-from-source' not in sys.argv:
+    if not published.is_file():
+        raise SystemExit('Published index.html is missing; cannot verify the deployed site.')
+    from html.parser import HTMLParser
+    from urllib.parse import urlsplit, unquote
+
+    class LocalAssets(HTMLParser):
+        def __init__(self):
+            super().__init__()
+            self.paths = []
+        def handle_starttag(self, tag, attrs):
+            a = dict(attrs)
+            uri = a.get('src') if tag in ('script', 'img', 'iframe') else a.get('href') if tag == 'link' else None
+            if not uri:
+                return
+            parsed = urlsplit(uri)
+            if parsed.scheme or parsed.netloc or uri.startswith(('#', '//', 'data:')):
+                return
+            path = unquote(parsed.path).lstrip('/')
+            if path and not path.startswith('../'):
+                self.paths.append(path)
+
+    page = published.read_text(encoding='utf-8')
+    parser = LocalAssets()
+    parser.feed(page)
+    paths = sorted(set(parser.paths))
+    missing = [p for p in paths if not (ROOT / p).is_file()]
+    if missing:
+        raise SystemExit('Published asset validation failed; missing: ' + ', '.join(missing))
+    print(json.dumps({
+        'mode': 'verify-published',
+        'status': 'ok',
+        'local_assets': len(paths),
+        'missing': 0,
+        'message': 'Existing optimized page and bundles were preserved without rewriting.'
+    }))
+    sys.exit(0)
+
+# Explicit legacy regeneration is destructive: it recreates index.html and
+# cleans assets/build. Keep it opt-in until src/ matches the published design.
 out = ROOT / 'assets/build'
 out.mkdir(exist_ok=True)
 for old in out.glob('*'):
