@@ -1,18 +1,10 @@
 {
   "total_queries": 70,
-  "localized": 66,
-  "remaining": 4,
+  "localized": 68,
+  "remaining": 2,
   "failed": [
     {
-      "query": "Batu Bolong temple Lombok",
-      "reason": "No license-compatible image"
-    },
-    {
       "query": "Mawi beach Lombok",
-      "reason": "No license-compatible image"
-    },
-    {
-      "query": "Suluban beach Uluwatu",
       "reason": "No license-compatible image"
     },
     {
