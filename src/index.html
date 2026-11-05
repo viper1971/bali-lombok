@@ -1059,10 +1059,16 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/js/011.js"
                     <input type="checkbox" id="chk15" class="pack-check packing-checkbox" data-weight="10" onchange="updatePackingWeight()" style="width: 18px; height: 18px; cursor: pointer; margin-top: 2px;">
                     <span>Fyzická bezkontaktní platební karta s povolenými platbami a výběry mimo Evropu. <span class="x-c-text-muted_fs-85">(10 g)</span></span>
                 </label>
+                <div class="packing-banknotes">
                 <label class="checklist-item x-cur-pointer_ai-flex-start_gap-75_mb-8" style="display: flex;">
                     <input type="checkbox" id="chk16" class="pack-check packing-checkbox" data-weight="50" onchange="updatePackingWeight()" style="width: 18px; height: 18px; cursor: pointer; margin-top: 2px;">
                     <span>Vyměněné, zcela nové a nepoškozené bankovky amerických dolarů (USD). Evropská měna (EUR) ani koruny zde nemají dobrou směnitelnost. <span class="x-c-text-muted_fs-85">(50 g)</span></span>
                 </label>
+                    <button type="button" class="packing-banknotes-preview" onclick="openImageInModal('dolar.png')" aria-label="Zvětšit ukázku dolarových bankovek na celou obrazovku">
+                        <img src="dolar.png" width="608" height="342" alt="Ukázka dvou typů americké stodolarové bankovky" loading="lazy" decoding="async">
+                        <span>Zvětšit bankovky ⛶</span>
+                    </button>
+                </div>
                 <label class="checklist-item x-cur-pointer_ai-flex-start_gap-75_mb-8" style="display: flex;">
                     <input type="checkbox" id="chk18" class="pack-check packing-checkbox" data-weight="5" onchange="updatePackingWeight()" style="width: 18px; height: 18px; cursor: pointer; margin-top: 2px;">
                     <span>Zakoupená a připravená asijská turistická eSIM (např. Singtel nebo Telkomsel). <span class="x-c-text-muted_fs-85">(5 g)</span></span>

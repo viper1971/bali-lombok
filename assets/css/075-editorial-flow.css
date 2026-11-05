@@ -68,3 +68,13 @@ html[data-magazine="on"] #hlavni-obsah :is(.spot-card-sg,.spot-card-ulu,.spot-ca
  #f-viza .mg-document-guide li,.mg-faq-answer {break-inside:avoid}
  #f-viza .mg-document-card h3,#f-viza .mg-guide-title,.mg-faq-answer h4 {break-after:avoid}
 }
+
+/* Packing-list reference stays next to its own checkbox. */
+.packing-banknotes {display:grid;grid-template-columns:minmax(0,1fr) 144px;gap:12px;align-items:start;margin-bottom:10px;break-inside:avoid}
+.packing-banknotes-preview {display:grid;gap:5px;width:144px;padding:4px;border:1px solid var(--mg-line,var(--border));border-radius:5px;background:var(--mg-card,var(--surface));color:var(--text-main);cursor:zoom-in;text-align:center}
+.packing-banknotes-preview img {display:block;width:100%;height:auto;border-radius:3px}
+.packing-banknotes-preview span {font:700 11px/1.4 var(--font-ui,system-ui)}
+.packing-banknotes-preview:focus-visible {outline:3px solid var(--mg-yellow,#f6cf35);outline-offset:3px}
+#fsModal #fsImage[src="dolar.png"] {width:95vw;height:95dvh;object-fit:contain}
+@media(max-width:600px) {.packing-banknotes {grid-template-columns:minmax(0,1fr);gap:6px}.packing-banknotes-preview {margin-left:26px}}
+@media print {.packing-banknotes-preview {border:0;padding:0}.packing-banknotes-preview span {display:none}}
