@@ -540,14 +540,14 @@ html[data-magazine="on"] body #hlavni-obsah .mg-place-source:focus-visible {
     align-items:start !important;
   }
   html[data-magazine="on"] body #hlavni-obsah.main-wrapper .uber-hotel-card .bali-ed-hotel-spread > .uber-media-grid > .uber-media-box {
-    height:clamp(137.5px,11.25vw,181.25px) !important;
-    max-height:181.25px !important;
+    height:clamp(171.875px,14.0625vw,226.5625px) !important;
+    max-height:226.5625px !important;
     min-height:0 !important;
     align-self:start !important;
   }
   html[data-magazine="on"] body #hlavni-obsah.main-wrapper .uber-hotel-card .bali-ed-hotel-spread > .uber-media-grid > :is(.sv-card,.hotel-location-map) {
-    height:clamp(117.5px,8.875vw,140px) !important;
-    max-height:140px !important;
+    height:clamp(146.875px,11.09375vw,175px) !important;
+    max-height:175px !important;
     min-height:0 !important;
     align-self:start !important;
     overflow:hidden !important;
