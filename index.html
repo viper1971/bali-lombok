@@ -3,10 +3,6 @@
 <head>
 <script id="bali-retire-offline">(function(){if(!("serviceWorker" in navigator))return;navigator.serviceWorker.getRegistrations().then(function(rs){return Promise.all(rs.filter(function(r){return r.scope===new URL("./",location.href).href}).map(function(r){return r.unregister()}))}).then(function(){if(!window.caches)return;return caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf("bali2027-")===0}).map(function(k){return caches.delete(k)}))})}).catch(function(e){console.warn("Odstranění staré offline cache:",e)})})();</script>
     <meta charset="UTF-8">
-    <script src="assets/map-click-preview.js?v=20261105a"></script>
-    <link rel="stylesheet" href="assets/map-click-preview.css?v=20261105a">
-    <script src="assets/real-static-previews.js?v=20261105b"></script>
-    <link rel="stylesheet" href="assets/real-static-previews.css?v=20261105b">
     <meta name="bali-build" content="20261105ed170a15">
 <script src="assets/build/js-head-critical-a-20261105.js"></script>
 
@@ -1181,7 +1177,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
     <section class="hotel-location-map" aria-label="Poloha hotelu Fragrance Hotel – Lavender" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=Fragrance%20Hotel%20%E2%80%93%20Lavender%20Singapore" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=Fragrance%20Hotel%20%E2%80%93%20Lavender%20Singapore&amp;z=16&amp;output=embed" title="Google mapa: Fragrance Hotel – Lavender" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=Fragrance%20Hotel%20%E2%80%93%20Lavender%20Singapore&amp;z=16&amp;output=embed" title="Google mapa: Fragrance Hotel – Lavender" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -1232,7 +1228,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
     <section class="hotel-location-map" aria-label="Poloha hotelu Hotel 81 Premier Princess" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=Hotel%2081%20Premier%20Princess%20Singapore" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=Hotel%2081%20Premier%20Princess%20Singapore&amp;z=16&amp;output=embed" title="Google mapa: Hotel 81 Premier Princess" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=Hotel%2081%20Premier%20Princess%20Singapore&amp;z=16&amp;output=embed" title="Google mapa: Hotel 81 Premier Princess" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -1283,7 +1279,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
     <section class="hotel-location-map" aria-label="Poloha hotelu Hotel 81 Gold" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=Hotel%2081%20Gold%20Singapore" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=Hotel%2081%20Gold%20Singapore&amp;z=16&amp;output=embed" title="Google mapa: Hotel 81 Gold" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=Hotel%2081%20Gold%20Singapore&amp;z=16&amp;output=embed" title="Google mapa: Hotel 81 Gold" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -1328,7 +1324,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     <div class="sg-map-frame-wrapper">
         <iframe title="Mapa / Street View"
             id="sgTransferMapFrame"
-            data-bali-map-src="https://maps.google.com/maps?saddr=Changi+Airport+Singapore&daddr=Hotel+81+Premier+Princess+Singapore&dirflg=r&output=embed"
+            src="https://maps.google.com/maps?saddr=Changi+Airport+Singapore&daddr=Hotel+81+Premier+Princess+Singapore&dirflg=r&output=embed"
             width="100%"
             height="100%"
             allowfullscreen=""
@@ -1921,7 +1917,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
     <section class="hotel-location-map" aria-label="Poloha hotelu Uluwatu Jungle Villa" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=Uluwatu%20Jungle%20Villa%20Uluwatu%20Bali%20Indonesia" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=Uluwatu%20Jungle%20Villa%20Uluwatu%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Uluwatu Jungle Villa" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=Uluwatu%20Jungle%20Villa%20Uluwatu%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Uluwatu Jungle Villa" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -1971,7 +1967,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
     <section class="hotel-location-map" aria-label="Poloha hotelu The Ululani" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=The%20Ululani%20Uluwatu%20Bali%20Indonesia" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=The%20Ululani%20Uluwatu%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: The Ululani" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=The%20Ululani%20Uluwatu%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: The Ululani" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -2017,7 +2013,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     <div class="ulu-map-frame-wrapper">
         <iframe title="Mapa / Street View"
             id="uluwatuMapFrame"
-            data-bali-map-src="https://maps.google.com/maps?saddr=I+Gusti+Ngurah+Rai+International+Airport&daddr=Uluwatu+Jungle+Villa+Bali&dirflg=d&output=embed"
+            src="https://maps.google.com/maps?saddr=I+Gusti+Ngurah+Rai+International+Airport&daddr=Uluwatu+Jungle+Villa+Bali&dirflg=d&output=embed"
             width="100%"
             height="100%"
             allowfullscreen=""
@@ -2242,7 +2238,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
         <div class="ubud-map-frame-wrapper" id="uluwatuUbudMapWrapper">
             <iframe title="Mapa / Street View"
                 id="uluwatuUbudMapFrame"
-                data-bali-map-src="https://maps.google.com/maps?saddr=Uluwatu+Jungle+Villa+Bali&daddr=Gandatera+Ubud+Bali&dirflg=d&output=embed"
+                src="https://maps.google.com/maps?saddr=Uluwatu+Jungle+Villa+Bali&daddr=Gandatera+Ubud+Bali&dirflg=d&output=embed"
                 width="100%"
                 height="100%"
                 allowfullscreen=""
@@ -2382,7 +2378,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
     <section class="hotel-location-map" aria-label="Poloha hotelu The Village Guest House" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=The%20Village%20Guest%20House%20Ubud%20Bali%20Indonesia" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=The%20Village%20Guest%20House%20Ubud%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: The Village Guest House" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=The%20Village%20Guest%20House%20Ubud%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: The Village Guest House" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -2428,7 +2424,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
     <section class="hotel-location-map" aria-label="Poloha hotelu Gandatera Ubud" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=Gandatera%20Ubud%20Ubud%20Bali%20Indonesia" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=Gandatera%20Ubud%20Ubud%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Gandatera Ubud" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=Gandatera%20Ubud%20Ubud%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Gandatera Ubud" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -2478,7 +2474,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
     <section class="hotel-location-map" aria-label="Poloha hotelu Bije Suite Villa Ubud" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=Bije%20Suite%20Villa%20Ubud%20Ubud%20Bali%20Indonesia" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=Bije%20Suite%20Villa%20Ubud%20Ubud%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Bije Suite Villa Ubud" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=Bije%20Suite%20Villa%20Ubud%20Ubud%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Bije Suite Villa Ubud" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -2764,7 +2760,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     <div class="ubud-port-map-frame-wrapper" id="ubudPortMapWrapper">
         <iframe title="Mapa / Street View"
             id="ubudPortMapFrame"
-            data-bali-map-src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d63046.933293893895!2d115.20!3d-8.58!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x2dd23d108be5a437%3A0x82372204f8a910c4!2sThe%20Village%20Guest%20House%2C%20Jl.%20Sri%20Wedari%20No.38%2C%20Ubud%2C%20Kec.%20Gianyar%2C%20Kabupaten%20Gianyar%2C%20Bali%2080571%2C%20Indon%C3%A9sie!3m2!1d-8.5033829!2d115.266166!4m5!1s0x2dd241987735fc67%3A0xd7ca3914de8f3487!2sSanur%20matahari%20terbit%2C%20Sanur%2C%20Jl.%20Hang%20Tuah%2C%20Sanur%20Kaja%2C%20Kec.%20Denpasar%20Tim.%2C%20Kota%20Denpasar%2C%20Bali%2080227%2C%20Indon%C3%A9sie!3m2!1d-8.6705046!2d115.261189!5e0!3m2!1scs!2scz!4v1792507103903!5m2!1scs!2scz"
+            src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d63046.933293893895!2d115.20!3d-8.58!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x2dd23d108be5a437%3A0x82372204f8a910c4!2sThe%20Village%20Guest%20House%2C%20Jl.%20Sri%20Wedari%20No.38%2C%20Ubud%2C%20Kec.%20Gianyar%2C%20Kabupaten%20Gianyar%2C%20Bali%2080571%2C%20Indon%C3%A9sie!3m2!1d-8.5033829!2d115.266166!4m5!1s0x2dd241987735fc67%3A0xd7ca3914de8f3487!2sSanur%20matahari%20terbit%2C%20Sanur%2C%20Jl.%20Hang%20Tuah%2C%20Sanur%20Kaja%2C%20Kec.%20Denpasar%20Tim.%2C%20Kota%20Denpasar%2C%20Bali%2080227%2C%20Indon%C3%A9sie!3m2!1d-8.6705046!2d115.261189!5e0!3m2!1scs!2scz!4v1792507103903!5m2!1scs!2scz"
             width="100%"
             height="100%"
             allowfullscreen=""
@@ -2802,7 +2798,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="strict-origin-when-cross-origin"
-            data-bali-map-src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d544525.3077454296!2d115.3499067922784!3d-8.515330189444471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x2dd241987735fc67%3A0xd7ca3914de8f3487!2sSanur%20matahari%20terbit%2C%20Sanur%2C%20Jl.%20Hang%20Tuah%2C%20Sanur%20Kaja%2C%20Kec.%20Denpasar%20Tim.%2C%20Kota%20Denpasar%2C%20Bali%2080227%2C%20Indon%C3%A9sie!3m2!1d-8.6705046!2d115.26118869999999!4m5!1s0x2dcddcef6f3dd37b%3A0xd96bb133e95e5a84!2sRM%20BANGSAL%20INDAH%2C%20Jl.%20Bangsal%20Baru%20No.184%2C%20Pemenang%20Bar.%2C%20Kec.%20Pemenang%2C%20Kabupaten%20Lombok%20Utara%2C%20Nusa%20Tenggara%20Bar.%2083352%2C%20Indon%C3%A9sie!3m2!1d-8.3945775!2d116.09981219999999!5e1!3m2!1scs!2scz!4v1792507552831!5m2!1scs!2scz">
+            src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d544525.3077454296!2d115.3499067922784!3d-8.515330189444471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x2dd241987735fc67%3A0xd7ca3914de8f3487!2sSanur%20matahari%20terbit%2C%20Sanur%2C%20Jl.%20Hang%20Tuah%2C%20Sanur%20Kaja%2C%20Kec.%20Denpasar%20Tim.%2C%20Kota%20Denpasar%2C%20Bali%2080227%2C%20Indon%C3%A9sie!3m2!1d-8.6705046!2d115.26118869999999!4m5!1s0x2dcddcef6f3dd37b%3A0xd96bb133e95e5a84!2sRM%20BANGSAL%20INDAH%2C%20Jl.%20Bangsal%20Baru%20No.184%2C%20Pemenang%20Bar.%2C%20Kec.%20Pemenang%2C%20Kabupaten%20Lombok%20Utara%2C%20Nusa%20Tenggara%20Bar.%2083352%2C%20Indon%C3%A9sie!3m2!1d-8.3945775!2d116.09981219999999!5e1!3m2!1scs!2scz!4v1792507552831!5m2!1scs!2scz">
         </iframe>
     </div>
 
@@ -2901,7 +2897,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 
         <!-- Interaktivní mapa Google Maps -->
         <div style="margin-bottom: 1.5rem; border-radius: 1rem; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
-            <iframe title="Mapa / Street View" data-bali-map-src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d1230.2619782181266!2d116.0989655168006!3d-8.394389691642328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sscooter%20rental%20Bangsal%20harbour%20Lombok!5e0!3m2!1scs!2scz!4v1792818512055!5m2!1scs!2scz" width="100%" height="350" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+            <iframe title="Mapa / Street View" src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d1230.2619782181266!2d116.0989655168006!3d-8.394389691642328!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sscooter%20rental%20Bangsal%20harbour%20Lombok!5e0!3m2!1scs!2scz!4v1792818512055!5m2!1scs!2scz" width="100%" height="350" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
 
         <!-- Nadpis sekce půjčoven -->
@@ -3138,7 +3134,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
             <section class="hotel-location-map" aria-label="Poloha hotelu Starsand Beach Resort (Sekotong)" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=Starsand%20Beach%20Resort%20Sekotong%20Lombok%20Indonesia" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=Starsand%20Beach%20Resort%20Sekotong%20Lombok%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Starsand Beach Resort (Sekotong)" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=Starsand%20Beach%20Resort%20Sekotong%20Lombok%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Starsand Beach Resort (Sekotong)" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -3184,7 +3180,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
             <section class="hotel-location-map" aria-label="Poloha hotelu Mina Tanjung Hotel (Sever / Tanjung)" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=Mina%20Tanjung%20Hotel%20Tanjung%20Lombok%20Indonesia" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=Mina%20Tanjung%20Hotel%20Tanjung%20Lombok%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Mina Tanjung Hotel (Sever / Tanjung)" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=Mina%20Tanjung%20Hotel%20Tanjung%20Lombok%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Mina Tanjung Hotel (Sever / Tanjung)" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -3424,7 +3420,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
                 allowfullscreen=""
                 loading="lazy"
                 referrerpolicy="strict-origin-when-cross-origin"
-                data-bali-map-src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d136035.3765416593!2d116.09103227973412!3d-8.780942373160777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x2dcd978b584ff76d%3A0xf0df8bad513033c8!2sStar%20Sand%20Beach%20Resort%20And%20Hotel%2C%20Sekotong%20Barat%2C%20Sekotong%2C%20West%20Lombok%20Regency%2C%20West%20Nusa%20Tenggara%2083365%2C%20Indonésie!3m2!1d-8.7491412!2d116.01687059999999!4m5!1s0x2dcda9d1d76f0b35%3A0xd66ebd0add97c0ce!2sEl%20Tropico%20Hotel%20Kuta%20Lombok%2C%20Baturiti%2C%20Jl.%20Raya%20Kuta%2C%20Kuta%2C%20Pujut%2C%20Central%20Lombok%20Regency%2C%20West%20Nusa%20Tenggara%2083573%2C%20Indonésie!3m2!1d-8.8883262!2d116.2761321!5e1!3m2!1scs!2scz!4v1792508105492!5m2!1scs!2scz">
+                src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d136035.3765416593!2d116.09103227973412!3d-8.780942373160777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x2dcd978b584ff76d%3A0xf0df8bad513033c8!2sStar%20Sand%20Beach%20Resort%20And%20Hotel%2C%20Sekotong%20Barat%2C%20Sekotong%2C%20West%20Lombok%20Regency%2C%20West%20Nusa%20Tenggara%2083365%2C%20Indonésie!3m2!1d-8.7491412!2d116.01687059999999!4m5!1s0x2dcda9d1d76f0b35%3A0xd66ebd0add97c0ce!2sEl%20Tropico%20Hotel%20Kuta%20Lombok%2C%20Baturiti%2C%20Jl.%20Raya%20Kuta%2C%20Kuta%2C%20Pujut%2C%20Central%20Lombok%20Regency%2C%20West%20Nusa%20Tenggara%2083573%2C%20Indonésie!3m2!1d-8.8883262!2d116.2761321!5e1!3m2!1scs!2scz!4v1792508105492!5m2!1scs!2scz">
             </iframe>
         </div>
 
@@ -3520,7 +3516,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
             <section class="hotel-location-map" aria-label="Poloha hotelu El Tropico Boutique Hotel" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=El%20Tropico%20Boutique%20Hotel%20Kuta%20Lombok%20Indonesia" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=El%20Tropico%20Boutique%20Hotel%20Kuta%20Lombok%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: El Tropico Boutique Hotel" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=El%20Tropico%20Boutique%20Hotel%20Kuta%20Lombok%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: El Tropico Boutique Hotel" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -3566,7 +3562,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
             <section class="hotel-location-map" aria-label="Poloha hotelu TheLocal AreGuling HOMESTAY" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=TheLocal%20AreGuling%20Homestay%20Lombok%20Indonesia" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=TheLocal%20AreGuling%20Homestay%20Lombok%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: TheLocal AreGuling HOMESTAY" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=TheLocal%20AreGuling%20Homestay%20Lombok%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: TheLocal AreGuling HOMESTAY" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -3826,7 +3822,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
                 allowfullscreen=""
                 loading="lazy"
                 referrerpolicy="strict-origin-when-cross-origin"
-                data-bali-map-src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d272172.268523143!2d115.99978649886768!3d-8.64144304184464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x2dcda9d1d76f0b35%3A0xd66ebd0add97c0ce!2sEl%20Tropico%20Hotel%20Kuta%20Lombok%2C%20Baturiti%2C%20Jl.%20Raya%20Kuta%2C%20Kuta%2C%20Pujut%2C%20Central%20Lombok%20Regency%2C%20West%20Nusa%20Tenggara%2083573%2C%20Indon%C3%A9sie!3m2!1d-8.8883262!2d116.2761321!4m5!1s0x2dcddcef6f3dd37b%3A0xd96bb133e95e5a84!2sRM%20BANGSAL%20INDAH%2C%20Jl.%20Bangsal%20Baru%20No.184%2C%20Pemenang%20Bar.%2C%20Kec.%20Pemenang%2C%20Kabupaten%20Lombok%20Utara%2C%20Nusa%20Tenggara%20Bar.%2083352%2C%20Indon%C3%A9sie!3m2!1d-8.3945775!2d116.09981219999999!5e1!3m2!1scs!2scz!4v1792509126658!5m2!1scs!2scz">
+                src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d272172.268523143!2d115.99978649886768!3d-8.64144304184464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x2dcda9d1d76f0b35%3A0xd66ebd0add97c0ce!2sEl%20Tropico%20Hotel%20Kuta%20Lombok%2C%20Baturiti%2C%20Jl.%20Raya%20Kuta%2C%20Kuta%2C%20Pujut%2C%20Central%20Lombok%20Regency%2C%20West%20Nusa%20Tenggara%2083573%2C%20Indon%C3%A9sie!3m2!1d-8.8883262!2d116.2761321!4m5!1s0x2dcddcef6f3dd37b%3A0xd96bb133e95e5a84!2sRM%20BANGSAL%20INDAH%2C%20Jl.%20Bangsal%20Baru%20No.184%2C%20Pemenang%20Bar.%2C%20Kec.%20Pemenang%2C%20Kabupaten%20Lombok%20Utara%2C%20Nusa%20Tenggara%20Bar.%2083352%2C%20Indon%C3%A9sie!3m2!1d-8.3945775!2d116.09981219999999!5e1!3m2!1scs!2scz!4v1792509126658!5m2!1scs!2scz">
             </iframe>
         </div>
 
@@ -3849,7 +3845,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
                 allowfullscreen=""
                 loading="lazy"
                 referrerpolicy="strict-origin-when-cross-origin"
-                data-bali-map-src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d544525.3077454296!2d115.3499067922784!3d-8.515330189444471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x2dcddcef6f3dd37b%3A0xd96bb133e95e5a84!2sRM%20BANGSAL%20INDAH%2C%20Jl.%20Bangsal%20Baru%20No.184%2C%20Pemenang%20Bar.%2C%20Kec.%20Pemenang%2C%20Kabupaten%20Lombok%20Utara%2C%20Nusa%20Tenggara%20Bar.%2083352%2C%20Indon%C3%A9sie!3m2!1d-8.3945775!2d116.09981219999999!4m5!1s0x2dd241987735fc67%3A0xd7ca3914de8f3487!2sSanur%20matahari%20terbit%2C%20Sanur%2C%20Jl.%20Hang%20Tuah%2C%20Sanur%20Kaja%2C%20Kec.%20Denpasar%20Tim.%2C%20Kota%20Denpasar%2C%20Bali%2080227%2C%20Indon%C3%A9sie!3m2!1d-8.6705046!2d115.26118869999999!5e1!3m2!1scs!2scz!4v1792507552831!5m2!1scs!2scz">
+                src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d544525.3077454296!2d115.3499067922784!3d-8.515330189444471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x2dcddcef6f3dd37b%3A0xd96bb133e95e5a84!2sRM%20BANGSAL%20INDAH%2C%20Jl.%20Bangsal%20Baru%20No.184%2C%20Pemenang%20Bar.%2C%20Kec.%20Pemenang%2C%20Kabupaten%20Lombok%20Utara%2C%20Nusa%20Tenggara%20Bar.%2083352%2C%20Indon%C3%A9sie!3m2!1d-8.3945775!2d116.09981219999999!4m5!1s0x2dd241987735fc67%3A0xd7ca3914de8f3487!2sSanur%20matahari%20terbit%2C%20Sanur%2C%20Jl.%20Hang%20Tuah%2C%20Sanur%20Kaja%2C%20Kec.%20Denpasar%20Tim.%2C%20Kota%20Denpasar%2C%20Bali%2080227%2C%20Indon%C3%A9sie!3m2!1d-8.6705046!2d115.26118869999999!5e1!3m2!1scs!2scz!4v1792507552831!5m2!1scs!2scz">
             </iframe>
         </div>
 
@@ -3957,7 +3953,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
     <section class="hotel-location-map" aria-label="Poloha hotelu Grand Ixora Kuta Resort" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=Grand%20Ixora%20Kuta%20Resort%20Kuta%20Bali%20Indonesia" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=Grand%20Ixora%20Kuta%20Resort%20Kuta%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Grand Ixora Kuta Resort" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=Grand%20Ixora%20Kuta%20Resort%20Kuta%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Grand Ixora Kuta Resort" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -4003,7 +3999,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
     <section class="hotel-location-map" aria-label="Poloha hotelu Bakung Beach Resort" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=Bakung%20Beach%20Resort%20Kuta%20Bali%20Indonesia" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=Bakung%20Beach%20Resort%20Kuta%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Bakung Beach Resort" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=Bakung%20Beach%20Resort%20Kuta%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Bakung Beach Resort" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -4051,7 +4047,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
     <section class="hotel-location-map" aria-label="Poloha hotelu Bali Sandy Resort" onclick="event.stopPropagation()">
         <div class="hotel-location-map-head"><strong>📍 Mapa hotelu</strong><a href="https://www.google.com/maps/search/?api=1&amp;query=Bali%20Sandy%20Resort%20Kuta%20Bali%20Indonesia" target="_blank" rel="noopener noreferrer">Otevřít v Google Maps ↗</a></div>
-        <iframe data-bali-map-src="https://maps.google.com/maps?q=Bali%20Sandy%20Resort%20Kuta%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Bali Sandy Resort" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <iframe src="https://maps.google.com/maps?q=Bali%20Sandy%20Resort%20Kuta%20Bali%20Indonesia&amp;z=16&amp;output=embed" title="Google mapa: Bali Sandy Resort" width="600" height="270" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </section>
     </div>
 
@@ -4156,7 +4152,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="strict-origin-when-cross-origin"
-            data-bali-map-src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d68031.11185633794!2d115.17295730502269!3d-8.707433574106235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x2dd241987735fc67%3A0xd7ca3914de8f3487!2sSanur%20matahari%20terbit%2C%20Sanur%2C%20Jl.%20Hang%20Tuah%2C%20Sanur%20Kaja%2C%20Kec.%20Denpasar%20Tim.%2C%20Kota%20Denpasar%2C%20Bali%2080227%2C%20Indon%C3%A9sie!3m2!1d-8.6705046!2d115.26118869999999!4m5!1s0x2dd246a0673d7b87%3A0xcb6107964e5aa04a!2sGrand%20Ixora%20Hotel%2C%20Jl.%20Kartika%20Plaza%20No.92%2C%20Kuta%2C%20Badung%2C%20Bali%2080361%2C%20Indon%C3%A9sie!3m2!1d-8.733885299999999!2d115.1675295!5e1!3m2!1scs!2scz!4v1792509410068!5m2!1scs!2scz">
+            src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d68031.11185633794!2d115.17295730502269!3d-8.707433574106235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x2dd241987735fc67%3A0xd7ca3914de8f3487!2sSanur%20matahari%20terbit%2C%20Sanur%2C%20Jl.%20Hang%20Tuah%2C%20Sanur%20Kaja%2C%20Kec.%20Denpasar%20Tim.%2C%20Kota%20Denpasar%2C%20Bali%2080227%2C%20Indon%C3%A9sie!3m2!1d-8.6705046!2d115.26118869999999!4m5!1s0x2dd246a0673d7b87%3A0xcb6107964e5aa04a!2sGrand%20Ixora%20Hotel%2C%20Jl.%20Kartika%20Plaza%20No.92%2C%20Kuta%2C%20Badung%2C%20Bali%2080361%2C%20Indon%C3%A9sie!3m2!1d-8.733885299999999!2d115.1675295!5e1!3m2!1scs!2scz!4v1792509410068!5m2!1scs!2scz">
         </iframe>
     </div>
 
@@ -4180,7 +4176,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="strict-origin-when-cross-origin"
-            data-bali-map-src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d8503.137767762599!2d115.16680081374952!3d-8.740419165094242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x2dd246a0673d7b87%3A0xcb6107964e5aa04a!2sGrand%20Ixora%20Hotel%2C%20Jl.%20Kartika%20Plaza%20No.92%2C%20Kuta%2C%20Badung%2C%20Bali%2080361%2C%20Indon%C3%A9sie!3m2!1d-8.733885299999999!2d115.1675295!4m5!1s0x2dd2441650216933%3A0xdf71da6ddd7bcc1f!2sI%20Gusti%20Ngurah%20Rai%20International%20Airport%2C%20Jl.%20Airport%20Ngurah%20Rai%2C%20Tuban%2C%20South%20Kuta%2C%20Badung%20Regency%2C%20Bali%2080361%2C%20Indon%C3%A9sie!3m2!1d-8.7469933!2d115.1681655!5e1!3m2!1scs!2scz!4v1792509573020!5m2!1scs!2scz">
+            src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d8503.137767762599!2d115.16680081374952!3d-8.740419165094242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x2dd246a0673d7b87%3A0xcb6107964e5aa04a!2sGrand%20Ixora%20Hotel%2C%20Jl.%20Kartika%20Plaza%20No.92%2C%20Kuta%2C%20Badung%2C%20Bali%2080361%2C%20Indon%C3%A9sie!3m2!1d-8.733885299999999!2d115.1675295!4m5!1s0x2dd2441650216933%3A0xdf71da6ddd7bcc1f!2sI%20Gusti%20Ngurah%20Rai%20International%20Airport%2C%20Jl.%20Airport%20Ngurah%20Rai%2C%20Tuban%2C%20South%20Kuta%2C%20Badung%20Regency%2C%20Bali%2080361%2C%20Indon%C3%A9sie!3m2!1d-8.7469933!2d115.1681655!5e1!3m2!1scs!2scz!4v1792509573020!5m2!1scs!2scz">
         </iframe>
     </div>
 
