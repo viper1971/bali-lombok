@@ -51,3 +51,11 @@
 - Odstraněno 6 spekulativních spojení v hlavičce pro Google Maps, Wikimedia a unpkg; živé mapy zůstávají funkčně beze změny, pouze spojení se neotevírají předem při prvním renderu.
 - Přidán nezávislý skript `tools/audit_production_resources.py` pro kontrolu lokálních cest a stavu načítání a workflow `.github/workflows/production-audit.yml`, který se spustí při změnách publikovaného HTML a dalších assetů.
 - Workflow neprovádí automatickou rekonstrukci stránky ani mazání kódu. Případné selhání kontroly musí být ověřeno ve výstupu GitHub Actions.
+
+## Responzivní titulní fotografie – další dokončená optimalizace
+- Automatizace vytvořila a publikovala 3 lokální WebP varianty původní 542 426 B fotografie: **640 px / 113 992 B**, **960 px / 239 574 B**, **1280 px / 388 162 B**.
+- `index.html` a `src/index.html` používají `srcset`, `sizes="100vw"`, prioritní `fetchpriority="high"` i propojený responzivní preload. Původní fotografie zůstává jako fallback.
+- Pro volbu 640 px varianta zmenšuje přenos tohoto jednoho obrázku přibližně o **79 %** proti původnímu souboru; konkrétní volbu prohlížeče určují viewport a DPR.
+- Komplet výstupů a jejich velikosti jsou v `docs/responsive-cover.json`. GitHub commit vznikl automaticky: `68b1006c6ff5e957e7c0aff3f87ffb84054f15f8`.
+- Produkční kontrola `tools/audit_production_resources.py` nyní ověřuje i zdroje `srcset` a `imagesrcset`; chybějící místní soubor způsobí selhání testu.
+- **Stále nelze prokázat zkrácení času načtení celé stránky** bez měření Core Web Vitals v reálném prohlížeči; snížení velikosti jednoho souboru není totéž jako zrychlení celé stránky.
