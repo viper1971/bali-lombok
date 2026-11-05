@@ -143,3 +143,6 @@
  #osa .rj-stop{padding:5px 0!important}
  #osa .rj-leg{padding-top:3px!important;padding-bottom:3px!important}
 }
+
+/* Explicitly hide ONLY the flight journey summary, regardless of legacy renderers. */
+#osa .rj, #routeMap .rj, #tripOverview .rj { display:none !important; }
