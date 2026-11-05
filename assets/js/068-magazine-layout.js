@@ -6,13 +6,6 @@
   root.setAttribute('data-magazine', 'on');
   try { localStorage.removeItem('bali_magazine_appearance_v1'); } catch (_) {}
   function init() {
-    document.querySelectorAll('[id$="AccContent"]:has(>[class*="day-block"])').forEach(function (content) {
-      var note = document.createElement('p');
-      note.className = 'mg-visit-note';
-      note.textContent = 'Náměty k návštěvě — pořadí i den si vybereme podle nálady, počasí a času. Uvedené okruhy a časy návštěv jsou orientační, termíny letů a přesunů platí podle itineráře.';
-      content.prepend(note);
-    });
-
     document.querySelectorAll('.sv-stage[data-sv-url]').forEach(function (stage) {
       var card = stage.closest('.sv-card');
       if (!card) return;
@@ -81,9 +74,6 @@
       pair.className = 'mg-media-pair mg-show-pair';
       var notes = document.createElement('section');
       notes.className = 'mg-show-notes';
-      var title = document.createElement('h3');
-      title.textContent = 'Co v okolí objevit';
-      notes.appendChild(title);
       var list = document.createElement('ul');
       content.querySelectorAll('[class*="day-block"] > h4').forEach(function (heading) {
         var item = document.createElement('li');
