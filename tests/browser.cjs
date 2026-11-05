@@ -30,6 +30,19 @@ function serve(dir,port){const p=spawn('python3',['-m','http.server',String(port
    await page.screenshot({path:`test-results/${label}-${viewport.width}.png`});
    const state=()=>page.evaluate(()=>({budget:document.getElementById('bxGrand_pers')?.textContent,food:TRIP.level(),sum:TRIP.sums({solo:false}).kc,folds:[...document.querySelectorAll('.lux-fold')].map(n=>n.id),theme:document.documentElement.dataset.theme}));
    const initial=await state();assert(initial.budget,'budget must render');assert(initial.folds.length>5);
+   // The landing cover must not trap the page in a modal or intercept the wheel.
+   assert.equal(await page.locator('dialog.mg-entry[open]').count(),0,'hero must not open a modal');
+   assert.equal(await page.locator('.mg-cover-cta').count(),0,'old explore CTA must be removed');
+   assert.equal(await page.evaluate(()=>getComputedStyle(document.documentElement).scrollBehavior),'auto');
+   if (viewport.width > 900 && label==='current') {
+     await page.evaluate(()=>window.scrollTo(0,0));
+     await page.mouse.move(250,320);
+     await page.mouse.wheel(0,650);
+     await page.waitForTimeout(400);
+     const wheelScroll=await page.evaluate(()=>window.scrollY);
+     assert(wheelScroll>60,'mouse wheel must move the page past the hero; got '+wheelScroll);
+     await page.evaluate(()=>window.scrollTo(0,0));
+   }
    // Native click handlers remain reachable even while the mobile rail is hidden.
    await page.locator('#v29BottomTab').evaluate(n=>n.click());assert(await page.locator('body').evaluate(n=>n.classList.contains('v29-bottom-open')));
    await page.locator('#floatingMenuBtn').evaluate(n=>n.click());assert(await page.locator('body').evaluate(n=>n.classList.contains('bali-content-mode')));
