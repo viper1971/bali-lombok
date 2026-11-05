@@ -275,3 +275,86 @@
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});
   else start();
 })();
+
+
+/* GLOBAL STREET VIEW FULLSCREEN CONTROLS
+   The button is inserted inside every original Street View stage.
+   No map URLs, iframe attributes or hotel-selection logic are modified. */
+(function () {
+  "use strict";
+  function mount(stage) {
+    if (!stage || stage.querySelector(":scope > .bali-sv-fullscreen")) return;
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "bali-sv-fullscreen";
+    button.setAttribute("aria-label", "Zobrazit Street View na celou obrazovku");
+    button.textContent = "⛶ Celá obrazovka";
+    button.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      var fullscreen = document.fullscreenElement || document.webkitFullscreenElement;
+      if (fullscreen === stage) {
+        var close = document.exitFullscreen || document.webkitExitFullscreen;
+        if (close) {
+          try { var ending = close.call(document); if (ending && ending.catch) ending.catch(function () {}); } catch (_) {}
+        }
+        return;
+      }
+      if (fullscreen) return;
+      var open = stage.requestFullscreen || stage.webkitRequestFullscreen;
+      if (!open) return;
+      try {
+        var result = open.call(stage);
+        // Preserve the lazy Google panorama and the original Play button.
+        // If the map is not loaded yet, launch the existing Street View loader.
+        function load() {
+          if (!stage.querySelector("iframe") && stage.dataset.svUrl && stage.id && typeof window.svLoad === "function") {
+            window.svLoad(stage.id, true);
+          }
+        }
+        if (result && result.then) result.then(load).catch(function () {});
+        else load();
+      } catch (_) {}
+    });
+    stage.appendChild(button);
+    refresh(stage);
+  }
+  function refresh(stage) {
+    var button = stage.querySelector(":scope > .bali-sv-fullscreen");
+    if (!button) return;
+    var active = (document.fullscreenElement || document.webkitFullscreenElement) === stage;
+    button.textContent = active ? "✕ Ukončit fullscreen" : "⛶ Celá obrazovka";
+    button.setAttribute("aria-label", active ? "Ukončit zobrazení Street View na celou obrazovku" : "Zobrazit Street View na celou obrazovku");
+  }
+  function scan(root) {
+    if (!root) return;
+    if (root.matches && root.matches(".sv-card .sv-stage")) mount(root);
+    if (root.querySelectorAll) root.querySelectorAll(".sv-card .sv-stage").forEach(mount);
+  }
+  function boot() {
+    var root = document.getElementById("hlavni-obsah") || document.body;
+    scan(root);
+    document.addEventListener("fullscreenchange", function () {
+      root.querySelectorAll(".sv-card .sv-stage").forEach(refresh);
+    });
+    document.addEventListener("webkitfullscreenchange", function () {
+      root.querySelectorAll(".sv-card .sv-stage").forEach(refresh);
+    });
+    if (window.MutationObserver) {
+      var queued = false;
+      new MutationObserver(function (records) {
+        if (queued || !records.some(function (record) {
+          return Array.prototype.some.call(record.addedNodes, function (node) {
+            return node.nodeType === 1 &&
+              ((node.matches && node.matches(".sv-stage,.sv-card")) ||
+                (node.querySelector && node.querySelector(".sv-stage")));
+          });
+        })) return;
+        queued = true;
+        requestAnimationFrame(function () { queued = false; scan(root); });
+      }).observe(root, {childList:true, subtree:true});
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, {once:true});
+  else boot();
+})();
