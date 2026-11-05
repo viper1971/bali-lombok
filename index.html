@@ -4,9 +4,7 @@
 <script id="bali-retire-offline">(function(){if(!("serviceWorker" in navigator))return;navigator.serviceWorker.getRegistrations().then(function(rs){return Promise.all(rs.filter(function(r){return r.scope===new URL("./",location.href).href}).map(function(r){return r.unregister()}))}).then(function(){if(!window.caches)return;return caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf("bali2027-")===0}).map(function(k){return caches.delete(k)}))})}).catch(function(e){console.warn("Odstranění staré offline cache:",e)})})();</script>
     <meta charset="UTF-8">
     <meta name="bali-build" content="20261105ed170a15">
-<script src="assets/build/js-a8fb75dcd6534736.js"></script>
-<script src="assets/build/js-27a5af24ef09ab15.js"></script>
-<script src="assets/build/js-036fff53752dca28.js?v=20261105-cleanheadings-cls-spacer"></script>
+<script src="assets/build/js-head-critical-a-20261105.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
@@ -37,16 +35,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/build/css-613ec9680ad29884.css">
-<link rel="stylesheet" href="assets/build/css-0bf59c48c4f36c4b.css"><style id="lux-skin"></style><style id="trip-design"></style>
+    <link rel="stylesheet" href="assets/build/css-head-critical-20261105.css"><style id="lux-skin"></style><style id="trip-design"></style>
 
-    <script src="assets/build/js-7d3c195dc665db9b.js"></script>
-    <script src="assets/build/js-53abd70116987b5e.js"></script>
-<script src="assets/build/js-60daa8d12f6d8cfc.js"></script>
+    <script src="assets/build/js-head-critical-b-20261105.js"></script>
     <link rel="stylesheet" href="assets/build/css-993f7f92be32fafd.css"><style id="radek-upravy"></style>
 
-<script src="assets/build/js-eed8ff620bf37182.js"></script>
-<script src="assets/build/js-94355c051fc3ddc3.js"></script>
+<script src="assets/build/js-head-critical-c-20261105.js"></script>
 
     <link rel="stylesheet" href="assets/build/css-ed30100c4937ee79.css"><style id="trip-extras-style"></style><style id="lux-features"></style>
 
