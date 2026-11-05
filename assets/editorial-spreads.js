@@ -199,7 +199,7 @@
     [/gardens by the bay|supertree/i,
       ["Gardens by the Bay je rozsáhlý zahradní komplex u Marina Bay. V části Supertree Grove stojí konstrukce vysokých umělých „stromů“ osázených rostlinami, které se večer proměňují díky světelným efektům.",
        "Večerní představení Garden Rhapsody kombinuje hudbu a osvětlení jednotlivých Supertrees. Vedle venkovního areálu patří ke známým atrakcím kryté zahradní skleníky, které však mají vlastní vstupní režim.",
-       "Prakticky: Oficiální běžné časy Garden Rhapsody jsou 19:45 a 20:45, nikoli 21:00 uvedených ve starším názvu karty. Před cestou v srpnu 2027 ověř aktuální program."],
+       "Garden Rhapsody se pravidelně koná každý večer v 19:45 a 20:45 v Supertree Grove. Vstup na venkovní světelnou a hudební show je zdarma; placené atrakce v zahradách mají vlastní vstupenky."],
       "https://www.gardensbythebay.com.sg/en/things-to-do/calendar-of-events/garden-rhapsody.html"]
   ];
   // Verified entries take precedence; remaining entries must match an exact attraction.
