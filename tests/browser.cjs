@@ -43,6 +43,24 @@ function serve(dir,port){const p=spawn('python3',['-m','http.server',String(port
      assert(wheelScroll>60,'mouse wheel must move the page past the hero; got '+wheelScroll);
      await page.evaluate(()=>window.scrollTo(0,0));
    }
+   // Hotel summaries remain immediately accessible; detailed daily itineraries
+   // are separate disclosures and do not expand with the parent hotel chapter.
+   const itineraryIds=['singapur','uluwatu','ubud','lombok','kuta','farewell'];
+   const itineraryState=await page.evaluate(ids=>ids.map(id=>{
+     const node=document.querySelector('details.bali-itinerary-subsection[data-itinerary="'+id+'"]');
+     return {id,exists:!!node,closed:!node?.open,legacy:!!node?.querySelector('.lux-acc-btn[aria-controls]')};
+   }),itineraryIds);
+   assert(itineraryState.every(x=>x.exists&&x.closed&&x.legacy),'detailed itineraries must begin collapsed: '+JSON.stringify(itineraryState));
+   if(label==='current'){
+     await page.evaluate(()=>{document.querySelector('details.bali-itinerary-subsection[data-itinerary="singapur"]').open=true;});
+     await page.waitForTimeout(450);
+     const expanded=await page.evaluate(()=>{
+       const detail=document.querySelector('details.bali-itinerary-subsection[data-itinerary="singapur"]');
+       return {open:detail.open,legacyExpanded:detail.querySelector('.lux-acc-btn').getAttribute('aria-expanded')};
+     });
+     assert(expanded.open&&expanded.legacyExpanded==='true','opening itinerary must activate existing detailed program: '+JSON.stringify(expanded));
+     await page.evaluate(()=>{document.querySelector('details.bali-itinerary-subsection[data-itinerary="singapur"]').open=false;});
+   }
    // Native click handlers remain reachable even while the mobile rail is hidden.
    await page.locator('#v29BottomTab').evaluate(n=>n.click());assert(await page.locator('body').evaluate(n=>n.classList.contains('v29-bottom-open')));
    await page.locator('#floatingMenuBtn').evaluate(n=>n.click());assert(await page.locator('body').evaluate(n=>n.classList.contains('bali-content-mode')));
