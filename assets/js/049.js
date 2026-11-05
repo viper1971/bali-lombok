@@ -236,8 +236,27 @@
             setPart(p, true);
             try { localStorage.setItem(PKEY, p.id); } catch (e) {}
         }
-        if (keepPos && h) window.luxPreserveHeader(p, change, prepare);
-        else { prepare(); change(); }
+        // Close the previously opened chapter BEFORE opening this one.
+        // The old preserve-header routine retained a stale scroll offset when
+        // the earlier chapter collapsed, placing the user mid-content.
+        prepare();
+        change();
+        if (keepPos && h) {
+            var chapterToken = (window.__baliChapterNavigationToken || 0) + 1;
+            window.__baliChapterNavigationToken = chapterToken;
+            function alignChapter() {
+                if (window.__baliChapterNavigationToken !== chapterToken ||
+                    !p.isConnected || !p.classList.contains('is-open')) return;
+                var fixedOffset = 12;
+                var top = Math.max(0, window.scrollY + h.getBoundingClientRect().top - fixedOffset);
+                window.scrollTo({ top: top, behavior: 'instant' });
+            }
+            // Two frames let the old chapter disappear and the new chapter
+            // establish its final layout before scrolling to the START.
+            requestAnimationFrame(function () {
+                requestAnimationFrame(alignChapter);
+            });
+        }
     }
     window.luxPartFor = function (el) { var p = el && el.closest ? el.closest('.lux-part') : null; if (p) openPart(p, false); };
     function initParts() {
