@@ -1,0 +1,63 @@
+/* BALI 2027 · Static Google map previews. No network access to Google before activation. */
+.bali-map-preview {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  min-height: 220px;
+  height: 270px;
+  max-height: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(25,65,57,.18);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  padding: 16px;
+  color: white;
+  background: #cee6d6 url("./map-preview-static.svg") center / cover no-repeat;
+}
+.bali-map-preview:before {
+  content: "";
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(transparent,rgba(11,43,39,.74));
+  pointer-events: none;
+}
+.bali-map-preview-label,.bali-map-preview-title {
+  z-index: 1;
+  position: relative;
+  text-shadow: 0 1px 4px rgba(0,0,0,.6);
+}
+.bali-map-preview-title {
+  font-size: clamp(.88rem,1.4vw,1rem);
+  font-weight: 750;
+}
+.bali-map-preview-label {
+  background: #123f3a;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 999px;
+  padding: 10px 17px;
+  font-size: .87rem;
+  font-weight: 800;
+}
+.bali-map-preview:hover .bali-map-preview-label { background: #176459; }
+.bali-map-preview:focus-visible { outline: 3px solid #e8a93a; outline-offset: 3px; }
+iframe[data-bali-map-src]:not([data-bali-map-active="1"]) { display:none!important; }
+.sg-map-frame-wrapper > .bali-map-preview, .hotel-location-map > .bali-map-preview { height: 270px; }
+.sv-stage:not(.is-loaded):not(.is-loading) {
+  background-image: url("./street-preview-static.svg");
+  background-size: cover;
+  background-position: center;
+  background-color: #bad9cb;
+}
+.sv-stage:not(.is-loaded):not(.is-loading) .sv-play {
+  background: rgba(12,51,47,.93);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.55);
+}
+@media (prefers-reduced-motion: reduce) { .bali-map-preview { transition: none!important; } }
+@media print { .bali-map-preview { break-inside:avoid; } }
