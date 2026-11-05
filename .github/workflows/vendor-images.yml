@@ -1,4 +1,5 @@
 name: Vendor and optimize remote photographs
+# Includes attributed Wikimedia NEST photo; preserves already migrated WebP records.
 on:
   push:
     branches: [main]
