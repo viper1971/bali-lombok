@@ -55,7 +55,20 @@ function serve(dir,port){const p=spawn('python3',['-m','http.server',String(port
    await page.evaluate(()=>luxPresent());assert(await page.locator('body').evaluate(n=>n.classList.contains('pres-on')));await page.evaluate(()=>luxPresentStop());assert(!(await page.locator('body').evaluate(n=>n.classList.contains('pres-on'))));
    const chosen=levels.at(-1);await page.reload();await page.waitForTimeout(3500);assert.equal(await page.evaluate(()=>TRIP.level()),chosen,'food choice persists');
    await page.locator('#uxSearchBtn').evaluate(n=>n.click());await page.locator('#uxSearchInput').fill('Ubud');await page.waitForTimeout(500);
-   assert(await page.locator('.uxResult').count()>0,'search results');
+   const searchResults=await page.locator('.uxResult').count();
+   if (!searchResults) {
+     const diagnostic=await page.evaluate(()=>({
+       input:document.querySelector('#uxSearchInput')?.value,
+       count:document.querySelector('#uxSearchCount')?.textContent,
+       overlayHidden:document.querySelector('#uxSearchOverlay')?.hidden,
+       bodyHasUbud:document.body.textContent.toLowerCase().includes('ubud'),
+       bodyTextLength:document.body.textContent.length,
+       resultsText:document.querySelector('#uxSearchResults')?.textContent?.slice(0,400)
+     }));
+     console.error('Search regression diagnostic:',JSON.stringify(diagnostic));
+     fs.writeFileSync('test-results/search-diagnostic.json',JSON.stringify(diagnostic,null,2));
+   }
+   assert(searchResults>0,'search results');
    if(label==='current'){
     // A collapsed fold body is inert for keyboard access, but is not a lock.
     await page.evaluate(()=>{const f=document.querySelector('.lux-fold:not(.lux-locked) .lux-fold-body');const n=document.createElement('p');n.textContent='AuditUniqueSearchTarget';f.appendChild(n);});
