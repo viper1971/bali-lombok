@@ -59,3 +59,10 @@
 - Komplet výstupů a jejich velikosti jsou v `docs/responsive-cover.json`. GitHub commit vznikl automaticky: `68b1006c6ff5e957e7c0aff3f87ffb84054f15f8`.
 - Produkční kontrola `tools/audit_production_resources.py` nyní ověřuje i zdroje `srcset` a `imagesrcset`; chybějící místní soubor způsobí selhání testu.
 - **Stále nelze prokázat zkrácení času načtení celé stránky** bez měření Core Web Vitals v reálném prohlížeči; snížení velikosti jednoho souboru není totéž jako zrychlení celé stránky.
+
+## Automatizované browser měření (nově přidané)
+- `tests/performance.cjs`: studený start stránky v Chromiu, viewport 390×844 a 1440×1000, bez service workeru, s blokovanými externími službami.
+- Zaznamenává FCP, kandidáta LCP, CLS, dlouhé úlohy main threadu, velikost přenosů podle `Content-Length`, síťové chyby lokálních souborů a skutečně vybranou variantu titulní fotografie.
+- `.github/workflows/browser-performance.yml` spouští test přes GitHub Actions a při úspěchu ukládá `docs/performance-metrics.json`; podrobná data archivuje také jako artifact.
+- Test je záměrně syntetický: nelze jej zaměňovat za měření reálných návštěvníků (RUM), produkční Lighthouse skóre nebo srovnání rychlosti před a po změnách.
+- Při poslední kontrole dosud nebyl v repozitáři výsledný `docs/performance-metrics.json` ověřen, proto nezveřejňujeme nezjištěné časy.
