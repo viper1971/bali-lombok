@@ -89,5 +89,17 @@ for page in (root/'src/index.html',root/'index.html'):
     content=re.sub(r'assets/data/gallery-catalog[.]js(?:[?]v=[^"\\s]+)?',
                    'assets/data/gallery-catalog.js?v='+revision,content)
     page.write_text(content,encoding='utf8')
+credits=['# Galerie – autorství a licence fotografií',
+         '',
+         'Fotografie byly zmenšeny a převedeny do WebP pro tento web. Původní licence a autorství zůstávají zachovány.',
+         '']
+for query,photo in ordered.items():
+    credits.extend(['## '+query,'',
+                    'Autor: '+photo['author'],
+                    'Licence: '+photo['license']+' — '+photo.get('licenseUrl',''),
+                    'Původní fotografie: '+photo['page'],
+                    'Úprava: zmenšení rozlišení a převod do WebP.',
+                    ''])
+(root/'docs/gallery-photo-credits.md').write_text('\n'.join(credits)+'\n',encoding='utf8')
 report_file.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({'total':len(queries),'localized':len(ordered),'remaining':len(queries)-len(ordered)}))
