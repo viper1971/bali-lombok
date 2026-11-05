@@ -488,3 +488,17 @@
     grid-template-columns:minmax(0,42%) minmax(0,58%) !important;
   }
 }
+
+/* Direct documentary source under verified destination descriptions. */
+html[data-magazine="on"] body #hlavni-obsah .mg-place-source {
+  display:inline-block;
+  margin:4px 0 3px;
+  padding-bottom:2px;
+  font:700 12px/1.5 system-ui,sans-serif;
+  color:#176147 !important;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+html[data-magazine="on"] body #hlavni-obsah .mg-place-source:focus-visible {
+  outline:2px solid #176147;outline-offset:3px;
+}
