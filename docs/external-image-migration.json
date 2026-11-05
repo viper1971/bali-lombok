@@ -1,0 +1,95 @@
+{
+  "migrated": [
+    {
+      "url": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&h=630&q=80",
+      "path": "assets/images/external/2f4dde68905f7f3c.webp",
+      "bytes": 126792
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8?auto=format&fit=crop&w=1800&q=85",
+      "path": "assets/images/external/c9c99d25f3e25d16.webp",
+      "bytes": 542426
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1600&q=85",
+      "path": "assets/images/external/3007e00607821fa1.webp",
+      "bytes": 273778
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1600&q=85",
+      "path": "assets/images/external/8971dd33d4c37a53.webp",
+      "bytes": 196332
+    },
+    {
+      "url": "https://images.pexels.com/photos/36956259/pexels-photo-36956259.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "path": "assets/images/external/f69252c4bc3322d8.webp",
+      "bytes": 559836
+    },
+    {
+      "url": "https://images.pexels.com/photos/36340125/pexels-photo-36340125.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "path": "assets/images/external/9cb33944529f364e.webp",
+      "bytes": 124842
+    },
+    {
+      "url": "https://images.pexels.com/photos/2499769/pexels-photo-2499769.jpeg?auto=compress&dpr=1&h=750&w=1260",
+      "path": "assets/images/external/0437ef33257e0165.webp",
+      "bytes": 85154
+    },
+    {
+      "url": "https://images.pexels.com/photos/31973396/pexels-photo-31973396/free-photo-of-underwater-sculpture-circle-at-gili-meno.jpeg?auto=compress&dpr=1&h=750&w=1260",
+      "path": "assets/images/external/6318cbf5367fc981.webp",
+      "bytes": 47774
+    },
+    {
+      "url": "https://images.pexels.com/photos/36956259/pexels-photo-36956259.jpeg?auto=compress&cs=tinysrgb&w=1000",
+      "path": "assets/images/external/7be75a7817c93877.webp",
+      "bytes": 281212
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2000&q=85",
+      "path": "assets/images/external/7f1b7b4f252949f9.webp",
+      "bytes": 201478
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1800&q=70",
+      "path": "assets/images/external/3963e1ae689c5f97.webp",
+      "bytes": 336286
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1800&q=70",
+      "path": "assets/images/external/5e41f53a86debc44.webp",
+      "bytes": 334138
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85",
+      "path": "assets/images/external/2892a3b290531333.webp",
+      "bytes": 111546
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1000&q=70",
+      "path": "assets/images/external/1f73e82c01bf6d00.webp",
+      "bytes": 120622
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1000&q=70",
+      "path": "assets/images/external/91dae68384e244eb.webp",
+      "bytes": 137384
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2000&q=82",
+      "path": "assets/images/external/eac77442ee7adfec.webp",
+      "bytes": 201262
+    },
+    {
+      "url": "https://images.pexels.com/photos/7010170/pexels-photo-7010170.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "path": "assets/images/external/ff0312048842ed12.webp",
+      "bytes": 80736
+    },
+    {
+      "url": "https://images.pexels.com/photos/13987298/pexels-photo-13987298.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "path": "assets/images/external/13c126c8d151494f.webp",
+      "bytes": 146126
+    }
+  ],
+  "failed": []
+}

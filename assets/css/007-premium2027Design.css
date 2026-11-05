@@ -31,7 +31,7 @@ body::selection {background:#2cb5a5;color:#061827;}
 button,select,input,textarea {font:inherit;}
 button {touch-action:manipulation;}
 .hero {min-height:min(790px,88svh);padding:112px 24px 98px;isolation:isolate;}
-.hero::before {content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(5,17,31,.89),rgba(5,24,37,.64) 50%,rgba(5,17,31,.76)),url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2000&q=82') center/cover no-repeat;}
+.hero::before {content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(5,17,31,.89),rgba(5,24,37,.64) 50%,rgba(5,17,31,.76)),url('/bali-lombok/assets/images/external/eac77442ee7adfec.webp') center/cover no-repeat;}
 .hero::after {content:"";position:absolute;inset:auto 0 0;height:32%;z-index:-1;background:linear-gradient(transparent,var(--bg-color));}
 .hero-inner {max-width:1040px; margin:auto;}
 .hero h1 {font-size:clamp(2.5rem,6.5vw,5.7rem);font-weight:800;letter-spacing:-.065em;line-height:1.08;text-wrap:balance;text-shadow:0 8px 35px rgba(0,0,0,.5);}

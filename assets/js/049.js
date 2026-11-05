@@ -1514,7 +1514,7 @@ function luxQRSvg(text, px) {
             if (k === 'f-leg-kuta') {
                 var photo = document.createElement('figure');
                 photo.className = 'mg-strip-photo';
-                photo.innerHTML = '<img src="https://images.pexels.com/photos/36956259/pexels-photo-36956259.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1000" alt="Tropické pobřeží Lomboku" loading="lazy" decoding="async"><figcaption><a href="https://www.pexels.com/photo/tropical-beach-scene-with-palm-trees-in-lombok-36956259/" target="_blank" rel="noopener noreferrer">Maria Burnay · Pexels</a></figcaption>';
+                photo.innerHTML = '<img src="assets/images/external/7be75a7817c93877.webp" alt="Tropické pobřeží Lomboku" loading="lazy" decoding="async"><figcaption><a href="https://www.pexels.com/photo/tropical-beach-scene-with-palm-trees-in-lombok-36956259/" target="_blank" rel="noopener noreferrer">Maria Burnay · Pexels</a></figcaption>';
                 st.appendChild(photo);
             }
 

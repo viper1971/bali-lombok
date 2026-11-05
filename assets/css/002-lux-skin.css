@@ -28,7 +28,7 @@
         [data-theme="light"] .hero {
             background:
                 linear-gradient(180deg, rgba(244, 245, 247, 0.78) 0%, var(--bg-color) 100%),
-                url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2000&q=85') center/cover no-repeat;
+                url('/bali-lombok/assets/images/external/7f1b7b4f252949f9.webp') center/cover no-repeat;
         }
         .hero h1 { text-shadow: 0 6px 30px rgba(0, 0, 0, 0.45); }
         .hero h1::after {
@@ -415,8 +415,8 @@
            zůstane původní ocelový přechod. Text je čitelný díky tmavému překryvu.
            ========================================================== */
         :root {
-            --img-part-1: url('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1800&q=70');   /* I   Plán & rozpočet  – Marina Bay */
-            --img-part-2: url('https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1800&q=70');   /* II  Příprava         – Singapur, ulice */
+            --img-part-1: url('/bali-lombok/assets/images/external/3963e1ae689c5f97.webp');   /* I   Plán & rozpočet  – Marina Bay */
+            --img-part-2: url('/bali-lombok/assets/images/external/5e41f53a86debc44.webp');   /* II  Příprava         – Singapur, ulice */
             --img-part-3: none;   /* III Itinerář         – fotka z úvodní hlavičky */
             --img-part-4: none;   /* IV  Na místě         – (nahraď fotkou z Bali/Lomboku) */
             --img-part-5: none;   /* V   Závěr            – (nahraď fotkou dle chuti) */

@@ -20,7 +20,7 @@
 .hero .badge,
 .hero .cd-key,
 .hero .cd-value{color:#ffffff !important;}.hero{color:var(--text-main) !important;}[data-theme="light"] .hero{background:linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(240, 243, 245, 0.95) 100%),
-                        url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2000&q=85') center/cover no-repeat !important;}[data-theme="light"] .hero h1,
+                        url('/bali-lombok/assets/images/external/7f1b7b4f252949f9.webp') center/cover no-repeat !important;}[data-theme="light"] .hero h1,
         [data-theme="light"] .hero p,
         [data-theme="light"] .hero span:not(.fc-price-badge),
         [data-theme="light"] .hero label,

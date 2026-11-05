@@ -83,7 +83,7 @@ h1, h2, .stage-title, .hero h1, .hotel-title-text, .lux-part-title { font-family
 .hero {
     background:
         linear-gradient(180deg, color-mix(in srgb, var(--bg-color) 45%, transparent) 0%, var(--bg-color) 100%),
-        url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=2000&q=85') center/cover no-repeat !important;
+        url('/bali-lombok/assets/images/external/7f1b7b4f252949f9.webp') center/cover no-repeat !important;
 }
 .hero .badge { background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; font-weight: 600; color: var(--text-muted) !important; }
 

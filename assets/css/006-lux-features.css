@@ -2,22 +2,22 @@
 /* Na telefonech stačí poloviční rozlišení fotek v hlavičkách (rychlejší načtení, méně dat) */
 @media (max-width: 800px) {
   [data-theme="light"] .hero { background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(240, 243, 245, 0.95) 100%),
-                        url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85') center/cover no-repeat !important; }
+                        url('/bali-lombok/assets/images/external/2892a3b290531333.webp') center/cover no-repeat !important; }
   [data-theme="light"] .hero { background: linear-gradient(180deg, rgba(244, 245, 247, 0.78) 0%, var(--bg-color) 100%),
-                url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85') center/cover no-repeat; }
-  :root { --img-part-1: url('https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1000&q=70'); }
-  :root { --img-part-2: url('https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=1000&q=70'); }
+                url('/bali-lombok/assets/images/external/2892a3b290531333.webp') center/cover no-repeat; }
+  :root { --img-part-1: url('/bali-lombok/assets/images/external/1f73e82c01bf6d00.webp'); }
+  :root { --img-part-2: url('/bali-lombok/assets/images/external/91dae68384e244eb.webp'); }
   :root { --img-part-3: none; }
   :root { --img-part-4: none; }
   :root { --img-part-5: none; }
   .hero { background: linear-gradient(180deg, color-mix(in srgb, var(--bg-color) 45%, transparent) 0%, var(--bg-color) 100%),
-        url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85') center/cover no-repeat !important; }
+        url('/bali-lombok/assets/images/external/2892a3b290531333.webp') center/cover no-repeat !important; }
   .hero, [data-theme="light"] .hero { background: linear-gradient(180deg,
             rgba(17, 32, 29, 0.42) 0%,
             rgba(17, 32, 29, 0.62) 45%,
             rgba(17, 32, 29, 0.86) 82%,
             var(--page-bg) 100%),
-        url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1000&q=85') center/cover no-repeat !important; }
+        url('/bali-lombok/assets/images/external/2892a3b290531333.webp') center/cover no-repeat !important; }
 }
 
 /* ===== Kurzy měn: vždy rozbalený panel ===== */

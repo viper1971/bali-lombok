@@ -1,0 +1,31 @@
+{
+  "total_external_image_urls": 3,
+  "by_host": {
+    "thumb.wikimedia.org": 1,
+    "tile.openstreetmap.org": 1,
+    "upload.wikimedia.org": 1
+  },
+  "images": [
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Gili_Underwater_Sculpture_%2849615256547%29.jpg/1280px-Gili_Underwater_Sculpture_%2849615256547%29.jpg",
+      "host": "thumb.wikimedia.org",
+      "files": [
+        "assets/js/047.js"
+      ]
+    },
+    {
+      "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      "host": "tile.openstreetmap.org",
+      "files": [
+        "assets/js/041.js"
+      ]
+    },
+    {
+      "url": "https://upload.wikimedia.org",
+      "host": "upload.wikimedia.org",
+      "files": [
+        "src/index.html"
+      ]
+    }
+  ]
+}
