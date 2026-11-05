@@ -1,20 +1,47 @@
-name: Verify published optimized site
+name: Build and performance regression
 
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  verify-published:
+  verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Verify published local resources without rebuilding
-        run: python3 tools/build.py
-      - name: Ensure verification did not modify published artifacts
-        run: git diff --exit-code -- index.html sw.js assets/build-manifest.json
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Verify reproducible optimized build
+        run: |
+          npm run build
+          npm run build:check
+          git diff --exit-code -- src/index.html index.html sw.js assets/build-manifest.json
+      - name: Run static, map and appearance regression tests
+        run: npm test
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run real-browser regression on mobile and desktop
+        run: npm run test:browser
+      - name: Measure mobile and desktop synthetic performance
+        run: npm run test:performance
+      - name: Upload browser and performance diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bali-browser-performance
+          path: |
+            test-results/
+            docs/performance-metrics.json
+          retention-days: 14
