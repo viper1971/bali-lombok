@@ -3,15 +3,15 @@
 html, body { scroll-behavior: auto !important; }
 
 
-/* BALI 2027: reduce layout/paint work in long opened hotel chapters.
-   Browser skips offscreen cards while preserving their complete DOM and widgets. */
+/* Stable full document heights: content-visibility:auto on hotel cards caused
+   estimated heights to be replaced during wheel scrolling (visual jumps). */
 @media screen {
   #hlavni-obsah .uber-hotel-card,
   #hlavni-obsah .spot-card-singapore,
   #hlavni-obsah .day-block-singapore,
   #hlavni-obsah .bali-ed-hotel-spread {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 520px;
+    content-visibility: visible !important;
+    contain-intrinsic-size: none !important;
   }
   /* Expand/collapse without animating huge layout heights. */
   #hlavni-obsah .lux-fold-body,
