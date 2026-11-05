@@ -44,3 +44,10 @@
 - HTML má 63 skriptových a 30 CSS odkazů včetně externích služeb, 26 iframe map se `loading="lazy"`, 60 obrázkových tagů (59 lazy a 1 prioritní titulní obrázek). Jde o statickou inspekci, nikoliv browser trace.
 - Dodán `tools/check_migrated_images.py`; CI kontrola má při další migraci zabránit zmizení lokálních souborů a návratu externích URL do kódu.
 - Reálnou produkční rychlost ani funkčnost na fyzickém telefonu zatím nebylo možné změřit; další optimalizace vyžaduje Lighthouse/Playwright regresi a analýzu síťového waterfallu.
+
+## Další optimalizace prvotního zobrazení
+- Oba HTML vstupy přednačítají konkrétní lokální WebP titulní fotografie pomocí `<link rel="preload" as="image" ... fetchpriority="high">`; samotné HTML `img` má `loading="eager"`, `fetchpriority="high"`.
+- Obrázek pro náhled při sdílení (`og:image`) má absolutní HTTPS URL na vlastní GitHub Pages, nikoli odkaz na cizí server.
+- Odstraněno 6 spekulativních spojení v hlavičce pro Google Maps, Wikimedia a unpkg; živé mapy zůstávají funkčně beze změny, pouze spojení se neotevírají předem při prvním renderu.
+- Přidán nezávislý skript `tools/audit_production_resources.py` pro kontrolu lokálních cest a stavu načítání a workflow `.github/workflows/production-audit.yml`, který se spustí při změnách publikovaného HTML a dalších assetů.
+- Workflow neprovádí automatickou rekonstrukci stránky ani mazání kódu. Případné selhání kontroly musí být ověřeno ve výstupu GitHub Actions.
