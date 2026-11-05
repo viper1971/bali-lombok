@@ -1,0 +1,20 @@
+name: Verify published optimized site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-published:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Verify published local resources without rebuilding
+        run: python3 tools/build.py
+      - name: Ensure verification did not modify published artifacts
+        run: git diff --exit-code -- index.html sw.js assets/build-manifest.json
