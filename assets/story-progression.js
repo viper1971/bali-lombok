@@ -12,9 +12,7 @@
   function moveTo(fold){
     if(!fold || !fold.classList.contains("is-open"))return;
     var heading=fold.querySelector(":scope > .lux-fold-h") || fold;
-    if(!heading.getClientRects().length)return;
-    var y=Math.max(0,window.scrollY+heading.getBoundingClientRect().top-offset());
-    window.scrollTo({top:y,behavior:prefersReduced && prefersReduced.matches ? "instant":"smooth"});
+    position(heading);
   }
   function schedule(fold,ms){
     clearTimeout(timer);
@@ -45,19 +43,32 @@
     activeChapter=null;
   }
   function position(el) {
-    if (!el || !el.getClientRects().length) return;
+    if(!el || !el.isConnected || !el.getClientRects().length)return;
     var part=el.closest(".lux-part");
+    // The desired scroll position subtracts the fixed-header offset EXACTLY ONCE.
+    // Earlier code subtracted twice and left the final chapters stuck near the bottom.
     var y=Math.max(0,window.scrollY+el.getBoundingClientRect().top-offset());
-    var gap=offset();
-    y=Math.max(0,y-gap);
     var extension=ensureTail();
     extension.style.height="0px";
+    // Reflow before reading available scroll height.
     var maxY=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
-    // Add exactly the missing scrollable space, not a permanent blank page.
-    var missing=Math.ceil(y-maxY);
-    if(missing>0)extension.style.height=(missing+20)+"px";
+    var missing=Math.max(0,Math.ceil(y-maxY));
+    if(missing>0)extension.style.height=(missing+32)+"px";
     activeChapter=part;
-    window.scrollTo({top:y,behavior:prefersReduced && prefersReduced.matches ? "instant" : "smooth"});
+    window.scrollTo({top:y,behavior:prefersReduced && prefersReduced.matches ? "instant":"smooth"});
+    // Once the chapter layout has settled, correct the final few pixels.
+    // Do not shrink the temporary tail before this correction.
+    window.setTimeout(function(){
+      if(!el.isConnected || !part || !part.classList.contains("is-open"))return;
+      var correction=el.getBoundingClientRect().top-offset();
+      if(Math.abs(correction)>3){
+        var extra=Math.max(0,Math.ceil(window.scrollY+correction-
+          (document.documentElement.scrollHeight-window.innerHeight)));
+        if(extra>0)extension.style.height=(extension.offsetHeight+extra+16)+"px";
+        window.scrollTo({top:Math.max(0,window.scrollY+correction),
+          behavior:prefersReduced && prefersReduced.matches ? "instant":"smooth"});
+      }
+    },700);
   }
   function afterChapterOpen(part) {
     // Existing accordion code preserves header position during the opening animation.
