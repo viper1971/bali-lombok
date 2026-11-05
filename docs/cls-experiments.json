@@ -1,0 +1,150 @@
+{
+  "note": "Diagnostic synthetic test; disabled-dialog variant is never deployed.",
+  "values": [
+    {
+      "profile": "mobile",
+      "disableDialog": false,
+      "clsEvents": [
+        {
+          "time": 991,
+          "value": 1,
+          "nodes": [
+            "section.mg-cover mg-only",
+            "div.hero-meeting",
+            "div#vipFloatingBar.vip-floating-bar pm-merged",
+            "section#magazineStory.mg-prologue mg-only",
+            "unknown"
+          ]
+        },
+        {
+          "time": 1215,
+          "value": 0.0162,
+          "nodes": [
+            "div.mg-cover-copy"
+          ]
+        }
+      ],
+      "dialogOpen": false,
+      "coverVisible": true,
+      "magazine": "on",
+      "fcp": 204,
+      "cls": 1.0162,
+      "failures": []
+    },
+    {
+      "profile": "mobile",
+      "disableDialog": true,
+      "clsEvents": [
+        {
+          "time": 923,
+          "value": 1,
+          "nodes": [
+            "section.mg-cover mg-only",
+            "div.hero-meeting",
+            "div#vipFloatingBar.vip-floating-bar",
+            "section#magazineStory.mg-prologue mg-only",
+            "button#floatingMenuBtn."
+          ]
+        },
+        {
+          "time": 1165,
+          "value": 0.0162,
+          "nodes": [
+            "div.mg-cover-copy"
+          ]
+        }
+      ],
+      "dialogOpen": false,
+      "coverVisible": true,
+      "magazine": "on",
+      "fcp": 148,
+      "cls": 1.0162,
+      "failures": []
+    },
+    {
+      "profile": "desktop",
+      "disableDialog": false,
+      "clsEvents": [
+        {
+          "time": 652,
+          "value": 0.00317,
+          "nodes": [
+            "div#vipFloatingBar.vip-floating-bar"
+          ]
+        },
+        {
+          "time": 750,
+          "value": 1,
+          "nodes": [
+            "section.mg-cover mg-only",
+            "div.hero-meeting",
+            "div.mg-mast-inner",
+            "unknown",
+            "unknown"
+          ]
+        },
+        {
+          "time": 1177,
+          "value": 0.56577,
+          "nodes": [
+            "section#magazineStory.mg-prologue mg-only",
+            "nav.mg-navigation mg-only-nav",
+            "span.mg-story-number",
+            "span.mg-story-number",
+            "span.mg-story-number"
+          ]
+        }
+      ],
+      "dialogOpen": true,
+      "coverVisible": true,
+      "magazine": "on",
+      "fcp": 264,
+      "cls": 1.56894,
+      "failures": []
+    },
+    {
+      "profile": "desktop",
+      "disableDialog": true,
+      "clsEvents": [
+        {
+          "time": 305,
+          "value": 0.00125,
+          "nodes": [
+            "div#toplistFloat."
+          ]
+        },
+        {
+          "time": 397,
+          "value": 0.00026,
+          "nodes": [
+            "div#toplistFloat."
+          ]
+        },
+        {
+          "time": 738,
+          "value": 0.00317,
+          "nodes": [
+            "div#vipFloatingBar.vip-floating-bar"
+          ]
+        },
+        {
+          "time": 839,
+          "value": 1,
+          "nodes": [
+            "section.mg-cover mg-only",
+            "div.hero-meeting",
+            "div.mg-mast-inner"
+          ]
+        }
+      ],
+      "dialogOpen": false,
+      "coverVisible": true,
+      "magazine": "on",
+      "fcp": 188,
+      "cls": 1.00468,
+      "failures": [
+        "Cannot read properties of undefined (reading 'toLowerCase')"
+      ]
+    }
+  ]
+}
