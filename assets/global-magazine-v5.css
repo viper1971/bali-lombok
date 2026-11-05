@@ -668,3 +668,42 @@ html[data-magazine="on"] body #hlavni-obsah .mg-place-source:focus-visible {
     margin:0 !important;
   }
 }
+
+
+/* 2026-11-05 — ROUTE MAP IFRAME HEIGHT: a previous generic selector
+   forced every Google iframe in a .map-container-wrapper to 195–205px,
+   even when its .map-box was 420px tall. The iframe must fill its
+   designated viewport, not leave a large white lower half.
+   Applies to itinerary route maps ONLY; hotel cards and thumbnails excluded. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    .lux-fold-pad .map-container-wrapper .map-box:has(> iframe[src*="google"]) {
+    position:relative !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    overflow:hidden !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    .lux-fold-pad .map-container-wrapper .map-box > iframe[src*="google"]:not(:fullscreen) {
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    height:100% !important;
+    min-height:100% !important;
+    max-height:none !important;
+    box-sizing:border-box !important;
+    float:none !important;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 !important;
+    aspect-ratio:auto !important;
+  }
+  /* Keep both return-leg maps at their intended height with no 195px cap. */
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #f-leg-presun5 .map-container-wrapper:has(> .map-box > iframe) {
+    min-width:0 !important;
+    overflow:visible !important;
+  }
+}
