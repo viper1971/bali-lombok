@@ -38,9 +38,6 @@
     var out = document.createElement("aside");
     out.className = "bali-ed-hotel-notes";
     out.setAttribute("aria-label","Cestopisné informace o oblasti hotelu");
-    var title = document.createElement("h4");
-    title.textContent = "O hotelu, okolí a plánování pobytu";
-    out.appendChild(title);
     notes.forEach(function (paragraph) {
       var p = document.createElement("p");
       p.textContent = paragraph;
@@ -239,10 +236,6 @@
       var section=document.createElement("div");
       section.className="mg-place-essay";
       section.setAttribute("aria-label","Cestopisné informace a tipy k místu");
-      var kicker=document.createElement("div");
-      kicker.className="mg-place-kicker";
-      kicker.textContent="CESTOVATELSKÝ PRŮVODCE";
-      section.appendChild(kicker);
       paras.forEach(function(str,i){
         var p=document.createElement("p");
         if(i===paras.length-1){p.className="mg-place-practical";var strong=document.createElement("strong");strong.textContent="Prakticky: ";p.appendChild(strong);}
