@@ -86,7 +86,7 @@ with ThreadPoolExecutor(max_workers=3) as pool:
         else:failed.append({'query':q,'reason':err})
 if not photos:raise SystemExit('No usable Commons photos; existing catalog unchanged')
 ordered={q:photos[q] for q in sorted(photos)}
-catalog_file.write_text('/* Licensed Commons images, with local attribution. */\nwindow.BALI_GALLERY_LOCAL = '+json.dumps(ordered,ensure_ascii=False,separators=(',',':'))+';\n')
+catalog_file.write_text('/* Licensed Commons images, with local attribution. */\nwindow.BALI_GALLERY_LOCAL = '+json.dumps(ordered,ensure_ascii=False,separators=(',',':'))+';\nwindow.BALI_GALLERY_MISSING = '+json.dumps([q for q in queries if q not in ordered],ensure_ascii=False)+';\n')
 report={'total_queries':len(queries),'localized':len(ordered),'remaining':len(queries)-len(ordered),
         'failed':sorted(failed,key=lambda x:x['query'])}
 revision=hashlib.sha256(catalog_file.read_bytes()).hexdigest()[:12]
