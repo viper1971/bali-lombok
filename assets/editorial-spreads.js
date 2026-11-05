@@ -345,9 +345,10 @@
       new MutationObserver(function (records) {
         if (queued || !records.some(function (record) {
           return Array.prototype.some.call(record.addedNodes, function (node) {
-            return node.nodeType === 1 &&
-              ((node.matches && node.matches(".sv-stage,.sv-card")) ||
-                (node.querySelector && node.querySelector(".sv-stage")));
+            return (record.target.matches && record.target.matches(".sv-stage") && !record.target.querySelector(":scope > .bali-sv-fullscreen")) ||
+              (node.nodeType === 1 &&
+                ((node.matches && node.matches(".sv-stage,.sv-card")) ||
+                  (node.querySelector && node.querySelector(".sv-stage"))));
           });
         })) return;
         queued = true;
