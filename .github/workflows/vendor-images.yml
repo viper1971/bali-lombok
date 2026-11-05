@@ -25,6 +25,7 @@ jobs:
       - name: Localize photography without rebuilding customized production scripts
         run: python tools/vendor_images.py
       - run: python tools/audit_image_urls.py
+      - run: python tools/check_migrated_images.py
       - name: Validate syntax of deployed JS without changing their order
         run: |
           for file in assets/build/*.js; do node --check "$file" || exit 1; done
