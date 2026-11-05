@@ -4,16 +4,24 @@
     {
       "profile": "mobile",
       "disableDialog": false,
+      "earlyMagazineCSS": false,
       "clsEvents": [
         {
-          "time": 991,
-          "value": 1,
+          "time": 965,
+          "value": 0.96919,
           "nodes": [
             "section.mg-cover mg-only",
-            "div.hero-meeting",
-            "div#vipFloatingBar.vip-floating-bar pm-merged",
+            "div#vipFloatingBar.vip-floating-bar",
             "section#magazineStory.mg-prologue mg-only",
-            "unknown"
+            "button#floatingMenuBtn.",
+            "nav.mg-navigation mg-only-nav"
+          ]
+        },
+        {
+          "time": 1032,
+          "value": 0.38527,
+          "nodes": [
+            "div.hero-meeting"
           ]
         },
         {
@@ -27,16 +35,17 @@
       "dialogOpen": false,
       "coverVisible": true,
       "magazine": "on",
-      "fcp": 204,
-      "cls": 1.0162,
+      "fcp": 376,
+      "cls": 1.37066,
       "failures": []
     },
     {
       "profile": "mobile",
       "disableDialog": true,
+      "earlyMagazineCSS": false,
       "clsEvents": [
         {
-          "time": 923,
+          "time": 1168,
           "value": 1,
           "nodes": [
             "section.mg-cover mg-only",
@@ -47,7 +56,7 @@
           ]
         },
         {
-          "time": 1165,
+          "time": 1444,
           "value": 0.0162,
           "nodes": [
             "div.mg-cover-copy"
@@ -57,23 +66,73 @@
       "dialogOpen": false,
       "coverVisible": true,
       "magazine": "on",
-      "fcp": 148,
+      "fcp": 336,
       "cls": 1.0162,
+      "failures": []
+    },
+    {
+      "profile": "mobile",
+      "disableDialog": false,
+      "earlyMagazineCSS": true,
+      "clsEvents": [
+        {
+          "time": 649,
+          "value": 0.43166,
+          "nodes": [
+            "div.hero-meeting",
+            "unknown",
+            "unknown",
+            "unknown"
+          ]
+        },
+        {
+          "time": 829,
+          "value": 0.0162,
+          "nodes": [
+            "div.mg-cover-copy"
+          ]
+        }
+      ],
+      "dialogOpen": false,
+      "coverVisible": true,
+      "magazine": "on",
+      "fcp": 236,
+      "cls": 0.44786,
+      "failures": []
+    },
+    {
+      "profile": "mobile",
+      "disableDialog": true,
+      "earlyMagazineCSS": true,
+      "clsEvents": [],
+      "dialogOpen": false,
+      "coverVisible": true,
+      "magazine": "on",
+      "fcp": 148,
+      "cls": 0,
       "failures": []
     },
     {
       "profile": "desktop",
       "disableDialog": false,
+      "earlyMagazineCSS": false,
       "clsEvents": [
         {
-          "time": 652,
+          "time": 474,
+          "value": 0.00026,
+          "nodes": [
+            "div#toplistFloat."
+          ]
+        },
+        {
+          "time": 780,
           "value": 0.00317,
           "nodes": [
             "div#vipFloatingBar.vip-floating-bar"
           ]
         },
         {
-          "time": 750,
+          "time": 874,
           "value": 1,
           "nodes": [
             "section.mg-cover mg-only",
@@ -84,7 +143,7 @@
           ]
         },
         {
-          "time": 1177,
+          "time": 1312,
           "value": 0.56577,
           "nodes": [
             "section#magazineStory.mg-prologue mg-only",
@@ -98,50 +157,133 @@
       "dialogOpen": true,
       "coverVisible": true,
       "magazine": "on",
-      "fcp": 264,
-      "cls": 1.56894,
+      "fcp": 476,
+      "cls": 1.5692,
       "failures": []
     },
     {
       "profile": "desktop",
       "disableDialog": true,
+      "earlyMagazineCSS": false,
       "clsEvents": [
         {
-          "time": 305,
-          "value": 0.00125,
-          "nodes": [
-            "div#toplistFloat."
-          ]
-        },
-        {
-          "time": 397,
+          "time": 314,
           "value": 0.00026,
           "nodes": [
             "div#toplistFloat."
           ]
         },
         {
-          "time": 738,
+          "time": 613,
           "value": 0.00317,
           "nodes": [
             "div#vipFloatingBar.vip-floating-bar"
           ]
         },
         {
-          "time": 839,
+          "time": 711,
           "value": 1,
           "nodes": [
             "section.mg-cover mg-only",
             "div.hero-meeting",
-            "div.mg-mast-inner"
+            "div.mg-mast-inner",
+            "unknown",
+            "unknown"
           ]
         }
       ],
       "dialogOpen": false,
       "coverVisible": true,
       "magazine": "on",
-      "fcp": 188,
-      "cls": 1.00468,
+      "fcp": 304,
+      "cls": 1.00343,
+      "failures": [
+        "Cannot read properties of undefined (reading 'toLowerCase')"
+      ]
+    },
+    {
+      "profile": "desktop",
+      "disableDialog": false,
+      "earlyMagazineCSS": true,
+      "clsEvents": [
+        {
+          "time": 308,
+          "value": 0.00017,
+          "nodes": [
+            "div#toplistFloat."
+          ]
+        },
+        {
+          "time": 617,
+          "value": 0.00317,
+          "nodes": [
+            "div#vipFloatingBar.vip-floating-bar"
+          ]
+        },
+        {
+          "time": 716,
+          "value": 0.12906,
+          "nodes": [
+            "div.hero-meeting",
+            "unknown",
+            "unknown",
+            "unknown"
+          ]
+        },
+        {
+          "time": 1127,
+          "value": 0.56577,
+          "nodes": [
+            "section#magazineStory.mg-prologue mg-only",
+            "nav.mg-navigation mg-only-nav",
+            "span.mg-story-number",
+            "span.mg-story-number",
+            "span.mg-story-number"
+          ]
+        }
+      ],
+      "dialogOpen": true,
+      "coverVisible": true,
+      "magazine": "on",
+      "fcp": 320,
+      "cls": 0.69817,
+      "failures": []
+    },
+    {
+      "profile": "desktop",
+      "disableDialog": true,
+      "earlyMagazineCSS": true,
+      "clsEvents": [
+        {
+          "time": 307,
+          "value": 0.00017,
+          "nodes": [
+            "div#toplistFloat."
+          ]
+        },
+        {
+          "time": 626,
+          "value": 0.00317,
+          "nodes": [
+            "div#vipFloatingBar.vip-floating-bar"
+          ]
+        },
+        {
+          "time": 703,
+          "value": 0.12906,
+          "nodes": [
+            "div.hero-meeting",
+            "unknown",
+            "unknown",
+            "unknown"
+          ]
+        }
+      ],
+      "dialogOpen": false,
+      "coverVisible": true,
+      "magazine": "on",
+      "fcp": 312,
+      "cls": 0.1324,
       "failures": [
         "Cannot read properties of undefined (reading 'toLowerCase')"
       ]
