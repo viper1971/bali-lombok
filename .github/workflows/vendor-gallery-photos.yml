@@ -1,5 +1,5 @@
 name: Mirror licensed Wikimedia slideshow photos
-# Retry the Mawi gallery using an exact CC BY Commons file with verified provenance.
+# Publish 69 local photos and an explicit no-remote marker for unavailable Tibumana.
 on:
   push:
     branches: [main]
