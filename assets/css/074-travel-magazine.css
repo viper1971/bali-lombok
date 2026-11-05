@@ -511,3 +511,11 @@ html body #hlavni-obsah :is(a.store-btn,a.transport-store-btn):hover {background
 .mg-cover-actions {display:flex;align-items:center;flex-wrap:wrap;gap:12px}
 html[data-magazine="on"] .mg-cover .mg-cover-fullscreen {width:auto;min-height:48px;margin:0;padding:14px 20px;border:1px solid #ffffff90;border-radius:2px;background:#092b2540;color:#fff;box-shadow:none;font:700 13px/1.4 'Plus Jakarta Sans',sans-serif}
 html[data-magazine="on"] .mg-cover .mg-cover-fullscreen:hover {background:#092b2570}
+
+/* A complete second screen, including its caption, without clipping content. */
+@media screen and (min-width:901px) {
+ html[data-magazine="on"] #magazineStory.mg-prologue {display:grid;align-content:center;min-height:100vh;min-height:100dvh;padding:clamp(24px,4vh,48px) 30px;scroll-margin-top:0}
+ #magazineStory .mg-intro-head {gap:clamp(24px,4vw,65px);margin-bottom:clamp(18px,3vh,32px)}
+ #magazineStory .mg-story {box-sizing:border-box;min-height:clamp(190px,40dvh,380px);padding:clamp(18px,2.5vh,26px)}
+ #magazineStory .mg-prologue-note {margin-top:12px}
+}

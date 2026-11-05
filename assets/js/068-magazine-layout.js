@@ -121,6 +121,19 @@
         desktop.addEventListener('change', enter);
       }
     }
+    // Align the second screen exactly after the cover leaves its modal dialog.
+    var explore = cover && cover.querySelector('.mg-cover-cta');
+    if (explore) explore.addEventListener('click', function (event) {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button > 0) return;
+      var story = document.getElementById('magazineStory');
+      if (!story) return;
+      event.preventDefault();
+      requestAnimationFrame(function () {
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: story.getBoundingClientRect().top + window.scrollY, behavior: reduced ? 'instant' : 'smooth' });
+        history.replaceState(null, '', '#magazineStory');
+      });
+    });
     document.addEventListener('click', function (event) {
       var link = event.target.closest && event.target.closest('a[data-magazine-target]');
       if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button > 0) return;
