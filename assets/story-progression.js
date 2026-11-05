@@ -1,132 +1,123 @@
-/* BALI 2027: pouze posun otevíraných podsekcí.
-   Neřeší viditelnost kapitol, odemykání ani stav přečtení.
-   Tyto funkce výhradně ovládá původní systém a přepínač v bočním menu. */
-(function(){
+/* BALI 2027 — main chapter and subsection alignment only.
+   Existing navigation, locks, read status, maps and accordion handlers stay authoritative. */
+(function () {
   "use strict";
-  var timer = 0;
-  var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
-  function offset(){
-    var value=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--stick-top"))||0;
-    return Math.max(12,Math.min(125,value+12));
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+  var pending = null, tail = null, generation = 0, timers = [];
+
+  function clearTimers() {
+    timers.forEach(function (id) { clearTimeout(id); });
+    timers = [];
   }
-  function moveTo(fold){
-    if(!fold || !fold.classList.contains("is-open"))return;
-    var heading=fold.querySelector(":scope > .lux-fold-h") || fold;
-    position(heading);
+  function offset() {
+    var root = document.documentElement;
+    var raw = parseFloat(getComputedStyle(root).getPropertyValue("--stick-top")) || 0;
+    return Math.max(12, Math.min(130, raw + 12));
   }
-  function schedule(fold,ms){
-    clearTimeout(timer);
-    timer=setTimeout(function(){moveTo(fold)},ms);
+  function firstHeading(part) {
+    var f = part.querySelector(":scope > .lux-part-body .lux-fold[id]");
+    return f ? (f.querySelector(":scope > .lux-fold-h") || f) :
+      (part.querySelector(":scope > .lux-part-head") || part);
   }
-  function scrollTarget(part) {
-    // A chapter can contain ordinary content without any accordion.
-    // Only direct chapter content counts, not nested accordions from other components.
-    var first = part.querySelector(":scope > .lux-part-body .lux-fold[id]");
-    return first ? (first.querySelector(":scope > .lux-fold-h") || first)
-                 : (part.querySelector(":scope > .lux-part-head") || part);
+  function destination(el) {
+    return Math.max(0, window.scrollY + el.getBoundingClientRect().top - offset());
   }
-  // The last chapters are shorter than the viewport. Without a temporary tail
-  // Chrome clamps scrollY before their first accordion reaches the top.
-  var tail=null, activeChapter=null;
-  function ensureTail(){
-    if(!tail){
-      tail=document.createElement("div");
-      tail.id="bali-chapter-scroll-tail";
-      tail.setAttribute("aria-hidden","true");
-      tail.style.cssText="height:0;min-height:0;pointer-events:none;flex:none;overflow:hidden";
-      document.body.appendChild(tail);
+  function ensureTail() {
+    if (!tail) {
+      tail = document.createElement("div");
+      tail.id = "bali-chapter-scroll-tail";
+      tail.setAttribute("aria-hidden", "true");
+      tail.style.cssText = "display:block!important;height:0;min-height:0;width:100%;flex:none;clear:both;pointer-events:none;overflow:hidden";
     }
+    var parts = document.querySelectorAll(".lux-part");
+    var last = parts[parts.length-1];
+    if (last && tail.previousElementSibling !== last) last.insertAdjacentElement("afterend", tail);
     return tail;
   }
-  function clearTail(){
-    if(tail)tail.style.height="0px";
-    activeChapter=null;
+  function resetTail() {
+    if (tail) tail.style.height = "0px";
   }
-  function position(el) {
-    if(!el || !el.isConnected || !el.getClientRects().length)return;
-    var part=el.closest(".lux-part");
-    // The desired scroll position subtracts the fixed-header offset EXACTLY ONCE.
-    // Earlier code subtracted twice and left the final chapters stuck near the bottom.
-    var y=Math.max(0,window.scrollY+el.getBoundingClientRect().top-offset());
-    var extension=ensureTail();
-    extension.style.height="0px";
-    // Reflow before reading available scroll height.
-    var maxY=Math.max(0,document.documentElement.scrollHeight-window.innerHeight);
-    var missing=Math.max(0,Math.ceil(y-maxY));
-    if(missing>0)extension.style.height=(missing+32)+"px";
-    activeChapter=part;
-    window.scrollTo({top:y,behavior:prefersReduced && prefersReduced.matches ? "instant":"smooth"});
-    // Once the chapter layout has settled, correct the final few pixels.
-    // Do not shrink the temporary tail before this correction.
-    window.setTimeout(function(){
-      if(!el.isConnected || !part || !part.classList.contains("is-open"))return;
-      var correction=el.getBoundingClientRect().top-offset();
-      if(Math.abs(correction)>3){
-        var extra=Math.max(0,Math.ceil(window.scrollY+correction-
-          (document.documentElement.scrollHeight-window.innerHeight)));
-        if(extra>0)extension.style.height=(extension.offsetHeight+extra+16)+"px";
-        window.scrollTo({top:Math.max(0,window.scrollY+correction),
-          behavior:prefersReduced && prefersReduced.matches ? "instant":"smooth"});
-      }
-    },700);
+  function extendFor(target) {
+    var spacer = ensureTail();
+    var scroll = document.scrollingElement || document.documentElement;
+    var goal = destination(target);
+    var max = Math.max(0, scroll.scrollHeight - scroll.clientHeight);
+    var missing = Math.max(0, Math.ceil(goal - max));
+    var current = parseFloat(spacer.style.height) || 0;
+    if (missing > 0) spacer.style.height = (current + missing + 80) + "px";
+    return goal;
   }
-  function afterChapterOpen(part) {
-    // Existing accordion code preserves header position during the opening animation.
-    // Scroll afterwards, when the part has settled and layout is measurable.
-    clearTimeout(timer);
-    timer=setTimeout(function(){
-      if(part.isConnected && part.classList.contains("is-open")) {
-        position(scrollTarget(part));
-      }
-    },470);
+  function align(target, owner, token) {
+    if (token !== generation || !owner.isConnected || !owner.classList.contains("is-open") ||
+        !target.isConnected || !target.getClientRects().length) return;
+    var y = extendFor(target);
+    // Direct positioning avoids competing smooth animations started by legacy accordion logic.
+    window.scrollTo({ top: y, behavior: "instant" });
   }
-  function clicked(e){
-    var target=e.target;
-    if(!target || !target.closest)return;
-    if(target.closest(".lux-part > .lux-part-head")) clearTail();
-    var foldButton=target.closest(".lux-fold-btn");
-    if(foldButton){
-      var fold=foldButton.closest(".lux-fold[id]");
-      if(fold && fold.closest(".lux-part") && !fold.classList.contains("is-open")){
-        setTimeout(function(){if(fold.classList.contains("is-open"))schedule(fold,70)},100);
+  function start(owner, target, firstDelay) {
+    generation++;
+    clearTimers();
+    var token = generation;
+    if (!owner || !target) return;
+    // The original accordion animation and preserve-header handler can move the page
+    // for a while. Align again after they finish.
+    [firstDelay, firstDelay + 300, firstDelay + 850].forEach(function (delay) {
+      timers.push(setTimeout(function () { align(target, owner, token); }, delay));
+    });
+  }
+  function chapterClick(event) {
+    var node = event.target;
+    if (!node || !node.closest) return;
+    var button = node.closest(".lux-fold-btn");
+    if (button) {
+      var fold = button.closest(".lux-fold[id]");
+      if (fold && fold.closest(".lux-part") && !fold.classList.contains("is-open")) {
+        start(fold, fold.querySelector(":scope > .lux-fold-h") || fold, 230);
       }
       return;
     }
-    var heading=target.closest(".lux-part > .lux-part-head");
-    if(!heading)return;
-    var nested=target.closest("a,button,input,select,textarea,[role=button],.trip-overview");
-    if(nested && nested!==heading)return;
-    var part=heading.closest(".lux-part");
-    if(!part || part.classList.contains("is-open"))return;
-    afterChapterOpen(part);
+    var heading = node.closest(".lux-part > .lux-part-head");
+    if (!heading) return;
+    var other = node.closest("a,button,input,select,textarea,.trip-overview");
+    if (other && other !== heading) return;
+    var part = heading.closest(".lux-part");
+    if (!part) return;
+    if (part.classList.contains("is-open")) {
+      generation++;
+      clearTimers();
+      resetTail();
+      return;
+    }
+    start(part, firstHeading(part), 480);
   }
-  function keyboard(e){
-    if(e.key!=="Enter" && e.key!==" ")return;
-    var heading=e.target && e.target.matches &&
-      e.target.matches(".lux-part > .lux-part-head") ? e.target:null;
-    if(!heading)return;
-    var part=heading.closest(".lux-part");
-    if(!part || part.classList.contains("is-open"))return;
-    afterChapterOpen(part);
+  function chapterKey(event) {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    var head = event.target && event.target.matches &&
+      event.target.matches(".lux-part > .lux-part-head") ? event.target : null;
+    if (!head) return;
+    var part = head.closest(".lux-part");
+    if (!part) return;
+    if (part.classList.contains("is-open")) {
+      generation++; clearTimers(); resetTail();
+    } else {
+      start(part, firstHeading(part), 480);
+    }
   }
-  document.addEventListener("click",clicked,true);
-  document.addEventListener("keydown",keyboard,true);
-  // Remove temporary page extension when the original system closes a chapter.
-  document.addEventListener("click",function(){
-    if(!activeChapter)return;
-    window.setTimeout(function(){
-      if(activeChapter && !activeChapter.classList.contains("is-open"))clearTail();
-    },600);
-  },true);
-  function init(){
+  document.addEventListener("click", chapterClick, true);
+  document.addEventListener("keydown", chapterKey, true);
+  function init() {
+    // No independent chapter locking: the existing sidebar checkbox is the only control.
     document.documentElement.classList.remove("bali-story-progressive");
-    document.querySelectorAll(".lux-part.bali-story-concealed").forEach(function(p){p.classList.remove("bali-story-concealed")});
-    // Preserve independent map markers inside the itinerary banner.
-    document.querySelectorAll(".lux-part > .lux-part-head .trip-overview").forEach(function(map){
-      map.addEventListener("click",function(e){e.stopPropagation()});
-      map.addEventListener("keydown",function(e){e.stopPropagation()});
+    document.querySelectorAll(".lux-part.bali-story-concealed").forEach(function (p) {
+      p.classList.remove("bali-story-concealed");
+    });
+    // Keep interactive itinerary-map clicks independent of its chapter header.
+    document.querySelectorAll(".lux-part > .lux-part-head .trip-overview").forEach(function (map) {
+      map.addEventListener("click", function (e) { e.stopPropagation(); });
+      map.addEventListener("keydown", function (e) { e.stopPropagation(); });
     });
   }
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
-  else init();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once:true });
+  } else init();
 })();
