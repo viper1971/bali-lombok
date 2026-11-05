@@ -986,3 +986,45 @@ html[data-magazine="on"] body #hlavni-obsah.main-wrapper #osa > .lux-part-body >
     margin-bottom:16px !important;
   }
 }
+
+
+/* Desktop full-width itinerary route: the legacy .rt-wrap uses two columns
+   even when its first journey panel is hidden in magazine view. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #osa > .lux-part-body #tripOverview,
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #osa > .lux-part-body #tripOverview .to-map,
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #osa > .lux-part-body #routeMap {
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #osa > .lux-part-body #routeMap .rt-wrap {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    gap:0 !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #osa > .lux-part-body #routeMap .rt-local {
+    grid-column:1 / -1 !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    display:block !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #osa > .lux-part-body #routeMap .rt-local svg {
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    min-width:0 !important;
+  }
+}
