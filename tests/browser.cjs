@@ -54,6 +54,12 @@ function serve(dir,port){const p=spawn('python3',['-m','http.server',String(port
    const oldTheme=await page.evaluate(()=>document.documentElement.dataset.theme);await page.evaluate(()=>toggleTheme());assert.notEqual(await page.evaluate(()=>document.documentElement.dataset.theme),oldTheme);await page.evaluate(()=>toggleTheme());
    await page.evaluate(()=>luxPresent());assert(await page.locator('body').evaluate(n=>n.classList.contains('pres-on')));await page.evaluate(()=>luxPresentStop());assert(!(await page.locator('body').evaluate(n=>n.classList.contains('pres-on'))));
    const chosen=levels.at(-1);await page.reload();await page.waitForTimeout(3500);assert.equal(await page.evaluate(()=>TRIP.level()),chosen,'food choice persists');
+   // Desktop magazine mode deliberately starts inside a modal cover.
+   // A real visitor must enter the magazine before using page-level search.
+   if (viewport.width > 900) {
+     const entry=page.locator('dialog.mg-entry[open]');
+     if (await entry.count()) await entry.locator('.mg-cover-cta').click();
+   }
    await page.locator('#uxSearchBtn').evaluate(n=>n.click());
    const searchInput=page.locator('#uxSearchInput');
    await searchInput.fill('Ubud');
