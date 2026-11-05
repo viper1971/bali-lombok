@@ -1,117 +1,73 @@
 #!/usr/bin/env python3
-"""Deterministic static build; preserves script boundaries and CSS cascade order."""
-import hashlib, json, pathlib, re, subprocess
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-source = (ROOT / 'src/index.html').read_text()
-
-# Default mode validates the deployed optimized site without modifying it.
-# Historical source regeneration must be explicitly requested because src/index.html
-# has not yet been synchronized with the deployed editorial and bundle changes.
-published = ROOT / 'index.html'
+"""Reproducible build from the canonical optimized HTML, without deleting assets."""
+import json
+import pathlib
+import re
 import sys
-if '--rebuild-from-source' not in sys.argv:
-    if not published.is_file():
-        raise SystemExit('Published index.html is missing; cannot verify the deployed site.')
-    from html.parser import HTMLParser
-    from urllib.parse import urlsplit, unquote
+from html.parser import HTMLParser
+from urllib.parse import unquote, urlsplit
 
-    class LocalAssets(HTMLParser):
-        def __init__(self):
-            super().__init__()
-            self.paths = []
-        def handle_starttag(self, tag, attrs):
-            a = dict(attrs)
-            uri = a.get('src') if tag in ('script', 'img', 'iframe') else a.get('href') if tag == 'link' else None
-            if not uri:
-                return
-            parsed = urlsplit(uri)
-            if parsed.scheme or parsed.netloc or uri.startswith(('#', '//', 'data:')):
-                return
-            path = unquote(parsed.path).lstrip('/')
-            if path and not path.startswith('../'):
-                self.paths.append(path)
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+SOURCE = ROOT / "src/index.html"
+DEST = ROOT / "index.html"
 
-    page = published.read_text(encoding='utf-8')
+class LocalAssets(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.paths = set()
+        self.scripts = []
+        self.stylesheets = []
+
+    def handle_starttag(self, tag, attrs):
+        a = dict(attrs)
+        uri = a.get("src") if tag in ("script", "img", "iframe", "source", "video") else a.get("href") if tag == "link" else None
+        if not uri:
+            return
+        parsed = urlsplit(uri)
+        if parsed.scheme or parsed.netloc or uri.startswith(("#", "//", "data:")):
+            return
+        path = unquote(parsed.path).lstrip("/")
+        if not path or path.startswith("../"):
+            return
+        self.paths.add(path)
+        if tag == "script":
+            self.scripts.append(path)
+        if tag == "link" and a.get("rel", "").lower() == "stylesheet":
+            self.stylesheets.append(path)
+
+def main():
+    check = "--check" in sys.argv
+    unknown = set(sys.argv[1:]) - {"--check"}
+    if unknown:
+        raise SystemExit("Unknown build options: " + ", ".join(sorted(unknown)))
+    source = SOURCE.read_text(encoding="utf-8")
+    if not source.startswith("<!DOCTYPE html>"):
+        raise SystemExit("Invalid source HTML; published files untouched")
+    charset = source.find('<meta charset="UTF-8">')
+    if not 0 <= charset < 1024:
+        raise SystemExit("Missing early UTF-8 charset; published files untouched")
     parser = LocalAssets()
-    parser.feed(page)
-    paths = sorted(set(parser.paths))
-    missing = [p for p in paths if not (ROOT / p).is_file()]
+    parser.feed(source)
+    missing = sorted(p for p in parser.paths if not (ROOT / p).is_file())
     if missing:
-        raise SystemExit('Published asset validation failed; missing: ' + ', '.join(missing))
+        raise SystemExit("Missing local assets; published files untouched: " + ", ".join(missing))
+    if len(parser.scripts) < 30 or len(parser.stylesheets) < 15:
+        raise SystemExit("Unexpected asset count; refusing to publish truncated source HTML")
+    existing = DEST.read_text(encoding="utf-8") if DEST.exists() else ""
+    if check and source != existing:
+        raise SystemExit("Published index.html is out of sync with src/index.html")
+    changed = source != existing
+    if changed and not check:
+        DEST.write_text(source, encoding="utf-8")
     print(json.dumps({
-        'mode': 'verify-published',
-        'status': 'ok',
-        'local_assets': len(paths),
-        'missing': 0,
-        'message': 'Existing optimized page and bundles were preserved without rewriting.'
+        "mode": "check" if check else "build",
+        "status": "ok",
+        "updated": changed and not check,
+        "local_assets": len(parser.paths),
+        "script_files": len(parser.scripts),
+        "stylesheet_files": len(parser.stylesheets),
+        "missing": 0
     }))
-    sys.exit(0)
 
-# Explicit legacy regeneration is destructive: it recreates index.html and
-# cleans assets/build. Keep it opt-in until src/ matches the published design.
-out = ROOT / 'assets/build'
-out.mkdir(exist_ok=True)
-for old in out.glob('*'):
-    old.unlink()
-manifest = []
-js_sources = {p: (ROOT / p).read_text() for p in re.findall(r'<script\b[^>]*src="(assets/js/[^\"]+)"', source)}
-minified = json.loads(subprocess.run(['node', 'tools/minify-js.cjs'], cwd=ROOT, input=json.dumps(js_sources), text=True, capture_output=True, check=True).stdout)
-css_sources = {p: (ROOT / p).read_text() for p in re.findall(r'href="(assets/css/[^\"]+)"', source)}
-minified_css = json.loads(subprocess.run(['node', 'tools/minify-css.cjs'], cwd=ROOT, input=json.dumps(css_sources), text=True, capture_output=True, check=True).stdout)
-def emit(kind, content, sources):
-    digest = hashlib.sha256(content.encode()).hexdigest()[:16]
-    name = f'assets/build/{kind}-{digest}.{kind}'
-    (ROOT / name).write_text(content)
-    manifest.append({'output': name, 'sources': sources, 'bytes': len(content.encode())})
-    return name
-# Comment-only scripts have no execution or DOM dependencies. Keep an inert element
-# if an ID exists, so selectors and integrations still find the original anchor.
-def script(m):
-    tag, path = m[0], m[1]
-    content = (ROOT / path).read_text()
-    executable = re.sub(r'/\*.*?\*/|//[^\n]*', '', content, flags=re.S).strip()
-    if not executable:
-        return re.sub(r'\s+src="[^"]+"', '', tag)
-    return tag.replace(path, emit('js', minified[path], [path]))
-source = re.sub(r'<script\b[^>]*src="(assets/js/[^"]+)"[^>]*></script>', script, source)
-# Merge only neighbouring stylesheets separated by whitespace/comments: never
-# move CSS across a script or markup boundary. Preserve IDs as inert anchors.
-css = r'<link\b[^>]*href="assets/css/[^"]+"[^>]*>'
-pattern = css + r'(?:(?:\s|<!--.*?-->)*' + css + r')*'
-def styles(m):
-    tags = re.findall(css, m[0])
-    paths = [re.search(r'href="([^"]+)"', t)[1] for t in tags]
-    contents = [minified_css[p] for p in paths]
-    # CSS relative URLs and @imports would change meaning after relocating.
-    for p, c in zip(paths, contents):
-        urls = re.findall(r"url\(\s*(?:\"([^\"]*)\"|'([^']*)'|([^)]*))\)", c)
-        if '@import' in c or any(not next((v for v in u if v), '').strip().startswith(('http:', 'https:', 'data:', '//', '#')) for u in urls):
-            raise ValueError(f'Unsafe CSS relocation: {p}')
-    chunks, batch, size = [], [], 0
-    for path, content in zip(paths, contents):
-        if batch and size + len(content.encode()) > 64000:
-            chunks.append(batch); batch, size = [], 0
-        batch.append((path, content)); size += len(content.encode())
-    if batch: chunks.append(batch)
-    links = ''
-    for batch in chunks:
-        name = emit('css', '\n'.join(c for p,c in batch), [p for p,c in batch])
-        links += f'<link rel="stylesheet" href="{name}">'
-    anchors = ''.join('<style id="'+i+'"></style>' for t in tags for i in re.findall(r'\bid="([^"]+)"',t))
-    comments = '\n'.join(re.findall(r'<!--.*?-->',m[0],re.S))
-    return links+anchors+'\n'+comments
-source = re.sub(pattern, styles, source, flags=re.S)
-# Charset must precede scripts and appear within the first 1024 bytes.
-source = source.replace('    <meta charset="UTF-8">\n','')
-source = source.replace('<head>', '<head>\n    <meta charset="UTF-8">',1)
-source = source.replace('href="https://viper1971.github.io/bali-lombok/icon-192.png"','href="icon-192.png"')
-(ROOT / 'index.html').write_text(source)
-(ROOT / 'assets/build-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
-print(json.dumps({'source_files':sum(len(m['sources']) for m in manifest),'requests':len(manifest),'bytes':sum(m['bytes'] for m in manifest)}))
-worker = (ROOT / 'src/sw.js').read_text()
-shell = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'transportData.js'] + [m['output'] for m in manifest]
-version = hashlib.sha256((source + worker + ''.join((ROOT / p).read_text() for p in shell if p.endswith(('.js','.json')))).encode()).hexdigest()[:16]
-(ROOT / 'sw.js').write_text('const VERSION = '+json.dumps(version)+';\nconst SHELL = '+json.dumps(shell)+';\n'+worker)
-
-# Version marker prevents mixing cached HTML with a different release's assets.
-(ROOT / 'index.html').write_text(source.replace('<meta charset="UTF-8">', '<meta charset="UTF-8">\n    <meta name="bali-build" content="' + version + '">', 1))
+if __name__ == "__main__":
+    main()
