@@ -34,3 +34,13 @@
 - V produkčním JavaScriptu pro položky 041 a 049 odstraněna aktivní registrace offline workeru a tlačítko offline; předchozí úprava samotného manifestového výstupu nestačila.
 - Produkční manifest eviduje 88 výstupních souborů (61 JS + 27 CSS), dohromady přibližně 1,28 MB bez přenosové komprese; samotné CSS tvoří přibližně 771 kB. To jsou velikosti souborů, nikoli naměřená síťová data.
 - Upravený nástroj `tools/vendor_images.py` prochází také opravdu nasazené `index.html` a `assets/build`, aniž by při migraci měnil strukturu skriptů; změněným assetům v publikované HTML přidá verzi kvůli cache.
+
+## Stav po úspěšné migraci fotografií
+- GitHub Actions dokončil převod **19 fotografických souborů** do `assets/images/external/*.webp` (18 Unsplash/Pexels + 1 Wikimedia Commons).
+- Kontrolní report `docs/external-image-migration.json` uvádí **0 chyb stahování**; ověřena existence nového Wikimedia WebP souboru a jeho lokální URL v produkčním i zdrojovém skriptu `047.js`.
+- Wikimedia fotografie Gili Meno: Enrico Strocchi, CC BY-SA 2.0; atributy a informace o zmenšení jsou v `docs/image-credits.md`.
+- Zbylé položky automatického inventáře tvoří **OpenStreetMap mapové dlaždice** (nutně externí pro živou mapu) a **doména Wikimedia v preconnect odkazu**, nikoli další pevná URL fotografie.
+- `index.html` nyní neobsahuje externí Unsplash/Pexels URL.
+- HTML má 63 skriptových a 30 CSS odkazů včetně externích služeb, 26 iframe map se `loading="lazy"`, 60 obrázkových tagů (59 lazy a 1 prioritní titulní obrázek). Jde o statickou inspekci, nikoliv browser trace.
+- Dodán `tools/check_migrated_images.py`; CI kontrola má při další migraci zabránit zmizení lokálních souborů a návratu externích URL do kódu.
+- Reálnou produkční rychlost ani funkčnost na fyzickém telefonu zatím nebylo možné změřit; další optimalizace vyžaduje Lighthouse/Playwright regresi a analýzu síťového waterfallu.
