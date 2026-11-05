@@ -1,0 +1,38 @@
+/* The regular site is untouched; only desktop presentation uses complete screens. */
+html[data-magazine="on"] body.pres-on .pres-hide,html[data-magazine="on"] body.pres-on header.hero.pres-hide {display:none!important}
+@media screen and (min-width:901px) {
+ html.pres-paged,html body.pres-on.pres-paged {height:100%;overflow:hidden!important;overscroll-behavior:none;scroll-behavior:auto!important}
+ html body.pres-on.pres-paged {padding:0!important}
+ html body.pres-paged :is(.main-wrapper,.lux-part,.lux-part-body) {transform:none!important;filter:none!important;contain:none!important;overflow:visible!important;animation:none!important;transition:none!important}
+ html body.pres-paged .vip-floating-bar {display:none!important}
+ html body.pres-paged #hlavni-obsah .pr-current,html body.pres-paged #presEnd.pr-current {
+  position:fixed!important;inset:10px 22px calc(var(--prh,76px) + 22px) 70px!important;
+  box-sizing:border-box!important;width:auto!important;max-width:none!important;height:auto!important;min-height:0!important;
+  margin:0!important;padding:12px!important;overflow:hidden!important;background:var(--mg-paper,#f7f5ed)!important;
+  border:1px solid var(--mg-line,#d6dbd0);border-radius:4px;isolation:isolate;z-index:10010!important;transform:none!important;animation:none!important;transition:none!important;
+ }
+ html body.pres-paged .pr-current > .lux-fold-h .lux-fold-btn {pointer-events:none}
+ html body.pres-paged .pr-current.pr-preparing {opacity:0!important;pointer-events:none!important}
+ html body.pres-paged .pr-current * {animation:none!important;transition:none!important}
+ html body.pres-paged .pr-current > .lux-fold-h {position:relative!important;top:auto!important;margin:0 0 12px!important}
+ html body.pres-paged .pr-current > .lux-fold-h .lux-fold-btn {padding:10px 16px!important;min-height:0!important;cursor:default}
+ html body.pres-paged .pr-current > .lux-fold-h :is(.lux-fold-chev,.lux-fold-arrow,.lux-progress-pill) {display:none!important}
+ html body.pres-paged #hlavni-obsah .pr-current :is(.lux-fold-body,.lux-fold-inner,.lux-fold-pad) {max-height:none!important;height:auto!important;min-height:0!important;padding:0!important;margin:0!important;overflow:visible!important;opacity:1!important;visibility:visible!important}
+ html body.pres-paged #hlavni-obsah .pr-current .pr-branch {min-height:0!important;height:auto!important;max-height:none!important;margin-top:0!important;margin-bottom:0!important;padding-top:0!important;padding-bottom:0!important;overflow:visible!important;animation:none!important;transition:none!important}
+ html body.pres-paged #hlavni-obsah .pr-current .pr-single {grid-template-columns:minmax(0,1fr)!important}
+ html body.pres-paged #hlavni-obsah .pr-current :is(.sv-stage,.uber-media-box,.trip-show,.map-box,.leaflet-container) {height:clamp(140px,34dvh,380px)!important;min-height:0!important;max-height:calc(var(--pr-space,600px) - 60px)!important}
+ html body.pres-paged #hlavni-obsah .pr-current :is(.sv-card,.hotel-location-map) {min-height:0!important;margin:0!important}
+ html body.pres-paged #hlavni-obsah .pr-current .hotel-location-map iframe {height:clamp(110px,29dvh,330px)!important;min-height:0!important}
+ html body.pres-paged #hlavni-obsah .pr-current img:not(.leaflet-tile) {max-height:min(38dvh,calc(var(--pr-space,600px) - 60px))!important;object-fit:contain}
+ html body.pres-paged #hlavni-obsah .pr-current :is(.mg-feature,.mg-feature > div) {min-height:0!important;height:auto!important;max-height:none!important}
+ html body.pres-paged #hlavni-obsah .pr-current .mg-feature {padding:18px!important}
+ html body.pres-paged #hlavni-obsah .pr-current .pr-fit-block {max-height:calc(var(--pr-space,600px) - 60px)!important;min-height:0!important;height:auto!important;object-fit:contain}
+ html body.pres-paged #hlavni-obsah .pr-current .pr-text-piece {display:block;margin:0 0 .5em}
+ html body.pres-paged #presBar {bottom:8px;max-width:calc(100vw - 32px);border-radius:8px;box-shadow:0 6px 22px #0002;background:#103e32}
+ html body.pres-paged #presBar :is(#prBrief,#prNotes) {display:none!important}
+ html body.pres-paged #presBar .pr-mid {max-width:38vw;min-width:200px}
+ html body.pres-paged #presBar #prN {white-space:nowrap;font-variant-numeric:tabular-nums}
+ html body.pres-paged #presBar :is(#prPrev,#prNext) {white-space:nowrap;border-radius:4px}
+ html body.pres-paged #presRail {left:10px;right:auto!important;width:32px!important;box-sizing:border-box;max-height:calc(100dvh - var(--prh,76px) - 32px)}
+ html body.pres-paged #presNav {bottom:calc(var(--prh,76px) + 22px);max-height:calc(100dvh - var(--prh,76px) - 44px)}
+}

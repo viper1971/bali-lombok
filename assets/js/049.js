@@ -361,6 +361,8 @@
     }
     function buildSlides() {
         var s = [];
+        var flights = $('flightPick');
+        if (flights) s.push({ el: flights, kicker: 'Před cestou', title: 'Výběr letenek' });
         allParts().forEach(function (pt) {
             var ey = pt.querySelector('.lux-part-eyebrow'), kick = ey ? ey.textContent.split('·')[0].trim() + (ey.textContent.indexOf('·') > -1 ? ' · ' + ey.textContent.split('·')[1].trim() : '') : '';
             [].forEach.call(pt.querySelectorAll('#tripOverview, .lux-fold[id]:not([data-nocount])'), function (el) {
@@ -371,20 +373,30 @@
         var endEl = buildEnd(); if (endEl) s.push({ el: endEl, kicker: 'Závěr', title: 'Děkuji · QR na stránku' });
         return s.filter(function (x) { return x.el; });
     }
-    function presShow(i) {
+    function presMove(step) {
+        if (window.luxPresentationPages && window.luxPresentationPages.state().preparing) return;
+        if (window.luxPresentationPages && window.luxPresentationPages.turn(step)) return;
+        if (pres.i + step < 0 || pres.i + step >= pres.slides.length) return;
+        presShow(pres.i + step, step < 0);
+    }
+    function presShow(i, lastPage) {
         if (!pres.slides.length) return;
+        if (window.luxPresentationPages) window.luxPresentationPages.unmount();
         pres.i = Math.max(0, Math.min(pres.slides.length - 1, i));
         var s = pres.slides[pres.i];
         [].forEach.call(document.querySelectorAll('.pres-hide'), function (x) { x.classList.remove('pres-hide'); });
         [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (f) { foldSet(f, false); });
         allParts().forEach(function (pt) { pt.classList.toggle('is-open', pt === s.part); });
-        if (s.fold) foldSet(s.el, true);
+        if (s.el.tagName === 'DETAILS') s.el.open = true;
+        if (s.fold) { foldSet(s.el, true); s.el.querySelectorAll('.lux-fold').forEach(function (f) { foldSet(f, true); }); }
         [].forEach.call(document.querySelectorAll('#presEnd'), function (x) { x.classList.toggle('is-cur', x === s.el); });
         hideSiblings(s.el);
         window.scrollTo({ top: 0, behavior: 'instant' });
         $('prK').textContent = s.kicker || ''; $('prT').textContent = s.title; $('prN').textContent = (pres.i + 1) + ' / ' + pres.slides.length;
         $('prPrev').disabled = pres.i === 0; $('prNext').disabled = pres.i === pres.slides.length - 1;
-        pres.seen[pres.i] = 1; navMark(); presLayout(); setTimeout(presLayout, 250); presTick(); notesRender();
+        pres.seen[pres.i] = 1; navMark(); presLayout();
+        if (window.luxPresentationPages) window.luxPresentationPages.mount(s.el, presTick, lastPage);
+        setTimeout(presLayout, 250); presTick(); notesRender();
         setTimeout(refreshMaps, 120); setTimeout(refreshMaps, 600);
     }
 
@@ -428,25 +440,27 @@
         if (bar) r.setProperty('--prh', bar.offsetHeight + 'px'); if (vb) r.setProperty('--pvh', vb.offsetHeight + 'px');
     }
     window.addEventListener('resize', function () { if (pres.on) presLayout(); });
-    function setSize(v) { pres.size = Math.max(90, Math.min(150, v)); document.documentElement.style.fontSize = pres.size + '%'; }
+    function setSize(v) { pres.size = Math.max(90, Math.min(150, v)); document.documentElement.style.fontSize = pres.size + '%'; if (window.luxPresentationPages) window.luxPresentationPages.reflow(); }
     window.luxPresent = function (start) {
         if (pres.on) return;
         if (typeof window.toggleMenuModal === 'function' && $('menuModalOverlay') && $('menuModalOverlay').classList.contains('open')) window.toggleMenuModal();
         pres.on = true; pres.scroll = window.scrollY; pres.slides = buildSlides(); pres.seen = {}; buildNav();
-        pres.snap = { folds: [].map.call(document.querySelectorAll('.lux-fold.is-open'), function (f) { return f.id; }), parts: [].map.call(document.querySelectorAll('.lux-part.is-open'), function (x) { return x.id; }) };
-        document.body.classList.add('pres-on'); document.documentElement.classList.add('pres-on'); setSize(112);
-        presT.t0 = Date.now(); clearInterval(presT.timer); presT.timer = setInterval(presTick, 1000);
+        pres.snap = { details: Array.from(document.querySelectorAll('details')).map(function (el) { return [el, el.open]; }), fontSize: document.documentElement.style.fontSize, hadFullscreen: !!document.fullscreenElement, folds: [].map.call(document.querySelectorAll('.lux-fold.is-open'), function (f) { return f.id; }), parts: [].map.call(document.querySelectorAll('.lux-part.is-open'), function (x) { return x.id; }) };
+        document.body.classList.add('pres-on'); document.documentElement.classList.add('pres-on'); if (window.luxRefreshReadState) window.luxRefreshReadState(); setSize(100);
+        presT.t0 = Date.now(); clearInterval(presT.timer);
         try { if (document.documentElement.requestFullscreen && !document.fullscreenElement) document.documentElement.requestFullscreen().then(function () { pres.wantFs = true; }).catch(function () {}); } catch (e) {}
         presShow(typeof start === 'number' ? start : 0);
         $('prNext').focus({ preventScroll: true });
     };
     window.luxPresentStop = function () { if (pres.on) { try { window.luxBrief(false); } catch (e) {} }
-        if (!pres.on) return; pres.on = false; pres.wantFs = false; pres.lostByTab = false; clearInterval(presT.timer); var pn = $('presNotes'); if (pn) pn.classList.remove('is-open'); [].forEach.call(document.querySelectorAll('#presEnd'), function (x) { x.classList.remove('is-cur'); }); closeViewer(); navToggle(false); var fo = $('presFs'); if (fo) fo.classList.remove('is-open');
+        if (!pres.on) return; if (window.luxPresentationPages) window.luxPresentationPages.unmount(); pres.on = false; pres.wantFs = false; pres.lostByTab = false; clearInterval(presT.timer); var pn = $('presNotes'); if (pn) pn.classList.remove('is-open'); [].forEach.call(document.querySelectorAll('#presEnd'), function (x) { x.classList.remove('is-cur'); }); closeViewer(); navToggle(false); var fo = $('presFs'); if (fo) fo.classList.remove('is-open');
         [].forEach.call(document.querySelectorAll('.pres-hide'), function (x) { x.classList.remove('pres-hide'); });
-        document.body.classList.remove('pres-on'); document.documentElement.classList.remove('pres-on'); document.documentElement.style.fontSize = '';
+        document.body.classList.remove('pres-on'); document.documentElement.classList.remove('pres-on'); document.documentElement.style.fontSize = pres.snap.fontSize;
         [].forEach.call(document.querySelectorAll('.lux-fold'), function (f) { foldSet(f, pres.snap.folds.indexOf(f.id) > -1); f.inert = f.classList.contains('lux-locked'); });
         allParts().forEach(function (pt) { pt.classList.toggle('is-open', pres.snap.parts.indexOf(pt.id) > -1); });
-        try { if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function () {}); } catch (e) {}
+        try { if (!pres.snap.hadFullscreen && document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function () {}); } catch (e) {}
+        pres.snap.details.forEach(function (saved) { saved[0].open = saved[1]; });
+        if (window.luxRefreshReadState) window.luxRefreshReadState();
         window.scrollTo({ top: pres.scroll, behavior: 'instant' }); refreshMaps();
     };
     function presKeys(e) {
@@ -454,8 +468,8 @@
         var tg = e.target, tag = tg && tg.tagName; if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA' || (tg && tg.isContentEditable)) return;
         var k = e.key;
         if (viewerOpen()) { if (k === 'Escape') { e.preventDefault(); closeViewer(); } return; }
-        if (k === 'ArrowRight' || k === 'PageDown' || (k === ' ' && tag !== 'BUTTON' && tag !== 'A')) { e.preventDefault(); presShow(pres.i + 1); }
-        else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); presShow(pres.i - 1); }
+        if (k === 'ArrowRight' || k === 'PageDown' || (k === ' ' && tag !== 'BUTTON' && tag !== 'A')) { e.preventDefault(); presMove(1); }
+        else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); presMove(-1); }
         else if (k === 'Home') { e.preventDefault(); presShow(0); }
         else if (k === 'End') { e.preventDefault(); presShow(pres.slides.length - 1); }
         else if (k === 'Escape') { e.preventDefault(); var nv = $('presNav'); if (nv && nv.classList.contains('is-open')) navToggle(false); else window.luxPresentStop(); }
@@ -466,18 +480,29 @@
     }
     (function presWire() {
         if (!$('presBar')) return;
-        $('prPrev').onclick = function () { presShow(pres.i - 1); }; $('prNext').onclick = function () { presShow(pres.i + 1); };
+        $('prPrev').onclick = function () { presMove(-1); }; $('prNext').onclick = function () { presMove(1); };
         $('prX').onclick = function () { window.luxPresentStop(); };
         $('prNotes').onclick = function () { presT.notes = !presT.notes; notesRender(); };
         $('prBrief').onclick = function () { window.luxBrief(); setTimeout(function () { presShow(pres.i); }, 50); };
         $('prMinus').onclick = function () { setSize(pres.size - 10); }; $('prPlus').onclick = function () { setSize(pres.size + 10); };
         $('prFs').onclick = function () { try { if (document.fullscreenElement) { pres.wantFs = false; document.exitFullscreen(); } else { document.documentElement.requestFullscreen(); } } catch (e) {} };
         document.addEventListener('keydown', presKeys);
+        document.addEventListener('click', function (e) {
+            if (!pres.on || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+            var link = e.target.closest('a[href^="#"]'); if (!link) return;
+            var target; try { target = document.getElementById(decodeURIComponent(link.getAttribute('href').slice(1))); } catch (_) { return; }
+            if (!target) return;
+            var index = pres.slides.findIndex(function (slide) { return slide.el === target || slide.el.contains(target); });
+            if (index < 0) return;
+            e.preventDefault(); e.stopImmediatePropagation();
+            if (index !== pres.i) presShow(index);
+            if (window.luxPresentationPages) window.luxPresentationPages.reveal(target);
+        }, true);
         var x0 = 0, y0 = 0, ok = false;
         document.addEventListener('touchstart', function (e) { if (!pres.on || e.touches.length !== 1) return; var t = e.touches[0]; x0 = t.clientX; y0 = t.clientY; ok = !(e.target.closest && e.target.closest('input,select,textarea,.leaflet-container,[style*="overflow-x"],#presBar,.gantt-scroll,#ganttChartContainer')); }, { passive: true });
         document.addEventListener('touchend', function (e) {
             if (!pres.on || !ok || !e.changedTouches.length) return; var t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
-            if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6) presShow(pres.i + (dx < 0 ? 1 : -1));
+            if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6) presMove(dx < 0 ? 1 : -1);
         }, { passive: true });
     })();
 
@@ -1128,7 +1153,14 @@ function luxQRSvg(text, px) {
     }
     var presT = { t0: 0, timer: 0, notes: false };
     function presClock() { var s = Math.floor((Date.now() - presT.t0) / 1000), m = Math.floor(s / 60); return (m >= 60 ? Math.floor(m / 60) + ':' + String(m % 60).padStart(2, '0') : m) + ':' + String(s % 60).padStart(2, '0'); }
-    function presTick() { var n = $('prN'); if (n && pres.on) n.textContent = (pres.i + 1) + ' / ' + pres.slides.length + ' · ⏱ ' + presClock(); }
+    function presTick() {
+        var n = $('prN'); if (!n || !pres.on) return;
+        var pg = window.luxPresentationPages && window.luxPresentationPages.state();
+        n.textContent = 'Kapitola ' + (pres.i + 1) + ' / ' + pres.slides.length + (pg && pg.enabled ? (pg.preparing ? ' · Připravuji strany…' : ' · Strana ' + (pg.index + 1) + ' / ' + pg.total) : '');
+        n.setAttribute('aria-live', 'polite');
+        $('prPrev').disabled = !!(pg && pg.preparing) || (pres.i === 0 && (!pg || pg.index === 0));
+        $('prNext').disabled = !!(pg && pg.preparing) || (pres.i === pres.slides.length - 1 && (!pg || pg.index === pg.total - 1));
+    }
     function notesRender() {
         var el = $('presNotes'); if (!el) { el = document.createElement('div'); el.id = 'presNotes'; el.setAttribute('role', 'note'); document.body.appendChild(el); }
         var s = pres.slides[pres.i], nx = pres.slides[pres.i + 1]; el.innerHTML = '<b>📝 Poznámky: ' + (s ? s.title : '') + '</b><p>' + (presNote(s && s.el) || 'Bez poznámky.') + '</p>' + (nx ? '<p style="margin-top:8px;font-size:.8rem;color:rgba(255,255,255,.65)">Další: ' + nx.title + '</p>' : '');
@@ -1474,14 +1506,14 @@ function luxQRSvg(text, px) {
     /* ---------- po obnovení stránky všechno zavřené; „Výběr letenek“ se zavírá a otevírá jako ostatní sekce ---------- */
     function closeFoldsOnReload() {
         var nav = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) || {}; if (nav.type !== 'reload' && nav.type !== 'back_forward') return;
-        function run() { [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (f) { try { window.luxToggle(f.id); } catch (e) {} }); var d = $('flightPick'); if (d) d.open = false; }
+        function run() { if (pres.on) return; [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (f) { try { window.luxToggle(f.id); } catch (e) {} }); var d = $('flightPick'); if (d) d.open = false; }
         if (location.hash) { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
         run(); setTimeout(run, 400); setTimeout(run, 1500);
     }
     (function flightPickExclusive() {
         var d = $('flightPick'); if (!d) return;
         d.addEventListener('toggle', function () {
-            if (!d.open) return;
+            if (pres.on || !d.open) return;
             function change() {
                 [].forEach.call(document.querySelectorAll('.lux-fold.is-open'), function (f) {
                     try { window.luxToggle(f.id, { preserveScroll: true }); } catch (e) {}
@@ -1496,7 +1528,7 @@ function luxQRSvg(text, px) {
             else change();
         });
         if (window.MutationObserver) new MutationObserver(function (ms) {
-            if (!d.open) return; ms.forEach(function (m) { var el = m.target; if (el.classList && el.classList.contains('lux-fold') && el.classList.contains('is-open') && !/\bis-open\b/.test(m.oldValue || '')) d.open = false; });
+            if (pres.on || !d.open) return; ms.forEach(function (m) { var el = m.target; if (el.classList && el.classList.contains('lux-fold') && el.classList.contains('is-open') && !/\bis-open\b/.test(m.oldValue || '')) d.open = false; });
         }).observe(document.body, { attributes: true, attributeFilter: ['class'], attributeOldValue: true, subtree: true });
     })();
 

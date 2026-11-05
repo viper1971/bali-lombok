@@ -25,7 +25,7 @@
     }
     function foldTitle(f) { var t = f.querySelector('.lux-fold-t'); return t ? t.textContent.trim() : f.id; }
     function applyLocks(all) {
-        var on = lockOn(), needsFlight = on && !flightFirstSeen, fu = null;
+        var on = lockOn() && !document.body.classList.contains('pres-on'), needsFlight = on && !flightFirstSeen, fu = null;
         if (!needsFlight) {
             for (var i = 0; i < all.length; i++) { if (!read[all[i].id]) { fu = all[i]; break; } }
         }
@@ -70,6 +70,7 @@
         prevLocked = now;
     }
     window.luxLockState = lockOn;
+    window.luxRefreshReadState = function () { paint(); };
     window.luxSetLock = function (on) {
         var wasOn = lockOn();
         try { localStorage.setItem(LOCK_KEY, on ? '1' : '0'); } catch (e) {}
