@@ -109,9 +109,10 @@ function init(){
   if(!found.length){var msg=document.createElement('p');msg.textContent='Nic nenalezeno. Zkuste jiné slovo.';msg.style.padding='14px';results.appendChild(msg)}
  }
  function open(preserve){
+  var alreadyOpen=!overlay.hidden;
   clearMarks();previous=document.activeElement;overlay.hidden=false;navigator.hidden=true;
-  if(!preserve){input.value='';render();}
-  else{input.value=searchTerm;render();}
+  if(!preserve&&!alreadyOpen){input.value='';render();}
+  else{if(preserve)input.value=searchTerm;render();}
   input.focus();
  }
  function close(restore){overlay.hidden=true;if(restore!==false&&previous&&previous.focus)previous.focus()}
