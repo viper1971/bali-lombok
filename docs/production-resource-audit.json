@@ -1,11 +1,24 @@
 {
-  "html_bytes": 443557,
-  "scripts": 48,
-  "stylesheets": 28,
+  "html_bytes": 446238,
+  "scripts": 49,
+  "stylesheets": 29,
   "images": 60,
   "iframes": 26,
   "lazy_iframes": 26,
-  "missing_local_resources": [],
+  "missing_local_resources": [
+    {
+      "tag": "link",
+      "url": "assets/itinerary-subsections-20261105.css",
+      "path": "assets/itinerary-subsections-20261105.css",
+      "exists": false
+    },
+    {
+      "tag": "script",
+      "url": "assets/itinerary-subsections-20261105.js",
+      "path": "assets/itinerary-subsections-20261105.js",
+      "exists": false
+    }
+  ],
   "responsive_variant_references": 6,
   "build_manifest_overrides": [
     "assets/build/js-head-critical-a-20261105.js",
