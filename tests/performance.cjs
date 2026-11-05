@@ -156,11 +156,11 @@ async function main() {
     }
   }
   lines.push('', failures.length ? '**Regrese:** ' + failures.join(' | ') : '**Stav:** bez zjištěné regrese.');
-  const summary = lines.join('\\n') + '\\n';
+  const summary = lines.join('\n') + '\n';
   fs.writeFileSync('docs/performance-summary.md', summary);
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
   if (failures.length) {
-    console.error('Browser performance regression failed:', failures.join('\\n'));
+    console.error('Browser performance regression failed:', failures.join('\n'));
     process.exitCode = 1;
   }
 }
