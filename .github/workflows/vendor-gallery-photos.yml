@@ -1,5 +1,5 @@
 name: Mirror licensed Wikimedia slideshow photos
-# Retry four remaining licensed photo topics using Indonesian place-name aliases.
+# Retry the Mawi gallery using an exact CC BY Commons file with verified provenance.
 on:
   push:
     branches: [main]
