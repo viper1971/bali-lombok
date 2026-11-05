@@ -506,3 +506,8 @@ html body #hlavni-obsah :is(a.store-btn,a.transport-store-btn):hover {background
 
 /* Hidden loading controls must never cover an interactive Google panorama. */
 .sv-stage .sv-play[hidden] {display:none!important}
+
+/* Fullscreen belongs to the opening cover, alongside the entry action. */
+.mg-cover-actions {display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+html[data-magazine="on"] .mg-cover .mg-cover-fullscreen {width:auto;min-height:48px;margin:0;padding:14px 20px;border:1px solid #ffffff90;border-radius:2px;background:#092b2540;color:#fff;box-shadow:none;font:700 13px/1.4 'Plus Jakarta Sans',sans-serif}
+html[data-magazine="on"] .mg-cover .mg-cover-fullscreen:hover {background:#092b2570}
