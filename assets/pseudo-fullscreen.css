@@ -1,0 +1,21 @@
+/* Immersive viewport mode without the browser Fullscreen API.
+   Browser toolbar remains under control of Chrome. */
+html.bali-pseudo-fullscreen,
+html.bali-pseudo-fullscreen body{
+  min-height:100%;
+}
+html.bali-pseudo-fullscreen .mg-cover,
+html.bali-pseudo-fullscreen .magazine-cover,
+html.bali-pseudo-fullscreen .mg-hero{
+  min-height:100svh;
+}
+@supports (height:100dvh){
+  html.bali-pseudo-fullscreen .mg-cover,
+  html.bali-pseudo-fullscreen .magazine-cover,
+  html.bali-pseudo-fullscreen .mg-hero{
+    min-height:100dvh;
+  }
+}
+html.bali-pseudo-fullscreen .page-fullscreen-btn{
+  outline-offset:3px;
+}
