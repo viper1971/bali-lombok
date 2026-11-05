@@ -8,6 +8,11 @@ const URL = 'http://127.0.0.1:' + PORT + '/index.html';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const server = spawn('python3', ['-m','http.server', String(PORT), '--bind','127.0.0.1','--directory','.'], {stdio:'ignore'});
 const snapshots = [];
+// This committed historical run is a comparison reference, not a production measurement.
+let baseline = [];
+try {
+  baseline = JSON.parse(fs.readFileSync('docs/performance-metrics.json','utf8')).snapshots || [];
+} catch (_) {}
 let browser;
 async function main() {
   await sleep(1200);
@@ -123,8 +128,39 @@ async function main() {
   },null,2)+'\n');
   console.log(JSON.stringify(snapshots,null,2));
   const clsLimit = Number(process.env.CLS_MAX || 0.1);
-  if (snapshots.some(s=>s.failedLocal.length || !s.heroNaturalWidth || s.wikimediaApiOnStartup || s.cumulativeLayoutShift > clsLimit || s.errors.length)) {
-    console.error('Browser regression failed: local errors, unexpected Wikimedia requests, JS errors, or CLS above '+clsLimit);
+  const failures = [];
+  const lines = [
+    '## BALI 2027 – syntetický test rychlosti',
+    '',
+    'Lokální Chromium, externí služby vypnuté. Nejde o produkční PageSpeed.',
+    '',
+    '| Profil | Požadavky | Data | FCP | LCP | CLS | Dlouhé úlohy JS |',
+    '|---|---:|---:|---:|---:|---:|---:|'
+  ];
+  for (const result of snapshots) {
+    const old = baseline.find(s => s.profile === result.profile);
+    const mb = (result.transferredBytesFromContentLength / 1048576).toFixed(2);
+    lines.push(`| ${result.profile} | ${result.requests} | ${mb} MiB | ${result.firstContentfulPaintMs} ms | ${result.lcpCandidateMs ?? '–'} ms | ${result.cumulativeLayoutShift} | ${result.totalLongTaskDurationMs} ms |`);
+    if (result.errors.length) failures.push(`${result.profile}: JS errors: ${result.errors.join('; ')}`);
+    if (result.failedLocal.length) failures.push(`${result.profile}: missing local requests: ${JSON.stringify(result.failedLocal)}`);
+    if (!result.heroNaturalWidth) failures.push(`${result.profile}: hero image did not load`);
+    if (result.wikimediaApiOnStartup) failures.push(`${result.profile}: unintended Wikimedia API requests`);
+    if (result.cumulativeLayoutShift > clsLimit) failures.push(`${result.profile}: CLS above ${clsLimit}`);
+    // Data volume and request counts are deterministic enough to catch large
+    // regressions; wall-clock speed depends on CI hardware and is reported only.
+    if (old) {
+      const allowedRequests = old.requests + 10;
+      const allowedBytes = old.transferredBytesFromContentLength * 1.15;
+      if (result.requests > allowedRequests) failures.push(`${result.profile}: requests ${result.requests} > baseline ${old.requests} + 10`);
+      if (result.transferredBytesFromContentLength > allowedBytes) failures.push(`${result.profile}: transferred bytes rose by more than 15% from baseline`);
+    }
+  }
+  lines.push('', failures.length ? '**Regrese:** ' + failures.join(' | ') : '**Stav:** bez zjištěné regrese.');
+  const summary = lines.join('\\n') + '\\n';
+  fs.writeFileSync('docs/performance-summary.md', summary);
+  if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
+  if (failures.length) {
+    console.error('Browser performance regression failed:', failures.join('\\n'));
     process.exitCode = 1;
   }
 }
