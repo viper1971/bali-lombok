@@ -1457,9 +1457,3 @@ html body #hlavni-obsah .sv-card .sv-stage > .bali-sv-fullscreen[hidden] {
   visibility:hidden !important;
   pointer-events:none !important;
 }
-
-/* Natural wheel and trackpad scrolling, including the opening magazine hero.
-   Smooth scrolling remains available where JS explicitly requests it. */
-html, body {
-  scroll-behavior: auto !important;
-}
