@@ -185,7 +185,7 @@
                 fig.className = 'trip-show-slide';
                 var img = document.createElement('img');
                 img.alt = it.cap; img.decoding = 'async';
-                img.loading = n < 3 ? 'eager' : 'lazy';
+                img.loading = n === 0 ? 'eager' : 'lazy';
                 img.setAttribute('fetchpriority', n === 0 ? 'high' : 'low');
                 img.src = it.ph.src;
                 var dot = document.createElement('button');
@@ -262,17 +262,7 @@
             nestShow.setAttribute('aria-label', 'Podvodní sochy NEST na Gili Meno');
             shows.push(nestShow);
         }
-        // Po načtení stránky v klidu postupně připraví všechny itineráře (texty + první fotky)
-        window.addEventListener('load', function () {
-            var cn = navigator.connection;
-            if (saveData || (cn && /^(slow-2g|2g|3g)$/.test(cn.effectiveType || ''))) return;   /* na pomalém připojení se fotky načtou až při otevření sekce */
-            var k = 0;
-            (function step() {
-                if (k >= shows.length) return;
-                var s = shows[k++];
-                idle(function () { s._prepare(saveData ? 1 : 3).then(function () { setTimeout(step, 250); }); }, 3000);
-            })();
-        });
+        // Galerie se připraví pouze při zobrazení nebo interakci uživatele.
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
