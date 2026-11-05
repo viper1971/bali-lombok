@@ -400,3 +400,91 @@
   #hlavni-obsah .mg-place-essay {font-size:10pt;line-height:1.45}
   #hlavni-obsah .mg-place-essay p {margin-bottom:7px}
 }
+
+
+/* Full-width flight cockpit: transfer from Singapore to Bali.
+   Overrides old half-width magazine rules without changing the simulator logic.
+   The map/animation occupies the left side, telemetry and tips fill the right. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps .lux-fold-pad > #flightDeck {
+    display:grid !important;
+    grid-template-columns:minmax(0,43fr) minmax(0,57fr) !important;
+    grid-template-rows:auto 1fr !important;
+    align-items:stretch !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    grid-column:1 / -1 !important;
+    justify-self:stretch !important;
+    float:none !important;
+    clear:both !important;
+    margin:20px 0 26px !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    border-radius:15px !important;
+    box-sizing:border-box !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck > .fl-sky {
+    grid-column:1 !important;
+    grid-row:1 / 3 !important;
+    width:100% !important;
+    min-width:0 !important;
+    height:100% !important;
+    min-height:385px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    border-radius:0 !important;
+    align-self:stretch !important;
+    overflow:hidden !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck > .fl-sky > svg {
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:calc(100% - 55px) !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck > .fl-read {
+    grid-column:2 !important;
+    grid-row:1 !important;
+    display:grid !important;
+    width:100% !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:1px !important;
+    margin:0 !important;
+    align-self:stretch !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck > .fl-read > div {
+    padding:clamp(15px,1.6vw,25px) !important;
+    align-content:center !important;
+    min-width:0 !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck > .fl-tips {
+    grid-column:2 !important;
+    grid-row:2 !important;
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:0 !important;
+    width:100% !important;
+    padding:0 !important;
+    margin:0 !important;
+    align-content:stretch !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck > .fl-tips > .fl-tip {
+    border-radius:0 !important;
+    border-inline:0 !important;
+    border-bottom:0 !important;
+    margin:0 !important;
+    padding:clamp(14px,1.2vw,22px) clamp(16px,1.6vw,26px) !important;
+    background:var(--surface) !important;
+  }
+}
+@media screen and (min-width:800px) and (max-width:1099px) {
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck {
+    width:100% !important;
+    max-width:none !important;
+    grid-column:1 / -1 !important;
+    grid-template-columns:minmax(0,42%) minmax(0,58%) !important;
+  }
+}
