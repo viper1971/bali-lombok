@@ -206,8 +206,16 @@
     };
     function setPart(p, open, preserveScroll) {
         if (!p) return;
-        if (!open) {   /* zavírání části zavře i otevřenou sekci uvnitř, ať nezůstane „přilepená“ hlavička skryté sekce */
-            [].forEach.call(p.querySelectorAll('.lux-fold.is-open'), function (f) { if (typeof window.luxToggle === 'function') window.luxToggle(f.id, { preserveScroll: !!preserveScroll }); });
+        if (!open) {
+            // Close nested accordions without calling their scroll/animation
+            // handlers. Those handlers were fighting chapter navigation.
+            [].forEach.call(p.querySelectorAll('.lux-fold.is-open'), function (f) {
+                f.classList.remove('is-open', 'is-settled');
+                var body = f.querySelector(':scope > .lux-fold-body');
+                if (body) body.setAttribute('inert', '');
+                var button = f.querySelector('.lux-fold-btn');
+                if (button) button.setAttribute('aria-expanded', 'false');
+            });
         }
         p.classList.toggle('is-open', open);
         if (open && (p.id === 'cast-misto' || p.id === 'cast-kontrola')) {
