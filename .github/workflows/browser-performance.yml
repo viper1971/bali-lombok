@@ -29,8 +29,8 @@ jobs:
           name: browser-performance
           path: docs/performance-metrics.json
           if-no-files-found: warn
-      - name: Save results to repository
-        if: success()
+      - name: Save results to repository (including failed performance checks)
+        if: always() && hashFiles('docs/performance-metrics.json') != ''
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
