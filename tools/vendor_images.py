@@ -7,9 +7,15 @@ from PIL import Image, ImageOps
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / 'assets/images/external'
 OUT.mkdir(parents=True, exist_ok=True)
-PAT = re.compile(r"https?://(?:images[.]unsplash[.]com|images[.]pexels[.]com)/[^\s\x22\x27\x60<>\\)]+", re.I)
+PAT = re.compile(r"https?://(?:images[.]unsplash[.]com|images[.]pexels[.]com|thumb[.]wikimedia[.]org)/[^\s\x22\x27\x60<>\\)]+", re.I)
 FILES = [ROOT/'src/index.html', ROOT/'index.html', *sorted((ROOT/'assets/js').glob('*.js')), *sorted((ROOT/'assets/css').glob('*.css')), *sorted((ROOT/'assets/build').glob('*.js')), *sorted((ROOT/'assets/build').glob('*.css'))]
-report = {'migrated': [], 'failed': []}
+report_path = ROOT / 'docs/external-image-migration.json'
+try:
+    old_report = json.loads(report_path.read_text(encoding='utf8'))
+except (FileNotFoundError, ValueError):
+    old_report = {'migrated': [], 'failed': []}
+report = {'migrated': list(old_report.get('migrated', [])), 'failed': []}
+seen = {item['url'] for item in report['migrated']}
 cache = {}
 changed_assets = set()
 for file in FILES:
@@ -38,7 +44,9 @@ for file in FILES:
                         if im.mode not in ('RGB','RGBA'): im = im.convert('RGB')
                         im.save(dest, 'WEBP', quality=82, method=6)
                 cache[url] = dest.relative_to(ROOT).as_posix()
-                report['migrated'].append({'url':url,'path':cache[url],'bytes':dest.stat().st_size})
+                if url not in seen:
+                    report['migrated'].append({'url':url,'path':cache[url],'bytes':dest.stat().st_size})
+                    seen.add(url)
             except Exception as e:
                 cache[url] = None
                 report['failed'].append({'url':url,'path':str(file.relative_to(ROOT)),'error':str(e)})
