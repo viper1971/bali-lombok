@@ -920,7 +920,7 @@
             '<h3>Porovnání všech '+keys.length+' leteckých variant</h3>'+
             '<p>Porovnej cenu, odlet, dobu letu, přestupy a čas na zpáteční zastávku v Singapuru. Kliknutím vybereš spojení pro celý rozpočet.</p></div>'+
             '<div class="ai-v52-best"><span>Nejlevnější varianta</span><strong>'+money(minPrice)+' / osoba</strong></div></div>';
-        var cols = '<div class="ai-v52-columns" aria-hidden="true"><span>Aerolinka / přestup</span><span>Cena na osobu</span><span>Cesta tam</span><span>Přestup tam</span><span>Tranzit v SIN zpět</span><span>Cesta zpět</span><span>Výběr</span></div>';
+        var cols = '<div class="ai-v52-columns" aria-hidden="true"><span>Aerolinka / přestup</span><span>Cena na osobu</span><span>Cesta tam</span><span>Přestup tam</span><span>Tranzit v SIN zpět</span><span>Přestup zpět</span><span>Cesta zpět</span><span>Výběr</span></div>';
         var rows = order.map(function(k){
             var f=flightOptions[k], chosen=k===currentAirline;
             var badges = (f.pricePerson===minPrice?'<span class="ai-v52-badge low">Nejlevnější</span>':'')+
@@ -934,7 +934,8 @@
                 '<div class="ai-v52-cell"><small class="ai-v52-label">Cesta tam</small><b>'+safe(f.outDep)+' PRG → '+safe(String(f.outArr).split(' (')[0])+' SIN</b><small>'+safe(f.outDuration)+' · '+safe(f.outDate)+'</small></div>'+
                 '<div class="ai-v52-cell"><small class="ai-v52-label">Přestup tam</small><b>'+safe(f.outLayover)+'</b></div>'+
                 '<div class="ai-v52-cell"><small class="ai-v52-label">Tranzit při návratu</small><b>'+safe(briefTransit(f.sinLayover))+'</b><small>mezi Bali a dálkovým odletem</small></div>'+
-                '<div class="ai-v52-cell"><small class="ai-v52-label">Cesta zpět</small><b>'+safe(f.retDep)+' SIN → '+safe(String(f.retArr).split(' (')[0])+' PRG</b><small>'+safe(f.retDuration)+' · '+safe(f.retLayover)+' přestup</small></div>'+
+                '<div class="ai-v52-cell"><small class="ai-v52-label">Přestup zpět</small><b>'+safe(f.retLayover || '–')+'</b></div>'+
+                '<div class="ai-v52-cell"><small class="ai-v52-label">Cesta zpět</small><b>'+safe(f.retDep)+' SIN → '+safe(String(f.retArr).split(' (')[0])+' PRG</b><small>'+safe(f.retDuration)+'</small></div>'+
                 '<div class="ai-v52-cell ai-v52-choice"><button type="button" class="ai-v52-select'+(chosen?' is-chosen':'')+'" data-ai-select="'+safe(k)+'" aria-pressed="'+(chosen?'true':'false')+'">'+(chosen?'✓ Vybráno':'Vybrat')+'</button></div>'+
                 '</div>';
         }).join('');
