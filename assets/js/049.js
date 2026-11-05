@@ -1388,7 +1388,7 @@ function luxQRSvg(text, px) {
     Object.keys(STRIPS).forEach(function (k) { for (var i = 0; i < 3; i++) IMG_Q['p:' + k + ':' + i] = [STRIPS[k][i], STRIPS[k][3]]; });
     IMG_Q.part_3 = ['Uluwatu cliffs Bali panorama', 'Bali coastline panorama', 'Nusa Penida Kelingking Beach', 'Indonesia coast landscape', 'Bali landscape']; IMG_Q.part_4 = ['Gili Trawangan beach panorama', 'Lombok beach panorama', 'Gili Islands', 'Indonesia beach', 'Lombok']; IMG_Q.part_5 = ['Jimbaran Bay sunset beach', 'Bali sunset beach', 'sunset beach Indonesia', 'Bali sunset', 'Bali'];
     IMG_Q.inl_1 = ['Marina Bay Singapore skyline night', 'Singapore skyline']; IMG_Q.inl_2 = ['Singapore Chinatown street', 'Singapore architecture street'];
-    var IMG_W = { part_3: 1600, part_4: 1600, part_5: 1600, inl_1: 960, inl_2: 960 }, IMG_MINW = { part_3: 2000, part_4: 2000, part_5: 2000 }, CASH_IMG = ['https://viper1971.github.io/bali-lombok/SINdolar.jpg', 'https://viper1971.github.io/bali-lombok/USAdolar.jpg', 'https://viper1971.github.io/bali-lombok/IDRbankovka.jpg'];
+    var IMG_W = { part_3: 1600, part_4: 1600, part_5: 1600, inl_1: 960, inl_2: 960 }, IMG_MINW = { part_3: 2000, part_4: 2000, part_5: 2000 }, CASH_IMG = ['SINdolar.jpg', 'USAdolar.jpg', 'IDRbankovka.jpg'];
     var IMG_MUST = { air_emirates: /emirates/i, air_emirates_flydubai: /flydubai|emirates/i, air_finnair: /finnair/i, air_swiss: /swiss/i, air_turkish: /turkish/i };
     var IMG_VER = { air_finnair: 2 };
     var IMG_FB = { sg: 'Singapore skyline', ulu: 'Uluwatu cliff Bali', ub: 'Ubud Bali', lo: 'Lombok beach', ta: 'Bali', mi: 'Bali', ho: 'Bali beach', f_: 'Indonesian food', air: 'airliner in flight' };
@@ -1706,7 +1706,6 @@ function luxQRSvg(text, px) {
         nav.appendChild(g);
         nav.appendChild(item('menuToolSimple', '📄', 'Jednoduchá stránka (jen to hlavní)', function () { window.luxSimple(true); }));
         nav.appendChild(item('menuToolShare', '🔗', 'Zkopírovat odkaz na moji variantu', window.luxCopyVariantLink));
-        nav.appendChild(item('menuToolOffline', '📴', 'Uložit pro offline', window.luxOffline));
         nav.appendChild(item('menuToolPresent', '🎞️', 'Režim prezentace', function () { window.luxPresent(); })); nav.appendChild(item('menuToolClearActs', '🎟️', 'Odškrtnout všechny vstupenky (Vstupné a aktivity)', function () { window.luxClearActs(); }));
         nav.appendChild(item('menuToolBrief', '📄', 'Přepnout na stručný režim', function () { window.luxBrief(); if (typeof window.toggleMenuModal === 'function' && $('menuModalOverlay') && $('menuModalOverlay').classList.contains('open')) window.toggleMenuModal(); }));
         nav.appendChild(item('menuToolInstall', '📲', 'Přidat na plochu', window.luxInstall));
