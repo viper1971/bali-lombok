@@ -565,3 +565,65 @@ html[data-magazine="on"] body #hlavni-obsah .mg-place-source:focus-visible {
     height:100% !important;
   }
 }
+
+
+/* RESTORE ROUTE WIDGETS (2026-11-05).
+   A previous blanket quarter-width selector squeezed the *entire* Uluwatu–Ubud
+   transport section into a narrow column, including the toll guide. Do not
+   classify full interactive transfer widgets as decorative marginal maps. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-ubud
+    .lux-fold-pad > .map-container-wrapper:has(.ubud-map-widget),
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-uluwatu
+    .lux-fold-pad > .map-container-wrapper:has(.ulu-map-widget) {
+    display:block !important;
+    float:none !important;
+    clear:both !important;
+    grid-column:1 / -1 !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    margin:18px 0 26px !important;
+    padding:clamp(12px,1.4vw,22px) !important;
+    box-sizing:border-box !important;
+    overflow:visible !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-ubud
+    .map-container-wrapper:has(.ubud-map-widget) > .ubud-map-widget,
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-uluwatu
+    .map-container-wrapper:has(.ulu-map-widget) > .ulu-map-widget {
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-ubud
+    .map-container-wrapper:has(.ubud-map-widget) :is(.ubud-map-frame-wrapper,#uluwatuUbudMapWrapper),
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-uluwatu
+    .map-container-wrapper:has(.ulu-map-widget) .ulu-map-frame-wrapper {
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    height:clamp(280px,29vw,430px) !important;
+    min-height:280px !important;
+    overflow:hidden !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-ubud
+    .map-container-wrapper #uluwatuUbudMapFrame:not(:fullscreen),
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-uluwatu
+    .map-container-wrapper .ulu-map-frame-wrapper iframe:not(:fullscreen) {
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:100% !important;
+    max-height:none !important;
+    min-height:100% !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-ubud
+    .map-container-wrapper .toll-info-box {
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+}
