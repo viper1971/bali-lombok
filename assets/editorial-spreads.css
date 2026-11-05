@@ -231,3 +231,166 @@
   }
 }
 /* At tablet/mobile sizes the original responsive presentation is retained. */
+
+/* Editorial chapter cover: photograph and the COMPLETE original report stay side by side,
+   without any text overlaying or obscuring the picture. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad > header.mg-feature {
+    display:grid !important;
+    grid-template-columns:minmax(0,38%) minmax(0,1fr) !important;
+    gap:clamp(20px,3vw,44px) !important;
+    align-items:stretch !important;
+    min-height:0 !important;
+    overflow:visible !important;
+    isolation:auto !important;
+    background:#f7f4e9 !important;
+    border-top:1px solid rgba(19,63,48,.2) !important;
+    border-bottom:1px solid rgba(19,63,48,.2) !important;
+    padding:14px !important;
+    margin:0 0 22px !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad > header.mg-feature > figure,
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad > header.mg-feature > div {
+    grid-row:1 !important;
+    grid-column:auto !important;
+    min-width:0 !important;
+    position:relative !important;
+    align-self:stretch !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad > header.mg-feature > figure {
+    grid-column:1 !important;
+    margin:0 !important;
+    overflow:hidden !important;
+    min-height:275px !important;
+    max-height:460px !important;
+    background:#14352d !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad > header.mg-feature > figure > img {
+    display:block !important;
+    position:relative !important;
+    inset:auto !important;
+    width:100% !important;
+    height:100% !important;
+    min-height:275px !important;
+    max-height:460px !important;
+    object-fit:cover !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad > header.mg-feature > div {
+    grid-column:2 !important;
+    display:block !important;
+    width:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    margin:0 !important;
+    padding:clamp(14px,2vw,30px) !important;
+    align-self:start !important;
+    background:#f7f4e9 !important;
+    color:#153b30 !important;
+    border:0 !important;
+    border-left:3px solid #c6aa4b !important;
+    box-shadow:none !important;
+    text-align:left !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad > header.mg-feature > div :is(h3,p,small,b,strong,span,div),
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad > header.mg-feature > div :is(.stage-title,.stage-desc,.st-move,.fl-h,.fl-tip,.fl-tip b) {
+    color:#153b30 !important;
+    -webkit-text-fill-color:currentColor !important;
+    text-shadow:none !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad > header.mg-feature > div h3 {
+    font:400 clamp(30px,3.5vw,54px)/1.1 Georgia,serif !important;
+    letter-spacing:-.02em !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad > header.mg-feature > div p {
+    font:400 clamp(16px,1.35vw,20px)/1.6 Georgia,serif !important;
+    max-width:68ch !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad > header.mg-feature > div :is(.fl-tip,.st-move,.timeline-date-container,.ticket-badge) {
+    background:rgba(24,69,52,.06) !important;
+    border:1px solid rgba(24,69,52,.15) !important;
+    box-shadow:none !important;
+    color:#153b30 !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad > header.mg-feature > div .st-deck {
+    color:#153b30 !important;
+    max-width:100% !important;
+    background:transparent !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad > header.mg-feature figcaption {
+    position:absolute !important;
+    inset:auto 0 0 0 !important;
+    background:rgba(12,37,32,.75) !important;
+    color:white !important;
+    text-shadow:none !important;
+    font-size:11px !important;
+    text-align:left !important;
+    max-width:none !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad:nth-of-type(even) > header.mg-feature {
+    grid-template-columns:minmax(0,1fr) minmax(0,38%) !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad:nth-of-type(even) > header.mg-feature > figure {grid-column:2 !important;}
+  html[data-magazine="on"] body #hlavni-obsah .lux-fold-pad:nth-of-type(even) > header.mg-feature > div {grid-column:1 !important;}
+
+  /* Maps across the desktop content are marginal illustrations, NEVER full-page.
+     Includes journey route maps, itinerary maps, and embedded hotel maps. */
+  html body #hlavni-obsah .lux-fold-pad > .map-container-wrapper,
+  html body #hlavni-obsah .lux-fold-pad > :is(.ubud-map-widget,.hotel-location-map),
+  html body #hlavni-obsah .lux-fold-pad .bento-card > .map-container-wrapper {
+    width:25% !important;
+    max-width:390px !important;
+    min-width:245px !important;
+    float:left !important;
+    clear:none !important;
+    margin:10px 24px 22px 0 !important;
+    padding:9px !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
+  }
+  html body #hlavni-obsah .lux-fold-pad.bali-ed-right > .map-container-wrapper,
+  html body #hlavni-obsah .lux-fold-pad.bali-ed-right > :is(.ubud-map-widget,.hotel-location-map) {
+    float:right !important;
+    margin:10px 0 22px 24px !important;
+  }
+  html body #hlavni-obsah .lux-fold-pad :is(.map-container-wrapper,.ubud-map-widget) :is(iframe,.google-map, [id*="MapCanvas"]):not(:fullscreen),
+  html body #hlavni-obsah .lux-fold-pad > .hotel-location-map iframe:not(:fullscreen) {
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    height:205px !important;
+    min-height:0 !important;
+    max-height:240px !important;
+    float:none !important;
+    margin:0 !important;
+    box-sizing:border-box !important;
+  }
+  html body #hlavni-obsah .lux-fold-pad > .map-container-wrapper ~ :is(p,.t-bubble,.stage-desc,.mg-visit-note),
+  html body #hlavni-obsah .lux-fold-pad > .hotel-location-map ~ :is(p,.t-bubble,.stage-desc) {
+    clear:none !important;
+  }
+  /* Keep semantic map links visible in tiny quarter-width maps. */
+  html body #hlavni-obsah .lux-fold-pad .hotel-location-map-head {
+    display:flex !important;flex-wrap:wrap !important;gap:5px !important;
+    padding:5px 7px !important;font-size:11px !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread .bali-ed-hotel-notes {
+    display:block;
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px solid rgba(30,78,61,.22);
+    color:#203f34;
+    font:400 15px/1.65 Georgia,serif;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread .bali-ed-hotel-notes h4 {
+    font:700 11px/1.4 system-ui,sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    color:#275a46;
+    margin:0 0 8px;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread .bali-ed-hotel-notes p {
+    margin:0 0 11px;
+    max-width:67ch;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread .bali-ed-hotel-notes p:last-child {margin-bottom:0;}
+}
