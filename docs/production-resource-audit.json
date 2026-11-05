@@ -1,7 +1,7 @@
 {
-  "html_bytes": 444038,
-  "scripts": 55,
-  "stylesheets": 28,
+  "html_bytes": 443790,
+  "scripts": 53,
+  "stylesheets": 27,
   "images": 60,
   "iframes": 26,
   "lazy_iframes": 26,
@@ -16,6 +16,7 @@
     "assets/build/js-1650a00000000003.js",
     "assets/build/js-1650a00000000005.js",
     "assets/build/js-footer-folds-20261105.js",
+    "assets/build/js-gallery-runtime-batch-20261105.js",
     "assets/build/js-1650a00000000004.js",
     "assets/build/js-footer-editorial-layout-20261105.js"
   ],
