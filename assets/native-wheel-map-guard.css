@@ -1,6 +1,11 @@
 /* Allow mouse wheel to reach document even when over active Google embeds. */
 .bali-wheel-map-control { position:relative; }
-.bali-wheel-map-control > iframe { pointer-events:none !important; }
+.bali-wheel-map-control:not(.sv-stage) > iframe { pointer-events:none !important; }
+/* Live Street View must remain usable with mouse/touch in normal and fullscreen views. */
+.sv-stage > iframe,
+.sv-stage:fullscreen > iframe,
+.sv-stage:-webkit-full-screen > iframe { pointer-events:auto !important; }
+.sv-stage > .bali-wheel-map-toggle { display:none !important; }
 .bali-wheel-map-control.bali-wheel-map-active > iframe { pointer-events:auto !important; }
 .bali-wheel-map-control > .bali-wheel-map-toggle {
  position:absolute;z-index:30;bottom:10px;left:10px;right:auto;
