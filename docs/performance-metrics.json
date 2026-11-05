@@ -1,6 +1,6 @@
 {
   "caveat": "Synthetic local HTTP test; not production RUM or PageSpeed. Third-party services intentionally disabled. Timings depend on CI runner.",
-  "timestamp": "2026-11-05T16:47:46.674Z",
+  "timestamp": "2026-11-05T16:53:08.118Z",
   "snapshots": [
     {
       "profile": "mobile",
@@ -11,9 +11,9 @@
       "synthetic": true,
       "thirdPartyNetwork": "blocked",
       "serviceWorkers": "blocked",
-      "domContentLoadedWallMs": 945,
+      "domContentLoadedWallMs": 763,
       "requests": 104,
-      "transferredBytesFromContentLength": 4657493,
+      "transferredBytesFromContentLength": 4657685,
       "imageRequests": 9,
       "imageBytesFromContentLength": 2794976,
       "thirdPartyRequests": 40,
@@ -38,109 +38,12 @@
       "wikimediaSamples": [],
       "errors": [],
       "failedLocal": [],
-      "domContentLoadedMs": 942,
-      "loadMs": 1002,
-      "firstContentfulPaintMs": 372,
-      "lcpCandidateMs": 372,
-      "cumulativeLayoutShift": 0.4479,
+      "domContentLoadedMs": 760,
+      "loadMs": 810,
+      "firstContentfulPaintMs": 288,
+      "lcpCandidateMs": 288,
+      "cumulativeLayoutShift": 0.0162,
       "biggestShifts": [
-        {
-          "value": 0.4317,
-          "sources": [
-            {
-              "node": "div#.hero-meeting",
-              "previousRect": {
-                "x": 0,
-                "y": 0,
-                "width": 389,
-                "height": 325.78125,
-                "top": 0,
-                "right": 389,
-                "bottom": 325.78125,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 0,
-                "y": 0,
-                "width": 0,
-                "height": 0,
-                "top": 0,
-                "right": 0,
-                "bottom": 0,
-                "left": 0
-              }
-            },
-            {
-              "node": "(unavailable)",
-              "previousRect": {
-                "x": 0,
-                "y": 340,
-                "width": 83,
-                "height": 184,
-                "top": 340,
-                "right": 83,
-                "bottom": 524,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 0,
-                "y": 71,
-                "width": 67,
-                "height": 136,
-                "top": 71,
-                "right": 67,
-                "bottom": 207,
-                "left": 0
-              }
-            },
-            {
-              "node": "(unavailable)",
-              "previousRect": {
-                "x": 0,
-                "y": 119.640625,
-                "width": 16.15625,
-                "height": 40.703125,
-                "top": 119.640625,
-                "right": 16.15625,
-                "bottom": 160.34375,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 3.484375,
-                "y": 116.25,
-                "width": 11,
-                "height": 35.484375,
-                "top": 116.25,
-                "right": 14.484375,
-                "bottom": 151.734375,
-                "left": 3.484375
-              }
-            },
-            {
-              "node": "(unavailable)",
-              "previousRect": {
-                "x": 24.15625,
-                "y": 126.5625,
-                "width": 15.046875,
-                "height": 26.875,
-                "top": 126.5625,
-                "right": 39.203125,
-                "bottom": 153.4375,
-                "left": 24.15625
-              },
-              "currentRect": {
-                "x": 20.484375,
-                "y": 123.59375,
-                "width": 15.046875,
-                "height": 20,
-                "top": 123.59375,
-                "right": 35.53125,
-                "bottom": 143.59375,
-                "left": 20.484375
-              }
-            }
-          ]
-        },
         {
           "value": 0.0162,
           "sources": [
@@ -171,7 +74,7 @@
         }
       ],
       "longTasks": 1,
-      "totalLongTaskDurationMs": 182,
+      "totalLongTaskDurationMs": 140,
       "heroImage": "http://127.0.0.1:8789/assets/images/external/c9c99d25f3e25d16-w960.webp",
       "heroComplete": true,
       "heroNaturalWidth": 389
@@ -185,11 +88,11 @@
       "synthetic": true,
       "thirdPartyNetwork": "blocked",
       "serviceWorkers": "blocked",
-      "domContentLoadedWallMs": 1265,
-      "requests": 104,
-      "transferredBytesFromContentLength": 4806081,
-      "imageRequests": 9,
-      "imageBytesFromContentLength": 2943564,
+      "domContentLoadedWallMs": 911,
+      "requests": 105,
+      "transferredBytesFromContentLength": 5270964,
+      "imageRequests": 10,
+      "imageBytesFromContentLength": 3408255,
       "thirdPartyRequests": 55,
       "wikimediaApiOnStartup": 0,
       "thirdPartySamples": [
@@ -212,40 +115,12 @@
       "wikimediaSamples": [],
       "errors": [],
       "failedLocal": [],
-      "domContentLoadedMs": 1263,
-      "loadMs": 1376,
-      "firstContentfulPaintMs": 180,
-      "lcpCandidateMs": 384,
-      "cumulativeLayoutShift": 0.1204,
+      "domContentLoadedMs": 909,
+      "loadMs": 1003,
+      "firstContentfulPaintMs": 108,
+      "lcpCandidateMs": 256,
+      "cumulativeLayoutShift": 0.0034,
       "biggestShifts": [
-        {
-          "value": 0.117,
-          "sources": [
-            {
-              "node": "div#.hero-meeting",
-              "previousRect": {
-                "x": 0,
-                "y": 0,
-                "width": 579.296875,
-                "height": 291.296875,
-                "top": 0,
-                "right": 579.296875,
-                "bottom": 291.296875,
-                "left": 0
-              },
-              "currentRect": {
-                "x": 0,
-                "y": 0,
-                "width": 0,
-                "height": 0,
-                "top": 0,
-                "right": 0,
-                "bottom": 0,
-                "left": 0
-              }
-            }
-          ]
-        },
         {
           "value": 0.0032,
           "sources": [
@@ -354,8 +229,8 @@
           ]
         }
       ],
-      "longTasks": 18,
-      "totalLongTaskDurationMs": 2864,
+      "longTasks": 15,
+      "totalLongTaskDurationMs": 2090,
       "heroImage": "http://127.0.0.1:8789/assets/images/external/c9c99d25f3e25d16-w1280.webp",
       "heroComplete": true,
       "heroNaturalWidth": 1440
