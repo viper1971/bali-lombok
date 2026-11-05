@@ -89,6 +89,11 @@
       "url": "https://images.pexels.com/photos/13987298/pexels-photo-13987298.jpeg?auto=compress&cs=tinysrgb&w=1600",
       "path": "assets/images/external/13c126c8d151494f.webp",
       "bytes": 146126
+    },
+    {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Gili_Underwater_Sculpture_%2849615256547%29.jpg/1280px-Gili_Underwater_Sculpture_%2849615256547%29.jpg",
+      "path": "assets/images/external/4d997f4c66ed781f.webp",
+      "bytes": 202504
     }
   ],
   "failed": []
