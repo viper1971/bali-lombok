@@ -546,8 +546,8 @@ html[data-magazine="on"] body #hlavni-obsah .mg-place-source:focus-visible {
     align-self:start !important;
   }
   html[data-magazine="on"] body #hlavni-obsah.main-wrapper .uber-hotel-card .bali-ed-hotel-spread > .uber-media-grid > :is(.sv-card,.hotel-location-map) {
-    height:clamp(146.875px,11.09375vw,175px) !important;
-    max-height:175px !important;
+    height:clamp(196.875px,calc(11.09375vw + 50px),225px) !important;
+    max-height:225px !important;
     min-height:0 !important;
     align-self:start !important;
     overflow:hidden !important;
@@ -625,5 +625,46 @@ html[data-magazine="on"] body #hlavni-obsah .mg-place-source:focus-visible {
     max-width:none !important;
     min-width:0 !important;
     box-sizing:border-box !important;
+  }
+}
+
+
+/* FIX: Bali -> Lombok boat route is a full-size interactive transfer map,
+   NOT a 25%-width editorial thumbnail. Keep the map and its notes together. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-presun4
+    .lux-fold-pad > .map-container-wrapper:has(#boatMapWrapper) {
+    display:block !important;
+    float:none !important;
+    clear:both !important;
+    grid-column:1 / -1 !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    margin:20px 0 26px !important;
+    padding:clamp(12px,1.4vw,20px) !important;
+    box-sizing:border-box !important;
+    overflow:visible !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-presun4
+    .map-container-wrapper #boatMapWrapper {
+    display:block !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    height:clamp(360px,32vw,480px) !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-presun4
+    .map-container-wrapper #boatMapFrame:not(:fullscreen) {
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:100% !important;
+    min-height:100% !important;
+    max-height:none !important;
+    float:none !important;
+    margin:0 !important;
   }
 }
