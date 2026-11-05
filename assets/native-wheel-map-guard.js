@@ -10,6 +10,8 @@
   function setup(frame) {
     if (!frame || !frame.isConnected || !isGoogleEmbed(frame) || frame.dataset.baliWheelGuard === "1") return;
     var wrapper = frame.parentElement;
+    /* Street View must always be interactive, including fullscreen. Map guard is for maps only. */
+    if (frame.closest(".sv-stage")) return;
     if (!wrapper || wrapper.classList.contains("bali-wheel-map-control")) return;
     frame.dataset.baliWheelGuard = "1";
     wrapper.classList.add("bali-wheel-map-control");
@@ -18,12 +20,12 @@
     button.className = "bali-wheel-map-toggle";
     button.setAttribute("aria-pressed", "false");
     button.textContent = "Ovládat mapu";
-    if (wrapper.closest(".sv-stage")) button.textContent = "Ovládat Street View";
+
     function enable(yes) {
       wrapper.classList.toggle("bali-wheel-map-active", yes);
       button.setAttribute("aria-pressed", String(yes));
       button.textContent = yes ? "Zpět na posouvání stránky" :
-        (wrapper.closest(".sv-stage") ? "Ovládat Street View" : "Ovládat mapu");
+        "Ovládat mapu";
     }
     button.addEventListener("click", function(e) { e.preventDefault(); e.stopPropagation(); enable(!wrapper.classList.contains("bali-wheel-map-active")); });
     wrapper.addEventListener("keydown", function(e) {
