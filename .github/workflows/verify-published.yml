@@ -35,6 +35,7 @@ jobs:
       - name: Run real-browser regression on mobile and desktop
         run: npm run test:browser
       - name: Measure mobile and desktop synthetic performance
+        if: always()
         run: npm run test:performance
       - name: Upload browser and performance diagnostics
         if: always()
