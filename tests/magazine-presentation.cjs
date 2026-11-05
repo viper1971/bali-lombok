@@ -1,5 +1,7 @@
-/* Browser regression of the editorial cover: entering the magazine must work on PC and phone. */
-const {chromium}=require('playwright'),{spawn}=require('node:child_process'),assert=require('node:assert/strict');
+/* Browser regression: magazine hero scrolls naturally with the mouse wheel. */
+const {chromium}=require('playwright');
+const {spawn}=require('node:child_process');
+const assert=require('node:assert/strict');
 const port=8792,host='http://127.0.0.1:'+port;
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const server=spawn('python3',['-m','http.server',String(port),'--bind','127.0.0.1','--directory','.'],{stdio:'ignore'});
@@ -19,35 +21,31 @@ let browser;
    return route.abort();
   });
   await page.goto(host+'/index.html',{waitUntil:'domcontentloaded'});
-  await page.waitForTimeout(1600);
-  let state=await page.evaluate(()=>({
-   open:!!document.querySelector('dialog.mg-entry[open]'),
-   cover:!!document.querySelector('.mg-cover'),
+  await page.waitForTimeout(1200);
+  const state=await page.evaluate(()=>({
+   cover:!!document.querySelector('.mg-cover')?.getBoundingClientRect().height,
+   modal:!!document.querySelector('dialog.mg-entry[open]'),
    spacer:!!document.querySelector('.mg-entry-spacer'),
    cta:!!document.querySelector('.mg-cover-cta'),
-   magazines:document.documentElement.dataset.magazine
-  }));
-  assert(state.cover&&state.cta&&state.magazines==='on',name+' has lost magazine cover');
-  if(name==='desktop'){
-   assert(state.open,'Desktop presentation dialog must remain open on first visit');
-   assert(state.spacer,'Desktop dialog needs an in-flow placeholder to avoid CLS');
-  }else{
-   assert(!state.open&&!state.spacer,'Phone must show the regular in-flow cover');
-  }
-  await page.locator('.mg-cover-cta').click({timeout:10000});
-  await page.waitForTimeout(350);
-  state=await page.evaluate(()=>({
-   open:!!document.querySelector('dialog.mg-entry[open]'),
-   spacer:!!document.querySelector('.mg-entry-spacer'),
-   cover:!!document.querySelector('.mg-cover'),
+   fullscreen:!!document.querySelector('.mg-cover-fullscreen'),
    story:!!document.getElementById('magazineStory'),
-   hash:location.hash
+   magazine:document.documentElement.dataset.magazine,
+   scrollBehavior:getComputedStyle(document.documentElement).scrollBehavior
   }));
-  assert(!state.open&&!state.spacer,name+' leaves the entry dialog/spacer behind');
-  assert(state.cover&&state.story,name+' lost cover or article after entering');
-  assert(state.hash==='#magazineStory',name+' did not navigate to the story');
+  assert(state.cover&&state.story&&state.magazine==='on',name+' magazine content must remain');
+  assert(!state.modal&&!state.spacer&&!state.cta,name+' must not show entry modal or Explore button');
+  assert(state.fullscreen,name+' fullscreen control must remain');
+  assert.equal(state.scrollBehavior,'auto',name+' must have native scrolling');
+  if(name==='desktop'){
+   await page.evaluate(()=>window.scrollTo(0,0));
+   await page.mouse.move(240,340);
+   await page.mouse.wheel(0,640);
+   await page.waitForTimeout(400);
+   const y=await page.evaluate(()=>window.scrollY);
+   assert(y>60,'desktop mouse wheel must scroll normally; got '+y);
+  }
   assert(!errors.length,name+' page errors: '+errors.slice(0,3).join('; '));
-  console.log(name+' magazine opening and close passed');
+  console.log('PASS: '+name+' magazine hero in normal flow without scroll trap');
   await ctx.close();
  }
 })().catch(e=>{console.error(e);process.exitCode=1}).finally(async()=>{if(browser)await browser.close().catch(()=>{});server.kill()});
