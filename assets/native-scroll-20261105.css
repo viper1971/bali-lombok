@@ -36,3 +36,30 @@ html, body { scroll-behavior: auto !important; }
     contain-intrinsic-size: none;
   }
 }
+
+/* Stable accordion opening: expand/collapse immediately without intermediate
+   frame-by-frame height changes, translated part bodies or scroll anchoring.
+   Does not modify user scrolling or page navigation. */
+@media screen {
+  html, body { scroll-behavior: auto !important; }
+  html { overflow-anchor: none; }
+  #hlavni-obsah .lux-fold-body,
+  #hlavni-obsah .lux-part-body,
+  #hlavni-obsah .lux-fold-inner,
+  #hlavni-obsah .lux-part-inner,
+  #hlavni-obsah .bali-itinerary-subsection,
+  #hlavni-obsah .bali-itinerary-inner {
+    transition: none !important;
+    animation: none !important;
+  }
+  #hlavni-obsah .lux-fold.is-open > .lux-fold-body,
+  #hlavni-obsah .lux-part.is-open > .lux-part-body {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  #hlavni-obsah .lux-fold-body { transition-property: none !important; }
+  #hlavni-obsah .lux-fold.is-open > .lux-fold-body {
+    grid-template-rows: minmax(0, 1fr);
+  }
+}
