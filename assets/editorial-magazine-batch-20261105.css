@@ -1,0 +1,1459 @@
+/* BALI 2027 — EDITORIAL GRID v4.
+   A single desktop design layer; no cloned or removed content.
+   Report opening: TEXT | FEATURE PHOTO | 3-PHOTO MOSAIC.
+   All remaining page elements follow in normal full-width order.
+   Mobile, print and media fullscreen retain their original behavior. */
+@media screen and (min-width:1100px) {
+  /* Chapter opening = ONE grid, not a floating strip + a separate cover.
+     The explicit full-width rule on following siblings prevents empty columns. */
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad:has(> header.mg-feature) {
+    display:grid !important;
+    grid-template-columns:minmax(0,44fr) minmax(0,35fr) minmax(0,21fr) !important;
+    column-gap:clamp(10px,1.3vw,22px) !important;
+    row-gap:0 !important;
+    align-items:start !important;
+    overflow:visible !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad:has(> header.mg-feature) > :not(header.mg-feature):not(.ph-strip) {
+    grid-column:1 / -1 !important;
+    min-width:0;
+    float:none !important;
+    clear:both !important;
+  }
+  /* No gallery: text and cover occupy the whole row with a clean 54/46 split. */
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad > header.mg-feature {
+    grid-column:1 / -1 !important;
+    grid-row:1 !important;
+    display:grid !important;
+    grid-template-columns:minmax(0,54fr) minmax(0,46fr) !important;
+    gap:clamp(14px,2vw,30px) !important;
+    align-items:stretch !important;
+    background:#faf8f1 !important;
+    color:#15382f !important;
+    border:0 !important;
+    border-top:2px solid #1a5843 !important;
+    border-bottom:1px solid #cfcfc2 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+    position:relative !important;
+    isolation:auto !important;
+    overflow:visible !important;
+    padding:clamp(12px,1.45vw,22px) 0 !important;
+    margin:0 0 22px !important;
+    min-height:0 !important;
+    height:auto !important;
+  }
+  /* When gallery is present, the cover fills the FIRST TWO parent columns. */
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad:has(> .ph-strip) > header.mg-feature {
+    grid-column:1 / 3 !important;
+    grid-template-columns:minmax(0,56fr) minmax(0,44fr) !important;
+    gap:clamp(12px,1.45vw,23px) !important;
+    margin:0 0 20px !important;
+  }
+  /* Text ALWAYS FIRST, at left, regardless of source DOM order. */
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad > header.mg-feature > div {
+    grid-column:1 !important;
+    grid-row:1 !important;
+    position:relative !important;
+    z-index:1 !important;
+    display:block !important;
+    min-width:0 !important;
+    width:100% !important;
+    height:auto !important;
+    max-width:none !important;
+    align-self:start !important;
+    margin:0 !important;
+    padding:clamp(8px,1.4vw,23px) clamp(8px,1.5vw,24px) !important;
+    background:transparent !important;
+    background-image:none !important;
+    border:0 !important;
+    border-left:3px solid #bd9e4e !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+    color:#15382f !important;
+    text-align:left !important;
+    transform:none !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad > header.mg-feature > figure {
+    grid-column:2 !important;
+    grid-row:1 !important;
+    align-self:stretch !important;
+    position:relative !important;
+    min-width:0 !important;
+    min-height:250px !important;
+    max-height:465px !important;
+    overflow:hidden !important;
+    margin:0 !important;
+    border:5px solid #fff !important;
+    border-radius:2px !important;
+    box-shadow:0 8px 22px #102e2530 !important;
+    background:#1b493d !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad > header.mg-feature > figure img {
+    display:block !important;
+    position:absolute !important;
+    inset:0 !important;
+    width:100% !important;
+    height:100% !important;
+    min-height:0 !important;
+    max-height:none !important;
+    object-fit:cover !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad > header.mg-feature > figure figcaption {
+    position:absolute !important;
+    inset:auto 0 0 0 !important;
+    z-index:2 !important;
+    width:auto !important;
+    max-width:none !important;
+    padding:5px 9px !important;
+    background:#092b25c9 !important;
+    color:#fff !important;
+    font:italic 11px/1.4 Georgia,serif !important;
+    text-align:left !important;
+    text-shadow:none !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad > header.mg-feature > div :is(h3,p,small,b,strong,span,div,label,time),
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad > header.mg-feature > div :is(.stage-title,.stage-desc,.st-move,.fl-h,.fl-tip,.fl-tip b,.fl-v,.fl-k,.fl-s) {
+    color:#15382f !important;
+    -webkit-text-fill-color:currentColor !important;
+    text-shadow:none !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad > header.mg-feature > div h3 {
+    font:400 clamp(30px,3.2vw,47px)/1.07 Georgia,serif !important;
+    letter-spacing:-.035em !important;
+    margin:5px 0 14px !important;
+    overflow-wrap:normal !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad > header.mg-feature > div p {
+    font:400 clamp(15px,1.27vw,18px)/1.55 Georgia,serif !important;
+    max-width:65ch !important;
+    margin:0 0 13px !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad > header.mg-feature :is(.mg-stage-metadata,.fl-read,.fl-tips) {
+    display:flex !important;
+    flex-wrap:wrap !important;
+    gap:7px !important;
+    margin:8px 0 !important;
+    min-width:0 !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad > header.mg-feature :is(.timeline-date-container,.ticket-badge,.fl-tip,.st-move) {
+    position:relative !important;
+    display:block !important;
+    width:auto !important;
+    max-width:100% !important;
+    padding:6px 9px !important;
+    background:#ebeee7 !important;
+    border:1px solid #cad6c9 !important;
+    color:#15382f !important;
+    font-size:12px !important;
+    line-height:1.35 !important;
+    text-shadow:none !important;
+    box-shadow:none !important;
+    transform:none !important;
+  }
+  /* Dense detail belongs BELOW the intro instead of swelling/overlapping it. */
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad > header.mg-feature .st-deck {
+    display:block !important;
+    width:100% !important;
+    min-width:0 !important;
+    margin:9px 0 !important;
+    background:transparent !important;
+    color:#15382f !important;
+    border:0 !important;
+    box-shadow:none !important;
+  }
+  /* The three photos form a neat mosaic on the RIGHT, same visual row as intro. */
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad:has(> header.mg-feature) > .ph-strip {
+    grid-column:3 !important;
+    grid-row:1 !important;
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    grid-template-rows:repeat(3,minmax(0,1fr)) !important;
+    align-self:stretch !important;
+    justify-self:stretch !important;
+    float:none !important;
+    clear:none !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+    min-width:0 !important;
+    margin:0 0 20px !important;
+    padding:5px !important;
+    gap:7px !important;
+    background:#fff !important;
+    border:1px solid #dddace !important;
+    border-radius:2px !important;
+    box-shadow:0 6px 17px #102e2522 !important;
+    transform:none !important;
+    overflow:hidden !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad:has(> header.mg-feature) > .ph-strip > :is(.tj-pic,.mg-strip-photo) {
+    display:block !important;
+    grid-column:1 !important;
+    width:100% !important;
+    height:clamp(84px,9.3vw,142px) !important;
+    min-height:0 !important;
+    max-height:142px !important;
+    margin:0 !important;
+    float:none !important;
+    border:0 !important;
+    border-radius:0 !important;
+    transform:none !important;
+    overflow:hidden !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-fold-pad:has(> header.mg-feature) > .ph-strip img {
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    min-height:0 !important;
+    object-fit:cover !important;
+  }
+  /* Hotel comparisons: true balanced two-column editorial spreads. */
+  html body #hlavni-obsah .bali-ed-hotel-spread {
+    display:grid !important;
+    grid-template-columns:minmax(0,46fr) minmax(0,54fr) !important;
+    align-items:start !important;
+    gap:clamp(16px,2.2vw,34px) !important;
+    margin:12px 0 20px !important;
+    padding:17px 8px !important;
+    border-top:1px solid #d2d9d1 !important;
+    border-bottom:1px solid #d2d9d1 !important;
+    background:transparent !important;
+    min-width:0 !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread.bali-ed-right {
+    grid-template-columns:minmax(0,54fr) minmax(0,46fr) !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread > .uber-media-grid {
+    display:grid !important;
+    grid-column:1 !important;
+    grid-row:1 !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:9px !important;
+    width:100% !important;
+    min-width:0 !important;
+    min-height:0 !important;
+    max-width:100% !important;
+    float:none !important;
+    margin:0 !important;
+    overflow:visible !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread.bali-ed-right > .uber-media-grid {grid-column:2 !important;}
+  html body #hlavni-obsah .bali-ed-hotel-spread > .uber-info-panel {
+    display:block !important;
+    grid-column:2 !important;
+    grid-row:1 !important;
+    min-width:0 !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:clamp(12px,1.6vw,24px) !important;
+    background:#f5f4ed !important;
+    border:0 !important;
+    border-left:3px solid #c7ad64 !important;
+    box-shadow:none !important;
+    font:400 15px/1.65 Georgia,serif !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread.bali-ed-right > .uber-info-panel {
+    grid-column:1 !important;
+    border-left:0 !important;
+    border-right:3px solid #c7ad64 !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread > .uber-media-grid > :is(.uber-media-box,.sv-card,.hotel-location-map) {
+    grid-column:auto !important;
+    grid-row:auto !important;
+    float:none !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    height:clamp(125px,11.5vw,182px) !important;
+    min-height:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    border-radius:3px !important;
+    overflow:hidden !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread > .uber-media-grid > .uber-media-box {
+    border:4px solid #fff !important;
+    box-shadow:0 6px 13px #102e2520 !important;
+    transform:rotate(-.5deg);
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread > .uber-media-grid > .uber-media-box:nth-child(even) {
+    transform:rotate(.5deg);
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread > .uber-media-grid > .uber-media-box:hover,
+  html body #hlavni-obsah .bali-ed-hotel-spread > .uber-media-grid > .uber-media-box:focus-within {
+    transform:rotate(0deg) translateY(-2px) !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread .uber-media-box :is(img,a) {
+    display:block !important;
+    width:100% !important;
+    height:100% !important;
+    min-height:0 !important;
+    object-fit:cover !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread .sv-card .sv-stage:not(:fullscreen) {
+    width:100% !important;
+    height:100% !important;
+    min-height:0 !important;
+    max-height:100% !important;
+    aspect-ratio:auto !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread .hotel-location-map {
+    display:flex !important;
+    flex-direction:column !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread .hotel-location-map-head {
+    padding:4px 6px !important;
+    line-height:1.2 !important;
+    font-size:10px !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread .hotel-location-map iframe:not(:fullscreen) {
+    display:block !important;
+    flex:1 1 0 !important;
+    width:100% !important;
+    height:100% !important;
+    min-height:0 !important;
+    max-height:none !important;
+    border:0 !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread .bali-ed-hotel-notes {
+    display:block;
+    border-top:1px solid #cfdbd1 !important;
+    padding-top:12px !important;
+    margin-top:14px !important;
+    font:400 14px/1.65 Georgia,serif !important;
+    color:#183f32 !important;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread .bali-ed-hotel-notes h4 {
+    font:800 11px/1.3 system-ui,sans-serif !important;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    color:#21513e;
+    margin:0 0 8px;
+  }
+  html body #hlavni-obsah .bali-ed-hotel-spread .bali-ed-hotel-notes p {
+    margin:0 0 10px !important;
+  }
+  /* Embedded Google maps elsewhere never become panoramic page-wide bands.
+     Do not compress the interactive hero route map or fullscreen overlays. */
+  html body #hlavni-obsah .lux-fold-pad > .map-container-wrapper,
+  html body #hlavni-obsah .lux-fold-pad > .hotel-location-map,
+  html body #hlavni-obsah .lux-fold-pad > .sv-card {
+    display:block !important;
+    float:left !important;
+    clear:none !important;
+    width:25% !important;
+    max-width:390px !important;
+    min-width:225px !important;
+    box-sizing:border-box !important;
+    margin:10px 23px 20px 0 !important;
+    padding:8px !important;
+    overflow:hidden !important;
+  }
+  html body #hlavni-obsah .lux-fold-pad.bali-ed-right > :is(.map-container-wrapper,.hotel-location-map,.sv-card) {
+    float:right !important;
+    margin:10px 0 20px 23px !important;
+  }
+  html body #hlavni-obsah .lux-fold-pad > :is(.map-container-wrapper,.hotel-location-map,.sv-card) :is(iframe,.sv-stage):not(:fullscreen) {
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    height:195px !important;
+    min-height:0 !important;
+    max-height:225px !important;
+    aspect-ratio:auto !important;
+    float:none !important;
+    margin:0 !important;
+  }
+  html body #hlavni-obsah .lux-fold-pad .map-container-wrapper iframe[src*="google.com/maps"]:not(:fullscreen),
+  html body #hlavni-obsah .lux-fold-pad .map-container-wrapper iframe[src*="maps.google.com"]:not(:fullscreen) {
+    width:100% !important;
+    height:195px !important;
+    min-height:0 !important;
+    max-height:225px !important;
+    float:none !important;
+    margin:0 !important;
+  }
+  /* Third-party map widget in large itinerary card: display quarter-width map
+     within its own parent without changing its data or Google links. */
+  html body #hlavni-obsah .lux-fold-pad .bento-card > .map-container-wrapper {
+    width:25% !important;
+    min-width:225px !important;
+    max-width:390px !important;
+    float:left !important;
+    margin:10px 22px 16px 0 !important;
+    padding:8px !important;
+  }
+  html body #hlavni-obsah .lux-fold-pad .map-container-wrapper .ubud-map-widget {
+    width:100% !important;
+    min-width:0 !important;
+    max-width:100% !important;
+  }
+}
+@media screen and (min-width:1100px) and (prefers-reduced-motion:reduce) {
+  html body #hlavni-obsah .bali-ed-hotel-spread > .uber-media-grid > .uber-media-box {
+    transform:none !important;transition:none !important;
+  }
+}
+
+/* BALI 2027 — GLOBAL MAGAZINE SYSTEM v5
+   Applied across ALL five main chapters and 27 fold chapters on desktop.
+   Keeps native widgets, pricing logic, image clicks, Google Maps and Street View.
+   Does not alter mobile, print, fullscreen or form visibility. */
+@media screen and (min-width:1100px) {
+  html body #hlavni-obsah.main-wrapper {
+    --ed-paper:#f8f6ef;
+    --ed-sheet:#fffdf8;
+    --ed-ink:#17382f;
+    --ed-muted:#506359;
+    --ed-line:rgba(31,78,59,.22);
+    --ed-gold:#b79d54;
+    --ed-spread-gap:clamp(16px,2vw,32px);
+    font-family:Georgia,"Times New Roman",serif;
+  }
+  /* A consistent, unbroken reading surface. Each main chapter has its own
+     numbered fold, with a visible beginning and breathing room. */
+  html body #hlavni-obsah.main-wrapper .lux-part-body,
+  html body #hlavni-obsah.main-wrapper .lux-fold-body,
+  html body #hlavni-obsah.main-wrapper .lux-fold-inner {
+    min-width:0;
+  }
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad {
+    background:var(--ed-paper) !important;
+    color:var(--ed-ink);
+    min-width:0;
+    padding:clamp(20px,2.2vw,40px) !important;
+    margin:0 !important;
+  }
+  html body #hlavni-obsah.main-wrapper #osa .lux-fold-pad {
+    padding:clamp(18px,2vw,34px) !important;
+  }
+  html body #hlavni-obsah.main-wrapper .lux-fold.is-open > .lux-fold-body {
+    border-inline:1px solid var(--ed-line);
+  }
+  /* Editorial section title at the LEFT: do not center generic headings. */
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad > .mg-department {
+    display:grid !important;
+    grid-template-columns:74px minmax(0,1fr) !important;
+    align-items:center !important;
+    gap:22px !important;
+    margin:0 0 30px !important;
+    padding:12px 0 18px !important;
+    width:100%;
+    border-top:2px solid var(--ed-ink) !important;
+    border-bottom:1px solid var(--ed-line) !important;
+    background:transparent !important;
+  }
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad > .mg-department > span {
+    font:italic 45px/.95 Georgia,serif !important;
+    color:#9b885f !important;
+    text-align:left !important;
+    padding:0 7px !important;
+  }
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad > .mg-department > div {
+    min-width:0 !important;
+    padding:0 !important;
+  }
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad > .mg-department small {
+    display:block;
+    font:800 11px/1.3 system-ui,sans-serif !important;
+    letter-spacing:.2em !important;
+    text-transform:uppercase !important;
+    color:#5a7166 !important;
+    margin-bottom:7px !important;
+  }
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad > .mg-department h3 {
+    font:400 clamp(30px,3vw,47px)/1.08 Georgia,serif !important;
+    letter-spacing:-.025em !important;
+    text-align:left !important;
+    color:var(--ed-ink) !important;
+    margin:0 !important;
+  }
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad :is(.mg-guide-title,.stage-title,.tj-h,.cx-h,.tk-card-t,.scooter-title) {
+    text-align:left !important;
+    letter-spacing:-.016em !important;
+  }
+  /* Existing oversized "gradient billboard" headings within preparation
+     sections are converted to slim editorial chapter straps. */
+  html body #hlavni-obsah.main-wrapper #cast-priprava .lux-fold-pad > div > h2,
+  html body #hlavni-obsah.main-wrapper #cast-priprava .lux-fold-pad .esim-wrapper > h2,
+  html body #hlavni-obsah.main-wrapper #cast-priprava .lux-fold-pad .transport-apps-wrapper > h2,
+  html body #hlavni-obsah.main-wrapper #cast-misto #slovnicek > div:first-child > h3 {
+    display:block !important;
+    height:auto !important;
+    width:100% !important;
+    padding:13px 0 13px 17px !important;
+    margin:0 0 20px !important;
+    border:0 !important;
+    border-left:4px solid var(--ed-gold) !important;
+    border-bottom:1px solid var(--ed-line) !important;
+    background:transparent !important;
+    background-image:none !important;
+    box-shadow:none !important;
+    border-radius:0 !important;
+    color:var(--ed-ink) !important;
+    -webkit-text-fill-color:var(--ed-ink) !important;
+    font:400 clamp(23px,2.6vw,36px)/1.18 Georgia,serif !important;
+    letter-spacing:-.02em !important;
+    text-align:left !important;
+    text-transform:none !important;
+  }
+  /* Text rhythm across every type of chapter, without modifying values
+     in calculators or causing table/button content to reflow unexpectedly. */
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad :is(.sec-sub,.stage-desc,.scooter-subtitle,.tj-sub,.cx-sub,.tk-card-s) {
+    max-width:88ch !important;
+    font:400 clamp(15px,1.18vw,18px)/1.65 Georgia,serif !important;
+    text-align:left !important;
+    color:var(--ed-muted) !important;
+    letter-spacing:normal !important;
+  }
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad :is(.tj-eyebrow,.p20-kicker,.p21-kicker,.pf18-kicker) {
+    font-family:system-ui,sans-serif !important;
+    letter-spacing:.17em !important;
+  }
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad :is(.tj-h,.cx-h,.p20-food-hero-copy h4,.p20-activity-lead h4,.p21-cash-masthead h4) {
+    font:400 clamp(27px,2.8vw,43px)/1.15 Georgia,serif !important;
+    text-align:left !important;
+    letter-spacing:-.025em !important;
+  }
+  /* General document cards: flexible magazine columns instead of tall
+     full-width notices. No change to their internal links/forms. */
+  html body #hlavni-obsah.main-wrapper #cast-priprava .mg-document-grid {
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:var(--ed-spread-gap) !important;
+    align-items:stretch !important;
+    width:100% !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-priprava .mg-document-card {
+    display:block !important;
+    width:auto !important;
+    min-width:0 !important;
+    max-width:none !important;
+    padding:clamp(20px,2vw,30px) !important;
+    background:var(--ed-sheet) !important;
+    border:1px solid var(--ed-line) !important;
+    border-top:4px solid var(--ed-gold) !important;
+    border-radius:2px !important;
+    box-shadow:0 8px 23px rgba(25,53,40,.08) !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-priprava .mg-document-card:nth-child(4n+2),
+  html body #hlavni-obsah.main-wrapper #cast-priprava .mg-document-card:nth-child(4n+3) {
+    border-top-color:#275b47 !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-priprava .mg-document-card :is(h3,h4) {
+    text-align:left !important;
+    color:var(--ed-ink) !important;
+  }
+  /* Practical app/SOS/eSIM grids preserve their own app cards, but get
+     consistent paper framing, typography, and readable column gaps. */
+  html body #hlavni-obsah.main-wrapper #cast-priprava :is(.transport-apps-grid,.esim-check-grid) {
+    gap:var(--ed-spread-gap) !important;
+    align-items:start !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-priprava :is(.transport-app-item,.bento-card,.scooter-main-card) {
+    border-radius:3px !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-priprava .transport-app-item {
+    background:var(--ed-sheet) !important;
+    box-shadow:0 5px 15px rgba(25,53,40,.09) !important;
+  }
+  /* Route/itinerary: all 14 fold chapters, irrespective of whether
+     an opening photo spread exists. Maintain the larger original JS widgets. */
+  html body #hlavni-obsah.main-wrapper #osa .lux-fold-pad > :is(.t-row,.bento-card,.scooter-main-card,.fl-deck,.map-container-wrapper) {
+    margin-block:17px 23px !important;
+    min-width:0 !important;
+  }
+  html body #hlavni-obsah.main-wrapper #osa :is(.t-bubble,.bento-card,.uber-hotel-card,.scooter-main-card) {
+    border-radius:3px !important;
+  }
+  html body #hlavni-obsah.main-wrapper #osa .timeline-date-container {
+    font:700 13px/1.4 system-ui,sans-serif !important;
+    letter-spacing:.02em !important;
+  }
+  html body #hlavni-obsah.main-wrapper #osa .stage-title {
+    font:400 clamp(24px,2.25vw,34px)/1.15 Georgia,serif !important;
+    color:var(--ed-ink) !important;
+  }
+  /* Non-reportage stages still receive the same coherent reading width. */
+  html body #hlavni-obsah.main-wrapper #osa .lux-fold-pad:not(:has(> header.mg-feature)) > :is(p,blockquote,.mg-department) {
+    max-width:100% !important;
+  }
+  /* Destination/program cards keep a true two-column layout when their
+     markup already has a photo/map alongside a body of text. */
+  html body #hlavni-obsah.main-wrapper #osa :is(.mg-media-pair,.mg-show-pair) {
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:var(--ed-spread-gap) !important;
+    align-items:start !important;
+    min-width:0 !important;
+  }
+  html body #hlavni-obsah.main-wrapper #osa :is(.mg-media-pair,.mg-show-pair) > * {
+    min-width:0 !important;
+    max-width:100% !important;
+  }
+  /* No giant standalone destination Google maps: make them quarter-page
+     marginal illustrations and let adjacent prose fill the unused width. */
+  /* Quarter-page rule only for standalone media, never for media nested
+     inside an itinerary card: 25% of a card made Street View 170px wide. */
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad > .hotel-location-map,
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad > .map-container-wrapper,
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad > .sv-card {
+    max-width:min(25%,390px) !important;
+    box-sizing:border-box !important;
+  }
+  /* Embedded destination cards own their complete internal media width.
+     No fixed page-level max-width propagates into their map/Street View. */
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad :is(.spot-card,.spot-card-sg,.spot-card-singapore,.spot-card-ulu,.spot-card-ubud,.spot-card-lombok,.spot-card-kuta,.bento-card) :is(.sv-card,.map-container-wrapper,.hotel-location-map) {
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad .map-container-wrapper iframe[src*="google"]:not(:fullscreen) {
+    max-width:100% !important;
+    height:205px !important;
+    min-height:0 !important;
+  }
+  /* Planning and finance: visually consistent editorial mastheads and
+     ledger panels. Calculated figures retain their original font-size
+     and tabular numerical alignment. */
+  html body #hlavni-obsah.main-wrapper #cast-plan .lux-fold-pad > .mg-department,
+  html body #hlavni-obsah.main-wrapper #cast-misto .lux-fold-pad > .mg-department,
+  html body #hlavni-obsah.main-wrapper #cast-kontrola .lux-fold-pad > .mg-department {
+    border-top-color:#1d6049 !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-plan :is(.p20-food-hero,.p20-activity-hero,.p21-cash-masthead,.pf18-hero) {
+    display:grid !important;
+    grid-template-columns:minmax(0,55fr) minmax(0,45fr) !important;
+    gap:var(--ed-spread-gap) !important;
+    align-items:center !important;
+    padding:clamp(18px,2vw,32px) !important;
+    border-radius:3px !important;
+    margin:0 0 22px !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-plan :is(.p20-food-hero,.p20-activity-hero,.p21-cash-masthead,.pf18-hero) > * {
+    min-width:0 !important;
+    max-width:100% !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-plan :is(.tj-card,.cx-card,.pf18-panel,.p22-card,.bento-card) {
+    border-radius:3px !important;
+    box-shadow:0 7px 20px rgba(15,54,38,.07) !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-plan :is(.tj-card,.cx-card,.pf18-panel) {
+    padding:clamp(16px,2vw,28px) !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-plan .tj-levels {
+    display:grid !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:16px !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-plan :is(.tj-line,.tj-grp,.cx-e,.pf18-kpi,.p22-ledger) {
+    min-width:0 !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-plan :is(.pf18-section-heading,.tj-card>.tj-h,.cx-top) {
+    text-align:left !important;
+  }
+  /* Financial numbers must remain fully readable: no floats, rotations,
+     clipping, or visual-only conversions on budget controls. */
+  html body #hlavni-obsah.main-wrapper #cast-plan :is(#rozpocet,#hotovost,#jidlo,#aktivity) {
+    float:none !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-plan :is(.pf18-kpi-slot,.p22-ledger,.tj-sum,.cx-hero) {
+    overflow:visible !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-plan :is(.pf18-overview-number,.fc-price,.cx-big,.cx-kc,.tj-total) {
+    font-variant-numeric:tabular-nums !important;
+    white-space:normal !important;
+  }
+  /* Glossary and final review: pages of compact reference cards rather than
+     oversized empty panels. Search and flip events are untouched. */
+  html body #hlavni-obsah.main-wrapper #slovnicek {
+    margin:0 !important;
+    padding:clamp(18px,2vw,32px) !important;
+    border-radius:3px !important;
+    background:var(--ed-sheet) !important;
+    box-shadow:none !important;
+  }
+  html body #hlavni-obsah.main-wrapper #slovnicek .flip-grid {
+    display:grid !important;
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    gap:clamp(10px,1.2vw,20px) !important;
+  }
+  html body #hlavni-obsah.main-wrapper #slovnicek .flip-grid > * {
+    min-width:0 !important;
+  }
+  html body #hlavni-obsah.main-wrapper #slovnicek #dictSearch {
+    max-width:650px !important;
+    border-radius:3px !important;
+  }
+  html body #hlavni-obsah.main-wrapper #ukolyTerminy {
+    padding:clamp(18px,2vw,34px) !important;
+    border-top:3px solid #285d48 !important;
+    border-radius:3px !important;
+    background:var(--ed-sheet) !important;
+  }
+  html body #hlavni-obsah.main-wrapper #ukolyTerminy :is(.tk-calendar-heading,.ck-sec-h,.tk-card-t) {
+    text-align:left !important;
+    color:var(--ed-ink) !important;
+  }
+  html body #hlavni-obsah.main-wrapper #ukolyTerminy .tk-card-t {
+    font:400 clamp(26px,2.5vw,38px)/1.2 Georgia,serif !important;
+  }
+  html body #hlavni-obsah.main-wrapper #ukolyTerminy .ck-sec {
+    border-top:1px solid var(--ed-line);
+    padding-top:16px;
+  }
+  /* Magazine-wide borders and cards, without touching checkboxes,
+     toggle switches, flight buttons, map buttons, or price state classes. */
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad :is(.p20-food-hero,.p20-activity-hero,.p21-cash-masthead,.pf18-hero,.mg-document-card) {
+    box-shadow:0 6px 22px rgba(16,53,37,.07);
+  }
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad :is(.uber-media-overlay,.sv-badge,.hotel-location-map-head) {
+    font-family:system-ui,sans-serif !important;
+  }
+}
+/* Narrow laptop: all editorial grids collapse BEFORE they become unreadable.
+   Mobile CSS and original interactive layout remain authoritative. */
+@media screen and (min-width:1100px) and (max-width:1250px) {
+  html body #hlavni-obsah.main-wrapper #slovnicek .flip-grid {
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+  html body #hlavni-obsah.main-wrapper #cast-priprava .mg-document-grid {
+    gap:14px !important;
+  }
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad {
+    padding:19px !important;
+  }
+}
+
+
+/* EDITORIAL PLACE GUIDES — detailed itineraries, not the hotel selector.
+   Preserve native 2-column card structure and all embedded Street View controls. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah .mg-enriched-spot {
+    align-items:start !important;
+    min-width:0 !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .mg-enriched-spot > div:first-child {
+    min-width:0 !important;
+    align-self:stretch !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .mg-enriched-spot > .sv-card {
+    min-width:0 !important;
+    max-width:100% !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .mg-place-essay {
+    margin:16px 0 8px !important;
+    padding:15px 0 0 !important;
+    border-top:1px solid rgba(34,92,68,.18);
+    color:#344b43 !important;
+    font-family:Georgia,"Times New Roman",serif !important;
+    font-size:clamp(14px,1.02vw,16px) !important;
+    line-height:1.62 !important;
+    text-align:left !important;
+    min-width:0;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .mg-place-essay .mg-place-kicker {
+    font:800 10px/1.5 system-ui,sans-serif !important;
+    letter-spacing:.15em !important;
+    color:#867446 !important;
+    margin:0 0 10px !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .mg-place-essay p {
+    margin:0 0 12px !important;
+    padding:0 !important;
+    max-width:none !important;
+    color:inherit !important;
+    font:inherit !important;
+    text-wrap:pretty;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .mg-place-essay .mg-place-practical {
+    padding:10px 13px !important;
+    margin:15px 0 0 !important;
+    border-left:3px solid #b39a5d;
+    background:rgba(31,105,76,.045);
+    font-size:.94em !important;
+  }
+}
+@media screen and (max-width:1099px) {
+  html[data-magazine="on"] #hlavni-obsah .mg-place-essay {
+    margin:14px 0 8px;padding-top:12px;border-top:1px solid rgba(34,92,68,.18);
+    color:inherit;line-height:1.62;font-size:14px;
+  }
+  html[data-magazine="on"] #hlavni-obsah .mg-place-essay p {margin:0 0 11px}
+  html[data-magazine="on"] #hlavni-obsah .mg-place-kicker {
+    font:800 10px/1.5 system-ui,sans-serif;letter-spacing:.12em;
+    color:#867446;margin-bottom:8px;
+  }
+  html[data-magazine="on"] #hlavni-obsah .mg-place-practical {
+    padding:9px 12px;border-left:3px solid #b39a5d;
+    background:rgba(31,105,76,.045);
+  }
+}
+@media print {
+  #hlavni-obsah .mg-place-essay {font-size:10pt;line-height:1.45}
+  #hlavni-obsah .mg-place-essay p {margin-bottom:7px}
+}
+
+
+/* Full-width flight cockpit: transfer from Singapore to Bali.
+   Overrides old half-width magazine rules without changing the simulator logic.
+   The map/animation occupies the left side, telemetry and tips fill the right. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps .lux-fold-pad > #flightDeck {
+    display:grid !important;
+    grid-template-columns:minmax(0,43fr) minmax(0,57fr) !important;
+    grid-template-rows:auto 1fr !important;
+    align-items:stretch !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    grid-column:1 / -1 !important;
+    justify-self:stretch !important;
+    float:none !important;
+    clear:both !important;
+    margin:20px 0 26px !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    border-radius:15px !important;
+    box-sizing:border-box !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck > .fl-sky {
+    grid-column:1 !important;
+    grid-row:1 / 3 !important;
+    width:100% !important;
+    min-width:0 !important;
+    height:100% !important;
+    min-height:385px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    border-radius:0 !important;
+    align-self:stretch !important;
+    overflow:hidden !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck > .fl-sky > svg {
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    max-height:calc(100% - 55px) !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck > .fl-read {
+    grid-column:2 !important;
+    grid-row:1 !important;
+    display:grid !important;
+    width:100% !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:1px !important;
+    margin:0 !important;
+    align-self:stretch !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck > .fl-read > div {
+    padding:clamp(15px,1.6vw,25px) !important;
+    align-content:center !important;
+    min-width:0 !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck > .fl-tips {
+    grid-column:2 !important;
+    grid-row:2 !important;
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:0 !important;
+    width:100% !important;
+    padding:0 !important;
+    margin:0 !important;
+    align-content:stretch !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck > .fl-tips > .fl-tip {
+    border-radius:0 !important;
+    border-inline:0 !important;
+    border-bottom:0 !important;
+    margin:0 !important;
+    padding:clamp(14px,1.2vw,22px) clamp(16px,1.6vw,26px) !important;
+    background:var(--surface) !important;
+  }
+}
+@media screen and (min-width:800px) and (max-width:1099px) {
+  html[data-magazine="on"] body #hlavni-obsah #f-leg-sgdps #flightDeck {
+    width:100% !important;
+    max-width:none !important;
+    grid-column:1 / -1 !important;
+    grid-template-columns:minmax(0,42%) minmax(0,58%) !important;
+  }
+}
+
+/* Direct documentary source under verified destination descriptions. */
+html[data-magazine="on"] body #hlavni-obsah .mg-place-source {
+  display:inline-block;
+  margin:4px 0 3px;
+  padding-bottom:2px;
+  font:700 12px/1.5 system-ui,sans-serif;
+  color:#176147 !important;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+html[data-magazine="on"] body #hlavni-obsah .mg-place-source:focus-visible {
+  outline:2px solid #176147;outline-offset:3px;
+}
+
+
+/* 2026-11-05: Flight widget is inserted into .mg-media-pair by magazine JS
+   because the following map wrapper is its companion. The old parent grid
+   allocated only 50% to the flight widget, leaving the other half empty
+   (the redundant map in that column is hidden by existing CSS). */
+@media screen and (min-width:1000px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-sgdps .mg-media-pair:has(> #flightDeck) {
+    display:block !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    margin:12px 0 24px !important;
+    padding:0 !important;
+    float:none !important;
+    clear:both !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-sgdps .mg-media-pair > #flightDeck {
+    display:grid !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+    margin:0 !important;
+    grid-template-columns:minmax(0,43fr) minmax(0,57fr) !important;
+    justify-self:stretch !important;
+  }
+}
+
+/* Hotel media compact again: half-height map, panorama and photo previews.
+   Local to hotel gallery; destination itineraries and fullscreen are unaffected. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .uber-hotel-card .bali-ed-hotel-spread > .uber-media-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:9px !important;
+    align-items:start !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .uber-hotel-card .bali-ed-hotel-spread > .uber-media-grid > .uber-media-box {
+    height:clamp(171.875px,14.0625vw,226.5625px) !important;
+    max-height:226.5625px !important;
+    min-height:0 !important;
+    align-self:start !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .uber-hotel-card .bali-ed-hotel-spread > .uber-media-grid > :is(.sv-card,.hotel-location-map) {
+    height:clamp(196.875px,calc(11.09375vw + 50px),225px) !important;
+    max-height:225px !important;
+    min-height:0 !important;
+    align-self:start !important;
+    overflow:hidden !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .uber-hotel-card .bali-ed-hotel-spread .sv-card .sv-stage:not(:fullscreen) {
+    width:100% !important;
+    height:100% !important;
+    max-height:100% !important;
+    min-height:0 !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .uber-hotel-card .bali-ed-hotel-spread .hotel-location-map iframe:not(:fullscreen) {
+    flex:1 1 0 !important;
+    min-height:0 !important;
+    width:100% !important;
+    height:100% !important;
+  }
+}
+
+
+/* RESTORE ROUTE WIDGETS (2026-11-05).
+   A previous blanket quarter-width selector squeezed the *entire* Uluwatu–Ubud
+   transport section into a narrow column, including the toll guide. Do not
+   classify full interactive transfer widgets as decorative marginal maps. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-ubud
+    .lux-fold-pad > .map-container-wrapper:has(.ubud-map-widget),
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-uluwatu
+    .lux-fold-pad > .map-container-wrapper:has(.ulu-map-widget) {
+    display:block !important;
+    float:none !important;
+    clear:both !important;
+    grid-column:1 / -1 !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    margin:18px 0 26px !important;
+    padding:clamp(12px,1.4vw,22px) !important;
+    box-sizing:border-box !important;
+    overflow:visible !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-ubud
+    .map-container-wrapper:has(.ubud-map-widget) > .ubud-map-widget,
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-uluwatu
+    .map-container-wrapper:has(.ulu-map-widget) > .ulu-map-widget {
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-ubud
+    .map-container-wrapper:has(.ubud-map-widget) :is(.ubud-map-frame-wrapper,#uluwatuUbudMapWrapper),
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-uluwatu
+    .map-container-wrapper:has(.ulu-map-widget) .ulu-map-frame-wrapper {
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    height:clamp(280px,29vw,430px) !important;
+    min-height:280px !important;
+    overflow:hidden !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-ubud
+    .map-container-wrapper #uluwatuUbudMapFrame:not(:fullscreen),
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-uluwatu
+    .map-container-wrapper .ulu-map-frame-wrapper iframe:not(:fullscreen) {
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:100% !important;
+    max-height:none !important;
+    min-height:100% !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-ubud
+    .map-container-wrapper .toll-info-box {
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+}
+
+
+/* FIX: Bali -> Lombok boat route is a full-size interactive transfer map,
+   NOT a 25%-width editorial thumbnail. Keep the map and its notes together. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-presun4
+    .lux-fold-pad > .map-container-wrapper:has(#boatMapWrapper) {
+    display:block !important;
+    float:none !important;
+    clear:both !important;
+    grid-column:1 / -1 !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    margin:20px 0 26px !important;
+    padding:clamp(12px,1.4vw,20px) !important;
+    box-sizing:border-box !important;
+    overflow:visible !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-presun4
+    .map-container-wrapper #boatMapWrapper {
+    display:block !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    height:clamp(360px,32vw,480px) !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #f-leg-presun4
+    .map-container-wrapper #boatMapFrame:not(:fullscreen) {
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:100% !important;
+    min-height:100% !important;
+    max-height:none !important;
+    float:none !important;
+    margin:0 !important;
+  }
+}
+
+
+/* 2026-11-05 — ROUTE MAP IFRAME HEIGHT: a previous generic selector
+   forced every Google iframe in a .map-container-wrapper to 195–205px,
+   even when its .map-box was 420px tall. The iframe must fill its
+   designated viewport, not leave a large white lower half.
+   Applies to itinerary route maps ONLY; hotel cards and thumbnails excluded. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    .lux-fold-pad .map-container-wrapper .map-box:has(> iframe[src*="google"]) {
+    position:relative !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    overflow:hidden !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    .lux-fold-pad .map-container-wrapper .map-box > iframe[src*="google"]:not(:fullscreen) {
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    height:100% !important;
+    min-height:100% !important;
+    max-height:none !important;
+    box-sizing:border-box !important;
+    float:none !important;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 !important;
+    aspect-ratio:auto !important;
+  }
+  /* Keep both return-leg maps at their intended height with no 195px cap. */
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #f-leg-presun5 .map-container-wrapper:has(> .map-box > iframe) {
+    min-width:0 !important;
+    overflow:visible !important;
+  }
+}
+
+
+/* Street View fullscreen is available inside every panorama: hotels + attractions. */
+html body #hlavni-obsah .sv-card .sv-stage {
+  position:relative !important;
+}
+html body #hlavni-obsah .sv-card .sv-stage > .bali-sv-fullscreen {
+  position:absolute !important;
+  z-index:2147483640 !important;
+  top:10px !important;
+  right:10px !important;
+  left:auto !important;
+  bottom:auto !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:auto !important;
+  max-width:calc(100% - 20px) !important;
+  min-width:0 !important;
+  min-height:34px !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:8px 11px !important;
+  border:1px solid rgba(255,255,255,.70) !important;
+  border-radius:7px !important;
+  background:rgba(11,37,32,.91) !important;
+  color:white !important;
+  box-shadow:0 3px 12px rgba(0,0,0,.28) !important;
+  font:700 12px/1.2 system-ui,sans-serif !important;
+  text-shadow:none !important;
+  cursor:pointer !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+  transform:none !important;
+}
+html body #hlavni-obsah .sv-card .sv-stage > .bali-sv-fullscreen:hover {
+  background:#0e654c !important;
+}
+html body #hlavni-obsah .sv-card .sv-stage > .bali-sv-fullscreen:focus-visible {
+  outline:3px solid #f2cb5c !important;
+  outline-offset:2px !important;
+}
+html body #hlavni-obsah .sv-card .sv-stage:fullscreen,
+html body #hlavni-obsah .sv-card .sv-stage:-webkit-full-screen {
+  position:fixed !important;
+  inset:0 !important;
+  width:100vw !important;
+  max-width:none !important;
+  min-width:100vw !important;
+  height:100vh !important;
+  max-height:none !important;
+  min-height:100vh !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  overflow:hidden !important;
+  background:#071410 !important;
+  display:block !important;
+}
+html body #hlavni-obsah .sv-card .sv-stage:fullscreen > iframe,
+html body #hlavni-obsah .sv-card .sv-stage:-webkit-full-screen > iframe {
+  display:block !important;
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  max-width:none !important;
+  min-width:100% !important;
+  height:100% !important;
+  max-height:none !important;
+  min-height:100% !important;
+  border:0 !important;
+  border-radius:0 !important;
+}
+html body #hlavni-obsah .sv-card .sv-stage:fullscreen > .bali-sv-fullscreen,
+html body #hlavni-obsah .sv-card .sv-stage:-webkit-full-screen > .bali-sv-fullscreen {
+  position:fixed !important;
+  top:max(18px,env(safe-area-inset-top)) !important;
+  right:max(18px,env(safe-area-inset-right)) !important;
+  padding:12px 16px !important;
+  font-size:14px !important;
+  min-height:44px !important;
+}
+@media print {
+  .bali-sv-fullscreen { display:none !important; }
+}
+
+
+
+/* Responsive full-width reading ribbon; preserve itinerary route overview as a
+   separate full-width child instead of accidentally grid-sizing the whole map. */
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head {
+  display:flex !important;
+  flex-direction:row !important;
+  flex-wrap:wrap !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:clamp(10px,1.4vw,18px) !important;
+  height:auto !important;
+  grid-template-columns:none !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > .lux-part-no {
+  flex:0 0 auto !important;
+  order:0 !important;
+  align-self:center !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > div:not(.lux-part-meta):not(.trip-overview) {
+  flex:1 1 250px !important;
+  width:auto !important;
+  max-width:none !important;
+  min-width:0 !important;
+  order:1 !important;
+  margin:0 !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > .trip-overview {
+  order:2 !important;
+  flex:0 0 100% !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  margin:0 !important;
+  align-self:auto !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > .lux-part-meta {
+  order:3 !important;
+  flex:0 0 100% !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  margin:0 !important;
+  display:flex !important;
+  align-items:stretch !important;
+  justify-content:space-between !important;
+  gap:10px !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count {
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) auto !important;
+  align-items:center !important;
+  gap:4px 12px !important;
+  text-align:left !important;
+  flex:1 1 0 !important;
+  width:auto !important;
+  min-width:0 !important;
+  max-width:none !important;
+  padding:12px clamp(12px,2vw,22px) !important;
+  border-radius:8px !important;
+  border:1px solid rgba(255,255,255,.48) !important;
+  background:rgba(7,35,30,.6) !important;
+  box-shadow:none !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count .pc-a {
+  grid-column:1 !important;
+  min-width:0 !important;
+  font-size:clamp(12px,1vw,15px) !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count .pc-b {
+  grid-column:2 !important;
+  text-align:right !important;
+  font-size:clamp(12px,1vw,15px) !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count .pc-bar {
+  grid-column:1 / -1 !important;
+  width:100% !important;
+  height:6px !important;
+  margin-top:4px !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-chev {
+  flex:0 0 40px !important;
+  width:40px !important;
+  min-width:40px !important;
+  align-self:center !important;
+  height:40px !important;
+  border-radius:8px !important;
+}
+@media (max-width:700px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head {
+    gap:10px !important;
+    padding:12px !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > div:not(.lux-part-meta):not(.trip-overview) {
+    flex:1 1 calc(100% - 74px) !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > .trip-overview {
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > .lux-part-meta {
+    gap:8px !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count {
+    padding:10px 12px !important;
+  }
+}
+
+
+/* Readable chapter accordion chevrons, desktop and mobile.
+   Draw the arrow with CSS rather than the tiny font glyph; preserve
+   the existing parent rotation when its chapter is open. */
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-part > .lux-part-head .lux-part-chev {
+  display:grid !important;
+  place-items:center !important;
+  position:relative !important;
+  font-size:0 !important;
+  line-height:0 !important;
+  color:transparent !important;
+  background:rgba(5,30,26,.82) !important;
+  border:2px solid rgba(255,255,255,.87) !important;
+  box-shadow:0 3px 12px rgba(0,0,0,.45) !important;
+  border-radius:10px !important;
+  width:clamp(50px,4.2vw,64px) !important;
+  min-width:clamp(50px,4.2vw,64px) !important;
+  height:clamp(50px,4.2vw,64px) !important;
+  min-height:clamp(50px,4.2vw,64px) !important;
+  flex:0 0 clamp(50px,4.2vw,64px) !important;
+  align-self:center !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-part > .lux-part-head .lux-part-chev::before {
+  content:"" !important;
+  display:block !important;
+  width:20px !important;
+  height:20px !important;
+  border-right:5px solid #fff !important;
+  border-bottom:5px solid #fff !important;
+  border-top:0 !important;
+  border-left:0 !important;
+  transform:translateY(-5px) rotate(45deg) !important;
+  filter:drop-shadow(0 2px 2px #000) !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+  .lux-part.is-open > .lux-part-head .lux-part-chev {
+  background:rgba(16,92,70,.92) !important;
+}
+@media (max-width:700px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    .lux-part > .lux-part-head .lux-part-chev {
+    width:52px !important;
+    min-width:52px !important;
+    height:52px !important;
+    min-height:52px !important;
+    flex-basis:52px !important;
+  }
+}
+
+
+/* Chapter II: make the itinerary banner identical in structure to other
+   chapters. The interactive journey graphic lives below, inside its body. */
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper #osa > .lux-part-head {
+  width:100% !important;
+  max-width:100% !important;
+  box-sizing:border-box !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper #osa > .lux-part-body > #tripOverview {
+  display:block !important;
+  position:relative !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+  margin:0 0 clamp(18px,2.5vw,34px) !important;
+  padding:clamp(12px,2vw,26px) !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper #osa > .lux-part-body > #tripOverview > .to-map {
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  box-sizing:border-box !important;
+}
+@media (max-width:700px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper #osa > .lux-part-body > #tripOverview {
+    padding:12px 8px !important;
+    margin-bottom:16px !important;
+  }
+}
+
+
+/* Desktop full-width itinerary route: the legacy .rt-wrap uses two columns
+   even when its first journey panel is hidden in magazine view. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #osa > .lux-part-body #tripOverview,
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #osa > .lux-part-body #tripOverview .to-map,
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #osa > .lux-part-body #routeMap {
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    box-sizing:border-box !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #osa > .lux-part-body #routeMap .rt-wrap {
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    gap:0 !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #osa > .lux-part-body #routeMap .rt-local {
+    grid-column:1 / -1 !important;
+    width:100% !important;
+    max-width:none !important;
+    min-width:0 !important;
+    display:block !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper
+    #osa > .lux-part-body #routeMap .rt-local svg {
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    min-width:0 !important;
+  }
+}
+
+
+/* Fullscreen Street View: hide our close button only while fullscreen is active.
+   Keep the open-fullscreen control visible in ordinary hotel/attraction cards.
+   Browser Escape / system fullscreen exit remains available. */
+html body #hlavni-obsah .sv-card .sv-stage:fullscreen > .bali-sv-fullscreen,
+html body #hlavni-obsah .sv-card .sv-stage:-webkit-full-screen > .bali-sv-fullscreen,
+html body #hlavni-obsah .sv-card .sv-stage > .bali-sv-fullscreen[hidden] {
+  display:none !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+}
