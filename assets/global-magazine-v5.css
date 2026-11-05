@@ -707,3 +707,90 @@ html[data-magazine="on"] body #hlavni-obsah .mg-place-source:focus-visible {
     overflow:visible !important;
   }
 }
+
+
+/* Street View fullscreen is available inside every panorama: hotels + attractions. */
+html body #hlavni-obsah .sv-card .sv-stage {
+  position:relative !important;
+}
+html body #hlavni-obsah .sv-card .sv-stage > .bali-sv-fullscreen {
+  position:absolute !important;
+  z-index:2147483640 !important;
+  top:10px !important;
+  right:10px !important;
+  left:auto !important;
+  bottom:auto !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:auto !important;
+  max-width:calc(100% - 20px) !important;
+  min-width:0 !important;
+  min-height:34px !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:8px 11px !important;
+  border:1px solid rgba(255,255,255,.70) !important;
+  border-radius:7px !important;
+  background:rgba(11,37,32,.91) !important;
+  color:white !important;
+  box-shadow:0 3px 12px rgba(0,0,0,.28) !important;
+  font:700 12px/1.2 system-ui,sans-serif !important;
+  text-shadow:none !important;
+  cursor:pointer !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+  transform:none !important;
+}
+html body #hlavni-obsah .sv-card .sv-stage > .bali-sv-fullscreen:hover {
+  background:#0e654c !important;
+}
+html body #hlavni-obsah .sv-card .sv-stage > .bali-sv-fullscreen:focus-visible {
+  outline:3px solid #f2cb5c !important;
+  outline-offset:2px !important;
+}
+html body #hlavni-obsah .sv-card .sv-stage:fullscreen,
+html body #hlavni-obsah .sv-card .sv-stage:-webkit-full-screen {
+  position:fixed !important;
+  inset:0 !important;
+  width:100vw !important;
+  max-width:none !important;
+  min-width:100vw !important;
+  height:100vh !important;
+  max-height:none !important;
+  min-height:100vh !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  overflow:hidden !important;
+  background:#071410 !important;
+  display:block !important;
+}
+html body #hlavni-obsah .sv-card .sv-stage:fullscreen > iframe,
+html body #hlavni-obsah .sv-card .sv-stage:-webkit-full-screen > iframe {
+  display:block !important;
+  position:absolute !important;
+  inset:0 !important;
+  width:100% !important;
+  max-width:none !important;
+  min-width:100% !important;
+  height:100% !important;
+  max-height:none !important;
+  min-height:100% !important;
+  border:0 !important;
+  border-radius:0 !important;
+}
+html body #hlavni-obsah .sv-card .sv-stage:fullscreen > .bali-sv-fullscreen,
+html body #hlavni-obsah .sv-card .sv-stage:-webkit-full-screen > .bali-sv-fullscreen {
+  position:fixed !important;
+  top:max(18px,env(safe-area-inset-top)) !important;
+  right:max(18px,env(safe-area-inset-right)) !important;
+  padding:12px 16px !important;
+  font-size:14px !important;
+  min-height:44px !important;
+}
+@media print {
+  .bali-sv-fullscreen { display:none !important; }
+}
