@@ -36,6 +36,12 @@ def attempt(query):
         'gsrlimit':10,'gsrsearch':lookup+' filetype:bitmap','prop':'imageinfo',
         'iiprop':'url|size|extmetadata','iiurlwidth':1200,
         'iiextmetadatafilter':'Artist|LicenseShortName|LicenseUrl'}
+    if query=='Mawi beach Lombok':
+        # Exact Commons photo explicitly attributed to the Mawi surf spot.
+        params.pop('generator',None)
+        params.pop('gsrlimit',None)
+        params.pop('gsrsearch',None)
+        params['titles']='File:Dave B @ Mawi (2706207006).jpg'
     url='https://commons.wikimedia.org/w/api.php?'+urlencode(params)
     try:
         response=json.loads(fetch(url))
