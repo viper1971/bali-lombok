@@ -1,0 +1,3 @@
+/* Keep wheel/trackpad scrolling native throughout the itinerary.
+   Intentional navigation links can still request smooth scrolling in JS. */
+html, body { scroll-behavior: auto !important; }
