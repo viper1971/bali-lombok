@@ -246,7 +246,7 @@
       paras.forEach(function(str,i){
         var p=document.createElement("p");
         if(i===paras.length-1){p.className="mg-place-practical";var strong=document.createElement("strong");strong.textContent="Prakticky: ";p.appendChild(strong);}
-        p.appendChild(document.createTextNode(i===paras.length-1 ? str.replace(/^Prakticky:\\s*/i, "") : str));
+        p.appendChild(document.createTextNode(i===paras.length-1 ? str.replace(/^Prakticky:\s*/i, "") : str));
         section.appendChild(p);
       });
       if(entry[2]) {
