@@ -1,0 +1,166 @@
+{
+  "caveat": "Synthetic local HTTP test; not production RUM or PageSpeed. Third-party services intentionally disabled. Timings depend on CI runner.",
+  "timestamp": "2026-11-05T16:25:49.809Z",
+  "snapshots": [
+    {
+      "profile": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "synthetic": true,
+      "thirdPartyNetwork": "blocked",
+      "serviceWorkers": "blocked",
+      "domContentLoadedWallMs": 1358,
+      "requests": 111,
+      "transferredBytesFromContentLength": 3136809,
+      "imageRequests": 16,
+      "imageBytesFromContentLength": 1275040,
+      "thirdPartyRequests": 59,
+      "wikimediaApiOnStartup": 19,
+      "errors": [],
+      "failedLocal": [
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/2892a3b290531333.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/91dae68384e244eb.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/eac77442ee7adfec.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/1f73e82c01bf6d00.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/2892a3b290531333.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/91dae68384e244eb.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/1f73e82c01bf6d00.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/13c126c8d151494f.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/c9c99d25f3e25d16.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/ff0312048842ed12.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/f69252c4bc3322d8.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/8971dd33d4c37a53.webp",
+          "status": 404
+        }
+      ],
+      "domContentLoadedMs": 1355,
+      "loadMs": 1427,
+      "firstContentfulPaintMs": 348,
+      "lcpCandidateMs": 1208,
+      "cumulativeLayoutShift": 1.0162,
+      "longTasks": 5,
+      "totalLongTaskDurationMs": 510,
+      "heroImage": "http://127.0.0.1:8789/assets/images/external/c9c99d25f3e25d16-w960.webp",
+      "heroComplete": true,
+      "heroNaturalWidth": 389
+    },
+    {
+      "profile": "desktop",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "synthetic": true,
+      "thirdPartyNetwork": "blocked",
+      "serviceWorkers": "blocked",
+      "domContentLoadedWallMs": 1223,
+      "requests": 112,
+      "transferredBytesFromContentLength": 3285857,
+      "imageRequests": 17,
+      "imageBytesFromContentLength": 1424088,
+      "thirdPartyRequests": 76,
+      "wikimediaApiOnStartup": 19,
+      "errors": [],
+      "failedLocal": [
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/7f1b7b4f252949f9.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/eac77442ee7adfec.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/5e41f53a86debc44.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/3963e1ae689c5f97.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/7f1b7b4f252949f9.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/5e41f53a86debc44.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/3963e1ae689c5f97.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/13c126c8d151494f.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/c9c99d25f3e25d16.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/8971dd33d4c37a53.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/f69252c4bc3322d8.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/ff0312048842ed12.webp",
+          "status": 404
+        },
+        {
+          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/13c126c8d151494f.webp",
+          "status": 404
+        }
+      ],
+      "domContentLoadedMs": 1221,
+      "loadMs": 1346,
+      "firstContentfulPaintMs": 292,
+      "lcpCandidateMs": 292,
+      "cumulativeLayoutShift": 1.5692,
+      "longTasks": 16,
+      "totalLongTaskDurationMs": 2645,
+      "heroImage": "http://127.0.0.1:8789/assets/images/external/c9c99d25f3e25d16-w1280.webp",
+      "heroComplete": true,
+      "heroNaturalWidth": 1440
+    }
+  ]
+}
