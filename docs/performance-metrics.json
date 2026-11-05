@@ -1,6 +1,6 @@
 {
   "caveat": "Synthetic local HTTP test; not production RUM or PageSpeed. Third-party services intentionally disabled. Timings depend on CI runner.",
-  "timestamp": "2026-11-05T16:25:49.809Z",
+  "timestamp": "2026-11-05T16:27:57.977Z",
   "snapshots": [
     {
       "profile": "mobile",
@@ -11,71 +11,187 @@
       "synthetic": true,
       "thirdPartyNetwork": "blocked",
       "serviceWorkers": "blocked",
-      "domContentLoadedWallMs": 1358,
-      "requests": 111,
-      "transferredBytesFromContentLength": 3136809,
-      "imageRequests": 16,
-      "imageBytesFromContentLength": 1275040,
+      "domContentLoadedWallMs": 1189,
+      "requests": 108,
+      "transferredBytesFromContentLength": 5227559,
+      "imageRequests": 13,
+      "imageBytesFromContentLength": 3365790,
       "thirdPartyRequests": 59,
       "wikimediaApiOnStartup": 19,
+      "thirdPartySamples": [
+        "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap",
+        "https://toplist.cz/count.asp?id=1843706&logo=bc&http=&t=Singapur%2C%20Bali%20a%20Lombok%202027%20%E2%80%93%20pl%C3%A1n%20cesty&l=http%3A%2F%2F127.0.0.1%3A8789%2Findex.html&wi=390&he=844&cd=24",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Uluwatu%20cliffs%20Bali%20panorama%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Gili%20Trawangan%20beach%20panorama%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Jimbaran%20Bay%20sunset%20beach%20filetype%3Abitmap",
+        "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d272172.268523143!2d115.99978649886768!3d-8.64144304184464!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x2dcda9d1d76f0b35%3A0xd66ebd0add97c0ce!2sEl%20Tropico%20Hotel%20Kuta%20Lombok%2C%20Baturiti%2C%20Jl.%20Raya%20Kuta%2C%20Kuta%2C%20Pujut%2C%20Central%20Lombok%20Regency%2C%20West%20Nusa%20Tenggara%2083573%2C%20Indon%C3%A9sie!3m2!1d-8.8883262!2d116.2761321!4m5!1s0x2dcddcef6f3dd37b%3A0xd96bb133e95e5a84!2sRM%20BANGSAL%20INDAH%2C%20Jl.%20Bangsal%20Baru%20No.184%2C%20Pemenang%20Bar.%2C%20Kec.%20Pemenang%2C%20Kabupaten%20Lombok%20Utara%2C%20Nusa%20Tenggara%20Bar.%2083352%2C%20Indon%C3%A9sie!3m2!1d-8.3945775!2d116.09981219999999!5e1!3m2!1scs!2scz!4v1792509126658!5m2!1scs!2scz",
+        "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d544525.3077454296!2d115.3499067922784!3d-8.515330189444471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e3!4m5!1s0x2dcddcef6f3dd37b%3A0xd96bb133e95e5a84!2sRM%20BANGSAL%20INDAH%2C%20Jl.%20Bangsal%20Baru%20No.184%2C%20Pemenang%20Bar.%2C%20Kec.%20Pemenang%2C%20Kabupaten%20Lombok%20Utara%2C%20Nusa%20Tenggara%20Bar.%2083352%2C%20Indon%C3%A9sie!3m2!1d-8.3945775!2d116.09981219999999!4m5!1s0x2dd241987735fc67%3A0xd7ca3914de8f3487!2sSanur%20matahari%20terbit%2C%20Sanur%2C%20Jl.%20Hang%20Tuah%2C%20Sanur%20Kaja%2C%20Kec.%20Denpasar%20Tim.%2C%20Kota%20Denpasar%2C%20Bali%2080227%2C%20Indon%C3%A9sie!3m2!1d-8.6705046!2d115.26118869999999!5e1!3m2!1scs!2scz!4v1792507552831!5m2!1scs!2scz",
+        "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d68031.11185633794!2d115.17295730502269!3d-8.707433574106235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x2dd241987735fc67%3A0xd7ca3914de8f3487!2sSanur%20matahari%20terbit%2C%20Sanur%2C%20Jl.%20Hang%20Tuah%2C%20Sanur%20Kaja%2C%20Kec.%20Denpasar%20Tim.%2C%20Kota%20Denpasar%2C%20Bali%2080227%2C%20Indon%C3%A9sie!3m2!1d-8.6705046!2d115.26118869999999!4m5!1s0x2dd246a0673d7b87%3A0xcb6107964e5aa04a!2sGrand%20Ixora%20Hotel%2C%20Jl.%20Kartika%20Plaza%20No.92%2C%20Kuta%2C%20Badung%2C%20Bali%2080361%2C%20Indon%C3%A9sie!3m2!1d-8.733885299999999!2d115.1675295!5e1!3m2!1scs!2scz!4v1792509410068!5m2!1scs!2scz",
+        "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d8503.137767762599!2d115.16680081374952!3d-8.740419165094242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x2dd246a0673d7b87%3A0xcb6107964e5aa04a!2sGrand%20Ixora%20Hotel%2C%20Jl.%20Kartika%20Plaza%20No.92%2C%20Kuta%2C%20Badung%2C%20Bali%2080361%2C%20Indon%C3%A9sie!3m2!1d-8.733885299999999!2d115.1675295!4m5!1s0x2dd2441650216933%3A0xdf71da6ddd7bcc1f!2sI%20Gusti%20Ngurah%20Rai%20International%20Airport%2C%20Jl.%20Airport%20Ngurah%20Rai%2C%20Tuban%2C%20South%20Kuta%2C%20Badung%20Regency%2C%20Bali%2080361%2C%20Indon%C3%A9sie!3m2!1d-8.7469933!2d115.1681655!5e1!3m2!1scs!2scz!4v1792509573020!5m2!1scs!2scz",
+        "https://maps.google.com/maps?q=Fragrance%20Hotel%20%E2%80%93%20Lavender%20Singapore&z=16&output=embed",
+        "https://maps.google.com/maps?q=Hotel%2081%20Premier%20Princess%20Singapore&z=16&output=embed",
+        "https://maps.google.com/maps?q=Hotel%2081%20Gold%20Singapore&z=16&output=embed",
+        "https://maps.google.com/maps?q=The%20Ululani%20Uluwatu%20Bali%20Indonesia&z=16&output=embed",
+        "https://maps.google.com/maps?q=Gandatera%20Ubud%20Ubud%20Bali%20Indonesia&z=16&output=embed",
+        "https://maps.google.com/maps?q=Mina%20Tanjung%20Hotel%20Tanjung%20Lombok%20Indonesia&z=16&output=embed"
+      ],
+      "wikimediaSamples": [
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Uluwatu%20cliffs%20Bali%20panorama%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Gili%20Trawangan%20beach%20panorama%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Jimbaran%20Bay%20sunset%20beach%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Bali%20coastline%20panorama%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Lombok%20beach%20panorama%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Bali%20sunset%20beach%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Nusa%20Penida%20Kelingking%20Beach%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Gili%20Islands%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=sunset%20beach%20Indonesia%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Indonesia%20coast%20landscape%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Indonesia%20beach%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Bali%20sunset%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Bali%20landscape%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Lombok%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Bali%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=960&gsrsearch=Marina%20Bay%20Singapore%20skyline%20night%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=960&gsrsearch=Singapore%20Chinatown%20street%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=960&gsrsearch=Singapore%20skyline%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=960&gsrsearch=Singapore%20architecture%20street%20filetype%3Abitmap"
+      ],
       "errors": [],
-      "failedLocal": [
+      "failedLocal": [],
+      "domContentLoadedMs": 1185,
+      "loadMs": 1255,
+      "firstContentfulPaintMs": 356,
+      "lcpCandidateMs": 1072,
+      "cumulativeLayoutShift": 1.0162,
+      "biggestShifts": [
         {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/2892a3b290531333.webp",
-          "status": 404
+          "value": 1,
+          "sources": [
+            {
+              "node": "section#.mg-cover mg-only",
+              "previousRect": {
+                "x": 0,
+                "y": 55.1875,
+                "width": 390,
+                "height": 788.8125,
+                "top": 55.1875,
+                "right": 390,
+                "bottom": 844,
+                "left": 0
+              },
+              "currentRect": {
+                "x": 0,
+                "y": 100.59375,
+                "width": 390,
+                "height": 658.3125,
+                "top": 100.59375,
+                "right": 390,
+                "bottom": 758.90625,
+                "left": 0
+              }
+            },
+            {
+              "node": "div#.hero-meeting",
+              "previousRect": {
+                "x": 0,
+                "y": 0,
+                "width": 390,
+                "height": 378.265625,
+                "top": 0,
+                "right": 390,
+                "bottom": 378.265625,
+                "left": 0
+              },
+              "currentRect": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0,
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              }
+            },
+            {
+              "node": "div#vipFloatingBar.vip-floating-bar pm-merged",
+              "previousRect": {
+                "x": 0,
+                "y": 653.7578125,
+                "width": 390,
+                "height": 190.2421875,
+                "top": 653.7578125,
+                "right": 390,
+                "bottom": 844,
+                "left": 0
+              },
+              "currentRect": {
+                "x": 0,
+                "y": 827.1171875,
+                "width": 390,
+                "height": 16.8828125,
+                "top": 827.1171875,
+                "right": 390,
+                "bottom": 844,
+                "left": 0
+              }
+            },
+            {
+              "node": "section#magazineStory.mg-prologue mg-only",
+              "previousRect": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0,
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "currentRect": {
+                "x": 0,
+                "y": 758.90625,
+                "width": 390,
+                "height": 85.09375,
+                "top": 758.90625,
+                "right": 390,
+                "bottom": 844,
+                "left": 0
+              }
+            }
+          ]
         },
         {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/91dae68384e244eb.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/eac77442ee7adfec.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/1f73e82c01bf6d00.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/2892a3b290531333.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/91dae68384e244eb.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/1f73e82c01bf6d00.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/13c126c8d151494f.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/c9c99d25f3e25d16.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/ff0312048842ed12.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/f69252c4bc3322d8.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/8971dd33d4c37a53.webp",
-          "status": 404
+          "value": 0.0162,
+          "sources": [
+            {
+              "node": "div#.mg-cover-copy",
+              "previousRect": {
+                "x": 24,
+                "y": 259.546875,
+                "width": 343.21875,
+                "height": 459.359375,
+                "top": 259.546875,
+                "right": 367.21875,
+                "bottom": 718.90625,
+                "left": 24
+              },
+              "currentRect": {
+                "x": 24,
+                "y": 232.546875,
+                "width": 343.21875,
+                "height": 486.359375,
+                "top": 232.546875,
+                "right": 367.21875,
+                "bottom": 718.90625,
+                "left": 24
+              }
+            }
+          ]
         }
       ],
-      "domContentLoadedMs": 1355,
-      "loadMs": 1427,
-      "firstContentfulPaintMs": 348,
-      "lcpCandidateMs": 1208,
-      "cumulativeLayoutShift": 1.0162,
       "longTasks": 5,
-      "totalLongTaskDurationMs": 510,
+      "totalLongTaskDurationMs": 501,
       "heroImage": "http://127.0.0.1:8789/assets/images/external/c9c99d25f3e25d16-w960.webp",
       "heroComplete": true,
       "heroNaturalWidth": 389
@@ -89,75 +205,312 @@
       "synthetic": true,
       "thirdPartyNetwork": "blocked",
       "serviceWorkers": "blocked",
-      "domContentLoadedWallMs": 1223,
-      "requests": 112,
-      "transferredBytesFromContentLength": 3285857,
-      "imageRequests": 17,
-      "imageBytesFromContentLength": 1424088,
+      "domContentLoadedWallMs": 1353,
+      "requests": 108,
+      "transferredBytesFromContentLength": 5878497,
+      "imageRequests": 13,
+      "imageBytesFromContentLength": 4016728,
       "thirdPartyRequests": 76,
       "wikimediaApiOnStartup": 19,
+      "thirdPartySamples": [
+        "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap",
+        "https://toplist.cz/count.asp?id=1843706&logo=bc&http=&t=Singapur%2C%20Bali%20a%20Lombok%202027%20%E2%80%93%20pl%C3%A1n%20cesty&l=http%3A%2F%2F127.0.0.1%3A8789%2Findex.html&wi=1440&he=1000&cd=24",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Uluwatu%20cliffs%20Bali%20panorama%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Gili%20Trawangan%20beach%20panorama%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Jimbaran%20Bay%20sunset%20beach%20filetype%3Abitmap",
+        "https://maps.google.com/maps?q=Fragrance%20Hotel%20%E2%80%93%20Lavender%20Singapore&z=16&output=embed",
+        "https://maps.google.com/maps?q=Hotel%2081%20Premier%20Princess%20Singapore&z=16&output=embed",
+        "https://maps.google.com/maps?q=Hotel%2081%20Gold%20Singapore&z=16&output=embed",
+        "https://maps.google.com/maps?q=Uluwatu%20Jungle%20Villa%20Uluwatu%20Bali%20Indonesia&z=16&output=embed",
+        "https://maps.google.com/maps?q=The%20Ululani%20Uluwatu%20Bali%20Indonesia&z=16&output=embed",
+        "https://maps.google.com/maps?q=The%20Village%20Guest%20House%20Ubud%20Bali%20Indonesia&z=16&output=embed",
+        "https://maps.google.com/maps?q=Gandatera%20Ubud%20Ubud%20Bali%20Indonesia&z=16&output=embed",
+        "https://maps.google.com/maps?q=Bije%20Suite%20Villa%20Ubud%20Ubud%20Bali%20Indonesia&z=16&output=embed",
+        "https://maps.google.com/maps?q=Starsand%20Beach%20Resort%20Sekotong%20Lombok%20Indonesia&z=16&output=embed",
+        "https://maps.google.com/maps?q=Mina%20Tanjung%20Hotel%20Tanjung%20Lombok%20Indonesia&z=16&output=embed"
+      ],
+      "wikimediaSamples": [
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Uluwatu%20cliffs%20Bali%20panorama%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Gili%20Trawangan%20beach%20panorama%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Jimbaran%20Bay%20sunset%20beach%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Bali%20coastline%20panorama%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Lombok%20beach%20panorama%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Bali%20sunset%20beach%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Nusa%20Penida%20Kelingking%20Beach%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Gili%20Islands%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=sunset%20beach%20Indonesia%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Indonesia%20coast%20landscape%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Indonesia%20beach%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Bali%20sunset%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Bali%20landscape%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Lombok%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=1600&gsrsearch=Bali%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=960&gsrsearch=Marina%20Bay%20Singapore%20skyline%20night%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=960&gsrsearch=Singapore%20Chinatown%20street%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=960&gsrsearch=Singapore%20skyline%20filetype%3Abitmap",
+        "https://commons.wikimedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrnamespace=6&gsrlimit=10&prop=imageinfo&iiprop=url|size|mime|extmetadata&iiextmetadatafilter=Artist|LicenseShortName&iiurlwidth=960&gsrsearch=Singapore%20architecture%20street%20filetype%3Abitmap"
+      ],
       "errors": [],
-      "failedLocal": [
+      "failedLocal": [],
+      "domContentLoadedMs": 1348,
+      "loadMs": 1542,
+      "firstContentfulPaintMs": 320,
+      "lcpCandidateMs": 320,
+      "cumulativeLayoutShift": 1.5692,
+      "biggestShifts": [
         {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/7f1b7b4f252949f9.webp",
-          "status": 404
+          "value": 1,
+          "sources": [
+            {
+              "node": "section#.mg-cover mg-only",
+              "previousRect": {
+                "x": 0,
+                "y": 55.1875,
+                "width": 1440,
+                "height": 944.8125,
+                "top": 55.1875,
+                "right": 1440,
+                "bottom": 1000,
+                "left": 0
+              },
+              "currentRect": {
+                "x": 0,
+                "y": 68,
+                "width": 1440,
+                "height": 932,
+                "top": 68,
+                "right": 1440,
+                "bottom": 1000,
+                "left": 0
+              }
+            },
+            {
+              "node": "div#.hero-meeting",
+              "previousRect": {
+                "x": 0,
+                "y": 0,
+                "width": 661.375,
+                "height": 269.921875,
+                "top": 0,
+                "right": 661.375,
+                "bottom": 269.921875,
+                "left": 0
+              },
+              "currentRect": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0,
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              }
+            },
+            {
+              "node": "div#.mg-mast-inner",
+              "previousRect": {
+                "x": 0,
+                "y": 0,
+                "width": 1440,
+                "height": 55.1875,
+                "top": 0,
+                "right": 1440,
+                "bottom": 55.1875,
+                "left": 0
+              },
+              "currentRect": {
+                "x": 60,
+                "y": 0,
+                "width": 1320,
+                "height": 68,
+                "top": 0,
+                "right": 1380,
+                "bottom": 68,
+                "left": 60
+              }
+            },
+            {
+              "node": "(unavailable)",
+              "previousRect": {
+                "x": 0,
+                "y": 135.96875,
+                "width": 20.421875,
+                "height": 51.0625,
+                "top": 135.96875,
+                "right": 20.421875,
+                "bottom": 187.03125,
+                "left": 0
+              },
+              "currentRect": {
+                "x": 3.84375,
+                "y": 136.484375,
+                "width": 13.09375,
+                "height": 39.03125,
+                "top": 136.484375,
+                "right": 16.9375,
+                "bottom": 175.515625,
+                "left": 3.84375
+              }
+            }
+          ]
         },
         {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/eac77442ee7adfec.webp",
-          "status": 404
+          "value": 0.5658,
+          "sources": [
+            {
+              "node": "section#magazineStory.mg-prologue mg-only",
+              "previousRect": {
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0,
+                "top": 0,
+                "right": 0,
+                "bottom": 0,
+                "left": 0
+              },
+              "currentRect": {
+                "x": 100,
+                "y": 68,
+                "width": 1240,
+                "height": 932,
+                "top": 68,
+                "right": 1340,
+                "bottom": 1000,
+                "left": 100
+              }
+            },
+            {
+              "node": "nav#.mg-navigation mg-only-nav",
+              "previousRect": {
+                "x": 1081.71875,
+                "y": 14.40625,
+                "width": 270.453125,
+                "height": 39.1875,
+                "top": 14.40625,
+                "right": 1352.171875,
+                "bottom": 53.59375,
+                "left": 1081.71875
+              },
+              "currentRect": {
+                "x": 1089.875,
+                "y": 14.78125,
+                "width": 262.125,
+                "height": 38.421875,
+                "top": 14.78125,
+                "right": 1352,
+                "bottom": 53.203125,
+                "left": 1089.875
+              }
+            },
+            {
+              "node": "span#.mg-story-number",
+              "previousRect": {
+                "x": 554.328125,
+                "y": 729.671875,
+                "width": 331.328125,
+                "height": 18,
+                "top": 729.671875,
+                "right": 885.65625,
+                "bottom": 747.671875,
+                "left": 554.328125
+              },
+              "currentRect": {
+                "x": 554.328125,
+                "y": 732.671875,
+                "width": 331.328125,
+                "height": 17.265625,
+                "top": 732.671875,
+                "right": 885.65625,
+                "bottom": 749.9375,
+                "left": 554.328125
+              }
+            },
+            {
+              "node": "span#.mg-story-number",
+              "previousRect": {
+                "x": 155,
+                "y": 729.671875,
+                "width": 331.328125,
+                "height": 18,
+                "top": 729.671875,
+                "right": 486.328125,
+                "bottom": 747.671875,
+                "left": 155
+              },
+              "currentRect": {
+                "x": 155,
+                "y": 732.671875,
+                "width": 331.328125,
+                "height": 17.265625,
+                "top": 732.671875,
+                "right": 486.328125,
+                "bottom": 749.9375,
+                "left": 155
+              }
+            }
+          ]
         },
         {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/5e41f53a86debc44.webp",
-          "status": 404
+          "value": 0.0032,
+          "sources": [
+            {
+              "node": "div#vipFloatingBar.vip-floating-bar",
+              "previousRect": {
+                "x": 97,
+                "y": 860.578125,
+                "width": 1246,
+                "height": 139.421875,
+                "top": 860.578125,
+                "right": 1343,
+                "bottom": 1000,
+                "left": 97
+              },
+              "currentRect": {
+                "x": 97,
+                "y": 829.578125,
+                "width": 1246,
+                "height": 170.421875,
+                "top": 829.578125,
+                "right": 1343,
+                "bottom": 1000,
+                "left": 97
+              }
+            }
+          ]
         },
         {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/3963e1ae689c5f97.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/7f1b7b4f252949f9.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/5e41f53a86debc44.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/3963e1ae689c5f97.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/13c126c8d151494f.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/c9c99d25f3e25d16.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/8971dd33d4c37a53.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/f69252c4bc3322d8.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/ff0312048842ed12.webp",
-          "status": 404
-        },
-        {
-          "url": "http://127.0.0.1:8789/bali-lombok/assets/images/external/13c126c8d151494f.webp",
-          "status": 404
+          "value": 0.0003,
+          "sources": [
+            {
+              "node": "div#toplistFloat.",
+              "previousRect": {
+                "x": 1283.860595703125,
+                "y": 40.400001525878906,
+                "width": 156.139404296875,
+                "height": 214.72000122070312,
+                "top": 40.400001525878906,
+                "right": 1440,
+                "bottom": 255.12000274658203,
+                "left": 1283.860595703125
+              },
+              "currentRect": {
+                "x": 1299.7005615234375,
+                "y": 40.400001525878906,
+                "width": 140.2994384765625,
+                "height": 133.40249633789062,
+                "top": 40.400001525878906,
+                "right": 1440,
+                "bottom": 173.80249786376953,
+                "left": 1299.7005615234375
+              }
+            }
+          ]
         }
       ],
-      "domContentLoadedMs": 1221,
-      "loadMs": 1346,
-      "firstContentfulPaintMs": 292,
-      "lcpCandidateMs": 292,
-      "cumulativeLayoutShift": 1.5692,
-      "longTasks": 16,
-      "totalLongTaskDurationMs": 2645,
+      "longTasks": 15,
+      "totalLongTaskDurationMs": 2520,
       "heroImage": "http://127.0.0.1:8789/assets/images/external/c9c99d25f3e25d16-w1280.webp",
       "heroComplete": true,
       "heroNaturalWidth": 1440
