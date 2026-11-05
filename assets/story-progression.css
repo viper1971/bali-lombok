@@ -1,0 +1,16 @@
+/* BALI 2027 / variant A: sequentially discovered main chapters. */
+html.bali-story-progressive .lux-part.bali-story-concealed {
+  display: none !important;
+}
+.lux-part.bali-story-next-ready > .lux-part-head {
+  animation: baliStoryReveal .42s ease-out both;
+}
+@keyframes baliStoryReveal {
+  from { opacity: .25; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lux-part.bali-story-next-ready > .lux-part-head {
+    animation: none !important;
+  }
+}
