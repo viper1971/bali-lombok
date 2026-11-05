@@ -21,11 +21,16 @@ async function main() {
     const errors = [], failedLocal = [];
     let transferred = 0, requests = 0, imageBytes = 0, imageRequests = 0;
     let wikimediaApiOnStartup = 0, thirdPartyRequests = 0;
+    const thirdPartySamples = [], wikimediaSamples = [];
     page.on('pageerror', e => errors.push(e.message));
     page.on('request', req => {
       if (!req.url().startsWith('http://127.0.0.1:' + PORT + '/')) {
         thirdPartyRequests++;
-        if (/commons[.]wikimedia[.]org\/w\/api[.]php/.test(req.url())) wikimediaApiOnStartup++;
+        if (thirdPartySamples.length < 15) thirdPartySamples.push(req.url());
+        if (/commons[.]wikimedia[.]org\/w\/api[.]php/.test(req.url())) {
+          wikimediaApiOnStartup++;
+          if (wikimediaSamples.length < 25) wikimediaSamples.push(req.url());
+        }
       }
     });
     page.on('requestfailed', req => {
@@ -35,6 +40,9 @@ async function main() {
     });
     await page.route('**/*', route => {
       const req = route.request();
+      if (req.url().startsWith('http://127.0.0.1:' + PORT + '/bali-lombok/')) {
+        return route.continue({url:req.url().replace('/bali-lombok/', '/')});
+      }
       if (req.url().startsWith('http://127.0.0.1:' + PORT + '/')) return route.continue();
       // Ensure deterministic layout and no remote API request noise.
       if (['fetch','xhr'].includes(req.resourceType())) return route.fulfill({
@@ -44,14 +52,21 @@ async function main() {
       return route.abort();
     });
     await page.addInitScript(() => {
-      window.__webVitals = {lcp: null, cls:0, longTasks:0, longTaskMs:0};
+      window.__webVitals = {lcp: null, cls:0, shifts:[], longTasks:0, longTaskMs:0};
       try {
         new PerformanceObserver(list => {
           for (const entry of list.getEntries()) window.__webVitals.lcp = Math.round(entry.startTime);
         }).observe({type:'largest-contentful-paint', buffered:true});
         new PerformanceObserver(list => {
           for (const entry of list.getEntries()) {
-            if (!entry.hadRecentInput) window.__webVitals.cls += entry.value;
+            if (!entry.hadRecentInput) {
+              window.__webVitals.cls += entry.value;
+              window.__webVitals.shifts.push({value:Number(entry.value.toFixed(4)),
+                sources:(entry.sources||[]).slice(0,4).map(s=>({
+                  node:s.node ? (s.node.tagName?.toLowerCase()||'')+'#'+(s.node.id||'')+'.'+(s.node.className?.toString()?.slice(0,90)||'') : '(unavailable)',
+                  previousRect:s.previousRect, currentRect:s.currentRect
+                }))});
+            }
           }
         }).observe({type:'layout-shift', buffered:true});
         new PerformanceObserver(list => {
@@ -85,6 +100,7 @@ async function main() {
         firstContentfulPaintMs: Math.round(paint.find(e=>e.name==='first-contentful-paint')?.startTime || 0),
         lcpCandidateMs: window.__webVitals.lcp,
         cumulativeLayoutShift: Number(window.__webVitals.cls.toFixed(4)),
+        biggestShifts: window.__webVitals.shifts.sort((a,b)=>b.value-a.value).slice(0,12),
         longTasks: window.__webVitals.longTasks,
         totalLongTaskDurationMs: Math.round(window.__webVitals.longTaskMs),
         heroImage: document.querySelector('.mg-cover-photo')?.currentSrc || null,
@@ -96,7 +112,7 @@ async function main() {
       synthetic:true, thirdPartyNetwork:'blocked', serviceWorkers:'blocked',
       domContentLoadedWallMs, requests, transferredBytesFromContentLength:transferred,
       imageRequests, imageBytesFromContentLength:imageBytes,
-      thirdPartyRequests, wikimediaApiOnStartup,
+      thirdPartyRequests, wikimediaApiOnStartup, thirdPartySamples, wikimediaSamples,
       errors:errors.slice(0,20), failedLocal:failedLocal.slice(0,30), ...data});
     await context.close();
   }
