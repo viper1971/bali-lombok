@@ -61,10 +61,18 @@
     if (!owner || !target) return;
     // The original accordion animation and preserve-header handler can move the page
     // for a while. Align again after they finish.
-    [firstDelay, firstDelay + 300, firstDelay + 850].forEach(function (delay) {
+    [firstDelay, firstDelay + 160, firstDelay + 430, firstDelay + 850].forEach(function (delay) {
       timers.push(setTimeout(function () { align(target, owner, token); }, delay));
     });
   }
+  // Centralized navigation for every main chapter, including the two short
+  // final chapters. A trailing spacer makes it physically possible to position
+  // their heading at the top even if the chapter is shorter than the viewport.
+  window.baliAlignOpenedChapter = function (part) {
+    if (!part) return;
+    var heading = part.querySelector(":scope > .lux-part-head") || part;
+    start(part, heading, 35);
+  };
   function chapterClick(event) {
     var node = event.target;
     if (!node || !node.closest) return;
