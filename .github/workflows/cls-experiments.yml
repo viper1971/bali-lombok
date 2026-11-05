@@ -1,4 +1,5 @@
 name: BALI CLS cause isolation
+# Compare current magazine, early CSS, and dialog ablation; no production changes.
 on:
   push:
     branches: [main]
