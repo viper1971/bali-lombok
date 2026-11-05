@@ -1,0 +1,118 @@
+/* Itinerář 2027 – fotografický interaktivní přehled.
+   Scoped to #osa; other sections and functionality remain unchanged. */
+#osa > .itinerary-glass-head{
+  display:grid !important;
+  grid-template-columns:52px minmax(0,1fr);
+  align-items:start !important;
+  column-gap:16px;
+  row-gap:14px;
+  padding:clamp(18px,2.2vw,30px) !important;
+  overflow:hidden;
+  isolation:isolate;
+  background-blend-mode:normal !important;
+}
+#osa > .itinerary-glass-head::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,23,27,.30),rgba(0,23,27,.20) 30%,rgba(0,23,27,.45));
+}
+#osa > .itinerary-glass-head > .trip-overview{
+  grid-column:1/-1;
+  width:100%;
+  min-width:0;
+  margin:4px 0 0 !important;
+  display:block;
+}
+#osa > .itinerary-glass-head .to-map{
+  padding:8px 0 0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  color:#fff;
+}
+#osa > .itinerary-glass-head .to-head,
+#osa > .itinerary-glass-head .to-legend{
+  color:#fff !important;
+  position:relative;
+  z-index:1;
+}
+#osa > .itinerary-glass-head .to-head b,
+#osa > .itinerary-glass-head .to-head span,
+#osa > .itinerary-glass-head .to-legend span,
+#osa > .itinerary-glass-head .lux-part-sub{
+  color:#fff !important;
+}
+#osa > .itinerary-glass-head .to-head b{font-size:clamp(1.06rem,1.7vw,1.4rem)}
+#osa > .itinerary-glass-head .to-head span{font-size:.85rem}
+#osa > .itinerary-glass-head .lux-part-title,
+#osa > .itinerary-glass-head .lux-part-eyebrow,
+#osa > .itinerary-glass-head .lux-part-sub,
+#osa > .itinerary-glass-head .to-head,
+#osa > .itinerary-glass-head .to-legend{
+  text-shadow:0 2px 3px #062c33,0 5px 12px rgba(0,0,0,.85);
+  -webkit-text-stroke:.28px rgba(0,0,0,.62);
+}
+#osa > .itinerary-glass-head #routeMap{
+  min-width:0;
+  position:relative;
+  color:#fff;
+}
+/* Keep all existing nodes and links, remove opaque panels only inside this preview. */
+#osa > .itinerary-glass-head #routeMap .to-flights,
+#osa > .itinerary-glass-head #routeMap .to-flight,
+#osa > .itinerary-glass-head #routeMap .route-panel,
+#osa > .itinerary-glass-head #routeMap .route-map,
+#osa > .itinerary-glass-head #routeMap .route-card{
+  background:rgba(4,29,34,.10) !important;
+  border-color:rgba(255,255,255,.30) !important;
+  box-shadow:none !important;
+}
+#osa > .itinerary-glass-head #routeMap svg{
+  border-radius:14px;
+  background:rgba(2,29,33,.10) !important;
+}
+#osa > .itinerary-glass-head #routeMap svg .rt-sea{
+  fill:rgba(5,38,44,.09) !important;
+}
+#osa > .itinerary-glass-head #routeMap svg .rt-land{
+  fill:rgba(17,73,67,.16) !important;
+  stroke:rgba(255,255,255,.48) !important;
+}
+#osa > .itinerary-glass-head #routeMap svg .rt-land-name,
+#osa > .itinerary-glass-head #routeMap svg .rt-gap{
+  fill:#fff !important;
+  paint-order:stroke fill;
+  stroke:rgba(0,18,22,.88);
+  stroke-width:2.5px;
+}
+#osa > .itinerary-glass-head #routeMap a,
+#osa > .itinerary-glass-head #routeMap button,
+#osa > .itinerary-glass-head #routeMap [role="button"]{
+  position:relative;
+  z-index:2;
+  cursor:pointer;
+}
+#osa > .itinerary-glass-head #routeMap a:focus-visible,
+#osa > .itinerary-glass-head #routeMap button:focus-visible,
+#osa > .itinerary-glass-head #routeMap [role="button"]:focus-visible{
+  outline:3px solid #ffcb55;
+  outline-offset:3px;
+}
+@media(max-width:760px){
+  #osa > .itinerary-glass-head{
+    grid-template-columns:40px minmax(0,1fr);
+    column-gap:10px;
+    padding:16px 12px !important;
+  }
+  #osa > .itinerary-glass-head .lux-part-no{width:40px;height:40px}
+  #osa > .itinerary-glass-head > .trip-overview{margin-top:0 !important}
+  #osa > .itinerary-glass-head .to-head{gap:3px 10px}
+  #osa > .itinerary-glass-head #routeMap{overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
+}
+@media(prefers-reduced-motion:reduce){
+  #osa > .itinerary-glass-head #routeMap *{scroll-behavior:auto !important}
+}
