@@ -44,4 +44,5 @@ jobs:
           path: |
             test-results/
             docs/performance-metrics.json
+            docs/performance-summary.md
           retention-days: 14
