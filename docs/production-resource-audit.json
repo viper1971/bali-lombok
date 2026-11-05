@@ -1,0 +1,22 @@
+{
+  "html_bytes": 443531,
+  "scripts": 64,
+  "stylesheets": 30,
+  "images": 60,
+  "iframes": 26,
+  "lazy_iframes": 26,
+  "missing_local_resources": [],
+  "responsive_variant_references": 6,
+  "build_manifest_overrides": [
+    "assets/build/js-1650a00000000001.js",
+    "assets/build/js-1650a00000000002.js",
+    "assets/build/js-1650a00000000003.js",
+    "assets/build/js-1650a00000000005.js",
+    "assets/build/js-1650a00000000004.js"
+  ],
+  "hero_src": "assets/images/external/c9c99d25f3e25d16.webp",
+  "hero_eager": true,
+  "hero_preloaded": true,
+  "hero_responsive": true,
+  "remote_photo_hosts_present": false
+}
