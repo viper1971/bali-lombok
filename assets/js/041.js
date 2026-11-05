@@ -29,51 +29,51 @@
                 stageTitle: "1. Singapur (2 noci)",
                 targetId: "etapa-singapur",
                 options: {
-                    A: { name: "Fragrance Hotel - Lavender", price: 4564, img: "https://viper1971.github.io/bali-lombok/1.jpg", mapQuery: "Fragrance+Hotel+Lavender+Singapore", note: "MRT Lavender (cca 35 min z letiště)", coords: [1.3134, 103.8615] },
-                    B: { name: "Hotel 81 Premier Princess", price: 3569, img: "https://viper1971.github.io/bali-lombok/9.jpg", mapQuery: "Hotel+81+Premier+Princess+Singapore", note: "MRT Aljunied 850m (cca 32 min z letiště)", coords: [1.3112, 103.8786] },
-                    C: { name: "Hotel 81 Gold", price: 3577, img: "https://viper1971.github.io/bali-lombok/14.jpg", mapQuery: "Hotel+81+Gold+Singapore", note: "MRT Aljunied jen 500m (cca 30 min z letiště)", coords: [1.3120, 103.8813] }
+                    A: { name: "Fragrance Hotel - Lavender", price: 4564, img: "1.jpg", mapQuery: "Fragrance+Hotel+Lavender+Singapore", note: "MRT Lavender (cca 35 min z letiště)", coords: [1.3134, 103.8615] },
+                    B: { name: "Hotel 81 Premier Princess", price: 3569, img: "9.jpg", mapQuery: "Hotel+81+Premier+Princess+Singapore", note: "MRT Aljunied 850m (cca 32 min z letiště)", coords: [1.3112, 103.8786] },
+                    C: { name: "Hotel 81 Gold", price: 3577, img: "14.jpg", mapQuery: "Hotel+81+Gold+Singapore", note: "MRT Aljunied jen 500m (cca 30 min z letiště)", coords: [1.3120, 103.8813] }
                 }
             },
             uluwatu: {
                 stageTitle: "2. Uluwatu (2 noci)",
                 targetId: "etapa-uluwatu",
                 options: {
-                    A: { name: "Uluwatu Jungle Villa", price: 2583, img: "https://viper1971.github.io/bali-lombok/2.jpg", coords: [-8.8149, 115.1167] },
-                    B: { name: "The Ululani Deluxe", price: 1924, img: "https://viper1971.github.io/bali-lombok/12.jpg", coords: [-8.7978, 115.1228] }
+                    A: { name: "Uluwatu Jungle Villa", price: 2583, img: "2.jpg", coords: [-8.8149, 115.1167] },
+                    B: { name: "The Ululani Deluxe", price: 1924, img: "12.jpg", coords: [-8.7978, 115.1228] }
                 }
             },
             ubud: {
                 stageTitle: "3. Ubud (4 noci)",
                 targetId: "etapa-ubud",
                 options: {
-                    A: { name: "The Village Guest House", price: 3275, img: "https://viper1971.github.io/bali-lombok/3.jpg", coords: [-8.5069, 115.2625] },
-                    B: { name: "Gandatera Ubud", price: 2422, img: "https://viper1971.github.io/bali-lombok/11.jpg", coords: [-8.5042, 115.2786] },
-                    C: { name: "Bije Suite Villa Ubud", price: 3626, img: "https://viper1971.github.io/bali-lombok/15.jpg", coords: [-8.4888, 115.2650] }
+                    A: { name: "The Village Guest House", price: 3275, img: "3.jpg", coords: [-8.5069, 115.2625] },
+                    B: { name: "Gandatera Ubud", price: 2422, img: "11.jpg", coords: [-8.5042, 115.2786] },
+                    C: { name: "Bije Suite Villa Ubud", price: 3626, img: "15.jpg", coords: [-8.4888, 115.2650] }
                 }
             },
             lombokNorth: {
                 stageTitle: "4. Lombok Z/S (4 noci)",
                 targetId: "etapa-lombok-zapad",
                 options: {
-                    A: { name: "Starsand Resort (Sekotong)", price: 4548, img: "https://viper1971.github.io/bali-lombok/4a.jpg", coords: [-8.7650, 115.9850] },
-                    B: { name: "Mina Tanjung Hotel (Sever)", price: 2395, img: "https://viper1971.github.io/bali-lombok/8.jpg", coords: [-8.3471, 116.1498] }
+                    A: { name: "Starsand Resort (Sekotong)", price: 4548, img: "4a.jpg", coords: [-8.7650, 115.9850] },
+                    B: { name: "Mina Tanjung Hotel (Sever)", price: 2395, img: "8.jpg", coords: [-8.3471, 116.1498] }
                 }
             },
             lombokSouth: {
                 stageTitle: "5. Kuta Lombok (4 noci)",
                 targetId: "etapa-lombok-jih",
                 options: {
-                    A: { name: "El Tropico Boutique Hotel", price: 5284, img: "https://viper1971.github.io/bali-lombok/5.jpg", coords: [-8.8920, 116.2810] },
-                    B: { name: "TheLocal AreGuling Villas", price: 3830, img: "https://viper1971.github.io/bali-lombok/10.jpg", coords: [-8.8925, 116.2400] }
+                    A: { name: "El Tropico Boutique Hotel", price: 5284, img: "5.jpg", coords: [-8.8920, 116.2810] },
+                    B: { name: "TheLocal AreGuling Villas", price: 3830, img: "10.jpg", coords: [-8.8925, 116.2400] }
                 }
             },
             kutaLast: {
                 stageTitle: "6. Bali Letiště (1 noc)",
                 targetId: "etapa-navrat",
                 options: {
-                    A: { name: "Grand Ixora Kuta Resort", price: 950, img: "https://viper1971.github.io/bali-lombok/6.jpg", coords: [-8.7390, 115.1680] },
-                    B: { name: "Bakung Beach Resort", price: 471, img: "https://viper1971.github.io/bali-lombok/13.jpg", coords: [-8.7347, 115.1657] },
-                    C: { name: "Bali Sandy Resort", price: 542, img: "https://viper1971.github.io/bali-lombok/hotel3.jpg", coords: [-8.717811626663684, 115.1714249405744] }
+                    A: { name: "Grand Ixora Kuta Resort", price: 950, img: "6.jpg", coords: [-8.7390, 115.1680] },
+                    B: { name: "Bakung Beach Resort", price: 471, img: "13.jpg", coords: [-8.7347, 115.1657] },
+                    C: { name: "Bali Sandy Resort", price: 542, img: "hotel3.jpg", coords: [-8.717811626663684, 115.1714249405744] }
                 }
             }
         };
@@ -86,7 +86,7 @@
         const flightOptions = {
             emirates: {
                 name: "Emirates (16:10 přes Dubaj)",
-                logo: "https://viper1971.github.io/bali-lombok/emirates.png",
+                logo: "emirates.png",
                 pricePerson: 22000,
                 priceRoom: 44000,
                 hub: "Dubaj (DXB)",
@@ -107,7 +107,7 @@
             },
             emirates_flydubai: {
                 name: "Emirates + flydubai (21:15 přes Dubaj)",
-                logo: "https://viper1971.github.io/bali-lombok/emirates.png",
+                logo: "emirates.png",
                 pricePerson: 22000,
                 priceRoom: 44000,
                 hub: "Dubaj (DXB)",
@@ -128,7 +128,7 @@
             },
             finnair: {
                 name: "Finnair (19:30 přes Helsinky)",
-                logo: "https://viper1971.github.io/bali-lombok/finair.jpg",
+                logo: "finair.jpg",
                 pricePerson: 24900,
                 priceRoom: 49800,
                 hub: "Helsinky (HEL)",
@@ -149,7 +149,7 @@
             },
             swiss: {
                 name: "SWISS (19:30 přes Curych)",
-                logo: "https://viper1971.github.io/bali-lombok/swiss.png",
+                logo: "swiss.png",
                 pricePerson: 23909,
                 priceRoom: 51000,
                 hub: "Curych (ZRH)",
@@ -170,7 +170,7 @@
             },
             turkish: {
                 name: "Turkish Airlines (19:15 přes Istanbul)",
-                logo: "https://viper1971.github.io/bali-lombok/turkish.png",
+                logo: "turkish.png",
                 pricePerson: 26505,
                 priceRoom: 53800,
                 hub: "Istanbul (IST)",
@@ -1484,11 +1484,6 @@ function recalculateAll() {
             });
         }
 
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' })
-                .then(reg => reg.update())
-                .catch(err => console.warn('Chyba registrace offline režimu:', err));
-        }
 
         const PACK_LIMIT_KG = 7;   // limit příručního batohu
         const PACK_WARN_KG = 6;    // od této váhy varování
