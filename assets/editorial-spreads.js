@@ -6,6 +6,14 @@
   function setup() {
     var root = document.getElementById("hlavni-obsah");
     if (!root) return;
+    if (!window.matchMedia("(min-width: 1100px)").matches) {
+      root.querySelectorAll(".bali-ed-hotel-spread").forEach(function (spread) {
+        var parent = spread.parentNode;
+        while (spread.firstChild) parent.insertBefore(spread.firstChild,spread);
+        spread.remove();
+      });
+      return;
+    }
     root.querySelectorAll(".uber-hotel-card").forEach(function (card, i) {
       if (card.querySelector(":scope > .bali-ed-hotel-spread")) return;
       var media = card.querySelector(":scope > .uber-media-grid");
@@ -45,6 +53,10 @@
       requestAnimationFrame(function () { queued = false; setup(); });
     });
     observer.observe(root,{childList:true,subtree:true});
+    // Restore the original DOM nesting if a desktop is resized to tablet/mobile.
+    var mediaQuery = window.matchMedia("(min-width: 1100px)");
+    if (mediaQuery.addEventListener) mediaQuery.addEventListener("change",setup);
+    else if (mediaQuery.addListener) mediaQuery.addListener(setup);
     // Photo strips are inserted late by the existing photo loader.
     window.addEventListener("load",setup,{once:true});
     setTimeout(setup,1600);
