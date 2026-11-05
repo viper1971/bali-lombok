@@ -84,3 +84,26 @@
 - Atribuce fotografií, konkrétní licence a informace o převodu do WebP jsou uložené v `docs/gallery-photo-credits.md`; kontrola `tests/gallery-local.cjs` validuje cesty a licence.
 - Přesný počet místních fotografií z obou etap je **19 + 69 = 88 souborů**; nevypovídá to o vizuální kvalitě či tematické přesnosti každého snímku. Tu je vhodné zkontrolovat ručně před cestou.
 - Závěrečné měření Core Web Vitals na veřejném webu stále nebylo potvrzeno; úbytek externích požadavků je technicky ověřen ve zdrojovém kódu, nikoliv vyčíslen měřením.
+
+## Ověřená syntetická měření prohlížeče – 5. 11. 2026, 16:33 UTC
+
+Přístup k souboru `docs/performance-metrics.json` potvrdil následující výsledky po opravě testovací cesty `/bali-lombok/` a odložení Wikimedia dotazů z `assets/js/049.js`:
+
+| Metrika | Mobil 390×844 | PC 1440×1000 |
+| --- | ---: | ---: |
+| První vykreslení (FCP) | 184 ms | 320 ms |
+| Kandidát LCP | 1 100 ms | 320 ms |
+| DOMContentLoaded | 1 214 ms | 1 129 ms |
+| CLS | 1,0162 | 1,5692 |
+| Wikimedia API dotazy při úvodu | **0** | **0** |
+| Lokální HTTP 404 | **0** | **0** |
+| Pokusy o třetí strany (zablokované) | 40 | 57 |
+
+Předchozí syntetické měření evidovalo **19 Wikimedia API požadavků na mobilu i PC**. Po odložení iniciace požadavků nyní benchmark ukazuje **0**, bez změny základního ovládání sekcí. Rozdíl není produkční měření návštěvnického síťového času.
+
+### Kritické nálezy z layout-shift observeru
+- Největší položka CLS = **1,0** na obou rozlišeních; přechod zahrnuje `.mg-cover`, `.hero-meeting` a hlavní lištu, které při inicializaci mění geometrii.
+- PC přidává přibližně **0,5658** další posun zahrnující `#magazineStory` a navigaci. Příčinou může být přesunutí titulní strany do dialogu při inicializaci magazínu v `assets/js/068-magazine-layout.js`. Zatím je to **hypotéza podpořená pozorovanými uzly**, nikoliv potvrzený výsledek izolovaného A/B testu.
+- Zbývající třetí strany jsou zejména Google Maps iframe, fonty a TOPlist. Jsou důležité pro obsah / měření, nesmí se bez testů mechanicky odstranit.
+
+Syntetický test blokuje externí služby, používá místní HTTP server bez běžné produkční přenosové komprese, a ve výpisu zaznamenává i požadavky, které by reálný prohlížeč mohl vyhodnotit jinak. Nevyhodnocovat výsledky jako PageSpeed skóre ani procentuální změnu rychlosti veřejného webu.
