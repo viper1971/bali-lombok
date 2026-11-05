@@ -1462,7 +1462,21 @@ function luxQRSvg(text, px) {
                 if (ln.querySelector(':scope > .tj-pic') || !IMG_Q[id] || !imgWant(id, 'jidlo')) return; var box = imgBox(ln, id, (ln.querySelector('b') || {}).textContent || 'Jídlo', true); if (box) ln.appendChild(box);
             });
         });
-        imgStarted.base = true; ['inl_2', 'inl_1', 'part_5', 'part_4', 'part_3'].forEach(function (id) { var c = imgCache[id]; if ((c && c.c) || imgPend[id] || imgQueue.indexOf(id) >= 0 || (imgFail[id] && Date.now() - imgFail[id] < 60000)) return; imgQueue.unshift(id); });
+        if (!imgStarted.base) {
+            imgStarted.base = true;
+            var queueEditorial = function () {
+                if (imgStarted.editorial) return;
+                imgStarted.editorial = true;
+                ['inl_2', 'inl_1', 'part_5', 'part_4', 'part_3'].forEach(function (id) {
+                    var c = imgCache[id];
+                    if ((c && c.c) || imgPend[id] || imgQueue.indexOf(id) >= 0 || (imgFail[id] && Date.now() - imgFail[id] < 60000)) return;
+                    imgQueue.unshift(id);
+                });
+                imgPump();
+            };
+            window.addEventListener('scroll', queueEditorial, { once: true, passive: true });
+            document.addEventListener('pointerdown', queueEditorial, { once: true, passive: true });
+        }
         imgApplyExtra(); imgDedupeDom(); imgPump();
     }
     function imgApplyPart(n) {
@@ -1500,7 +1514,7 @@ function luxQRSvg(text, px) {
             var host = $(hostId); if (!host) return; var sched = false;
             function trig() { if (!sched) { sched = true; requestAnimationFrame(function () { sched = false; try { imgScan(); } catch (e) {} }); } }
             if (window.MutationObserver) new MutationObserver(trig).observe(host, { childList: true, subtree: true });
-            function start() { if (imgStarted[key] || host.offsetHeight < 20) return; imgStarted[key] = true; trig(); }
+            function start() { if (imgStarted[key] || host.offsetHeight < 20) return; var bounds = host.getBoundingClientRect(); if (bounds.bottom < -400 || bounds.top > innerHeight + 400) return; imgStarted[key] = true; trig(); }
             if (window.ResizeObserver) new ResizeObserver(start).observe(host);
             if (window.IntersectionObserver) new IntersectionObserver(start, { rootMargin: '600px' }).observe(host);
             setTimeout(start, 1500); trig();
