@@ -1,0 +1,39 @@
+name: BALI CLS cause isolation
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/cls-experiments.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  isolate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/cls-experiments.cjs
+      - name: Archive experimental layout shift results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cls-experiments
+          path: docs/cls-experiments.json
+      - name: Commit diagnostic results
+        if: always() && hashFiles('docs/cls-experiments.json') != ''
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/cls-experiments.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Record browser experiment isolating initial CLS'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
