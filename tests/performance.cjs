@@ -20,7 +20,14 @@ async function main() {
     const page = await context.newPage();
     const errors = [], failedLocal = [];
     let transferred = 0, requests = 0, imageBytes = 0, imageRequests = 0;
+    let wikimediaApiOnStartup = 0, thirdPartyRequests = 0;
     page.on('pageerror', e => errors.push(e.message));
+    page.on('request', req => {
+      if (!req.url().startsWith('http://127.0.0.1:' + PORT + '/')) {
+        thirdPartyRequests++;
+        if (/commons[.]wikimedia[.]org\/w\/api[.]php/.test(req.url())) wikimediaApiOnStartup++;
+      }
+    });
     page.on('requestfailed', req => {
       if (req.url().startsWith(URL.slice(0, URL.indexOf('/index.html')))) {
         failedLocal.push({url:req.url(), error:req.failure()?.errorText || 'request failed'});
@@ -89,6 +96,7 @@ async function main() {
       synthetic:true, thirdPartyNetwork:'blocked', serviceWorkers:'blocked',
       domContentLoadedWallMs, requests, transferredBytesFromContentLength:transferred,
       imageRequests, imageBytesFromContentLength:imageBytes,
+      thirdPartyRequests, wikimediaApiOnStartup,
       errors:errors.slice(0,20), failedLocal:failedLocal.slice(0,30), ...data});
     await context.close();
   }
@@ -98,7 +106,7 @@ async function main() {
     timestamp:new Date().toISOString(), snapshots
   },null,2)+'\n');
   console.log(JSON.stringify(snapshots,null,2));
-  if (snapshots.some(s=>s.failedLocal.length || !s.heroNaturalWidth))
+  if (snapshots.some(s=>s.failedLocal.length || !s.heroNaturalWidth || s.wikimediaApiOnStartup))
     process.exitCode = 1;
 }
 main().catch(e=>{console.error(e);process.exitCode=1}).finally(async()=>{
