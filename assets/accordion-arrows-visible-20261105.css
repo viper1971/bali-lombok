@@ -1,0 +1,90 @@
+/* BALI 2027 · Easily visible expansion arrows for every section.
+   Pure CSS; no changes to scrolling, open/close logic or Street View. */
+@media screen {
+  html body .lux-part > .lux-part-head .lux-part-chev,
+  html body #cast-priprava > .lux-part-head .lux-part-chev {
+    display: grid !important;
+    place-items: center !important;
+    flex: 0 0 48px !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    font-size: 28px !important;
+    line-height: 1 !important;
+    font-weight: 900 !important;
+    opacity: 1 !important;
+    color: #fff !important;
+    background: #12665e !important;
+    border: 2px solid #e8fff6 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 8px rgba(9,46,44,.26) !important;
+  }
+  html body .lux-fold > .lux-fold-h .lux-fold-btn .lux-fold-chev,
+  html body .lux-part .lux-fold > .lux-fold-h .lux-fold-chev,
+  html body #osa .lux-spine .lux-fold-btn .lux-fold-chev {
+    display: grid !important;
+    place-items: center !important;
+    flex: 0 0 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    font-size: 27px !important;
+    line-height: 1 !important;
+    font-weight: 900 !important;
+    opacity: 1 !important;
+    color: #fff !important;
+    background: #12665e !important;
+    border: 2px solid #e8fff6 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 8px rgba(9,46,44,.26) !important;
+  }
+  html body .lux-acc-btn .lux-acc-chev {
+    display: grid !important;
+    place-items: center !important;
+    flex: 0 0 42px !important;
+    width: 42px !important;
+    height: 42px !important;
+    font-size: 26px !important;
+    line-height: 1 !important;
+    font-weight: 900 !important;
+    opacity: 1 !important;
+    color: #fff !important;
+    background: #12665e !important;
+    border: 2px solid #e8fff6 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 8px rgba(9,46,44,.26) !important;
+  }
+  html body .bali-itinerary-subsection > summary .bali-itinerary-chevron {
+    display: grid !important;
+    place-items: center !important;
+    flex: 0 0 44px !important;
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 28px !important;
+    font-weight: 900 !important;
+    color: #fff !important;
+    background: #12665e !important;
+    border: 2px solid #e8fff6 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 2px 8px rgba(9,46,44,.26) !important;
+  }
+}
+@media (max-width: 600px) {
+  html body .lux-part > .lux-part-head .lux-part-chev,
+  html body #cast-priprava > .lux-part-head .lux-part-chev {
+    flex-basis: 42px !important;
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 42px !important;
+    font-size: 25px !important;
+  }
+  html body .lux-fold > .lux-fold-h .lux-fold-btn .lux-fold-chev,
+  html body .lux-part .lux-fold > .lux-fold-h .lux-fold-chev,
+  html body #osa .lux-spine .lux-fold-btn .lux-fold-chev {
+    flex-basis: 39px !important;
+    width: 39px !important;
+    min-width: 39px !important;
+    height: 39px !important;
+    font-size: 24px !important;
+  }
+}
