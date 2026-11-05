@@ -1,0 +1,35 @@
+/* The detailed day-by-day program is a secondary, native disclosure.
+   Keep hotel cards, hotel selection, photos and essential transfers visible. */
+.bali-itinerary-subsection {
+  margin: 20px 0 22px;
+  border: 1px solid var(--border, #c9d5da);
+  border-radius: 16px;
+  background: var(--surface, #fff);
+  box-shadow: 0 4px 18px rgba(14, 45, 54, .06);
+  overflow: clip;
+}
+.bali-itinerary-subsection > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: clamp(16px, 2vw, 23px);
+  cursor: pointer;
+  list-style: none;
+  color: var(--text-main, #12343c);
+  background: var(--surface, #fff);
+}
+.bali-itinerary-subsection > summary::-webkit-details-marker { display: none; }
+.bali-itinerary-subsection > summary:hover { background: var(--surface-hover, #eef6f7); }
+.bali-itinerary-subsection > summary:focus-visible { outline: 3px solid var(--primary, #168d8d); outline-offset: -3px; }
+.bali-itinerary-summary-text { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.bali-itinerary-summary-text strong { font-size: clamp(1rem, 1.3vw, 1.18rem); font-weight: 800; }
+.bali-itinerary-summary-text small { font-size: .85rem; line-height: 1.5; opacity: .78; }
+.bali-itinerary-chevron { font-size: 1.4rem; font-weight: 700; transition: transform .15s ease; }
+.bali-itinerary-subsection[open] .bali-itinerary-chevron { transform: rotate(180deg); }
+.bali-itinerary-inner { padding: 0 clamp(12px, 2vw, 22px) 20px; }
+.bali-itinerary-subsection .lux-acc-btn { display: none !important; }
+.bali-itinerary-subsection .lux-acc-title { margin-top: 8px; }
+@media (prefers-reduced-motion: reduce) {
+  .bali-itinerary-chevron { transition: none; }
+}
