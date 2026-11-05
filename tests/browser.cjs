@@ -54,7 +54,13 @@ function serve(dir,port){const p=spawn('python3',['-m','http.server',String(port
    const oldTheme=await page.evaluate(()=>document.documentElement.dataset.theme);await page.evaluate(()=>toggleTheme());assert.notEqual(await page.evaluate(()=>document.documentElement.dataset.theme),oldTheme);await page.evaluate(()=>toggleTheme());
    await page.evaluate(()=>luxPresent());assert(await page.locator('body').evaluate(n=>n.classList.contains('pres-on')));await page.evaluate(()=>luxPresentStop());assert(!(await page.locator('body').evaluate(n=>n.classList.contains('pres-on'))));
    const chosen=levels.at(-1);await page.reload();await page.waitForTimeout(3500);assert.equal(await page.evaluate(()=>TRIP.level()),chosen,'food choice persists');
-   await page.locator('#uxSearchBtn').evaluate(n=>n.click());await page.locator('#uxSearchInput').fill('Ubud');await page.waitForTimeout(500);
+   await page.locator('#uxSearchBtn').evaluate(n=>n.click());
+   const searchInput=page.locator('#uxSearchInput');
+   await searchInput.fill('Ubud');
+   const instant=await page.evaluate(()=>({v:document.querySelector('#uxSearchInput')?.value,inputs:document.querySelectorAll('#uxSearchInput').length}));
+   await page.waitForTimeout(500);
+   const delayed=await page.evaluate(()=>({v:document.querySelector('#uxSearchInput')?.value,inputs:document.querySelectorAll('#uxSearchInput').length}));
+   console.log('SEARCH_INPUT_TIMELINE',JSON.stringify({instant,delayed}));
    const searchResults=await page.locator('.uxResult').count();
    if (!searchResults) {
      const diagnostic=await page.evaluate(()=>({
