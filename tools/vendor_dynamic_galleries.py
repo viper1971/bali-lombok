@@ -76,5 +76,11 @@ ordered={q:photos[q] for q in sorted(photos)}
 catalog_file.write_text('/* Licensed Commons images, with local attribution. */\nwindow.BALI_GALLERY_LOCAL = '+json.dumps(ordered,ensure_ascii=False,separators=(',',':'))+';\n')
 report={'total_queries':len(queries),'localized':len(ordered),'remaining':len(queries)-len(ordered),
         'failed':sorted(failed,key=lambda x:x['query'])}
+revision=hashlib.sha256(catalog_file.read_bytes()).hexdigest()[:12]
+for page in (root/'src/index.html',root/'index.html'):
+    content=page.read_text(encoding='utf8')
+    content=re.sub(r'assets/data/gallery-catalog[.]js(?:[?]v=[^"\\s]+)?',
+                   'assets/data/gallery-catalog.js?v='+revision,content)
+    page.write_text(content,encoding='utf8')
 report_file.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({'total':len(queries),'localized':len(ordered),'remaining':len(queries)-len(ordered)}))
