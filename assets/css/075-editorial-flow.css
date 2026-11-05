@@ -32,12 +32,22 @@ html body #vipFloatingBar.pm-merged #premiumBudgetDetails .vfb-actions .vfb-what
 }
 /* A photo is part of the prose; interactive Google frames stay in stable grids. */
 @media(min-width:1000px) {
- html[data-magazine="on"] #hlavni-obsah .mg-show-pair {display:flow-root!important}
- #hlavni-obsah .mg-show-pair>.trip-show {
-  float:inline-start;width:48%!important;height:clamp(260px,25vw,360px)!important;
-  margin:0 22px 12px 0!important;
+ /* Keep the gallery and its heading/list/description as two coherent
+    columns. display:contents used to scatter the note children across grid rows. */
+ html[data-magazine="on"] #hlavni-obsah .mg-show-pair {
+  display:grid!important;
+  grid-template-columns:minmax(260px,36%) minmax(0,1fr)!important;
+  gap:clamp(18px,2.5vw,36px)!important;
+  align-items:start!important;
  }
- #hlavni-obsah .mg-show-pair>.mg-show-notes {display:contents;padding:0!important;border:0}
+ html[data-magazine="on"] #hlavni-obsah .mg-show-pair>.trip-show {
+  float:none!important;width:100%!important;max-width:100%!important;
+  height:clamp(300px,29vw,420px)!important;margin:0!important;
+ }
+ html[data-magazine="on"] #hlavni-obsah .mg-show-pair>.mg-show-notes {
+  display:block!important;min-width:0!important;width:100%!important;
+  padding:0!important;border:0!important;grid-column:2!important;
+ }
  #hlavni-obsah .mg-show-notes>h3 {padding-top:8px;font-family:Georgia,serif}
  #hlavni-obsah .mg-show-notes>ul {list-style-position:inside;padding-left:0}
  #hlavni-obsah .mg-show-notes>ul>li {margin-bottom:8px;line-height:1.55}
