@@ -31,6 +31,7 @@ jobs:
       - name: Run static, map and appearance regression tests
         run: npm test
       - name: Install Chromium
+        if: always()
         run: npx playwright install --with-deps chromium
       - name: Run real-browser regression on mobile and desktop
         run: npm run test:browser
