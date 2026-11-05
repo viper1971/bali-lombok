@@ -11,7 +11,7 @@
 #airlineImpact .ai-v52-best span{font-size:10px;font-weight:750;color:var(--text-muted);}
 #airlineImpact .ai-v52-best strong{font-size:15px;color:var(--primary);font-weight:900;font-variant-numeric:tabular-nums;}
 #airlineImpact .ai-v52-table{min-width:0;width:100%;}
-#airlineImpact .ai-v52-columns,#airlineImpact .ai-v52-row{display:grid;grid-template-columns:minmax(175px,1.5fr) minmax(114px,.9fr) minmax(142px,1.3fr) minmax(126px,.9fr) minmax(100px,.85fr) minmax(155px,1.3fr) minmax(82px,.65fr);gap:10px;align-items:center;padding:11px 14px;}
+#airlineImpact .ai-v52-columns,#airlineImpact .ai-v52-row{display:grid;grid-template-columns:minmax(146px,1.32fr) minmax(105px,.88fr) minmax(128px,1.16fr) minmax(112px,.9fr) minmax(98px,.84fr) minmax(120px,1.05fr) minmax(140px,1.17fr) minmax(82px,.66fr);gap:10px;align-items:center;padding:11px 14px;}
 #airlineImpact .ai-v52-columns{padding-top:9px;padding-bottom:9px;background:color-mix(in srgb,var(--text-main) 5%,var(--surface));color:var(--text-muted);font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.035em;}
 #airlineImpact .ai-v52-row{border-top:1px solid var(--border);transition:background .18s;min-width:0;background:var(--surface);}
 #airlineImpact .ai-v52-row:nth-of-type(even){background:color-mix(in srgb,var(--text-main) 2%,var(--surface));}
