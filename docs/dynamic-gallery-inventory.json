@@ -1,0 +1,322 @@
+{
+  "note": "Tyto galerie používají při prvním otevření Wikimedia Commons API. Jsou dynamické a dosavadní statická migrace 19 fotografií je nepokrývá.",
+  "gallery_count": 7,
+  "topic_count": 70,
+  "galleries": [
+    {
+      "id": "singapurAccContent",
+      "topics": [
+        {
+          "caption": "Marina Bay Sands nad zálivem",
+          "search_query": "Marina Bay Sands skyline"
+        },
+        {
+          "caption": "Supertrees v Gardens by the Bay",
+          "search_query": "Supertree Grove Gardens by the Bay night"
+        },
+        {
+          "caption": "Cloud Forest – mlžný prales pod kopulí",
+          "search_query": "Cloud Forest Gardens by the Bay"
+        },
+        {
+          "caption": "Merlion, symbol Singapuru",
+          "search_query": "Merlion Park Singapore"
+        },
+        {
+          "caption": "Lanovka na Sentosu",
+          "search_query": "Singapore Cable Car Sentosa"
+        },
+        {
+          "caption": "Chrám Sri Veeramakaliamman v Little India",
+          "search_query": "Sri Veeramakaliamman Temple"
+        },
+        {
+          "caption": "Barevné domy v Little India",
+          "search_query": "Little India Singapore shophouses"
+        },
+        {
+          "caption": "Sultánova mešita v Arabské čtvrti",
+          "search_query": "Sultan Mosque Singapore"
+        },
+        {
+          "caption": "Haji Lane",
+          "search_query": "Haji Lane Singapore"
+        },
+        {
+          "caption": "Chinatown a chrám Buddhova zubu",
+          "search_query": "Buddha Tooth Relic Temple Singapore"
+        }
+      ]
+    },
+    {
+      "id": "uluwatuAccContent",
+      "topics": [
+        {
+          "caption": "Chrám Uluwatu na útesu",
+          "search_query": "Pura Luhur Uluwatu"
+        },
+        {
+          "caption": "Tanec Kecak při západu slunce",
+          "search_query": "Kecak dance Uluwatu"
+        },
+        {
+          "caption": "Útesy poloostrova Bukit",
+          "search_query": "Uluwatu cliff Bali"
+        },
+        {
+          "caption": "Pláž Padang Padang",
+          "search_query": "Padang Padang beach"
+        },
+        {
+          "caption": "Pláž Melasti",
+          "search_query": "Melasti beach Bali"
+        },
+        {
+          "caption": "Jeskyně na pláži Suluban",
+          "search_query": "Suluban beach Uluwatu"
+        },
+        {
+          "caption": "Pláž Bingin",
+          "search_query": "Bingin beach Bali"
+        },
+        {
+          "caption": "Park Garuda Wisnu Kencana",
+          "search_query": "Garuda Wisnu Kencana statue"
+        },
+        {
+          "caption": "Pláž Pandawa",
+          "search_query": "Pandawa beach Bali"
+        },
+        {
+          "caption": "Západ slunce nad oceánem",
+          "search_query": "Uluwatu sunset"
+        }
+      ]
+    },
+    {
+      "id": "ubudAccContent",
+      "topics": [
+        {
+          "caption": "Opičí prales v Ubudu",
+          "search_query": "Ubud Monkey Forest"
+        },
+        {
+          "caption": "Královský palác Puri Saren",
+          "search_query": "Puri Saren Agung Ubud"
+        },
+        {
+          "caption": "Lotosový chrám Taman Saraswati",
+          "search_query": "Pura Taman Saraswati Ubud"
+        },
+        {
+          "caption": "Rýžové terasy Tegalalang",
+          "search_query": "Tegallalang rice terraces"
+        },
+        {
+          "caption": "Posvátné prameny Tirta Empul",
+          "search_query": "Tirta Empul"
+        },
+        {
+          "caption": "Vodopád Kanto Lampo",
+          "search_query": "Kanto Lampo waterfall"
+        },
+        {
+          "caption": "Vodopád Tibumana",
+          "search_query": "Tibumana waterfall"
+        },
+        {
+          "caption": "Hřebenovka Campuhan",
+          "search_query": "Campuhan Ridge Walk"
+        },
+        {
+          "caption": "Sloní jeskyně Goa Gajah",
+          "search_query": "Goa Gajah"
+        },
+        {
+          "caption": "Kávová plantáž a kopi luwak",
+          "search_query": "kopi luwak Bali plantation"
+        }
+      ]
+    },
+    {
+      "id": "lombokAccContent",
+      "topics": [
+        {
+          "caption": "Gili Trawangan",
+          "search_query": "Gili Trawangan beach"
+        },
+        {
+          "caption": "Gili Air",
+          "search_query": "Gili Air island"
+        },
+        {
+          "caption": "Gili Meno",
+          "search_query": "Gili Meno"
+        },
+        {
+          "caption": "Mořské želvy u ostrovů Gili",
+          "search_query": "sea turtle Gili"
+        },
+        {
+          "caption": "Sopka Rinjani",
+          "search_query": "Mount Rinjani"
+        },
+        {
+          "caption": "Vodopád Sendang Gile",
+          "search_query": "Sendang Gile waterfall"
+        },
+        {
+          "caption": "Vodopád Tiu Kelep",
+          "search_query": "Tiu Kelep waterfall"
+        },
+        {
+          "caption": "Tradiční vesnice na severu Lomboku",
+          "search_query": "Senaru village Lombok"
+        },
+        {
+          "caption": "Mořský chrám Pura Batu Bolong",
+          "search_query": "Batu Bolong temple Lombok"
+        },
+        {
+          "caption": "Pobřeží u Malimbu",
+          "search_query": "Malimbu Lombok"
+        }
+      ]
+    },
+    {
+      "id": "kutaAccContent",
+      "topics": [
+        {
+          "caption": "Vyhlídka Bukit Merese",
+          "search_query": "Bukit Merese"
+        },
+        {
+          "caption": "Pláž Tanjung Aan",
+          "search_query": "Tanjung Aan beach"
+        },
+        {
+          "caption": "Okruh Mandalika",
+          "search_query": "Mandalika International Street Circuit"
+        },
+        {
+          "caption": "Vesnice kmene Sasak – Sade",
+          "search_query": "Sade village Sasak"
+        },
+        {
+          "caption": "Sasacké tkaní",
+          "search_query": "Sasak weaving Lombok"
+        },
+        {
+          "caption": "Růžová pláž",
+          "search_query": "Pink beach Lombok"
+        },
+        {
+          "caption": "Pláž Mawi",
+          "search_query": "Mawi beach Lombok"
+        },
+        {
+          "caption": "Zátoka Selong Belanak",
+          "search_query": "Selong Belanak"
+        },
+        {
+          "caption": "Pláž v Kutě na Lomboku",
+          "search_query": "Kuta Lombok beach"
+        },
+        {
+          "caption": "Jih Lomboku",
+          "search_query": "Mandalika Lombok"
+        }
+      ]
+    },
+    {
+      "id": "farewellAccContent",
+      "topics": [
+        {
+          "caption": "Zátoka Jimbaran",
+          "search_query": "Jimbaran beach"
+        },
+        {
+          "caption": "Západ slunce v Jimbaranu",
+          "search_query": "Jimbaran sunset"
+        },
+        {
+          "caption": "Rybářské lodě v Jimbaranu",
+          "search_query": "Jimbaran fishing boats"
+        },
+        {
+          "caption": "Grilované mořské plody",
+          "search_query": "grilled seafood Bali"
+        },
+        {
+          "caption": "Pláž Kuta na Bali",
+          "search_query": "Kuta beach Bali"
+        },
+        {
+          "caption": "Obětiny canang sari",
+          "search_query": "canang sari"
+        },
+        {
+          "caption": "Balijský tanec",
+          "search_query": "Balinese dance"
+        },
+        {
+          "caption": "Balijská brána candi bentar",
+          "search_query": "candi bentar Bali"
+        },
+        {
+          "caption": "Letiště Ngurah Rai",
+          "search_query": "Ngurah Rai International Airport"
+        },
+        {
+          "caption": "Sbohem, Bali",
+          "search_query": "Bali sunset beach"
+        }
+      ]
+    },
+    {
+      "id": "singaporeAccContent",
+      "topics": [
+        {
+          "caption": "Tržnice Lau Pa Sat",
+          "search_query": "Lau Pa Sat"
+        },
+        {
+          "caption": "Satay Street večer",
+          "search_query": "Boon Tat Street satay"
+        },
+        {
+          "caption": "Satay na grilu",
+          "search_query": "satay Singapore"
+        },
+        {
+          "caption": "Mrakodrapy Raffles Place",
+          "search_query": "Raffles Place Singapore"
+        },
+        {
+          "caption": "Nábřeží Marina Bay",
+          "search_query": "Marina Bay waterfront"
+        },
+        {
+          "caption": "Metro MRT",
+          "search_query": "Singapore MRT train"
+        },
+        {
+          "caption": "Vodopád Rain Vortex v Jewel",
+          "search_query": "Jewel Changi Rain Vortex"
+        },
+        {
+          "caption": "Uvnitř Jewel Changi",
+          "search_query": "Jewel Changi Airport interior"
+        },
+        {
+          "caption": "Letiště Changi",
+          "search_query": "Changi Airport terminal"
+        },
+        {
+          "caption": "Motýlí zahrada na Changi",
+          "search_query": "Changi Airport butterfly garden"
+        }
+      ]
+    }
+  ]
+}
