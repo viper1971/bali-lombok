@@ -20,6 +20,14 @@ for(const [label,content,path] of [
   assert(content.indexOf('href="'+path+'"')<content.indexOf('</head>'),label+' early stylesheet missing');
   assert(content.lastIndexOf('href="'+path+'"')>content.indexOf('</head>'),label+' original cascade stylesheet was moved');
 }
+for(const [label,content,journey] of [
+  ['source',sourceHtml,'assets/css/078-journey-overview.css'],
+  ['production',html,'assets/build/css-fb292f813752ad3a.css']]){
+  assert(content.indexOf('href="'+journey+'"')<content.indexOf('</head>'),
+    label+' journey grid must load before first paint');
+  assert(content.lastIndexOf('href="'+journey+'"')>content.indexOf('</head>'),
+    label+' original journey CSS cascade must remain intact');
+}
 assert(html.includes('js-036fff53752dca28.js?v=20261105-cleanheadings-cls-spacer'),
   'Published HTML is using old magazine dialog JavaScript');
 console.log('Magazine CLS guard passed with dialog interaction unchanged.');
