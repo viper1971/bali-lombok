@@ -25,6 +25,7 @@ jobs:
       - run: python -m pip install 'Pillow>=11,<13'
       - run: python -m py_compile tools/vendor_images.py
       - run: python tools/vendor_images.py
+      - run: python tools/audit_image_urls.py
       - run: npm ci
       - run: python tools/build.py
       - run: npm test
