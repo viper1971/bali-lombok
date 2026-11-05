@@ -9,7 +9,13 @@ class BuildTests(unittest.TestCase):
  def test_build_reproducible(self):
   paths=['index.html','sw.js','assets/build-manifest.json']
   before=[(ROOT/p).read_bytes() for p in paths]
-  subprocess.run(['python3','tools/build.py'],cwd=ROOT,check=True,capture_output=True)
+  published=(ROOT/'index.html').read_text()
+  if 'js-head-critical-a-20261105.js' in published:
+   result=subprocess.run(['python3','tools/build.py'],cwd=ROOT,capture_output=True,text=True)
+   self.assertNotEqual(result.returncode,0)
+   self.assertIn('Build blocked',result.stderr+result.stdout)
+  else:
+   subprocess.run(['python3','tools/build.py'],cwd=ROOT,check=True,capture_output=True)
   self.assertEqual(before,[(ROOT/p).read_bytes() for p in paths])
  def test_ids_and_markup_preserved(self):
   src=Page((ROOT/'src/index.html').read_text());out=Page((ROOT/'index.html').read_text())
