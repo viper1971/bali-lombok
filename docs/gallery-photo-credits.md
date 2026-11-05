@@ -234,6 +234,13 @@ Licence: CC BY 4.0 — https://creativecommons.org/licenses/by/4.0
 Původní fotografie: https://commons.wikimedia.org/wiki/File:Marina_Bay_Waterfront_Skyline_(2025).jpg
 Úprava: zmenšení rozlišení a převod do WebP.
 
+## Mawi beach Lombok
+
+Autor: David Hunt from Sydney, Australia
+Licence: CC BY 2.0 — https://creativecommons.org/licenses/by/2.0
+Původní fotografie: https://commons.wikimedia.org/wiki/File:Dave_B_@_Mawi_(2706207006).jpg
+Úprava: zmenšení rozlišení a převod do WebP.
+
 ## Melasti beach Bali
 
 Autor: Dare2Leap
