@@ -1,4 +1,5 @@
 name: Mirror licensed Wikimedia slideshow photos
+# Retry four remaining licensed photo topics using Indonesian place-name aliases.
 on:
   push:
     branches: [main]
