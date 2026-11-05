@@ -107,6 +107,7 @@
     function candidates(query) {
         var local = window.BALI_GALLERY_LOCAL && window.BALI_GALLERY_LOCAL[query];
         if (local && local.src) return Promise.resolve([local]);
+        if (window.BALI_GALLERY_MISSING && window.BALI_GALLERY_MISSING.includes(query)) return Promise.resolve([]);
         if (cache[query]) return Promise.resolve(cache[query]);
         return fetch(API + encodeURIComponent(query + ' filetype:bitmap'))
             .then(function (r) { return r.json(); })
