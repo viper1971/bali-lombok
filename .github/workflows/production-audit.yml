@@ -1,0 +1,34 @@
+name: BALI production resource audit
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/audit_production_resources.py'
+      - 'index.html'
+      - 'src/index.html'
+      - 'assets/build/**'
+      - 'assets/images/external/**'
+      - '.github/workflows/production-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check published resource links and priority loading
+        run: python tools/audit_production_resources.py
+      - name: Verify migrated image files
+        run: python tools/check_migrated_images.py
+      - name: Archive audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-resources
+          path: docs/production-resource-audit.json
+          if-no-files-found: warn
