@@ -25,8 +25,15 @@ def fetch(url):
 def attempt(query):
     name=hashlib.sha256(query.encode()).hexdigest()[:16]+'.webp'
     dest=folder/name
+    aliases={
+        'Batu Bolong temple Lombok':'Pura Batu Bolong Senggigi',
+        'Mawi beach Lombok':'Pantai Mawi Lombok',
+        'Suluban beach Uluwatu':'Suluban Blue Point Beach Bali',
+        'Tibumana waterfall':'Air Terjun Tibumana Bali',
+    }
+    lookup=aliases.get(query,query)
     params={'action':'query','format':'json','generator':'search','gsrnamespace':6,
-        'gsrlimit':10,'gsrsearch':query+' filetype:bitmap','prop':'imageinfo',
+        'gsrlimit':10,'gsrsearch':lookup+' filetype:bitmap','prop':'imageinfo',
         'iiprop':'url|size|extmetadata','iiurlwidth':1200,
         'iiextmetadatafilter':'Artist|LicenseShortName|LicenseUrl'}
     url='https://commons.wikimedia.org/w/api.php?'+urlencode(params)
