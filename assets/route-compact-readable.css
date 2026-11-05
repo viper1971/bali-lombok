@@ -1,0 +1,30 @@
+/* BALI 2027 – kompaktní a čitelná časová osa cesty, pouze #routeMap. */
+#osa #routeMap .rj{padding:12px!important;margin:0!important;border-radius:14px!important;background:#fffdf8!important;border:1px solid #d7e2da!important;box-shadow:none!important;color:#18352e!important}
+#osa #routeMap .rj, #osa #routeMap .rj *{text-shadow:none!important;-webkit-text-stroke:0!important;letter-spacing:normal}
+#osa #routeMap .rj-h{gap:3px 10px!important;margin:0 0 9px!important;align-items:center!important}
+#osa #routeMap .rj-h b{color:#173b32!important;font-size:1.02rem!important;line-height:1.25!important}
+#osa #routeMap .rj-h span{color:#4b605a!important;font-size:.78rem!important;line-height:1.35!important}
+#osa #routeMap .rj-cols{gap:10px!important;align-items:start!important}
+#osa #routeMap .rj-col{padding:10px!important;border-radius:12px!important;background:#f5f8f4!important;border:1px solid #dbe5dc!important;min-width:0!important}
+#osa #routeMap .rj-ret{background:#fff8ed!important;border-color:#eadbc2!important}
+#osa #routeMap .rj-ttl{display:inline-flex!important;align-items:center!important;max-width:100%!important;margin:0 0 7px!important;padding:5px 10px!important;border-radius:8px!important;font-size:.79rem!important;line-height:1.25!important;font-weight:800!important;color:#fff!important;background:#135c49!important;box-shadow:none!important}
+#osa #routeMap .rj-ret .rj-ttl{background:#9b620e!important}
+#osa #routeMap .rj-stop{grid-template-columns:30px minmax(0,1fr)!important;gap:9px!important;min-height:42px!important;padding:3px 4px 3px 0!important;margin:0!important;border-radius:8px!important;color:#18352e!important;text-decoration:none!important}
+#osa #routeMap .rj-dot{width:30px!important;height:30px!important;font-size:15px!important;line-height:1!important;border-width:2px!important;background:#fff!important;box-shadow:none!important}
+#osa #routeMap .rj-t{min-width:0!important}
+#osa #routeMap .rj-t b{font-size:.88rem!important;line-height:1.2!important;font-weight:800!important;color:#18352e!important;margin:0!important}
+#osa #routeMap .rj-t small{font-size:.77rem!important;line-height:1.25!important;font-weight:600!important;color:#4b605a!important;margin:2px 0 0!important}
+#osa #routeMap .rj-leg{min-height:29px!important;gap:4px 8px!important;margin:0 0 0 14px!important;padding:4px 0 4px 25px!important;font-size:.78rem!important;line-height:1.3!important;font-weight:700!important;color:#27463d!important}
+#osa #routeMap .rj-ground{color:#53675f!important;font-weight:600!important}
+#osa #routeMap .rj-fl{padding:3px 8px!important;border-radius:7px!important;background:#135c49!important;color:#fff!important;font-size:.75rem!important;line-height:1.2!important;box-shadow:none!important}
+#osa #routeMap .rj-ret .rj-fl{background:#9b620e!important}
+#osa #routeMap .rj-leg sup{font-size:.7em!important}
+#osa #routeMap .rj-stop:focus-visible{outline:2px solid #136b58!important;outline-offset:2px!important}
+@media(max-width:650px){
+ #osa #routeMap .rj{padding:9px!important}
+ #osa #routeMap .rj-cols{grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+ #osa #routeMap .rj-col{padding:9px 10px!important}
+ #osa #routeMap .rj-h{margin-bottom:8px!important}
+ #osa #routeMap .rj-stop{min-height:39px!important}
+ #osa #routeMap .rj-leg{min-height:27px!important}
+}
