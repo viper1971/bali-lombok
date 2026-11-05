@@ -1,6 +1,6 @@
 {
-  "html_bytes": 444512,
-  "scripts": 59,
+  "html_bytes": 444337,
+  "scripts": 56,
   "stylesheets": 31,
   "images": 60,
   "iframes": 26,
@@ -15,6 +15,7 @@
     "assets/build/js-1650a00000000002.js",
     "assets/build/js-1650a00000000003.js",
     "assets/build/js-1650a00000000005.js",
+    "assets/build/js-footer-folds-20261105.js",
     "assets/build/js-1650a00000000004.js"
   ],
   "hero_src": "assets/images/external/c9c99d25f3e25d16.webp",
