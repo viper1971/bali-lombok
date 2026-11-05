@@ -171,6 +171,7 @@
         new IntersectionObserver(function (entries) {
             entries.forEach(function (en) {
                 show._visible = en.isIntersecting;
+                if (show._syncTimer) show._syncTimer();
                 if (en.isIntersecting) show._prepare(3);
             });
         }, { threshold: 0.15 }).observe(show);
@@ -216,12 +217,17 @@
                 for (var d = 1; d <= 2; d++) { var nx = slides[(i + d) % slides.length].querySelector('img'); nx.loading = 'eager'; }
             }
             function tick() { if (!paused && show._visible && !document.hidden) go(i + 1); }
-            function restart() { clearInterval(timer); timer = setInterval(tick, 2000); }   /* fotka se mění po 2 s */
+            function restart() {
+                clearInterval(timer); timer = null;
+                if (show._visible && !document.hidden && !paused) timer = setInterval(tick, 2000);
+            }
+            show._syncTimer = restart;
+            document.addEventListener('visibilitychange', restart);   /* fotka se mění po 2 s */
             var prev = document.createElement('button'), next = document.createElement('button'), pause = document.createElement('button');
             prev.className = 'trip-show-nav trip-show-prev'; prev.type = 'button'; prev.textContent = '‹'; prev.setAttribute('aria-label', 'Předchozí fotka');
             next.className = 'trip-show-nav trip-show-next'; next.type = 'button'; next.textContent = '›'; next.setAttribute('aria-label', 'Další fotka');
             pause.className = 'trip-show-pause'; pause.type = 'button';
-            function setPause(v) { paused = v; pause.textContent = v ? '▶ Přehrát' : '❚❚ Pauza'; pause.setAttribute('aria-pressed', String(v)); }
+            function setPause(v) { paused = v; pause.textContent = v ? '▶ Přehrát' : '❚❚ Pauza'; pause.setAttribute('aria-pressed', String(v)); restart(); }
             setPause(paused);
             prev.onclick = function () { go(i - 1); restart(); };
             next.onclick = function () { go(i + 1); restart(); };
