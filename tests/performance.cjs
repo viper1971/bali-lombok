@@ -16,7 +16,7 @@ async function main() {
     {name:'mobile', viewport:{width:390,height:844}, deviceScaleFactor:2, isMobile:true, hasTouch:true},
     {name:'desktop', viewport:{width:1440,height:1000}, deviceScaleFactor:1, isMobile:false, hasTouch:false}
   ]) {
-    const context = await browser.newContext({...profile, serviceWorkers:'block'});
+    const context = await browser.newContext({viewport:profile.viewport, deviceScaleFactor:profile.deviceScaleFactor, isMobile:profile.isMobile, hasTouch:profile.hasTouch, serviceWorkers:'block'});
     const page = await context.newPage();
     const errors = [], failedLocal = [];
     let transferred = 0, requests = 0, imageBytes = 0, imageRequests = 0;
@@ -59,7 +59,8 @@ async function main() {
       if (!response.url().startsWith('http://127.0.0.1:' + PORT + '/')) return;
       requests++;
       const req = response.request();
-      const size = Number((await response.allHeaders()).get?.('content-length') || 0);
+      const headers = await response.allHeaders().catch(()=>({}));
+      const size = Number(headers['content-length'] || 0);
       if (Number.isFinite(size)) transferred += size;
       if (req.resourceType() === 'image') {imageRequests++;imageBytes += size;}
       if (response.status() >= 400) failedLocal.push({url:response.url(),status:response.status()});
