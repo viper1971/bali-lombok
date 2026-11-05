@@ -1,167 +1,23 @@
-/* BALI 2027 — main chapter and subsection alignment only.
-   Existing navigation, locks, read status, maps and accordion handlers stay authoritative. */
+/* BALI 2027 — no automatic scrolling during chapter, fold or hotel expansion.
+   Keep native wheel/touch scrolling and all original section, lock and hotel handlers. */
 (function () {
   "use strict";
-  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
-  var pending = null, tail = null, generation = 0, timers = [];
-
-  function clearTimers() {
-    timers.forEach(function (id) { clearTimeout(id); });
-    timers = [];
-  }
-  function offset() {
-    var root = document.documentElement;
-    var raw = parseFloat(getComputedStyle(root).getPropertyValue("--stick-top")) || 0;
-    return Math.max(12, Math.min(130, raw + 12));
-  }
-  function firstHeading(part) {
-    var f = part.querySelector(":scope > .lux-part-body .lux-fold[id]");
-    return f ? (f.querySelector(":scope > .lux-fold-h") || f) :
-      (part.querySelector(":scope > .lux-part-head") || part);
-  }
-  function destination(el) {
-    return Math.max(0, window.scrollY + el.getBoundingClientRect().top - offset());
-  }
-  function ensureTail() {
-    if (!tail) {
-      tail = document.createElement("div");
-      tail.id = "bali-chapter-scroll-tail";
-      tail.setAttribute("aria-hidden", "true");
-      tail.style.cssText = "display:block!important;height:0;min-height:0;width:100%;flex:none;clear:both;pointer-events:none;overflow:hidden";
-    }
-    var parts = document.querySelectorAll(".lux-part");
-    var last = parts[parts.length-1];
-    if (last && tail.previousElementSibling !== last) last.insertAdjacentElement("afterend", tail);
-    return tail;
-  }
-  function resetTail() {
-    if (tail) tail.style.height = "0px";
-  }
-  function extendFor(target) {
-    var spacer = ensureTail();
-    var scroll = document.scrollingElement || document.documentElement;
-    var goal = destination(target);
-    var max = Math.max(0, scroll.scrollHeight - scroll.clientHeight);
-    var missing = Math.max(0, Math.ceil(goal - max));
-    var current = parseFloat(spacer.style.height) || 0;
-    if (missing > 0) spacer.style.height = (current + missing + 80) + "px";
-    return goal;
-  }
-  function align(target, owner, token) {
-    if (token !== generation || !owner.isConnected || !owner.classList.contains("is-open") ||
-        !target.isConnected || !target.getClientRects().length) return;
-    var y = extendFor(target);
-    // Direct positioning avoids competing smooth animations started by legacy accordion logic.
-    window.scrollTo({ top: y, behavior: "instant" });
-  }
-  function start(owner, target, firstDelay) {
-    generation++;
-    clearTimers();
-    var token = generation;
-    if (!owner || !target) return;
-    // The original accordion animation and preserve-header handler can move the page
-    // for a while. Align again after they finish.
-    // One initial alignment only: repeated late scrollTo calls fought the mouse wheel.
-    timers.push(setTimeout(function () { align(target, owner, token); }, firstDelay));
-  }
-  // Centralized navigation for every main chapter, including the two short
-  // final chapters. A trailing spacer makes it physically possible to position
-  // their heading at the top even if the chapter is shorter than the viewport.
-  window.baliAlignOpenedChapter = function (part) {
-    if (!part) return;
-    generation++;
-    clearTimers();
-    var token = generation;
-    var heading = part.querySelector(":scope > .lux-part-head") || part;
-    function position() {
-      if (token !== generation || !heading.isConnected ||
-          !part.classList.contains("is-open")) return;
-      // For the final short chapter, create only the additional scroll room
-      // actually needed to reach its heading. Never scroll to its last card.
-      extendFor(heading);
-      // Browser-native element alignment is safer than retaining stale scrollY
-      // while the preceding long chapter disappears.
-      heading.scrollIntoView({ behavior: "instant", block: "start", inline: "nearest" });
-      var delta = heading.getBoundingClientRect().top - offset();
-      if (Math.abs(delta) > 3) {
-        window.scrollBy({ top: delta, behavior: "instant" });
-      }
-    }
-    // Avoid repeated forced layout and late jumps while the user scrolls.
-    requestAnimationFrame(position);
-  };
-  function chapterClick(event) {
-    var node = event.target;
-    if (!node || !node.closest) return;
-    var button = node.closest(".lux-fold-btn");
-    if (button) {
-      var fold = button.closest(".lux-fold[id]");
-      if (fold && fold.closest(".lux-part") && !fold.classList.contains("is-open")) {
-        start(fold, fold.querySelector(":scope > .lux-fold-h") || fold, 230);
-      }
-      return;
-    }
-    var heading = node.closest(".lux-part > .lux-part-head");
-    if (!heading) return;
-    var other = node.closest("a,button,input,select,textarea,.trip-overview");
-    if (other && other !== heading) return;
-    var part = heading.closest(".lux-part");
-    if (!part) return;
-    if (part.classList.contains("is-open")) {
-      generation++;
-      clearTimers();
-      resetTail();
-      return;
-    }
-    // Main chapter scrolling is handled by openPart after the previous chapter closes.
-  }
-  function chapterKey(event) {
-    if (event.key !== "Enter" && event.key !== " ") return;
-    var head = event.target && event.target.matches &&
-      event.target.matches(".lux-part > .lux-part-head") ? event.target : null;
-    if (!head) return;
-    var part = head.closest(".lux-part");
-    if (!part) return;
-    if (part.classList.contains("is-open")) {
-      generation++; clearTimers(); resetTail();
-    } else {
-      // Main chapter scrolling is handled by openPart after the previous chapter closes.
-    }
-  }
-  // Suspend decorative transitions briefly while opening a long hotel/chapter panel.
-  var foldBusyTimer = null;
-  document.addEventListener("click", function (event) {
-    var target = event.target && event.target.closest &&
-      event.target.closest(".lux-fold-btn,.lux-part-head,.lux-acc-btn,.bali-itinerary-subsection > summary,.sqs-btn");
-    if (!target) return;
-    document.documentElement.classList.add("bali-fold-busy");
-    clearTimeout(foldBusyTimer);
-    foldBusyTimer = setTimeout(function () {
-      document.documentElement.classList.remove("bali-fold-busy");
-    }, 550);
-  }, true);
-  // Lazy-load below-the-fold embedded maps without changing their URLs or controls.
-  function deferMaps() {
+  function init() {
+    document.documentElement.classList.remove("bali-story-progressive");
+    document.querySelectorAll(".lux-part.bali-story-concealed").forEach(function (part) {
+      part.classList.remove("bali-story-concealed");
+    });
+    document.querySelectorAll(".lux-part > .lux-part-head .trip-overview").forEach(function (map) {
+      map.addEventListener("click", function (event) { event.stopPropagation(); });
+      map.addEventListener("keydown", function (event) { event.stopPropagation(); });
+    });
     document.querySelectorAll("iframe").forEach(function (frame) {
       if (!frame.hasAttribute("loading")) frame.setAttribute("loading", "lazy");
     });
   }
-  document.addEventListener("click", chapterClick, true);
-  document.addEventListener("keydown", chapterKey, true);
-  function init() {
-    deferMaps();
-    // No independent chapter locking: the existing sidebar checkbox is the only control.
-    document.documentElement.classList.remove("bali-story-progressive");
-    document.querySelectorAll(".lux-part.bali-story-concealed").forEach(function (p) {
-      p.classList.remove("bali-story-concealed");
-    });
-    // Keep interactive itinerary-map clicks independent of its chapter header.
-    document.querySelectorAll(".lux-part > .lux-part-head .trip-overview").forEach(function (map) {
-      map.addEventListener("click", function (e) { e.stopPropagation(); });
-      map.addEventListener("keydown", function (e) { e.stopPropagation(); });
-    });
-  }
+  /* Legacy chapter handlers may call this hook. It must not reposition viewport. */
+  window.baliAlignOpenedChapter = function () {};
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init, { once:true });
+    document.addEventListener("DOMContentLoaded", init, { once: true });
   } else init();
 })();
