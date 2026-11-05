@@ -98,7 +98,8 @@
     }
     var heading = target.closest(".lux-part > .lux-part-head");
     if (!heading) return;
-    if (target !== heading && target.closest("a,button,input,select,textarea,[role=button],.trip-overview")) return;
+    var nested = target.closest("a,button,input,select,textarea,[role=button],.trip-overview");
+    if (nested && nested !== heading) return;
     var part = heading.closest(".lux-part");
     if (!part || part.classList.contains("bali-story-concealed")) return;
     var opening = !part.classList.contains("is-open");
