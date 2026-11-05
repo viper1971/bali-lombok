@@ -1,0 +1,20 @@
+{
+  "original": "assets/images/external/c9c99d25f3e25d16.webp",
+  "variants": [
+    {
+      "path": "assets/images/external/c9c99d25f3e25d16-w640.webp",
+      "width": 640,
+      "bytes": 113992
+    },
+    {
+      "path": "assets/images/external/c9c99d25f3e25d16-w960.webp",
+      "width": 960,
+      "bytes": 239574
+    },
+    {
+      "path": "assets/images/external/c9c99d25f3e25d16-w1280.webp",
+      "width": 1280,
+      "bytes": 388162
+    }
+  ]
+}

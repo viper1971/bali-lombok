@@ -1,8 +1,7 @@
 {
-  "total_external_image_urls": 2,
+  "total_external_image_urls": 1,
   "by_host": {
-    "tile.openstreetmap.org": 1,
-    "upload.wikimedia.org": 1
+    "tile.openstreetmap.org": 1
   },
   "images": [
     {
@@ -10,13 +9,6 @@
       "host": "tile.openstreetmap.org",
       "files": [
         "assets/js/041.js"
-      ]
-    },
-    {
-      "url": "https://upload.wikimedia.org",
-      "host": "upload.wikimedia.org",
-      "files": [
-        "src/index.html"
       ]
     }
   ]
