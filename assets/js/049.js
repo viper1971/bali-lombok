@@ -242,20 +242,13 @@
         prepare();
         change();
         if (keepPos && h) {
-            var chapterToken = (window.__baliChapterNavigationToken || 0) + 1;
-            window.__baliChapterNavigationToken = chapterToken;
-            function alignChapter() {
-                if (window.__baliChapterNavigationToken !== chapterToken ||
-                    !p.isConnected || !p.classList.contains('is-open')) return;
-                var fixedOffset = 12;
-                var top = Math.max(0, window.scrollY + h.getBoundingClientRect().top - fixedOffset);
-                window.scrollTo({ top: top, behavior: 'instant' });
+            if (typeof window.baliAlignOpenedChapter === 'function') {
+                window.baliAlignOpenedChapter(p);
+            } else {
+                requestAnimationFrame(function () {
+                    window.scrollTo({top:Math.max(0,window.scrollY+h.getBoundingClientRect().top-12),behavior:'instant'});
+                });
             }
-            // Two frames let the old chapter disappear and the new chapter
-            // establish its final layout before scrolling to the START.
-            requestAnimationFrame(function () {
-                requestAnimationFrame(alignChapter);
-            });
         }
     }
     window.luxPartFor = function (el) { var p = el && el.closest ? el.closest('.lux-part') : null; if (p) openPart(p, false); };
