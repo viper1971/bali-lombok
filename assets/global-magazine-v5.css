@@ -196,10 +196,20 @@
   }
   /* No giant standalone destination Google maps: make them quarter-page
      marginal illustrations and let adjacent prose fill the unused width. */
-  html body #hlavni-obsah.main-wrapper .lux-fold-pad .hotel-location-map:not(.uber-media-grid > .hotel-location-map):not(.bali-ed-hotel-spread .hotel-location-map),
-  html body #hlavni-obsah.main-wrapper .lux-fold-pad .map-container-wrapper:not(.lux-fold-pad > .map-container-wrapper),
-  html body #hlavni-obsah.main-wrapper .lux-fold-pad .sv-card:not(.uber-media-grid > .sv-card) {
+  /* Quarter-page rule only for standalone media, never for media nested
+     inside an itinerary card: 25% of a card made Street View 170px wide. */
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad > .hotel-location-map,
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad > .map-container-wrapper,
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad > .sv-card {
     max-width:min(25%,390px) !important;
+    box-sizing:border-box !important;
+  }
+  /* Embedded destination cards own their complete internal media width.
+     No fixed page-level max-width propagates into their map/Street View. */
+  html body #hlavni-obsah.main-wrapper .lux-fold-pad :is(.spot-card,.spot-card-sg,.spot-card-singapore,.spot-card-ulu,.spot-card-ubud,.spot-card-lombok,.spot-card-kuta,.bento-card) :is(.sv-card,.map-container-wrapper,.hotel-location-map) {
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
     box-sizing:border-box !important;
   }
   html body #hlavni-obsah.main-wrapper .lux-fold-pad .map-container-wrapper iframe[src*="google"]:not(:fullscreen) {
