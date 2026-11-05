@@ -59,3 +59,63 @@
  #airlineImpact .ai-v52-row{grid-template-columns:1fr;}
  #airlineImpact .ai-v52-choice,#airlineImpact .ai-v52-airline{grid-column:1;}
 }
+
+
+/* Air route comparison: transparent rows, readable foreground on travel page. */
+#airlineImpact.ai-v52,
+#airlineImpact .ai-v52-header,
+#airlineImpact .ai-v52-table,
+#airlineImpact .ai-v52-columns,
+#airlineImpact .ai-v52-row,
+#airlineImpact .ai-v52-row:nth-of-type(even),
+#airlineImpact .ai-v52-row.selected,
+#airlineImpact .ai-v52-notice {
+  background: transparent !important;
+  background-image: none !important;
+}
+#airlineImpact.ai-v52 {
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+#airlineImpact .ai-v52-row.selected {
+  box-shadow: inset 4px 0 0 #135b45 !important;
+}
+#airlineImpact .ai-v52-cell,
+#airlineImpact .ai-v52-cell>b,
+#airlineImpact .ai-v52-airline-text>b,
+#airlineImpact .ai-v52-header h3 {
+  color: #142d27 !important;
+  text-shadow: 0 1px 1px rgba(255,255,255,.65) !important;
+}
+#airlineImpact .ai-v52-cell>small,
+#airlineImpact .ai-v52-airline-text>small,
+#airlineImpact .ai-v52-header p,
+#airlineImpact .ai-v52-columns,
+#airlineImpact .ai-v52-notice,
+#airlineImpact .ai-v52-label,
+#airlineImpact .ai-v52-delta {
+  color: #34564b !important;
+  text-shadow: 0 1px 1px rgba(255,255,255,.7) !important;
+}
+#airlineImpact .ai-v52-price>b,
+#airlineImpact .ai-v52-best strong {
+  color: #075b44 !important;
+  text-shadow: 0 1px 1px rgba(255,255,255,.6) !important;
+}
+#airlineImpact .ai-v52-best {
+  background: transparent !important;
+}
+html[data-theme="dark"] #airlineImpact .ai-v52-cell,
+html[data-theme="dark"] #airlineImpact .ai-v52-cell>b,
+html[data-theme="dark"] #airlineImpact .ai-v52-airline-text>b,
+html[data-theme="dark"] #airlineImpact .ai-v52-header h3 {
+  color: #f3fbf6 !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.8) !important;
+}
+html[data-theme="dark"] #airlineImpact :is(.ai-v52-cell>small,.ai-v52-airline-text>small,.ai-v52-header p,.ai-v52-columns,.ai-v52-notice,.ai-v52-label,.ai-v52-delta) {
+  color: #d5eae1 !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,.75) !important;
+}
+html[data-theme="dark"] #airlineImpact .ai-v52-price>b {
+  color: #9cf2cf !important;
+}
