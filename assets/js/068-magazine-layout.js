@@ -89,48 +89,7 @@
     });
     }, 0);
 
-    var cover = document.querySelector('.mg-cover');
-    if (cover && window.matchMedia && window.HTMLDialogElement) {
-      var desktop = window.matchMedia('(min-width: 901px)');
-      if (desktop.matches && mode === 'magazine' && !location.hash && !new URL(location.href).searchParams.has('jednoduse')) {
-        var gate = document.createElement('dialog');
-        gate.className = 'mg-entry';
-        gate.setAttribute('aria-labelledby', 'magazineCoverTitle');
-        // Keep the article below the cover at its original position while
-        // the cover is displayed in a modal. Prevents layout shifting on PC.
-        var spacer = document.createElement('div');
-        spacer.className = 'mg-entry-spacer';
-        spacer.style.height = cover.getBoundingClientRect().height + 'px';
-        cover.before(spacer);
-        spacer.after(gate);
-        gate.appendChild(cover);
-        gate.showModal();
-        root.classList.add('mg-entry-open');
-        function enter() {
-          gate.close();
-          root.classList.remove('mg-entry-open');
-          gate.replaceWith(cover);
-          spacer.remove();
-          desktop.removeEventListener('change', enter);
-        }
-        gate.addEventListener('cancel', function (event) { event.preventDefault(); });
-        cover.querySelector('.mg-cover-cta').addEventListener('click', enter, { once: true });
-        desktop.addEventListener('change', enter);
-      }
-    }
-    // Align the second screen exactly after the cover leaves its modal dialog.
-    var explore = cover && cover.querySelector('.mg-cover-cta');
-    if (explore) explore.addEventListener('click', function (event) {
-      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button > 0) return;
-      var story = document.getElementById('magazineStory');
-      if (!story) return;
-      event.preventDefault();
-      requestAnimationFrame(function () {
-        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        window.scrollTo({ top: story.getBoundingClientRect().top + window.scrollY, behavior: reduced ? 'instant' : 'smooth' });
-        history.replaceState(null, '', '#magazineStory');
-      });
-    });
+    // The magazine cover is ordinary page content: never trap wheel scrolling in a modal.
     document.addEventListener('click', function (event) {
       var link = event.target.closest && event.target.closest('a[data-magazine-target]');
       if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button > 0) return;
