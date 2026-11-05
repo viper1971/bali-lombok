@@ -66,3 +66,12 @@
 - `.github/workflows/browser-performance.yml` spouští test přes GitHub Actions a při úspěchu ukládá `docs/performance-metrics.json`; podrobná data archivuje také jako artifact.
 - Test je záměrně syntetický: nelze jej zaměňovat za měření reálných návštěvníků (RUM), produkční Lighthouse skóre nebo srovnání rychlosti před a po změnách.
 - Při poslední kontrole dosud nebyl v repozitáři výsledný `docs/performance-metrics.json` ověřen, proto nezveřejňujeme nezjištěné časy.
+
+## Optimalizace galerií a jejich časovačů – 5. 11. 2026
+- Odstraněna plošná postupná příprava všech galerií z `assets/js/047.js` a skutečně používaného `assets/build/js-2a84e1c14c764d64.js`, která se automaticky spouštěla po `window.load`.
+- Přípravu fotografií nyní vyvolává původní `IntersectionObserver` při viditelnosti galerie a původní `pointerenter/touchstart/focus` při interakci s příslušným tlačítkem.
+- Pouze první fotografie nově vykreslené galerie má atribut `loading=eager`; ostatní jsou `lazy` a dosavadní slideshow přepínáním aktivuje dvě následující.
+- Slideshow intervaly se nyní vypínají, jakmile galerie opustí viewport, když návštěvník pozastaví přehrávání a při přepnutí na kartu prohlížeče na pozadí. Při návratu se obnoví.
+- Publikovaný `index.html` používá cache-busting verzi `visible-gallery-timers-20261105`.
+- `tests/gallery-lazy.cjs` ověřuje zachování interakčních událostí, vypnutí background prefetch a viditelnostních časovačů; syntaxi zdrojového i publikovaného JS jsem ověřil. Reálné browser regresní testy dosud nebyly ověřeny.
+- Přínos: méně zbytečných síťových požadavků a menší běžná zátěž CPU. Přesný počet ušetřených požadavků závisí na počtu otevřených galerií a výsledek nelze číselně tvrdit bez browser síťové stopy.
