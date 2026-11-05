@@ -105,6 +105,8 @@
 
     // Vrátí seřazené kandidáty (nejlepší první) pro jedno téma; výsledek se ukládá do prohlížeče
     function candidates(query) {
+        var local = window.BALI_GALLERY_LOCAL && window.BALI_GALLERY_LOCAL[query];
+        if (local && local.src) return Promise.resolve([local]);
         if (cache[query]) return Promise.resolve(cache[query]);
         return fetch(API + encodeURIComponent(query + ' filetype:bitmap'))
             .then(function (r) { return r.json(); })
