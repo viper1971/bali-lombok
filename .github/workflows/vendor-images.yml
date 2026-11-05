@@ -21,9 +21,11 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install 'Pillow>=11,<13'
-      - run: python -m py_compile tools/vendor_images.py tools/audit_image_urls.py
+      - run: python -m py_compile tools/vendor_images.py tools/audit_image_urls.py tools/responsive_cover.py
       - name: Localize photography without rebuilding customized production scripts
         run: python tools/vendor_images.py
+      - name: Create responsive magazine cover variants
+        run: python tools/responsive_cover.py
       - run: python tools/audit_image_urls.py
       - run: python tools/check_migrated_images.py
       - name: Validate syntax of deployed JS without changing their order
