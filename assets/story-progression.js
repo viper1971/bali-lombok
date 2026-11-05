@@ -61,9 +61,8 @@
     if (!owner || !target) return;
     // The original accordion animation and preserve-header handler can move the page
     // for a while. Align again after they finish.
-    [firstDelay, firstDelay + 160, firstDelay + 430, firstDelay + 850].forEach(function (delay) {
-      timers.push(setTimeout(function () { align(target, owner, token); }, delay));
-    });
+    // One initial alignment only: repeated late scrollTo calls fought the mouse wheel.
+    timers.push(setTimeout(function () { align(target, owner, token); }, firstDelay));
   }
   // Centralized navigation for every main chapter, including the two short
   // final chapters. A trailing spacer makes it physically possible to position
@@ -88,12 +87,8 @@
         window.scrollBy({ top: delta, behavior: "instant" });
       }
     }
-    requestAnimationFrame(function () {
-      position();
-      requestAnimationFrame(position);
-    });
-    // One correction after the opening animation, without a long scrolling loop.
-    timers.push(setTimeout(position, 480));
+    // Avoid repeated forced layout and late jumps while the user scrolls.
+    requestAnimationFrame(position);
   };
   function chapterClick(event) {
     var node = event.target;
@@ -133,9 +128,28 @@
       // Main chapter scrolling is handled by openPart after the previous chapter closes.
     }
   }
+  // Suspend decorative transitions briefly while opening a long hotel/chapter panel.
+  var foldBusyTimer = null;
+  document.addEventListener("click", function (event) {
+    var target = event.target && event.target.closest &&
+      event.target.closest(".lux-fold-btn,.lux-part-head,.lux-acc-btn,.bali-itinerary-subsection > summary,.sqs-btn");
+    if (!target) return;
+    document.documentElement.classList.add("bali-fold-busy");
+    clearTimeout(foldBusyTimer);
+    foldBusyTimer = setTimeout(function () {
+      document.documentElement.classList.remove("bali-fold-busy");
+    }, 550);
+  }, true);
+  // Lazy-load below-the-fold embedded maps without changing their URLs or controls.
+  function deferMaps() {
+    document.querySelectorAll("iframe").forEach(function (frame) {
+      if (!frame.hasAttribute("loading")) frame.setAttribute("loading", "lazy");
+    });
+  }
   document.addEventListener("click", chapterClick, true);
   document.addEventListener("keydown", chapterKey, true);
   function init() {
+    deferMaps();
     // No independent chapter locking: the existing sidebar checkbox is the only control.
     document.documentElement.classList.remove("bali-story-progressive");
     document.querySelectorAll(".lux-part.bali-story-concealed").forEach(function (p) {
