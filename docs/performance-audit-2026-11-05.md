@@ -75,3 +75,12 @@
 - Publikovaný `index.html` používá cache-busting verzi `visible-gallery-timers-20261105`.
 - `tests/gallery-lazy.cjs` ověřuje zachování interakčních událostí, vypnutí background prefetch a viditelnostních časovačů; syntaxi zdrojového i publikovaného JS jsem ověřil. Reálné browser regresní testy dosud nebyly ověřeny.
 - Přínos: méně zbytečných síťových požadavků a menší běžná zátěž CPU. Přesný počet ušetřených požadavků závisí na počtu otevřených galerií a výsledek nelze číselně tvrdit bez browser síťové stopy.
+
+## Lokální dynamické galerie – hotový katalog (5. 11. 2026)
+- Původní galerie `assets/js/047.js` obsahují 7 skupin × 10 témat. Inventura: `docs/dynamic-gallery-inventory.json`.
+- Pro **69 témat** nyní existuje lokální licencovaná fotografie uložená v `assets/images/gallery/` ve WebP a přiřazená v `assets/data/gallery-catalog.js`; 19 předchozích statických fotografií zůstává samostatně v `assets/images/external/`.
+- Pro poslední téma **Tibumana waterfall** nebyla nalezena ověřená vhodně licencovaná fotografie. Skript jej označuje `BALI_GALLERY_MISSING` a nezahajuje externí požadavek. Fotografie tedy nebude v galerii zobrazena; text itineráře zůstává zachován. Není použit nesouvisející či nelicencovaný snímek.
+- Katalog se načítá **před** skriptem galerií v obou verzích HTML. Pokud je lokální fotka dostupná, `candidates(query)` vůbec nevolá Wikimedia Commons API. Původní API zůstává jako záloha pro nová, dosud nezaregistrovaná témata.
+- Atribuce fotografií, konkrétní licence a informace o převodu do WebP jsou uložené v `docs/gallery-photo-credits.md`; kontrola `tests/gallery-local.cjs` validuje cesty a licence.
+- Přesný počet místních fotografií z obou etap je **19 + 69 = 88 souborů**; nevypovídá to o vizuální kvalitě či tematické přesnosti každého snímku. Tu je vhodné zkontrolovat ručně před cestou.
+- Závěrečné měření Core Web Vitals na veřejném webu stále nebylo potvrzeno; úbytek externích požadavků je technicky ověřen ve zdrojovém kódu, nikoliv vyčíslen měřením.
