@@ -76,9 +76,6 @@
   function chapterClick(event) {
     var node = event.target;
     if (!node || !node.closest) return;
-    // Original behavior: both short chapters open immediately and never auto-scroll.
-    var localPart = node.closest("#cast-misto, #cast-kontrola");
-    if (localPart) { generation++; clearTimers(); resetTail(); return; }
     var button = node.closest(".lux-fold-btn");
     if (button) {
       var fold = button.closest(".lux-fold[id]");
@@ -103,9 +100,6 @@
   }
   function chapterKey(event) {
     if (event.key !== "Enter" && event.key !== " ") return;
-    if (event.target && event.target.closest && event.target.closest("#cast-misto, #cast-kontrola")) {
-      generation++; clearTimers(); resetTail(); return;
-    }
     var head = event.target && event.target.matches &&
       event.target.matches(".lux-part > .lux-part-head") ? event.target : null;
     if (!head) return;
