@@ -10,6 +10,11 @@ on:
       - 'assets/build/js-2a84e1c14c764d64.js'
       - 'assets/data/gallery-catalog.js'
       - 'tests/editorial-lazy.cjs'
+      - 'tests/magazine-cls.cjs'
+      - 'tests/magazine-presentation.cjs'
+      - 'assets/js/068-magazine-layout.js'
+      - 'assets/build/js-head-critical-a-20261105.js'
+      - 'assets/native-scroll-20261105.css'
   workflow_dispatch:
 permissions:
   contents: write
