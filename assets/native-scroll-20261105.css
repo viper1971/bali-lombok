@@ -1,3 +1,38 @@
 /* Keep wheel/trackpad scrolling native throughout the itinerary.
    Intentional navigation links can still request smooth scrolling in JS. */
 html, body { scroll-behavior: auto !important; }
+
+
+/* BALI 2027: reduce layout/paint work in long opened hotel chapters.
+   Browser skips offscreen cards while preserving their complete DOM and widgets. */
+@media screen {
+  #hlavni-obsah .uber-hotel-card,
+  #hlavni-obsah .spot-card-singapore,
+  #hlavni-obsah .day-block-singapore,
+  #hlavni-obsah .bali-ed-hotel-spread {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 520px;
+  }
+  /* Expand/collapse without animating huge layout heights. */
+  #hlavni-obsah .lux-fold-body,
+  #hlavni-obsah .lux-part-body,
+  #hlavni-obsah .lux-fold-inner,
+  #hlavni-obsah .bali-itinerary-inner {
+    transition-property: opacity, background-color, color, border-color !important;
+  }
+  /* During expansion avoid expensive multi-layer effects/repaints. */
+  html.bali-fold-busy #hlavni-obsah .lux-fold.is-open .uber-hotel-card,
+  html.bali-fold-busy #hlavni-obsah .lux-fold.is-open .bali-ed-hotel-spread {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media print {
+  #hlavni-obsah .uber-hotel-card,
+  #hlavni-obsah .spot-card-singapore,
+  #hlavni-obsah .day-block-singapore,
+  #hlavni-obsah .bali-ed-hotel-spread {
+    content-visibility: visible;
+    contain-intrinsic-size: none;
+  }
+}
