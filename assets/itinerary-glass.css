@@ -116,3 +116,30 @@
 @media(prefers-reduced-motion:reduce){
   #osa > .itinerary-glass-head #routeMap *{scroll-behavior:auto !important}
 }
+
+
+/* Compact, legible journey timeline: outbound and return; scoped to itinerary only. */
+#osa .rj{color:#20323b!important;text-shadow:none!important;-webkit-text-stroke:0!important}
+#osa .rj *:not(.rj-dot){text-shadow:none!important;-webkit-text-stroke:0!important}
+#osa .rj-h{padding:9px 12px!important;margin:0 0 7px!important;gap:3px!important}
+#osa .rj-h b{color:#173d3a!important;font-size:clamp(15px,2.5vw,19px)!important;line-height:1.25!important}
+#osa .rj-h span{color:#42545a!important;font-size:11px!important;line-height:1.35!important}
+#osa .rj-cols{gap:12px!important;align-items:start!important}
+#osa .rj-col{padding:10px 12px!important;gap:0!important;min-width:0!important}
+#osa .rj-ttl{margin:0 0 8px!important;padding:0 0 7px!important;color:#164b43!important;font-size:13px!important;line-height:1.3!important;font-weight:850!important}
+#osa .rj-stop{display:flex!important;align-items:center!important;gap:10px!important;min-height:0!important;margin:0!important;padding:6px 0!important;color:#20323b!important}
+#osa .rj-dot{width:30px!important;height:30px!important;min-width:30px!important;flex:0 0 30px!important;font-size:15px!important;line-height:30px!important;box-shadow:none!important}
+#osa .rj-t{display:flex!important;flex-direction:column!important;gap:1px!important;min-width:0!important}
+#osa .rj-t b{color:#19383c!important;font-size:12.5px!important;line-height:1.28!important;font-weight:850!important}
+#osa .rj-t small{color:#465a60!important;font-size:10.5px!important;line-height:1.3!important}
+#osa .rj-leg{display:flex!important;align-items:center!important;flex-wrap:wrap!important;gap:4px 9px!important;min-height:0!important;margin:0 0 0 14px!important;padding:4px 0 4px 24px!important;color:#365159!important;font-size:11px!important;line-height:1.3!important}
+#osa .rj-fl{font-size:11px!important;font-weight:800!important;color:#12675b!important}
+#osa .rj-ground{font-size:10.5px!important;color:#52646a!important}
+#osa .rj-stop::before,#osa .rj-stop::after,#osa .rj-leg::before,#osa .rj-leg::after{max-height:100%!important}
+@media(max-width:760px){
+ #osa .rj{width:100%!important;max-width:100%!important}
+ #osa .rj-cols{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px!important}
+ #osa .rj-col{padding:9px 11px!important}
+ #osa .rj-stop{padding:5px 0!important}
+ #osa .rj-leg{padding-top:3px!important;padding-bottom:3px!important}
+}
