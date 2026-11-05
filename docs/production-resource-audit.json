@@ -5,20 +5,7 @@
   "images": 60,
   "iframes": 26,
   "lazy_iframes": 26,
-  "missing_local_resources": [
-    {
-      "tag": "link",
-      "url": "assets/itinerary-subsections-20261105.css",
-      "path": "assets/itinerary-subsections-20261105.css",
-      "exists": false
-    },
-    {
-      "tag": "script",
-      "url": "assets/itinerary-subsections-20261105.js",
-      "path": "assets/itinerary-subsections-20261105.js",
-      "exists": false
-    }
-  ],
+  "missing_local_resources": [],
   "responsive_variant_references": 6,
   "build_manifest_overrides": [
     "assets/build/js-head-critical-a-20261105.js",
