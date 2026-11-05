@@ -796,89 +796,111 @@ html body #hlavni-obsah .sv-card .sv-stage:-webkit-full-screen > .bali-sv-fullsc
 }
 
 
-/* Full-width chapter reading progress: turn the tiny badge into a bottom ribbon.
-   Only the five main accordion banners; underlying progress calculations untouched. */
-html body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head {
-  display:grid !important;
-  grid-template-columns:auto minmax(0,1fr) !important;
+
+/* Responsive full-width reading ribbon; preserve itinerary route overview as a
+   separate full-width child instead of accidentally grid-sizing the whole map. */
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head {
+  display:flex !important;
+  flex-direction:row !important;
+  flex-wrap:wrap !important;
   align-items:center !important;
-  column-gap:clamp(12px,2vw,24px) !important;
-  row-gap:clamp(12px,1.6vw,18px) !important;
+  justify-content:flex-start !important;
+  gap:clamp(10px,1.4vw,18px) !important;
+  height:auto !important;
+  grid-template-columns:none !important;
 }
-html body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > .lux-part-no {
-  grid-column:1 !important;
-  grid-row:1 !important;
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > .lux-part-no {
+  flex:0 0 auto !important;
+  order:0 !important;
   align-self:center !important;
 }
-html body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > div:not(.lux-part-meta) {
-  grid-column:2 !important;
-  grid-row:1 !important;
-  min-width:0 !important;
-  width:100% !important;
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > div:not(.lux-part-meta):not(.trip-overview) {
+  flex:1 1 250px !important;
+  width:auto !important;
   max-width:none !important;
+  min-width:0 !important;
+  order:1 !important;
   margin:0 !important;
-  flex-basis:auto !important;
 }
-html body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > .lux-part-meta {
-  grid-column:1 / -1 !important;
-  grid-row:2 !important;
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > .trip-overview {
+  order:2 !important;
+  flex:0 0 100% !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  margin:0 !important;
+  align-self:auto !important;
+}
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > .lux-part-meta {
+  order:3 !important;
+  flex:0 0 100% !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  margin:0 !important;
   display:flex !important;
   align-items:stretch !important;
+  justify-content:space-between !important;
   gap:10px !important;
-  width:100% !important;
-  max-width:none !important;
-  min-width:0 !important;
-  margin:0 !important;
-  flex:1 1 100% !important;
 }
-html body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count {
-  flex:1 1 auto !important;
-  width:100% !important;
-  max-width:none !important;
-  min-width:0 !important;
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count {
   display:grid !important;
-  grid-template-columns:1fr auto !important;
+  grid-template-columns:minmax(0,1fr) auto !important;
   align-items:center !important;
-  gap:4px 16px !important;
-  padding:12px clamp(13px,2vw,24px) !important;
+  gap:4px 12px !important;
   text-align:left !important;
-  background:rgba(4,24,21,.48) !important;
+  flex:1 1 0 !important;
+  width:auto !important;
+  min-width:0 !important;
+  max-width:none !important;
+  padding:12px clamp(12px,2vw,22px) !important;
+  border-radius:8px !important;
   border:1px solid rgba(255,255,255,.48) !important;
-  border-radius:9px !important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.08) !important;
+  background:rgba(7,35,30,.6) !important;
+  box-shadow:none !important;
 }
-html body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count .pc-a {
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count .pc-a {
   grid-column:1 !important;
+  min-width:0 !important;
   font-size:clamp(12px,1vw,15px) !important;
 }
-html body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count .pc-b {
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count .pc-b {
   grid-column:2 !important;
   text-align:right !important;
   font-size:clamp(12px,1vw,15px) !important;
 }
-html body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count .pc-bar {
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count .pc-bar {
   grid-column:1 / -1 !important;
   width:100% !important;
-  height:7px !important;
-  margin-top:5px !important;
+  height:6px !important;
+  margin-top:4px !important;
 }
-html body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-chev {
-  flex:0 0 42px !important;
-  align-self:stretch !important;
-  width:42px !important;
-  min-height:42px !important;
-  height:auto !important;
-  border-radius:9px !important;
+html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-chev {
+  flex:0 0 40px !important;
+  width:40px !important;
+  min-width:40px !important;
+  align-self:center !important;
+  height:40px !important;
+  border-radius:8px !important;
 }
-@media (max-width:520px) {
-  html body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head {
-    column-gap:10px !important;
+@media (max-width:700px) {
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head {
+    gap:10px !important;
+    padding:12px !important;
   }
-  html body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count {
-    gap:5px 9px !important;
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > div:not(.lux-part-meta):not(.trip-overview) {
+    flex:1 1 calc(100% - 74px) !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > .trip-overview {
+    display:block !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head > .lux-part-meta {
+    gap:8px !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-count {
     padding:10px 12px !important;
-  }
-  html body #hlavni-obsah.main-wrapper .lux-part > .lux-part-head .lux-part-meta {
-    gap:7px !important;
   }
 }
