@@ -331,3 +331,72 @@
     padding:19px !important;
   }
 }
+
+
+/* EDITORIAL PLACE GUIDES — detailed itineraries, not the hotel selector.
+   Preserve native 2-column card structure and all embedded Street View controls. */
+@media screen and (min-width:1100px) {
+  html[data-magazine="on"] body #hlavni-obsah .mg-enriched-spot {
+    align-items:start !important;
+    min-width:0 !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .mg-enriched-spot > div:first-child {
+    min-width:0 !important;
+    align-self:stretch !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .mg-enriched-spot > .sv-card {
+    min-width:0 !important;
+    max-width:100% !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .mg-place-essay {
+    margin:16px 0 8px !important;
+    padding:15px 0 0 !important;
+    border-top:1px solid rgba(34,92,68,.18);
+    color:#344b43 !important;
+    font-family:Georgia,"Times New Roman",serif !important;
+    font-size:clamp(14px,1.02vw,16px) !important;
+    line-height:1.62 !important;
+    text-align:left !important;
+    min-width:0;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .mg-place-essay .mg-place-kicker {
+    font:800 10px/1.5 system-ui,sans-serif !important;
+    letter-spacing:.15em !important;
+    color:#867446 !important;
+    margin:0 0 10px !important;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .mg-place-essay p {
+    margin:0 0 12px !important;
+    padding:0 !important;
+    max-width:none !important;
+    color:inherit !important;
+    font:inherit !important;
+    text-wrap:pretty;
+  }
+  html[data-magazine="on"] body #hlavni-obsah .mg-place-essay .mg-place-practical {
+    padding:10px 13px !important;
+    margin:15px 0 0 !important;
+    border-left:3px solid #b39a5d;
+    background:rgba(31,105,76,.045);
+    font-size:.94em !important;
+  }
+}
+@media screen and (max-width:1099px) {
+  html[data-magazine="on"] #hlavni-obsah .mg-place-essay {
+    margin:14px 0 8px;padding-top:12px;border-top:1px solid rgba(34,92,68,.18);
+    color:inherit;line-height:1.62;font-size:14px;
+  }
+  html[data-magazine="on"] #hlavni-obsah .mg-place-essay p {margin:0 0 11px}
+  html[data-magazine="on"] #hlavni-obsah .mg-place-kicker {
+    font:800 10px/1.5 system-ui,sans-serif;letter-spacing:.12em;
+    color:#867446;margin-bottom:8px;
+  }
+  html[data-magazine="on"] #hlavni-obsah .mg-place-practical {
+    padding:9px 12px;border-left:3px solid #b39a5d;
+    background:rgba(31,105,76,.045);
+  }
+}
+@media print {
+  #hlavni-obsah .mg-place-essay {font-size:10pt;line-height:1.45}
+  #hlavni-obsah .mg-place-essay p {margin-bottom:7px}
+}
