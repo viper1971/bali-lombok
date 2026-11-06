@@ -1630,3 +1630,61 @@ body.bali-map-modal-open { overflow:hidden !important; }
   #hlavni-obsah .bali-hotel-choice-below { padding:12px !important; }
   #hlavni-obsah .bali-hotel-choice-below .sqs-btn { flex:1 1 100%; white-space:normal !important; }
 }
+
+
+/* Fix 2026-11-06: never put selected hotel in a narrow magazine/sidebar column. */
+html body #hlavni-obsah [id^="selected-hotel-slot-"] {
+  display:block !important; position:relative !important; float:none !important;
+  clear:both !important; grid-column:1/-1 !important; width:100% !important;
+  min-width:0 !important; max-width:100% !important; flex:0 0 100% !important;
+  box-sizing:border-box !important; margin:0 !important;
+}
+html body #hlavni-obsah [id^="selected-hotel-slot-"] > .uber-hotel-card,
+html body #hlavni-obsah [id^="selected-hotel-slot-"] .uber-hotel-card {
+  display:block !important; width:100% !important; max-width:100% !important;
+  min-width:0 !important; grid-column:1/-1 !important; float:none !important;
+  flex:0 0 100% !important; box-sizing:border-box !important;
+}
+html body #hlavni-obsah [id^="selected-hotel-slot-"] .uber-top-bar {
+  width:100% !important; max-width:100% !important; min-width:0 !important;
+}
+html body #hlavni-obsah [id^="selected-hotel-slot-"] .hotel-title-text {
+  overflow-wrap:normal !important; word-break:normal !important;
+  white-space:normal !important;
+}
+html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below {
+  display:block !important; position:relative !important; float:none !important;
+  clear:both !important; grid-column:1/-1 !important; flex:0 0 100% !important;
+  width:100% !important; min-width:0 !important; max-width:100% !important;
+  height:auto !important; box-sizing:border-box !important;
+  margin:16px 0 22px !important; padding:16px 18px !important;
+}
+html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below .sqs-label {
+  display:block !important; width:100% !important; margin:0 0 12px !important;
+  font:800 15px/1.5 system-ui,sans-serif !important;
+}
+html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below .sqs-buttons {
+  display:grid !important; width:100% !important; max-width:100% !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:10px !important; align-items:stretch !important; min-width:0 !important;
+  overflow:visible !important; flex-direction:initial !important;
+}
+html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below .sqs-btn {
+  display:flex !important; align-items:center !important; justify-content:center !important;
+  position:relative !important; float:none !important; width:100% !important;
+  min-width:0 !important; max-width:100% !important; height:auto !important;
+  min-height:52px !important; margin:0 !important; padding:12px 14px !important;
+  box-sizing:border-box !important; white-space:normal !important;
+  overflow-wrap:break-word !important; word-break:normal !important;
+  text-align:center !important; font:700 14px/1.4 system-ui,sans-serif !important;
+}
+@media(max-width:850px) {
+  html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below .sqs-buttons {
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+@media(max-width:540px) {
+  html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below .sqs-buttons {
+    grid-template-columns:minmax(0,1fr) !important;
+  }
+}
