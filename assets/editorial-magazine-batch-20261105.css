@@ -1748,3 +1748,100 @@ html body #hlavni-obsah .hotel-reservation-info .hotel-reservation-grid p{
  html body #hlavni-obsah .hotel-reservation-info > summary{font-size:14px!important;padding:12px!important;}
  html body #hlavni-obsah .hotel-reservation-info .hotel-reservation-grid{padding:9px!important;grid-template-columns:1fr!important;}
 }
+
+
+/* BALI 2027 — permanent Booking-style hotel profiles in the editorial column.
+   This is the EXISTING hotel description column alongside the photo / Street View grid. */
+html body #hlavni-obsah .uber-hotel-card .uber-info-panel:has(.hotel-booking-intro){
+  min-width:0!important;
+  box-sizing:border-box!important;
+  overflow-wrap:anywhere!important;
+}
+html body #hlavni-obsah .hotel-booking-intro{
+  padding:0 0 12px!important;
+  border-bottom:1px solid rgba(137,111,52,.24)!important;
+}
+html body #hlavni-obsah .hotel-booking-eyebrow{
+  font:800 10px/1.4 system-ui,sans-serif!important;
+  text-transform:uppercase!important;
+  letter-spacing:2px!important;
+  color:#7e6840!important;
+  margin-bottom:7px!important;
+}
+html body #hlavni-obsah .hotel-booking-intro h4{
+  margin:0 0 8px!important;
+  font:700 clamp(19px,1.55vw,26px)/1.18 Georgia,serif!important;
+  letter-spacing:-.35px!important;
+  color:#183d35!important;
+}
+html body #hlavni-obsah .hotel-booking-intro p{
+  margin:0!important;
+  font:400 14px/1.65 Georgia,serif!important;
+  color:#46534a!important;
+}
+html body #hlavni-obsah .hotel-booking-amenities{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:6px!important;
+  margin:12px 0!important;
+  padding:0!important;
+}
+html body #hlavni-obsah .hotel-booking-amenities span{
+  display:inline-flex!important;
+  align-items:center!important;
+  border:1px solid #d4e2d6!important;
+  background:#eaf4ee!important;
+  color:#215e4e!important;
+  border-radius:99px!important;
+  padding:5px 9px!important;
+  font:700 11px/1.4 system-ui,sans-serif!important;
+  box-shadow:none!important;
+}
+html body #hlavni-obsah .hotel-booking-existing{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,185px),1fr))!important;
+  gap:7px!important;
+  margin:12px 0!important;
+}
+html body #hlavni-obsah .hotel-booking-existing > div{
+  min-width:0!important;
+  background:rgba(255,255,255,.62)!important;
+  border-radius:8px!important;
+  padding:7px 9px!important;
+  font:500 12px/1.45 system-ui,sans-serif!important;
+}
+html body #hlavni-obsah .hotel-booking-facts{
+  display:grid!important;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,185px),1fr))!important;
+  gap:7px!important;
+  margin-top:11px!important;
+}
+html body #hlavni-obsah .hotel-booking-fact{
+  padding:10px!important;
+  border-radius:9px!important;
+  border:1px solid rgba(42,91,68,.12)!important;
+  background:#fff!important;
+  box-shadow:0 2px 5px rgba(23,70,50,.03)!important;
+  font:500 12px/1.5 system-ui,sans-serif!important;
+  color:#263d35!important;
+}
+html body #hlavni-obsah .hotel-booking-fact strong{
+  color:#205b4d!important;
+  font-weight:850!important;
+}
+html body #hlavni-obsah .hotel-booking-note{
+  margin:12px 0 0!important;
+  padding-top:9px!important;
+  border-top:1px solid #dcded5!important;
+  font:400 11px/1.5 system-ui,sans-serif!important;
+  color:#687469!important;
+}
+@media screen and (max-width:1099px){
+ html body #hlavni-obsah .hotel-booking-facts{grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))!important}
+}
+@media screen and (max-width:620px){
+ html body #hlavni-obsah .hotel-booking-facts{grid-template-columns:1fr!important}
+ html body #hlavni-obsah .hotel-booking-existing{grid-template-columns:1fr!important}
+ html body #hlavni-obsah .hotel-booking-fact{font-size:13px!important}
+ html body #hlavni-obsah .hotel-booking-amenities span{font-size:11px!important}
+}
