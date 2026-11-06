@@ -48,7 +48,7 @@
     var heading = details.querySelector(":scope > summary strong");
     if (heading) heading.textContent = "Návrhy co navštívit – " + region;
     var small = details.querySelector(":scope > summary small");
-    if (small) small.textContent = "Zajímavá místa, jejich popis a interaktivní Street View · bez pevného harmonogramu";
+    if (small) small.textContent = "Zajímavá místa, jejich popis a interaktivní Street View";
     var intro = document.createElement("p");
     intro.className = "bali-destination-intro";
     intro.textContent = "Inspirace k návštěvě v oblasti " + region + ". Vyber si místa podle zájmu; každá karta obsahuje popis a možnost virtuální prohlídky.";
