@@ -3,7 +3,7 @@
 <head>
 <script id="bali-retire-offline">(function(){if(!("serviceWorker" in navigator))return;navigator.serviceWorker.getRegistrations().then(function(rs){return Promise.all(rs.filter(function(r){return r.scope===new URL("./",location.href).href}).map(function(r){return r.unregister()}))}).then(function(){if(!window.caches)return;return caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf("bali2027-")===0}).map(function(k){return caches.delete(k)}))})}).catch(function(e){console.warn("Odstranění staré offline cache:",e)})})();</script>
     <meta charset="UTF-8">
-    <meta name="bali-build" content="20261105ed170a15">
+    <meta name="bali-build" content="20261106quiz-publish-v2">
 <script src="assets/build/js-head-critical-a-20261105.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
