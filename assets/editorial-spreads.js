@@ -354,3 +354,121 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot, {once:true});
   else boot();
 })();
+
+
+/* Universal map modal — maps only; Street View retains its own fullscreen UI. */
+(function () {
+  "use strict";
+  var modal, viewport, priorFocus, moving = null, placeholder = null, observerQueued = false;
+  var mapSelector = 'iframe[src*="google.com/maps"],iframe[src*="maps.google."],iframe[src*="openstreetmap.org"],iframe[src*="mapy.cz"],iframe[src*="mapy.com"]';
+  function eligible(frame) {
+    return frame && !frame.closest('.sv-card,.sv-stage,.bali-map-modal,[data-no-map-modal]') &&
+      !/streetview|map_action=pano|!1m2!1s/i.test(frame.getAttribute('src') || '');
+  }
+  function ensure() {
+    if (modal) return;
+    modal = document.createElement('div');
+    modal.className = 'bali-map-modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Mapa přes celou obrazovku');
+    modal.hidden = true;
+    modal.innerHTML = '<div class="bali-map-modal-shell"><div class="bali-map-modal-bar"><strong>Mapa – celá obrazovka</strong><button class="bali-map-modal-close" type="button" aria-label="Zavřít mapu">✕ Zavřít</button></div><div class="bali-map-modal-viewport"></div></div>';
+    viewport = modal.querySelector('.bali-map-modal-viewport');
+    document.body.appendChild(modal);
+    modal.querySelector('.bali-map-modal-close').addEventListener('click', close);
+    modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+    document.addEventListener('keydown', function (e) {
+      if (modal.hidden) return;
+      if (e.key === 'Escape') { e.preventDefault(); close(); }
+      if (e.key === 'Tab') {
+        var closeButton = modal.querySelector('.bali-map-modal-close');
+        // Embedded maps own their keyboard focus; keep the close control reachable.
+        if (e.shiftKey && document.activeElement === closeButton) {
+          e.preventDefault(); closeButton.focus();
+        }
+      }
+    });
+  }
+  function open(frame, mapRoot) {
+    ensure();
+    if (!modal.hidden) close();
+    priorFocus = document.activeElement;
+    viewport.replaceChildren();
+    if (frame) {
+      var copy = frame.cloneNode(false);
+      copy.removeAttribute('id');
+      copy.removeAttribute('loading');
+      copy.setAttribute('title', frame.getAttribute('title') || 'Zvětšená interaktivní mapa');
+      copy.setAttribute('allowfullscreen', '');
+      copy.className = 'bali-map-modal-frame';
+      copy.style.cssText = 'display:block;width:100%;height:100%;border:0;max-width:none;max-height:none';
+      viewport.appendChild(copy);
+    } else if (mapRoot) {
+      placeholder = document.createComment('původní místo interaktivní mapy');
+      mapRoot.parentNode.insertBefore(placeholder, mapRoot);
+      moving = mapRoot;
+      viewport.appendChild(mapRoot);
+      mapRoot.classList.add('bali-map-moved');
+      window.dispatchEvent(new Event('resize'));
+    }
+    modal.hidden = false;
+    document.body.classList.add('bali-map-modal-open');
+    modal.querySelector('.bali-map-modal-close').focus({ preventScroll: true });
+  }
+  function close() {
+    if (!modal || modal.hidden) return;
+    if (moving && placeholder && placeholder.parentNode) {
+      placeholder.parentNode.replaceChild(moving, placeholder);
+      moving.classList.remove('bali-map-moved');
+    }
+    moving = null; placeholder = null;
+    viewport.replaceChildren();
+    modal.hidden = true;
+    document.body.classList.remove('bali-map-modal-open');
+    window.dispatchEvent(new Event('resize'));
+    if (priorFocus && priorFocus.isConnected && priorFocus.focus) priorFocus.focus({ preventScroll: true });
+  }
+  function buttonFor(host, label, onClick) {
+    if (!host || host.querySelector(':scope > .bali-map-modal-open-button')) return;
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'bali-map-modal-open-button';
+    b.textContent = '⛶ Otevřít fullscreen';
+    b.setAttribute('aria-label', label);
+    b.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); onClick(); });
+    host.classList.add('bali-map-modal-host');
+    host.appendChild(b);
+  }
+  function scan() {
+    var root = document.getElementById('hlavni-obsah') || document.body;
+    root.querySelectorAll(mapSelector).forEach(function (frame) {
+      if (!eligible(frame)) return;
+      var host = frame.parentElement;
+      if (!host || host.closest('.bali-map-modal')) return;
+      buttonFor(host, 'Otevřít mapu přes celou obrazovku', function () { open(frame, null); });
+    });
+    var route = root.querySelector('#routeMap');
+    if (route && !route.closest('.bali-map-modal')) {
+      buttonFor(route, 'Otevřít interaktivní mapu celé trasy', function () { open(null, route); });
+    }
+  }
+  function boot() {
+    scan();
+    if (window.MutationObserver) {
+      new MutationObserver(function (records) {
+        if (observerQueued || !records.some(function (r) {
+          return Array.prototype.some.call(r.addedNodes, function (n) {
+            return n.nodeType === 1 &&
+              ((n.matches && (n.matches('iframe,#routeMap,.rt-wrap,.leaflet-container'))) ||
+               (n.querySelector && n.querySelector('iframe,#routeMap')));
+          });
+        })) return;
+        observerQueued = true;
+        requestAnimationFrame(function () { observerQueued = false; scan(); });
+      }).observe(document.body, { childList:true, subtree:true });
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, {once:true});
+  else boot();
+})();
