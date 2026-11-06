@@ -54,3 +54,5 @@
 @media(max-width:649px) {
   #hlavni-obsah .bali-destination-grid { grid-template-columns:minmax(0,1fr) !important; gap:12px !important; }
 }
+
+#hlavni-obsah .bali-itinerary-subsection .bali-original-schedule-hidden { display:none !important; }
