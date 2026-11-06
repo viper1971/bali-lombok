@@ -508,3 +508,5 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
   else start();
 })();
+
+/* Booking confirmation details will be mounted inside the existing hotel cards. */
