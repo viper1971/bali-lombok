@@ -33,3 +33,24 @@
 @media (prefers-reduced-motion: reduce) {
   .bali-itinerary-chevron { transition: none; }
 }
+
+
+/* Destination gallery — 4 columns on wide desktop, 3 on laptop, responsive below. */
+#hlavni-obsah .bali-itinerary-subsection .bali-itinerary-inner { min-width:0 !important; width:100% !important; max-width:none !important; }
+#hlavni-obsah .bali-destination-intro { margin:0 0 18px; line-height:1.55; color:var(--text-main,#244237); }
+#hlavni-obsah .bali-destination-grid { display:grid !important; grid-template-columns:repeat(4,minmax(0,1fr)) !important; gap:18px !important; align-items:stretch; width:100% !important; max-width:none !important; min-width:0; }
+#hlavni-obsah .bali-destination-grid > .bali-destination-card { display:flex !important; flex-direction:column !important; gap:10px; min-width:0 !important; width:auto !important; max-width:none !important; margin:0 !important; padding:14px !important; background:var(--lux-card,#fff); border:1px solid rgba(23,94,76,.22); border-radius:13px; box-shadow:0 3px 12px rgba(0,45,38,.07); overflow:hidden; }
+#hlavni-obsah .bali-destination-title { margin:0 !important; font:800 clamp(15px,1.3vw,18px)/1.35 system-ui,sans-serif; overflow-wrap:anywhere; color:var(--text-main,#173c30); }
+#hlavni-obsah .bali-destination-description { margin:0 0 6px !important; flex:1 1 auto; line-height:1.5; font-size:14px; color:var(--text-main,#31483e); overflow-wrap:break-word; }
+#hlavni-obsah .bali-destination-card > .sv-card { display:block !important; position:relative !important; width:100% !important; min-width:0 !important; max-width:none !important; margin:auto 0 0 !important; }
+#hlavni-obsah .bali-destination-card .sv-stage:not(:fullscreen) { height:auto !important; min-height:0 !important; width:100% !important; aspect-ratio:16/10 !important; }
+#hlavni-obsah .bali-destination-card .sv-stage iframe { width:100% !important; height:100% !important; }
+@media(max-width:1450px) and (min-width:1000px) {
+  #hlavni-obsah .bali-destination-grid { grid-template-columns:repeat(3,minmax(0,1fr)) !important; }
+}
+@media(max-width:999px) and (min-width:650px) {
+  #hlavni-obsah .bali-destination-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+}
+@media(max-width:649px) {
+  #hlavni-obsah .bali-destination-grid { grid-template-columns:minmax(0,1fr) !important; gap:12px !important; }
+}
