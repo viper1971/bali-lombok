@@ -3,48 +3,6 @@
    hotel state, links, map embeds and Street View controls all stay attached. */
 (function () {
   "use strict";
-  var regionalNotes = {
-    singapore: [
-      "Singapur je první městskou zastávkou před odletem na Bali. Při výběru ubytování se vyplatí sledovat hlavně polohu vůči stanici MRT: podle ní poznáme, jak pohodlné budou večerní návraty i přesuny s batohem.",
-      "Na programu jsou procházky městem, místní jídlo a zátoka Marina Bay. Z hotelových údajů nahoře zkontroluj čas příjezdu a odjezdu, případně zda je zahrnutá snídaně."
-    ],
-    uluwatu: [
-      "Poloostrov Bukit na jihu Bali je výchozím bodem pro výlety k útesům, plážím Padang Padang a Suluban i k chrámu Uluwatu. Pro plánování dne je důležité počítat s přesuny mezi jednotlivými místy, nikoli jen se vzdušnou vzdáleností.",
-      "Tato etapa navazuje na přílet do Denpasaru a převzetí skútrů. Při výběru pokoje proto porovnej nejen cenu a vybavení, ale také polohu vzhledem k plánovanému dennímu programu."
-    ],
-    ubud: [
-      "Ubud slouží jako základna pro cesty do vnitrozemí Bali: k rýžovým terasám, vodopádům, chrámům a Opičímu pralesu. Na delší výlety je praktické vyrážet s časovou rezervou, protože vzdálenosti samy o sobě nevystihují délku přejezdu.",
-      "U jednotlivých variant ubytování zvaž, zda ti více vyhovuje kontakt s centrem Ubudu, nebo klidnější zázemí mimo nejrušnější místa. Konkrétní vybavení a podmínky jsou uvedené v informacích o hotelu."
-    ],
-    lombokNorth: [
-      "Severní Lombok je v itineráři odlišnou etapou od jihu ostrova. Při plánování pobytu je podstatné, jak bude hotel navazovat na příjezd na Lombok a na další přesun; cesta mezi jednotlivými oblastmi může tvořit významnou část dne.",
-      "V této části cesty stojí za to porovnat polohu hotelu, možnosti okolních výletů a tempo, které skupině vyhovuje. Podrobnosti o konkrétním pokoji a rezervaci zůstávají v kartě nahoře."
-    ],
-    lombokSouth: [
-      "Jižní Lombok nabízí odlišný charakter pobytu než sever ostrova. Do programu patří pobřeží, pláže a výlety na skútrech; při výběru základny proto hraje roli vzdálenost k jednotlivým zastávkám.",
-      "Pokud chceš během dne projet více pláží, nech v programu prostor na zastávky a návrat. Informace o ceně, snídani a vybavení se řídí konkrétní zvolenou variantou hotelu."
-    ],
-    kutaLast: [
-      "Poslední noc na Bali je především praktickou zastávkou před navazujícím letem. Vedle ceny pokoje je důležitá dostupnost letiště, čas odjezdu a to, zda se ubytování platí předem, nebo až na místě.",
-      "Tuto noc je vhodné posuzovat jinak než delší pobytové etapy: přednost má jednoduchá logistika, sbalená zavazadla a dostatečná časová rezerva před odletem."
-    ]
-  };
-  function enrichHotel(card) {
-    var panel = card.querySelector(".bali-ed-hotel-spread > .uber-info-panel");
-    if (!panel || panel.querySelector(".bali-ed-hotel-notes")) return;
-    var identity = (card.id || "").replace(/^card-/, "").replace(/-[A-Z]$/, "");
-    var notes = regionalNotes[identity];
-    if (!notes) return;
-    var out = document.createElement("aside");
-    out.className = "bali-ed-hotel-notes";
-    out.setAttribute("aria-label","Cestopisné informace o oblasti hotelu");
-    notes.forEach(function (paragraph) {
-      var p = document.createElement("p");
-      p.textContent = paragraph;
-      out.appendChild(p);
-    });
-    panel.appendChild(out);
-  }
   function setup() {
     var root = document.getElementById("hlavni-obsah");
     if (!root) return;
@@ -57,7 +15,7 @@
       return;
     }
     root.querySelectorAll(".uber-hotel-card").forEach(function (card, i) {
-      if (card.querySelector(":scope > .bali-ed-hotel-spread")) { enrichHotel(card); return; }
+      if (card.querySelector(":scope > .bali-ed-hotel-spread")) return;
       var media = card.querySelector(":scope > .uber-media-grid");
       var info = card.querySelector(":scope > .uber-info-panel");
       if (!media || !info) return;
@@ -69,7 +27,6 @@
       media.parentNode.insertBefore(spread, media);
       spread.appendChild(media);
       spread.appendChild(info);
-      enrichHotel(card);
     });
     var pads = root.querySelectorAll(".lux-fold-pad:has(> .ph-strip)");
     pads.forEach(function (pad, i) {
