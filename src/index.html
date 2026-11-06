@@ -3,7 +3,7 @@
 <head>
 <script id="bali-retire-offline">(function(){if(!("serviceWorker" in navigator))return;navigator.serviceWorker.getRegistrations().then(function(rs){return Promise.all(rs.filter(function(r){return r.scope===new URL("./",location.href).href}).map(function(r){return r.unregister()}))}).then(function(){if(!window.caches)return;return caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k.indexOf("bali2027-")===0}).map(function(k){return caches.delete(k)}))})}).catch(function(e){console.warn("Odstranění staré offline cache:",e)})})();</script>
     <meta charset="UTF-8">
-    <meta name="bali-build" content="20261105ed170a15">
+    <meta name="bali-build" content="20261106quiz-publish-v2">
 <script src="assets/build/js-head-critical-a-20261105.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -37,7 +37,7 @@
 
     <link rel="stylesheet" href="assets/build/css-head-critical-20261105.css"><style id="lux-skin"></style><style id="trip-design"></style>
 
-    <script src="assets/build/js-head-critical-b-20261105.js"></script>
+    <script src="assets/build/js-head-critical-b-20261105.js?v=accordion-stable-20261105-3"></script>
     <link rel="stylesheet" href="assets/build/css-993f7f92be32fafd.css"><style id="radek-upravy"></style>
 
 <script src="assets/build/js-head-critical-c-20261105.js"></script>
@@ -288,7 +288,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     <div class="lp-top">
         <div class="lp-score"><span class="lp-done" id="lpDone">0</span><span class="lp-of">/ <span id="lpAll">0</span></span></div>
         <div class="lp-meta"><span class="lp-title" id="luxReadCount">Přečteno 0 z 0</span><span class="lp-sub" id="lpSub"></span></div>
-        <div class="lp-btns"><button type="button" class="lux-tool" onclick="luxPresent()">🎞️ Prezentace</button><button type="button" class="lux-tool lp-clear" onclick="luxClearRead()">Vymazat přečtené</button></div>
+        <div class="lp-btns"><button type="button" class="lux-tool" onclick="luxPresent()">🎞️ Prezentace</button><button type="button" class="lux-tool lp-clear" onclick="luxClearRead()">Vymazat přečtené</button><button type="button" class="lux-tool lp-close-all" id="baliCloseAllAccordions" title="Otevřít nebo zavřít všechny kapitoly a podsekce" aria-pressed="false">▾ Otevřít vše</button></div>
     </div>
     <div class="lp-track" aria-hidden="true"><div class="lp-fill" id="lpFill"></div></div>
     <div class="lp-parts" id="lpParts"></div>
@@ -1050,7 +1050,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     <div class="timeline-date-container x-a8f6a5" id="lbDate" style="box-shadow: 0 6px 20px rgba(169, 187, 208, 0.3);">🚌 Pátek 6. 8. 2027 • Liberec ➔ Praha</div>
     <div class="t-bubble transfer-bubble">
         <h3 class="stage-title">Z Liberce na letiště v Praze</h3>
-        <p class="stage-desc">Sraz a odjezd z Liberce nejpozději v <strong id="lbDep">--:--</strong>, aby byla celá skupina na letišti v Praze v <strong id="lbAir">--:--</strong> (zhruba 3 hodiny před odletem). Cesta autobusem nebo vlakem z Liberce do Prahy a dál na letiště vychází orientačně na 2 h 30 min včetně rezervy na přestup. Konkrétní spoj a jízdenky se doplní podle toho, jak se domluvíme na srazu.</p>
+        <p class="stage-desc">Sraz a odjezd z Liberce nejpozději v <strong id="lbDep">--:--</strong>, aby byla celá skupina na letišti v Praze v <strong id="lbAir">--:--</strong> (<strong id="lbAirportRule">3 hodiny před odletem · Terminál 1 (mimo Schengen)</strong>). Cesta autobusem nebo vlakem z Liberce do Prahy a dál na letiště vychází orientačně na 2 h 30 min včetně rezervy na přestup. Konkrétní spoj a jízdenky se doplní podle toho, jak se domluvíme na srazu.</p>
         <span class="transfer-distance">📍 Orientační čas, není to jízdní řád. Před odjezdem ho ověř ve vyhledávači spojení.</span>
     </div>
 </div>
@@ -1181,12 +1181,12 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>Fragrance Hotel – Lavender</h4><p>Městský pobyt v živé čtvrti Lavender s rychlým přístupem k singapurským zážitkům.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Výhled na město</span><span>Klimatizace</span><span>Fén</span><span>Rychlovarná konvice</span><span>Soukromá koupelna</span><span>TV</span><span>Nekuřácké pokoje</span></div><div class="hotel-booking-existing">
         <div>📍 <strong>Adresa:</strong> Lor 6 Geylang, Singapur</div>
         <div>🛏️ <strong>Ubytování:</strong> Dvoulůžkové pokoje (klimatizace, TV, Wi-Fi, koupelna)</div>
         <div>🕒 <strong>Časy:</strong> Check-in od 15:00 • Check-out do 11:00</div>
         <div>🥐❌ <span class="breakfast-badge breakfast-no">Snídaně není v ceně</span></div>
-    </div>
+    </div><div class="hotel-booking-facts"><div class="hotel-booking-fact"><strong>Pobyt:</strong> 7.–9. 8. 2027; check-in od 15:00, check-out do 12:00</div><div class="hotel-booking-fact"><strong>Rezervované pokoje:</strong> 4 pokoje / 8 osob: 2× Superior a 2× Standard, všechny s manželskou postelí</div><div class="hotel-booking-fact"><strong>Cena celkem:</strong> 18 305 Kč (1 079,10 SGD)</div><div class="hotel-booking-fact"><strong>Stravování:</strong> Bez snídaně</div><div class="hotel-booking-fact"><strong>Storno:</strong> Zdarma do 3 dnů před příjezdem, potom 100 % ceny první noci</div><div class="hotel-booking-fact"><strong>Platba:</strong> Platba přes Booking.com, dosud zaplaceno 0 SGD</div><div class="hotel-booking-fact"><strong>Kontakt:</strong> 51 Lavender Street, Singapur 338710; tel. +65 6345 6116</div><div class="hotel-booking-fact"><strong>Vybavení a podmínky:</strong> Klimatizace, sprcha, vlastní koupelna, TV, fén, konvice; Superior výhled na město. Nekuřácké pokoje.</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
 </div>
 
 <!-- 2. VARIANT B HOTEL (HOTEL 81 PREMIER PRINCESS) -->
@@ -1232,12 +1232,12 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>Hotel 81 Premier Princess</h4><p>Praktická základna v Geylangu pro poznávání Singapuru a večerní místní gastronomii.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Oddělené postele</span><span>Klimatizace</span><span>Vlastní sprcha</span><span>TV</span><span>Telefon</span><span>Nekuřácké pokoje</span></div><div class="hotel-booking-existing">
         <div>📍 <strong>Lokace:</strong> No. 21, Geylang Lorong 12. Klidná poloha blízko metra a nočních trhů.</div>
         <div>🛏️ <strong>Ubytování:</strong> Dvoulůžkové pokoje (klimatizace, TV, Wi-Fi)</div>
         <div>🕒 <strong>Časy:</strong> Check-in od 15:00 • Check-out do 11:00</div>
         <div>🥐❌ <span class="breakfast-badge breakfast-no">Snídaně není v ceně (street food)</span></div>
-    </div>
+    </div><div class="hotel-booking-facts"><div class="hotel-booking-fact"><strong>Pobyt:</strong> 7.–9. 8. 2027; check-in od 15:00, check-out do 11:00</div><div class="hotel-booking-fact"><strong>Rezervované pokoje:</strong> 4× Superior s oddělenými postelemi / 8 osob</div><div class="hotel-booking-fact"><strong>Cena celkem:</strong> 14 251 Kč (840,08 SGD)</div><div class="hotel-booking-fact"><strong>Stravování:</strong> Bez snídaně</div><div class="hotel-booking-fact"><strong>Storno:</strong> Zdarma do 3 dnů před příjezdem; poté 100 % první noci, při nedojezdu celá cena</div><div class="hotel-booking-fact"><strong>Platba:</strong> Platba přes Booking.com, dosud zaplaceno 0 SGD</div><div class="hotel-booking-fact"><strong>Kontakt:</strong> 21 Geylang Lorong 12, Singapur 399001; tel. +65 6842 8181</div><div class="hotel-booking-fact"><strong>Vybavení a podmínky:</strong> Klimatizace, vlastní koupelna a sprcha, TV, telefon. Nekuřácké pokoje, bez přistýlek. K check-inu fyzický průkaz s fotografií a karta.</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
 </div>
 
 <!-- 3. HOTEL 81 GOLD (C) -->
@@ -1283,13 +1283,13 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>Hotel 81 Gold</h4><p>Pohodlné ubytování v Geylangu, vhodné pro cestovatele, kteří chtějí poznávat město celý den.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Oddělené postele</span><span>Klimatizace</span><span>Fén</span><span>Vlastní koupelna</span><span>TV</span><span>Nekuřácké pokoje</span></div><div class="hotel-booking-existing">
         <div>📍 <strong>Adresa:</strong> 20, Geylang Lorong 20, Singapur</div>
         <div>🛏️ <strong>Ubytování:</strong> 4× Dvoulůžkový pokoj Superior (klimatizace, TV, Wi-Fi)</div>
         <div>🕒 <strong>Časy:</strong> Check-in so 7. 8. (15:00) • Check-out po 9. 8. (11:00)</div>
         <div>📞 <strong>Kontakt:</strong> <a href="tel:+6562958181" class="call-btn" onclick="event.stopPropagation();" style="color: var(--primary); font-weight: 900; text-decoration: underline;">+65 6295 8181</a></div>
         <div class="x-gri-1-1">🥐❌ <span class="breakfast-badge breakfast-no">Snídaně není v ceně (street food)</span></div>
-    </div>
+    </div><div class="hotel-booking-facts"><div class="hotel-booking-fact"><strong>Pobyt:</strong> 7.–9. 8. 2027; check-in od 15:00, check-out do 11:00</div><div class="hotel-booking-fact"><strong>Rezervované pokoje:</strong> 4× Superior s oddělenými postelemi / 8 osob</div><div class="hotel-booking-fact"><strong>Cena celkem:</strong> 14 251 Kč (840,08 SGD)</div><div class="hotel-booking-fact"><strong>Stravování:</strong> Bez snídaně</div><div class="hotel-booking-fact"><strong>Storno:</strong> Zdarma do 3 dnů před příjezdem; poté 100 % první noci, při nedojezdu celá cena</div><div class="hotel-booking-fact"><strong>Platba:</strong> Platba přes Booking.com, dosud zaplaceno 0 SGD</div><div class="hotel-booking-fact"><strong>Kontakt:</strong> 20 Geylang Lorong 20, Singapur 398738; tel. +65 6295 8181</div><div class="hotel-booking-fact"><strong>Vybavení a podmínky:</strong> Klimatizace, vlastní koupelna, TV, telefon, fén. Nekuřácké pokoje, bez přistýlek. K check-inu průkaz s fotografií a karta.</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
 </div>
 
 
@@ -1349,7 +1349,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 
 <!-- HLAVIČKA KARTY -->
 <details class="bali-itinerary-subsection" data-itinerary="singapur">
-  <summary><span class="bali-itinerary-summary-text"><strong>Podrobný itinerář – Singapur</strong><small>Program po dnech, zajímavosti, mapy a interaktivní náhledy</small></span><span class="bali-itinerary-chevron" aria-hidden="true">▾</span></summary>
+  <summary><span class="bali-itinerary-summary-text"><strong>Návrhy co navštívit – Singapur</strong><small>Zajímavá místa, popisy a interaktivní Street View</small></span><span class="bali-itinerary-chevron" aria-hidden="true">▾</span></summary>
   <div class="bali-itinerary-inner">
 <h3 class="lux-acc-title"><span class="flag" data-cc="SG" role="img" aria-label="Singapur" title="Singapur"></span> Poznávací program: Singapur</h3>
 <p class="lux-acc-sub">Futuristická metropole (1x večer + 1x celý den): Marina Bay Sands, světoznámá zahradní show, lanovka na Sentosu, Little India, Arabská čtvrť & Hot Pot večeře.</p>
@@ -1921,14 +1921,14 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>Uluwatu Jungle Villa</h4><p>Tropická vila u Uluwatu s terasou, výhledem na zeleň a bazén a snídaní pro pohodový začátek dne.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Výhled na bazén</span><span>Balkon</span><span>Terasa</span><span>Klimatizace</span><span>Minibar</span><span>Soukromý vstup</span><span>Parkování</span></div><div class="hotel-booking-existing">
         <div>📍 <strong>Adresa:</strong> Jalan Pantai Suluban, Uluwatu, Bali</div>
         <div>🛏️ <strong>Ubytování:</strong> Vily v tropické zeleni, klimatizace, bazén, Wi-Fi</div>
         <div>🕒 <strong>Časy:</strong> Check-in 14:00–22:00 • Check-out 08:00–12:00</div>
         <div>🛡️ <strong>Storno:</strong> Zrušení zdarma dle podmínek</div>
         <div>📞 <strong>Kontakt:</strong> <a href="tel:+62361123456" class="call-btn" onclick="event.stopPropagation();" style="color: var(--primary); font-weight: 900; text-decoration: underline;">+62 361 123456</a></div>
         <div class="x-gri-1-1">🥐 <span class="breakfast-badge breakfast-yes">Snídaně je v ceně pobytu</span></div>
-    </div>
+    </div><div class="hotel-booking-facts"><div class="hotel-booking-fact"><strong>Pobyt:</strong> 9.–11. 8. 2027; check-in od 14:00, check-out do 12:00</div><div class="hotel-booking-fact"><strong>Rezervované pokoje:</strong> 4× Deluxe s manželskou postelí / 8 osob</div><div class="hotel-booking-fact"><strong>Cena celkem:</strong> 10 968 Kč (8 486 400 IDR k platbě po příspěvku Booking.com)</div><div class="hotel-booking-fact"><strong>Stravování:</strong> Snídaně v ceně</div><div class="hotel-booking-fact"><strong>Storno:</strong> Zdarma do 1 dne před příjezdem; poté až 100 % celkové ceny</div><div class="hotel-booking-fact"><strong>Platba:</strong> Platba přes Booking.com, dosud zaplaceno 0 IDR</div><div class="hotel-booking-fact"><strong>Kontakt:</strong> Jalan Pantai Suluban, Uluwatu 80361; tel. +62 821 4480 1751</div><div class="hotel-booking-fact"><strong>Vybavení a podmínky:</strong> Balkon, terasa, výhled na bazén a zahradu, klimatizace, minibar, TV. Parkování v ceně; pozdní příjezd do 01:00 po domluvě.</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
 </div>
 
 <!-- 2. VARIANT B HOTEL (THE ULULANI) -->
@@ -1971,14 +1971,14 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>The Ululani</h4><p>Odpočinek v Uluwatu: pokoje Deluxe s vlastní vířivkou a balkonem, ideální po výletech k útesům.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Soukromá vířivka</span><span>Balkon</span><span>Velká postel</span><span>Vana i sprcha</span><span>Minibar</span><span>Wi-Fi v ceně</span><span>Parkování</span></div><div class="hotel-booking-existing">
         <div>📍 <strong>Adresa:</strong> Uluwatu, Bali (cca 16 km od letiště DPS)</div>
         <div>🛏️ <strong>Ubytování:</strong> 4× Pokoj Deluxe s balkonem a vířivkou, klimatizace, Wi-Fi</div>
         <div>🕒 <strong>Časy:</strong> Check-in 15:00–00:00 • Check-out 11:30–12:00</div>
         <div>🛡️ <strong>Storno:</strong> Zrušení zdarma do 25. 7. 2027</div>
         <div>📞 <strong>Kontakt:</strong> <a href="tel:+6281999113339" class="call-btn" onclick="event.stopPropagation();" style="color: var(--primary); font-weight: 900; text-decoration: underline;">+62 819 9911 3339</a></div>
         <div class="x-gri-1-1">🥐 <span class="breakfast-badge breakfast-yes">Snídaně je v ceně pobytu</span></div>
-    </div>
+    </div><div class="hotel-booking-facts"><div class="hotel-booking-fact"><strong>Pobyt:</strong> 9.–11. 8. 2027; check-in 15:00–00:00, check-out 11:30–12:00</div><div class="hotel-booking-fact"><strong>Rezervované pokoje:</strong> 4× Deluxe s balkonem a extra velkou manželskou postelí / 8 osob</div><div class="hotel-booking-fact"><strong>Cena celkem:</strong> 7 576 Kč (6 321 472 IDR)</div><div class="hotel-booking-fact"><strong>Stravování:</strong> Snídaně v ceně</div><div class="hotel-booking-fact"><strong>Storno:</strong> Zdarma do 25. 7. 2027; od 26. 7. 790 184 IDR za pokoj, od 10. 8. 1 580 368 IDR za pokoj</div><div class="hotel-booking-fact"><strong>Platba:</strong> Platba přes Booking.com, dosud zaplaceno 0 IDR</div><div class="hotel-booking-fact"><strong>Kontakt:</strong> Uluwatu 80361; tel. +62 819 9911 3339</div><div class="hotel-booking-fact"><strong>Vybavení a podmínky:</strong> Vlastní vířivka, balkon, vana, minibar, klimatizace, vysokorychlostní internet a parkování v ceně. Přistýlka na vyžádání.</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
 </div>
 
          </div>
@@ -2042,7 +2042,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 
 <!-- HLAVIČKA KARTY -->
 <details class="bali-itinerary-subsection" data-itinerary="uluwatu">
-  <summary><span class="bali-itinerary-summary-text"><strong>Podrobný itinerář – Uluwatu</strong><small>Program po dnech, zajímavosti, mapy a interaktivní náhledy</small></span><span class="bali-itinerary-chevron" aria-hidden="true">▾</span></summary>
+  <summary><span class="bali-itinerary-summary-text"><strong>Návrhy co navštívit – Uluwatu</strong><small>Zajímavá místa, popisy a interaktivní Street View</small></span><span class="bali-itinerary-chevron" aria-hidden="true">▾</span></summary>
   <div class="bali-itinerary-inner">
 <h3 class="lux-acc-title">Poznávací program: Uluwatu & Poloostrov Bukit</h3>
 <p class="lux-acc-sub">Intenzivní poznávací itinerář (1x večer + 1x celý den): Útesy, jeskyně, skalní kaňony, monumentální park GWK a chrám Uluwatu.</p>
@@ -2382,10 +2382,10 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>The Village Guest House</h4><p>Klidnější ubytování v Ubudu se zahradou, bazénovým výhledem a prostornými postelemi.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Výhled na bazén</span><span>Balkon</span><span>Terasa</span><span>Moskytiéra</span><span>Trezor</span><span>Extra dlouhá postel</span><span>Parkování</span></div><div class="hotel-booking-existing">
         <div>📍 <strong>Lokace:</strong> Jalan Sriwedari No 38. Příjemný guest house s bazénem kousek od centra Ubudu.</div>
         <div class="x-gri-1-1">🥐 <span class="breakfast-badge breakfast-yes">Snídaně je v ceně pobytu</span></div>
-    </div>
+    </div><div class="hotel-booking-facts"><div class="hotel-booking-fact"><strong>Termín:</strong> 11.–15. 8. 2027</div><div class="hotel-booking-fact"><strong>Pokoje:</strong> 4× Deluxe s manželskou postelí, 8 osob</div><div class="hotel-booking-fact"><strong>Cena:</strong> 13 806 Kč (10 758 347 IDR k platbě)</div><div class="hotel-booking-fact"><strong>Snídaně:</strong> Snídaně v ceně</div><div class="hotel-booking-fact"><strong>Storno:</strong> Zdarma do 1 dne před příjezdem, potom 100 % první noci</div><div class="hotel-booking-fact"><strong>Platba:</strong> Platba přes Booking.com, zatím 0 IDR</div><div class="hotel-booking-fact"><strong>Kontakt:</strong> Jalan Sriwedari No. 38, Taman Kaja, Ubud; +62 812 3956 847</div><div class="hotel-booking-fact"><strong>Check-in / check-out a vybavení:</strong> 14:00–00:00 / do 12:00; balkon, terasa, výhled na bazén, klimatizace, trezor, parkování</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
 </div>
 
 <!-- 2. VARIANT B HOTEL (GANDATERA UBUD) -->
@@ -2397,7 +2397,6 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
         </label>
         <span class="hotel-status-tag tag-active" id="tag-ubud-B" style="padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 900;">⭐ Vybráno</span>
     </div>
-
     <div class="x-gap-12_fwrap-wrap_mb-12" style="display: flex;">
         <span class="uber-price-badge x-bg-rgba-37-21_c-lux-ok" style="border-color: rgba(37, 211, 102, 0.45);">🔥 2 422 Kč / pokoj na 4 noci (1 211 Kč / os.) • Ušetřeno 853 Kč!</span>
     </div>
@@ -2428,14 +2427,14 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>Gandatera Ubud</h4><p>Zelená atmosféra Ubudu a vlastní terasa jako příjemné zázemí po objevování rýžových teras.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Terasa</span><span>Výhled do zahrady</span><span>Klimatizace</span><span>Lednička</span><span>Vlastní koupelna</span><span>Pracovní stůl</span></div><div class="hotel-booking-existing">
         <div>📍 <strong>Adresa:</strong> Jl. Raya Laplapan No.16, Ubud, Bali</div>
         <div>🛏️ <strong>Ubytování:</strong> 4× Pokoj Superior s terasou a výhledem do zahrady, klimatizace, Wi-Fi</div>
         <div>🕒 <strong>Časy:</strong> Check-in 14:00–22:00 • Check-out 08:00–12:00</div>
         <div>🛡️ <strong>Storno:</strong> Zrušení zdarma do 9. srpna 2027</div>
         <div>📞 <strong>Kontakt:</strong> <a href="tel:+628970870745" class="call-btn" onclick="event.stopPropagation();" style="color: var(--primary); font-weight: 900; text-decoration: underline;">+62 897 0870 745</a></div>
         <div class="x-gri-1-1">🥐 <span class="breakfast-badge breakfast-yes">Snídaně je v ceně pobytu</span></div>
-    </div>
+    </div><div class="hotel-booking-facts"><div class="hotel-booking-fact"><strong>Termín:</strong> 11.–15. 8. 2027</div><div class="hotel-booking-fact"><strong>Pokoje:</strong> 4× Superior s manželskou postelí, 8 osob</div><div class="hotel-booking-fact"><strong>Cena:</strong> 9 535 Kč (7 377 382 IDR k platbě)</div><div class="hotel-booking-fact"><strong>Snídaně:</strong> Snídaně v ceně</div><div class="hotel-booking-fact"><strong>Storno:</strong> Zdarma do 9. 8. 2027; potom 1 989 000 IDR za pokoj</div><div class="hotel-booking-fact"><strong>Platba:</strong> Platba přes Booking.com, zatím 0 IDR</div><div class="hotel-booking-fact"><strong>Kontakt:</strong> Jl. Raya Laplapan No. 16, Ubud; +62 897 0870 745</div><div class="hotel-booking-fact"><strong>Check-in / check-out a vybavení:</strong> 14:00–22:00 / 08:00–12:00; terasa, klimatizace, lednička, zákaz večírků</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
 </div>
 
 <!-- 3. BIJE SUITE VILLA UBUD (C) -->
@@ -2478,20 +2477,20 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>Bije Suite Villa Ubud</h4><p>Soukromá apartmá orientovaná k bazénu, s terasou, posezením a pohodlím pro několikadenní pobyt.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Výhled na bazén</span><span>Balkon</span><span>Terasa</span><span>Klimatizace</span><span>Minibar</span><span>Trezor</span><span>Internet</span></div><div class="hotel-booking-existing">
         <div>📍 <strong>Adresa:</strong> Jl. Suweta, Desa Bentuyung, Ubud, Bali</div>
         <div>🛏️ <strong>Ubytování:</strong> 4× Soukromé apartmá s výhledem na bazén, terasa, klimatizace, Wi-Fi</div>
         <div>🕒 <strong>Časy:</strong> Check-in st 11. 8. (14:00) • Check-out ne 15. 8. (12:00)</div>
         <div>🛡️ <strong>Storno:</strong> Zrušení zdarma do 10. srpna 2027</div>
         <div>📞 <strong>Kontakt:</strong> <a href="tel:+6281391512335" class="call-btn" onclick="event.stopPropagation();" style="color: var(--primary); font-weight: 900; text-decoration: underline;">+62 813 9151 2335</a></div>
         <div class="x-gri-1-1">🥐 <span class="breakfast-badge breakfast-yes">Snídaně je v ceně pobytu</span></div>
-    </div>
+    </div><div class="hotel-booking-facts"><div class="hotel-booking-fact"><strong>Termín:</strong> 11.–15. 8. 2027</div><div class="hotel-booking-fact"><strong>Pokoje:</strong> 4× apartmá s výhledem na bazén, 8 osob</div><div class="hotel-booking-fact"><strong>Cena:</strong> 14 199 Kč (11 064 344 IDR k platbě)</div><div class="hotel-booking-fact"><strong>Snídaně:</strong> Snídaně v ceně</div><div class="hotel-booking-fact"><strong>Storno:</strong> Zdarma do 1 dne před příjezdem, poté 100 % ceny</div><div class="hotel-booking-fact"><strong>Platba:</strong> Přes Booking.com, zatím nezaplaceno</div><div class="hotel-booking-fact"><strong>Kontakt:</strong> Jl. Suweta, Desa Bentuyung, Ubud; +62 813 9151 2335</div><div class="hotel-booking-fact"><strong>Check-in / check-out a vybavení:</strong> Check-in od 14:00, odjezd do 12:00. Terasa, balkon, minibar, klimatizace, parkování a internet v ceně</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
 </div>
 
             </div>
 <!-- HLAVIČKA KARTY -->
 <details class="bali-itinerary-subsection" data-itinerary="ubud">
-  <summary><span class="bali-itinerary-summary-text"><strong>Podrobný itinerář – Ubud</strong><small>Program po dnech, zajímavosti, mapy a interaktivní náhledy</small></span><span class="bali-itinerary-chevron" aria-hidden="true">▾</span></summary>
+  <summary><span class="bali-itinerary-summary-text"><strong>Návrhy co navštívit – Ubud</strong><small>Zajímavá místa, popisy a interaktivní Street View</small></span><span class="bali-itinerary-chevron" aria-hidden="true">▾</span></summary>
   <div class="bali-itinerary-inner">
 <h3 class="lux-acc-title">Poznávací program: Ubud (Kulturní srdce Bali)</h3>
 <p class="lux-acc-sub">Pobyt na 4 noci v Bije Suite Villa Ubud: Rýžové terasy, vodopády, skleněný most, opičí prales, posvátné prameny a kávové plantáže.</p>
@@ -3138,10 +3137,10 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>Starsand Beach Resort</h4><p>Dvě soukromé vily se dvěma ložnicemi a vlastním bazénem — prostor na odpočinek u pobřeží Sekotongu.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Soukromý bazén</span><span>Výhled na moře</span><span>2 ložnice</span><span>Kuchyň</span><span>Terasa</span><span>Gril</span><span>Klimatizace</span></div><div class="hotel-booking-existing">
                 <div>📍 <strong>Lokace:</strong> Sekotong, Lombok. Klidné plážové vily.</div>
                 <div class="x-gri-1-1">🥐 <span class="breakfast-badge breakfast-yes">Plážové zázemí a odpočinek</span></div>
-            </div>
+            </div><div class="hotel-booking-facts"><div class="hotel-booking-fact"><strong>Termín:</strong> 15.–19. 8. 2027</div><div class="hotel-booking-fact"><strong>Pokoje:</strong> 2 vily se 2 ložnicemi a soukromými bazény, každá pro 4 dospělé</div><div class="hotel-booking-fact"><strong>Cena:</strong> 19 175 Kč (14 942 149 IDR k úhradě)</div><div class="hotel-booking-fact"><strong>Snídaně:</strong> Snídaně v ceně</div><div class="hotel-booking-fact"><strong>Storno:</strong> Zdarma do 14 dnů před příjezdem; potom storno 100 % ceny</div><div class="hotel-booking-fact"><strong>Platba:</strong> Přes Booking.com; zatím nezaplaceno</div><div class="hotel-booking-fact"><strong>Kontakt:</strong> Jl. Raya Sekotong, Batu Kijuk, Sekotong Barat; +49 1511 0193052</div><div class="hotel-booking-fact"><strong>Check-in / check-out a vybavení:</strong> Check-in 14:00–00:00, check-out do 12:00. Soukromé bazény, výhled na moře, kuchyně, gril. Klíče na recepci.</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
         </div>
 
         <!-- 2. VARIANT B HOTEL (MINA TANJUNG HOTEL) -->
@@ -3184,20 +3183,19 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>Mina Tanjung Hotel</h4><p>Poklidný Tanjung se zahradním výhledem a terasou, dobrá základna pro severní Lombok.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Výhled do zahrady</span><span>Balkon</span><span>Terasa</span><span>Klimatizace</span><span>Trezor</span><span>Fén</span><span>TV</span></div><div class="hotel-booking-existing">
                 <div>📍 <strong>Lokace:</strong> Jalan Pantai Sorong Jukung, Tanjung. Skvělá základna pro lodní výlety na Gili.</div>
                 <div class="x-gri-1-1">🥐 <span class="breakfast-badge breakfast-yes">Snídaně je v ceně pobytu</span></div>
-            </div>
+            </div><div class="hotel-booking-facts"><div class="hotel-booking-fact">15.–19. srpna 2027 · 4 pokoje Superior · 8 dospělých · snídaně v ceně.</div><div class="hotel-booking-fact">Celkem 9 430 Kč (7 868 568 IDR). Dosud nezaplaceno.</div><div class="hotel-booking-fact">Storno zdarma do 5 dní před příjezdem, později poplatek ve výši první noci, při nedojezdu celá cena.</div><div class="hotel-booking-fact">Check-in 14:00–23:00, check-out 11:30–12:00. Balkon, terasa, klimatizace, trezor a TV.</div><div class="hotel-booking-fact">Jalan Pantai Sorong Jukung, Tanjung. Telefon +62 881 7799 91696.</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
         </div>
 </div>
  <div class="bento-card full x-4c7ef9" style="box-shadow: var(--shadow);">
     <!-- HLAVIČKA KARTY -->
 <details class="bali-itinerary-subsection" data-itinerary="lombok">
-  <summary><span class="bali-itinerary-summary-text"><strong>Podrobný itinerář – Severní Lombok a Gili</strong><small>Program po dnech, zajímavosti, mapy a interaktivní náhledy</small></span><span class="bali-itinerary-chevron" aria-hidden="true">▾</span></summary>
+  <summary><span class="bali-itinerary-summary-text"><strong>Návrhy co navštívit – Severní Lombok a Gili</strong><small>Zajímavá místa, popisy a interaktivní Street View</small></span><span class="bali-itinerary-chevron" aria-hidden="true">▾</span></summary>
   <div class="bali-itinerary-inner">
 <h3 class="lux-acc-title">Poznávací program: Severní Lombok &amp; Ostrovy Gili</h3>
 <p class="lux-acc-sub">Pobyt na 4 noci v Mina Tanjung Hotel: Privátní plavba se skleněným dnem kolem Gili, vodopády pod sopkou Rinjani, vyhlídky &amp; mořský chrám.</p>
-
 <!-- ROZBALOVACÍ TLAČÍTKO -->
 <button type="button" class="lux-acc-btn accordion-btn-lombok" aria-expanded="false" aria-controls="lombokAccContent">
     <span class="lux-acc-ico" aria-hidden="true">✨</span>
@@ -3520,10 +3518,10 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>El Tropico Boutique Hotel</h4><p>Stylové pokoje s terasou pro pobyt v oblasti Kuta Lombok, s klimatizací a pohodlným zázemím.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Terasa</span><span>Klimatizace</span><span>Trezor</span><span>Minibar</span><span>Bidet</span><span>TV</span><span>Čaj a káva</span></div><div class="hotel-booking-existing">
                 <div>📍 <strong>Lokace:</strong> Centrální oblast Kuta Lombok. Stylové butikové ubytování.</div>
                 <div class="x-gri-1-1">🥐 <span class="breakfast-badge breakfast-yes">Komfortní zázemí v centru dění</span></div>
-            </div>
+            </div><div class="hotel-booking-facts"><div class="hotel-booking-fact">19.–23. 8. 2027, 4 pokoje Premiere King/Twin s terasou, snídaně v ceně.</div><div class="hotel-booking-fact">Cena 22 435 Kč (17 358 545 IDR k úhradě), dosud nezaplaceno.</div><div class="hotel-booking-fact">DŮLEŽITÉ: rezervace je pro 4 dospělé, jeden na pokoj. Ubytování osmi dospělých může být dražší.</div><div class="hotel-booking-fact">Storno zdarma do 13. 8. 2027; později 1 170 000 IDR za pokoj.</div><div class="hotel-booking-fact">Check-in od 15:00, odjezd do 12:00. Terasa, minibar, klimatizace, trezor.</div><div class="hotel-booking-fact">Jalan Baturiti I, Kuta Lombok; telefon +62 859 3355 3335.</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
         </div>
 
         <!-- 2. VARIANT B HOTEL (THELOCAL AREGULING HOMESTAY) -->
@@ -3566,10 +3564,10 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>TheLocal AreGuling</h4><p>Samostatné vily v zeleném prostředí Are Guling s výhledy na kopce i bazén.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Samostatné vily</span><span>Výhled na hory</span><span>Výhled na bazén</span><span>Terasa</span><span>Klimatizace</span><span>Minibar</span><span>Soukromý vchod</span></div><div class="hotel-booking-existing">
                 <div>📍 <strong>Lokace:</strong> Zátoka Are Guling, Lombok. Vily s bazénem obklopené zelenými kopci kousek od pláže.</div>
                 <div class="x-gri-1-1">🥐 <span class="breakfast-badge breakfast-yes">Snídaně je v ceně pobytu</span></div>
-            </div>
+            </div><div class="hotel-booking-facts"><div class="hotel-booking-fact">19.–23. 8. 2027, 4 vily pro 8 dospělých. Cena 15 076 Kč (12 580 000 IDR).</div><div class="hotel-booking-fact">3 vily Superior: snídaně zdarma. U vily Deluxe není snídaně v potvrzení uvedena.</div><div class="hotel-booking-fact">Storno zdarma do 17. 8. 2027, potom 3 060 000 IDR za Superior nebo 3 400 000 IDR za Deluxe.</div><div class="hotel-booking-fact">Příjezd 14:00–22:00, odjezd 08:00–12:00. Terasa, výhled na bazén a hory, klimatizace.</div><div class="hotel-booking-fact">Tumpak, Pujut, Lombok Tengah. Tel. +62 853 3854 2025.</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
         </div>
 
         <!-- JEDNOTNÁ JAVASCRIPTOVÁ FUNKCE PRO NAČTENÍ STREET VIEW -->
@@ -3578,7 +3576,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </div>
 <!-- HLAVIČKA KARTY -->
 <details class="bali-itinerary-subsection" data-itinerary="kuta">
-  <summary><span class="bali-itinerary-summary-text"><strong>Podrobný itinerář – Kuta Lombok</strong><small>Program po dnech, zajímavosti, mapy a interaktivní náhledy</small></span><span class="bali-itinerary-chevron" aria-hidden="true">▾</span></summary>
+  <summary><span class="bali-itinerary-summary-text"><strong>Návrhy co navštívit – Kuta Lombok</strong><small>Zajímavá místa, popisy a interaktivní Street View</small></span><span class="bali-itinerary-chevron" aria-hidden="true">▾</span></summary>
   <div class="bali-itinerary-inner">
 <h3 class="lux-acc-title">Poznávací program: Kuta Lombok, Moto GP & Zátoka Are Guling</h3>
 <p class="lux-acc-sub">Pobyt na 4 noci v TheLocal AreGuling HOMESTAY: Okruh Moto GP, podzemní jeskyně Goa Bangkang, kultura kmenu Sasak, Růžová pláž & vyhlášené útesy.</p>
@@ -3957,10 +3955,10 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>Rezervace Grand Ixora Kuta Resort – podrobnosti</h4><p>Pohodlné zakončení cesty v Kutě s klimatizovanými pokoji a snídaní před odletem.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Snídaně v ceně</span><span>Klimatizace</span><span>Trezor</span><span>Minibar</span><span>Fén</span><span>TV</span><span>Internet</span></div><div class="hotel-booking-existing">
         <div>📍 <strong>Lokace:</strong> Jalan Kartika Plaza No. 92. Ráno 24. 8. v 11:15 přímý let se Scoot do Singapuru a dále do ČR.</div>
         <div class="x-gri-1-1">🥐 <span class="breakfast-badge breakfast-yes">Snídaně před letem je v ceně</span></div>
-    </div>
+    </div><div class="hotel-booking-facts"><div class="hotel-booking-fact">23.–24. srpna 2027; 4 pokoje pro 8 dospělých. Snídaně v ceně. 3 741 Kč / 3 121 200 IDR.</div><div class="hotel-booking-fact">Storno zdarma do 7 dnů před příjezdem, potom celá cena. Příjezd od 14:00, odjezd do 12:00.</div><div class="hotel-booking-fact">Klimatizace, trezor, minibar, TV, internet. Jalan Kartika Plaza No. 92, Kuta; +62 361 795099.</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
 </div>
 
 <!-- 2. VARIANT B HOTEL (BAKUNG BEACH RESORT) -->
@@ -4003,16 +4001,17 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>Rezervace Bakung Beach Resort – podrobnosti</h4><p>Jednoduché a cenově dostupné ubytování v Kutě na poslední noc, s terasou a snídaní.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Snídaně v ceně</span><span>Terasa</span><span>Lednice</span><span>Minibar</span><span>Klimatizace</span><span>Propojené pokoje</span></div><div class="hotel-booking-existing">
         <div>📍 <strong>Lokace:</strong> Kuta, Bali (3 km od letiště DPS).</div>
         <div>🛏️ <strong>Ubytování:</strong> 4 pokoje pro 8 osob, klimatizace, bazén, zahrada, Wi-Fi</div>
         <div>🕒 <strong>Termín:</strong> po 23. 8. – út 24. 8. 2027</div>
         <div>📞 <strong>Kontakt:</strong> <a href="tel:+62361754495" class="call-btn" onclick="event.stopPropagation();" style="color: var(--primary); font-weight: 900; text-decoration: underline;">+62 361 754495</a></div>
         <div class="x-gri-1-1">🥐 <span class="breakfast-badge breakfast-yes">Snídaně je v ceně pobytu</span></div>
-    </div>
+    </div><div class="hotel-booking-facts"><div class="hotel-booking-fact">23.–24. srpna 2027; 4 pokoje pro 8 dospělých. Snídaně v ceně. Cena 1 855 Kč / 1 548 001 IDR.</div><div class="hotel-booking-fact">Platba přímo v hotelu, bez zálohy, karty Visa/Mastercard. Storno zdarma do 19. 8. 2027, potom 387 000 IDR za pokoj.</div><div class="hotel-booking-fact">Příjezd od 14:00, odjezd do 12:00. Terasa, klimatizace, lednice, minibar, TV.</div><div class="hotel-booking-fact">Jl. Kartika Plaza, Gang Samudera, Kuta. Telefon +62 361 754495.</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
 </div>
 <!-- 3. VARIANT C HOTEL (BALI SANDY RESORT) -->
 <div id="card-kutaLast-C" class="uber-hotel-card hotel-active" onclick="userSelectHotel('kutaLast', 'C')">
+
     <div class="uber-top-bar">
         <label class="hotel-radio-label x-ai-center_gap-12_cur-pointer" style="display: flex;">
             <span class="custom-checkbox-round">✓</span>
@@ -4051,13 +4050,13 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     </section>
     </div>
 
-    <div class="uber-info-panel">
+    <div class="uber-info-panel"><div class="hotel-booking-intro"><div class="hotel-booking-eyebrow">UBYTOVÁNÍ · POTVRZENÁ REZERVACE</div><h4>Rezervace Bali Sandy Resort – podrobnosti</h4><p>Příjemná zahradní atmosféra na poslední noc v Kutě, s balkonem a výhledem k bazénu.</p></div><div class="hotel-booking-amenities" aria-label="Vybavení pokoje"><span>Snídaně v ceně</span><span>Balkon</span><span>Výhled na bazén</span><span>Klimatizace</span><span>Konvice</span><span>Posezení</span><span>Přistýlka na dotaz</span></div><div class="hotel-booking-existing">
         <div>📍 <strong>Lokace:</strong> Jl. Poppies II, 80361 Kuta, Indonésie (5 km od letiště DPS).</div>
         <div>🛏️ <strong>Ubytování:</strong> 4 pokoje (Dvoulůžkový pokoj Superior s manželskou postelí nebo oddělenými postelemi) pro 8 osob, klimatizace, bazén, zahrada, Wi-Fi.</div>
         <div>🕒 <strong>Termín:</strong> po 23. 8. – út 24. 8. 2027</div>
         <div>📞 <strong>Kontakt:</strong> <a href="tel:+62361755601" class="call-btn" onclick="event.stopPropagation();" style="color: var(--primary); font-weight: 900; text-decoration: underline;">+62 361 755601</a></div>
         <div class="x-gri-1-1">🥐 <span class="breakfast-badge breakfast-yes">Snídaně v ceně pobytu</span></div>
-    </div>
+    </div><div class="hotel-booking-facts"><div class="hotel-booking-fact">23.–24. srpna 2027; 4 pokoje pro 8 dospělých. Snídaně v ceně. Cena 2 157 Kč / 1 799 998 IDR.</div><div class="hotel-booking-fact">Platba přímo v hotelu, pouze hotovost v IDR, bez zálohy. Storno zdarma do 15. 8. 2027, potom 450 000 IDR za pokoj.</div><div class="hotel-booking-fact">Příjezd od 14:00, odjezd do 12:00. Balkon, výhled na bazén, klimatizace, konvice, posezení.</div><div class="hotel-booking-fact">Jl. Poppies II, Kuta. Telefon +62 361 755601. Dotaz na letištní transfer.</div></div><p class="hotel-booking-note">Podklady z potvrzení Booking.com. Ceny v Kč jsou orientační; storno lhůty platí podle místního času ubytování.</p></div>
 </div>
 
     </div>
@@ -4070,7 +4069,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 
 <!-- HLAVIČKA KARTY -->
 <details class="bali-itinerary-subsection" data-itinerary="farewell">
-  <summary><span class="bali-itinerary-summary-text"><strong>Podrobný itinerář – Rozlučka na Bali</strong><small>Program po dnech, zajímavosti, mapy a interaktivní náhledy</small></span><span class="bali-itinerary-chevron" aria-hidden="true">▾</span></summary>
+  <summary><span class="bali-itinerary-summary-text"><strong>Návrhy co navštívit – Rozlučka na Bali</strong><small>Zajímavá místa, popisy a interaktivní Street View</small></span><span class="bali-itinerary-chevron" aria-hidden="true">▾</span></summary>
   <div class="bali-itinerary-inner">
 <h3 class="lux-acc-title">Poznávací program: Rozlučka na Bali</h3>
 <p class="lux-acc-sub" id="stage6DescParagraph">1 noc v Bakung Beach Resort (Kuta): Západ slunce & mořské plody v Jimbaranu, balijská masáž a odlet zpět do ČR.</p>
@@ -6054,13 +6053,24 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 </section>
 
 
+
+<!-- Fotografický kvíz: úsporné spuštění na konci stránky -->
+<section id="cestovatelsky-kviz" aria-labelledby="quiz-launch-heading" style="max-width:640px;margin:18px auto 28px;padding:0 14px;clear:both;">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:14px 18px;border:1px solid rgba(34,103,91,.25);background:#eaf2eb;border-radius:14px;box-shadow:0 3px 10px rgba(15,56,54,.08);">
+    <div style="min-width:180px;flex:1 1 300px;">
+      <h2 id="quiz-launch-heading" style="margin:0 0 3px;color:#204d44;font:700 clamp(17px,2vw,21px)/1.25 Georgia,serif;">Poznáš místa z naší dovolené?</h2>
+      <p style="margin:0;color:#506a61;font:500 12px/1.5 system-ui,sans-serif;">12 fotografií ze Singapuru, Bali a Lomboku · losuje se z 30 míst</p>
+    </div>
+    <a href="bali-lombok-kviz.html" style="display:inline-flex;justify-content:center;align-items:center;gap:6px;min-height:38px;padding:8px 13px;border:1px solid #1b6a5a;border-radius:9px;text-decoration:none!important;background:#236c5d;color:#fff!important;font:750 12px/1.2 system-ui,sans-serif;box-shadow:none;white-space:nowrap;">Spustit kvíz <span aria-hidden="true">→</span></a>
+  </div>
+</section>
 </div><!-- /main-wrapper -->
-<script src="assets/build/js-1650a00000000005.js"></script>
+<script src="assets/build/js-1650a00000000005.js?v=wheel-fix-20261105-2"></script>
 
 
-<script src="assets/build/js-footer-folds-20261105.js"></script>
+<script src="assets/build/js-footer-folds-20261105.js?v=wheel-fix-20261105-2"></script>
 
-<script src="assets/build/js-9500f38732daf21c.js?v=20261105-remove-journey"></script>
+<script src="assets/build/js-9500f38732daf21c.js?v=20261106-prg-terminal-v1?v=20261105-remove-journey"></script>
 <!-- ===== SLIDESHOW FOTEK V ITINERÁŘÍCH (volné fotky z Wikimedia Commons) ===== -->
 <link rel="stylesheet" href="assets/build/css-c4d100c569da2682.css">
 
@@ -6093,11 +6103,11 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
     <span class="pb-pct" id="pbPct">0 %</span>
 </div>
 
-<script src="assets/build/js-1650a00000000004.js?v=lazy-editorial-20261105"></script>
+<script src="assets/build/js-1650a00000000004.js?v=accordion-stable-20261105-3"></script>
 
 <link rel="stylesheet" href="assets/build/css-df70f456662283c8.css?v=20261105-stub-tear-v1"><style id="bpx-style"></style>
 
-<script src="assets/build/js-d597c7bc58059231.js?v=20261105-stub-tear-v1" id="bpx-script"></script>
+<script src="assets/build/js-d597c7bc58059231.js?v=20261106-prg-terminal-v1" id="bpx-script"></script>
 
 <link rel="stylesheet" href="assets/build/css-003c1ad96c39a287.css"><style id="pageFullscreenButtonsStyle"></style>
 
@@ -6107,7 +6117,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 <!-- UX 2026: přístupnost, rychlé hledání v sekcích a indikátor posunu -->
 <link rel="stylesheet" href="assets/build/css-4a71fcb02688e8f3.css"><style id="ux2026-style"></style>
 
-<script src="assets/build/js-footer-ui-controls-20261105.js" id="ux2026-script"></script>
+<script src="assets/build/js-footer-ui-controls-20261105.js?v=wheel-fix-20261105-2" id="ux2026-script"></script>
 <script id="premium2027Navigation"></script>
 <script id="premium2027Stage2"></script>
 <script id="premium2027Stage9"></script>
@@ -6135,7 +6145,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 
 <link rel="stylesheet" href="assets/build/css-9053caa8be06d544.css"><style id="premium-v50-single-row-desktop"></style><style id="bali-v53-left-budget-drawer"></style>
 
-<script src="assets/build/js-525a279af25c5764.js" id="bali-v54-left-budget-control"></script>
+<script src="assets/build/js-525a279af25c5764.js?v=20261106-budget-label" id="bali-v54-left-budget-control"></script>
 <link rel="stylesheet" href="assets/build/css-985ae35a3b15d50d.css"><style id="bali-v54-unified-menu"></style><style id="bali-v55-stacked-sidebar"></style><style id="bali-v56-two-separated-tabs"></style><style id="bali-v57-two-independent-panel-modes"></style><style id="bali-v58-search-navigation"></style><style id="bali-v59-toast-above-search"></style><style id="bali-v60-menu-finance-distribution"></style><style id="bali-v61-fixed-menu-edge-controls"></style><style id="bali-v62-third-progress-tab"></style>
 
 <script src="assets/build/js-c4d3fe47342be4bb.js" id="bali-v62-third-progress-tab-script"></script>
@@ -6143,7 +6153,7 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
 
 <link rel="stylesheet" href="assets/build/css-90124539b7e68290.css"><style id="bali-v63-visibility-and-seven-controls"></style><style id="bali-v64-unified-side-rail"></style>
 
-<script src="assets/build/js-87fa99716183f102.js" id="bali-v64-unified-side-rail-logic"></script>
+<script src="assets/build/js-87fa99716183f102.js?v=20261106-rail-rozpocet" id="bali-v64-unified-side-rail-logic"></script>
 
 
 <link rel="stylesheet" href="assets/build/css-de8bcea3a84370b2.css"><style id="bali-v65-collapsed-rail-opacity"></style><style id="bali-v66-mobile-hamburger"></style>
@@ -6173,10 +6183,17 @@ alt="TOPlist" width="88" height="120"/></noscript><script src="assets/build/js-1
   .page-fs-hero { display: none !important; }
 </style>
 <!-- Editorial spreads: compact triptychs, paired hotel photos/maps and reading text -->
-<link rel="stylesheet" href="assets/editorial-magazine-batch-20261105.css">
-<link rel="stylesheet" href="assets/native-scroll-20261105.css">
-<link rel="stylesheet" href="assets/itinerary-subsections-20261105.css">
-<script defer src="assets/itinerary-subsections-20261105.js"></script>
-<script defer src="assets/editorial-spreads.js?v=20261105-sv-hide-close-v1"></script>
+<link rel="stylesheet" href="assets/editorial-magazine-batch-20261105.css?v=20261106-booking-editorial-v2">
+<link rel="stylesheet" href="assets/native-scroll-20261105.css?v=accordion-stable-20261105-3">
+<script defer src="assets/streetview-autoload-safe.js?v=20261105-visible-v1"></script>
+<link rel="stylesheet" href="assets/itinerary-subsections-20261105.css?v=20261106-destinations-2">
+<script defer src="assets/itinerary-subsections-20261105.js?v=20261106-destinations-2"></script>
+<script defer src="assets/editorial-spreads.js?v=20261106-remove-hotel-filler-v1"></script>
+<link rel="stylesheet" href="assets/accordion-arrows-visible-20261105.css?v=1">
+<style id="bali-close-all-style">.lp-btns .lp-close-all{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:#17635b!important;color:#fff!important;border:1px solid #11554d!important;border-radius:999px!important;font-weight:800!important;padding:11px 17px!important;box-shadow:0 4px 12px rgba(10,72,61,.2)!important;min-height:44px!important;cursor:pointer!important}.lp-btns .lp-close-all:hover{background:#0b4944!important}.lp-btns .lp-close-all:focus-visible{outline:3px solid #e4b849;outline-offset:3px}@media(max-width:600px){.lp-btns .lp-close-all{flex:1 1 100%;width:100%;font-size:15px!important}}</style>
+<script defer src="assets/close-all-accordions-20261106.js?v=toggle-v2"></script>
+
+<!-- Samostatná cestovatelská hra na konci stránky -->
+<section id="bali-travel-quiz" aria-labelledby="bali-travel-quiz-title" style="max-width:1100px;margin:55px auto 70px;padding:30px 22px;text-align:center;border:1px solid #cda95c;border-radius:22px;background:linear-gradient(135deg,#113d42,#102635);color:#fff;box-shadow:0 12px 32px #0002"><div style="font-size:13px;font-weight:800;letter-spacing:.14em;color:#f0c675;text-transform:uppercase">Cestovatelská výzva</div><h2 id="bali-travel-quiz-title" style="font-size:clamp(25px,4vw,39px);margin:14px 0;color:#fff">Kdo zná naši dovolenou nejlépe?</h2><p style="font-size:17px;line-height:1.6;color:#e2e9e9;margin:0 auto 22px;max-width:660px">12 otázek · 15 sekund na odpověď · body a žebříček hráčů</p><a href="kviz.html" style="display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:14px 32px;border-radius:999px;background:#e8b75c;color:#172a30;font-size:18px;font-weight:900;text-decoration:none;box-shadow:0 6px 18px #0003">Zahrát si kvíz</a></section>
 </body>
 </html>
