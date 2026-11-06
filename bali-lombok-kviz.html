@@ -32,7 +32,58 @@ function leaders(){try{return JSON.parse(localStorage.getItem(KEY)||'[]').filter
 function setLeaders(a){try{localStorage.setItem(KEY,JSON.stringify(a.slice(0,10)))}catch{}}
 function showLeaders(id){const a=leaders(),el=$(id);el.replaceChildren();if(!a.length){el.textContent='Zatím žádné výsledky. Buď první!';el.style.color='#60746c';return}a.slice(0,7).forEach((x,i)=>{const row=document.createElement('div');row.className='rank-row';for(const [c,t] of [['rank-position',String(i+1)+'.'],['rank-name',x.name],['rank-score',x.score+' b.']]){const span=document.createElement('span');span.className=c;span.textContent=t;row.appendChild(span)}el.appendChild(row)})}
 function start(name){player=name.trim().slice(0,22)||'Cestovatel';qs=shuffle([...shuffle(imageBank.filter(q=>q.region==='SG')).slice(0,4),...shuffle(imageBank.filter(q=>q.region==='BALI')).slice(0,4),...shuffle(imageBank.filter(q=>q.region==='LOMBOK')).slice(0,4)]);index=0;score=0;right=0;streak=0;view('quiz');render()}
-function render(){answered=false;remaining=15;const q=qs[index];$('category').textContent=q.c;$('position').textContent='Otázka '+(index+1)+' z '+qs.length;$('progress').style.width=(index/qs.length*100)+'%';$('points').textContent='Skóre: '+score+' bodů';$('streak').textContent='Série: '+streak;$('question').textContent=q.q;const photoWrap=$('quiz-photo-wrap'),photo=$('quiz-photo');photoWrap.classList.toggle('hide',!q.img);if(q.img){photo.src=q.img;photo.alt='Fotografie zajímavého místa – vyber jeho název';$('quiz-credit').textContent=q.credit;$('quiz-credit').href=q.creditUrl;$('quiz-license').textContent=' · '+q.license}else photo.removeAttribute('src');$('answers').replaceChildren();$('feedback').classList.add('hide');$('next').classList.add('hide');$('timer').classList.remove('low');$('timer').textContent='00:15';answerOrder=shuffle(q.a.map((text,i)=>({text,i})));answerOrder.forEach((v,j)=>{const b=document.createElement('button');b.className='answer';b.type='button';const letter=document.createElement('span');letter.className='key';letter.textContent='ABCD'[j];const label=document.createElement('span');label.textContent=v.text;b.append(letter,label);b.addEventListener('click',()=>choose(v.i,j));$('answers').appendChild(b)});clearInterval(tick);tick=setInterval(()=>{if(answered)return;remaining--;$('timer').textContent='00:'+String(remaining).padStart(2,'0');$('timer').classList.toggle('low',remaining<=5);if(remaining<=0)choose(-1,-1)},1000)}
+function render(){
+answered=false;remaining=15;clearInterval(tick);tick=null;
+const q=qs[index];
+$('category').textContent=q.c;$('position').textContent='Otázka '+(index+1)+' z '+qs.length;
+$('progress').style.width=(index/qs.length*100)+'%';
+$('points').textContent='Skóre: '+score+' bodů';$('streak').textContent='Série: '+streak;
+$('question').textContent=q.q;
+$('feedback').classList.add('hide');$('next').classList.add('hide');$('timer').classList.remove('low');
+$('timer').textContent='Načítám…';
+const photoWrap=$('quiz-photo-wrap'),photo=$('quiz-photo');
+photoWrap.classList.remove('hide');
+$('quiz-credit').textContent=q.credit;$('quiz-credit').href=q.creditUrl;
+$('quiz-license').textContent=' · '+q.license;
+$('answers').replaceChildren();
+answerOrder=shuffle(q.a.map((text,i)=>({text,i})));
+answerOrder.forEach((v,j)=>{
+ const b=document.createElement('button');b.className='answer';b.type='button';
+ const letter=document.createElement('span');letter.className='key';letter.textContent='ABCD'[j];
+ const label=document.createElement('span');label.textContent=v.text;
+ b.append(letter,label);b.addEventListener('click',()=>choose(v.i,j));
+ $('answers').appendChild(b);
+});
+function beginCountdown(){
+ if(answered||tick!==null)return;
+ $('timer').textContent='00:15';
+ tick=setInterval(()=>{if(answered)return;remaining--;
+ $('timer').textContent='00:'+String(Math.max(0,remaining)).padStart(2,'0');
+ $('timer').classList.toggle('low',remaining<=5);
+ if(remaining<=0)choose(-1,-1)},1000);
+}
+photo.onload=beginCountdown;
+photo.onerror=()=>{
+ if(!q._fallback){
+  const fallback={
+   SG:{img:'assets/images/external/3007e00607821fa1.webp',a:['Marina Bay','Gardens by the Bay','Jewel Changi','Sultan Mosque'],e:'Marina Bay v Singapuru.',credit:'Fotografie z cestovatelského webu',creditUrl:'./',license:'zdroj v itineráři'},
+   BALI:{img:'assets/images/external/c9c99d25f3e25d16.webp',a:['Nusa Penida','Tegallalang','Tanah Lot','Mount Batur'],e:'Útesy ostrova Nusa Penida na Bali.',credit:'Fotografie z cestovatelského webu',creditUrl:'./',license:'zdroj v itineráři'},
+   LOMBOK:{img:'assets/images/external/f69252c4bc3322d8.webp',a:['Pobřeží Lomboku','Marina Bay','Nusa Penida','Uluwatu'],e:'Tropické pobřeží Lomboku.',credit:'Fotografie z cestovatelského webu',creditUrl:'./',license:'zdroj v itineráři'}
+  }[q.region];
+  Object.assign(q,fallback,{_fallback:true});
+  render();
+ }else{
+  photoWrap.classList.add('hide');$('question').textContent='Fotografii se nepodařilo načíst.';
+  $('answers').replaceChildren();
+  answered=true;$('next').textContent='Přeskočit otázku →';$('next').classList.remove('hide');
+  $('timer').textContent='–';
+ }
+};
+photo.alt='Poznávací fotografie – urči místo podle snímku';
+photo.removeAttribute('src');
+photo.src=q.img;
+if(photo.complete&&photo.naturalWidth>0)beginCountdown();
+}
 function choose(selected,choiceIndex){if(answered)return;answered=true;clearInterval(tick);const q=qs[index],correct=selected===q.k,buttons=[...$('answers').children];buttons.forEach((b,j)=>{b.disabled=true;if(answerOrder[j].i===q.k)b.classList.add('correct');else if(j===choiceIndex)b.classList.add('wrong')});if(correct){let gained=100+Math.max(0,remaining)*5;score+=gained;right++;streak++;$('feedback-title').textContent='Správně! +'+gained+' bodů.'}else{streak=0;$('feedback-title').textContent=selected<0?'Čas vypršel.':'Tohle tentokrát nevyšlo.'}$('feedback-text').textContent=q.e;$('feedback').classList.remove('hide');$('points').textContent='Skóre: '+score+' bodů';$('streak').textContent='Série: '+streak;$('next').textContent=index===qs.length-1?'Zobrazit výsledek →':'Další otázka →';$('next').classList.remove('hide');$('progress').style.width=((index+1)/qs.length*100)+'%'}
 function complete(){clearInterval(tick);const leadersNow=leaders();leadersNow.push({name:player,score,at:new Date().toISOString()});leadersNow.sort((a,b)=>b.score-a.score);setLeaders(leadersNow);$('final-points').textContent=score;$('medal').textContent=right>=11?'🏆':right>=8?'🥇':right>=5?'🥈':'🧭';$('result-title').textContent=right>=11?'Mistr expedice!':right>=8?'Skvělý znalec Bali!':right>=5?'Zkušený cestovatel!':'Dobrodružství teprve začíná!';$('result-description').textContent=player+', máš '+right+' správných odpovědí z '+qs.length+'. Další kolo přinese nový náhodný výběr fotografií.';showLeaders('ranking-end');view('result')}
 $('start-form').addEventListener('submit',e=>{e.preventDefault();start($('player-name').value)});$('next').addEventListener('click',()=>{if(!answered)return;if(index===qs.length-1)complete();else{index++;render()}});$('again').addEventListener('click',()=>{showLeaders('ranking-start');view('start')});$('share').addEventListener('click',async()=>{const t=player+' získal/a '+score+' bodů ('+right+'/12 správně) ve hře Kdo zná naši dovolenou nejlépe? — BALI & LOMBOK 2027';try{await navigator.clipboard.writeText(t);$('share').textContent='Zkopírováno ✓';setTimeout(()=>$('share').textContent='Kopírovat výsledek',1800)}catch{$('share').textContent=t}});showLeaders('ranking-start');
