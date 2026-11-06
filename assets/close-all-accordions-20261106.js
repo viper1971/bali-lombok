@@ -1,88 +1,148 @@
-/* BALI 2027 — Close every open journey accordion in one action.
-   Does not change read progress, hotel selection, locks or window scroll position. */
+/* BALI 2027 — One toggle for all itinerary disclosures.
+   Keeps reading progress, hotel selections and page scroll untouched. */
 (function () {
   "use strict";
 
-  function closeAll() {
-    var root = document.getElementById("hlavni-obsah") || document;
-    var count = 0;
+  function root() {
+    return document.getElementById("hlavni-obsah") || document;
+  }
 
-    // Close nested scripted accordions using their existing click handlers.
-    root.querySelectorAll('.lux-acc-btn[aria-expanded="true"]').forEach(function (button) {
-      try { button.click(); count++; } catch (_) {}
-    });
+  function containsOpen() {
+    return !!root().querySelector(
+      ".lux-fold.is-open, .lux-part.is-open, details[open], " +
+      ".alt-hotels-collapse.open, .acc.open, .lux-acc-btn[aria-expanded='true']"
+    );
+  }
 
-    // Native details: flight selection, sub-itineraries and other disclosures.
-    root.querySelectorAll("details[open]").forEach(function (details) {
-      details.open = false;
-      count++;
-    });
+  function setFold(fold, opened) {
+    fold.classList.toggle("is-open", opened);
+    fold.classList.toggle("is-settled", opened);
+    fold.classList.remove("no-anim");
+    var body = fold.querySelector(":scope > .lux-fold-body");
+    if (body) {
+      if (opened) body.removeAttribute("inert");
+      else body.setAttribute("inert", "");
+    }
+    var button = fold.querySelector(":scope > .lux-fold-h .lux-fold-btn");
+    if (button) button.setAttribute("aria-expanded", opened ? "true" : "false");
+  }
 
-    // Close hotel variants/independent expandable groups without changing choices.
-    root.querySelectorAll(".alt-hotels-collapse.open").forEach(function (el) {
-      el.classList.remove("open");
-      var stage = el.id && el.id.replace(/^collapse-/, "");
+  function setPart(part, opened) {
+    part.classList.toggle("is-open", opened);
+    var header = part.querySelector(":scope > .lux-part-head");
+    if (header) header.setAttribute("aria-expanded", opened ? "true" : "false");
+  }
+
+  function setHotelAlternatives(opened) {
+    root().querySelectorAll(".alt-hotels-collapse").forEach(function (panel) {
+      panel.classList.toggle("open", opened);
+      var stage = panel.id && panel.id.replace(/^collapse-/, "");
       var button = stage && document.getElementById("btn-toggle-" + stage);
-      if (button) {
-        button.setAttribute("aria-expanded", "false");
-        var arrow = button.querySelector(".arrow-indicator");
-        if (arrow) arrow.textContent = "▼";
+      if (!button) return;
+      button.setAttribute("aria-expanded", opened ? "true" : "false");
+      var icon = button.querySelector(".arrow-indicator");
+      if (icon) icon.textContent = opened ? "▲" : "▼";
+    });
+  }
+
+  function setSmallAccordions(opened) {
+    root().querySelectorAll(".acc").forEach(function (acc) {
+      acc.classList.toggle("open", opened);
+      var content = acc.querySelector(".acc-content");
+      if (content) content.style.maxHeight = opened ? "none" : "0px";
+    });
+  }
+
+  function setNestedAccordions(opened) {
+    root().querySelectorAll(".lux-acc-btn").forEach(function (button) {
+      var active = button.getAttribute("aria-expanded") === "true";
+      // Reuse existing click handlers so the content, icon and associated
+      // hotel map/photo components remain in sync.
+      if (active !== opened) {
+        try { button.click(); } catch (_) {}
       }
-      count++;
     });
+  }
 
-    root.querySelectorAll(".acc.open").forEach(function (el) {
-      el.classList.remove("open");
-      var content = el.querySelector(".acc-content");
-      if (content) content.style.maxHeight = "0px";
-      count++;
+  function setAll(opened) {
+    var scope = root();
+    // Do not invoke 300 individual luxToggle calls: they schedule animations.
+    // Change all sections directly and then save the resulting state once.
+    scope.querySelectorAll(".lux-part").forEach(function (part) {
+      setPart(part, opened);
     });
-
-    // Close fold bodies directly. Calling luxToggle 300+ times would trigger
-    // expensive animations and repeatedly rewrite the page height.
-    root.querySelectorAll(".lux-fold.is-open").forEach(function (fold) {
-      fold.classList.remove("is-open", "is-settled", "no-anim");
-      var body = fold.querySelector(":scope > .lux-fold-body");
-      if (body) body.setAttribute("inert", "");
-      var toggle = fold.querySelector(":scope > .lux-fold-h .lux-fold-btn");
-      if (toggle) toggle.setAttribute("aria-expanded", "false");
-      count++;
+    scope.querySelectorAll(".lux-fold").forEach(function (fold) {
+      setFold(fold, opened);
     });
-
-    root.querySelectorAll(".lux-part.is-open").forEach(function (part) {
-      part.classList.remove("is-open");
-      var head = part.querySelector(":scope > .lux-part-head");
-      if (head) head.setAttribute("aria-expanded", "false");
-      count++;
+    scope.querySelectorAll("details").forEach(function (details) {
+      details.open = opened;
     });
-
-    // Defensive sync for nested accordions where an inline handler is delayed.
-    root.querySelectorAll(".lux-acc-btn").forEach(function (button) {
-      if (button.getAttribute("aria-expanded") !== "false") button.setAttribute("aria-expanded", "false");
-      var icon = button.querySelector(".lux-acc-chev");
-      if (icon) icon.classList.remove("rotate");
-      var id = button.getAttribute("aria-controls");
-      var panel = id && document.getElementById(id);
-      if (panel) panel.classList.remove("open");
-    });
+    setHotelAlternatives(opened);
+    setSmallAccordions(opened);
+    // Opening details.bali-itinerary-subsection may itself open its child
+    // accordion in an asynchronous toggle handler. Reconcile afterwards.
+    setNestedAccordions(opened);
 
     try {
-      localStorage.removeItem("lux_open_part_v1");
-      localStorage.setItem("lux_open_folds_v1", "[]");
+      if (opened) {
+        localStorage.setItem("lux_open_part_v1", "all");
+        localStorage.setItem("lux_open_folds_v1", JSON.stringify(
+          Array.from(scope.querySelectorAll(".lux-fold.is-open"), function (fold) { return fold.id; }).filter(Boolean)
+        ));
+      } else {
+        localStorage.removeItem("lux_open_part_v1");
+        localStorage.setItem("lux_open_folds_v1", "[]");
+      }
     } catch (_) {}
+  }
 
-    // Leave the dashboard, its read counts and the current scroll alone.
-    return count;
+  function syncLabel(button) {
+    var opened = containsOpen();
+    button.textContent = opened ? "▴ Zavřít vše" : "▾ Otevřít vše";
+    button.title = opened ? "Zavřít všechny otevřené kapitoly a podsekce" :
+      "Otevřít všechny kapitoly a podsekce";
+    button.setAttribute("aria-label", button.title);
+    button.setAttribute("aria-pressed", String(opened));
   }
 
   function init() {
     var button = document.getElementById("baliCloseAllAccordions");
     if (!button || button.dataset.bound === "1") return;
     button.dataset.bound = "1";
+
+    var busy = false;
     button.addEventListener("click", function (event) {
       event.preventDefault();
-      closeAll();
+      if (busy) return;
+      busy = true;
+      var opened = !containsOpen();
+      setAll(opened);
+      syncLabel(button);
+      // Wait for native details toggle handlers to synchronize nested panels.
+      setTimeout(function () {
+        setNestedAccordions(opened);
+        syncLabel(button);
+        busy = false;
+      }, 120);
     });
+
+    var scheduled = false;
+    function scheduleSync() {
+      if (scheduled || busy) return;
+      scheduled = true;
+      requestAnimationFrame(function () {
+        scheduled = false;
+        if (!busy) syncLabel(button);
+      });
+    }
+    // Manual section toggles also update the button; no scroll listener.
+    document.addEventListener("click", function (event) {
+      if (event.target.closest(".lux-fold-btn,.lux-part-head,.lux-acc-btn,.acc-header,.acc-trigger,.alt-hotels-collapse,summary")) {
+        setTimeout(scheduleSync, 0);
+      }
+    }, true);
+    document.addEventListener("toggle", scheduleSync, true);
+    syncLabel(button);
   }
 
   if (document.readyState === "loading") {
