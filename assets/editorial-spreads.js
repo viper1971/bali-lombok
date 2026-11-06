@@ -360,10 +360,10 @@
 (function () {
   "use strict";
   var modal, viewport, priorFocus, moving = null, placeholder = null, observerQueued = false;
-  var mapSelector = 'iframe[src*="google.com/maps"],iframe[src*="maps.google."],iframe[src*="openstreetmap.org"],iframe[src*="mapy.cz"],iframe[src*="mapy.com"]';
+  var mapSelector = 'iframe[src*="google.com/maps"],iframe[src*="maps.google."],iframe[src*="openstreetmap.org"],iframe[src*="mapy.cz"],iframe[src*="mapy.com"],iframe[data-src*="google.com/maps"],iframe[data-src*="maps.google."],iframe[data-src*="openstreetmap.org"],iframe[data-src*="mapy.cz"],iframe[data-src*="mapy.com"],iframe[data-bali-map-src]';
   function eligible(frame) {
     return frame && !frame.closest('.sv-card,.sv-stage,.bali-map-modal,[data-no-map-modal]') &&
-      !/streetview|map_action=pano|!1m2!1s/i.test(frame.getAttribute('src') || '');
+      !/streetview|map_action=pano|!1m2!1s/i.test(frame.getAttribute('src') || frame.getAttribute('data-src') || frame.getAttribute('data-bali-map-src') || '');
   }
   function ensure() {
     if (modal) return;
@@ -399,6 +399,8 @@
       var copy = frame.cloneNode(false);
       copy.removeAttribute('id');
       copy.removeAttribute('loading');
+      var liveMapSrc = frame.getAttribute('src') || frame.getAttribute('data-bali-map-src') || frame.getAttribute('data-src');
+      if (liveMapSrc && !/^about:blank$/i.test(liveMapSrc)) copy.setAttribute('src', liveMapSrc);
       copy.setAttribute('title', frame.getAttribute('title') || 'Zvětšená interaktivní mapa');
       copy.setAttribute('allowfullscreen', '');
       copy.className = 'bali-map-modal-frame';
@@ -471,4 +473,38 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, {once:true});
   else boot();
+})();
+
+
+/* Hotel choice placement — keep original switchers and event listeners intact. */
+(function () {
+  "use strict";
+  function reposition() {
+    document.querySelectorAll('.stage-quick-switcher[id^="sqs-"]').forEach(function (switcher) {
+      var key = switcher.id.slice(4);
+      var slot = document.getElementById('selected-hotel-slot-' + key);
+      if (!slot || !slot.parentNode || switcher.parentNode === null) return;
+      // The hotel itself must precede the choice tabs, followed by the route.
+      if (slot.nextElementSibling !== switcher) slot.insertAdjacentElement('afterend', switcher);
+      switcher.classList.add('bali-hotel-choice-below');
+      switcher.setAttribute('role', 'group');
+      switcher.setAttribute('aria-label', 'Volba varianty hotelu');
+    });
+  }
+  function start() {
+    reposition();
+    var scheduled = false;
+    new MutationObserver(function (records) {
+      if (scheduled || !records.some(function (r) {
+        return Array.prototype.some.call(r.addedNodes, function (n) {
+          return n.nodeType === 1 && (n.matches?.('[id^="selected-hotel-slot-"],.stage-quick-switcher') ||
+            n.querySelector?.('[id^="selected-hotel-slot-"],.stage-quick-switcher'));
+        });
+      })) return;
+      scheduled = true;
+      requestAnimationFrame(function () { scheduled = false; reposition(); });
+    }).observe(document.body, {childList: true, subtree: true});
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
+  else start();
 })();
