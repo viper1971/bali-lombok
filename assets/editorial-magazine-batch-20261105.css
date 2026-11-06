@@ -1688,3 +1688,32 @@ html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below .sqs-btn {
     grid-template-columns:minmax(0,1fr) !important;
   }
 }
+
+
+/* 2026-11-06: compact the gap between hotel variant tabs and the following route.
+   Applies to every hotel stage, without changing hotel choices or route controls. */
+html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below {
+  margin-top:0 !important;
+  margin-bottom:5px !important;
+}
+html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below + :is(
+  .sg-map-widget,.ulu-map-widget,.ubud-map-widget,.map-container-wrapper,
+  .route-map-widget,.transfer-map-widget,.route-widget
+) {
+  margin-top:0 !important;
+}
+html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below ~ :is(
+  .sg-map-widget,.ulu-map-widget,.ubud-map-widget,.map-container-wrapper,
+  .route-map-widget,.transfer-map-widget,.route-widget
+) {
+  margin-top:0 !important;
+}
+html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below + .btn-toggle-alt-hotels,
+html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below ~ .btn-toggle-alt-hotels {
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+}
+html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below ~ .alt-hotels-collapse:not(.open):not(.show) {
+  margin-top:0 !important;
+  margin-bottom:0 !important;
+}
