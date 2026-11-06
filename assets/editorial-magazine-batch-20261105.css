@@ -1717,3 +1717,34 @@ html body #hlavni-obsah .stage-quick-switcher.bali-hotel-choice-below ~ .alt-hot
   margin-top:0 !important;
   margin-bottom:0 !important;
 }
+
+/* Confirmed booking details shared for every hotel choice, 2026-11-06. */
+html body #hlavni-obsah .uber-hotel-card > .hotel-reservation-info{
+  display:block!important;grid-column:1/-1!important;clear:both!important;
+  width:100%!important;max-width:100%!important;box-sizing:border-box!important;
+  margin:10px 0 14px!important;border:1px solid rgba(22,99,85,.28)!important;
+  border-radius:12px!important;background:#f4f9f5!important;
+  color:#193d35!important;overflow:hidden!important;
+}
+html body #hlavni-obsah .hotel-reservation-info > summary{
+  display:list-item!important;cursor:pointer!important;padding:13px 18px!important;
+  background:#e6f2eb!important;font-weight:850!important;font-size:15px!important;
+  line-height:1.4!important;color:#174e43!important;
+}
+html body #hlavni-obsah .hotel-reservation-info > summary:focus-visible{
+  outline:3px solid #c29b3a!important;outline-offset:-3px!important;
+}
+html body #hlavni-obsah .hotel-reservation-info .hotel-reservation-grid{
+  padding:12px 18px!important;display:grid!important;gap:8px!important;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr))!important;
+  box-sizing:border-box!important;
+}
+html body #hlavni-obsah .hotel-reservation-info .hotel-reservation-grid p{
+  margin:0!important;padding:9px 11px!important;border-radius:8px!important;
+  background:rgba(255,255,255,.7)!important;font-size:14px!important;
+  line-height:1.5!important;overflow-wrap:anywhere!important;
+}
+@media(max-width:650px){
+ html body #hlavni-obsah .hotel-reservation-info > summary{font-size:14px!important;padding:12px!important;}
+ html body #hlavni-obsah .hotel-reservation-info .hotel-reservation-grid{padding:9px!important;grid-template-columns:1fr!important;}
+}
