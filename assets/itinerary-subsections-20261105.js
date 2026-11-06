@@ -52,7 +52,13 @@
     var intro = document.createElement("p");
     intro.className = "bali-destination-intro";
     intro.textContent = "Inspirace k návštěvě v oblasti " + region + ". Vyber si místa podle zájmu; každá karta obsahuje popis a možnost virtuální prohlídky.";
-    inner.replaceChildren(intro, gallery);
+    // Keep the former schedule DOM available to legacy handlers, but out of view.
+    Array.from(inner.children).forEach(function (node) {
+      node.classList.add('bali-original-schedule-hidden');
+      node.setAttribute('aria-hidden', 'true');
+    });
+    inner.appendChild(intro);
+    inner.appendChild(gallery);
     details.dataset.destinationGalleryReady = "1";
   }
   function init() {
