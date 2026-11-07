@@ -42,6 +42,12 @@
       item.appendChild(title);
       item.appendChild(body);
       item.appendChild(sv);
+      // Keep per-place photo links with the Street View when the original
+      // itinerary card is moved into its visible destination-gallery card.
+      // Without this, the NEST photo button stays in the hidden old schedule.
+      source.querySelectorAll(".nest-photo-link").forEach(function (link) {
+        item.appendChild(link);
+      });
       gallery.appendChild(item);
     });
     if (!gallery.children.length) return;
