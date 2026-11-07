@@ -255,12 +255,23 @@
       if (!open) return;
       try {
         var result = open.call(stage);
-        // Preserve the lazy Google panorama and the original Play button.
-        // If the map is not loaded yet, launch the existing Street View loader.
+        // Google Street View must initialize AFTER fullscreen layout has settled.
+        // Recreate its iframe once at fullscreen size, even if the preview was
+        // loaded previously; otherwise the first fullscreen can ignore dragging.
         function load() {
-          if (!stage.querySelector("iframe") && stage.dataset.svUrl && stage.id && typeof window.svLoad === "function") {
-            window.svLoad(stage.id, true);
-          }
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              if ((document.fullscreenElement || document.webkitFullscreenElement) !== stage) return;
+              if (!stage.dataset.svUrl || !stage.id || typeof window.svLoad !== "function") return;
+              window.svLoad(stage.id, true);
+              var frame = stage.querySelector("iframe");
+              if (frame) {
+                frame.style.pointerEvents = "auto";
+                frame.style.touchAction = "auto";
+                frame.setAttribute("allow", "fullscreen");
+              }
+            });
+          });
         }
         if (result && result.then) result.then(load).catch(function () {});
         else load();
