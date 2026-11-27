@@ -1,0 +1,55 @@
+/* Photo credits stay below the image on mobile. */
+@media screen and (max-width: 700px) {
+  html body #hlavni-obsah .ph-strip {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 14px !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  html body #hlavni-obsah .ph-strip > :is(.tj-pic, .mg-strip-photo) {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-column: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    background: #fff !important;
+  }
+  html body #hlavni-obsah .ph-strip > :is(.tj-pic, .mg-strip-photo) img {
+    display: block !important;
+    flex: none !important;
+    width: 100% !important;
+    height: clamp(180px, 55vw, 260px) !important;
+    min-height: 0 !important;
+    object-fit: cover !important;
+  }
+  html body #hlavni-obsah .ph-strip > .tj-pic .tj-credit,
+  html body #hlavni-obsah .ph-strip > .mg-strip-photo figcaption {
+    position: static !important;
+    display: block !important;
+    flex: none !important;
+    width: auto !important;
+    max-width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 8px 10px !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #f1f5f0 !important;
+    box-shadow: none !important;
+    color: #24473b !important;
+    font: 500 11px/1.4 system-ui, sans-serif !important;
+    text-align: left !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    overflow-wrap: anywhere !important;
+    text-overflow: clip !important;
+  }
+  html body #hlavni-obsah .ph-strip > .mg-strip-photo figcaption a {
+    color: inherit !important;
+  }
+}
